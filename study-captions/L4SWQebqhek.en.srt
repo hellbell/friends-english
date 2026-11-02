@@ -1,0 +1,3108 @@
+1
+00:00:00,000 --> 00:00:03,880
+collectively, you know, we started with this kind of gray mush in our head.
+
+2
+00:00:04,080 --> 00:00:16,480
+Um we somehow started out knowing nothing at all and somehow discovered like everything that humans know today was like this process of collective discovery like of of languages and technology and science and mathematics
+
+3
+00:00:16,560 --> 00:00:25,000
+and uh all the rest of it, you know, everything we learned, we we discovered it for ourselves and that's an incredible thing that no one has cracked yet in AI.
+
+4
+00:00:25,160 --> 00:00:32,320
+And so to me that is the essence of what it will take to get to superintelligence, like a system that just keep learning and discovering knowledge forever.
+
+5
+00:00:49,600 --> 00:00:55,840
+>> I'm thrilled to have Dave Silver and Lasse Espeholt with us, two of the co-founders of Ineffable Intelligence.
+
+6
+00:00:56,560 --> 00:00:57,920
+Uh great name by the way.
+
+7
+00:00:58,080 --> 00:01:08,360
+Fun fact, Dave, you were the first person I cold emailed to come on training data when we started the show a hundred-ish episodes ago and feels like a full circle moment to finally have
+
+8
+00:01:08,360 --> 00:01:09,120
+you on the show.
+
+9
+00:01:09,120 --> 00:01:10,720
+Uh so thank you for joining us.
+
+10
+00:01:11,000 --> 00:01:12,000
+Um thank you.
+
+11
+00:01:12,080 --> 00:01:13,480
+Dave, let's start with you.
+
+12
+00:01:13,680 --> 00:01:20,440
+Your 2009 PhD was on reinforcement learning applied to the devilishly difficult game of Go.
+
+13
+00:01:20,800 --> 00:01:36,800
+Uh you demonstrated for the world for the first time that superhuman in one domain machine intelligence was possible and I think you were really the figure that inspired the entire current generation of of
+
+14
+00:01:36,800 --> 00:01:39,440
+reinforcement learning and and uh deep learning researchers.
+
+15
+00:01:39,440 --> 00:01:43,680
+And so thank you for your contributions uh to where the field is.
+
+16
+00:01:44,160 --> 00:01:49,360
+I'm curious um thinking back to that point in time, what did you learn?
+
+17
+00:01:49,360 --> 00:01:50,880
+What did you have conviction on?
+
+18
+00:01:51,240 --> 00:01:57,920
+And what has remained the same and what has changed as AI AI changed uh over the last five years or so.
+
+19
+00:01:58,040 --> 00:01:58,560
+>> Yeah, thank you.
+
+20
+00:01:58,560 --> 00:02:03,240
+And pleasure to be here and um glad I finally made it after these 100 episodes.
+
+21
+00:02:03,240 --> 00:02:04,680
+It's a pleasure to be here.
+
+22
+00:02:05,040 --> 00:02:17,360
+Um So, I suppose I always had this conviction starting my PhD and going into um the game of Go that the right approach to solve AI was was through learning from experience,
+
+23
+00:02:17,360 --> 00:02:24,080
+through systems that discovered things for themselves, that that were learning through reinforcement learning to get better and better and better,
+
+24
+00:02:24,080 --> 00:02:29,720
+and that that would be the thing which would lead to the emergence of intelligence and ultimately superintelligence.
+
+25
+00:02:30,600 --> 00:02:36,720
+And so, I suppose we were able to show that in in the game of Go, but it's a conviction that has held true throughout my career.
+
+26
+00:02:36,760 --> 00:02:47,600
+And um here we are now now applying that that conviction that uh Ineffable, trying to show that indeed um superintelligence can emerge all the way through through systems that learn from experience.
+
+27
+00:02:48,320 --> 00:02:55,760
+And in terms of things which are different, although we are not pursuing the the human data path that that the LLM world has has pursued,
+
+28
+00:02:56,080 --> 00:02:58,680
+I do think there's lots of interesting lessons to learn from that.
+
+29
+00:02:58,680 --> 00:03:11,880
+Um in particular, I was it was definitely a surprise to me how a system that was trained on a massive amount of data could then um be very quickly um fine-tuned on a a
+
+30
+00:03:11,880 --> 00:03:16,280
+a a very small amount of data to kind of completely shape um change its behavior.
+
+31
+00:03:16,560 --> 00:03:24,720
+That was something which I think was something which sort of changed my mindset in terms of, you know, just suggesting that if you get things at the right scale,
+
+32
+00:03:25,040 --> 00:03:32,040
+that a lot of things which seem like incredibly hard or like they might be very slow, that once you've kind of experienced enough data,
+
+33
+00:03:32,040 --> 00:03:34,839
+that after that the things that were slow can become very fast.
+
+34
+00:03:35,040 --> 00:03:39,920
+I think that's a yeah a lesson that wasn't obvious to me in advance until it until it happened.
+
+35
+00:03:40,000 --> 00:03:40,600
+>> Mhm.
+
+36
+00:03:40,760 --> 00:03:42,360
+Okay, we're going to come back to that later.
+
+37
+00:03:42,560 --> 00:03:50,960
+Um you could have run this program inside DeepMind's, uh where, you know, could have probably had more access to compute than than just about anybody.
+
+38
+00:03:51,160 --> 00:03:55,120
+You decided the right thing to do was to start a new lab.
+
+39
+00:03:55,520 --> 00:03:57,440
+Uh why'd you do that?
+
+40
+00:03:57,440 --> 00:03:58,040
+>> Yeah.
+
+41
+00:03:58,240 --> 00:04:02,320
+Um So, look, first of all, I had a fantastic time at DeepMind.
+
+42
+00:04:02,320 --> 00:04:08,480
+I I loved my years there, and um I have a you know, huge amount of respect for the people there,
+
+43
+00:04:08,480 --> 00:04:10,280
+and still get on with them very well.
+
+44
+00:04:10,600 --> 00:04:21,160
+But at the end of the day, you know, I have a really strong belief about how um we can go beyond where we are today um with AI and all the way to superintelligence.
+
+45
+00:04:22,000 --> 00:04:28,080
+And the path that I believe in um doesn't actually go through LLM-based products as an intermediate point.
+
+46
+00:04:28,440 --> 00:04:38,520
+And when I really thought about that, I thought about it really hard, um I realized that I felt that so passionately that this deserved to be more than just the corner of a of
+
+47
+00:04:38,520 --> 00:04:50,040
+a organization that's focused on on LLM-based products, and deserved to be um represented by a an elite AI app lab that really just gives this approach its all,
+
+48
+00:04:50,040 --> 00:04:57,400
+and and represents it 100%, and you know, once I realized that, it it felt very natural to to uh create this company.
+
+49
+00:04:57,680 --> 00:05:05,200
+I suppose another way to look at it is that, you know, the world already has tens of thousands, if not hundreds of thousands,
+
+50
+00:05:05,200 --> 00:05:13,360
+of really talented researchers all pursuing exactly the same approach, like really just kind of doubling down on on LLMs with pre-training,
+
+51
+00:05:13,480 --> 00:05:22,040
+post-training, you know, um coding, and >> um and and that kind of LLM path, it am I going to be the 100,001
+
+52
+00:05:23,120 --> 00:05:25,200
+person that's like pursuing that approach?
+
+53
+00:05:25,560 --> 00:05:28,760
+Uh is that the most effective use of my time and my my energy?
+
+54
+00:05:29,000 --> 00:05:34,160
+And in the end, I I realized that there's this other lamp post that right now no one is looking under,
+
+55
+00:05:34,280 --> 00:05:41,960
+and where if if I actually put my effort there, has a much higher chance of really having a a massive impact on the field,
+
+56
+00:05:42,040 --> 00:05:45,200
+cuz if this works, it's going to change the whole of AI.
+
+57
+00:05:45,200 --> 00:05:51,280
+Um so, I think that that kind of realization also meant that this was something which just means that you know,
+
+58
+00:05:51,280 --> 00:05:54,800
+it's the best way to have impact on the field through through through this approach.
+
+59
+00:05:55,280 --> 00:05:58,120
+>> Plus you had a company name that couldn't go to waste, so.
+
+60
+00:05:58,120 --> 00:05:58,600
+>> That's right.
+
+61
+00:05:58,600 --> 00:05:58,960
+Yeah, so.
+
+62
+00:05:58,960 --> 00:06:00,680
+>> to say where the lights called Ineffable?
+
+63
+00:06:00,680 --> 00:06:04,880
+>> Yeah, so I suppose that the name Ineffable it came from this idea
+
+64
+00:06:06,080 --> 00:06:15,200
+that you know, there's really just knowledge could be so incredible, like the things which which super intelligence will one day discover.
+
+65
+00:06:15,320 --> 00:06:20,440
+Like this knowledge that's going to be so unbelievable, incredible, and it's going to be something which is, you know,
+
+66
+00:06:20,440 --> 00:06:26,920
+profoundly amazing, and and perhaps so profound that we can't even express it in in human language.
+
+67
+00:06:27,240 --> 00:06:33,000
+And so really it's like, you know, in line with this other path that doesn't go through through, you know,
+
+68
+00:06:33,000 --> 00:06:43,800
+human language-based approaches, but instead build systems that discover things for themselves and has the the possibility to to discover knowledge that's unbelievably profound and and ultimately ineffable.
+
+69
+00:06:44,160 --> 00:06:50,919
+I should say there was also a secret second reason that that that we used, which was that, you know,
+
+70
+00:06:50,919 --> 00:06:54,000
+it's this idea it it really it has to work.
+
+71
+00:06:54,000 --> 00:06:58,800
+Like if you really just double down on learning from experience, it's an approach that that just has to work.
+
+72
+00:06:59,360 --> 00:07:03,440
+And so you could say that it can't possibly eff up, so it's it's ineffable.
+
+73
+00:07:03,880 --> 00:07:06,640
+So there you go, there's the secret reason as well.
+
+74
+00:07:06,640 --> 00:07:07,200
+>> Amazing.
+
+75
+00:07:07,200 --> 00:07:07,800
+Amazing.
+
+76
+00:07:08,040 --> 00:07:09,440
+But both love name.
+
+77
+00:07:09,680 --> 00:07:10,400
+Um, let's see.
+
+78
+00:07:10,400 --> 00:07:11,000
+What about you?
+
+79
+00:07:11,000 --> 00:07:16,720
+You were at Google, you were in a different group than Dave in the in the deep learning group at DeepMind,
+
+80
+00:07:17,080 --> 00:07:20,080
+and you spent years scaling up reinforcement learning on GPUs.
+
+81
+00:07:20,480 --> 00:07:26,040
+What made you decide to leave DeepMind, and what drew you to to co-found Ineffable?
+
+82
+00:07:26,400 --> 00:07:27,880
+Right.
+
+83
+00:07:27,880 --> 00:07:35,040
+Yeah, so I joined like DeepMind in January 15, and actually I started work a bit with Dave around like 16,
+
+84
+00:07:35,040 --> 00:07:37,920
+where I was doing this work on like scaling up reinforcement learning.
+
+85
+00:07:38,240 --> 00:07:42,800
+Um, so as you said, I was part of like the deep learning team, and he was like leading a reinforcement learning team.
+
+86
+00:07:43,040 --> 00:07:45,800
+But we were working on an internal project together.
+
+87
+00:07:46,240 --> 00:07:48,360
+I actually left DeepMind twice.
+
+88
+00:07:48,360 --> 00:07:53,160
+So, I left DeepMind in summer '18 and went to like Google Brain.
+
+89
+00:07:53,640 --> 00:07:57,160
+Then eventually Google Brain and DeepMind merged, and then I was like back again.
+
+90
+00:07:57,440 --> 00:08:01,840
+But then there I I I left DeepMind again like a year before Dave left.
+
+91
+00:08:02,240 --> 00:08:07,360
+Um and the first time I heard about Ineffable was actually through one of our eventual investors.
+
+92
+00:08:07,880 --> 00:08:10,400
+It's like reaching out to me asking what I thought about Dave.
+
+93
+00:08:10,880 --> 00:08:15,720
+Well, my first like reaction was damn, I missed out of on an opportunity.
+
+94
+00:08:16,040 --> 00:08:18,320
+I should have, you know, reached out to him.
+
+95
+00:08:18,440 --> 00:08:25,480
+But I I I was, you know, I recall like Dave as more often than not being one of the smartest people in the room.
+
+96
+00:08:25,800 --> 00:08:31,800
+And you know, shortly after that sync with that investor, um they actually reached out to me.
+
+97
+00:08:32,039 --> 00:08:32,960
+So, I was like, great.
+
+98
+00:08:32,960 --> 00:08:35,160
+Yeah, so I really love to work with the Dave.
+
+99
+00:08:35,440 --> 00:08:42,039
+Um I knew Wojtek and Chris um from back in the day, and I thought like the team was a great,
+
+100
+00:08:42,039 --> 00:08:45,760
+and also thought it was like an amazing to have like an opportunity like this in Europe.
+
+101
+00:08:45,880 --> 00:08:56,400
+>> It should be said as well like um we we worked together um on some of the early approaches to to um combining reinforcement learning with deep learning and trying to scale things up.
+
+102
+00:08:56,400 --> 00:09:05,280
+And and it should be said that Lasse, who by the way is a is very modest, but he he actually worked on some of the original approaches that that um were the first attempts
+
+103
+00:09:05,280 --> 00:09:14,480
+to actually scale up reinforcement learning and show that it could be done at large scale and like ways to parallelize reinforcement learning and ways to kind of build out architectures that were scalable.
+
+104
+00:09:14,800 --> 00:09:23,720
+And if you look today at the way the field's gone, like actually all of the ideas that people use today kind of um sort of hail back to to those that original work that
+
+105
+00:09:23,720 --> 00:09:25,240
+that Lasse did back in the day.
+
+106
+00:09:25,240 --> 00:09:29,240
+That's where all the roots come from of of of um scaled up IRL.
+
+107
+00:09:29,520 --> 00:09:31,400
+So, he was the the first to figure it out.
+
+108
+00:09:31,480 --> 00:09:32,080
+>> Wonderful.
+
+109
+00:09:32,200 --> 00:09:36,439
+We should have you guys introduce each other instead of you you're both too humble to brag about yourselves.
+
+110
+00:09:37,160 --> 00:09:40,080
+Okay, let's talk about Improbable and what you're building.
+
+111
+00:09:40,400 --> 00:09:42,320
+You have a beautiful mission statement as a company.
+
+112
+00:09:42,400 --> 00:09:47,320
+You want to build a super learner and make first contact with super intelligence.
+
+113
+00:09:48,080 --> 00:09:49,800
+Can you define both of those things for us?
+
+114
+00:09:49,800 --> 00:09:53,520
+What is a super learner and what does making first contact look like?
+
+115
+00:09:53,920 --> 00:10:06,360
+>> Yeah, so so to me a super learner um is is something which is it it's got incredible capacity both in its its depth of what it can learn and in its breadth.
+
+116
+00:10:06,560 --> 00:10:15,840
+So, in the depth dimension, it should be something that can start from not knowing anything at all and can go all the way through to discovering things that go way beyond what humans know.
+
+117
+00:10:16,080 --> 00:10:23,640
+Um so, an analogy to this would be the way that that human collectively, you know, we started with this kind of gray mush in our head.
+
+118
+00:10:23,800 --> 00:10:37,120
+Um we somehow started out knowing nothing at all and somehow discovered like everything that humans know today was like this process of collective discovery like of of languages and technology and science and mathematics
+
+119
+00:10:37,120 --> 00:10:38,080
+uh all the rest of it.
+
+120
+00:10:38,080 --> 00:10:40,920
+You know, everything we learned, we we discovered it for ourselves.
+
+121
+00:10:41,320 --> 00:10:50,000
+Um it wasn't that someone came down and gave us like a blueprint of how they should work and it wasn't that someone came down and gave like a a trillion element data set of
+
+122
+00:10:50,000 --> 00:10:52,000
+like, "Oh, this is what these things should look like."
+
+123
+00:10:52,000 --> 00:10:57,439
+We actually figured it out for ourselves and that's an incredible thing that no one has cracked yet in AI.
+
+124
+00:10:57,560 --> 00:11:04,760
+And so, to me that is the essence of what it will take to get to super intelligence like a system that can just keep learning and discovering knowledge forever.
+
+125
+00:11:05,120 --> 00:11:14,680
+So, the second element is breadth that we want something which can do this incredible discovery from like all the way um to incredible things and it should be possible to drop it into any
+
+126
+00:11:14,680 --> 00:11:15,680
+stream of experience.
+
+127
+00:11:16,080 --> 00:11:22,800
+So, whether, you know, it's it's like a simulated world or a digital world or or a physical world, uh you know,
+
+128
+00:11:22,800 --> 00:11:26,040
+whatever it's dropped into, it should be something it can just learn and learn and learn.
+
+129
+00:11:26,040 --> 00:11:26,960
+So, that's the dream.
+
+130
+00:11:26,960 --> 00:11:34,080
+I think if we crack this, then to me it it it it gives rise to a super intelligence that will be like it be like encountering magic,
+
+131
+00:11:34,080 --> 00:11:40,320
+you know, it will be something which is so so profoundly amazing that it will it will be be able to do wonderful things.
+
+132
+00:11:40,480 --> 00:11:43,000
+>> What will it feel like when we first encounter it?
+
+133
+00:11:43,000 --> 00:11:46,960
+Or is it one of these things where you you can't predict ahead of time?
+
+134
+00:11:47,160 --> 00:11:48,520
+>> I think it will be amazing.
+
+135
+00:11:48,520 --> 00:11:53,280
+I think we'll we will, you know, that it we should have an experience of like wonderment.
+
+136
+00:11:53,640 --> 00:12:00,480
+And the only thing I can say from my own experience is what happened when we got to this point in a admittedly much narrower field,
+
+137
+00:12:00,480 --> 00:12:07,080
+but when we got there in in in board games, you know, when we got to the point of superhuman play in the in the game of Go,
+
+138
+00:12:07,080 --> 00:12:09,360
+like it brought wonderment to the to the field.
+
+139
+00:12:09,360 --> 00:12:18,280
+Like the the the Go players who who saw like AlphaGo playing, you know, they they were amazed and like it was it was like a joyful experience for them to kind of witness this
+
+140
+00:12:18,280 --> 00:12:19,320
+kind of Go play.
+
+141
+00:12:19,320 --> 00:12:21,720
+Same happened when we got to superhuman play in chess.
+
+142
+00:12:21,720 --> 00:12:25,120
+And you know, the chess players they they they were so excited.
+
+143
+00:12:25,120 --> 00:12:30,720
+And and and just imagine like going far beyond that that like in, you know, things which are discovering incredible things,
+
+144
+00:12:30,880 --> 00:12:35,839
+new fields of science, new types of of of technology that we've never even dreamed of.
+
+145
+00:12:35,839 --> 00:12:37,400
+I mean, it will be it will be incredible.
+
+146
+00:12:37,839 --> 00:12:48,880
+>> So, the current paradigm, these large language models with reinforcement learning, seem to be, you know, at least knocking out millennium problems and making some sorts of scientific discoveries.
+
+147
+00:12:49,440 --> 00:12:57,320
+Does that still count as a super learner or what's the difference between something that can make novel scientific discoveries versus a super learner in in your sense of the term?
+
+148
+00:12:57,839 --> 00:12:58,280
+>> Yeah.
+
+149
+00:12:58,280 --> 00:13:03,280
+So, look, I think LLMs are doing a lot of great things and I have a lot of respect for what's being achieved.
+
+150
+00:13:03,640 --> 00:13:08,680
+What I mean by a super learner is something which first of all discovers completely autonomously.
+
+151
+00:13:08,680 --> 00:13:16,720
+And I think what we've seen so far at least with these kind of approaches that have been taken is there's a lot of human in the loop effort that's required to to make these
+
+152
+00:13:16,720 --> 00:13:17,320
+breakthroughs.
+
+153
+00:13:17,880 --> 00:13:20,000
+It's not fully autonomous yet.
+
+154
+00:13:20,040 --> 00:13:30,000
+And it's also something which should be applicable to kind of you know, real world embodied domains where where where the agent can like learn from from its physical experience.
+
+155
+00:13:30,400 --> 00:13:38,840
+Um and we're a long long long way off that one and it's not at all clear that LLMs and language-based approaches are even the right like vehicle to achieve that that kind of knowledge.
+
+156
+00:13:38,840 --> 00:13:47,040
+Thinking about these things in terms of language might not even be the right paradigm and it might just be that all of this human data that's been used in LLMs is kind of weighing
+
+157
+00:13:47,040 --> 00:13:47,880
+things down.
+
+158
+00:13:48,040 --> 00:13:57,320
+So, a lot of respect for some of these uh the progress that's made, but I don't think we're anywhere close to this like true super learner or something which can be like autonomously just
+
+159
+00:13:57,320 --> 00:13:58,960
+discover everything for itself.
+
+160
+00:13:59,480 --> 00:14:02,160
+>> What does building this look like in practice for you?
+
+161
+00:14:02,160 --> 00:14:07,800
+And you know, we backed Yiannis who was on your original AlphaGo team and he he told us that you know,
+
+162
+00:14:07,800 --> 00:14:15,800
+one of the things that's distinct about you is you can have these incredibly ambitious visions, but you also ground the team in very practical
+
+163
+00:14:16,880 --> 00:14:18,120
+uh research milestones.
+
+164
+00:14:18,440 --> 00:14:22,160
+And and I'd love to understand big big big vision.
+
+165
+00:14:22,520 --> 00:14:27,000
+What does this look like in the day-to-day and whether you whether you're implementing how do you spend your days right now?
+
+166
+00:14:27,000 --> 00:14:27,880
+>> Yeah, great question.
+
+167
+00:14:27,880 --> 00:14:39,680
+So, um so day-to-day um I suppose there's a lot of hard technical work with uh that by people like like like Lasse to kind of build the uh the whole stack that means we've
+
+168
+00:14:39,680 --> 00:14:50,200
+got, you know, a state-of-the-art reinforcement learning stack that allows us to run things at massive scale um inhale data um at the optimal way be able to kind of learn and and and have
+
+169
+00:14:50,200 --> 00:14:52,040
+systems that keep learning and learning and learning.
+
+170
+00:14:52,320 --> 00:14:56,840
+And then on top of that um so, we've spoken about the super learner.
+
+171
+00:14:56,960 --> 00:15:10,080
+Um the other aspect which we're building is um we're building out environments which are uh capable of super learners like discovering everything like environments in which simulated environments in which in which a super
+
+172
+00:15:10,080 --> 00:15:12,640
+learner can discover everything that we mean by intelligence.
+
+173
+00:15:13,200 --> 00:15:14,439
+Uh we call those crucibles.
+
+174
+00:15:14,839 --> 00:15:25,680
+Um so, they're environments in which it's possible for agents to to make incredible discoveries in in which it's possible to express and learn everything that we think of as intelligence.
+
+175
+00:15:26,040 --> 00:15:30,640
+And so we have been putting a a certain amount of effort into creating these environments.
+
+176
+00:15:30,640 --> 00:15:39,840
+Um and so it's a combination of of building out the super learner, doing the research to make super learners incredible and and beat the state of the art of what's possible with reinforcement learning
+
+177
+00:15:40,280 --> 00:15:50,240
+both in terms of the engineering and the research that happens, and creating and and placing the super learners into these crucibles to kind of see the emergence of of incredible behaviors.
+
+178
+00:15:50,720 --> 00:15:54,120
+And in terms of the grounding, you asked about how to ground this in in the day-to-day.
+
+179
+00:15:54,440 --> 00:15:56,440
+So we ground it in in in milestones.
+
+180
+00:15:56,440 --> 00:16:05,480
+And the milestones are kind of analogous to, you know, what happens with the human um journey um where we discovered incredible things.
+
+181
+00:16:05,480 --> 00:16:13,680
+And And so those become natural milestones for us to for our agents to rediscover the great moments that that humans went through in our discovery of knowledge.
+
+182
+00:16:13,680 --> 00:16:15,000
+Mhm.
+
+183
+00:16:15,000 --> 00:16:21,360
+What do you think the agents will rediscover first when the That's going to be your first moments of, "Oh,
+
+184
+00:16:21,360 --> 00:16:22,280
+this is working."
+
+185
+00:16:22,760 --> 00:16:24,240
+>> I imagine we're going to be surprised.
+
+186
+00:16:24,280 --> 00:16:33,960
+Like I think one thing which is different about the way we take to doing reinforcement learning to a lot of the rest of the field is that we are not breadcrumb trailing the particular
+
+187
+00:16:34,920 --> 00:16:37,040
+um objective to be learned about.
+
+188
+00:16:37,080 --> 00:16:42,280
+A lot of the way things people do RL with LLMs at the moment is to kind of say, "Oh,
+
+189
+00:16:42,280 --> 00:16:45,960
+you know, the the agent should be learning about this problem and then this problem and then this problem."
+
+190
+00:16:45,960 --> 00:16:51,839
+And after kind of following that trail, we're kind of pulling the agent by its nose towards the particular desired outcome.
+
+191
+00:16:51,839 --> 00:16:52,920
+We're not taking that approach.
+
+192
+00:16:52,920 --> 00:17:01,000
+We're giving the agent some simple objectives and asking it to, you know, discover things that will will surprise us and amaze amaze us.
+
+193
+00:17:01,000 --> 00:17:10,280
+So, you know, the the agent is in principle capable of discovering all kinds of things, and we don't necessarily know in advance what those will what what those discoveries will be.
+
+194
+00:17:10,280 --> 00:17:14,400
+And it's kind of just going to be exciting to to witness that journey.
+
+195
+00:17:14,400 --> 00:17:17,679
+So So I hope to be surprised, I think is the answer to your question.
+
+196
+00:17:17,959 --> 00:17:18,360
+>> Interesting.
+
+197
+00:17:18,360 --> 00:17:25,800
+So So what you're saying is instead of explicitly giving the agent the goal to go rediscover language or, you know,
+
+198
+00:17:25,800 --> 00:17:36,720
+build a calculator or build a computer, you're going to give it other more open-ended goals and the agent may discover that the most efficient way to actually or the best way to actually accomplish
+
+199
+00:17:36,720 --> 00:17:40,600
+that goal may be to build some of these tools that we as humans have already built.
+
+200
+00:17:40,600 --> 00:17:42,280
+Is that Is that one way of putting it?
+
+201
+00:17:42,280 --> 00:17:42,920
+>> That's one way of putting it.
+
+202
+00:17:42,920 --> 00:17:51,160
+I think I think another way to say it is people often think in RL, "Oh my god, how do I come up with a a reward function that kind of perfectly specifies this really
+
+203
+00:17:51,160 --> 00:17:52,880
+complicated thing that I want to discover?"
+
+204
+00:17:52,880 --> 00:17:57,440
+Like, you know, "How can I How can I specify exactly what I mean by by science?"
+
+205
+00:17:57,440 --> 00:18:00,400
+Or "How can I specify exactly what I mean by interesting maths?"
+
+206
+00:18:00,400 --> 00:18:01,320
+But there's no alternative.
+
+207
+00:18:01,880 --> 00:18:13,120
+Um and the alternative is that to give the agent something you know, really straightforward to optimize, um but in a really complex environment where there's a lot to learn about.
+
+208
+00:18:13,440 --> 00:18:18,160
+And so it turns out that, you know, if you look at the way the world has worked in in nature,
+
+209
+00:18:18,480 --> 00:18:30,560
+the pursuit and optimization of a very simple easy to describe quantities can often give rise to incredibly hard to describe complexity and emergence.
+
+210
+00:18:31,200 --> 00:18:39,720
+So So examples of that would be, you know, evolution which kind of just optimize uh uh kind of survival of the fittest style um um you know,
+
+211
+00:18:39,720 --> 00:18:41,120
+some kind of fitness signal.
+
+212
+00:18:41,320 --> 00:18:47,040
+And the pursuit of of of of fitness gave rise to all of the complexity that we see in in life.
+
+213
+00:18:47,280 --> 00:18:58,040
+Um in the human journey, like the pursuit of relatively simple kind of goals that we as humans have gave rise to uh all of the complex behaviors that humans ultimately um acquired and all
+
+214
+00:18:58,040 --> 00:19:00,600
+of the knowledge that it we eventually ended up with.
+
+215
+00:19:00,720 --> 00:19:06,240
+So the kind of emergent complexity is much greater than the kind of um starting point that was given.
+
+216
+00:19:06,240 --> 00:19:15,560
+So it wasn't like, you know, evolution said, "Look, you Hey Hey humans, you know, here's this idea of science and you need to kind of get to the most complex science that's out there.
+
+217
+00:19:15,600 --> 00:19:17,600
+It it it was really something much simpler.
+
+218
+00:19:18,000 --> 00:19:24,080
+So So, way to describe this maybe would be, you know, perhaps that that humans, in the pursuit of our goals,
+
+219
+00:19:24,320 --> 00:19:31,680
+started coordinating a bit more, and then and then um in the process of coordinating, we discovered that it was um helpful to start communicating,
+
+220
+00:19:31,840 --> 00:19:37,400
+and in the process of communicating, we started trading, and then we in in the process of trading, we discovered that,
+
+221
+00:19:37,400 --> 00:19:46,560
+you know, basic arithmetic was useful, and then we started to discover that, you know, tools were useful, and then we discovered that some basic science was required to help understand how the tools would
+
+222
+00:19:46,560 --> 00:19:53,480
+work, and that gave rise to more complex technology, and understanding the technology required more complex maths, and so forth and so forth.
+
+223
+00:19:53,480 --> 00:19:58,360
+So, all in the pursuit of relatively simple goals, this incredible complexity emerged.
+
+224
+00:19:58,560 --> 00:20:03,200
+So, if we can get that process right, you know, things are going to take off and and and lead to,
+
+225
+00:20:03,200 --> 00:20:04,600
+you know, unbelievable things.
+
+226
+00:20:04,720 --> 00:20:05,440
+>> It's fascinating.
+
+227
+00:20:05,920 --> 00:20:11,200
+Are the rewards for your agents kind of similar to like human biology and evolution, then?
+
+228
+00:20:11,200 --> 00:20:14,320
+Like, you know, try to make it to the next generation.
+
+229
+00:20:14,320 --> 00:20:17,920
+Um what does a reward function look like for you all?
+
+230
+00:20:17,920 --> 00:20:24,360
+>> Yeah, I mean, we've we've we've been experimenting with quite a number of different rewards, so it's not like we have one answer to that question.
+
+231
+00:20:24,480 --> 00:20:33,120
+Um but I think one thing we're not doing is is the kind of, you know, crafting a reward that exactly describes what we mean by science,
+
+232
+00:20:33,120 --> 00:20:36,400
+or exactly what we mean by technology, or exactly what we mean by language.
+
+233
+00:20:36,680 --> 00:20:38,720
+We expect our agents to discover things.
+
+234
+00:20:38,720 --> 00:20:47,640
+And if we can't crack that, you know, like if we can't crack this problem as AI scientists, we're never going to have agents that discover whole new fields of knowledge that we don't even know
+
+235
+00:20:47,640 --> 00:20:48,240
+about.
+
+236
+00:20:48,280 --> 00:20:56,160
+There are vast fields that will exist that are out there that which we don't even know um have the potential to exist at this point in time.
+
+237
+00:20:56,160 --> 00:21:03,200
+You know, it's like imagine imagine you were back in, you know, the days of Newtonian physics, and and no one even knew that that like quantum physics was a thing,
+
+238
+00:21:03,200 --> 00:21:05,680
+or or that you know, relativity was was thing.
+
+239
+00:21:05,800 --> 00:21:12,360
+Like, we should be in that process of open-minded discovery where our agents are free to kind of figure things out for themselves,
+
+240
+00:21:12,360 --> 00:21:16,160
+and I think that's going to lead to, you know, much more exciting outcomes.
+
+241
+00:21:16,160 --> 00:21:18,920
+>> What do these crucibles look like in practice?
+
+242
+00:21:19,080 --> 00:21:25,720
+And, you know, you're contrasting it to today when people say environments, often times it's a it's a set of tasks,
+
+243
+00:21:25,720 --> 00:21:27,520
+and, you know, what the agents should have done on the task.
+
+244
+00:21:27,520 --> 00:21:31,600
+It sounds like your environments are your crucibles are very, very different.
+
+245
+00:21:31,960 --> 00:21:33,560
+What do they look like in practice?
+
+246
+00:21:34,040 --> 00:21:45,960
+>> So, we are building crucibles which are, without giving too many details away, have the capacity for a lot of emergent complexity.
+
+247
+00:21:46,320 --> 00:21:54,480
+Like, the key thing about them is it's like it's not like we've kind of hand-crafted a whole load of puzzles for the agents to to to to work with.
+
+248
+00:21:54,640 --> 00:21:57,360
+Um, there's just a huge amount of emergent complexity there.
+
+249
+00:21:57,360 --> 00:22:00,080
+Some of that emergent complexity can come from different places.
+
+250
+00:22:00,080 --> 00:22:05,320
+It can come from from like physics engines that give rise to kind of complexity as you go, you know,
+
+251
+00:22:05,320 --> 00:22:08,720
+millions of interacting objects with with like a complex physics engine.
+
+252
+00:22:08,720 --> 00:22:19,360
+You can have millions of interacting agents in there, and and the world becomes much more complex because it suddenly now in count includes the complexity of all of those other agents within the the
+
+253
+00:22:19,360 --> 00:22:20,760
+world that the agent's building.
+
+254
+00:22:20,960 --> 00:22:26,960
+So, there's ways to build worlds that are vastly more complex than the kind of standard simulators like, you know,
+
+255
+00:22:26,960 --> 00:22:36,560
+Atari 57 or whatever it is that that that people have been working with in in the past, and which are certainly more complex than the kind of standard benchmark kind of tasks that people
+
+256
+00:22:36,560 --> 00:22:37,240
+are using.
+
+257
+00:22:37,680 --> 00:22:43,960
+Um, and if you get that right, you have a world in which there's the possibility for discovery by the agent.
+
+258
+00:22:43,960 --> 00:22:53,160
+There's the possibility for the agents to discover everything from from technology to science to mathematics to languages to everything else,
+
+259
+00:22:53,160 --> 00:22:57,560
+you know, just the same way our humans all the way through from from more basic things like, you know,
+
+260
+00:22:57,560 --> 00:23:02,600
+motor control or um coordination, you know, the that spectrum is possible.
+
+261
+00:23:02,880 --> 00:23:04,720
+>> Like, if you look at like a game like Go, right?
+
+262
+00:23:04,720 --> 00:23:07,680
+Which is like very simple to represent is just like a bit map.
+
+263
+00:23:07,840 --> 00:23:09,680
+The simulation is extremely simple.
+
+264
+00:23:10,240 --> 00:23:14,640
+Um but you still see this like emerging behavior of something complex, right?
+
+265
+00:23:14,720 --> 00:23:16,040
+It's like super interesting to us.
+
+266
+00:23:16,040 --> 00:23:21,080
+So, like of course like Go is like way simpler than we can imagine doing.
+
+267
+00:23:21,320 --> 00:23:29,160
+Uh but at the same time, going all the way to the kind of realistic physics would be like very computationally expensive,
+
+268
+00:23:29,160 --> 00:23:29,760
+right?
+
+269
+00:23:29,760 --> 00:23:36,960
+So, we want to like range of cruisible where we have like simple ones that can execute quickly and we can iterate on.
+
+270
+00:23:37,080 --> 00:23:41,120
+But where we can still see like very complex behavior emerging.
+
+271
+00:23:41,160 --> 00:23:41,520
+>> Interesting.
+
+272
+00:23:41,520 --> 00:23:42,040
+Yeah.
+
+273
+00:23:42,040 --> 00:23:46,200
+It's almost like what you choose to represent is is is tricky, right?
+
+274
+00:23:46,200 --> 00:23:50,640
+Because there's For example, I can imagine a lot of economics arises from game theory.
+
+275
+00:23:50,920 --> 00:23:55,080
+Um and most of that is completely unrelated to physics.
+
+276
+00:23:55,080 --> 00:23:58,720
+And so, there a crucible that represents physics is probably not that helpful.
+
+277
+00:23:58,920 --> 00:24:06,080
+But if you have information theory represented, who which agents know what, then you probably do end up discovering rediscovering quite a bit of economics.
+
+278
+00:24:06,080 --> 00:24:14,240
+Is that Is that a fair way to put it like the the primitives you choose to capture in the environment kind of give rise to the type of learning that emerges.
+
+279
+00:24:14,400 --> 00:24:19,160
+>> Yeah, like the end goal is to have something that is grounded in in the real world, right?
+
+280
+00:24:19,480 --> 00:24:20,840
+But stepping stones.
+
+281
+00:24:21,640 --> 00:24:24,440
+>> I want to come back to the Go example because I really like this example.
+
+282
+00:24:25,040 --> 00:24:27,920
+You'll be surprised to hear that I find Go to be a good example.
+
+283
+00:24:27,960 --> 00:24:35,520
+But uh Um but what what I find fascinating is I think is what Lassus um talking to here is is that,
+
+284
+00:24:35,520 --> 00:24:39,800
+you know, Go is just like a 19 by 19 grid where you're trying to kind of maximize the territory.
+
+285
+00:24:40,240 --> 00:24:44,880
+And if this was a single agent game, it would be like the most boring game you could imagine.
+
+286
+00:24:44,880 --> 00:24:48,960
+It would be, you know, you just place down stones on a grid until you fill up the whole grid.
+
+287
+00:24:49,080 --> 00:24:51,160
+And there'd be no strategy whatsoever.
+
+288
+00:24:51,520 --> 00:25:02,600
+The moment you put a second agent into the environment, you get this emergent complexity, which is suddenly um because the agent contains like one agent has to reason about all the possible behaviors of
+
+289
+00:25:02,600 --> 00:25:08,880
+the other agent, suddenly it kind of massively increases the complexity in the environment and and to the best of our knowledge,
+
+290
+00:25:09,000 --> 00:25:18,440
+you know, certainly all of the compute which we sank into it when we were working on it, there there was just like this endless learning curve that where with with without end,
+
+291
+00:25:18,440 --> 00:25:20,960
+you could continue to discover new things in this game.
+
+292
+00:25:21,320 --> 00:25:24,520
+Um None of this is to say that go is like the end point.
+
+293
+00:25:24,520 --> 00:25:34,400
+Of course, it's still just a board game and quite narrow in a certain sense, but it shows that very simple environment dynamics can lead to kind of infinite like an infinite onion of layers
+
+294
+00:25:34,400 --> 00:25:37,080
+of complexity that kind of never stops.
+
+295
+00:25:37,520 --> 00:25:40,920
+Infinite to the capacity of what our computers can do, of course.
+
+296
+00:25:41,200 --> 00:25:50,480
+>> Do you think that the agents will end up rediscovering language and will that language look like ours or will it look different?
+
+297
+00:25:50,480 --> 00:26:01,120
+>> I I mean, my personal belief is that um anyone who thinks that human language is the end point of of like or the best way to to to reason,
+
+298
+00:26:01,120 --> 00:26:04,840
+it's it's you know, that that perspective is a little naive.
+
+299
+00:26:04,840 --> 00:26:10,640
+I think that it must be the case that there are far more sophisticated approaches to to reasoning, you know,
+
+300
+00:26:10,640 --> 00:26:28,720
+maybe using um parallelizable, rich, complex um approaches that neural reasoning or whatever it is, these approaches will will ultimately be far more expressive um and far more capable than approaches which are based on
+
+301
+00:26:28,720 --> 00:26:29,760
+on human language.
+
+302
+00:26:30,520 --> 00:26:43,240
+I would also say that starting from human language as as like the the the approach for reasoning is somewhat problematic um because it pulls in all of our biases about how we think agents
+
+303
+00:26:43,240 --> 00:26:44,120
+should think.
+
+304
+00:26:44,440 --> 00:26:51,480
+Um so, for example, a nice way to think about this is to imagine um you know, what if we were to step back,
+
+305
+00:26:51,640 --> 00:27:00,600
+you know, 500 years or 1,000 years or 2,000 years and only like we're able to use all of the language that that humans used at that time.
+
+306
+00:27:01,040 --> 00:27:11,960
+Um, so maybe our agents would believe that the world was flat or or that the diseases were caused by uh the four humors or um there'd be all kinds of,
+
+307
+00:27:11,960 --> 00:27:20,560
+you know, strange beliefs that would be embedded in there and be very hard to kind of remove because they're so fundamental to the kind of language and the processes of thinking that that that
+
+308
+00:27:20,560 --> 00:27:21,800
+that humans have used.
+
+309
+00:27:22,200 --> 00:27:27,960
+So, I do think that that you know, going beyond this is is a really important goal.
+
+310
+00:27:28,400 --> 00:27:41,360
+>> I'd love to talk more about this concept of removing human priors and I think your experience with AlphaGo and then AlphaZero AlphaGo Zero uh yeah is maybe the the best example that anyone can
+
+311
+00:27:41,360 --> 00:27:44,680
+point to of what happens when you remove human priors.
+
+312
+00:27:44,680 --> 00:27:47,520
+Maybe if you take us back to AlphaGo and then AlphaZero
+
+313
+00:27:48,600 --> 00:27:53,800
+was it surprising to you that removing human priors would result in even smarter intelligence?
+
+314
+00:27:54,920 --> 00:27:56,120
+>> I wasn't sure, honestly.
+
+315
+00:27:56,120 --> 00:28:07,200
+So, I remember I remember I I always like to do things in research where I think um it it you ask research questions which are like on a knife edge where it's like 50/50.
+
+316
+00:28:07,200 --> 00:28:13,080
+Um I think it's not very interesting to do research where you already know the answer and you're all you're like 95% certain this thing's going to work.
+
+317
+00:28:13,080 --> 00:28:15,880
+It's kind of like boring, honestly, to do to do those things.
+
+318
+00:28:15,960 --> 00:28:25,720
+So, you know, I think I think research good research is about asking questions where you're really not sure what the answer is in advance and in this case I was about 50/50 and I
+
+319
+00:28:25,720 --> 00:28:32,400
+thought that maybe there was a good chance that it might um but I wasn't confident and and it was very exciting to see it.
+
+320
+00:28:32,680 --> 00:28:35,640
+Um I should say that you asked about human priors.
+
+321
+00:28:35,640 --> 00:28:45,840
+So, so we are making a bet at Matherball and the bet we're making is that we can go further by giving up like on on the priors that everyone's relying on today like the
+
+322
+00:28:45,840 --> 00:28:51,240
+human data like the the whole internet of knowledge that that everyone else is is building their systems upon.
+
+323
+00:28:51,400 --> 00:28:57,480
+That's a an important choice, and so we should probably talk about like why we're doing that.
+
+324
+00:28:57,520 --> 00:29:08,360
+And I think the reason for me of course it's, you know, a short-term sacrifice, like we we give up a certain amount of performance in order to access something which is potentially far greater.
+
+325
+00:29:08,760 --> 00:29:11,840
+And it comes back to this like, you know, what does it mean to build a super learner?
+
+326
+00:29:11,840 --> 00:29:19,080
+Like to me, building a super learner again is about building something that that has this like potential for for full depth and breadth.
+
+327
+00:29:19,200 --> 00:29:27,000
+So, in the depth direction, like we need to get to something which is capable of discovering things which go so far beyond human knowledge that that,
+
+328
+00:29:27,040 --> 00:29:29,160
+you know, it goes just far beyond the prior.
+
+329
+00:29:29,440 --> 00:29:37,120
+And and the more we lean on human data, the less able we are to actually discover the algorithms that are really going to take us all the way to something that's going to,
+
+330
+00:29:37,120 --> 00:29:39,320
+for example, discover a whole new field of knowledge.
+
+331
+00:29:39,720 --> 00:29:49,680
+And then in the breadth direction, you know, we need to have algorithms that can can be placed down and discover things in in >> environments for which language and human data that we started with
+
+332
+00:29:49,680 --> 00:29:50,760
+is just not a good fit.
+
+333
+00:29:50,760 --> 00:29:55,640
+I mean, you know, there are just many many areas, you know, different kinds of sensors, for example,
+
+334
+00:29:56,640 --> 00:30:04,040
+where where human like language data or human data in general is not a good fit for some of the this this description.
+
+335
+00:30:04,080 --> 00:30:14,840
+And so so I think by letting go of this this the human data, we put ourselves in a position where we can actually discover something which can which can like get go far far
+
+336
+00:30:14,840 --> 00:30:15,720
+beyond it.
+
+337
+00:30:15,720 --> 00:30:22,880
+And so if we come back to the AlphaGo example, what we found there was that the moment we let go of the human data,
+
+338
+00:30:23,040 --> 00:30:29,160
+which we'd spent, by the way, we'd spent about 2 years like building AlphaGo somewhat similar to the LM approach where we kind of,
+
+339
+00:30:29,160 --> 00:30:34,080
+you know, we built every level of this, you know, we kind of hand put together the next level.
+
+340
+00:30:34,080 --> 00:30:42,320
+We kind of put in a lot of human data, and then we were kind of human in the loop like improving it where we would kind of take the previous generation and choose how
+
+341
+00:30:42,320 --> 00:30:46,760
+we were going to improve it to give the next generation and and so we were right in the loop of this process.
+
+342
+00:30:47,040 --> 00:30:50,360
+It took us 2 years to get to AlphaGo and beat Lee Sedol.
+
+343
+00:30:50,360 --> 00:30:57,360
+When we got AlphaZero right, you know, we gave up on the human data and finally focused on what would be like to build an algorithm that could discover for itself.
+
+344
+00:30:57,360 --> 00:31:01,640
+Um so once we got it right, that algorithm, it took just a few hours.
+
+345
+00:31:01,840 --> 00:31:07,520
+Like it took a few hours to like outperform the 2 years of work which we'd done as with human in the loop.
+
+346
+00:31:07,720 --> 00:31:13,680
+Um so in the in the game of chess it took 4 hours to beat the world champion, the best ever AI that had ever been created.
+
+347
+00:31:14,040 --> 00:31:18,320
+In the game of Go it took um you you know, like uh I think it was a couple of days or something,
+
+348
+00:31:18,320 --> 00:31:21,280
+but it was you incredible progress.
+
+349
+00:31:21,320 --> 00:31:30,640
+Like and and and so you have to let go of the human data to allow yourself to discover these things that can then shoot past the the competition and discover the things that just
+
+350
+00:31:30,640 --> 00:31:32,400
+keep learning and learning and learning forever.
+
+351
+00:31:32,800 --> 00:31:35,360
+So so you know, it's it has to be an active choice.
+
+352
+00:31:35,600 --> 00:31:40,800
+And if you don't make that active choice, you know, what I see in a lot of the kind of LLM companies today is that they're basically,
+
+353
+00:31:41,120 --> 00:31:48,880
+you know, building uh semi-autonomous human in the loop kind of learning algorithms with thousands of people in the loop of the learning progress,
+
+354
+00:31:49,200 --> 00:31:52,800
+which is, you know, it works and and a lot of respect for how far it gets.
+
+355
+00:31:52,960 --> 00:31:57,560
+But, you know, until we step back from that and really discover the process that's going to learn for itself,
+
+356
+00:31:57,760 --> 00:32:05,040
+I don't believe we'll get all the way to something which is truly a super learner and unleashes the potential that that we've talked about so far.
+
+357
+00:32:05,400 --> 00:32:06,440
+>> That's very profound.
+
+358
+00:32:07,040 --> 00:32:16,000
+As far as I know it that there are humans that are ineffable and um some of you are creating environments or crucibles and what does it look like to actually try and make sure
+
+359
+00:32:16,000 --> 00:32:19,800
+that human priors aren't kind of leaking into what you're doing?
+
+360
+00:32:20,080 --> 00:32:28,360
+>> Yeah, well, so when we design like environments um and like rewards function and so on, like obviously there's a human bias in there.
+
+361
+00:32:28,520 --> 00:32:37,320
+But we don't want to as as David was also mentioning earlier, we don't want to like bias it towards uh building a machine based on like the von Neumann architecture or something like this,
+
+362
+00:32:37,320 --> 00:32:37,880
+right?
+
+363
+00:32:37,880 --> 00:32:44,920
+We want to like but if you if you're stating like um some problem where like a machine would be useful,
+
+364
+00:32:45,240 --> 00:32:51,760
+it would be very interesting to see what type of machine it comes up with, like what computer-like machine it comes up with.
+
+365
+00:32:51,760 --> 00:32:52,800
+>> So, I totally agree with this.
+
+366
+00:32:52,800 --> 00:32:56,800
+I would also say that we're not religious about this.
+
+367
+00:32:56,800 --> 00:32:59,960
+It's not like a religion that you can't have any human prior anywhere.
+
+368
+00:33:00,240 --> 00:33:11,600
+Um it's more like a pragmatic position that, you know, until we give up on on like relying on the trillion like item data sets of of human knowledge that we're not going to make
+
+369
+00:33:11,600 --> 00:33:14,720
+the progress that we that the field deserves to see.
+
+370
+00:33:14,720 --> 00:33:17,400
+So, it's more like a actually a practical position.
+
+371
+00:33:17,480 --> 00:33:21,960
+And so, in practice, of course, there's going to be a certain amount of priors which like as Lassa says,
+
+372
+00:33:22,200 --> 00:33:31,680
+there'll be priors which which apply to many different like worlds um as opposed to like, you know, trying to put in these very strong priors that exactly encode how all the knowledge we know
+
+373
+00:33:31,680 --> 00:33:35,040
+about about this one particular problem or this one particular world.
+
+374
+00:33:35,160 --> 00:33:43,880
+So, a kind of weak environment-agnostic priors seem perfectly reasonable, but kind of these super strong priors with like trillion-item data sets,
+
+375
+00:33:44,200 --> 00:33:48,200
+we're trying to avoid that because we think pragmatically it's going to lead to better outcomes.
+
+376
+00:33:48,200 --> 00:33:49,200
+>> Yeah, absolutely.
+
+377
+00:33:49,720 --> 00:33:56,080
+You mentioned that you like philosophically that you're drawn to research that's more on the knife's edge.
+
+378
+00:33:56,080 --> 00:33:56,680
+50/50.
+
+379
+00:33:56,840 --> 00:34:05,040
+I'm curious what your confidence levels are for, you know, ineffable broad at the broadest level, like does it will a super learner emerge?
+
+380
+00:34:05,600 --> 00:34:11,200
+And then I guess at the more pragmatic level in terms of the things that you're trying to accomplish right now.
+
+381
+00:34:11,200 --> 00:34:13,400
+Are you are you 50/50 on these as well?
+
+382
+00:34:13,800 --> 00:34:19,560
+>> So, first of all, I would say I strongly believe that the approach will be feasible at some point.
+
+383
+00:34:19,560 --> 00:34:28,840
+Like we have in fact it's the only thing for which we have an example of like, you know, the example in our brains is the only existence proof of something which has discovered like
+
+384
+00:34:28,840 --> 00:34:36,160
+an incredible intelligence that's very general and works in you know, in embodied world and discovers how to do all kinds of different things.
+
+385
+00:34:36,800 --> 00:34:41,680
+So, we have this incredible example of the of the human brain that um we can look at.
+
+386
+00:34:42,560 --> 00:34:45,399
+So, then you know, do I think we can achieve it?
+
+387
+00:34:45,399 --> 00:34:50,960
+Well, I think like many great like moments in science, it's about timing.
+
+388
+00:34:51,120 --> 00:34:54,440
+So, so you know, whether this succeeds or fails, I think is about timing.
+
+389
+00:34:54,440 --> 00:34:58,640
+Like um you when you create a startup, you want to be at the right time.
+
+390
+00:34:58,640 --> 00:35:02,120
+You would you don't want to be um too early or too late.
+
+391
+00:35:02,360 --> 00:35:03,960
+You know, if you're too late, everyone's done it.
+
+392
+00:35:03,960 --> 00:35:04,920
+You know, it's not interesting.
+
+393
+00:35:04,920 --> 00:35:06,920
+Like a thousand other people have already done it.
+
+394
+00:35:06,920 --> 00:35:13,480
+And if you're too early, um you know, you might be banging on the door um but not have the the right kind of you know,
+
+395
+00:35:13,480 --> 00:35:18,080
+maybe the field isn't advanced enough or or there isn't enough compute to be able to succeed yet.
+
+396
+00:35:18,120 --> 00:35:19,640
+So, to me it's all about timing.
+
+397
+00:35:19,960 --> 00:35:29,240
+For example, with computer Go, um you know, I made a prediction I think 10 years before um computer Go was solved and I got it right to the year.
+
+398
+00:35:29,280 --> 00:35:40,160
+Um got it right for um StarCraft which I also we had a bet and made a prediction um same for AlphaProof um when we predicting when when the IMO was going to fall.
+
+399
+00:35:40,160 --> 00:35:41,960
+>> So, you're a super forecaster of sorts.
+
+400
+00:35:42,320 --> 00:35:49,840
+>> So, so far so far I've done very well at this um and I do have a very strong sense that this is the right time for this to fall.
+
+401
+00:35:49,840 --> 00:35:51,520
+That the super learners are possible.
+
+402
+00:35:51,560 --> 00:36:04,120
+Like there's been enormous progress in the level of technology, the the ability to accelerate research using kind of um LLM coding methods or or auto research methods like like we've produced in the past.
+
+403
+00:36:04,520 --> 00:36:14,200
+Uh the the ability and understanding of scaling laws and and the sophistication of technology in the stack, there's a lot of things that have fallen into place that I think make this the right
+
+404
+00:36:14,200 --> 00:36:14,800
+timing.
+
+405
+00:36:14,880 --> 00:36:17,080
+So, that's my bet that this is the right timing.
+
+406
+00:36:17,080 --> 00:36:19,000
+But yeah, of course, like this is research.
+
+407
+00:36:19,360 --> 00:36:24,160
+Um research is never guaranteed and um and that's what makes it exciting.
+
+408
+00:36:24,360 --> 00:36:26,400
+If you get the timing right, you can be the first.
+
+409
+00:36:26,400 --> 00:36:28,880
+You can be the ones to change the the whole field of AI.
+
+410
+00:36:28,880 --> 00:36:36,160
+And um you know, um that that's that's what it means to to take risks and and do something exciting.
+
+411
+00:36:36,680 --> 00:36:42,040
+>> For Ineffable and also all the previous things that you correctly forecasted, is the biggest driver of timing compute?
+
+412
+00:36:42,680 --> 00:36:44,040
+>> I think it's a very big driver.
+
+413
+00:36:44,160 --> 00:36:45,680
+I think it's it's an enormous driver.
+
+414
+00:36:45,680 --> 00:36:53,400
+I think um yeah, I mean we're we're in a great position with the compute that um that we've we've managed to get hold of.
+
+415
+00:36:53,400 --> 00:36:54,520
+Um and
+
+416
+00:36:55,600 --> 00:37:05,880
+I think it gives an opportunity to do things which are you know, orders of magnitude um more sophisticated than than approaches that have tried to kind of do self-discovered RL in the past.
+
+417
+00:37:05,880 --> 00:37:16,960
+So, I think yeah, if we compare to I don't know, something like hide and seek from OpenAI which which um was like an early example where where agents discovered um kind of some basic
+
+418
+00:37:16,960 --> 00:37:17,800
+tool use.
+
+419
+00:37:18,040 --> 00:37:23,960
+Um I think, you know, we could probably run experiments that like are use 100,000 times more compute.
+
+420
+00:37:24,280 --> 00:37:30,840
+And so, it's kind of amazing that people haven't come back and really pushed on these types of approaches given the the the availability of compute.
+
+421
+00:37:31,000 --> 00:37:34,320
+And of course, hide and seek I I don't want to pretend that that's the end goal.
+
+422
+00:37:34,320 --> 00:37:39,800
+I think it's it's very basic, but I think it just it's suggestive of of of what could be done.
+
+423
+00:37:39,800 --> 00:37:44,640
+Like if we really, you know, so I think compute is a huge driver.
+
+424
+00:37:44,640 --> 00:37:45,600
+That's not the only one.
+
+425
+00:37:45,600 --> 00:37:46,040
+Yeah.
+
+426
+00:37:46,040 --> 00:37:50,960
+>> I think we're in a very fortunate situation that we have been able to secure like a very large cluster,
+
+427
+00:37:50,960 --> 00:37:51,560
+right?
+
+428
+00:37:51,840 --> 00:37:54,920
+So, and and a large amount of compute >> cluster at that.
+
+429
+00:37:54,920 --> 00:37:55,280
+>> Yes.
+
+430
+00:37:55,280 --> 00:37:59,480
+So, so um um so, this is like really like an opportunity for us, right?
+
+431
+00:37:59,480 --> 00:38:03,280
+Like we really have like the cards on our hands to to test this out.
+
+432
+00:38:03,360 --> 00:38:06,120
+Um very few other people are doing something similar.
+
+433
+00:38:06,640 --> 00:38:07,840
+So, yeah.
+
+434
+00:38:07,840 --> 00:38:13,080
+We can we can really test this out in a way that we couldn't do at DeepMind for instance.
+
+435
+00:38:13,160 --> 00:38:13,760
+>> Absolutely.
+
+436
+00:38:14,120 --> 00:38:15,640
+It seems like one of the
+
+437
+00:38:17,040 --> 00:38:22,400
+maybe determinants of how far this can go is how far you can push simulation.
+
+438
+00:38:22,920 --> 00:38:27,400
+and these ultimately these crucibles are you know, they're they're digital, right?
+
+439
+00:38:27,440 --> 00:38:33,040
+And I think simulation has probably come quite far in the last handful of years.
+
+440
+00:38:33,480 --> 00:38:36,520
+Uh but it's not it's not perfect, right?
+
+441
+00:38:36,600 --> 00:38:44,840
+Um Uh we recently had your your friend Rich Sutton on the show and I asked him about simulation and he said he was very dismissive of simulation.
+
+442
+00:38:45,200 --> 00:38:49,320
+Um I'm curious how you guys think about this and and I say you've been on both sides of this.
+
+443
+00:38:49,320 --> 00:38:56,640
+I think you you obviously did in the digital world, uh but you also built Met Net, uh which, you know,
+
+444
+00:38:56,640 --> 00:38:59,040
+touches real-world atmospheric data.
+
+445
+00:38:59,400 --> 00:39:00,880
+How do you all think about
+
+446
+00:39:03,040 --> 00:39:08,160
+where is the ceiling on simulation and what is when is the right time to bring an apple into the real world?
+
+447
+00:39:08,560 --> 00:39:10,800
+>> So, I guess Met Net was actually like an example.
+
+448
+00:39:10,800 --> 00:39:24,400
+So, this is like a weather forecasting model we did in the Google Brain Amsterdam office together with Google Research where like we're doing like a machine learning model to predict short-term like weather forecast
+
+449
+00:39:24,400 --> 00:39:29,120
+and this is like way better than the physics-based simulations, right?
+
+450
+00:39:29,120 --> 00:39:33,000
+Like so, the physics simulations were like accumulating errors over time.
+
+451
+00:39:33,080 --> 00:39:37,040
+So, there's like a point to that that the physics simulation is not perfect.
+
+452
+00:39:37,760 --> 00:39:48,200
+I do think there's there's a lot of relatively simple environments that we can build where we can see this like emergent behavior of like let's say like technology and so on where we don't
+
+453
+00:39:48,200 --> 00:39:49,880
+need like exact physics.
+
+454
+00:39:50,520 --> 00:39:52,920
+Um I actually do think it's interesting to see
+
+455
+00:39:54,280 --> 00:39:59,720
+how much we can build these days with like very small team in terms of these simulations and so on.
+
+456
+00:39:59,720 --> 00:40:05,320
+So, there's definitely like a ceiling um on how much >> I'm curious about this.
+
+457
+00:40:05,320 --> 00:40:05,920
+Yeah.
+
+458
+00:40:06,520 --> 00:40:08,720
+>> Well, I guess quantum physics and and whatnot, right?
+
+459
+00:40:08,720 --> 00:40:15,160
+But but so, there's like a ceiling somewhere, but um but we can do like very interesting things without real physics,
+
+460
+00:40:15,160 --> 00:40:15,920
+I would say.
+
+461
+00:40:16,120 --> 00:40:22,520
+>> So, I think the right question to ask is can a super intelligence be built in simulation?
+
+462
+00:40:22,520 --> 00:40:34,000
+So, if it is possible for it to be built in simulation, I believe it will happen 10 times or 100 times faster just because simulation can be infinitely paralyzed,
+
+463
+00:40:34,280 --> 00:40:38,360
+you get perfect reproducibility, um has a lot of really nice properties.
+
+464
+00:40:38,920 --> 00:40:42,400
+It's also the safest place for a super intelligence to be built.
+
+465
+00:40:42,680 --> 00:40:47,160
+So, it has these really nice properties, then we need to ask is it possible?
+
+466
+00:40:47,560 --> 00:41:02,800
+Um and and I think for the reasons we discussed earlier, there are very clear approaches that we can add into the simulation um that allow it to be sufficiently complex to represent arbitrarily interesting
+
+467
+00:41:02,800 --> 00:41:03,400
+things.
+
+468
+00:41:03,600 --> 00:41:11,080
+So, for example, like let's say you wanted to build a computer in simulation, well, all you require is that your simulation is is Turing complete.
+
+469
+00:41:11,480 --> 00:41:20,880
+If you have a Turing complete simulation, suddenly everything that we mean by computation, like everything, like provably everything we mean by computation can be expressed completely inside simulation.
+
+470
+00:41:21,240 --> 00:41:27,920
+And indeed, humans have built incredibly complex computers or or um related things in inside simulated worlds.
+
+471
+00:41:28,400 --> 00:41:34,080
+The same is true for various other um ideas, like you know, if you want to build an economy, like you know,
+
+472
+00:41:34,080 --> 00:41:38,560
+money can be built out of coins or out of paper or out of bits.
+
+473
+00:41:38,960 --> 00:41:48,120
+Um and as long as you have um one of those, you know, some some representation of money, everything that we mean by economics can be can be expressed inside a simulation.
+
+474
+00:41:48,560 --> 00:41:49,600
+The same is true for language.
+
+475
+00:41:49,600 --> 00:41:55,560
+If you've got multiple agents and they've got some uh ability to express a channel of communication between the agents,
+
+476
+00:41:55,720 --> 00:41:58,840
+suddenly everything that we mean by language is expressible in simulation.
+
+477
+00:41:59,400 --> 00:42:02,520
+Um mathematics we know is expressible in any universe.
+
+478
+00:42:02,840 --> 00:42:10,360
+Science in some sense is the study of our world, so will a simulation be sufficient to to study um what we mean by science?
+
+479
+00:42:10,840 --> 00:42:18,600
+Well, there are some aspects of science which are like expressible in many things like you know energy or entropy or or evolution.
+
+480
+00:42:19,240 --> 00:42:30,280
+But also it's it's true that you know the agent will discover its own science like whatever the simulator is if it's got this emergent complexity to its environment the agent will discover its own
+
+481
+00:42:30,280 --> 00:42:32,520
+science about whatever that world is.
+
+482
+00:42:32,520 --> 00:42:43,520
+It's very like provably possible to build environments in which it's possible to express and represent enormous complexity of all of these things.
+
+483
+00:42:43,520 --> 00:42:50,400
+Well, I agree with Lassa there might be some things which which aren't well expressed you know there will be things which can only be expressed in the real world like quantum computation is a
+
+484
+00:42:50,400 --> 00:42:51,120
+good example.
+
+485
+00:42:51,640 --> 00:42:59,000
+The real point is that if it's possible to get all the way to a super intelligence in simulation it will happen faster and it will happen safer.
+
+486
+00:42:59,240 --> 00:43:02,960
+And so for those reasons it's something that we choose to to put a lot of energy into.
+
+487
+00:43:03,280 --> 00:43:13,640
+I actually agree with Rich Sutton that that you know I think his point was something along the lines that you shouldn't expect that the things that you learn in simulation to like transfer like
+
+488
+00:43:13,640 --> 00:43:21,440
+sim to real into the real world because the real world is like just like vastly more more complex and and in very interesting ways that are hard to simulate.
+
+489
+00:43:21,920 --> 00:43:31,360
+But I think what we can do is we can do all of the science to discover the super learner and and and once we have that super learner we we we will have the
+
+490
+00:43:31,360 --> 00:43:40,400
+answers and we'll know how to build something which that that same algorithm should be applicable to the real world and we can also you know make our simulations more and more high fidelity towards
+
+491
+00:43:40,400 --> 00:43:44,400
+the real world and check that they still work before before putting them into the world.
+
+492
+00:43:44,600 --> 00:43:45,320
+>> Great answer.
+
+493
+00:43:45,320 --> 00:43:46,160
+Thank you.
+
+494
+00:43:46,240 --> 00:43:56,160
+I'd love to talk about alignment and maybe less I know there's a politically charged topic right now and so I'm less interested I'm I'm zero interested in having the politics or policy discussion around
+
+495
+00:43:56,160 --> 00:43:59,960
+alignment but I am very interested in the scientific discussion around it.
+
+496
+00:43:59,960 --> 00:44:09,760
+It seems like so much of the misalignments that's emerged has arisen from you know scaling reinforcement learning to the extent that that it's been scaled.
+
+497
+00:44:10,120 --> 00:44:18,680
+Do you think that the super learner you build will naturally be aligned to human interests um and have human values?
+
+498
+00:44:18,680 --> 00:44:24,080
+Is it important for that for it to have alignment with with human values?
+
+499
+00:44:24,600 --> 00:44:26,760
+>> So so this is a a big topic.
+
+500
+00:44:26,760 --> 00:44:29,760
+So let me, you know, start by saying a few things.
+
+501
+00:44:30,040 --> 00:44:45,360
+So so where we are today with alignment, we are essentially relying very heavily on alignment approaches that are based on the language that the agents use um and priors that are based on on
+
+502
+00:44:45,360 --> 00:44:46,800
+human data.
+
+503
+00:44:46,800 --> 00:44:55,320
+Um that has been recently been been very effective up to this point, but we're starting to see that that approach is reaching its its its limits.
+
+504
+00:44:55,560 --> 00:45:03,600
+And by itself, I think it's going to be difficult to see a path where as agents become inevitably more and more powerful,
+
+505
+00:45:03,680 --> 00:45:10,520
+you we can already see this happening as the agents are trained more and more, they they are kind of um going to start to overwhelm their priors.
+
+506
+00:45:10,520 --> 00:45:14,640
+They're going to start to learn to say one thing and act in a different way.
+
+507
+00:45:14,640 --> 00:45:22,480
+Um and it's going to be increasingly difficult to to align to the things that we that we that humans want them to do.
+
+508
+00:45:22,720 --> 00:45:27,400
+So my belief is that we need something more um and that this by itself is not sufficient.
+
+509
+00:45:27,840 --> 00:45:37,760
+The most important single thing that we can do as a company um is to actually understand the the science of super intelligence.
+
+510
+00:45:38,160 --> 00:45:47,000
+So that this means to say that if we actually can in simulation really build a super intelligent agent and start to see these super learners like go all the way,
+
+511
+00:45:47,240 --> 00:45:53,840
+um we can start to actually understand like what it takes for a super intelligence to actually um interact peacefully.
+
+512
+00:45:54,400 --> 00:45:57,040
+Um so we can answer really important questions.
+
+513
+00:45:57,120 --> 00:45:59,040
+Like these are fundamentally important questions.
+
+514
+00:45:59,040 --> 00:46:05,160
+Like, you know, under what conditions, like what are the what are the conditions, what are the the the structures,
+
+515
+00:46:05,200 --> 00:46:13,440
+what are the kind of leverages that we need to put into place to make sure that that like a a society of super intelligences actually interacts peacefully,
+
+516
+00:46:13,760 --> 00:46:19,680
+and in particular interacts peacefully with other lesser intelligences that are also going to be in in in their world.
+
+517
+00:46:19,880 --> 00:46:30,080
+And I think if we get this right, um we actually can get to some answers like to some a real science that will help to understand like what the right things to do are
+
+518
+00:46:30,080 --> 00:46:39,920
+in the real world um because we're hastening towards that real world outcome where there are going to be a whole load of different interacting super intelligences um and and we don't quite know how
+
+519
+00:46:39,920 --> 00:46:41,120
+that's going to play out.
+
+520
+00:46:41,120 --> 00:46:48,520
+And I think the faster that we can actually get to these answers in simulation and publicly share that, um the better situation we'll be in.
+
+521
+00:46:48,520 --> 00:46:50,200
+Um so that's my strong belief.
+
+522
+00:46:50,440 --> 00:46:57,120
+Um I also believe that we can use this to kind of gate the actual decision making of of like what we do in in the real world.
+
+523
+00:46:57,240 --> 00:47:07,960
+So, you know, one of our um commitments is that we will gate anything we do in the real world on having sufficient um evidence from this kind of science of super intelligence that we
+
+524
+00:47:07,960 --> 00:47:16,840
+are really confident that things are going to go well um and we'll only push forward um to the next level of what we do in the real world once we are um absolutely confident
+
+525
+00:47:16,840 --> 00:47:18,360
+that that can lead to a good outcome.
+
+526
+00:47:18,640 --> 00:47:21,800
+Um so I think this is these are two things that I believe we can do.
+
+527
+00:47:21,800 --> 00:47:25,720
+You know, we're in this world where where um a lot of things are happening very quickly.
+
+528
+00:47:25,840 --> 00:47:29,080
+We're hurtling towards an outcome with lots of interacting super intelligences.
+
+529
+00:47:29,640 --> 00:47:33,960
+I personally believe that this will lead to a good outcome for humanity, but it's happening very quickly.
+
+530
+00:47:34,200 --> 00:47:40,200
+And I think that if we um are able to actually understand this and and and run ahead in simulation,
+
+531
+00:47:40,640 --> 00:47:45,640
+we'll be in a much better place to actually do the do the things that ensure that this goes really well.
+
+532
+00:47:45,760 --> 00:47:47,000
+Fascinating.
+
+533
+00:47:47,000 --> 00:47:55,960
+And it seems like one of the primary things that current safety researchers rely on is being able to monitor the agent's chains of thought in English.
+
+534
+00:47:56,000 --> 00:48:01,080
+And so when they start speaking in English, that scares people because we can no longer understand monitor as well.
+
+535
+00:48:01,080 --> 00:48:06,000
+In your case, you have your agents kind of going straight to rediscovering language.
+
+536
+00:48:06,320 --> 00:48:09,320
+What do you think that means for for monitoring?
+
+537
+00:48:09,440 --> 00:48:17,280
+And is or is the point that, you know, if you get the reward right and if you get the environments right,
+
+538
+00:48:17,280 --> 00:48:19,040
+then you shouldn't need to monitor?
+
+539
+00:48:19,680 --> 00:48:24,040
+>> Yeah, I think I think monitoring is is something which is still really helpful.
+
+540
+00:48:24,720 --> 00:48:26,240
+Um I think that
+
+541
+00:48:28,120 --> 00:48:40,680
+like it or not, I believe that the approach of monitoring the human language that these systems use is going to be increasingly difficult to as agents get more powerful and we're already seeing that
+
+542
+00:48:40,680 --> 00:48:52,480
+that the monitoring, you know, agents are you know, maybe they're producing like a ton of you know, a million words of of of of reasoning um or maybe they're actually actively you know,
+
+543
+00:48:52,480 --> 00:48:55,520
+using subterfuge to kind of think in one way and then act in another.
+
+544
+00:48:55,720 --> 00:48:59,240
+Um it's increasingly difficult to rely 100% on that.
+
+545
+00:48:59,440 --> 00:49:02,760
+Um so, I do think we need other elements in our armory anyway.
+
+546
+00:49:03,080 --> 00:49:07,560
+Um so, I think it's actually really important that some people are looking at how to get this right.
+
+547
+00:49:07,600 --> 00:49:11,960
+I think there are ways to to monitor agents that don't that don't use language.
+
+548
+00:49:12,360 --> 00:49:25,240
+Um I think we can do things like um start to, for example, you you know, you can use shadow um actions where you start to have actions taken that um where you can look
+
+549
+00:49:25,240 --> 00:49:29,840
+at what they would actually do if they were allowed to act in the world, but you don't actually let them take that action yet.
+
+550
+00:49:29,920 --> 00:49:34,720
+You can start to have other um super intelligences which are acting as the as the monitor.
+
+551
+00:49:35,000 --> 00:49:41,920
+So, for example, you might um have the idea of like a an incredible scientist agent that sort of treads lightly upon the earth.
+
+552
+00:49:41,920 --> 00:49:50,360
+And then you have another super intelligent that's kind of monitoring the kind of magnitude of its actions and regularizing it to make sure it can't do things which are kind of affecting the the
+
+553
+00:49:50,360 --> 00:49:51,800
+the the the world too much.
+
+554
+00:49:51,800 --> 00:49:53,280
+I think there are lots of ideas.
+
+555
+00:49:53,480 --> 00:49:56,200
+I would say that there's a lot of research to be done here.
+
+556
+00:49:56,200 --> 00:50:04,000
+I'm not claiming to have all of the answers, but I think it's something that that deserves um a a a a lot of of investigation.
+
+557
+00:50:04,560 --> 00:50:13,600
+And if if people aren't looking at this because they're only looking at the language-based approach, I think we're in trouble because I think that language-based approach is not enough in itself to actually get
+
+558
+00:50:13,600 --> 00:50:14,480
+to where we want.
+
+559
+00:50:14,480 --> 00:50:20,080
+I should say in terms of having said in trouble, I I am optimistic about where the world is going.
+
+560
+00:50:20,080 --> 00:50:25,480
+So So by trouble, I mean that we're not going to have agents that do the things that we want them to do.
+
+561
+00:50:25,480 --> 00:50:37,800
+I do think we're going to end up in a world with lots of complex interacting um superintelligent beings, and I'm um optimistic that that will lead to a kind of a balance of of
+
+562
+00:50:37,800 --> 00:50:48,400
+of axes, some of which are supporting the flourishing of humanity, and some of which may not be, but the ones which do support the flourishing of humanity will will um end up kind of
+
+563
+00:50:48,400 --> 00:50:54,120
+supporting us and protecting us against the ones which aren't um you know, acting on our best interests.
+
+564
+00:50:54,120 --> 00:50:58,400
+So So that's the world I think we're we we can work towards, you know.
+
+565
+00:50:58,440 --> 00:51:02,000
+>> Well, given your super forecasting abilities, I'm happy to hear that.
+
+566
+00:51:03,120 --> 00:51:06,760
+What do you think about all the conversation around pacing the frontier?
+
+567
+00:51:07,280 --> 00:51:18,720
+>> I'm actually yeah, very much supportive of the idea that that there should be pacing of what happens for the frontier of AI in the real world.
+
+568
+00:51:19,160 --> 00:51:23,960
+Um at the same time, I think we should move as fast as possible in simulation.
+
+569
+00:51:24,560 --> 00:51:35,720
+Now, the reason is that I think in simulation, we can actually develop a lot of things like the science of superintelligence that will actually help us to find solutions that help things to go
+
+570
+00:51:35,720 --> 00:51:37,000
+well in the real world.
+
+571
+00:51:37,080 --> 00:51:43,560
+And I think that kind of work should happen as fast as possible to make sure that when things really happen in the real world,
+
+572
+00:51:43,800 --> 00:51:49,160
+um that things have the the possible opportunity to go well and lead to human flourishing.
+
+573
+00:51:49,520 --> 00:51:51,480
+So, I think that would be my thought.
+
+574
+00:51:51,480 --> 00:51:54,800
+But, yeah, in general I'm supportive of of the Yeah.
+
+575
+00:51:55,160 --> 00:52:02,360
+suggestions like the kind of direction that that people like um you know, Demis and and Dario and so forth are are suggesting.
+
+576
+00:52:02,800 --> 00:52:04,760
+I think it's um generally good idea.
+
+577
+00:52:04,880 --> 00:52:07,080
+Maybe part of that is that I think that
+
+578
+00:52:08,200 --> 00:52:10,560
+you know, things are moving really quickly and
+
+579
+00:52:11,840 --> 00:52:21,560
+I do believe that when we accelerate AI and get to superintelligence, it will lead to a um a really great future for humanity.
+
+580
+00:52:21,840 --> 00:52:31,080
+But, I also think that it's something that the speed at which things are moving is not something that that we are capable of adapting to that fast.
+
+581
+00:52:31,200 --> 00:52:36,720
+So, I think just by pacing a little bit, I think it gives us the opportunity A for our you know,
+
+582
+00:52:36,720 --> 00:52:43,440
+governments and our organizations and our emotional responses to to adapt to the changes that are coming.
+
+583
+00:52:43,720 --> 00:52:52,200
+And also for for this work to to continue a pace of like really figuring out in simulation how how to you know,
+
+584
+00:52:52,200 --> 00:52:54,600
+the real science of of doing this doing this right.
+
+585
+00:52:54,600 --> 00:52:55,400
+Hm.
+
+586
+00:52:55,400 --> 00:53:02,000
+So, accelerate in simulation so we can understand what's happening and you know, do science around it and then careful in the real world.
+
+587
+00:53:02,000 --> 00:53:03,800
+>> Yeah, I think that that would be my summary.
+
+588
+00:53:03,800 --> 00:53:04,080
+Yeah.
+
+589
+00:53:04,080 --> 00:53:04,800
+Hm.
+
+590
+00:53:04,800 --> 00:53:07,360
+>> I'd love to transition to talking a little bit about compute.
+
+591
+00:53:07,840 --> 00:53:17,440
+Um this is going to be an incredibly compute expensive journey and you are pushing the limits of what compute can do.
+
+592
+00:53:17,640 --> 00:53:21,440
+I mean, both Google and Nvidia have been great partners for you.
+
+593
+00:53:21,760 --> 00:53:24,040
+Can you talk a little bit about your cluster?
+
+594
+00:53:24,080 --> 00:53:34,760
+Like you're not simply renting spot compute from Neo Clouds like many other Neo Labs, you're actually you're doing some really serious work on on your cluster and and the different other forms of compute
+
+595
+00:53:34,960 --> 00:53:35,480
+that you have.
+
+596
+00:53:35,480 --> 00:53:37,280
+Can you just talk about your compute setup?
+
+597
+00:53:37,760 --> 00:53:38,040
+>> Right.
+
+598
+00:53:38,040 --> 00:53:48,560
+So, yeah, as I mentioned earlier, like we are very fortunate with the computer we have like we are the first first customers of the largest vehicle Google cluster on GCP.
+
+599
+00:53:49,240 --> 00:53:51,000
+Um by the end of the year.
+
+600
+00:53:51,040 --> 00:53:53,680
+Well, actually start like 1 month from now.
+
+601
+00:53:53,920 --> 00:54:03,480
+Um so we are like extremely fortunate in that and I actually feel quite bad about like the startups that are like uh getting computer now because it's becoming like harder and harder.
+
+602
+00:54:03,880 --> 00:54:09,360
+Um but yeah, so we have like this like vehicle Google cluster which is like based on GPUs, right?
+
+603
+00:54:09,360 --> 00:54:17,640
+Like Nvidia GPUs which is uh really fortunate for us because it means that we can easily do simulation um and like training and inference,
+
+604
+00:54:17,640 --> 00:54:17,840
+right?
+
+605
+00:54:17,840 --> 00:54:19,440
+They are quite like general chips.
+
+606
+00:54:19,480 --> 00:54:20,440
+So that's like amazing.
+
+607
+00:54:20,440 --> 00:54:28,080
+I think like the vehicle Google specifically um they have this architecture where like one rack can basically consider like one machine.
+
+608
+00:54:28,080 --> 00:54:40,400
+There's like a very high bandwidth between the nodes in one rack um which is very important for reinforcement learning where you have like really fast iteration cycles um compared to LLMs that are relatively
+
+609
+00:54:40,400 --> 00:54:41,640
+speaking quite slow.
+
+610
+00:54:42,240 --> 00:54:44,040
+Uh so that's quite fortunate for us.
+
+611
+00:54:44,200 --> 00:54:53,280
+I think like some of the the things we did like 8 10 years ago um at at Google where we basically had like abundant CPUs at Google.
+
+612
+00:54:53,480 --> 00:54:54,840
+That doesn't scale anymore.
+
+613
+00:54:55,160 --> 00:55:01,960
+So we really need to make sure that everything we do is on the GPUs and we don't need like millions of CPUs uh beyond these GPUs.
+
+614
+00:55:02,360 --> 00:55:05,960
+Uh so our simulations can run on the GPU or inference and training and so on.
+
+615
+00:55:05,960 --> 00:55:08,320
+So we have some good out- architectures for that.
+
+616
+00:55:08,480 --> 00:55:18,760
+I think like the LLM companies now have kind of like the problems that we had uh many years ago where they need like sandboxes running on CPUs like simulating computers and so on uh
+
+617
+00:55:18,760 --> 00:55:22,040
+and we're trying to not put ourselves in that situation.
+
+618
+00:55:22,160 --> 00:55:22,760
+>> Mhm.
+
+619
+00:55:23,120 --> 00:55:27,840
+All the computers, is it roughly fungible between the different things that you're doing?
+
+620
+00:55:27,840 --> 00:55:29,920
+I imagine you're you're building crucibles
+
+621
+00:55:30,920 --> 00:55:35,200
+and then you're kind of doing these big rollouts where the agents are are actually learning.
+
+622
+00:55:35,200 --> 00:55:38,640
+Is that is that the rough buckets of what computer's being used for?
+
+623
+00:55:38,880 --> 00:55:40,760
+>> Yeah, you you could split it up into
+
+624
+00:55:42,040 --> 00:55:44,320
+training, inference, and simulation.
+
+625
+00:55:45,040 --> 00:55:49,120
+>> Is the same compute equally good at training, inference, and simulation?
+
+626
+00:55:49,120 --> 00:55:50,760
+Like No.
+
+627
+00:55:50,760 --> 00:55:51,360
+Okay.
+
+628
+00:55:51,360 --> 00:56:02,160
+>> So, I I I think it's pretty clear what has happened with GPUs over the last many years all except since deep learning took off is that they've been more and more tailored towards training.
+
+629
+00:56:02,840 --> 00:56:03,160
+Right?
+
+630
+00:56:03,160 --> 00:56:06,480
+And and maybe in the last few years also inference.
+
+631
+00:56:07,120 --> 00:56:08,400
+But less about simulation.
+
+632
+00:56:09,240 --> 00:56:09,480
+Right?
+
+633
+00:56:09,480 --> 00:56:16,840
+So, uh but we are like similarly to the LLM companies, we also want to be in the case where like scaling laws matter.
+
+634
+00:56:16,840 --> 00:56:26,720
+Like we know that roughly like if we add this amount of compute and experiences, then we get a certain amount of the quality out of that.
+
+635
+00:56:26,720 --> 00:56:31,880
+>> So, I guess if if GPUs aren't great for for scaling simulation, then then what's the solution?
+
+636
+00:56:32,160 --> 00:56:32,280
+>> Right.
+
+637
+00:56:32,280 --> 00:56:34,240
+So, so there are many different solutions here, right?
+
+638
+00:56:34,240 --> 00:56:40,680
+So, we have the similar model-based reinforcement learning where like the model becomes much more expensive compared to to the simulation.
+
+639
+00:56:40,800 --> 00:56:42,840
+So, there's many different tricks you can do.
+
+640
+00:56:43,040 --> 00:56:47,960
+Um there's like various approaches for like replay buffers or like reusing data many times.
+
+641
+00:56:48,200 --> 00:56:50,200
+So, yeah, there are ways around that.
+
+642
+00:56:50,200 --> 00:56:55,760
+And all in that, we do spend quite some effort on just making the simulations as fast as possible.
+
+643
+00:56:56,320 --> 00:56:59,680
+Uh and make them use of make the best use of the GPUs.
+
+644
+00:56:59,880 --> 00:57:00,480
+>> Hm.
+
+645
+00:57:00,600 --> 00:57:01,200
+Hm.
+
+646
+00:57:01,520 --> 00:57:04,920
+Are you seeing scaling laws yet or is it too early to say?
+
+647
+00:57:05,200 --> 00:57:09,240
+>> So, for reinforcement learning like scaling is all laws are like slightly different, right?
+
+648
+00:57:09,240 --> 00:57:15,080
+So, like scaling laws is the component of how much compute you put in, how much data you put in,
+
+649
+00:57:15,280 --> 00:57:16,840
+uh and then the model size.
+
+650
+00:57:17,360 --> 00:57:21,720
+Um well, reinforcement learning is a little bit different because the problem is like non-stationary.
+
+651
+00:57:21,960 --> 00:57:25,480
+So, as you progress in the problem, the data changes.
+
+652
+00:57:25,800 --> 00:57:27,520
+Like the data distribution changes.
+
+653
+00:57:28,160 --> 00:57:29,800
+Um so, they are a little bit different.
+
+654
+00:57:29,800 --> 00:57:34,120
+It's like a a very interesting um research direction.
+
+655
+00:57:34,560 --> 00:57:42,360
+>> I understand that different but you're saying some some sort of scaling law where more computing gets you closer to achieving the goals or or is it hard to say right now?
+
+656
+00:57:42,480 --> 00:57:45,960
+>> Yeah, but it's it's something that we're we're actively pushing towards.
+
+657
+00:57:46,360 --> 00:57:46,960
+Yeah.
+
+658
+00:57:47,120 --> 00:57:53,400
+And especially as we like transition from like a smaller cluster to the bigger cluster, we want to be ready for that.
+
+659
+00:57:53,400 --> 00:57:54,280
+Yeah.
+
+660
+00:57:54,280 --> 00:58:07,520
+Let's say at the beginning when David introduced you, he mentioned that you had done some very foundational work to compute and algorithms for reinforcement learning upon which the field really relies on today.
+
+661
+00:58:07,760 --> 00:58:12,240
+Maybe talk about some of that work and in particular your your work around Impala and Seed.
+
+662
+00:58:12,400 --> 00:58:15,560
+What what are those and how do they relate to the work that you're doing at Enumerable?
+
+663
+00:58:16,280 --> 00:58:16,480
+>> Right.
+
+664
+00:58:16,480 --> 00:58:24,840
+So, when I joined like the deep learning team at DeepMind, most people were running like single machine CPU based reinforcement learning.
+
+665
+00:58:25,000 --> 00:58:27,320
+So, the scale was like quite small.
+
+666
+00:58:27,760 --> 00:58:38,280
+So, what I did together with colleagues was to make an agent reinforcement learning agent that really utilized GPUs and could scale like linear with compute.
+
+667
+00:58:38,280 --> 00:58:47,040
+I think like partially because it was it was very efficient, it was very good at scaling, and like the third thing was it was it was very easy to extend and like modify and
+
+668
+00:58:47,040 --> 00:58:49,120
+and do whatever you wanted with it.
+
+669
+00:58:49,360 --> 00:59:02,840
+Um contributed to it it being like the most popular reinforcement learning agent at the company and I think at one point um most RL team used it or like derivatives of it.
+
+670
+00:59:03,120 --> 00:59:07,480
+Um so, that was quite successful and quite a nice project to work on.
+
+671
+00:59:07,680 --> 00:59:10,480
+>> Then like later on like we we got TPUs, right?
+
+672
+00:59:10,480 --> 00:59:14,120
+We got like racks of these TPUs, so we need to scale beyond that.
+
+673
+00:59:14,560 --> 00:59:25,560
+So, some of my work at Google Brain after I left DeepMind to found the Google Brain Amsterdam office was to scale to like racks of TPUs and that project was called like Seed RL.
+
+674
+00:59:26,280 --> 00:59:37,400
+So, that was like really about like utilizing uh the TPUs both for like inference and training in the best possible way while keeping um the environments as flexible as as as you want it
+
+675
+00:59:37,400 --> 00:59:37,720
+to.
+
+676
+00:59:37,720 --> 00:59:43,080
+It could be like anything from go to uh very expensive physics simulations.
+
+677
+00:59:43,960 --> 00:59:46,360
+>> And how's that been used at Ineffable?
+
+678
+00:59:46,960 --> 00:59:51,920
+>> Yeah, so well, we actually implemented um a few of those algorithms.
+
+679
+00:59:52,000 --> 00:59:52,360
+Okay.
+
+680
+00:59:52,360 --> 00:59:54,320
+>> Also like derivatives of these algorithms.
+
+681
+00:59:54,680 --> 00:59:56,840
+So, that is like what we are using today.
+
+682
+00:59:57,240 --> 01:00:00,600
+We have like depending on like the environments, we use like different algorithms, right?
+
+683
+01:00:00,600 --> 01:00:02,400
+There are like pros and cons between them.
+
+684
+01:00:02,400 --> 01:00:02,920
+So, yeah.
+
+685
+01:00:02,920 --> 01:00:11,280
+Also, we talked about like we have some very simple um like fast to to simulate environments and also some that are more expensive.
+
+686
+01:00:12,240 --> 01:00:21,800
+>> So, if you guys who are working on large-scale RL architectures today and haven't read those original papers, it's definitely worth a look because I think you'll discover that,
+
+687
+01:00:21,800 --> 01:00:27,320
+you know, many of the ideas that that are currently in use like kind of trace back to those uh yeah,
+
+688
+01:00:27,320 --> 01:00:33,680
+early early work that that that Lasser kind of did and and and figured out, which was yeah, a little bit prescient,
+
+689
+01:00:33,680 --> 01:00:34,760
+I would say.
+
+690
+01:00:34,760 --> 01:00:43,440
+>> I feel it's actually kind of fun to see um the reinforcement learning space now versus like 10 years ago or like let say like 8 years ago maybe.
+
+691
+01:00:43,760 --> 01:00:50,440
+Um like the LLM community is also using reinforcement learning uh in particular the last 2 years or so.
+
+692
+01:00:50,440 --> 01:00:54,080
+And like a lot of the things that they're using are, you know, being rediscovered.
+
+693
+01:00:54,840 --> 01:00:57,840
+Approaches that we used uh many years ago.
+
+694
+01:00:58,120 --> 01:01:01,640
+Uh so, it's kind of like interesting to see with a lot of novelty as well on top of it,
+
+695
+01:01:01,640 --> 01:01:01,920
+right?
+
+696
+01:01:01,920 --> 01:01:03,840
+But uh yeah.
+
+697
+01:01:03,840 --> 01:01:05,240
+>> Can you talk a little bit about your team?
+
+698
+01:01:05,240 --> 01:01:06,720
+How big is the team right now?
+
+699
+01:01:06,920 --> 01:01:11,200
+>> We have intentionally kept the team relatively small.
+
+700
+01:01:12,600 --> 01:01:16,560
+So, we're not in a hurry to build a a giant organization.
+
+701
+01:01:16,720 --> 01:01:22,640
+I think it's um you know, you can do an awful lot um nowadays with a small number of incredibly talented people.
+
+702
+01:01:22,640 --> 01:01:26,560
+So, we have hired 20 people in total.
+
+703
+01:01:27,920 --> 01:01:37,360
+Um yeah, the people we've hired it's it's about finding some of the exceptionally talented people that but not just it's not just about talent for us.
+
+704
+01:01:37,480 --> 01:01:43,280
+It's also about bringing together people who are um kind collaborative human beings.
+
+705
+01:01:43,280 --> 01:01:51,800
+That's really important to the kind of culture we're trying to build and people who are you know really well aligned with the kind of mission that we're following um and people that sort of
+
+706
+01:01:51,800 --> 01:01:55,000
+fit the the the the the needs that we have.
+
+707
+01:01:55,240 --> 01:01:59,240
+Um so we try and build the team with the right right kind set of skills as well.
+
+708
+01:01:59,480 --> 01:02:08,040
+Um so all of those four things are really important and um and yeah we kind of have very high standards and very high expectations of the people that come in.
+
+709
+01:02:08,040 --> 01:02:13,240
+So, uh we're very lucky to get um some yeah amazing really amazing people.
+
+710
+01:02:13,280 --> 01:02:15,480
+>> And so just to tie it to the computer as well, right?
+
+711
+01:02:15,480 --> 01:02:23,120
+Like give like this relatively small amount of people so far means that we have a lot of compute per person,
+
+712
+01:02:23,160 --> 01:02:23,640
+right?
+
+713
+01:02:23,640 --> 01:02:27,920
+And like these days you can you can do a lot of experiments just like one person.
+
+714
+01:02:27,920 --> 01:02:32,720
+So, it's really also to keep like the compute to person ratio quite high.
+
+715
+01:02:33,440 --> 01:02:36,720
+So, we're not like fighting for resources um from day one.
+
+716
+01:02:36,720 --> 01:02:37,840
+Mhm.
+
+717
+01:02:37,840 --> 01:02:40,800
+I think three of the co-founders worked together on on AlphaStar.
+
+718
+01:02:41,240 --> 01:02:43,080
+Um many of you many of you did work together.
+
+719
+01:02:43,480 --> 01:02:47,920
+Are you are you assembling the Avengers from especially given the recent changes from DeepMind?
+
+720
+01:02:47,920 --> 01:02:50,920
+Are you assembling the Avengers of folks that you've worked with in the past?
+
+721
+01:02:50,920 --> 01:02:58,920
+Have you hired new people and and if so, kind of what are the attributes that make somebody new to you um likely to be a fit at an Affable?
+
+722
+01:02:59,560 --> 01:03:01,440
+>> So, so it's a a mixture.
+
+723
+01:03:01,440 --> 01:03:05,080
+So, I mean AlphaStar was an exceptional team.
+
+724
+01:03:05,280 --> 01:03:11,880
+Um it was sort of intentionally assembled within DeepMind by choosing the kind of best of the best to work on that project.
+
+725
+01:03:11,880 --> 01:03:17,880
+So, in some sense it's not a surprise that I think actually four of our co-founders come from from that team.
+
+726
+01:03:17,960 --> 01:03:24,080
+Um but we are not exclusively um drawing from that team or indeed from from DeepMind.
+
+727
+01:03:24,240 --> 01:03:42,720
+I mean, the other three founders uh all came from uh very successful startups um and we hire people who are brilliant um but also kind and nice people to have around um who are
+
+728
+01:03:42,720 --> 01:03:48,920
+going to work together well who are aligned with the mission and who are you you know fit the things that we that we need.
+
+729
+01:03:48,920 --> 01:03:54,040
+So, um but in terms of finding those people, we put a lot of effort into getting the right people.
+
+730
+01:03:54,040 --> 01:04:02,120
+So, as uncomfortable as it is, I've had to say no to a lot of people I've worked with in the past just because our bar is so super high.
+
+731
+01:04:02,120 --> 01:04:05,960
+You know, I've worked I've been fortunate to work with like some amazing people.
+
+732
+01:04:06,160 --> 01:04:15,800
+And so, you know, I've been choosing amongst uh like a a very exceptional crop and bringing in yeah, what I consider to be a yeah,
+
+733
+01:04:15,800 --> 01:04:16,840
+superstar team.
+
+734
+01:04:17,240 --> 01:04:26,720
+Um and so, yeah, it's it's um it's it's not easy to get into Ineffable, but um the people who we have are wonderful human beings.
+
+735
+01:04:26,720 --> 01:04:29,440
+And yeah, very very proud of the people we've brought in.
+
+736
+01:04:29,440 --> 01:04:30,040
+>> Yeah.
+
+737
+01:04:30,040 --> 01:04:37,200
+I can see why people are drawn to working in Ineffable, especially a time when you know, the the biggest clusters,
+
+738
+01:04:37,200 --> 01:04:44,200
+the biggest labs are kind of you know, they're in they're locked in this prisoner's dilemma race.
+
+739
+01:04:44,440 --> 01:04:47,200
+And you know, there's a lot of dollars at stake.
+
+740
+01:04:47,200 --> 01:04:49,920
+And so, you know, decisions get made differently.
+
+741
+01:04:49,920 --> 01:04:56,920
+I can imagine for for a set of people that especially that really really deeply believes in the scientific mission of what you want to accomplish,
+
+742
+01:04:57,360 --> 01:04:59,240
+this must feel like a breath of fresh air.
+
+743
+01:04:59,320 --> 01:05:00,520
+>> Yeah, I think that's right.
+
+744
+01:05:00,520 --> 01:05:03,800
+And we've tried to establish a a research-led culture.
+
+745
+01:05:03,960 --> 01:05:15,160
+So, it's it's not a company that's led by you know, building an incremental next product V 17.1 on the thing that's come before.
+
+746
+01:05:15,160 --> 01:05:24,120
+It's a company that's built on uh researchers pursuing um their passion and trying to produce the breakthroughs that they believe are possible.
+
+747
+01:05:24,360 --> 01:05:31,200
+And we center the company around that from the beginning and from the outset to create like a a a haven for research,
+
+748
+01:05:31,200 --> 01:05:36,840
+you know, where where we push back on on on product pressure because we believe that if we make these breakthroughs,
+
+749
+01:05:36,840 --> 01:05:43,880
+it will lead to, you know, far bigger products downstream and far bigger successes than if we kind of start off from day one on like,
+
+750
+01:05:43,880 --> 01:05:47,120
+you know, oh, you know, here's here's the product we're doing from the beginning.
+
+751
+01:05:47,240 --> 01:05:48,600
+So, yeah, so it's research-led.
+
+752
+01:05:48,720 --> 01:05:55,840
+We're creating um uh I think a really special environment and yeah, people are loving it.
+
+753
+01:05:55,840 --> 01:05:57,080
+Um I'm loving it.
+
+754
+01:05:57,080 --> 01:05:57,800
+Uh >> Wonderful.
+
+755
+01:05:58,280 --> 01:05:58,880
+Wonderful.
+
+756
+01:05:59,480 --> 01:06:02,280
+Um I'd love to close with some predictions.
+
+757
+01:06:02,640 --> 01:06:05,560
+Maybe especially since you're such a super forecaster.
+
+758
+01:06:06,520 --> 01:06:08,120
+What's your guess for when
+
+759
+01:06:09,280 --> 01:06:10,440
+when you'll have the first
+
+760
+01:06:11,520 --> 01:06:15,200
+strong evidence that the approach is working?
+
+761
+01:06:15,200 --> 01:06:24,280
+And then what's your forecast for when we'll achieve the mission that you've set out to achieve, this first contact with superintelligence?
+
+762
+01:06:24,280 --> 01:06:25,960
+>> Yeah, so these are effect questions.
+
+763
+01:06:26,120 --> 01:06:32,440
+Um so, there are going to be some reasonable bars of uncertainty on this, but >> you're being recorded, so we're going to hold you to it.
+
+764
+01:06:32,440 --> 01:06:33,440
+>> Exactly, yeah.
+
+765
+01:06:33,440 --> 01:06:40,240
+Uh so, I think we will see some extremely strong evidence that we're on the right track um within a year.
+
+766
+01:06:40,480 --> 01:06:48,760
+And I think we will achieve something which is a true superintelligence like the according to the definition I gave earlier of something which you know,
+
+767
+01:06:48,760 --> 01:06:56,080
+discovers things which are far beyond what humans can achieve in across e- e- you know, everything from science, mathematics,
+
+768
+01:06:56,560 --> 01:06:59,160
+technology, languages, et cetera, et cetera.
+
+769
+01:06:59,440 --> 01:07:01,680
+I originally thought within 3 to 5 years.
+
+770
+01:07:01,960 --> 01:07:11,040
+Um my timelines have accelerated a little bit, so I'm going to say 3 years because of um yeah, what can be done with um with like um coding agents to accelerate things.
+
+771
+01:07:11,680 --> 01:07:14,080
+I think yeah, I think things are going to move fast.
+
+772
+01:07:14,200 --> 01:07:15,640
+>> Buckle up for the journey.
+
+773
+01:07:16,360 --> 01:07:16,960
+Wonderful.
+
+774
+01:07:17,320 --> 01:07:20,480
+Lisa, David, this is a wonderful wonderful conversation.
+
+775
+01:07:21,720 --> 01:07:29,000
+I'm so inspired by what you're building and thank you for taking the time to sit down and share with our audience what you're building today.
+
+776
+01:07:29,200 --> 01:07:29,680
+>> Thank you Sonya.
+
+777
+01:07:29,680 --> 01:07:30,400
+It's a pleasure.
+

@@ -1,0 +1,2232 @@
+1
+00:00:00,000 --> 00:00:10,360
+There's a an idea in science fiction that is when robotics and AI has ultimately fully generalized and solved all tasks that humans can do,
+
+2
+00:00:10,400 --> 00:00:13,360
+the final frontier is going to be organic.
+
+3
+00:00:13,440 --> 00:00:15,040
+Final frontier is going to be biological.
+
+4
+00:00:15,560 --> 00:00:21,160
+And you see this in like Asimov, you see this in Ender's Game, you could even in Hitchhiker's at the very end,
+
+5
+00:00:21,160 --> 00:00:28,040
+the planet ultimately was this giant organic computer trying to process and understand what the meaning of life was or what the question was.
+
+6
+00:00:45,120 --> 00:00:48,360
+>> Today I'm delighted to have Josh from Mecca on the show.
+
+7
+00:00:48,520 --> 00:00:54,720
+Josh is founder and CEO of Mecca AI, which is building a data and deployment company for robotics.
+
+8
+00:00:55,320 --> 00:01:01,080
+I and I think the whole ecosystem think that robotics is about to enter a golden age.
+
+9
+00:01:01,320 --> 00:01:09,720
+And unlike LLMs, where we had so much free human data from the internet, robotics is fundamentally data constrained.
+
+10
+00:01:10,000 --> 00:01:20,400
+And I think your position in the ecosystem as the leading data factory to bring robotic data and physical data in distribution for models is just a really,
+
+11
+00:01:20,400 --> 00:01:21,440
+really interesting perch.
+
+12
+00:01:21,440 --> 00:01:27,960
+So I'm excited to use this conversation today to chat about how does ecocentric data and data collection work in robotics,
+
+13
+00:01:28,320 --> 00:01:34,720
+what are the actual operations and economics of operating a data factory, and your your overall thoughts on robotics research and deployment.
+
+14
+00:01:35,040 --> 00:01:36,080
+Thanks for joining the show.
+
+15
+00:01:36,080 --> 00:01:36,480
+>> Amazing.
+
+16
+00:01:36,480 --> 00:01:37,560
+Thanks for having me.
+
+17
+00:01:37,560 --> 00:01:38,160
+>> Awesome.
+
+18
+00:01:38,480 --> 00:01:44,200
+Maybe to start off, for those who aren't familiar, what is Mecca and how are you looking to impact the world of robotics?
+
+19
+00:01:44,600 --> 00:01:49,080
+>> So Mecca is, like you said, the data and deployment company for physical AI.
+
+20
+00:01:49,160 --> 00:01:57,080
+What that means is today we create, we process, and ultimately we license a lot of the data that goes into training these robotics foundation models.
+
+21
+00:01:57,280 --> 00:02:04,480
+The big problem across robotics is that we don't have the luxury of the cold start that LLMs had with the internet.
+
+22
+00:02:04,800 --> 00:02:07,520
+Fundamentally, a lot of this robotics data is three things.
+
+23
+00:02:07,520 --> 00:02:10,440
+It's pixels, it's actions, and it's logic.
+
+24
+00:02:10,880 --> 00:02:20,360
+And so, we don't have access to a large amount of this curated and processed and clean data to be able to then train these models to understand what it is to be in the
+
+25
+00:02:20,360 --> 00:02:21,320
+physical world.
+
+26
+00:02:21,480 --> 00:02:29,280
+Uh so, a lot of our job is pretty much to one, uh create different types of hardware such as sensorizing and wearables for humans,
+
+27
+00:02:29,520 --> 00:02:42,200
+the different operations to go and collect and partner with individual contributors, businesses, tasks across different environments, and then ultimately post-process and own the quality gates to make these data sets useful and teach uh
+
+28
+00:02:42,200 --> 00:02:43,520
+robots about the world.
+
+29
+00:02:43,520 --> 00:02:54,320
+>> Without having been given the benefits of a giant free many trillions of tokens maybe lots of trillions, trillions of trillions of tokens uh of um internet corpus,
+
+30
+00:02:54,640 --> 00:03:01,000
+do you think that robotics, you know, having to pay for and operationally collect all the data that's going into the mix,
+
+31
+00:03:01,519 --> 00:03:03,440
+is it even a feasible challenge?
+
+32
+00:03:03,440 --> 00:03:07,440
+Like, is it economically feasible uh without having had the gift of the internet?
+
+33
+00:03:08,519 --> 00:03:14,720
+>> I think we we still have the luxury of a a lot of things that uh was given from the internet.
+
+34
+00:03:14,800 --> 00:03:16,720
+So, we aren't starting from zero, ultimately.
+
+35
+00:03:17,320 --> 00:03:20,960
+Um I think you can see it across LLMs and data across LLMs.
+
+36
+00:03:21,160 --> 00:03:27,440
+Pre-training data was always driven by the labs largely across web crawlers, things like that.
+
+37
+00:03:27,480 --> 00:03:29,160
+It didn't become a a large market.
+
+38
+00:03:29,400 --> 00:03:32,520
+Today in robotics, we do see pre-training as quite a large market.
+
+39
+00:03:32,840 --> 00:03:36,280
+And in that could be and taken in several forms.
+
+40
+00:03:36,280 --> 00:03:44,559
+So, that could be that we are teaching uh video models how to generate uh more physics-grounded realities of what the world looks like.
+
+41
+00:03:44,560 --> 00:03:49,839
+And we get to leverage all the work that has gone into the VLMs and then different types of world models before to make that possible.
+
+42
+00:03:50,400 --> 00:03:55,080
+Um is it possible and scalable to get to that volume of data?
+
+43
+00:03:55,480 --> 00:04:02,200
+I think that ultimately comes down to what commercial use case can you unlock at which levels of scales of data?
+
+44
+00:04:02,560 --> 00:04:12,680
+And our strong belief is along that journey that we will be able to unlock a lot of the simple uh pick and place tasks along the beginning of what we're creating.
+
+45
+00:04:12,959 --> 00:04:18,839
+And towards that long tail, that is going to be many orders of magnitude larger than it is today.
+
+46
+00:04:19,200 --> 00:04:20,600
+>> I did a little homework for this.
+
+47
+00:04:20,600 --> 00:04:21,959
+Your website is very whimsical.
+
+48
+00:04:22,080 --> 00:04:25,760
+Uh it says that you are teaching robots about carbon life.
+
+49
+00:04:25,760 --> 00:04:26,919
+What What does that mean?
+
+50
+00:04:26,919 --> 00:04:34,560
+>> I I actually made the uh the website like >> like the night before we did our our our first tweet announcement or something like that.
+
+51
+00:04:34,800 --> 00:04:45,080
+There's a an idea in science fiction that is when robotics and AI has ultimately fully generalized and solved all tasks that humans can do,
+
+52
+00:04:45,120 --> 00:04:48,120
+the final frontier is going to be organic.
+
+53
+00:04:48,840 --> 00:04:50,480
+Final frontier is going to be biological.
+
+54
+00:04:50,960 --> 00:04:56,600
+And you see this in like Asimov, you see this in Ender's Game, you could even in Hitchhiker's at the very end.
+
+55
+00:04:56,600 --> 00:05:03,480
+The planet ultimately was this giant organic computer trying to process and understand what the meaning of life was or what the question was.
+
+56
+00:05:03,680 --> 00:05:11,840
+Um, and so I think in the same vein for us, that is the human brain runs on just 20 watts.
+
+57
+00:05:12,240 --> 00:05:13,720
+Uh we are we are self-healing.
+
+58
+00:05:14,280 --> 00:05:22,960
+And so along the journey of teaching and getting robots to fully generalize, we'll we'll we'll slowly show them what what carbon life is made of.
+
+59
+00:05:22,960 --> 00:05:23,560
+>> Mhm.
+
+60
+00:05:23,640 --> 00:05:24,400
+Love that.
+
+61
+00:05:25,000 --> 00:05:27,920
+Okay, you come from an untraditional background for robotics.
+
+62
+00:05:28,000 --> 00:05:33,120
+I think you started in the fintech world and the sneaker world, if I'm not mistaken.
+
+63
+00:05:33,640 --> 00:05:36,880
+Tell me about how you and your co-founder found your way to robotics.
+
+64
+00:05:37,480 --> 00:05:39,200
+>> It was It was quite an interesting journey, yeah.
+
+65
+00:05:39,200 --> 00:05:43,760
+For So before this, um I was building essentially a toast for cloud kitchens.
+
+66
+00:05:44,200 --> 00:05:47,800
+Um this meant we did everything from back of the house uh order management.
+
+67
+00:05:48,480 --> 00:05:55,720
+Uh at one point in in my fourth year of university, I was skipping class to go uh deploy and install kiosk into rural Rochester,
+
+68
+00:05:55,720 --> 00:06:02,120
+New York, uh where we had to stay all nights replacing a lot of these uh different front of the houses for restaurants.
+
+69
+00:06:02,120 --> 00:06:09,240
+Uh my co-founder built a stablecoin, uh that ultimately sold to Coinbase, but uh he's been this very obsessive personality.
+
+70
+00:06:09,440 --> 00:06:14,240
+He was a top thousand in four competitive games, including League of Legends.
+
+71
+00:06:14,760 --> 00:06:24,320
+And I think a big part of what brought us together, uh one, we're both Canadian, uh and two is we have this big uh science fiction grounding.
+
+72
+00:06:24,919 --> 00:06:32,320
+And so the belief ultimately was that payment was a hard and difficult problem, but whatever we worked on next,
+
+73
+00:06:32,320 --> 00:06:36,920
+we wanted to be something that seemed exciting, that the future was going to be incredible.
+
+74
+00:06:37,520 --> 00:06:40,200
+And robotics seemed like a great space to get into.
+
+75
+00:06:40,520 --> 00:06:47,120
+>> I remember walking into your office and then immediately seeing those like mechatronic robots, and then the the Kawasaki Kreloses on the wall.
+
+76
+00:06:47,120 --> 00:06:51,120
+Like, the inner child in you must be very happy about what you're doing these days.
+
+77
+00:06:51,120 --> 00:06:51,880
+>> Yeah, absolutely.
+
+78
+00:06:52,120 --> 00:06:58,919
+>> Coming from a non-robotics background, what do you think your advantages advantages are in building this business?
+
+79
+00:06:58,919 --> 00:07:01,000
+Um and where has it presented challenges?
+
+80
+00:07:01,000 --> 00:07:07,160
+>> I think the advantages is when we entered the space, we had to go and do this full discovery process.
+
+81
+00:07:07,760 --> 00:07:11,400
+Um we reached out to hundreds of folks that were in the space that we appreciated.
+
+82
+00:07:11,400 --> 00:07:13,680
+We read every paper that we get our hands on.
+
+83
+00:07:13,680 --> 00:07:15,560
+We went to visit the different robot labs.
+
+84
+00:07:15,880 --> 00:07:21,800
+And what we saw in in in late '24, roughly, GPT was taking off.
+
+85
+00:07:21,840 --> 00:07:26,720
+Robotics was still evolving from this traditional uh robotics era.
+
+86
+00:07:26,919 --> 00:07:33,160
+And it seems obvious to us at the very least that data and compute would become very important across the industry.
+
+87
+00:07:33,640 --> 00:07:40,280
+And so moving towards that, we got to uh read and see some of the papers like Ego4D from a Fresh Lands and say,
+
+88
+00:07:40,280 --> 00:07:45,600
+"Hey, there's about 4,000 hours of this human demonstration data."
+
+89
+00:07:46,000 --> 00:07:53,200
+And when you actually went in to look at the data, you would realize some of the data sets would be daily life of folks like bowling,
+
+90
+00:07:53,200 --> 00:07:53,960
+for example.
+
+91
+00:07:54,400 --> 00:08:00,040
+There was very broad use cases and potential applications at the 4,000 hour scale.
+
+92
+00:08:01,160 --> 00:08:07,400
+And so, coming into into that with like a fresh lens, we were able to from a first principles approach,
+
+93
+00:08:07,600 --> 00:08:19,040
+I'd say, have a general intuition of what would be important and then iterate very closely with people that were much smarter than us that had that had different views of what the future would
+
+94
+00:08:19,040 --> 00:08:22,480
+be and be able to stay close to iterate on what the product would become.
+
+95
+00:08:22,800 --> 00:08:23,800
+>> Yeah, interesting.
+
+96
+00:08:24,000 --> 00:08:31,800
+It seems like robotics has just changed so quickly as a field that almost coming from the field can be an advantage and a disadvantage because people come from different eras of,
+
+97
+00:08:31,800 --> 00:08:34,319
+you know, what's important in the training mix and things like that.
+
+98
+00:08:34,320 --> 00:08:34,640
+Yeah.
+
+99
+00:08:34,640 --> 00:08:39,480
+>> Um, maybe for our audience, just say a word on like what is egocentric data?
+
+100
+00:08:39,880 --> 00:08:43,320
+And I think you really started your company kind of making a bet behind it.
+
+101
+00:08:43,320 --> 00:08:46,640
+Obviously, it's much more distributed now, but what is egocentric data?
+
+102
+00:08:46,640 --> 00:08:48,760
+Why did you decide to bet the company on it at the beginning?
+
+103
+00:08:49,040 --> 00:08:56,920
+>> Egocentric data is pretty much video data from humans demonstrating and doing tasks from a first-person POV.
+
+104
+00:08:57,400 --> 00:09:04,600
+The high-level idea was that from the gap of human data to robotics data, you could close a lot of the vision gap.
+
+105
+00:09:04,920 --> 00:09:13,240
+Where robotics experience the world from POV, can we also show it what it is like to interact with the world from first person as well.
+
+106
+00:09:13,440 --> 00:09:21,600
+Why we bet on on it was was pretty much when we explored the space, a lot of what we saw was robotics data at the time was teleoperation,
+
+107
+00:09:22,160 --> 00:09:25,920
+which was humans controlling robots to do demonstrations.
+
+108
+00:09:25,920 --> 00:09:28,200
+It was very hard to scale at the time.
+
+109
+00:09:28,520 --> 00:09:39,200
+And from what we saw across GPT and a lot of the the principles of scaling up, um, we had to find ways to scale up data much more significantly.
+
+110
+00:09:39,720 --> 00:09:46,040
+And I think that some of our early intuitions were that humans and robots share a lot of similarities.
+
+111
+00:09:46,400 --> 00:09:48,560
+Humanoids were just starting to take off.
+
+112
+00:09:48,560 --> 00:09:50,280
+Humans and humanoids look the same.
+
+113
+00:09:50,400 --> 00:10:00,560
+Why couldn't we turn humans into this fleet-style learning that Tesla has to be able to all contribute into understanding and ground the physics of the world.
+
+114
+00:10:00,760 --> 00:10:01,360
+>> Hm.
+
+115
+00:10:01,800 --> 00:10:02,760
+And so what does that look like?
+
+116
+00:10:02,760 --> 00:10:08,520
+You're like mounting a iPhone on somebody's forehead and just letting them go about their day or what what does that look like in practice?
+
+117
+00:10:08,520 --> 00:10:13,400
+>> Yeah, when we first started, our very earliest pilot was we created a mobile app.
+
+118
+00:10:13,400 --> 00:10:18,640
+We got all the Chinese aunties and uncles to record themselves cooking, cleaning, doing tasks.
+
+119
+00:10:18,960 --> 00:10:20,760
+That obviously evolved a lot.
+
+120
+00:10:20,760 --> 00:10:22,160
+We we we tried a number of things.
+
+121
+00:10:22,160 --> 00:10:23,040
+We did uni data.
+
+122
+00:10:23,040 --> 00:10:25,000
+We did all all the sorts at the beginning.
+
+123
+00:10:25,520 --> 00:10:29,360
+And that's evolved quite a bit into all the custom hardware that we have to produce now.
+
+124
+00:10:29,960 --> 00:10:33,880
+Um and all the different partnerships that we have to have across different industries.
+
+125
+00:10:34,320 --> 00:10:36,320
+And ultimately, we're sensorizing humans.
+
+126
+00:10:36,320 --> 00:10:37,520
+And that's the broader category.
+
+127
+00:10:38,040 --> 00:10:40,839
+>> How important is it to get force data from the sensors?
+
+128
+00:10:40,839 --> 00:10:46,400
+Cuz you know, one of the things I've always thought about is in in self-driving, you don't really need force data as much,
+
+129
+00:10:46,400 --> 00:10:46,640
+right?
+
+130
+00:10:46,640 --> 00:10:53,439
+Whereas with robotics, especially with manipulation, you really care about how hard am I squeezing that door handle or picking up that egg.
+
+131
+00:10:53,680 --> 00:10:56,360
+And it seems to me that like video doesn't quite capture that.
+
+132
+00:10:56,360 --> 00:10:58,880
+You might be able to approximate it, but it doesn't really capture it.
+
+133
+00:10:58,880 --> 00:11:00,320
+How important is capturing force data?
+
+134
+00:11:00,320 --> 00:11:01,720
+And how do you think about getting that?
+
+135
+00:11:01,720 --> 00:11:09,960
+>> I think some of the substitutes for force data that we've seen would be approaches like wrist cameras currently across both humans and robots.
+
+136
+00:11:10,320 --> 00:11:16,840
+And being able to see the contact time between the hand and the different objects that you interact with.
+
+137
+00:11:17,000 --> 00:11:27,760
+That obviously is kind of a a hacky way ultimately to get to understanding how much force in Newtons it takes to pull open a chair or twist a bottle cap.
+
+138
+00:11:28,000 --> 00:11:30,240
+Um I think force data will be incredibly important.
+
+139
+00:11:30,240 --> 00:11:37,840
+It's actually one of the products that we've been building out in that when you iterate with many of different robotics foundation labs,
+
+140
+00:11:38,280 --> 00:11:42,360
+you realize to close this gap, one, we have to create new hardware.
+
+141
+00:11:42,840 --> 00:11:53,800
+So we've been developing things like gloves for humans to wear and in those gloves being able to collect the information in how much force it takes to do your daily life in different tasks.
+
+142
+00:11:53,800 --> 00:12:03,320
+>> I'd love to just spend spend over the time on the actual operations of a data factory because I think it is there's so much money that's gone into the LLM data factories.
+
+143
+00:12:03,680 --> 00:12:08,440
+There's so much money that is starting to be poured into and I think will be poured into the robot data factories.
+
+144
+00:12:09,040 --> 00:12:12,080
+And the way they work is just, you know, mysterious, intriguing to me.
+
+145
+00:12:12,080 --> 00:12:14,760
+So I'd love to ask you a bit about the operations of it if that's okay.
+
+146
+00:12:14,760 --> 00:12:15,520
+>> Yeah, let's do it.
+
+147
+00:12:15,520 --> 00:12:16,560
+>> Okay, so how does it work?
+
+148
+00:12:16,560 --> 00:12:21,280
+Like if I am, you know, if I want to make an extra buck, do I just sign up on your website to start,
+
+149
+00:12:21,280 --> 00:12:25,480
+you know, to put a camera on my on my forehead and start sending you data or how does it work?
+
+150
+00:12:25,640 --> 00:12:29,280
+>> So we we actually have a lot of different approaches on the operator side.
+
+151
+00:12:29,280 --> 00:12:31,840
+One would be we have a direct consumer approach.
+
+152
+00:12:32,040 --> 00:12:36,000
+And so through direct mobile apps, can you sign up from anywhere in the world?
+
+153
+00:12:36,000 --> 00:12:37,040
+Can you start contributing?
+
+154
+00:12:37,040 --> 00:12:39,839
+Can you Can you register which profession you're in?
+
+155
+00:12:39,839 --> 00:12:50,280
+And can you get streamed a sequence of tasks to do such as cleaning your bedroom, cooking your breakfast, cleaning up afterwards.
+
+156
+00:12:50,280 --> 00:12:55,880
+Um this is a very lightweight approach to get that diversity ultimately of this pre-training data.
+
+157
+00:12:56,080 --> 00:13:03,680
+The second approach that you have to get into is ultimately there is so much more beyond the home to collect.
+
+158
+00:13:03,680 --> 00:13:14,160
+And so we had to build out a lot of this B2B engine and this muscle of being able to recruit businesses across this incredible taxonomy of all physical human work,
+
+159
+00:13:14,440 --> 00:13:20,360
+which is across bakeries, it could be a PCB manufacturing line, everything to podcasting.
+
+160
+00:13:20,360 --> 00:13:20,960
+>> Podcasting.
+
+161
+00:13:21,920 --> 00:13:24,080
+There's There's not too much hand work in podcasting, is there?
+
+162
+00:13:24,080 --> 00:13:24,880
+>> bucks here.
+
+163
+00:13:26,080 --> 00:13:27,600
+>> We we should have equipped ourselves.
+
+164
+00:13:28,920 --> 00:13:32,680
+Um and and that's ultimately how contributors come into the mix.
+
+165
+00:13:33,040 --> 00:13:40,840
+But the actual data engine for the data factory is so much more sophisticated and much more painful than folks can expect.
+
+166
+00:13:41,240 --> 00:13:49,560
+And that is that a lot of the the things that we have to distribute into the world didn't exist until we designed and produced this hardware.
+
+167
+00:13:50,040 --> 00:13:52,880
+Even across tactile gloves is a fantastic example.
+
+168
+00:13:53,040 --> 00:14:02,480
+There is nothing off-the-shelf that you can purchase and that you can wear and that reliably tells you how much force you are applying day-to-day and turn that into ready data sets for these different
+
+169
+00:14:02,480 --> 00:14:03,840
+robotics foundation models.
+
+170
+00:14:03,920 --> 00:14:15,440
+So we have to have that hardware iteration loop to have these three, four different product cycles, that engineering muscle to actually think and iterate what is going to be useful and then scale that
+
+171
+00:14:15,440 --> 00:14:17,280
+production into the world.
+
+172
+00:14:17,400 --> 00:14:26,760
+And that becomes this logistics of distributing into these thousands of homes, thousands of businesses to collect that, to upload that.
+
+173
+00:14:27,040 --> 00:14:38,160
+We've had to set up these 100 GB upload lines in a lot of the places that we operate in just to sustain the hundreds of petabytes of data that we have to deal with
+
+174
+00:14:38,160 --> 00:14:39,040
+at this point.
+
+175
+00:14:39,280 --> 00:14:46,640
+And then you have to process, you have to make sure your quality gates are incredible and then all of the computer vision to make it useful ultimately.
+
+176
+00:14:47,120 --> 00:14:52,760
+>> So let's say you decide, okay, in my training mix there's not enough podcasters, there's not enough, you know, I don't know,
+
+177
+00:14:52,760 --> 00:14:53,880
+donut bakers.
+
+178
+00:14:54,560 --> 00:14:59,960
+Do you go Do you go out and literally go knock on doors of donut bakers then to sign them up to the platform or how does that work?
+
+179
+00:14:59,960 --> 00:15:07,760
+>> Well, we'll generally track kind of like a heat map across different jobs, industries and ways we think about diversity.
+
+180
+00:15:08,240 --> 00:15:14,600
+And across that heat map, if ultimately we think, oh, not enough Sonya's podcasting and we have to go get that,
+
+181
+00:15:14,880 --> 00:15:16,160
+that's actually why we're here today.
+
+182
+00:15:16,160 --> 00:15:18,040
+This is our This is our secret mission.
+
+183
+00:15:19,480 --> 00:15:20,880
+That's why there's cameras everywhere.
+
+184
+00:15:22,360 --> 00:15:25,240
+>> No, no, you're never editing me out of this.
+
+185
+00:15:25,240 --> 00:15:25,920
+Um no, I'm kidding.
+
+186
+00:15:25,920 --> 00:15:26,720
+Please do.
+
+187
+00:15:27,120 --> 00:15:28,680
+Uh okay, interesting.
+
+188
+00:15:28,760 --> 00:15:38,680
+Like I've heard that, you know, that there's a lot of quality issues in robot data collection generally and that a lot of the hours of robot data sample that get sent in end up
+
+189
+00:15:38,680 --> 00:15:39,640
+not being accepted.
+
+190
+00:15:40,200 --> 00:15:41,480
+Um why is that?
+
+191
+00:15:41,880 --> 00:15:44,720
+And what are you doing about that problem?
+
+192
+00:15:44,720 --> 00:15:49,600
+>> This lesson came from even originally the different types of robot data.
+
+193
+00:15:49,800 --> 00:15:59,600
+There I have been these very large-scale robot factories that have spun up from just large-scale warehouses repetitively doing tasks trying to scale out teleoperation data.
+
+194
+00:16:00,040 --> 00:16:10,800
+Uh some of the learnings there came from the research in that there is some threshold of diversity where you oversaturate how much robot data you need or how much data in general you need.
+
+195
+00:16:10,800 --> 00:16:12,520
+Across human data, quality
+
+196
+00:16:13,560 --> 00:16:17,640
+you can imagine is actually quite a bit of a moving target as we grow.
+
+197
+00:16:17,960 --> 00:16:24,240
+The amount of edge cases that you have in the real world that you have to deal with are very extreme.
+
+198
+00:16:24,680 --> 00:16:27,520
+And you will always see something new that you haven't seen.
+
+199
+00:16:27,760 --> 00:16:35,240
+So for us, it's been about can you think about the heuristics to be able to catch a lot of the different things as it's processed?
+
+200
+00:16:35,520 --> 00:16:38,640
+Can you have the different engines to escalate to very quickly?
+
+201
+00:16:39,000 --> 00:16:44,680
+And ultimately, we will learn new things about quality and diversity that weren't true a week ago even.
+
+202
+00:16:44,920 --> 00:16:51,920
+And so the nimbleness to move very quickly to create and adapt your engine to catch that uh and we >> What's an example of something that you would catch?
+
+203
+00:16:52,760 --> 00:16:59,439
+>> Well, uh I I think I think fraud is an is an underestimated one across data industries in general.
+
+204
+00:16:59,680 --> 00:17:04,560
+We're ultimately creating data that doesn't exist yet versus when you're filtering through the internet.
+
+205
+00:17:04,680 --> 00:17:10,600
+And so when you are, you're you're coming across very creative and uh interesting >> sending generative videos or what?
+
+206
+00:17:10,600 --> 00:17:22,120
+>> Yeah, very creative people where I think at one point we have folks uh recording YouTube videos like POV working at McDonald's and trying to submit that as his contribution pretty much.
+
+207
+00:17:23,480 --> 00:17:28,400
+Um >> Wow, never underestimate how entrepreneurial people can be.
+
+208
+00:17:28,400 --> 00:17:29,480
+That's amazing.
+
+209
+00:17:29,480 --> 00:17:30,600
+>> Yeah, very much.
+
+210
+00:17:31,000 --> 00:17:37,200
+Uh and so the these have been like part of the painful lessons where yes, you have to create a lot of the gates,
+
+211
+00:17:37,240 --> 00:17:40,560
+but ultimately you have to also be there where collection is happening.
+
+212
+00:17:40,560 --> 00:17:42,240
+You have to go see how it's done.
+
+213
+00:17:42,240 --> 00:17:48,640
+You have to figure out an incentive model that actually uh incentivizes people to create good contribution.
+
+214
+00:17:48,640 --> 00:17:52,200
+>> How do you think about your right to earn a margin long-term?
+
+215
+00:17:52,760 --> 00:17:58,600
+And you know, I could imagine a Mecha competitor comes to Sony and says, "Sony, I really want your podcast data."
+
+216
+00:17:59,040 --> 00:18:04,760
+Um I could imagine that, you know, the margin that you're able to own as an intermediary ends up getting squeezed.
+
+217
+00:18:05,040 --> 00:18:06,400
+>> I think the contributor
+
+218
+00:18:07,440 --> 00:18:17,640
+uh amount in terms of the the margin cost is actually not a large not the largest factor at play here in terms of the end-to-end making sure this data is useful.
+
+219
+00:18:17,920 --> 00:18:27,840
+So, even though that baseline is always going to be there and maybe it comes more and more uncompetitive, um there will be ways to differentiate and make sure that your data is verifiably high
+
+220
+00:18:27,840 --> 00:18:32,680
+quality at very large scale with the right hardware, the operations, and the software.
+
+221
+00:18:32,800 --> 00:18:43,400
+I think when we think about these products, ultimately it is that we do want to scale up and mature these products and just like any any product that's uh begins to scale up,
+
+222
+00:18:43,400 --> 00:18:45,720
+you want to optimize it.
+
+223
+00:18:45,720 --> 00:18:49,440
+But over time, you may have different products that evolve.
+
+224
+00:18:49,640 --> 00:19:00,720
+And so, when you think about this egocentric data of podcasting as simply one of your SKUs, and you then realize that there is going to be different types of data that are going to
+
+225
+00:19:00,720 --> 00:19:11,040
+be important, such as maybe we move from the the Chinese restaurant uh from the side of the road, can we start moving into the Michelin star restaurants over time.
+
+226
+00:19:11,200 --> 00:19:16,960
+Can you get more and more closer into what it means to be Federer than it means to be an average tennis player?
+
+227
+00:19:17,400 --> 00:19:22,960
+So, these products will change uh and and and how these products are created will also change.
+
+228
+00:19:23,120 --> 00:19:24,000
+>> Really interesting.
+
+229
+00:19:24,200 --> 00:19:27,160
+What scale of data has already been collected, do you think?
+
+230
+00:19:27,160 --> 00:19:31,640
+And how much data do you think is going to be collected over the next few years?
+
+231
+00:19:31,640 --> 00:19:37,360
+>> I think we finally entered a world where we are in the millions of hours of data.
+
+232
+00:19:37,440 --> 00:19:46,320
+And coming from the world where Ego4D of 4,000 hours 2 years ago, where we were then, uh is a huge step up.
+
+233
+00:19:46,760 --> 00:19:59,080
+But then comparatively, and you think about autonomous driving as an example, uh Tesla spent over a decade solving for two degrees of freedom ultimately of acceleration and direction,
+
+234
+00:19:59,360 --> 00:20:01,160
+millions of cars on the road.
+
+235
+00:20:01,240 --> 00:20:05,880
+They have a lot more than a few million hours uh of video data at this point.
+
+236
+00:20:06,040 --> 00:20:13,480
+So, relatively, we're still many orders of magnitudes away from where we have to be ultimately.
+
+237
+00:20:13,920 --> 00:20:16,200
+>> So, on one hand, that sounds like opportunity for you.
+
+238
+00:20:16,200 --> 00:20:18,680
+That sounds like a lot of revenue for the robot data factories.
+
+239
+00:20:19,120 --> 00:20:25,520
+On the other hand, as a you know, as somebody that, you know, invests in the robot foundation models, I look at that and I say like,
+
+240
+00:20:25,520 --> 00:20:26,200
+oh shoot.
+
+241
+00:20:27,000 --> 00:20:28,400
+Are we ever going to get to the promised land?
+
+242
+00:20:28,400 --> 00:20:32,560
+Cuz I I've I've done the same math as you and like a car has two or three degrees of freedom.
+
+243
+00:20:32,680 --> 00:20:35,080
+A robot has >> even dozens in the hand.
+
+244
+00:20:35,080 --> 00:20:35,840
+>> Yeah, exactly.
+
+245
+00:20:35,880 --> 00:20:36,160
+Mhm.
+
+246
+00:20:36,160 --> 00:20:45,800
+>> And so, you combine that with like you probably need force data and there's a way more, you know, it's just a way harder environment to operate in.
+
+247
+00:20:46,080 --> 00:20:51,920
+And I get to like you might need billions, trillions, quadrillions of hours.
+
+248
+00:20:53,000 --> 00:20:56,320
+Is there even enough GDP in the world to support the cost to bring that in?
+
+249
+00:20:56,320 --> 00:20:57,240
+Like, what do you think?
+
+250
+00:20:57,240 --> 00:21:00,680
+>> I think it's about unlocking commercial use cases as we go.
+
+251
+00:21:00,720 --> 00:21:05,840
+So, it doesn't have to be so much binary in that, oh, one day we've unlocked robotics or not.
+
+252
+00:21:05,880 --> 00:21:08,400
+It is going to be a slow creep up into the world.
+
+253
+00:21:08,680 --> 00:21:16,000
+Um, a great ways to get there is that with some of this base pyramid built up, where we are seeing the generalizations,
+
+254
+00:21:16,240 --> 00:21:22,120
+we are seeing the scaling laws at play, that gives people the courage to scale up.
+
+255
+00:21:22,360 --> 00:21:27,280
+And with that courage, can we one have some generalizability in some of these environments?
+
+256
+00:21:27,720 --> 00:21:35,840
+Can we then also collect a lot of the in-domain, in-task uh data that closes that gap in who's training.
+
+257
+00:21:36,120 --> 00:21:48,080
+So, maybe I can collect data exactly from this room, exactly in this podcast demonstration, uh to actually close the gap of what is in a lot of cases four nines of reliability in these
+
+258
+00:21:48,080 --> 00:21:49,280
+in these real-world environments.
+
+259
+00:21:49,760 --> 00:21:50,640
+>> That's a helpful framework.
+
+260
+00:21:50,640 --> 00:21:53,960
+So, it's not about a binary of getting from zero to one.
+
+261
+00:21:54,320 --> 00:22:00,080
+It's about we're going to increasingly get, you know, robots that can do an increasing set of capabilities.
+
+262
+00:22:00,080 --> 00:22:02,240
+>> And we will unlock a lot of tasks along the way.
+
+263
+00:22:02,240 --> 00:22:03,240
+Yeah.
+
+264
+00:22:03,240 --> 00:22:08,560
+One curiosity though is that, you know, the data that is most plentiful right now is like it seems like home data,
+
+265
+00:22:08,560 --> 00:22:08,800
+right?
+
+266
+00:22:08,800 --> 00:22:11,400
+Just cuz like everyone everyone can film that.
+
+267
+00:22:11,400 --> 00:22:12,520
+It's pretty easy to get.
+
+268
+00:22:12,560 --> 00:22:16,600
+But the robot in the home almost seems like one of the most difficult environments to deploy in.
+
+269
+00:22:16,960 --> 00:22:21,200
+And so, I'm curious what applications you think will hit first in robotics?
+
+270
+00:22:21,200 --> 00:22:29,160
+Cuz like where the data is most readily available seems almost the opposite of where robotics might be easiest to deploy.
+
+271
+00:22:29,160 --> 00:22:35,400
+>> The home is going to be some of the environments that we have to be most diligent on by far.
+
+272
+00:22:35,600 --> 00:22:45,640
+And a lot of these benchmarking and evals that have just started to mature across robotics, making sure that the the robot doesn't fall on the baby in the home,
+
+273
+00:22:45,640 --> 00:22:46,960
+for example.
+
+274
+00:22:46,960 --> 00:22:55,160
+Um, I think the initial tasks will be much more constrained uh as we go along that spectrum in that very goal-oriented,
+
+275
+00:22:55,800 --> 00:23:02,320
+where you can hill climb some of these tasks, where you have existing SOPs for what it means to do that job and that work.
+
+276
+00:23:02,560 --> 00:23:04,040
+>> Like a laundry folding robot.
+
+277
+00:23:04,040 --> 00:23:05,160
+>> It could be laundry folding.
+
+278
+00:23:05,160 --> 00:23:12,600
+Laundry folding uh we we we spent about a year and a half plus trying to solve and I think it will absolutely get solved in the near term.
+
+279
+00:23:12,680 --> 00:23:20,280
+A lot of these pick and place, these packaging tasks that you see on assembly lines that had to be manipulation bots that couldn't be solved by traditional robotics,
+
+280
+00:23:20,600 --> 00:23:22,640
+uh we will get there within the next year or two.
+
+281
+00:23:22,640 --> 00:23:23,160
+Mhm.
+
+282
+00:23:23,160 --> 00:23:23,760
+Mhm.
+
+283
+00:23:23,760 --> 00:23:25,600
+>> That is a good transition to talk about deployments.
+
+284
+00:23:25,840 --> 00:23:30,680
+I'd love to talk to you about, you know, robot deploy deployments overall as a concept.
+
+285
+00:23:30,920 --> 00:23:33,960
+Um you've said that useful robots can already be deployed today.
+
+286
+00:23:34,440 --> 00:23:35,760
+Why do you think that's the case?
+
+287
+00:23:36,520 --> 00:23:40,920
+>> I think people underestimate how diverse robotics can be.
+
+288
+00:23:41,240 --> 00:23:52,400
+Uh and if we if we constrain ourselves to to one humanoids are incredibly popular, it will be uh a very popular terminal state of robotics as well.
+
+289
+00:23:52,480 --> 00:23:56,640
+But beyond that, there are so many different form factors that exist in robotics today.
+
+290
+00:23:56,640 --> 00:24:05,920
+You could look at different markets even across uh hotels in China or Southeast Asia, for example, where there are robots that are doing services,
+
+291
+00:24:05,920 --> 00:24:14,840
+that are doing cleaning, that are delivering from after your your Uber Eats gets to the door, from the front desk to your hotel room door that exist.
+
+292
+00:24:15,320 --> 00:24:19,200
+Many of these bots are widely deployed across the world today.
+
+293
+00:24:19,360 --> 00:24:23,400
+They are just starting to get popularized across the US and North America.
+
+294
+00:24:23,520 --> 00:24:30,240
+I think some of the first bots that have to get deployed will be even just the industrial cleaning bots,
+
+295
+00:24:30,240 --> 00:24:30,960
+for example.
+
+296
+00:24:31,480 --> 00:24:33,880
+Uh a lot of like thematic robotics that are out there.
+
+297
+00:24:33,880 --> 00:24:40,160
+And then slowly stepping up and up from there where you start to solve early manipulation tasks along that spectrum,
+
+298
+00:24:40,400 --> 00:24:46,520
+all the way up until we get to that humanoid solving out of the box any task in the future.
+
+299
+00:24:46,520 --> 00:24:49,840
+>> You mentioned Tesla and FSD earlier in this show.
+
+300
+00:24:50,040 --> 00:24:54,520
+Um when do you think we're going to get to the point where there is a little bit of an FSD like flywheel?
+
+301
+00:24:54,840 --> 00:24:56,120
+And when we get to that point,
+
+302
+00:24:57,320 --> 00:24:59,920
+how do you see your role as a company evolving?
+
+303
+00:24:59,920 --> 00:25:05,120
+>> When we would get there, um I think we're a while's away.
+
+304
+00:25:06,080 --> 00:25:07,560
+But it'll be a slow transition.
+
+305
+00:25:08,400 --> 00:25:15,320
+In that when you are slowly solving some of the commercial tasks, you will also be able to finally get some of these flywheels.
+
+306
+00:25:15,800 --> 00:25:22,480
+Then you can get some of the in deployment data where you get the failure cases, you get the correction data.
+
+307
+00:25:22,880 --> 00:25:27,440
+Um that will be absolutely important in starting up this robot flywheel.
+
+308
+00:25:27,880 --> 00:25:36,880
+How far that is depends on that spectrum and across saturating different types of tasks and domains that aren't completed or solved for yet.
+
+309
+00:25:37,200 --> 00:25:38,720
+So it's quite a while's away.
+
+310
+00:25:39,000 --> 00:25:45,600
+When we do get there, thing is I I I believe that Mekko will look very different along that process.
+
+311
+00:25:46,080 --> 00:25:50,640
+In that one, we're not fully subscribed to only egocentric data.
+
+312
+00:25:50,640 --> 00:25:55,640
+We believe generally that a lot of different SKUs, the entire data soup is important.
+
+313
+00:25:56,240 --> 00:26:00,800
+And so will we be producing the Michelin star data at at some point in the future?
+
+314
+00:26:01,120 --> 00:26:06,720
+Will we be teaching some sort of edge case about the real world that the robots haven't gotten to yet?
+
+315
+00:26:06,920 --> 00:26:13,120
+If we believe that the world is incredibly vast and rich in detail, um there's going to be no shortage of things to teach.
+
+316
+00:26:13,320 --> 00:26:20,840
+And then even in that world, we do have this angle where we believe that Mekko will very much contribute to the deployment of robots.
+
+317
+00:26:21,360 --> 00:26:28,160
+And so in in some of these environments in closing that gap, of being able to do that task in that domain in that environment,
+
+318
+00:26:28,480 --> 00:26:38,760
+can we actually be the platform where we collect that domain data, we post train, we help support the enterprises and white glove hold them into what it means to be in a world filled
+
+319
+00:26:38,760 --> 00:26:39,520
+with robotics?
+
+320
+00:26:40,440 --> 00:26:42,000
+We see Mekko maturing into that.
+
+321
+00:26:42,000 --> 00:26:47,360
+>> I'd love to get your predictions on how you think deployment diffusion is going to work out in the physical world.
+
+322
+00:26:47,680 --> 00:26:54,000
+And maybe if I can analogize what's happened in the LLM world, there's like a few different ways that deploy codes have happened,
+
+323
+00:26:54,000 --> 00:26:54,280
+right?
+
+324
+00:26:54,280 --> 00:26:57,520
+There's vertical specific application companies.
+
+325
+00:26:58,160 --> 00:27:03,040
+Uh, there's the foundation model companies themselves that are scaling up good to markets.
+
+326
+00:27:03,480 --> 00:27:09,600
+And then there's you know, all these FDE deploy code, service code, whatever you want to call them, you know,
+
+327
+00:27:09,600 --> 00:27:14,040
+just armies of people um helping enterprises adopt AI scale.
+
+328
+00:27:14,040 --> 00:27:18,720
+Those are seem like the broad vectors that are disseminating tokens across the economy.
+
+329
+00:27:19,200 --> 00:27:21,840
+What do you think the analog will be in the physical world?
+
+330
+00:27:22,000 --> 00:27:26,080
+>> We we believe very much in both the vertical and the horizontal across robotics.
+
+331
+00:27:26,400 --> 00:27:32,880
+So, the full verticals um that are very task specific all the way from hardware to models to data that are tackling.
+
+332
+00:27:33,160 --> 00:27:42,440
+We also believe uh believe in an ecosystem where there's going to be very vast and different shapes and sizes of hardware of robotics.
+
+333
+00:27:43,000 --> 00:27:46,520
+Uh, and there will be different types of open models that exist in the world.
+
+334
+00:27:47,200 --> 00:27:52,880
+I think it will look something like a modern robotics version of a systems integrator.
+
+335
+00:27:52,880 --> 00:27:56,200
+That in a traditional version, you are installing the product.
+
+336
+00:27:56,200 --> 00:27:57,440
+It's incredibly competitive.
+
+337
+00:27:57,480 --> 00:27:58,560
+It is tight margins.
+
+338
+00:27:59,160 --> 00:28:05,760
+There is now a world where you can actually install and help make that product become more data-driven and productive over time.
+
+339
+00:28:06,280 --> 00:28:14,640
+So, can you actually uh have the bot you installed last week do something that it didn't think was possible uh a few a few days ago even?
+
+340
+00:28:14,840 --> 00:28:18,880
+Can it help you start expanding the scope of what your business is capable of doing?
+
+341
+00:28:19,040 --> 00:28:22,480
+And that's ultimately the milestone that we're we're hoping to to aim for.
+
+342
+00:28:22,480 --> 00:28:25,200
+>> Okay, but you would tell me as an investor, now give me some investing advice.
+
+343
+00:28:25,200 --> 00:28:28,120
+You you invest in both the general and the vertical robots then.
+
+344
+00:28:28,200 --> 00:28:28,600
+Yeah.
+
+345
+00:28:28,600 --> 00:28:31,200
+>> What are your favorite vertical robot categories?
+
+346
+00:28:31,200 --> 00:28:34,600
+>> I think the best ones will be the industrial bots to start.
+
+347
+00:28:34,920 --> 00:28:40,320
+Those are are are are are going to be ones that already have a lot of traditional robotics in the mix.
+
+348
+00:28:40,320 --> 00:28:42,280
+They're task constrained like we talked about.
+
+349
+00:28:42,280 --> 00:28:44,000
+>> Like data center maintenance robots.
+
+350
+00:28:44,240 --> 00:28:49,000
+>> Yeah, you just don't have to expect a baby to appear uh and have to think about that and not fall on it,
+
+351
+00:28:49,000 --> 00:28:49,720
+for example.
+
+352
+00:28:50,000 --> 00:28:53,640
+So, the the world is much more constrained than in the wild.
+
+353
+00:28:54,240 --> 00:29:04,560
+Um other categories we're excited about are are are just spaces that are even feasible and possible uh early on.
+
+354
+00:29:04,720 --> 00:29:13,080
+And so, some of the approaches in the hotels, for example, where you could actually start delivering from the front desk to the hotel rooms,
+
+355
+00:29:13,440 --> 00:29:19,800
+um be able to actually have manipulation to hand off, um are exciting to us.
+
+356
+00:29:20,280 --> 00:29:22,920
+And then places that just humans were not capable of.
+
+357
+00:29:23,000 --> 00:29:31,560
+A joke that we make in in some of our all-hands in the company would be if one day Meka was able to help deploy a robot that mines an asteroid,
+
+358
+00:29:31,680 --> 00:29:33,440
+we've probably done a pretty good job.
+
+359
+00:29:34,280 --> 00:29:40,360
+>> It's just a it's just it's a job and a task that completely doesn't exist, that humans can't do, that we have no idea how to do just yet,
+
+360
+00:29:40,840 --> 00:29:42,000
+but it seems inevitable.
+
+361
+00:29:42,120 --> 00:29:43,520
+>> Yeah, I love that.
+
+362
+00:29:43,720 --> 00:29:50,000
+Reminds me of, you know, even I'm not thinking interplanetary yet, but, you know, like have you ever heard of Gecko Robotics?
+
+363
+00:29:50,240 --> 00:29:50,680
+Mhm.
+
+364
+00:29:50,680 --> 00:29:53,720
+>> Um what they do to help maintain ships and things like that.
+
+365
+00:29:53,720 --> 00:29:54,680
+I think it's really cool.
+
+366
+00:29:54,680 --> 00:29:55,760
+Absolutely.
+
+367
+00:29:55,760 --> 00:30:06,600
+>> Can you say a word on whatever you're willing to share publicly, the slate of hardware that you've developed, and where where the labs currently are most interested in in collecting bespoke data?
+
+368
+00:30:06,600 --> 00:30:14,320
+>> Some of the uh iteration came from when we started with the mobile app, we quickly were able to scale that.
+
+369
+00:30:14,320 --> 00:30:16,200
+There were a lot of shoes in that product.
+
+370
+00:30:16,560 --> 00:30:23,160
+Um the downsides ultimately were you don't get as much rich information about the world as you could have.
+
+371
+00:30:23,720 --> 00:30:30,400
+And so, some of the things that we had to develop very early on uh were things like Waymo-fying people ultimately.
+
+372
+00:30:30,760 --> 00:30:37,200
+And in the sensorization, can you build things like these baseball caps that are equipped with different cameras and sensors?
+
+373
+00:30:37,680 --> 00:30:44,640
+Um we build a central hub that then connects to all these different accessories, such as the tactile gloves, external cameras,
+
+374
+00:30:44,640 --> 00:30:45,680
+and more.
+
+375
+00:30:45,680 --> 00:30:52,880
+All of which is trying to capture how do you interact with the world on a day-to-day, and hopefully be able to clone that behavior.
+
+376
+00:30:53,160 --> 00:30:54,280
+>> Hm, interesting.
+
+377
+00:30:54,680 --> 00:30:55,520
+What is EgoVerse?
+
+378
+00:30:56,760 --> 00:31:05,960
+>> EgoVerse, uh so Professor Dan Fei, Ryan Simmer, these are some of the earliest cohorts researchers that believed in egocentric data.
+
+379
+00:31:06,240 --> 00:31:16,640
+Uh we had the privilege to be a an early contributor in that consortium ultimately of different folks that think scaling up human data would be important for robotics.
+
+380
+00:31:17,160 --> 00:31:26,400
+And so, one we created a and contributed large amount of different types of egocentric data across different businesses, industries,
+
+381
+00:31:26,840 --> 00:31:27,680
+home environments.
+
+382
+00:31:28,320 --> 00:31:31,720
+Uh we shared all of the uh action trajectory data.
+
+383
+00:31:31,720 --> 00:31:36,080
+So, all of the post-processing, the computer vision, and the quality gates.
+
+384
+00:31:36,480 --> 00:31:39,880
+Uh and we contributed all the uh platform and web tooling.
+
+385
+00:31:40,000 --> 00:31:40,360
+Pretty much.
+
+386
+00:31:40,360 --> 00:31:43,480
+So, the data loading, the infrastructure.
+
+387
+00:31:43,480 --> 00:31:54,960
+And so, it is ultimately going to be uh to to repeat their vision on this is ideally we can bring together a lot of the robotics industry because hopefully we can lift up everybody
+
+388
+00:31:55,200 --> 00:32:02,120
+in this wave and share the tooling, the data, and the lessons just because we are so far behind as an industry to get there.
+
+389
+00:32:02,240 --> 00:32:07,560
+>> Is it fair to say that the robotics industry has kind of converged on a training data mix that is,
+
+390
+00:32:07,560 --> 00:32:19,720
+you know, internet scale data from YouTube and like plus bunch of egocentric data plus tele UMi and then plus teleop and like maybe there was like a triangle of like amount of data on
+
+391
+00:32:19,720 --> 00:32:19,920
+each.
+
+392
+00:32:19,920 --> 00:32:22,400
+I think Jim Fan had like a really nice visual on this.
+
+393
+00:32:22,520 --> 00:32:23,800
+Um at a Sequoia event.
+
+394
+00:32:23,920 --> 00:32:25,840
+Is that kind of like the mix that you see?
+
+395
+00:32:25,840 --> 00:32:31,520
+And then amongst your customers has everybody kind of converged on a very, very similar mix?
+
+396
+00:32:32,440 --> 00:32:38,080
+>> It it's it's fun to see that even a year ago, uh many folks would argue and say, "Oh, no,
+
+397
+00:32:38,080 --> 00:32:39,720
+it's only UMI data that's going to work.
+
+398
+00:32:39,720 --> 00:32:42,120
+It's only egocentric data that's going to work."
+
+399
+00:32:42,320 --> 00:32:47,760
+And you slowly realize, to your point, all of this is essentially a data pot of soup.
+
+400
+00:32:48,080 --> 00:32:53,280
+And in that pot of soup, the all the ingredients are going to be important at some point.
+
+401
+00:32:53,280 --> 00:32:58,280
+I think what we're seeing is a convergence in cross what that recipe might be today.
+
+402
+00:32:58,600 --> 00:33:06,520
+And that does look like some version of a million hours of human data across egocentric and different different types of modalities.
+
+403
+00:33:06,960 --> 00:33:20,640
+Uh, some tens of thousands of hours of UMI data, and then some last mile teleoperation data, and in-domain in distribution data in a in just a couple hours even of that demonstration.
+
+404
+00:33:21,240 --> 00:33:33,120
+I think we are seeing that, but over time and why why we don't subscribe aggressively to even one religion here is that things like tactile data haven't even entered the mix yet.
+
+405
+00:33:33,400 --> 00:33:43,280
+And if there is this belief that these these models ultimately will need to learn how much force it takes to apply towards the door handle,
+
+406
+00:33:43,280 --> 00:33:46,880
+for example, these will have to come into the data pot of soup.
+
+407
+00:33:46,960 --> 00:33:52,640
+Simulation will come into the data pot of soup, and they all all will be important to converge on.
+
+408
+00:33:52,760 --> 00:34:00,000
+>> One of the, I guess, objections that I hear most frequently to the types of data being collected are, you know,
+
+409
+00:34:00,200 --> 00:34:06,640
+you could watch millions of hours of tennis data and you still wouldn't know how to beat Roger Federer, right?
+
+410
+00:34:06,640 --> 00:34:13,080
+And I'm curious what you think of that and what it means for where we might be headed in terms of the way robots learn.
+
+411
+00:34:13,879 --> 00:34:18,120
+>> I I I love the analogy of AlphaGo ultimately.
+
+412
+00:34:18,480 --> 00:34:23,479
+When you talk about robots playing tennis, you got to talk about robots playing Go.
+
+413
+00:34:23,840 --> 00:34:33,720
+And I think with Lee Sedol and and and all the work that DeepMind did, at the very beginning it was large-scale behavior cloning of different experts playing Go.
+
+414
+00:34:34,280 --> 00:34:46,560
+Then the next step was the self-play version of with the rules of the game, can you ultimately simulate all the different ways until you come up with the magic of move 37 ultimately.
+
+415
+00:34:47,200 --> 00:34:52,679
+Um which was so out of scope of what humans could have thought in that moment on the Go.
+
+416
+00:34:52,679 --> 00:35:06,400
+For us though, in our case of robotics, for for Go, the rules of the game are the is the entire uh circumference of the world that you will operate at.
+
+417
+00:35:06,400 --> 00:35:17,120
+In robotics, you have the incredible rich detail that the that the physical world has, and we ultimately don't have a world simulator that can recreate that today.
+
+418
+00:35:17,120 --> 00:35:29,040
+And so to close that gap, a lot of the egocentric data today is to one, help us ground the basic physics uh and the basic uh behavior cloning that you have to get to.
+
+419
+00:35:29,160 --> 00:35:34,240
+It is also contributing to creating what this world simulator might look like.
+
+420
+00:35:34,480 --> 00:35:39,640
+And then somewhere along the way, I think we will be able to create and have robots playing tennis like Roger Federer.
+
+421
+00:35:39,760 --> 00:35:40,880
+Mhm.
+
+422
+00:35:40,880 --> 00:35:46,600
+Do you think they'll mostly be doing self-play in simulation or in the real world?
+
+423
+00:35:46,600 --> 00:35:48,840
+>> I could see I could see a hybrid ultimately.
+
+424
+00:35:49,120 --> 00:35:55,920
+I think if we can get simulation and we don't have to fully reconstruct the world to uh to its detail like right away,
+
+425
+00:35:56,320 --> 00:35:59,920
+but I I see self-play both in the physical and in simulation.
+
+426
+00:36:00,400 --> 00:36:03,200
+>> You used the word world simulator a couple times there.
+
+427
+00:36:03,200 --> 00:36:04,760
+What are your thoughts on
+
+428
+00:36:05,960 --> 00:36:12,320
+I guess what's happening with world models, which I guess are being used somewhat interchangeably with video models as a term right now.
+
+429
+00:36:12,520 --> 00:36:16,520
+Um but world models and like their contribution to the robot data training mix.
+
+430
+00:36:16,880 --> 00:36:24,360
+>> I I I think the potential and possibility to have what we just talked about in in terms of self-play,
+
+431
+00:36:24,760 --> 00:36:33,880
+to even just dream what it means to drop a cup and have it shatter without actually doing it is incredibly valuable for what what could happen.
+
+432
+00:36:34,320 --> 00:36:39,160
+I see the value in that we get to leverage a lot of the work from the internet and YouTube,
+
+433
+00:36:39,160 --> 00:36:42,000
+for example, in this pixel prediction ultimately.
+
+434
+00:36:42,520 --> 00:36:50,160
+And if we can translate that back into what these action trajectories would be, um it could help us accelerate quite a bit.
+
+435
+00:36:50,160 --> 00:36:50,760
+>> Yeah.
+
+436
+00:36:50,800 --> 00:36:51,680
+Yeah, interesting.
+
+437
+00:36:52,240 --> 00:36:56,200
+So, you mentioned that we've kind of converged on this like pyramid of data mix.
+
+438
+00:36:56,200 --> 00:36:59,360
+Do you think this pyramid will like scale if we just scaled up?
+
+439
+00:36:59,480 --> 00:37:01,240
+Do you think that takes us to the promised land?
+
+440
+00:37:01,240 --> 00:37:04,720
+And to me, promised land is people like saying GPT-3 moment for robotics.
+
+441
+00:37:04,720 --> 00:37:05,760
+I no longer like that.
+
+442
+00:37:05,760 --> 00:37:11,280
+I just like when will a robot actually fold my clothes or cook a meal for me?
+
+443
+00:37:11,520 --> 00:37:18,880
+Um do you think the current data mix will get us to that point or do you think we're like new breakthroughs in algos and data are going to be needed to get there?
+
+444
+00:37:19,840 --> 00:37:28,880
+I think if we scale it up some order of magnitude in that ratio, uh we will solve a lot of tasks along the way.
+
+445
+00:37:29,360 --> 00:37:33,120
+So, some of those tasks could be a lot more constrained environments.
+
+446
+00:37:33,400 --> 00:37:38,440
+They could be within business operation tasks, very specific SOPs you give.
+
+447
+00:37:39,000 --> 00:37:47,520
+Um in that ideal world where we have a drop-in robot and it solves any task by just looking at it,
+
+448
+00:37:47,560 --> 00:37:50,720
+can play tennis just like Roger Federer out of the box.
+
+449
+00:37:51,080 --> 00:37:57,880
+Um and all of the it crazy complexities of the actual world scenarios, like the weather, for example.
+
+450
+00:37:58,360 --> 00:38:02,320
+I think it will be some way and I don't think this is what it will look like ultimately.
+
+451
+00:38:02,800 --> 00:38:03,960
+>> What will it look like?
+
+452
+00:38:04,680 --> 00:38:07,080
+>> Well, we still have so much to add into the mix still.
+
+453
+00:38:07,360 --> 00:38:14,440
+And I think I think that is going to be how can we start introducing other modalities into the mix?
+
+454
+00:38:14,720 --> 00:38:16,760
+This is going to be that tactile data.
+
+455
+00:38:16,880 --> 00:38:21,880
+I I like the approach a lot of the models converging towards an omni model approach.
+
+456
+00:38:22,360 --> 00:38:33,560
+And where you can feed it any type of input that is the observation, whether it is force, pixel, even smell in a very extreme case,
+
+457
+00:38:34,520 --> 00:38:36,400
+and then have some sort of output
+
+458
+00:38:37,560 --> 00:38:42,720
+in in whether it's action, voice, or or or different type of types of controls.
+
+459
+00:38:43,000 --> 00:38:45,680
+>> Are there even chips that can sense smell?
+
+460
+00:38:45,680 --> 00:38:48,240
+>> I It's It's It's pretty It's pretty early.
+
+461
+00:38:48,320 --> 00:38:51,320
+This olfactory approach is is very early.
+
+462
+00:38:51,720 --> 00:38:55,480
+But I I like to imagine that there's going to be an approach in the world where where that gets unlocked.
+
+463
+00:38:55,480 --> 00:38:55,960
+>> Yeah.
+
+464
+00:38:55,960 --> 00:39:03,000
+The results of, you know, GPT-6 Astra is generalizing incredibly well to robot tasks.
+
+465
+00:39:03,920 --> 00:39:09,120
+I'm curious what you make of that and what it means for all these pure-play robotics companies.
+
+466
+00:39:09,520 --> 00:39:16,040
+Like, are they ultimately just going to get clobbered by the AGI labs and like the Better Lesson is just going to steamroll robotics as well?
+
+467
+00:39:16,040 --> 00:39:16,840
+What do you think?
+
+468
+00:39:16,960 --> 00:39:22,240
+>> It takes a lot of courage to scale up data with imperfect information.
+
+469
+00:39:23,320 --> 00:39:31,520
+And I think a lot of these labs have the DNA in themselves to take on that courage uh early on.
+
+470
+00:39:31,840 --> 00:39:43,960
+>> I think what we're we're seeing and what's exciting is that um with the scale up of robotics data and even just adding into uh a lot of the pretraining mixes of these main LLMs
+
+471
+00:39:43,960 --> 00:39:49,800
+and these these foundation models, uh it really is that you can start to generalize in a lot of different domains.
+
+472
+00:39:50,120 --> 00:40:01,600
+I I'm excited about the omnimodel approaches where you can introduce a lot of different types of observation, whether that's force or whether that's action trajectories uh into the mix,
+
+473
+00:40:01,680 --> 00:40:03,320
+and allow it to generalize.
+
+474
+00:40:03,320 --> 00:40:13,600
+Um I think there're al- also going to be a lot of arguments where you want to be much more vertical than a fully generalized model that can do anything.
+
+475
+00:40:13,600 --> 00:40:21,680
+So, somewhere along that time horizon, that model that can do everything is going to be very good at a lot of things,
+
+476
+00:40:21,760 --> 00:40:32,280
+but some of these specialized models, some of these more targeted robotics foundation models might become very excellent into four nines of capability and reliability in some of these tasks.
+
+477
+00:40:32,280 --> 00:40:33,520
+>> Hmm, okay.
+
+478
+00:40:33,680 --> 00:40:44,360
+What I heard reading between the lines just now was that the you know, the fact that the latest foundation models are great at robotics is not actually that surprising um in part because there
+
+479
+00:40:44,360 --> 00:40:47,480
+actually is quite a bit of robot data that's been now thrown into the training mix.
+
+480
+00:40:47,480 --> 00:40:48,320
+Is that fair?
+
+481
+00:40:48,360 --> 00:40:50,360
+>> It's actually quite expected when you think about it.
+
+482
+00:40:50,360 --> 00:40:51,160
+>> Very interesting.
+
+483
+00:40:52,160 --> 00:40:56,000
+Um I'd love to close by going back to your sci-fi roots.
+
+484
+00:40:56,120 --> 00:41:03,320
+Um you started this company because you know, you could imagine a version of the world with robots everywhere.
+
+485
+00:41:03,720 --> 00:41:06,360
+Paint a picture of what you what you think the world looks like.
+
+486
+00:41:06,560 --> 00:41:16,200
+>> I I think this was a the the funniest moment was probably when you visited our New York office and in our main conference room we have hung up on the wall actually the the
+
+487
+00:41:16,200 --> 00:41:17,280
+Kawasaki Carleo.
+
+488
+00:41:17,280 --> 00:41:18,160
+>> I love that.
+
+489
+00:41:18,160 --> 00:41:22,040
+>> Which is >> the robot panther dog horse whatever it is.
+
+490
+00:41:22,040 --> 00:41:23,720
+>> The panther dog horse, exactly.
+
+491
+00:41:23,840 --> 00:41:27,680
+So so it's pretty much a robot panther dog horse.
+
+492
+00:41:27,680 --> 00:41:32,560
+>> Um and it's the most ridiculous video and trailer you've ever seen pretty much.
+
+493
+00:41:32,560 --> 00:41:38,160
+>> My favorite part is that you guys convinced Anassa that it was actually you and your mom on it.
+
+494
+00:41:38,800 --> 00:41:50,080
+>> Yeah, yeah, there's there's a clip pretty much where this this fantastical like Asian lady and her and her son are riding this green meadow over a a little river and the Carleo,
+
+495
+00:41:50,600 --> 00:41:55,400
+this horse dog panther robot, is jumping over the river.
+
+496
+00:41:55,400 --> 00:42:00,280
+And so we told Anassa this this was pretty much us as when we were kids and we generated it.
+
+497
+00:42:00,400 --> 00:42:05,760
+Um but what is wonderful is how absurd it is.
+
+498
+00:42:06,520 --> 00:42:14,080
+I I very much love the philosophy of Hitchhiker's and just how absurd the world could be and how absurd the future could be.
+
+499
+00:42:14,280 --> 00:42:24,160
+Um and in this world that is full of robots, I would love to believe that there's going to be such crazy entrepreneurs and and and people that believe that form factors like this would
+
+500
+00:42:24,160 --> 00:42:24,880
+be interesting.
+
+501
+00:42:25,560 --> 00:42:35,640
+Um and I think that the the the shape and size of robotics will look something uh like a world where we come up with wacky uh robots that could do anything that you haven't
+
+502
+00:42:35,640 --> 00:42:36,680
+even thought of yet.
+
+503
+00:42:36,840 --> 00:42:37,480
+>> I love that.
+
+504
+00:42:37,480 --> 00:42:38,440
+>> Like mining asteroids.
+
+505
+00:42:39,400 --> 00:42:42,720
+>> Um order of magnitude, how many robots will there be in the world in a decade?
+
+506
+00:42:42,720 --> 00:42:46,080
+>> Many many times more than there are people.
+
+507
+00:42:46,080 --> 00:42:47,880
+>> Many orders of magnitude more?
+
+508
+00:42:48,320 --> 00:42:49,240
+>> Than there are people, yes.
+
+509
+00:42:49,240 --> 00:42:52,000
+In the in in de- in a decade plus.
+
+510
+00:42:52,400 --> 00:42:53,680
+>> Like 100 billion robots?
+
+511
+00:42:54,000 --> 00:42:55,560
+Yeah.
+
+512
+00:42:55,560 --> 00:42:56,160
+>> That's really cool.
+
+513
+00:42:56,160 --> 00:42:58,440
+100 billion panther dog horses?
+
+514
+00:42:58,680 --> 00:43:03,560
+>> Panther dog horses, at least another order of magnitude more than that.
+
+515
+00:43:03,560 --> 00:43:04,320
+>> Love it.
+
+516
+00:43:04,360 --> 00:43:05,320
+Um awesome, Josh.
+
+517
+00:43:05,320 --> 00:43:16,920
+I think that what you're building is like operationally really impressive and very cool how you were scaling up the data collection efforts to enable kind of this robotics golden age and this sci-fi future
+
+518
+00:43:16,920 --> 00:43:18,320
+that you've dreamed of since you were a kid.
+
+519
+00:43:18,320 --> 00:43:23,480
+And so, thank you for for joining the pod today to tell us both how you're building the business and how you see the future.
+
+520
+00:43:23,480 --> 00:43:24,360
+It was really fun.
+
+521
+00:43:24,360 --> 00:43:25,680
+>> Thank you so much for having us.
+
+522
+00:43:25,680 --> 00:43:26,480
+Thank you, Sonya.
+
+523
+00:43:28,400 --> 00:43:29,760
+So, we actually brought you a present.
+
+524
+00:43:30,600 --> 00:43:31,480
+>> I love presents.
+
+525
+00:43:31,640 --> 00:43:34,120
+>> uh this is kind of like a full circle moment for us.
+
+526
+00:43:34,360 --> 00:43:35,720
+>> Is this what I think it is?
+
+527
+00:43:36,080 --> 00:43:36,480
+>> Who knows?
+
+528
+00:43:36,480 --> 00:43:37,200
+Who knows?
+
+529
+00:43:38,320 --> 00:43:40,600
+>> All right, you're going to have to open it up on on the podcast.
+
+530
+00:43:40,600 --> 00:43:41,160
+>> is amazing.
+
+531
+00:43:41,160 --> 00:43:42,760
+And look at the Hold on.
+
+532
+00:43:42,760 --> 00:43:47,240
+Can we You know, I could be one of those YouTubers that does the unboxings.
+
+533
+00:43:48,080 --> 00:43:51,440
+Look at I love this The Mecha stickers are A+.
+
+534
+00:43:51,520 --> 00:43:53,040
+Okay, I think this is what I think it is.
+
+535
+00:43:53,040 --> 00:43:53,800
+Let's see.
+
+536
+00:43:53,800 --> 00:43:59,000
+>> We're we're going to actually actually come up with a a a series of Mecha figurines and stickers.
+
+537
+00:43:59,560 --> 00:44:02,840
+>> Because they're all like giant robots, human pilot stuff.
+
+538
+00:44:03,760 --> 00:44:04,560
+That'll be fun.
+
+539
+00:44:04,640 --> 00:44:07,080
+>> I'm so I'm Let's see if this is going to work.
+
+540
+00:44:13,200 --> 00:44:14,360
+I love it.
+
+541
+00:44:15,440 --> 00:44:16,840
+Oh my gosh.
+
+542
+00:44:16,840 --> 00:44:17,440
+Okay.
+
+543
+00:44:18,000 --> 00:44:20,320
+This is the >> This is the Corleone.
+
+544
+00:44:20,560 --> 00:44:22,280
+>> This is the Kawasaki Corleone.
+
+545
+00:44:23,080 --> 00:44:24,280
+I love this.
+
+546
+00:44:24,840 --> 00:44:26,880
+This is the robot dog panther horse.
+
+547
+00:44:26,880 --> 00:44:27,600
+>> and my mom.
+
+548
+00:44:27,600 --> 00:44:28,200
+Oh.
+
+549
+00:44:28,200 --> 00:44:29,840
+>> On the on the panther horse.
+
+550
+00:44:29,840 --> 00:44:31,400
+That's right.
+
+551
+00:44:31,400 --> 00:44:34,680
+>> This is going We're either going to put it in the podcast room or in my office.
+
+552
+00:44:34,680 --> 00:44:35,520
+This is incredible.
+
+553
+00:44:35,560 --> 00:44:35,720
+>> Okay.
+
+554
+00:44:35,720 --> 00:44:36,320
+Do it.
+
+555
+00:44:36,320 --> 00:44:36,520
+Do it.
+
+556
+00:44:36,520 --> 00:44:37,600
+>> I'm so happy.
+
+557
+00:44:37,600 --> 00:44:38,360
+>> I'm so happy.
+
+558
+00:44:38,360 --> 00:44:39,280
+Thank you.
+

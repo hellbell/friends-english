@@ -1,0 +1,4932 @@
+1
+00:00:00,160 --> 00:00:03,200
+Today, I’m chatting with three of my AI researcher friends
+
+2
+00:00:03,200 --> 00:00:08,960
+from whom I learn a lot every time we talk. They also happen to be at somewhat open-ish
+
+3
+00:00:08,960 --> 00:00:12,720
+labs and companies, so you guys can actually say things on the record.
+
+4
+00:00:12,720 --> 00:00:16,640
+I’m joined by Beren Millidge, who is the CTO of Zyphra, which is developing open source models.
+
+5
+00:00:16,640 --> 00:00:20,720
+John Schulman is the chief scientist at Thinking Machines, previously a co-founder of
+
+6
+00:00:20,720 --> 00:00:27,120
+OpenAI, and led the RLHF work that led to ChatGPT. And Charlie O’Neill is head of
+
+7
+00:00:27,120 --> 00:00:30,640
+model training at Baseten. The first question I have:
+
+8
+00:00:30,640 --> 00:00:38,080
+If we’re in 2036 and we don’t have billions of crazy superintelligences running around that have
+
+9
+00:00:38,080 --> 00:00:43,760
+radically transformed the world, what is the most likely reason that doesn’t end up being the case?
+
+10
+00:00:43,760 --> 00:00:49,200
+Other than exogenous political shocks, or there’s a war, or they ban AI or something.
+
+11
+00:00:49,200 --> 00:00:55,360
+What is the most likely technical reason that 2036 isn’t a crazy alien superintelligence world?
+
+12
+00:01:00,560 --> 00:01:06,000
+There’s been a classic thing, almost like Moravec’s paradox, where we think of the AI as,
+
+13
+00:01:06,000 --> 00:01:09,040
+"If it can do this, it’s going to be amazing." If it can solve these hard maths problems,
+
+14
+00:01:09,040 --> 00:01:13,280
+if it can win at chess, blah, blah, blah… Then it solves these things, and it’s not that impactful.
+
+15
+00:01:13,280 --> 00:01:15,840
+Obviously, it’s somewhat impactful, but not everything.
+
+16
+00:01:15,840 --> 00:01:21,120
+If somehow that continues, and there’s never the true spark of generalization that occurs,
+
+17
+00:01:21,120 --> 00:01:26,080
+I think that could lead to the AI just being extremely good at everything that people put
+
+18
+00:01:26,080 --> 00:01:30,080
+into a benchmark or put into an environment. But there’s still some persistent sim-to-real gap
+
+19
+00:01:30,080 --> 00:01:33,760
+which is somehow blocking everything. I think this is unlikely.
+
+20
+00:01:33,760 --> 00:01:37,360
+We do actually see this kind of generalization even from RL in practice already.
+
+21
+00:01:37,360 --> 00:01:42,560
+But if it is just ridiculously hard to generalize meta-learning, plus we don’t solve continual
+
+22
+00:01:42,560 --> 00:01:48,000
+learning and it’s just super hard and impossible… This would be my default scenario in that case.
+
+23
+00:01:48,000 --> 00:01:53,200
+I agree with that. Humans have a lot of advantages over models now.
+
+24
+00:01:54,080 --> 00:02:00,800
+Each time a new model comes out, it’ll catch up in some of these areas.
+
+25
+00:02:00,800 --> 00:02:06,160
+But you end up getting bottlenecked by the places where the model is weaker and where
+
+26
+00:02:06,160 --> 00:02:11,600
+it has worse judgment, or the models can’t check themselves well enough.
+
+27
+00:02:12,480 --> 00:02:17,120
+There’s this cycle that keeps repeating where a new model comes out and people are
+
+28
+00:02:17,120 --> 00:02:21,840
+blown away and they’re like, "This is it. This is AGI." But then they use it a bit,
+
+29
+00:02:21,840 --> 00:02:27,360
+and it starts to feel dumb after a month or so. That cycle just might keep going.
+
+30
+00:02:27,360 --> 00:02:30,000
+It’s hard to predict how many times it’s going to repeat.
+
+31
+00:02:31,200 --> 00:02:35,760
+Right now, you don’t get explosive growth in capabilities because
+
+32
+00:02:36,480 --> 00:02:39,440
+you still get bottlenecked enough when you’re trying to do research and engineering.
+
+33
+00:02:40,080 --> 00:02:46,400
+Even if the model can write way more code than a person, it doesn’t make you 100X more productive.
+
+34
+00:02:47,600 --> 00:02:52,480
+So maybe there are just more of these cycles than we would expect.
+
+35
+00:02:52,480 --> 00:02:58,240
+For me, it’s a question of how far off the global optimum of "a learner you could have
+
+36
+00:02:58,240 --> 00:03:03,680
+on a chip" is from the transformer + RL, basically the current recipe.
+
+37
+00:03:05,200 --> 00:03:12,320
+People imagine that once you have an agent which is better than all humans at AI research,
+
+38
+00:03:12,320 --> 00:03:17,360
+even if it’s 0.1% better than all humans, then the fact that you can run hundreds of thousands, if
+
+39
+00:03:17,360 --> 00:03:20,880
+not millions, of these in parallel — and you can run them much faster as chips speed up — is going
+
+40
+00:03:20,880 --> 00:03:25,680
+to outweigh every other bottleneck. You’re eventually going to hit this very
+
+41
+00:03:25,680 --> 00:03:29,920
+fast takeoff with regards to self-improvement. I could imagine that if we continue along the
+
+42
+00:03:29,920 --> 00:03:35,040
+trajectory that we’re currently on with that paradigm, where it’s basically self-attention,
+
+43
+00:03:35,040 --> 00:03:41,600
+RL, scaling up RL environments… Think about what happened with Moore’s law.
+
+44
+00:03:41,600 --> 00:03:45,120
+We had this very nice straight line and that held for a really, really long time.
+
+45
+00:03:45,120 --> 00:03:50,000
+But there were so many discrete discontinuities and innovations that had
+
+46
+00:03:50,000 --> 00:03:54,000
+to happen to keep that scaling law going. The same thing has happened with LLMs.
+
+47
+00:03:54,000 --> 00:03:59,280
+We had this pre-training scaling law, and then that was hitting diminishing returns.
+
+48
+00:03:59,280 --> 00:04:02,880
+Then we came up with RL and solved that, and then we got this new diminishing
+
+49
+00:04:02,880 --> 00:04:06,800
+returns curve to hit that made it keep looking like a straight line going up.
+
+50
+00:04:06,800 --> 00:04:11,200
+So if it requires another one of those discontinuities to solve,
+
+51
+00:04:11,200 --> 00:04:15,840
+I’m not sure that the current method of training LLMs with these RL environments,
+
+52
+00:04:15,840 --> 00:04:20,480
+even RSI-targeted RL environments, would be able to discover that discontinuity.
+
+53
+00:04:21,280 --> 00:04:24,880
+If not, we’re probably going to hit this asymptotic curve.
+
+54
+00:04:25,600 --> 00:04:31,280
+But do you think the discontinuity will be harder than anything that’s come since 2012?
+
+55
+00:04:31,280 --> 00:04:35,200
+If we had the answer to that, we’d kind of have the ability to implement it.
+
+56
+00:04:35,200 --> 00:04:40,160
+But maybe we should distinguish between a discontinuity which adds to the current paradigm,
+
+57
+00:04:40,160 --> 00:04:43,840
+which is cumulative — there’s something beyond the RL that we have to discover,
+
+58
+00:04:43,840 --> 00:04:49,840
+and maybe they’re capable of connecting the dots in that straight line — or, again,
+
+59
+00:04:49,840 --> 00:04:52,880
+how far off the global optimum are we? Do we have to go back and throw out
+
+60
+00:04:53,760 --> 00:04:59,040
+gradient descent and neural nets in general? I don’t think, if you continue to scale up the
+
+61
+00:04:59,040 --> 00:05:02,240
+current paradigm, an LLM, no matter how many LLMs you’re running, is necessarily capable
+
+62
+00:05:02,240 --> 00:05:09,600
+of discovering that if it’s too far away. The only hope really is if deep learning just
+
+63
+00:05:09,600 --> 00:05:17,680
+can’t get us to an AI which can at least dominate human research and human development,
+
+64
+00:05:17,680 --> 00:05:20,800
+including the human ability to come up with new paradigms and so forth.
+
+65
+00:05:20,800 --> 00:05:26,240
+Or, I don't know, maybe humans would also never have discovered the next learning architecture.
+
+66
+00:05:26,240 --> 00:05:32,480
+But to the extent humans could have discovered it eventually… But it just seems like… If you
+
+67
+00:05:32,480 --> 00:05:36,480
+just look at the progress that’s happened since 2012 till now, and you just continue
+
+68
+00:05:36,480 --> 00:05:40,800
+that on —I know it’s just been powered by huge amounts of compute scaling and so forth—
+
+69
+00:05:42,480 --> 00:05:47,360
+it would be weird if it just didn’t get to the point where it could dominate humans, at least
+
+70
+00:05:47,360 --> 00:05:54,320
+in R&D, especially over the next few years. Ryan Greenblatt was on the podcast recently.
+
+71
+00:05:54,320 --> 00:05:55,280
+He made this point that I’d be curious to get your thoughts on.
+
+72
+00:05:55,280 --> 00:06:00,080
+You could imagine, as AIs get more and more capable, that they’re capable of making progress
+
+73
+00:06:00,080 --> 00:06:07,040
+on simulations which incentivize getting better at not only AI R&D, but at science generally.
+
+74
+00:06:07,040 --> 00:06:10,240
+This is a thing that all the labs are targeting and many startups are targeting.
+
+75
+00:06:10,240 --> 00:06:14,400
+Another intuition pump is if you look at the Elo score of chess bots since the ’80s.
+
+76
+00:06:14,400 --> 00:06:20,320
+There’s a very linear increase in Elo over time. But there’s this huge discontinuity as they cross
+
+77
+00:06:20,320 --> 00:06:25,920
+the human range, from human experts always winning against AIs to human experts never winning against
+
+78
+00:06:25,920 --> 00:06:31,920
+AIs, as this linear increase in Elo happens. I agree with your point that so far, AI
+
+79
+00:06:31,920 --> 00:06:36,480
+capabilities have not been that big of a deal in terms of their end economic impact in the world.
+
+80
+00:06:36,480 --> 00:06:39,680
+But that is because they’re slowly rising in Elo relative to humans.
+
+81
+00:06:40,480 --> 00:06:44,320
+I agree it would be very surprising. The only way for this to not happen is if,
+
+82
+00:06:44,320 --> 00:06:48,320
+as you said, it somehow asymptotes just before. Because we’re already pretty close, in my opinion,
+
+83
+00:06:48,320 --> 00:06:52,960
+to where we’ll start crossing the human Elo score. So we’ll need to asymptote before that.
+
+84
+00:06:53,520 --> 00:06:55,840
+That’s the only way — in this scenario you pose where somehow
+
+85
+00:06:55,840 --> 00:06:59,760
+we’re sitting here in 2035 and everything is normal — for this to happen, I think.
+
+86
+00:06:59,760 --> 00:07:03,040
+The only other way is there’s some dramatic regulation on AI.
+
+87
+00:07:03,040 --> 00:07:05,840
+This is what I see as the most likely way for this scenario to happen,
+
+88
+00:07:05,840 --> 00:07:10,080
+actually, rather than a technical thing. I think there’s different kinds of research.
+
+89
+00:07:10,080 --> 00:07:15,360
+There’s research in the autoresearch style where the objective is already specified very cleanly
+
+90
+00:07:15,360 --> 00:07:18,960
+and you’re optimizing that objective. I think everyone is picturing that if
+
+91
+00:07:18,960 --> 00:07:22,560
+we continue along this path of making pre-training loss go down and making our
+
+92
+00:07:22,560 --> 00:07:25,440
+environments have the reward on them go up, that’s going to lead to improvement.
+
+93
+00:07:25,440 --> 00:07:29,440
+But maybe what Ryan is talking about is this much more open-ended type of science which
+
+94
+00:07:29,440 --> 00:07:33,760
+is required for paradigm shifts, where we can’t specify the objective, and the AIs are definitely
+
+95
+00:07:33,760 --> 00:07:37,520
+not able to specify that objective either. We have to be really, really careful about how
+
+96
+00:07:37,520 --> 00:07:41,200
+we specify objectives for any of these things. Maybe your point is that the nature of the
+
+97
+00:07:41,200 --> 00:07:45,680
+breakthroughs that have happened since 2012 is that we have found… In 2012,
+
+98
+00:07:45,680 --> 00:07:49,120
+people weren’t saying… I’m assuming, I don’t know, you guys were there.
+
+99
+00:07:49,120 --> 00:07:51,040
+Or at least John, you were there. But I was not.
+
+100
+00:07:51,040 --> 00:07:55,520
+I was in primary school. Actually, John, I’m curious
+
+101
+00:07:55,520 --> 00:08:01,920
+for your wisdom of the ages, or wisdom of being in the trenches way back when.
+
+102
+00:08:01,920 --> 00:08:06,160
+Presumably, a big breakthrough was realizing that next token prediction is the… You wouldn’t
+
+103
+00:08:06,160 --> 00:08:12,880
+have thought that the nanoGPT speed run is the thing to be optimizing for in 2014.
+
+104
+00:08:12,880 --> 00:08:16,640
+But now that we have come to this new paradigm, you would think to do a speed run on that and
+
+105
+00:08:16,640 --> 00:08:20,960
+have AIs get really good at that. But maybe there’s a next inner loop
+
+106
+00:08:20,960 --> 00:08:25,760
+to optimize that the AIs wouldn’t anticipate. There’s an outer loop of revenue or something
+
+107
+00:08:25,760 --> 00:08:29,680
+that eventually should be strong, but it’s a very slow outer loop.
+
+108
+00:08:30,240 --> 00:08:39,840
+In fact, I remember in the early OpenAI days having the intuition that just minimizing log
+
+109
+00:08:39,840 --> 00:08:46,960
+loss wasn’t going to get you to intelligence. Because the important bits are accounting for
+
+110
+00:08:46,960 --> 00:08:52,160
+such a small fraction of the loss that it was going to be overwhelmed by noise.
+
+111
+00:08:52,160 --> 00:08:58,640
+So just training a language model on next token prediction wasn’t going to learn the
+
+112
+00:08:58,640 --> 00:09:02,880
+interesting things you want it to learn. We needed to craft better objectives that
+
+113
+00:09:02,880 --> 00:09:09,040
+would put more emphasis on the important things. You can make all sorts of arguments for this.
+
+114
+00:09:09,040 --> 00:09:17,120
+You could say, "Oh, humans probably don’t learn how to model everything in our environment.
+
+115
+00:09:18,720 --> 00:09:23,680
+Most people can’t create a photorealistic reproduction of
+
+116
+00:09:23,680 --> 00:09:30,800
+some kind of scene they’ve looked at. So we must need a better objective."
+
+117
+00:09:30,800 --> 00:09:35,120
+But then it turned out that it just worked anyway. As you were pointing out, the inner loop,
+
+118
+00:09:35,120 --> 00:09:39,680
+even in current AI research, of post-training benchmarks or whatever, doesn’t necessarily
+
+119
+00:09:39,680 --> 00:09:43,920
+translate into what users like. Oh, yeah. The whole field relies
+
+120
+00:09:43,920 --> 00:09:49,200
+a lot on generalization and it’s very hard to predict when you’re going to get generalization,
+
+121
+00:09:49,200 --> 00:09:52,640
+or when you’re going to get some kind of out-of-distribution generalization.
+
+122
+00:09:52,640 --> 00:09:55,680
+We know that if you train on the task you care about, you’re going to do better.
+
+123
+00:09:56,320 --> 00:10:06,640
+But the most important advances are often types of generalization that we have no right to expect.
+
+124
+00:10:06,640 --> 00:10:14,800
+For example, from just pre-training on this very naive next-token-prediction objective
+
+125
+00:10:14,800 --> 00:10:24,000
+to various tasks of interest that require understanding of the input in some deep way,
+
+126
+00:10:24,000 --> 00:10:31,920
+or learning some skill from pre-training that’s very rare and not heavily represented.
+
+127
+00:10:32,640 --> 00:10:38,320
+Then also generalization from these verifiable tasks to less verifiable ones,
+
+128
+00:10:38,320 --> 00:10:43,040
+this is also a type of generalization that there’s no reason a priori to expect.
+
+129
+00:10:44,480 --> 00:10:48,720
+This is an interesting question, because one intuition pump you could have for why you
+
+130
+00:10:48,720 --> 00:10:55,200
+would see some sort of singularity very rapidly — without even scaling up the inputs to AI progress
+
+131
+00:10:55,200 --> 00:11:02,400
+that are not just AI labor — is that before every single 7-figure experiment you run, you spend an
+
+132
+00:11:02,400 --> 00:11:08,240
+equivalent amount of compute on AI labor. So you just have automated versions of you
+
+133
+00:11:08,240 --> 00:11:15,200
+guys spending a century thinking about what is the optimal experiment to run, doing small-scale
+
+134
+00:11:15,200 --> 00:11:22,480
+ablations, developing literally a century’s worth of theory, going back even before deep learning.
+
+135
+00:11:23,200 --> 00:11:25,360
+Before you decide what experiment to run, you’re doing extremely
+
+136
+00:11:25,360 --> 00:11:28,800
+optimal setting up of the experiment. Then you do a century of thinking after the
+
+137
+00:11:28,800 --> 00:11:33,360
+experiment is over, where you’re analyzing what happened and what the next experiment to run is.
+
+138
+00:11:34,640 --> 00:11:39,280
+If you think hard enough, you probably could have expected some of these things beforehand.
+
+139
+00:11:40,560 --> 00:11:44,480
+There is probably some very clever way to do a small-scale experiment that’ll
+
+140
+00:11:44,480 --> 00:11:48,000
+let you build the theory that then will generalize to the large-scale experiment.
+
+141
+00:11:48,000 --> 00:11:52,240
+So I would expect that we’re nowhere near the ceiling of how well you can do research.
+
+142
+00:11:53,920 --> 00:12:03,360
+I would imagine a future where AI is doing a lot of analysis and theory building,
+
+143
+00:12:05,200 --> 00:12:08,800
+spending a comparable amount of compute to the amount that you’re spending on the experiments
+
+144
+00:12:08,800 --> 00:12:15,440
+themselves, doing various kinds of analysis and building a theory around what we’ve seen so far.
+
+145
+00:12:15,440 --> 00:12:19,280
+I think there are really concrete examples of this when the objective is well specified.
+
+146
+00:12:20,560 --> 00:12:24,160
+All thinking can do is update your posterior based on the bits
+
+147
+00:12:24,160 --> 00:12:28,880
+that you’ve gotten since you formed your prior. You can’t gain any new bits from just thinking.
+
+148
+00:12:28,880 --> 00:12:32,240
+But when the objective is well specified and there is this data sitting around,
+
+149
+00:12:32,240 --> 00:12:35,040
+I imagine there will be this big speed-up in the current paradigm we’re in.
+
+150
+00:12:35,040 --> 00:12:40,240
+A good example of this is if you got an AI to think about the Kaplan scaling laws.
+
+151
+00:12:40,880 --> 00:12:45,200
+An AI at this point would have noticed, "Oh, they’ve just taken these intermediate
+
+152
+00:12:45,200 --> 00:12:49,040
+checkpoints and didn’t account for the annealing, and so this is wrong."
+
+153
+00:12:49,040 --> 00:12:54,240
+That would have been caught years earlier. We would have cut off a year or two of
+
+154
+00:12:54,240 --> 00:12:59,680
+progress just from that observation from an AI. Again, once the objective is well specified, which
+
+155
+00:12:59,680 --> 00:13:04,160
+is lower pre-training loss or whatever, there are many, many good examples where if you just thought
+
+156
+00:13:04,160 --> 00:13:09,040
+about it a bit more, you would have been able to cut down significantly on things that you’ve done.
+
+157
+00:13:09,040 --> 00:13:13,280
+So muP, and how learning rate scales with model size, and realizing that
+
+158
+00:13:13,280 --> 00:13:18,720
+model width is important in that as well. I feel like you can really back out a lot of these
+
+159
+00:13:18,720 --> 00:13:23,040
+things and cut off a lot of low-hanging fruit. I would imagine a 10x speed-up if our thing is
+
+160
+00:13:23,040 --> 00:13:27,600
+just, "Maximize the objective we’re currently on." But I don’t see how that generalizes at all
+
+161
+00:13:27,600 --> 00:13:30,400
+to coming up with the right objective in the first place.
+
+162
+00:13:30,400 --> 00:13:33,440
+Just thinking doesn’t necessarily buy you the right objective in the first place.
+
+163
+00:13:33,440 --> 00:13:40,080
+I think this is really the key question for any kind of very rapid RSI from current AIs.
+
+164
+00:13:40,080 --> 00:13:43,040
+How well can AIs generalize to learning their own objectives?
+
+165
+00:13:43,040 --> 00:13:47,200
+To have any kind of self-propelling automated loop, we need the AI to propose objectives,
+
+166
+00:13:47,200 --> 00:13:50,720
+optimize them, figure that out, propose a new objective, and have this not go off
+
+167
+00:13:50,720 --> 00:13:55,120
+the rails at any point for a long, long time. To come back to Moravec’s paradox, there might
+
+168
+00:13:55,120 --> 00:14:01,200
+be a case of Moravec’s paradox where we think this kind of autonomy and being self-encapsulated — so
+
+169
+00:14:01,200 --> 00:14:04,960
+we can think of what we should do ourselves and then go do it and have this loop — is super
+
+170
+00:14:04,960 --> 00:14:07,520
+easy because we always do this. Obviously, evolution needs to
+
+171
+00:14:07,520 --> 00:14:10,720
+create creatures that can survive by themselves for long periods of time.
+
+172
+00:14:10,720 --> 00:14:14,000
+And this just might be something that for some reason is really hard for the AI, in the same
+
+173
+00:14:14,000 --> 00:14:19,040
+way that locomotion stuff is really hard but math is super easy despite being super hard for us.
+
+174
+00:14:19,040 --> 00:14:21,520
+But doesn’t the time horizon increasing suggest that that’s—
+
+175
+00:14:21,520 --> 00:14:26,480
+Yeah, exactly. This is another possibility, but I agree, there’s no obvious evidence for this.
+
+176
+00:14:26,480 --> 00:14:30,800
+In fact, the fact that our agents are now super persistent and it’s quite easy to
+
+177
+00:14:30,800 --> 00:14:35,280
+do this is kind of evidence against this. But this would potentially be one of the
+
+178
+00:14:35,280 --> 00:14:39,280
+reasons why we just don’t get this immediate takeoff, if this is hard.
+
+179
+00:14:39,280 --> 00:14:45,040
+If you look back from 2012 till now — or maybe from when you started doing
+
+180
+00:14:45,040 --> 00:14:53,600
+your research till now — what part of all the innovations that have happened since that time,
+
+181
+00:14:53,600 --> 00:14:58,960
+including purely engineering ones, including purely conceptual ones, seems like the thing
+
+182
+00:14:58,960 --> 00:15:05,360
+that would be the last thing humans would have to do before AI totally automates AI R&D?
+
+183
+00:15:05,360 --> 00:15:08,000
+Probably just iteratively asking the right questions.
+
+184
+00:15:08,000 --> 00:15:12,400
+If you can get the AI to do any experiment, you still need to decide what experiments to do.
+
+185
+00:15:12,400 --> 00:15:16,240
+Right now I think AIs are not very good at this compared to coding the experiment.
+
+186
+00:15:17,360 --> 00:15:20,240
+Whenever we talk about research, they propose a bunch of miscellaneous
+
+187
+00:15:20,240 --> 00:15:24,640
+things which are very, very tiny steps. Or even going from DeepMind’s approach of,
+
+188
+00:15:24,640 --> 00:15:30,000
+"We’re going to solve intelligence by learning to play games at a superhuman level," to one
+
+189
+00:15:30,000 --> 00:15:34,000
+random researcher like Radford being, "I’m going to try and just predict the
+
+190
+00:15:34,000 --> 00:15:40,480
+next token of a very wide swath of data"… Even once Radford had discovered that,
+
+191
+00:15:40,480 --> 00:15:43,360
+it took a while before people decided to scale it up, because we had to come up
+
+192
+00:15:43,360 --> 00:15:46,720
+with the idea of scaling laws and the fact that you could very reliably predict these things.
+
+193
+00:15:47,840 --> 00:15:55,520
+I would say that the last job for humans, or the role for humans that’ll last the longest,
+
+194
+00:15:55,520 --> 00:16:00,560
+is defining the objective and deciding what we actually want.
+
+195
+00:16:03,520 --> 00:16:12,000
+In that vein, something like deciding how the AI assistants should behave, or what it means
+
+196
+00:16:12,000 --> 00:16:17,600
+to be helpful, or what the objective is when we’re doing RL from human feedback, is one such thing.
+
+197
+00:16:19,120 --> 00:16:24,080
+Then later, defining constitutions and model specs is another one.
+
+198
+00:16:25,600 --> 00:16:29,600
+Even if the AIs can do all the technical work, we’ll still have to do a lot of that
+
+199
+00:16:29,600 --> 00:16:33,120
+and decide what we actually want. Alignment is the final job.
+
+200
+00:16:33,760 --> 00:16:38,960
+Alignment is sort of the answer. But alignment itself can be decomposed into
+
+201
+00:16:41,600 --> 00:16:45,760
+specification of the objective, or figuring out what the right objective should be, and then
+
+202
+00:16:47,360 --> 00:16:51,680
+actually achieving or optimizing the objective you’ve defined.
+
+203
+00:16:52,560 --> 00:16:56,080
+I think the first one is not going to go away anytime soon.
+
+204
+00:16:57,840 --> 00:17:04,640
+If I think about a post-training team and why you need a lot of people on the team,
+
+205
+00:17:05,360 --> 00:17:09,360
+it’s just because there are a lot of different areas where you have
+
+206
+00:17:09,360 --> 00:17:19,280
+to figure out how the model should behave. It would be very hard to automate the whole thing,
+
+207
+00:17:19,280 --> 00:17:24,320
+just because someone has to think about how the model should behave in this area.
+
+208
+00:17:24,320 --> 00:17:28,640
+Jane Street started using Antithesis to test its software in early 2025,
+
+209
+00:17:28,640 --> 00:17:32,320
+and the team was so impressed by the product that it decided to invest in the company.
+
+210
+00:17:32,320 --> 00:17:36,000
+I recently caught up with Ron Minsky, who co-leads Jane Street’s tech group,
+
+211
+00:17:36,000 --> 00:17:40,560
+to ask how Antithesis actually plugs in. The thing that I think is most impressive
+
+212
+00:17:40,560 --> 00:17:44,640
+about Antithesis is that we started using it on a team that was building
+
+213
+00:17:44,640 --> 00:17:50,160
+high-assurance software and being really careful. Nonetheless, it was able to shake out bugs that
+
+214
+00:17:50,160 --> 00:17:54,640
+were otherwise going to be really hard to find. That’s important both because it helps make
+
+215
+00:17:54,640 --> 00:17:59,600
+those systems more reliable and because it helps the teams that build them move faster.
+
+216
+00:17:59,600 --> 00:18:03,760
+This matters more and more as code production is increasingly automated.I think, in general,
+
+217
+00:18:03,760 --> 00:18:08,320
+as we’ve been using agents more and more, the key problem you run into is the verification
+
+218
+00:18:08,320 --> 00:18:12,480
+bottleneck: just the time it takes for people to look at code and figure out,
+
+219
+00:18:12,480 --> 00:18:16,240
+is that actually something you want to accept into your production software?
+
+220
+00:18:16,880 --> 00:18:19,680
+Tools that make testing better are just incredibly helpful there.
+
+221
+00:18:19,680 --> 00:18:23,680
+They ease the verification bottleneck and make it possible for you to get more stuff
+
+222
+00:18:23,680 --> 00:18:27,600
+done and move faster, because you can have more confidence that the code generated
+
+223
+00:18:27,600 --> 00:18:32,960
+by the agent isn’t introducing new problems. To see how Antithesis fits into your development
+
+224
+00:18:32,960 --> 00:18:43,200
+process, go to antithesis.com/dwarkesh. What is the story for why there isn’t huge
+
+225
+00:18:43,200 --> 00:18:45,920
+consolidation in model providers? There are just so many things
+
+226
+00:18:45,920 --> 00:18:51,920
+that point to centralization here. If you step back over the course of years,
+
+227
+00:18:51,920 --> 00:18:57,360
+is there something that is going to prevent that? I think distillation is the main thing that
+
+228
+00:18:57,360 --> 00:19:02,000
+fights against the centralizing force. Basically anything that can be learned
+
+229
+00:19:02,000 --> 00:19:09,200
+through RL can be distilled very easily, because it’s a small number of bits.
+
+230
+00:19:09,200 --> 00:19:11,680
+It’s something that you can learn from a small amount of data.
+
+231
+00:19:12,720 --> 00:19:19,440
+If you can get trajectories from the model that show a behavior, you can easily distill it.
+
+232
+00:19:20,800 --> 00:19:26,640
+I think distillation is one of the things that fights centralization.
+
+233
+00:19:29,840 --> 00:19:34,800
+There is also a possibility that there’ll be company-specific models, that it’ll be
+
+234
+00:19:34,800 --> 00:19:41,680
+possible to learn from deployment and have a company continually improving its own model.
+
+235
+00:19:42,960 --> 00:19:47,520
+Such a system could be provided by the current oligopoly of model providers
+
+236
+00:19:47,520 --> 00:19:54,240
+or some other currently smaller company. But I think that’ll change the game a bit.
+
+237
+00:19:54,240 --> 00:19:58,000
+I also want to point out that continual learning, honestly, doesn’t stop distillation.
+
+238
+00:19:58,000 --> 00:20:01,440
+Even if your model is improving every day, people could be distilling it every day.
+
+239
+00:20:02,000 --> 00:20:09,040
+The loops could just operate at the same pace. That makes sense. So copying model behavior…
+
+240
+00:20:10,080 --> 00:20:14,640
+I guess you need to know yourself what the right distribution to prompt is in order to
+
+241
+00:20:14,640 --> 00:20:19,120
+get the relevant model behavior? Oh, yeah. For just distilling
+
+242
+00:20:19,120 --> 00:20:23,360
+with supervised learning, the prompt distribution is extremely important.
+
+243
+00:20:23,360 --> 00:20:28,240
+It’s very non-trivial to distill a model, even if you have full access to it and have
+
+244
+00:20:28,240 --> 00:20:35,840
+the chain of thought and everything. It’s non-trivial to distill all of the
+
+245
+00:20:35,840 --> 00:20:40,320
+useful capabilities from it, because you need to prompt the model with something.
+
+246
+00:20:40,320 --> 00:20:47,200
+You need to prompt it with realistic prompts. You need to have a really wide
+
+247
+00:20:47,200 --> 00:20:52,560
+distribution of realistic prompts. One thing that’s been coming out recently is
+
+248
+00:20:54,080 --> 00:20:59,680
+that some of the Chinese companies are probably using these router services which are designed
+
+249
+00:20:59,680 --> 00:21:05,280
+to allow people in China to use the US frontier models, which would otherwise be blocked in China.
+
+250
+00:21:05,280 --> 00:21:09,440
+There are all these router or proxy services that allow people in China
+
+251
+00:21:09,440 --> 00:21:15,280
+to use these models, mostly for coding. And these router services are collecting
+
+252
+00:21:15,280 --> 00:21:20,400
+and selling some of the data. This is a very useful data set
+
+253
+00:21:20,400 --> 00:21:25,840
+for distillation because it gives you the perfect prompt distribution.
+
+254
+00:21:25,840 --> 00:21:28,080
+I think this is one of those things where AIs help a lot.
+
+255
+00:21:28,080 --> 00:21:31,760
+If you actually look at the frontier pipelines, or the Chinese models that
+
+256
+00:21:31,760 --> 00:21:36,880
+they’ve actually put in their papers, they get seed prompts from somewhere, which is some
+
+257
+00:21:36,880 --> 00:21:40,640
+combination of humans and this kind of data. Then they synthesize a vast coverage from
+
+258
+00:21:40,640 --> 00:21:43,920
+those seed prompts using their existing models or the other frontier models.
+
+259
+00:21:44,640 --> 00:21:48,960
+You can automate an awful lot of this prompt distribution gathering and environment creation.
+
+260
+00:21:49,520 --> 00:21:52,880
+Humans need to provide increasingly fewer bits as the models get better.
+
+261
+00:21:53,520 --> 00:22:01,360
+But it still seems you’re bottlenecked by having a service which has users going through it.
+
+262
+00:22:01,360 --> 00:22:04,320
+Not necessarily. That’s obviously very helpful, but theoretically,
+
+263
+00:22:04,320 --> 00:22:10,640
+you can just think about what users want. But the whole point is that the user says,
+
+264
+00:22:10,640 --> 00:22:13,040
+"Make me an application like this. Oh, that didn’t work. I actually want
+
+265
+00:22:13,040 --> 00:22:15,120
+you to make this new feature. But actually,
+
+266
+00:22:15,120 --> 00:22:19,040
+let’s step back and do this other thing." Capturing that whole trace is the thing.
+
+267
+00:22:19,040 --> 00:22:23,440
+Or to the extent you could have done that anyway, then you just have RSI.
+
+268
+00:22:24,880 --> 00:22:28,480
+Ultimately, if you have this fully automated loop, that is basically RSI.
+
+269
+00:22:28,480 --> 00:22:30,480
+The AI is deciding the data, it’s deciding the training.
+
+270
+00:22:30,480 --> 00:22:34,480
+That is the loop. But it depends how much human information you need.
+
+271
+00:22:34,480 --> 00:22:36,640
+At some point, if you’re just like, "I want traces that look
+
+272
+00:22:36,640 --> 00:22:39,520
+like this," you prompt that to the model. The model will be able to come up with a
+
+273
+00:22:39,520 --> 00:22:41,200
+pretty good approximation. But what if you want to do,
+
+274
+00:22:41,200 --> 00:22:47,280
+"Make me a really good politician," and then it has to anticipate de novo how a discussion in the
+
+275
+00:22:47,280 --> 00:22:51,154
+Senate halls would go or something? I just feel like there are going
+
+276
+00:22:51,154 --> 00:22:52,480
+to be a lot of things which are— Ironically, this is actually easier for
+
+277
+00:22:52,480 --> 00:22:55,440
+the distillers than the frontier labs. The distiller’s just like,
+
+278
+00:22:55,440 --> 00:22:57,680
+"I want a good politician." They go to the frontier model.
+
+279
+00:22:57,680 --> 00:23:01,040
+The frontier model already knows how to be a good politician, so it just generates those traces.
+
+280
+00:23:01,040 --> 00:23:03,760
+Whereas if you actually want to build the first model that does this,
+
+281
+00:23:03,760 --> 00:23:08,400
+you have to actually somehow get data on what politicians do every day and build that.
+
+282
+00:23:08,400 --> 00:23:11,510
+It’s actually much easier to say, "I want something like this," and then get the AI to
+
+283
+00:23:11,510 --> 00:23:15,519
+produce a billion variations, than to actually create the thing like this to begin with.
+
+284
+00:23:15,519 --> 00:23:20,631
+I think you can actually make a really concrete prediction based off this observation
+
+285
+00:23:20,631 --> 00:23:25,120
+that the Chinese labs have this router data. The thing that started this originally was I
+
+286
+00:23:25,120 --> 00:23:32,000
+was saying, "Isn’t it weird how Sonnet 5 and Opus 5 are almost objectively worse models
+
+287
+00:23:32,000 --> 00:23:37,440
+than GLM-5.3 and Kimi K3, even though they’ve had access to not only distillation but logit
+
+288
+00:23:37,440 --> 00:23:40,800
+distillation from Mythos?" The counter was that the
+
+289
+00:23:40,800 --> 00:23:45,360
+prompt distribution really, really matters. You need to see what users are doing so that you
+
+290
+00:23:45,360 --> 00:23:50,080
+can distill these behaviors and things in. I think the prediction from this is that the
+
+291
+00:23:50,080 --> 00:23:55,280
+frontier labs don’t necessarily have much of an advantage, if at all, in RL environments now.
+
+292
+00:23:56,000 --> 00:24:01,280
+Yes, user distribution matters for general behavior and so on, but the best measure
+
+293
+00:24:01,280 --> 00:24:05,360
+of a capability is the very, very hard RL environments you’ve made at the frontier.
+
+294
+00:24:05,920 --> 00:24:08,480
+If you have access to those RL environments as Anthropic,
+
+295
+00:24:08,480 --> 00:24:13,200
+and you have access to logit distillation, and you’ve still made a worse model, then maybe—
+
+296
+00:24:13,200 --> 00:24:15,760
+Then real-world deployment matters more than the environment.
+
+297
+00:24:15,760 --> 00:24:20,560
+That’s really interesting. But they had to incentivize those capabilities in the
+
+298
+00:24:20,560 --> 00:24:26,480
+first place in Fable, or the frontier model. So it’s weird that they can’t incentivize them
+
+299
+00:24:26,480 --> 00:24:32,800
+again with a smaller model or something. Maybe we’re just in this weird uncanny
+
+300
+00:24:32,800 --> 00:24:38,640
+valley where trying to copy that frontier model too much, the student-teacher gap,
+
+301
+00:24:38,640 --> 00:24:42,160
+whatever it is, is just too large. People have made this point with Opus.
+
+302
+00:24:42,960 --> 00:24:47,600
+The difference between Opus 4.6 and Opus 5 is that Opus 5 really feels like it’s
+
+303
+00:24:47,600 --> 00:24:50,640
+got this AI-as-a-judge checking every possible thing it’s done.
+
+304
+00:24:51,280 --> 00:24:54,080
+That’s why it uses so many tokens. It tries to think about all these things,
+
+305
+00:24:54,080 --> 00:24:58,560
+but it doesn’t necessarily have the big model smell of Fable to know when to stop doing that,
+
+306
+00:24:58,560 --> 00:25:02,000
+or when’s a good path to go down. The reach exceeds the grasp.
+
+307
+00:25:02,720 --> 00:25:09,120
+I would offer a slightly different hypothesis. I would say there are a couple of different axes
+
+308
+00:25:09,120 --> 00:25:13,600
+for the environments you can create. One of them is difficulty
+
+309
+00:25:13,600 --> 00:25:19,600
+and the other is realism. It’s comparatively easy to create a
+
+310
+00:25:19,600 --> 00:25:29,440
+lot of difficult environments that involve doing a much more complicated task or doing something that
+
+311
+00:25:29,440 --> 00:25:33,680
+requires a lot more cleverness. You could say this is the
+
+312
+00:25:33,680 --> 00:25:38,480
+benchmaxxing distribution, because a lot of the most prominent benchmarks just involve doing some
+
+313
+00:25:38,480 --> 00:25:45,280
+very hard puzzle-like task that’s easy to verify. Then there’s the realism axis, where you want the
+
+314
+00:25:45,280 --> 00:25:49,760
+model to be good in the realistic coding agent setting where there’s multiple back-and-forths
+
+315
+00:25:49,760 --> 00:26:01,280
+with the human and there’s multiple objectives. The labs who are crafting the model behavior for
+
+316
+00:26:01,280 --> 00:26:05,600
+the first time need to push in both directions. To get good model behavior, you need to really
+
+317
+00:26:05,600 --> 00:26:11,600
+push on the realism axis and have rubrics or some kind of human feedback that’s informing
+
+318
+00:26:12,640 --> 00:26:18,960
+the reward function you use there. But if you try to do distillation naively,
+
+319
+00:26:18,960 --> 00:26:23,280
+you end up just matching the teacher on the benchmaxxing distribution.
+
+320
+00:26:24,960 --> 00:26:30,080
+If you don’t have enough of the environments that really exercise the capabilities in these
+
+321
+00:26:30,640 --> 00:26:36,160
+trickier realistic settings, then you’re not going to get those into your student model.
+
+322
+00:26:36,160 --> 00:26:41,120
+I think maybe one thing that’s happening is the big models generalize better from the
+
+323
+00:26:42,480 --> 00:26:52,480
+tricky narrow tasks to these more realistic tasks. If you have a really good realistic prompt
+
+324
+00:26:52,480 --> 00:26:56,400
+distribution for distillation, you can match the big model really well.
+
+325
+00:26:56,400 --> 00:27:03,280
+But if you only have this distribution of easily verifiable tasks, then you can match
+
+326
+00:27:03,280 --> 00:27:09,680
+the big model on all the benchmarks, but you do worse on this broader distribution.
+
+327
+00:27:10,960 --> 00:27:17,760
+That might even explain something about the smaller Anthropic models, like Sonnet 5,
+
+328
+00:27:17,760 --> 00:27:22,080
+though it’s hard to predict exactly what they’re doing to post-train those models.
+
+329
+00:27:22,080 --> 00:27:28,480
+It could also be that they’re always changing their post-training stack, and they just got
+
+330
+00:27:28,480 --> 00:27:37,200
+a few things wrong in some of these models. I don’t know… they turned something up too
+
+331
+00:27:37,200 --> 00:27:39,920
+high and created some quirks that people really don’t like.
+
+332
+00:27:39,920 --> 00:27:44,640
+It’s really easy to screw up post-training in some way that doesn’t show up in benchmarks.
+
+333
+00:27:45,280 --> 00:27:50,000
+Just one other very basic point is that the frontier AI labs buy
+
+334
+00:27:50,000 --> 00:27:52,960
+all their data from big data companies. The Chinese can also just buy the same
+
+335
+00:27:52,960 --> 00:27:54,560
+data from data companies. And they are, right?
+
+336
+00:27:54,560 --> 00:27:57,520
+And they are. Exactly. There’s a lot of people being annoyed about this,
+
+337
+00:27:57,520 --> 00:28:02,080
+but if they have exactly the same data and they can buy that, they can also distill.
+
+338
+00:28:02,080 --> 00:28:11,200
+It means it’s quite easy to keep up, really. The other question I had is how the first
+
+339
+00:28:11,200 --> 00:28:15,360
+models that are capable of automating AI R&D will actually be trained.
+
+340
+00:28:15,360 --> 00:28:19,760
+There’s a toy version, which is this thing that Ryan was talking about.
+
+341
+00:28:19,760 --> 00:28:26,160
+You just have GPT-8 try to build GPT-3 size models that are really good at inner loop
+
+342
+00:28:26,160 --> 00:28:32,400
+type challenges: beating video games that require continual learning, or just getting to a certain
+
+343
+00:28:32,400 --> 00:28:36,640
+loss with the least amount of compute, et cetera. But John, I think you had an interesting point
+
+344
+00:28:36,640 --> 00:28:39,760
+that maybe that’s not the way it actually will happen in practice.
+
+345
+00:28:39,760 --> 00:28:44,240
+So I’m curious, by the point at which you have AIs that are actually capable of automating AI R&D,
+
+346
+00:28:44,240 --> 00:28:47,680
+how are they probably trained? We’ll probably do some combination
+
+347
+00:28:47,680 --> 00:28:52,720
+of learning from human feedback to absorb the researchers’ taste,
+
+348
+00:28:52,720 --> 00:28:59,600
+and just creating a lot of practice environments which involve doing multi-step research projects.
+
+349
+00:29:03,360 --> 00:29:06,560
+People will in practice do some combination of those two things and,
+
+350
+00:29:08,000 --> 00:29:13,520
+each iteration, patch whatever seems to be most broken in the last iteration.
+
+351
+00:29:14,960 --> 00:29:22,240
+Researchers will be using the AIs a lot and will notice that they have some consistent weaknesses.
+
+352
+00:29:23,440 --> 00:29:28,720
+Those things will either be patched by collecting human feedback or creating environments.
+
+353
+00:29:29,840 --> 00:29:33,120
+Maybe a useful way to think about this is how much of the lineage we
+
+354
+00:29:33,120 --> 00:29:38,880
+roll back and then let self-play from there. In the limit, you’re picturing just giving
+
+355
+00:29:38,880 --> 00:29:44,800
+them a GPU and maybe neural nets or something and saying, "Okay, figure out how to train
+
+356
+00:29:44,800 --> 00:29:49,600
+a model to do these particular tasks." The way it currently works is we go up
+
+357
+00:29:49,600 --> 00:29:54,320
+to the very edge of the lineage and say, "Okay, here are the bugs Anthropic has found in their
+
+358
+00:29:54,320 --> 00:29:56,400
+training stack in the last few months. We’ll turn those into environments."
+
+359
+00:29:56,960 --> 00:29:59,440
+You need to train and get better on the frontier.
+
+360
+00:29:59,440 --> 00:30:01,840
+So you obviously lock in all the previous history of the lineage.
+
+361
+00:30:01,840 --> 00:30:06,720
+But you could imagine a world in which you roll back to before GRPO or something.
+
+362
+00:30:06,720 --> 00:30:12,640
+Then you have environments which try to get it to discover the best form to RL models on, and
+
+363
+00:30:12,640 --> 00:30:16,800
+then maybe you roll further and further back… But I think we will still be so compute bottlenecked
+
+364
+00:30:16,800 --> 00:30:21,360
+that people will just keep staying at the frontier and essentially diffing the bugs and whatever
+
+365
+00:30:21,360 --> 00:30:24,560
+improvements they found since the last model version, turning those into training environments.
+
+366
+00:30:24,560 --> 00:30:29,520
+Which is also really good for having non-stale, new data between model generations.
+
+367
+00:30:30,320 --> 00:30:35,680
+Again, this is basically continual learning within the AI lab, of distilling the last three months of
+
+368
+00:30:35,680 --> 00:30:41,680
+AI research progress through environments and RLHF-type stuff back into the model itself.
+
+369
+00:30:41,680 --> 00:30:46,480
+And it is distilling. That’s maybe why some of us feel like it’s asymptotic.
+
+370
+00:30:46,480 --> 00:30:50,240
+You’re always just trying to get the last three months of progress.
+
+371
+00:30:50,240 --> 00:30:54,480
+That progress is being contributed to by AIs, of course, but it also still has humans in the loop.
+
+372
+00:30:54,480 --> 00:30:58,480
+It feels like you’re just constantly inching closer and closer to what the human researchers
+
+373
+00:30:58,480 --> 00:31:01,680
+are finding and capable of doing. The one thing I will say, though,
+
+374
+00:31:01,680 --> 00:31:04,800
+is obviously if you’re just distilling on trajectories, you can never go above it.
+
+375
+00:31:04,800 --> 00:31:07,840
+But environments can go quite a far way above what a human can do.
+
+376
+00:31:07,840 --> 00:31:10,720
+It’s very easy to design an environment that no human can solve, but the AI can
+
+377
+00:31:10,720 --> 00:31:14,080
+obviously still try and solve it. That would be the path to go ahead
+
+378
+00:31:14,080 --> 00:31:18,400
+of just what the human AI research is. Do you have an example in terms of RSI,
+
+379
+00:31:18,400 --> 00:31:21,200
+of what kind of training set? Nanochat speedrun, but doing it
+
+380
+00:31:21,200 --> 00:31:24,880
+even faster than a human speedrunner. I feel like in AI research especially,
+
+381
+00:31:24,880 --> 00:31:29,360
+it’s very easy to define goals. You could say the loss needs to be 1.3 or
+
+382
+00:31:29,360 --> 00:31:34,160
+something, and no human can get that now. But that’s an extremely measurable,
+
+383
+00:31:34,160 --> 00:31:37,120
+verifiable task. If the AI gets that, then great.
+
+384
+00:31:37,120 --> 00:31:41,360
+Or I don’t know, building a 100 million parameter model that beats Minecraft.
+
+385
+00:31:41,360 --> 00:31:45,680
+That’s maybe too easy, but beats a much more complicated game or something.
+
+386
+00:31:45,680 --> 00:31:48,880
+Isn’t it crazy that 100 million parameter models beat Minecraft?
+
+387
+00:31:48,880 --> 00:31:52,400
+We’re calling that too easy? Imagine if you said that five years ago.
+
+388
+00:31:52,400 --> 00:31:56,000
+I would say a lot of research is not exactly like that, though,
+
+389
+00:31:56,000 --> 00:32:01,760
+where it’s hill climbing on a well-defined goal. It’s more like, here’s an intuition we have about
+
+390
+00:32:02,400 --> 00:32:07,200
+some way models should be better. We also have some idea for an algorithm
+
+391
+00:32:07,200 --> 00:32:15,040
+that seems to go a little bit in this direction. So let’s come up with a task that is designed
+
+392
+00:32:15,040 --> 00:32:22,160
+to show signs of life on this approach, and see if we get those signs of life.
+
+393
+00:32:22,160 --> 00:32:26,080
+If we do, we can make successively more realistic versions of the task.
+
+394
+00:32:26,080 --> 00:32:35,440
+It’s a lot more guided by intuition. The inner loop is to test for that
+
+395
+00:32:35,440 --> 00:32:40,240
+intuition rather than the test itself leading to the insight.
+
+396
+00:32:40,240 --> 00:32:45,120
+Right. You’re not directly optimizing for the eventual objective you care
+
+397
+00:32:45,120 --> 00:32:54,000
+about or the practical production objective. You’re relaxing your objective a little bit.
+
+398
+00:32:54,000 --> 00:32:59,440
+You’re saying, "Let’s relax on the realism axis a little bit and find some methods that actually
+
+399
+00:32:59,440 --> 00:33:04,400
+work, and then try to get back to realism later after the method matures a little bit."
+
+400
+00:33:05,200 --> 00:33:13,760
+There’s also research that’s more oriented towards explaining things and developing a theory.
+
+401
+00:33:15,680 --> 00:33:20,800
+Often we don’t have mathematical theories in machine learning that are that predictive.
+
+402
+00:33:20,800 --> 00:33:26,480
+But we have a lot of more informal theories for what’s going on.
+
+403
+00:33:27,120 --> 00:33:30,480
+Presumably the models will be trained on some combination of all of these tasks.
+
+404
+00:33:30,480 --> 00:33:34,960
+Some will be very easily verifiable, some will be LLM-as-a-judge or just ask the human,
+
+405
+00:33:34,960 --> 00:33:39,520
+"Does this look reasonable?" The hope would be that these would
+
+406
+00:33:39,520 --> 00:33:43,200
+all generalize to these much harder, more vague, fuzzy kinds of tasks.
+
+407
+00:33:43,200 --> 00:33:45,680
+It probably will to some extent. Whether it generalizes enough that
+
+408
+00:33:46,640 --> 00:33:50,560
+the loop can become self-sealing without humans being in the loop at all is unclear.
+
+409
+00:33:51,760 --> 00:33:55,360
+Maybe taking a step back. Here’s what it seems to me
+
+410
+00:33:55,360 --> 00:34:00,800
+the plan for AI research going forward is. You tell me if you think it’s going to work
+
+411
+00:34:00,800 --> 00:34:08,080
+or if you agree with this characterization. The bet is that we will scale up RLVR training
+
+412
+00:34:08,080 --> 00:34:13,360
+across millions of diverse environments, across hundreds of different kinds of domains.
+
+413
+00:34:14,000 --> 00:34:19,440
+What will emerge at the other end is an agent which has learned these basic skills — or less
+
+414
+00:34:19,440 --> 00:34:26,240
+than basic skills — around being persistent, being able to triage information and context,
+
+415
+00:34:26,240 --> 00:34:30,640
+eventually having end-to-end optimization of working with other agents and things like that.
+
+416
+00:34:31,200 --> 00:34:36,560
+Such an agent will be very sample efficient within the context —you've done research on how you
+
+417
+00:34:36,560 --> 00:34:40,640
+scale up in-context learning to make it arbitrarily long, but you keep scaling it up.
+
+418
+00:34:40,640 --> 00:34:45,840
+And what comes out the other end will be something that basically functions like a drop-in remote
+
+419
+00:34:45,840 --> 00:34:49,760
+worker over the course of a week or a month. First of all, do you agree that that is
+
+420
+00:34:49,760 --> 00:34:53,520
+the bet the labs are making? And second, is that enough?
+
+421
+00:34:53,520 --> 00:34:58,240
+Basically learning how to learn within these simulacra within a data center,
+
+422
+00:34:58,240 --> 00:35:02,400
+and then getting deployed into the real world, but not actually learning from real-world deployment…
+
+423
+00:35:02,400 --> 00:35:07,520
+only learning these meta skills from the simulated environments in the data center.
+
+424
+00:35:08,080 --> 00:35:13,120
+I think it’s now hard to separate out how much of the labs’ effort is going
+
+425
+00:35:13,120 --> 00:35:17,520
+towards direct RSI versus making generally intelligent models that they can continue
+
+426
+00:35:17,520 --> 00:35:20,560
+to deploy to collect revenue to fund the next big training run.
+
+427
+00:35:20,560 --> 00:35:30,640
+For the latter, yes, that’s probably just the bet they’re making.
+
+428
+00:35:30,640 --> 00:35:32,400
+It’s very clear, the pattern of where these environments are going over the last few years.
+
+429
+00:35:32,400 --> 00:35:34,560
+Anthropic’s lineage of environments is a very clear example of this.
+
+430
+00:35:35,200 --> 00:35:38,880
+First, we just focus on coding and we’re going to get really, really good at that.
+
+431
+00:35:38,880 --> 00:35:42,560
+Then, from the task horizon that we’ve got from coding — which is probably the
+
+432
+00:35:42,560 --> 00:35:46,160
+lowest-hanging fruit in terms of data available on the internet to create environments, and
+
+433
+00:35:46,160 --> 00:35:50,080
+their own internal stuff that they can turn into environments — then we’re going to generalize.
+
+434
+00:35:50,080 --> 00:35:54,400
+We’re going to go up to finance next, and literally just so much Excel data and all
+
+435
+00:35:54,400 --> 00:35:58,640
+that sort of stuff in the RL training. Then it’s PowerPoints. It’s this long
+
+436
+00:35:58,640 --> 00:36:02,160
+tail of the working economy. That seemed to work really well.
+
+437
+00:36:02,160 --> 00:36:05,200
+A lot of the other labs, even the open source labs, have now realized
+
+438
+00:36:05,200 --> 00:36:07,920
+that that was the correct bet to make. But what is the implication from that?
+
+439
+00:36:07,920 --> 00:36:12,160
+When I had Dario on the podcast, the thing I asked him was, if you truly expect models which
+
+440
+00:36:12,160 --> 00:36:18,560
+will be human-like in their ability to learn on the job, why would you try to bake in all these
+
+441
+00:36:18,560 --> 00:36:22,080
+skills of working with PowerPoint or something? Wouldn’t you just expect the model to be able
+
+442
+00:36:22,080 --> 00:36:26,240
+to pick that up while it’s deployed? There’s multiple different explanations.
+
+443
+00:36:26,240 --> 00:36:31,120
+One is just that we expect models to get there soon, but they’re not there yet, so why not
+
+444
+00:36:31,120 --> 00:36:38,160
+amortize these skills into the model training? Another is that we’re not concentrated on making
+
+445
+00:36:38,160 --> 00:36:42,960
+it really good at widely deployed work. We just want it really good at RSI.
+
+446
+00:36:43,760 --> 00:36:48,400
+This is just a way for us to get revenue so that we can pour it back into a model that is actually
+
+447
+00:36:48,400 --> 00:36:52,640
+really good at doing RSI development. Then once the singularity happens,
+
+448
+00:36:52,640 --> 00:36:56,080
+the thing that comes out the other end will be really good at all the things which seem like
+
+449
+00:36:56,080 --> 00:36:59,520
+bottlenecks to the current generation of models. John, I don’t know if you have takes on
+
+450
+00:37:00,720 --> 00:37:06,160
+how one should construe why there is so much task-specific knowledge in these models if the
+
+451
+00:37:06,160 --> 00:37:10,480
+path is this kind of generalization. If the models were good enough at
+
+452
+00:37:10,480 --> 00:37:15,440
+learning in context, then in theory, you wouldn’t need to train them on finance.
+
+453
+00:37:15,440 --> 00:37:22,880
+They would just be able to read all the books on the fly and figure out how to do everything
+
+454
+00:37:22,880 --> 00:37:29,360
+in the appropriate jurisdiction. You could argue that you need to do
+
+455
+00:37:29,360 --> 00:37:34,240
+a lot of this domain-specific training just to make them more efficient.
+
+456
+00:37:35,360 --> 00:37:40,240
+Even if they were smart enough to figure this out on the fly, you still might want to do a bunch of
+
+457
+00:37:40,240 --> 00:37:47,760
+RL and bake all these intuitions into the weights, so the model would be more efficient at runtime.
+
+458
+00:37:49,040 --> 00:37:55,040
+In practice, it does seem like model providers are going domain by domain and trying to strengthen
+
+459
+00:37:55,040 --> 00:37:59,680
+the models in the highest value domains. I’d say that that’s one of the answers to
+
+460
+00:37:59,680 --> 00:38:04,880
+why the models have gotten so much better. It’s just because the model providers have
+
+461
+00:38:04,880 --> 00:38:10,720
+covered a lot of the high-value domains and the most common types of skills.
+
+462
+00:38:10,720 --> 00:38:14,080
+Another thing is just that it’s not that expensive to do both at the same time.
+
+463
+00:38:14,640 --> 00:38:18,560
+The models are massive. They can easily afford, in terms of their parameters, to learn everything.
+
+464
+00:38:18,560 --> 00:38:22,480
+There is likely some transfer. Even if finance is not specific,
+
+465
+00:38:22,480 --> 00:38:26,640
+the information is important for RSI. Just the general meta-learning of how to figure
+
+466
+00:38:26,640 --> 00:38:31,440
+out what’s important, how to have taste, how to do long-horizon work is potentially generalizable.
+
+467
+00:38:31,440 --> 00:38:34,560
+There’s not that much RSI data in the world as well.
+
+468
+00:38:34,560 --> 00:38:36,960
+It’s hard to generate and requires a lot of effort.
+
+469
+00:38:36,960 --> 00:38:40,480
+So if you can amortize in this other data, you get some transfer from it.
+
+470
+00:38:40,480 --> 00:38:42,800
+You already have masses of compute and masses of parameter space,
+
+471
+00:38:42,800 --> 00:38:47,200
+so why not do that as well as, obviously, the direct commercial intent of selling a model?
+
+472
+00:38:48,320 --> 00:38:55,760
+I’ll add that there’s one question about whether this current paradigm of doing
+
+473
+00:38:55,760 --> 00:39:03,040
+sim-to-real will be the dominant one forever. You look at what the real-world tasks are like.
+
+474
+00:39:03,040 --> 00:39:06,320
+Then you try to create a bunch of environments that can be simulated
+
+475
+00:39:07,040 --> 00:39:14,160
+in the data center, and you can do RL on them. Obviously, this has been very successful.
+
+476
+00:39:14,160 --> 00:39:19,760
+But it has a lot of weaknesses, because a lot of things are just hard to simulate,
+
+477
+00:39:19,760 --> 00:39:25,440
+especially if they involve interacting with a bunch of humans in real time.
+
+478
+00:39:25,440 --> 00:39:31,200
+So there’s some question about whether sim-to-real will be the dominant framework forever.
+
+479
+00:39:31,200 --> 00:39:34,800
+I think sim-to-real has to be the dominant framework while sample efficiency is low,
+
+480
+00:39:34,800 --> 00:39:38,560
+because right now you need thousands and thousands of interactions with the humans.
+
+481
+00:39:38,560 --> 00:39:42,720
+No human is going to sit there and be in the loop of RL training.
+
+482
+00:39:42,720 --> 00:39:45,760
+So we have to simulate that now to get the samples you need.
+
+483
+00:39:45,760 --> 00:39:48,880
+But obviously, if sample efficiency improves a lot, you’d expect learning from
+
+484
+00:39:48,880 --> 00:39:53,760
+deployment to become a much bigger part of it. Though there are also other things you could do.
+
+485
+00:39:53,760 --> 00:39:59,360
+You can learn off-policy, so you can take all the traces, and even without resimulating everything,
+
+486
+00:39:59,360 --> 00:40:03,760
+you can potentially learn something from them. Jane Street just launched a new competition,
+
+487
+00:40:03,760 --> 00:40:08,240
+and it’s its most ambitious one yet: design a protocol-emulator ASIC.
+
+488
+00:40:08,240 --> 00:40:11,680
+Basically, if you have a chip you want to test, you can connect it to this ASIC,
+
+489
+00:40:11,680 --> 00:40:16,720
+and the ASIC will simulate realistic traffic. That way, you can see how the chip responds
+
+490
+00:40:16,720 --> 00:40:20,560
+without having to plug it into a live system. Jane Street is looking for flexible,
+
+491
+00:40:20,560 --> 00:40:23,920
+general-purpose designs, not single-protocol emulators.
+
+492
+00:40:23,920 --> 00:40:28,160
+When I was chatting with them, they suggested that I start by trying to implement what are apparently
+
+493
+00:40:28,160 --> 00:40:35,040
+three very common protocols: UART, SPI, and I²C. Jane Street also mentioned that they hope more
+
+494
+00:40:35,040 --> 00:40:41,040
+ambitious designs will tackle low-speed USB, Ethernet, and any other protocols that flex
+
+495
+00:40:41,040 --> 00:40:44,880
+your chip’s specific architecture. Importantly, your design should be
+
+496
+00:40:44,880 --> 00:40:49,280
+reprogrammable rather than smashing a bunch of specific protocols onto a chip.
+
+497
+00:40:49,280 --> 00:40:53,920
+If a new protocol comes out after your ASIC is taped out, your chip
+
+498
+00:40:53,920 --> 00:40:57,360
+still needs to be able to handle it. How exactly it does that is up to you.
+
+499
+00:40:57,360 --> 00:41:03,920
+But there is one hard constraint: your design must target an open-source 130-nanometer process node.
+
+500
+00:41:03,920 --> 00:41:07,280
+That’s because Jane Street will pay to tape out the most novel submissions
+
+501
+00:41:07,280 --> 00:41:12,320
+and send physical copies to the winners. The competition is open until January 18,
+
+502
+00:41:12,320 --> 00:41:19,920
+2027, and working in teams is highly encouraged. Go to janestreet.com/dwarkesh to download the
+
+503
+00:41:19,920 --> 00:41:23,600
+template code and get started. I want to ask more about this,
+
+504
+00:41:23,600 --> 00:41:30,000
+because it’s weird that you have 50% of compute that’s spent on inference that is
+
+505
+00:41:30,000 --> 00:41:35,440
+not directly helping the model become better. One of the key advantages you’d expect digital
+
+506
+00:41:35,440 --> 00:41:38,880
+minds to eventually have is that, unlike a human who gets to have 50
+
+507
+00:41:38,880 --> 00:41:43,600
+years of real-world experience, a model will get to experience, through all its instances,
+
+508
+00:41:45,520 --> 00:41:51,920
+millions of years of deployment across all kinds of economically relevant work in the economy.
+
+509
+00:41:51,920 --> 00:41:56,080
+Right now, that data is just not, in a meaningful sense, helping the model get better.
+
+510
+00:41:56,080 --> 00:42:00,320
+It seems so obvious that eventually models should be able to learn from this data.
+
+511
+00:42:00,320 --> 00:42:03,840
+Once they do, you would have something that almost feels like a widely deployed
+
+512
+00:42:03,840 --> 00:42:07,920
+intelligence explosion, because the model is assimilating so much information
+
+513
+00:42:07,920 --> 00:42:11,600
+across all these deployed instances. When do you expect this kind of hive-mind,
+
+514
+00:42:11,600 --> 00:42:15,440
+crazy shit to start happening? I think broadly, at a very basic level,
+
+515
+00:42:15,440 --> 00:42:18,640
+this is already happening… just in the next generation of models.
+
+516
+00:42:18,640 --> 00:42:21,920
+Right now, you can obviously take your deployment data and put this in the pre-train or the
+
+517
+00:42:21,920 --> 00:42:26,000
+mid-train of future models, especially if you do some kind of filtering or some kind of judgment
+
+518
+00:42:26,000 --> 00:42:30,160
+or annotation or synthesization of that. How much do you think that explains the
+
+519
+00:42:30,160 --> 00:42:33,200
+generation-over-generation improvement? I think it explains quite a bit.
+
+520
+00:42:35,360 --> 00:42:37,920
+I don’t know whether the labs do this, because theoretically, they claim not
+
+521
+00:42:37,920 --> 00:42:41,200
+to train on people’s data. But the Chinese 100% do.
+
+522
+00:42:41,200 --> 00:42:45,200
+They definitely get this advantage. This is basically what distillation is.
+
+523
+00:42:45,200 --> 00:42:50,000
+They take the models, they get some fraction of their deployment data by pinging the model,
+
+524
+00:42:50,000 --> 00:42:52,240
+and then they train their next generation of models on it.
+
+525
+00:42:52,240 --> 00:42:54,080
+They can certainly do it on their own models as well.
+
+526
+00:42:54,080 --> 00:42:56,560
+There’s no reason not to whatsoever. I completely agree with this.
+
+527
+00:42:56,560 --> 00:42:59,280
+If you zoom out far enough, this is definitely happening.
+
+528
+00:43:00,240 --> 00:43:06,400
+What we’re all picturing, the holy grail of continual learning, is this very organic,
+
+529
+00:43:06,400 --> 00:43:10,480
+live loop of an individual model getting an experience and live-updating on the
+
+530
+00:43:10,480 --> 00:43:13,200
+spot and learning from that. A lot of things break when you
+
+531
+00:43:13,200 --> 00:43:16,560
+zoom into that level of granularity. But the big labs are doing this.
+
+532
+00:43:17,200 --> 00:43:19,520
+The closed models are doing this. There are also early signs of life
+
+533
+00:43:19,520 --> 00:43:23,200
+of people using open-source models doing this at a much faster cadence.
+
+534
+00:43:24,240 --> 00:43:27,520
+A good example is probably Composer. Harvey’s doing the same thing with legal agents.
+
+535
+00:43:27,520 --> 00:43:38,000
+You have some sort of model, and you are getting very specific environments from the
+
+536
+00:43:38,000 --> 00:43:42,400
+data that you have for that particular task, and things that users are complaining about,
+
+537
+00:43:42,400 --> 00:43:46,880
+and all the feedback that you’re somehow extracting from your specific deployments.
+
+538
+00:43:46,880 --> 00:43:49,520
+A lot of these companies have the advantage over the big labs in that they
+
+539
+00:43:49,520 --> 00:43:52,720
+can use this data really, really well. Then they will create environments.
+
+540
+00:43:52,720 --> 00:43:57,040
+They will do a big post-train of Kimi K3. They will go deploy it.
+
+541
+00:43:57,040 --> 00:44:00,320
+They might do some online learning as well, like Composer did online…
+
+542
+00:44:00,320 --> 00:44:04,880
+basically REINFORCE for a long time. There’s still a human in the loop.
+
+543
+00:44:04,880 --> 00:44:07,120
+There’s still a human saying, "Okay, these are the signals we care about.
+
+544
+00:44:07,120 --> 00:44:09,680
+Here’s how we’re going to create environments from the data that we have."
+
+545
+00:44:09,680 --> 00:44:12,640
+It’s still a longer cadence than maybe the one that you’re thinking of,
+
+546
+00:44:12,640 --> 00:44:15,280
+but it really is happening. Eventually that loop will
+
+547
+00:44:15,280 --> 00:44:17,680
+become faster and faster. The Composer thing is interesting
+
+548
+00:44:17,680 --> 00:44:24,240
+because this is where, in Cursor, people press Tab or they don’t press Tab on the
+
+549
+00:44:24,240 --> 00:44:28,240
+next completion that the model suggests. Based on that, every single day, Composer
+
+550
+00:44:28,240 --> 00:44:31,520
+gets better at predicting the next— That was the old Tab model.
+
+551
+00:44:31,520 --> 00:44:35,920
+They actually did the same thing not just for the Tab model, but for the actual generative model.
+
+552
+00:44:35,920 --> 00:44:39,120
+Oh, I see. Interesting. It’s hard because when you do online
+
+553
+00:44:39,120 --> 00:44:42,560
+reinforcement learning, you don’t have groups. You just have one user saying one thing,
+
+554
+00:44:42,560 --> 00:44:47,040
+and then you get one rollout. So you have a big variance-reduction problem.
+
+555
+00:44:47,040 --> 00:44:53,600
+Cursor’s fuzzy answer to this was, "We have very good heuristics which are able to estimate how
+
+556
+00:44:53,600 --> 00:44:57,440
+much better than average this response was, or how much worse than average this response was."
+
+557
+00:44:57,440 --> 00:45:03,360
+Then they would do this big REINFORCE update. Their solution to whether it got worse or not
+
+558
+00:45:03,360 --> 00:45:07,040
+was that if it improved on CursorBench, they would deploy the new model every five hours.
+
+559
+00:45:07,040 --> 00:45:11,040
+If it didn’t, they would throw that version out. I think your biggest problem is actually
+
+560
+00:45:11,040 --> 00:45:14,000
+just not knowing what the reward function should be for natural data.
+
+561
+00:45:14,640 --> 00:45:21,520
+If you use some kind of superficial signal, like did they accept the edit,
+
+562
+00:45:22,560 --> 00:45:27,520
+that might get reward-hacked in some way. But isn’t this a bigger issue with the sim-to-real
+
+563
+00:45:27,520 --> 00:45:34,160
+thing, where the longer-horizon tasks get, the harder they are to simulate within a data center?
+
+564
+00:45:34,800 --> 00:45:42,080
+It seems to me that even in coding, we’re already getting to the point where there’s not some
+
+565
+00:45:42,080 --> 00:45:47,360
+year-long coding task that doesn’t eventually require you to talk to a client or interact
+
+566
+00:45:47,360 --> 00:45:51,840
+with the company or interact with users. If you think about the gamut of things we
+
+567
+00:45:51,840 --> 00:45:56,480
+would want AI to be capable of, eventually superintelligence should be able to run a
+
+568
+00:45:56,480 --> 00:46:00,160
+business, or start a new business and make it profitable, or have a profitable day trading
+
+569
+00:46:00,160 --> 00:46:03,600
+in the markets, or win a court case. These are all things which are very
+
+570
+00:46:03,600 --> 00:46:07,120
+hard to simulate in a data center. An inherent part of the learning
+
+571
+00:46:07,120 --> 00:46:11,840
+there is interacting with the real world. Maybe they learn how to get better at these
+
+572
+00:46:11,840 --> 00:46:16,480
+things from the transfer between sim-to-real. But alternatively, maybe you do need weight
+
+573
+00:46:16,480 --> 00:46:21,600
+updates from these kinds of interactions in order to get better at them.
+
+574
+00:46:21,600 --> 00:46:24,720
+If that is the case — if transfer isn’t strong enough and you do need weight
+
+575
+00:46:24,720 --> 00:46:30,000
+updates — then the fact that the models are quite sample-inefficient is maybe a deeper problem.
+
+576
+00:46:30,000 --> 00:46:34,960
+The reason I’m curious about this is that by default, I don’t see how
+
+577
+00:46:34,960 --> 00:46:39,520
+you don’t get some kind of crazy recursive self-improvement within the next 10 years.
+
+578
+00:46:39,520 --> 00:46:45,200
+But the one reason why that might not happen is that in terms of the sample efficiency of weight
+
+579
+00:46:45,200 --> 00:46:50,080
+updates, models just seem way far behind humans. They’re plausibly a millionfold behind humans in
+
+580
+00:46:50,080 --> 00:46:53,760
+terms of how much data a human sees from birth to adulthood versus how much a model
+
+581
+00:46:53,760 --> 00:47:02,480
+sees from cold start to finishing training. This is all to say, first of all, is there going
+
+582
+00:47:02,480 --> 00:47:05,920
+to be good transfer between simulations and the extremely long-horizon, really complicated real
+
+583
+00:47:05,920 --> 00:47:10,320
+shit that we want the AI to do in the real world? And if not, does that really mean that the
+
+584
+00:47:10,320 --> 00:47:13,920
+lack of sample efficiency in these models comes to bite us?
+
+585
+00:47:14,800 --> 00:47:18,240
+Maybe the way I’d break down the two types of tasks — the ones in which models get good
+
+586
+00:47:18,240 --> 00:47:22,240
+and the ones where models will still continue to struggle — is whether the task is cumulative,
+
+587
+00:47:22,240 --> 00:47:26,160
+or whether you have this non-stationary distribution where you have to keep
+
+588
+00:47:26,160 --> 00:47:31,760
+learning and relitigating a bunch of stuff. An example of a cumulative task might be RSI.
+
+589
+00:47:32,320 --> 00:47:36,800
+It’s theoretically possible to have a less-than-a-million-token Python file
+
+590
+00:47:36,800 --> 00:47:41,120
+which from scratch trains a model that is capable of recursive self-improvement.
+
+591
+00:47:41,680 --> 00:47:45,040
+Every discovery that you make is a line in the sand that you hold.
+
+592
+00:47:45,040 --> 00:47:49,120
+If it’s true that for RSI we don’t need to discover a new attention variant or whatever,
+
+593
+00:47:49,120 --> 00:47:52,480
+then once you’ve discovered attention, and once you’ve discovered mixture of experts,
+
+594
+00:47:52,480 --> 00:47:56,960
+and once you discover GRPO, you just add that to the training stack and that’s there.
+
+595
+00:47:56,960 --> 00:48:03,520
+A good example of this is 5.6 Sol training, 5.6 Terra, or whichever one OpenAI told us it trained.
+
+596
+00:48:03,520 --> 00:48:07,680
+It didn’t have to go back and discover attention. It basically would have called a bunch of
+
+597
+00:48:07,680 --> 00:48:11,600
+scripts, like pre-training.sh and post-training.sh, and just done that.
+
+598
+00:48:12,160 --> 00:48:16,080
+That’s an example of a cumulative task. I think the real world — and the reason
+
+599
+00:48:16,080 --> 00:48:20,560
+people are thinking so much about continual learning — is not really a cumulative task.
+
+600
+00:48:20,560 --> 00:48:25,120
+Imagine in a law firm, you have an agent acting as a legal associate.
+
+601
+00:48:25,120 --> 00:48:27,200
+That’s a very non-stationary distribution.
+
+602
+00:48:27,200 --> 00:48:30,400
+You have to be able to fit in your context all the relationships between
+
+603
+00:48:30,400 --> 00:48:33,680
+all the important people at that company, which are also changing all the time.
+
+604
+00:48:33,680 --> 00:48:38,960
+You have all these implicit ways about how things are done, where to find information, et cetera.
+
+605
+00:48:38,960 --> 00:48:43,280
+That’s not as clean an example of a cumulative task as RSI is.
+
+606
+00:48:43,920 --> 00:48:45,920
+I think there will be this breakdown between tasks.
+
+607
+00:48:45,920 --> 00:48:50,080
+But if the labs realize that — and they do believe that RSI is cumulative in the sense
+
+608
+00:48:50,080 --> 00:48:54,480
+that we don’t need to go back and discover some brand-new architecture or whatever — then maybe
+
+609
+00:48:54,480 --> 00:48:56,960
+more and more effort and compute gets focused on that versus the other tasks.
+
+610
+00:48:56,960 --> 00:49:01,760
+It’s so unfortunate that RSI happened to be easier than being a paralegal.
+
+611
+00:49:04,800 --> 00:49:12,080
+I would say today’s models are weaker than humans in a lot of different ways.
+
+612
+00:49:13,040 --> 00:49:16,960
+Some of them might have to do with sample efficiency in a certain regime.
+
+613
+00:49:19,200 --> 00:49:23,040
+In some regimes, models are very sample-efficient, like learning in context.
+
+614
+00:49:23,040 --> 00:49:27,360
+But then there might be some medium-length regime where they’re less sample-efficient,
+
+615
+00:49:27,360 --> 00:49:34,400
+because humans can do some kind of weight update more efficiently than models.
+
+616
+00:49:34,960 --> 00:49:41,120
+I think being less sample-efficient in certain regimes might be one of the sources of weakness.
+
+617
+00:49:41,120 --> 00:49:45,120
+But I think there are other sources of weakness that are completely different from that.
+
+618
+00:49:45,120 --> 00:49:52,400
+For example, having lower diversity of thought than humans, or being bad at
+
+619
+00:49:52,400 --> 00:49:58,080
+certain kinds of long-horizon judgments. I think a lot of what people call taste
+
+620
+00:49:58,080 --> 00:50:05,360
+is something about behavior that works in the long run, and that
+
+621
+00:50:05,360 --> 00:50:12,720
+people have realized works in the long run. Not everything, but some aspect of taste.
+
+622
+00:50:12,720 --> 00:50:16,400
+Especially for something like software engineering, I think a lot of taste is "What
+
+623
+00:50:16,400 --> 00:50:23,520
+are the systems that are going to be maintainable and work well in the long run of this project?"
+
+624
+00:50:25,200 --> 00:50:31,440
+There are a variety of weaknesses of models which limit RSI along with other things.
+
+625
+00:50:34,880 --> 00:50:37,520
+Some of them are related to sample efficiency, and some of them aren’t.
+
+626
+00:50:37,520 --> 00:50:42,720
+Maybe an interesting thought experiment is this. Let’s say you were able to give a model a context
+
+627
+00:50:42,720 --> 00:50:46,720
+window of a trillion tokens, or whatever you would have needed to fit in your
+
+628
+00:50:46,720 --> 00:50:51,920
+experience prior to, let’s say, RLHF. It’s got all that experience in the
+
+629
+00:50:51,920 --> 00:50:55,760
+context window, and it has the same sample efficiency and in-context learning ability
+
+630
+00:50:55,760 --> 00:50:59,840
+as it does at a million tokens. Do you think taste is then solved?
+
+631
+00:50:59,840 --> 00:51:02,000
+Would it be able to make the same judgments that you did?
+
+632
+00:51:02,000 --> 00:51:05,760
+Or is there something fundamentally missing, apart from just a longer context window with
+
+633
+00:51:05,760 --> 00:51:08,720
+the same sample efficiency? It would have to be trained
+
+634
+00:51:08,720 --> 00:51:15,840
+to learn from that context. Either it would have to be
+
+635
+00:51:16,480 --> 00:51:22,139
+trained to learn the right update to make from that context, or it would have to generalize.
+
+636
+00:51:22,139 --> 00:51:26,240
+So you don’t think you can just dump it all in, your whole life, your research experience?
+
+637
+00:51:26,240 --> 00:51:28,560
+You still need the data to train it on long context.
+
+638
+00:51:28,560 --> 00:51:31,760
+Even if you could theoretically get a trillion context, you would need a trillion lengths
+
+639
+00:51:31,760 --> 00:51:34,560
+of data to train it. Right now you have 10k context,
+
+640
+00:51:34,560 --> 00:51:37,200
+you can't just dump in a million. Yeah, I’m just asking if you had that.
+
+641
+00:51:37,200 --> 00:51:39,840
+In theory, I think, yes. This really just comes down to the
+
+642
+00:51:39,840 --> 00:51:44,640
+question of how meta-learnable taste is from shorter-horizon episodes.
+
+643
+00:51:44,640 --> 00:51:48,160
+I feel like there’s no obvious reason it’s super long, because humans somehow developed taste
+
+644
+00:51:48,160 --> 00:51:51,600
+without having many long episodes. We don’t live to be 10,000.
+
+645
+00:51:53,120 --> 00:51:57,600
+We develop pretty quickly. If you think about even a PhD, the difference between
+
+646
+00:51:57,600 --> 00:52:02,400
+a first-year PhD student and a final-year student or postdoc, that’s five years maybe.
+
+647
+00:52:02,400 --> 00:52:05,600
+They’ve only done maybe 10-30 research projects in total.
+
+648
+00:52:05,600 --> 00:52:10,960
+But somehow they develop taste quite quickly from a relatively short succession of small things.
+
+649
+00:52:10,960 --> 00:52:13,840
+Theoretically, it’s possible to develop it like that.
+
+650
+00:52:13,840 --> 00:52:18,080
+The AI obviously will have vastly more experience in which to develop taste, to meta-learn it.
+
+651
+00:52:18,080 --> 00:52:22,720
+Then the question is how well that generalizes to really long-horizon things, which I think is
+
+652
+00:52:22,720 --> 00:52:25,360
+really unsolved at this point. We don’t know.
+
+653
+00:52:25,360 --> 00:52:29,680
+Going back to this question, eventually there should be a regime where AIs are
+
+654
+00:52:29,680 --> 00:52:33,760
+learning a ton from each individual instance of deployment that they have.
+
+655
+00:52:33,760 --> 00:52:36,960
+Currently you could say there’s a fuzzy meta process
+
+656
+00:52:36,960 --> 00:52:43,520
+by which models do improve from deployment. But I feel like it’s a very weak feedback loop.
+
+657
+00:52:43,520 --> 00:52:48,320
+Do you see this on the horizon, where there’s this hive mind kind of learning that’s very rapid,
+
+658
+00:52:48,320 --> 00:52:55,680
+and if so, how exactly does it happen? I would say that whether we get a hive
+
+659
+00:52:55,680 --> 00:53:02,320
+mind that learns from all of its deployment experience is in a big part about incentives,
+
+660
+00:53:02,320 --> 00:53:07,600
+rather than being a technical question. Companies aren’t going to want to
+
+661
+00:53:08,160 --> 00:53:13,920
+have the model provider learn from all of their deployment, because that might just
+
+662
+00:53:13,920 --> 00:53:20,480
+reduce the advantage of their business. I think the economics of this will pressure,
+
+663
+00:53:20,480 --> 00:53:26,720
+not necessarily weight updates to one big common shared model, but modules that get subbed in.
+
+664
+00:53:26,720 --> 00:53:29,440
+A very obvious example of this is a LoRA, but it might be something else.
+
+665
+00:53:30,160 --> 00:53:34,640
+There’s been a lot of work to try and fit an arbitrary context length into a fixed size.
+
+666
+00:53:34,640 --> 00:53:39,280
+This is all the linear attention stuff. And cartridges, which are essentially
+
+667
+00:53:39,280 --> 00:53:43,680
+KV caches trained to be very, very compressed to fit in a lot of information.
+
+668
+00:53:43,680 --> 00:53:48,480
+That’s another example of something that companies may be willing to sign up for, if that gets
+
+669
+00:53:48,480 --> 00:53:51,840
+subbed into the model and it’s not actually changing the base underlying model itself.
+
+670
+00:53:53,120 --> 00:53:56,960
+There are many different versions of learning from your data in real time.
+
+671
+00:53:56,960 --> 00:54:00,560
+The latter ones are not really helping the big labs, because they are just these modules.
+
+672
+00:54:00,560 --> 00:54:06,080
+But I think the economic pressure will force the labs to go down that
+
+673
+00:54:06,080 --> 00:54:11,360
+path first before they can embark on this... Which economic pressure, though? I feel like
+
+674
+00:54:11,360 --> 00:54:14,960
+even if you have a bunch of cartridges or LoRAs or whatnot, you can still just
+
+675
+00:54:14,960 --> 00:54:19,200
+take all these traces and dump them into the pre-training of your next generation of models.
+
+676
+00:54:19,200 --> 00:54:23,120
+Yes. It may be a more indirect form of learning that the big labs are getting.
+
+677
+00:54:23,120 --> 00:54:26,640
+That’s obviously still really valuable to them. But I can’t imagine a world in which we start
+
+678
+00:54:26,640 --> 00:54:29,760
+off with, "We’re going to just directly train this one big
+
+679
+00:54:29,760 --> 00:54:33,280
+model on all the exact data that we’re getting." No, I think it will definitely go through stages,
+
+680
+00:54:33,280 --> 00:54:36,720
+because this is assuming there’s one discontinuous event where suddenly
+
+681
+00:54:36,720 --> 00:54:39,760
+we fix weight updates continuously. In practice, I think it’s much more
+
+682
+00:54:39,760 --> 00:54:43,200
+likely to be that the cartridges and stuff allow you to specialize in deployments.
+
+683
+00:54:43,200 --> 00:54:46,160
+Then you generate traces, you put that in your model, and three months later you come
+
+684
+00:54:46,160 --> 00:54:50,400
+out with a model which is better at this stuff. You specialize it again, you consolidate it again,
+
+685
+00:54:50,400 --> 00:54:52,800
+and then eventually we’ll just make this leap faster and faster.
+
+686
+00:54:52,800 --> 00:54:55,360
+Instead of releasing a model every three months, now it’s every week,
+
+687
+00:54:55,360 --> 00:54:58,800
+and then every day, and then every hour, at which point we’ve basically solved it.
+
+688
+00:54:59,360 --> 00:55:03,760
+I think this is a good point as well, because you asked how far off the current
+
+689
+00:55:03,760 --> 00:55:07,280
+paradigm we are from being able to do this. We’ve done a bit of research into this,
+
+690
+00:55:07,280 --> 00:55:11,280
+and people have done a lot of research. At a really large scale, when you wash
+
+691
+00:55:11,280 --> 00:55:14,800
+out enough noise and you have large enough batches, this outer-loop process
+
+692
+00:55:14,800 --> 00:55:18,000
+of putting data into mid-training and creating our own environments does work
+
+693
+00:55:18,000 --> 00:55:21,760
+in some sort of continual learning regime. But the problem is, when you zoom in close
+
+694
+00:55:21,760 --> 00:55:26,240
+enough at a micro level — I’ve got one model and I’m trying to update it again for a law
+
+695
+00:55:26,240 --> 00:55:30,960
+firm or something, and I’m trying to do that very continuously with a relatively small amount of
+
+696
+00:55:30,960 --> 00:55:38,560
+data — all the methods kind of break down a bit. If I SFT the model on just successful traces,
+
+697
+00:55:39,280 --> 00:55:44,480
+off-policy or on-policy, eventually in the very iterative regime, when you’re doing
+
+698
+00:55:44,480 --> 00:55:48,720
+hundreds of these micro-updates, you see catastrophic forgetting.
+
+699
+00:55:48,720 --> 00:55:53,040
+You see forgetting of previous information learned on top of the base model that was much earlier on,
+
+700
+00:55:53,040 --> 00:55:57,040
+and you see degradation of general capabilities.
+
+701
+00:55:58,320 --> 00:56:02,080
+On-policy distillation seems to push this horizon out a little bit, but it still
+
+702
+00:56:02,080 --> 00:56:09,120
+eventually succumbs to the same thing. RL is good at getting capabilities in,
+
+703
+00:56:09,120 --> 00:56:13,360
+but it’s not as good at getting knowledge in, this very explicit knowledge of, "Ah,
+
+704
+00:56:13,360 --> 00:56:17,440
+okay, this person does this at this law firm, and this is a very specific process we find."
+
+705
+00:56:17,440 --> 00:56:19,280
+You have to pour in a lot of compute to create the right
+
+706
+00:56:19,280 --> 00:56:23,600
+environments to get the knowledge in with RL. Do you think the fundamental issue here — why
+
+707
+00:56:23,600 --> 00:56:28,560
+you get worse at these other skills or there’s forgetting — is fundamentally an issue of capacity
+
+708
+00:56:28,560 --> 00:56:31,520
+or an issue of techniques? A little bit of both.
+
+709
+00:56:31,520 --> 00:56:37,680
+I think SFT and even on-policy distillation can be way too destructive.
+
+710
+00:56:38,720 --> 00:56:44,160
+The reason RL is so nice is because it changes a very, very small amount about the model.
+
+711
+00:56:44,160 --> 00:56:46,400
+There’s a lot of evidence for why this is the case.
+
+712
+00:56:47,040 --> 00:56:52,480
+It just tweaks it in this very, very small loss valley to get it into the right point.
+
+713
+00:56:53,040 --> 00:56:57,120
+But that also then limits what you can do with RL, how much you can actually change the model.
+
+714
+00:56:57,120 --> 00:57:00,000
+So you’re saying the reason this isn't a winner-take-all, potentially,
+
+715
+00:57:00,000 --> 00:57:03,840
+is that it is just very hard to distill that much information into the base model?
+
+716
+00:57:03,840 --> 00:57:06,480
+Without ruining something, in an iterative fashion.
+
+717
+00:57:06,480 --> 00:57:08,800
+It’s easy to distill it into a different base model.
+
+718
+00:57:08,800 --> 00:57:13,600
+This is where I think it’s mostly technique. It’s definitely not that there isn’t capacity.
+
+719
+00:57:13,600 --> 00:57:17,120
+If you had some model with all this data, and you take literally the same-size model and
+
+720
+00:57:17,120 --> 00:57:20,160
+pre-train it from scratch with all of the stuff in mid-training, it will be better.
+
+721
+00:57:20,160 --> 00:57:24,720
+I think that’s a lot of what’s happening today. There’s very much a bottleneck that stops us from
+
+722
+00:57:24,720 --> 00:57:28,000
+just keeping training the same model forever, versus just getting all the data from the old
+
+723
+00:57:28,000 --> 00:57:31,840
+model and training a new model from scratch. This is exactly as Charlie was saying:
+
+724
+00:57:31,840 --> 00:57:34,320
+some combination of plasticity and catastrophic forgetting.
+
+725
+00:57:35,520 --> 00:57:39,840
+If you just naively train on non-stationary data, because you’re adding new data as you go,
+
+726
+00:57:39,840 --> 00:57:43,520
+this is messing with the data distribution, so the old stuff is just forgotten.
+
+727
+00:57:43,520 --> 00:57:46,320
+We don’t really have good methods to stop that from happening.
+
+728
+00:57:46,320 --> 00:57:49,040
+So maybe in the limit you’re just bottlenecked by retraining the model
+
+729
+00:57:49,040 --> 00:57:52,800
+from scratch with all this new information. Yes, which of course is very expensive.
+
+730
+00:57:52,800 --> 00:57:55,440
+Training a model from scratch is expensive. But you’re going to do that anyways.
+
+731
+00:57:56,000 --> 00:57:59,520
+Not necessarily. Maybe eventually, if you have continual learning, you never train a new model.
+
+732
+00:57:59,520 --> 00:58:02,480
+You just have a model and it keeps learning and expanding.
+
+733
+00:58:02,480 --> 00:58:05,680
+But there might be some deep technical reason why that’s very difficult.
+
+734
+00:58:06,640 --> 00:58:11,680
+That’s the question. I think we have pushed back how much from scratch we need to do.
+
+735
+00:58:11,680 --> 00:58:15,520
+It is definitely possible now to take the pre-trained base and do
+
+736
+00:58:15,520 --> 00:58:20,320
+very good mid-training on top of that, kind of continuously, plus some RL from different
+
+737
+00:58:20,320 --> 00:58:23,680
+checkpoints that are later on in the training. That’s looking more like continual learning,
+
+738
+00:58:23,680 --> 00:58:27,600
+but it’s certainly not the case of taking the most recent model, applying a couple of very small
+
+739
+00:58:27,600 --> 00:58:32,080
+updates, and iteratively never losing anything. Sorry, but I’m a bit confused, because isn’t this
+
+740
+00:58:32,080 --> 00:58:35,120
+literally what happens during training? During post-training or something,
+
+741
+00:58:35,120 --> 00:58:40,400
+you have a model that’s already gone through so much training, and then you distill some
+
+742
+00:58:40,400 --> 00:58:44,080
+fork that’s been further RL’d. Isn’t that literally what happens?
+
+743
+00:58:44,720 --> 00:58:47,280
+But it’s still at a large enough scale, I think, that you’re washing out a lot
+
+744
+00:58:47,280 --> 00:58:52,720
+of the noise, and you’re not just focused on one distribution, which, as Beren said, is the issue.
+
+745
+00:58:53,280 --> 00:58:59,760
+If you’re just focusing on one task— But in the eventual regime you’d be doing…
+
+746
+00:58:59,760 --> 00:59:05,200
+There are billions of deployed instances. You’re learning from all of them at once,
+
+747
+00:59:05,200 --> 00:59:09,280
+so hopefully there’s some washing out of noise from that.
+
+748
+00:59:09,280 --> 00:59:13,440
+Maybe at that scale, yeah. As Charlie was saying,
+
+749
+00:59:13,440 --> 00:59:16,320
+you can definitely do continual mid-training for a long time, and you can roll back to a
+
+750
+00:59:16,320 --> 00:59:18,880
+checkpoint and give it new mid-training data. But at the same time,
+
+751
+00:59:18,880 --> 00:59:21,840
+you can’t do this indefinitely. If you just keep continually training the
+
+752
+00:59:21,840 --> 00:59:27,760
+same base forever, it asymptotes at some point. You can’t just learn new stuff in that base.
+
+753
+00:59:27,760 --> 00:59:31,040
+This is why people end up training new bases. Otherwise you would just keep mid-training
+
+754
+00:59:31,040 --> 00:59:33,440
+the same base forever. Whenever I finish recording
+
+755
+00:59:33,440 --> 00:59:37,440
+an interview, I immediately brain-dump all my thoughts into Slack—things like what was
+
+756
+00:59:37,440 --> 00:59:40,960
+most interesting and what should get cut. This ensures that my editors have all the
+
+757
+00:59:40,960 --> 00:59:45,840
+context they need to start editing the episode. But these brain dumps don’t have clear timestamps,
+
+758
+00:59:45,840 --> 00:59:52,160
+and my unedited recordings are many hours long. It can take a ton of editor time just to find the
+
+759
+00:59:52,160 --> 00:59:55,360
+exact moments I was referencing. So we decided to try adding
+
+760
+00:59:55,360 --> 00:59:59,600
+a Grok Bot producer to our chat. Now, whenever one of my editors posts
+
+761
+00:59:59,600 --> 01:00:04,480
+a rough cut of an episode, Grok Bot opens the transcript on its own computer and starts working,
+
+762
+01:00:04,480 --> 01:00:08,000
+usually before I’ve even seen the message. It takes the notes I dropped into Slack
+
+763
+01:00:08,000 --> 01:00:10,320
+and highlights the relevant snippets in the transcript.
+
+764
+01:00:10,320 --> 01:00:13,920
+It also uses a big case file I’ve compiled with all my preferences,
+
+765
+01:00:13,920 --> 01:00:17,360
+so it can suggest potential edits. When it’s done, it sends me its
+
+766
+01:00:17,360 --> 01:00:20,240
+top clip candidates so I can review everything from my phone.
+
+767
+01:00:20,240 --> 01:00:23,440
+This has worked really well. Being able to send informal messages,
+
+768
+01:00:23,440 --> 01:00:27,280
+like I’m texting my editor, and then have the transcript immediately reflect my
+
+769
+01:00:27,280 --> 01:00:34,000
+preferences has just been so helpful. Try Grok Bot yourself at x.ai/bot.
+
+770
+01:00:34,000 --> 01:00:38,000
+Let’s talk a bit about data now. I’m generally interested in this
+
+771
+01:00:38,000 --> 01:00:41,680
+question of how much of AI progress is just explained by data progress.
+
+772
+01:00:41,680 --> 01:00:46,320
+That doesn’t mean it will necessarily be hard to automate, but that's a separate question.
+
+773
+01:00:46,320 --> 01:00:53,600
+Is there some data distribution which, if you trained current architectures on it, would result
+
+774
+01:00:53,600 --> 01:00:58,800
+in a superintelligence that totally dominates human experts across every single field?
+
+775
+01:00:58,800 --> 01:01:02,720
+Are we talking about pre-training plus post-training data, environments as well?
+
+776
+01:01:03,520 --> 01:01:07,600
+I think the existence of this is obvious. It’s just whether we can create the right
+
+777
+01:01:07,600 --> 01:01:09,120
+environment to get there. In the trivial case,
+
+778
+01:01:09,120 --> 01:01:12,560
+we could just train it to output the Python file which trains the actual superintelligence.
+
+779
+01:01:12,560 --> 01:01:17,280
+Just have that memorized in the weights. Yes, there’s probably a ladder of RL
+
+780
+01:01:17,280 --> 01:01:23,600
+environments that is possible to construct such that you would get an AI researcher which is
+
+781
+01:01:23,600 --> 01:01:28,960
+at least as good as a human researcher. But the effort to climb each successive
+
+782
+01:01:28,960 --> 01:01:34,720
+rung grows kind of exponentially. Those are the two things you have to
+
+783
+01:01:34,720 --> 01:01:40,000
+trade off against as to how fast we’re going to hit that final rung where it’s better.
+
+784
+01:01:40,800 --> 01:01:44,320
+I think that’s fairly clear. We’re still relatively
+
+785
+01:01:44,320 --> 01:01:47,280
+early in RL environment creation. There are a lot of asymmetries that
+
+786
+01:01:47,280 --> 01:01:51,680
+we exploit in order to create good environments. One of the asymmetries which we’ve talked about
+
+787
+01:01:51,680 --> 01:01:56,800
+before is that there are environments where it’s easier to go backwards than forwards.
+
+788
+01:01:56,800 --> 01:02:01,120
+What I mean by that is, it’s very easy to define this complex data-generating process,
+
+789
+01:02:01,120 --> 01:02:04,560
+and this is the latent variable you keep hidden from the model.
+
+790
+01:02:04,560 --> 01:02:09,440
+You can generate arbitrarily complex environments, and the model has to do a lot of irreducible
+
+791
+01:02:09,440 --> 01:02:14,080
+token spend and irreducible work to figure out what that data-generating process was.
+
+792
+01:02:14,080 --> 01:02:18,080
+There are asymmetries in terms of injecting information from the real world.
+
+793
+01:02:18,080 --> 01:02:23,280
+Anthropic finds a bug through tens of thousands of humans and LLMs combined,
+
+794
+01:02:23,280 --> 01:02:26,880
+and turns that into a very, very neat environment which a single LLM could
+
+795
+01:02:26,880 --> 01:02:31,600
+theoretically find within a few million tokens. There are all these asymmetries which we’re
+
+796
+01:02:31,600 --> 01:02:36,240
+cherry-picking, and we’re counting on this kind of task-horizon generalization.
+
+797
+01:02:36,240 --> 01:02:41,120
+But I think it’s just going to hit diminishing returns at some point, diminishing returns in
+
+798
+01:02:41,120 --> 01:02:44,640
+how hard it is to create those environments in the first place, coming up with them, because
+
+799
+01:02:44,640 --> 01:02:50,320
+you can’t necessarily just have these processes where it’s easier to go backwards than forwards.
+
+800
+01:02:50,320 --> 01:02:55,760
+You actually have to sit down and construct something that looks like a long enough time
+
+801
+01:02:55,760 --> 01:02:59,120
+horizon with humans, and it’s going to be a really complex task to create.
+
+802
+01:02:59,120 --> 01:03:01,920
+Then there are also going to be the compute and time bottlenecks for the
+
+803
+01:03:01,920 --> 01:03:05,360
+agent to actually do those tasks. I think you’re just going to start
+
+804
+01:03:05,360 --> 01:03:08,560
+seeing this curve flatten out. I saw something about how someone
+
+805
+01:03:08,560 --> 01:03:17,520
+fine-tuned the Talkie model, which is only trained on data up to 1930, on modern coding agent data.
+
+806
+01:03:18,320 --> 01:03:26,400
+It did better than Claude 3 Opus on SWE-bench. So this model that has no knowledge of code
+
+807
+01:03:26,400 --> 01:03:30,000
+whatsoever can be fine-tuned on a moderate amount of data and
+
+808
+01:03:31,520 --> 01:03:36,320
+behave better as a coding agent than this much larger pre-trained model, which is pretty crazy.
+
+809
+01:03:36,320 --> 01:03:42,000
+It kind of shows you that once you have an example of the right expert behavior,
+
+810
+01:03:42,000 --> 01:03:48,480
+it’s actually surprisingly easy to copy that into a relatively weak model.
+
+811
+01:03:48,480 --> 01:03:53,280
+But a counterexample to that is a paper recently where they trained a model up to
+
+812
+01:03:53,280 --> 01:03:59,600
+fifth-grade maths, and also primary-school English and stuff, so it was a decent language model.
+
+813
+01:03:59,600 --> 01:04:03,360
+They tried to RL it to do late high school and college maths.
+
+814
+01:04:03,360 --> 01:04:06,000
+The gap was just too large. They couldn’t get it to climb at all.
+
+815
+01:04:06,560 --> 01:04:11,280
+But if you did successive rungs of year 7 maths and then year 8 maths… and so on,
+
+816
+01:04:11,280 --> 01:04:15,440
+you could obviously climb to year 12. Again, it’s just what is the distance
+
+817
+01:04:15,440 --> 01:04:17,840
+between the rungs on those ladders, and how hard is it to create?
+
+818
+01:04:18,400 --> 01:04:22,720
+This just comes back to the RL signal problem. RL is not very good at exploring right now.
+
+819
+01:04:23,520 --> 01:04:28,800
+If the model can’t get it in 128 rollouts, it’s very unlikely to get signal to progress.
+
+820
+01:04:28,800 --> 01:04:33,120
+This is why in RL we need curricula, whereas in pre-training we don’t, because that’s not
+
+821
+01:04:33,120 --> 01:04:37,200
+a problem for pre-training at all. Again, pre-training data is
+
+822
+01:04:37,200 --> 01:04:42,320
+different to post-training data. I imagine as we continue on, humans
+
+823
+01:04:42,320 --> 01:04:46,240
+will be involved less and less, but that doesn’t change the fact that you’re bottlenecked on how
+
+824
+01:04:46,240 --> 01:04:51,040
+much signal you can extract from the real world. There’s a lot of signal in the world,
+
+825
+01:04:51,040 --> 01:04:52,720
+and that’s true. There’s people doing
+
+826
+01:04:53,280 --> 01:04:56,720
+spreadsheet tasks, there’s people doing legal tasks and all this sort of stuff.
+
+827
+01:04:56,720 --> 01:05:00,560
+But at the capability frontier of where the models are at now,
+
+828
+01:05:00,560 --> 01:05:06,880
+how many bits in the world are actually really relevant to improving the model’s capabilities?
+
+829
+01:05:06,880 --> 01:05:09,920
+How many new maths problems are being solved that are just beyond
+
+830
+01:05:09,920 --> 01:05:13,280
+the reach or grasp of the current models? How many new coding problems are being
+
+831
+01:05:13,280 --> 01:05:16,080
+created or solved that are beyond the reach of the current models?
+
+832
+01:05:16,080 --> 01:05:19,680
+I think that’s why the diminishing returns kick in, because even the world as a whole is not
+
+833
+01:05:19,680 --> 01:05:22,480
+giving you the bits, going back to the start of this, that are useful for tipping you into
+
+834
+01:05:22,480 --> 01:05:26,480
+the next basin of capability. I totally agree with this.
+
+835
+01:05:26,480 --> 01:05:28,800
+It’s really a question of where the signal is coming from.
+
+836
+01:05:30,960 --> 01:05:33,840
+In pre-training, the signal is already in Common Crawl.
+
+837
+01:05:33,840 --> 01:05:38,400
+For the tasks that you care about in pre-training, the problem is not getting signal at all.
+
+838
+01:05:38,400 --> 01:05:41,760
+It’s filtering out all the noise that exists. That’s quite an automatable process.
+
+839
+01:05:41,760 --> 01:05:45,040
+But as the models get better, as we enter mid-training and post-training,
+
+840
+01:05:45,040 --> 01:05:48,320
+the signal just doesn’t exist anywhere in the original data we have.
+
+841
+01:05:48,320 --> 01:05:52,960
+No amount of filtering will get this. There’s no hidden proof of a Millennium
+
+842
+01:05:52,960 --> 01:05:55,680
+Prize problem sitting in Common Crawl that we can just filter until we see it.
+
+843
+01:05:56,560 --> 01:06:00,560
+At that point, you have to get bits some other way, either from humans directly, asking them
+
+844
+01:06:00,560 --> 01:06:05,120
+to write out their reasoning, or by creating environments where humans decide what environment
+
+845
+01:06:05,120 --> 01:06:10,240
+should be created and what the objectives of these environments are, or some kind of training on
+
+846
+01:06:10,240 --> 01:06:13,680
+the human data that exists in deployment. You have to get the bits from somewhere.
+
+847
+01:06:14,640 --> 01:06:17,760
+There’s a question of how much of the progress in pre-training is being driven by data.
+
+848
+01:06:18,320 --> 01:06:24,640
+I did this investigation with Jerry Han, who’s a student at Princeton, where we trained all
+
+849
+01:06:24,640 --> 01:06:31,520
+the recipes from 2019 till now pairwise with all the data sets from 2019 to now.
+
+850
+01:06:31,520 --> 01:06:36,000
+You’re training GPT-2 on the newest data set, like Ultra-FineWeb.
+
+851
+01:06:36,000 --> 01:06:42,320
+You train Delphi, which is the newest open source training recipe, on the Pile or some old data set.
+
+852
+01:06:42,320 --> 01:06:48,000
+You do the whole grid. You see, getting to some
+
+853
+01:06:48,000 --> 01:06:52,960
+level of capabilities, how much less compute does it take, across this grid?
+
+854
+01:06:52,960 --> 01:06:58,000
+You see that the data seems to explain something like a 12.0x compute efficiency
+
+855
+01:06:58,000 --> 01:07:01,520
+gain, but the architecture improvements explain something like a 3.7x compute
+
+856
+01:07:01,520 --> 01:07:06,800
+efficiency gain, at a very small scale. To the extent that that is true at large
+
+857
+01:07:06,800 --> 01:07:10,080
+scale — that most of the pre-training compute efficiency gains are coming from
+
+858
+01:07:10,080 --> 01:07:16,160
+better data — how much can that continue? Can you keep filtering data more and more
+
+859
+01:07:16,160 --> 01:07:20,560
+and building more and more synthetic data? Do you have a sense of how much this kind of
+
+860
+01:07:20,560 --> 01:07:26,000
+pre-training progress can continue? My prior is that, again, the
+
+861
+01:07:26,000 --> 01:07:31,040
+low-hanging fruit is somewhat exhausted. We got the internet as this big block,
+
+862
+01:07:31,040 --> 01:07:36,240
+and it’s not like the internet is necessarily growing at the same rate.
+
+863
+01:07:36,240 --> 01:07:38,000
+All the useful stuff on the internet isn’t growing at the same rate.
+
+864
+01:07:38,720 --> 01:07:42,880
+We’ve probably got a bunch of 0.1% loss drops to go, but definitely
+
+865
+01:07:42,880 --> 01:07:46,800
+not as many as have currently occurred. But it’s also really interesting that you
+
+866
+01:07:46,800 --> 01:07:53,920
+find this cumulative 33x improvement across both. I think it was Epoch or someone who estimated
+
+867
+01:07:53,920 --> 01:08:01,440
+3x a year since 2019, which would imply something like 3⁷, over 2,000X improvement.
+
+868
+01:08:01,440 --> 01:08:05,200
+So where’s that missing 100x or whatever coming from?
+
+869
+01:08:05,200 --> 01:08:08,720
+That probably gives you a good signal of how much of this is post-training.
+
+870
+01:08:08,720 --> 01:08:14,320
+I think the explanation has to be that a lot of the compute efficiency gains are scale dependent,
+
+871
+01:08:14,320 --> 01:08:20,000
+and we’re starting at extremely small scale. That raises a question of whether the data compute
+
+872
+01:08:20,000 --> 01:08:25,920
+efficiency gains or the algorithmic compute efficiency gains have more scale dependence.
+
+873
+01:08:25,920 --> 01:08:27,120
+I don't know if you have a prior on that.
+
+874
+01:08:27,120 --> 01:08:29,040
+We just didn’t have enough compute to investigate that question.
+
+875
+01:08:29,600 --> 01:08:36,320
+Just naively, theoretically, the scale dependence of the architecture is fairly well known,
+
+876
+01:08:36,320 --> 01:08:40,400
+and you can fit a straight line to it. Whereas I would have no idea how to
+
+877
+01:08:40,400 --> 01:08:44,640
+do that for combining pre-training plus post-training data and mid-training data.
+
+878
+01:08:44,640 --> 01:08:48,320
+Funnily enough, I feel like data is actually more important with scale.
+
+879
+01:08:48,320 --> 01:08:51,840
+I feel like architectures are kind of a one-time thing.
+
+880
+01:08:53,360 --> 01:08:57,600
+Saying just an X% efficiency gain is kind of misleading, because what an architecture does is
+
+881
+01:08:57,600 --> 01:09:01,440
+let you reach a qualitatively new regime which you couldn’t reach with the old architecture.
+
+882
+01:09:01,440 --> 01:09:04,640
+Within that regime, obviously the data is the primary thing determining it.
+
+883
+01:09:04,640 --> 01:09:10,400
+But if we didn’t have even GQA, if we were doing full attention all day, it would be
+
+884
+01:09:10,400 --> 01:09:15,040
+ridiculously expensive to do a million context. Because of that, we could never use the data
+
+885
+01:09:15,040 --> 01:09:18,400
+which is actually at a million context, so we couldn’t get these capabilities.
+
+886
+01:09:18,400 --> 01:09:23,120
+Even though if you just do a naive "how much does this do at 2K context", where the architecture
+
+887
+01:09:23,120 --> 01:09:27,120
+isn’t unlocking anything, then the data will look much more important than in some sense it is.
+
+888
+01:09:27,920 --> 01:09:32,560
+It’s unclear to me that these things are really just multiplicative gains in this way.
+
+889
+01:09:32,560 --> 01:09:36,480
+I see. So what’s your take on the scale dependence of data?
+
+890
+01:09:37,280 --> 01:09:41,920
+On scale dependence, I think a lot of the mid-training and post-training data
+
+891
+01:09:41,920 --> 01:09:46,480
+we have now actually gets better with scale, because a lot of it — the very long context
+
+892
+01:09:46,480 --> 01:09:51,440
+horizon environment stuff — really requires big models to be able to make use of it.
+
+893
+01:09:51,440 --> 01:09:54,800
+If you try and train your 100 million parameter model on SWE-bench traces,
+
+894
+01:09:54,800 --> 01:09:57,440
+it’s not going to get anywhere. It’s not going to show you the
+
+895
+01:09:57,440 --> 01:10:00,800
+same kind of improvement that you would get if you train an actual sensible size model on it.
+
+896
+01:10:01,680 --> 01:10:05,200
+It’s hard as well now because so many of the architecture changes — you look at Kimi,
+
+897
+01:10:05,200 --> 01:10:10,800
+for instance, or DeepSeek — they’re doing these architectural modifications not just with dropping
+
+898
+01:10:10,800 --> 01:10:14,560
+the pre-training loss in mind, but with how the models are going to be used in the real world.
+
+899
+01:10:15,120 --> 01:10:19,120
+The inference efficiency, having some form of compressed attention in the DeepSeek models,
+
+900
+01:10:19,120 --> 01:10:23,280
+is not necessarily geared around a fundamental trade-off improvement.
+
+901
+01:10:23,280 --> 01:10:26,000
+It’s just, "Okay, we’re considering how the models are going to be used."
+
+902
+01:10:27,040 --> 01:10:28,800
+One question I’m curious about, to understand the future,
+
+903
+01:10:28,800 --> 01:10:34,400
+is how parameter scaling will go as we’re getting into more of an RL-heavy regime.
+
+904
+01:10:37,440 --> 01:10:42,240
+You can look at open source architectures and see how fast parameters have been scaling.
+
+905
+01:10:42,240 --> 01:10:46,400
+Maybe it’s roughly 2x every year for frontier open source models.
+
+906
+01:10:46,400 --> 01:10:52,080
+To the extent that even frontier closed source models have 100B or 200B active parameters,
+
+907
+01:10:52,080 --> 01:10:55,360
+do you think that keeps 2x-ing year over year? Or, now that we’re in an RL regime where you
+
+908
+01:10:55,360 --> 01:11:01,760
+also want to conserve compute on rollouts… Also, maybe there is a threshold effect where you have
+
+909
+01:11:01,760 --> 01:11:06,240
+enough capacity and at that point increasing parameters arbitrarily doesn’t matter as much.
+
+910
+01:11:06,240 --> 01:11:10,560
+Do you guys have a sense of, in 2030, how many active parameters a frontier model will have?
+
+911
+01:11:11,120 --> 01:11:17,200
+I think for the next few years, because we are so focused on doing longer and longer horizon
+
+912
+01:11:17,200 --> 01:11:23,280
+rollouts for RL, where inference efficiency matters a lot, it feels like the models aren’t
+
+913
+01:11:23,280 --> 01:11:27,600
+necessarily saturated on their ability to do that. The bottleneck is still the environments.
+
+914
+01:11:27,600 --> 01:11:33,280
+So we might see a little bit of a plateau. I have a feeling that Mythos and the GPT
+
+915
+01:11:33,280 --> 01:11:37,600
+models are much smaller than the 10 trillion parameter range that people are talking about.
+
+916
+01:11:38,240 --> 01:11:42,320
+Even just naively comparing them to open source models, you can probably back out that conclusion.
+
+917
+01:11:44,000 --> 01:11:47,760
+Probably for the next few years, I wouldn’t imagine a huge growth in the number of parameters.
+
+918
+01:11:47,760 --> 01:11:51,360
+But again, there’s so many different things to trade off here.
+
+919
+01:11:51,360 --> 01:11:55,280
+You decide the size of your model based on how much pre-training data you have,
+
+920
+01:11:55,280 --> 01:11:58,960
+and then the difficulty of the RL environments that you’ve got to train on.
+
+921
+01:11:58,960 --> 01:12:04,560
+You ideally want to get to the optimal point where you can get a decent pass@1 or something
+
+922
+01:12:04,560 --> 01:12:08,480
+on the hardest environments you have. It wouldn’t make sense to make a bigger
+
+923
+01:12:08,480 --> 01:12:12,880
+model pass there, because then you’re just paying much more inference than you need to.
+
+924
+01:12:12,880 --> 01:12:18,960
+So a lot of it depends on how quickly Mercor and the in-house teams can scale up the complexity
+
+925
+01:12:18,960 --> 01:12:22,640
+of the RL environments they’re training on. I would expect the models to keep getting
+
+926
+01:12:22,640 --> 01:12:26,720
+bigger just because people are scaling up compute and the GPUs are getting bigger.
+
+927
+01:12:26,720 --> 01:12:33,040
+But exactly how much they get bigger depends a bit on the scaling laws in non-obvious ways.
+
+928
+01:12:34,000 --> 01:12:40,640
+One thing is that I think data efficiency is going to be a bigger driver than compute efficiency of
+
+929
+01:12:40,640 --> 01:12:46,800
+the exact architectures people use, now that we’re getting to the regime where we’re running
+
+930
+01:12:46,800 --> 01:12:51,920
+low on high quality pre-training data. That might affect how sparse you want
+
+931
+01:12:51,920 --> 01:12:54,800
+to make the model. I also think we don’t
+
+932
+01:12:55,680 --> 01:12:59,920
+understand sparsity that well. Parameters are a different
+
+933
+01:12:59,920 --> 01:13:08,160
+resource than active parameters. Sparsity has definitely increased a bit,
+
+934
+01:13:08,160 --> 01:13:11,360
+but it’s not clear that it’s going to keep increasing without bound.
+
+935
+01:13:11,360 --> 01:13:16,080
+There might be some kind of sweet spot. There’s an argument that sparsity should
+
+936
+01:13:16,080 --> 01:13:21,200
+make data efficiency worse, because you might have to learn the same thing on multiple experts,
+
+937
+01:13:22,880 --> 01:13:27,280
+though that’s debatable. I don’t think we have a
+
+938
+01:13:27,280 --> 01:13:32,480
+good enough theory of scaling laws that we really understand why sparsity is helping,
+
+939
+01:13:33,440 --> 01:13:38,880
+how much it’ll help, and if that’ll plateau at some point at a certain level of sparsity.
+
+940
+01:13:38,880 --> 01:13:42,000
+Sorry, can you spell out exactly what the implication of data
+
+941
+01:13:42,000 --> 01:13:46,080
+efficiency would be on parameters? It sounds like you’d say there
+
+942
+01:13:46,080 --> 01:13:49,360
+should be less sparsity, but what are the other implications on parameter scaling?
+
+943
+01:13:50,240 --> 01:13:56,400
+Just that with the scaling law, you’re not trying to optimize compute efficiency.
+
+944
+01:13:56,400 --> 01:13:59,680
+You have all your choices you can make on the architecture.
+
+945
+01:14:00,240 --> 01:14:04,480
+Each of these gives you a different scaling law. Traditionally, you would look at some
+
+946
+01:14:04,480 --> 01:14:08,320
+kind of envelope based on compute. You would look at performance versus
+
+947
+01:14:08,320 --> 01:14:20,120
+compute and take the envelope of the best models. But if we’re making that decision based on data —
+
+948
+01:14:20,720 --> 01:14:33,600
+we’re assuming we can spend a lot of compute, so data is on our x-axis instead of compute — then
+
+949
+01:14:33,600 --> 01:14:38,960
+we just get a different set of optima, or a different set of models that are on that frontier.
+
+950
+01:14:39,760 --> 01:14:44,160
+I also don’t think that we’ve necessarily doubled the size of the
+
+951
+01:14:44,160 --> 01:14:49,440
+models every year for the last few years. People have been training 1 trillion
+
+952
+01:14:49,440 --> 01:14:53,040
+parameter models for at least a few years. There was even an open source one called Falcon.
+
+953
+01:14:53,040 --> 01:14:56,000
+Liam from Periodic Labs, I think, posted yesterday on Twitter about how
+
+954
+01:14:56,000 --> 01:15:00,720
+an early experiment was training a 1 trillion parameter model that was very, very sparse.
+
+955
+01:15:00,720 --> 01:15:05,120
+That was what they did before OpenAI, at Google, the Switch Transformer.
+
+956
+01:15:05,920 --> 01:15:11,680
+It was very, very good at knowledge but terrible at reasoning because it was so sparse.
+
+957
+01:15:12,720 --> 01:15:18,080
+It feels like we’ve been playing in this 100 billion up to 2 trillion parameter range for
+
+958
+01:15:18,080 --> 01:15:19,680
+at least a little bit. It certainly hasn’t
+
+959
+01:15:19,680 --> 01:15:23,600
+been this nice linear increase. I feel like there’s two things.
+
+960
+01:15:23,600 --> 01:15:27,920
+As Charlie was saying, inference efficiency is super important for RL rollouts.
+
+961
+01:15:27,920 --> 01:15:31,680
+This will really push down active parameters quite a lot.
+
+962
+01:15:31,680 --> 01:15:35,280
+I think the total parameters really depends a lot on the hardware as well.
+
+963
+01:15:35,280 --> 01:15:39,760
+You really need very high memory bandwidth and VRAM size to actually be able to serve
+
+964
+01:15:39,760 --> 01:15:43,600
+multi-trillion parameter models. Right now, people are still using
+
+965
+01:15:43,600 --> 01:15:46,240
+a lot of H100s and stuff. As everyone moves to GBs and
+
+966
+01:15:46,240 --> 01:15:51,280
+then Vera Rubins, we’ll get more of the ability to scale and actually serve and
+
+967
+01:15:51,280 --> 01:15:56,080
+do large RL inference at larger scales. The data question I think is interesting,
+
+968
+01:15:56,080 --> 01:16:00,960
+because naively, larger models are much more sample efficient in the actual data points.
+
+969
+01:16:00,960 --> 01:16:04,080
+Even if you’re not saturating the model, it’s still better to go bigger,
+
+970
+01:16:04,080 --> 01:16:08,960
+because larger models generalize better and get to a better loss for the same amount of data.
+
+971
+01:16:09,520 --> 01:16:13,440
+Right now I think we have a lot of data, and that’s not the constraint.
+
+972
+01:16:13,440 --> 01:16:16,720
+Compute is. So we’re having smaller models which are very inference efficient.
+
+973
+01:16:16,720 --> 01:16:19,600
+But if compute is no longer the bottleneck, it might come back to larger models which are
+
+974
+01:16:20,800 --> 01:16:25,360
+undersaturated, but have this generalization ability because they’re much larger.
+
+975
+01:16:25,360 --> 01:16:31,680
+If you just look at the basic Chinchilla scaling law and you just maximize out
+
+976
+01:16:31,680 --> 01:16:36,080
+parameters, it actually decreases the amount of data you need to get to the same loss very little.
+
+977
+01:16:36,720 --> 01:16:41,360
+If you go to infinity on parameters, the amount of data you need I think goes down less than 10X,
+
+978
+01:16:41,360 --> 01:16:45,200
+just because of the nature of the power law. But we’re now on the way-too-much-data side
+
+979
+01:16:45,200 --> 01:16:47,920
+of the Chinchilla laws. Right now we over-train
+
+980
+01:16:47,920 --> 01:16:49,920
+models according to Chinchilla. So we could easily get back to
+
+981
+01:16:49,920 --> 01:16:53,840
+a point where, as we’re running out of data, we move back to the Chinchilla optimal point,
+
+982
+01:16:53,840 --> 01:16:59,360
+or even a bit on the under-training model side. But surely, even with these new chips that come
+
+983
+01:16:59,360 --> 01:17:02,800
+online, we’re just going to be so compute bottlenecked for the next few years that
+
+984
+01:17:02,800 --> 01:17:06,240
+that won’t necessarily be the case. This depends on the ratio you have of
+
+985
+01:17:06,240 --> 01:17:09,600
+training and inference compute, really. If you’re super bottlenecked on data,
+
+986
+01:17:09,600 --> 01:17:12,320
+not on compute, you should go bigger. If you’re super bottlenecked on compute,
+
+987
+01:17:12,320 --> 01:17:16,480
+you should always go smaller. You can also use computer-generated
+
+988
+01:17:16,480 --> 01:17:20,160
+synthetic data, so it’s one of these very hard things to predict.
+
+989
+01:17:20,160 --> 01:17:24,400
+I think part of the reason it took people so long to figure out the scaling laws in the first place
+
+990
+01:17:24,400 --> 01:17:28,880
+was that if you don’t get all these things right, then you don’t get such a clean relationship.
+
+991
+01:17:30,880 --> 01:17:37,200
+The beautiful straight lines on graphs hide a lot of complexity in how you have to make sure
+
+992
+01:17:37,200 --> 01:17:42,320
+to scale every hyperparameter the right way, or parameterize your optimizer in a way that
+
+993
+01:17:43,280 --> 01:17:47,360
+scales and where you don’t have to change your hyperparameters as you change the model size.
+
+994
+01:17:47,360 --> 01:17:53,040
+Bugs have their own clean scaling laws as well. Like with Kaplan forgetting the cosine
+
+995
+01:17:53,040 --> 01:17:56,480
+annealing thing, or even just not considering embedding parameters, I think.
+
+996
+01:17:56,480 --> 01:18:00,080
+That messed up the estimate at smaller models because embedding
+
+997
+01:18:00,080 --> 01:18:08,320
+parameters are a decent size of the model. A bit on RL. A year ago, a lot of people
+
+998
+01:18:08,320 --> 01:18:14,560
+were making this argument that RL will not be super successful at scaling for models.
+
+999
+01:18:14,560 --> 01:18:19,200
+John, you wrote a research paper where you were pointing out that models learn one
+
+1000
+01:18:19,200 --> 01:18:22,480
+bit per episode when you RL. They learn, "Did I get the
+
+1001
+01:18:22,480 --> 01:18:25,920
+answer right or did I get it wrong?" Then I wrote some blog posts earlier
+
+1002
+01:18:25,920 --> 01:18:28,720
+this year where I was like, "It’s even worse than that," because when the pass rate is low and the
+
+1003
+01:18:28,720 --> 01:18:35,040
+model is very unlikely to get the answer right, it learns almost nothing at all from an RL episode.
+
+1004
+01:18:35,040 --> 01:18:39,200
+But I look at the models today, and they seem pretty smart.
+
+1005
+01:18:39,200 --> 01:18:43,600
+It seems to be the result of scaling up RL. Beren, you had a post a few weeks ago where
+
+1006
+01:18:43,600 --> 01:18:47,920
+you were trying to explain what’s going on. Why has RL been more successful than
+
+1007
+01:18:47,920 --> 01:18:52,720
+one would have naively thought? I think the success of RL comes
+
+1008
+01:18:52,720 --> 01:18:56,560
+down to a bunch of different things. First, what is slightly underestimated
+
+1009
+01:18:56,560 --> 01:18:59,120
+is the mid-training. An awful lot of what we
+
+1010
+01:18:59,120 --> 01:19:03,680
+see as successes of RL actually comes from very, very good mid-training data, which is where we’re
+
+1011
+01:19:04,240 --> 01:19:08,480
+essentially doing pre-training but on synthetic reasoning data and the kind of environments
+
+1012
+01:19:08,480 --> 01:19:12,960
+that get the model warm-started for RL. This takes the model almost 80% of the
+
+1013
+01:19:12,960 --> 01:19:16,880
+way to the final RL checkpoint often. Then what RL does on top of that is
+
+1014
+01:19:18,960 --> 01:19:22,240
+essentially tweaking the policy. This is one of the reasons why it doesn’t
+
+1015
+01:19:22,240 --> 01:19:25,600
+need as many bits as you would naively think. It doesn’t have to learn all of these
+
+1016
+01:19:25,600 --> 01:19:28,080
+behaviors from scratch. It needs just a few bits
+
+1017
+01:19:28,080 --> 01:19:31,680
+from these episodes, which you do get. The other thing that I point out in my
+
+1018
+01:19:31,680 --> 01:19:36,560
+blog is that these bits are extremely high signal compared to regular pre-training,
+
+1019
+01:19:36,560 --> 01:19:40,960
+which is why you need RL at all versus just SFT-ing on successful reasoning traces.
+
+1020
+01:19:40,960 --> 01:19:44,320
+Because it’s exactly the bits about how to get the answer right.
+
+1021
+01:19:44,320 --> 01:19:47,440
+There’s two things. Yes, one, it’s exactly the bits about how to get the answer right.
+
+1022
+01:19:47,440 --> 01:19:52,400
+But this is not exactly how you think of it, because in SFT, you have a trace.
+
+1023
+01:19:52,400 --> 01:19:55,040
+You have, say, a bunch of math reasoning and then the answer at the end.
+
+1024
+01:19:55,040 --> 01:19:58,080
+The bit is still there. You still SFT on the answer token.
+
+1025
+01:19:58,960 --> 01:20:01,840
+What’s important is that the objective ignores all the other bits.
+
+1026
+01:20:01,840 --> 01:20:07,360
+In SFT, you have to try and match the exact reasoning tokens that the model produces.
+
+1027
+01:20:07,360 --> 01:20:10,400
+You’re essentially getting too many bits about the exact way this other
+
+1028
+01:20:10,400 --> 01:20:14,080
+model you’re training on reasons. For RL, you only get the one bit.
+
+1029
+01:20:14,080 --> 01:20:19,120
+That means that signal is not drowned out in the noise of all the other bits the model has.
+
+1030
+01:20:20,400 --> 01:20:24,000
+It’s really a super dramatic increase in the signal-to-noise ratio during training,
+
+1031
+01:20:24,000 --> 01:20:28,080
+which is why RL is so dramatically efficient in terms of steps.
+
+1032
+01:20:31,440 --> 01:20:36,960
+There’s been so much debate about what RL does to the model versus mid-training or SFT or whatever.
+
+1033
+01:20:38,400 --> 01:20:42,240
+Everyone talks about how pass@1 will go up, but pass@256 will go down.
+
+1034
+01:20:42,240 --> 01:20:46,560
+Very rare correct reasoning traces will be down-weighted and outweighed
+
+1035
+01:20:46,560 --> 01:20:53,360
+by a gradient signal from easier reasoning traces. I think the simple way to view RL now is that if
+
+1036
+01:20:53,360 --> 01:20:58,000
+you have a large enough amount of compute to sample a large enough group size — such
+
+1037
+01:20:58,000 --> 01:21:03,680
+that your probability of getting a bunch of correct answers is past some not insignificant
+
+1038
+01:21:03,680 --> 01:21:10,880
+probability — then it will be up-weighted. To Beren’s point, mid-training and more
+
+1039
+01:21:10,880 --> 01:21:15,280
+pre-training — the pass@1, the starting point for RL — scales in
+
+1040
+01:21:15,280 --> 01:21:18,640
+a log number of pre-training tokens. Can I ask some very basic questions?
+
+1041
+01:21:20,320 --> 01:21:24,400
+That answer makes sense, and maybe there’s empirical research which
+
+1042
+01:21:24,400 --> 01:21:28,800
+shows that this is what’s happening. But then I just look at the models
+
+1043
+01:21:28,800 --> 01:21:34,320
+themselves… I don’t know what’s happened. Maybe you can give me a sense of what is
+
+1044
+01:21:34,320 --> 01:21:44,240
+the basis of the AI progress over the last year. Maybe it’s just up-weighting the policies which
+
+1045
+01:21:44,240 --> 01:21:48,240
+were going to do the correct thinking anyways. But it just seems like qualitatively,
+
+1046
+01:21:48,240 --> 01:21:56,480
+the models have gotten so much more capable. Maybe there’s no inherent contradiction there.
+
+1047
+01:21:56,480 --> 01:22:02,000
+But how do we square the relatively small impact this take would imply that
+
+1048
+01:22:02,000 --> 01:22:06,560
+RL would have with the actual qualitative capabilities the models seem to be gaining?
+
+1049
+01:22:06,560 --> 01:22:08,400
+One thing I want to point out here is that it doesn’t
+
+1050
+01:22:08,400 --> 01:22:13,120
+necessarily imply that RL has a small effect. Even if you have a few bits and you only change
+
+1051
+01:22:13,120 --> 01:22:18,059
+the parameters a small amount, the actual impact on function space — the input-to-output mapping
+
+1052
+01:22:18,059 --> 01:22:22,880
+the model learns — can still be super dramatic. Even one bit can change your function space a lot.
+
+1053
+01:22:22,880 --> 01:22:25,920
+It can rule out half the hypothesis space, which is huge.
+
+1054
+01:22:25,920 --> 01:22:29,680
+I don’t think it’s necessarily the case that small amounts of bits, small amounts of RL, once you’re
+
+1055
+01:22:29,680 --> 01:22:33,440
+starting from a really good point, means that you don’t have dramatic impacts in behavior.
+
+1056
+01:22:33,440 --> 01:22:36,880
+At least… not necessarily. I think it comes down to two things.
+
+1057
+01:22:36,880 --> 01:22:41,120
+The first thing is that everyone was hoping that RL would generalize this reasoning
+
+1058
+01:22:41,120 --> 01:22:44,080
+across all these different domains. I don’t think we necessarily got
+
+1059
+01:22:44,080 --> 01:22:47,840
+this horizontal generalization. Just training on math doesn’t
+
+1060
+01:22:47,840 --> 01:22:51,920
+necessarily make you the greatest coder. You do have to do RL on code environments.
+
+1061
+01:22:51,920 --> 01:22:55,840
+I think what we did get, though, is horizon generalization.
+
+1062
+01:22:55,840 --> 01:23:00,160
+The models just learned how to use more tokens for longer and still
+
+1063
+01:23:00,160 --> 01:23:04,400
+make progress on some sort of task. You can train on environments where
+
+1064
+01:23:04,400 --> 01:23:07,440
+they get longer and longer and then put them into a completely new environment.
+
+1065
+01:23:07,440 --> 01:23:10,800
+Yes, they may not have generalized the reasoning patterns which allow them to do well in that
+
+1066
+01:23:10,800 --> 01:23:14,560
+environment, but they’ve at least generalized the ability to continue on that task for longer,
+
+1067
+01:23:14,560 --> 01:23:18,400
+which is correlated with success. There was a paper called EdgeBench which
+
+1068
+01:23:18,400 --> 01:23:23,440
+showed that the rate at which models can work for longer is doubling every three months.
+
+1069
+01:23:23,440 --> 01:23:27,280
+That’s clear evidence of generalization. The final way to think about it is,
+
+1070
+01:23:28,480 --> 01:23:34,720
+in pre-training, there’s this idea of quanta. You have this very smooth pre-training loss curve.
+
+1071
+01:23:34,720 --> 01:23:39,120
+When you look at what’s happening in the model, the model is learning all these very discrete
+
+1072
+01:23:39,120 --> 01:23:43,520
+tasks, and there’s all these emergent points where there’s a phase transition.
+
+1073
+01:23:43,520 --> 01:23:46,000
+It didn’t have induction heads, now it has induction heads.
+
+1074
+01:23:46,000 --> 01:23:50,080
+There’s tens of thousands, millions, probably hundreds of millions of these things.
+
+1075
+01:23:50,080 --> 01:23:52,960
+You average them all together and you get this very smooth loss curve.
+
+1076
+01:23:54,000 --> 01:23:58,960
+To an extent, a similar thing is happening for RL. There is this very slow outer loop,
+
+1077
+01:23:58,960 --> 01:24:01,760
+as Beren mentioned. We will train a model and then
+
+1078
+01:24:01,760 --> 01:24:07,280
+RL it, and then in the next model iteration of training, we will dump a bunch of these synthetic
+
+1079
+01:24:07,280 --> 01:24:11,040
+reasoning traces into the mid-training data. We’re kind of hitting all these quanta for
+
+1080
+01:24:11,040 --> 01:24:15,840
+all these different tasks, and on an individual task level, it may look like a phase transition.
+
+1081
+01:24:15,840 --> 01:24:20,720
+You’re suddenly going from a 0.5% pass rate to a 90% pass rate on a particular
+
+1082
+01:24:21,360 --> 01:24:24,880
+finance task or Excel task or whatever. But you average all these things together,
+
+1083
+01:24:24,880 --> 01:24:30,560
+plus the horizon generalization, and you kind of go, "Wow, we’ve got qualitatively better models."
+
+1084
+01:24:30,560 --> 01:24:34,560
+I think a lot of this as well is just… RL does generalize a bit.
+
+1085
+01:24:34,560 --> 01:24:38,560
+You get some transfer between math and code, or puzzles and math and this kind of stuff.
+
+1086
+01:24:38,560 --> 01:24:43,040
+Also, the sheer amount of environments people are targeting is just vastly greater.
+
+1087
+01:24:43,760 --> 01:24:48,320
+Before, when you tried to do some task which you do in your daily life, two years ago,
+
+1088
+01:24:48,320 --> 01:24:50,960
+the labs wouldn’t really care about this. They wouldn’t train the model for it.
+
+1089
+01:24:50,960 --> 01:24:53,360
+Now it’s just so much broader. They have a lot of environments
+
+1090
+01:24:53,360 --> 01:24:56,320
+targeting this specific thing. Earlier in the conversation we were talking
+
+1091
+01:24:56,320 --> 01:25:02,400
+about RL in the context of causing this entropy collapse, or just concentrating probability on
+
+1092
+01:25:02,400 --> 01:25:08,000
+solutions the base model had already done, and causing relatively sparse updates in the policy.
+
+1093
+01:25:08,000 --> 01:25:16,560
+But I think there’s also another story about RL, which is going back to the
+
+1094
+01:25:16,560 --> 01:25:21,600
+Atari games and then AlphaGo coming up with move 37, the super creative move.
+
+1095
+01:25:21,600 --> 01:25:25,280
+Because it was never initialized on human data, it can think in ways that
+
+1096
+01:25:25,280 --> 01:25:29,040
+humans are not even thinking and come up with extremely creative solutions.
+
+1097
+01:25:29,600 --> 01:25:35,120
+Do you have a sense of when we should expect, or if we should expect, RL on LLMs to result
+
+1098
+01:25:35,120 --> 01:25:41,800
+in things like move 37, extreme creativity even beyond human creativity, because there’s just de
+
+1099
+01:25:41,800 --> 01:25:47,120
+novo initialization of intelligence? A couple of things here.
+
+1100
+01:25:47,120 --> 01:25:52,400
+First off, I think that AlphaGo is using MCTS, which obviously does more exploration and stuff
+
+1101
+01:25:52,400 --> 01:25:56,560
+than regular policy gradients. But I also think that RL doesn’t
+
+1102
+01:25:56,560 --> 01:26:01,760
+necessarily reduce the creativity. This is obviously qualitative, but if
+
+1103
+01:26:01,760 --> 01:26:06,560
+we look at the OpenAI-Hugging Face incident, these models were coming up with multiple zero-days at
+
+1104
+01:26:06,560 --> 01:26:11,600
+a time to break out of the sandbox. This is clearly some level of move 37
+
+1105
+01:26:11,600 --> 01:26:16,720
+creativity already, which we just get from the general generalization properties of the LLMs.
+
+1106
+01:26:17,280 --> 01:26:22,960
+It’s definitely not the case that RL is totally destroying entropy, especially on long horizons.
+
+1107
+01:26:23,600 --> 01:26:28,080
+One thing that people call creativity is just solving hard search problems.
+
+1108
+01:26:31,680 --> 01:26:36,000
+Move 37 is obviously an example of that, or writing some kind of poem
+
+1109
+01:26:36,000 --> 01:26:42,000
+that satisfies a ton of different constraints. That’s something AI is obviously going to be
+
+1110
+01:26:42,000 --> 01:26:48,160
+extremely good at, if trained for it. Then there’s another way in which the
+
+1111
+01:26:51,120 --> 01:26:56,880
+diversity of the models’ outputs is a lot lower after RL, and they develop these tics.
+
+1112
+01:26:58,480 --> 01:27:02,000
+Even though the models seem like they’re good at writing, when you do some kind of
+
+1113
+01:27:02,000 --> 01:27:10,160
+distributional analysis, you find that they’re reusing certain themes all the time and they’re
+
+1114
+01:27:10,160 --> 01:27:15,840
+using the same character names all the time. You’re not getting the same kind of diversity
+
+1115
+01:27:15,840 --> 01:27:21,520
+that you get from human authors. You’re getting one really good style.
+
+1116
+01:27:21,520 --> 01:27:28,400
+So I think that kind of diversity has definitely been cut down by RL a lot.
+
+1117
+01:27:29,120 --> 01:27:38,000
+In fact, since we were talking about distillation earlier, one thing that’s happening is that so
+
+1118
+01:27:38,000 --> 01:27:44,240
+many people are distilling, mostly from Claude, that all the open-weight models write the same
+
+1119
+01:27:44,240 --> 01:27:50,240
+way as Claude and have the same tics. This seems kind of concerning to me,
+
+1120
+01:27:50,240 --> 01:27:56,320
+that we’re having this monoculture emerge. Again, I don’t think this is fundamental
+
+1121
+01:27:56,320 --> 01:27:59,760
+to RL as a method, though. The same with distillation. Even with
+
+1122
+01:27:59,760 --> 01:28:03,840
+distillation, you’re just training on the data. Just because your data is not super broad,
+
+1123
+01:28:03,840 --> 01:28:06,560
+that doesn’t mean the training method itself is somehow wrong.
+
+1124
+01:28:06,560 --> 01:28:08,480
+It’s a problem with the data. I think a lot of the RL entropy collapse, for
+
+1125
+01:28:08,480 --> 01:28:15,440
+instance, is basically due to exploitation of fairly simple verifiers when you don’t have a
+
+1126
+01:28:15,440 --> 01:28:17,680
+huge diversity of environments. The writing, for instance,
+
+1127
+01:28:19,200 --> 01:28:22,240
+is presumably graded by some judge. The judge has some specific tics,
+
+1128
+01:28:22,240 --> 01:28:26,000
+and the model is learning to reward hack the judge, and that’s why it collapses.
+
+1129
+01:28:26,000 --> 01:28:30,960
+But this is really a problem with the judge. It’s not a problem with RL in general.
+
+1130
+01:28:30,960 --> 01:28:34,720
+Okay, super rapid-fire predictions about the future.
+
+1131
+01:28:34,720 --> 01:28:38,880
+I want timelines on the following couple of questions.
+
+1132
+01:28:38,880 --> 01:28:46,800
+By when do we have models which… Here’s what it feels like to a user.
+
+1133
+01:28:46,800 --> 01:28:53,520
+You basically hire it as a drop-in remote worker for all kinds of white-collar work?
+
+1134
+01:28:53,520 --> 01:28:59,840
+Not just coding, but video editing, law, paralegal, et cetera.
+
+1135
+01:28:59,840 --> 01:29:02,880
+It’s literally an actual remote worker, with full computer use,
+
+1136
+01:29:02,880 --> 01:29:10,400
+with literally a month of seamless learning and operation, executing on complex projects that
+
+1137
+01:29:10,400 --> 01:29:15,440
+require interacting with other people, et cetera. Everything a human worker could do over a month.
+
+1138
+01:29:15,440 --> 01:29:20,160
+If you mandate it to use a browser or whatever — rather than the firm setting
+
+1139
+01:29:20,160 --> 01:29:23,680
+up the information to be programmatically accessible — maybe a couple of years.
+
+1140
+01:29:23,680 --> 01:29:28,400
+But if it’s not browser-based — it can send Slack messages, it can do all this stuff — I’d
+
+1141
+01:29:28,400 --> 01:29:32,480
+still probably say around a year. I would say maybe three years for
+
+1142
+01:29:32,480 --> 01:29:36,960
+the full generality. But to Charlie’s point,
+
+1143
+01:29:36,960 --> 01:29:41,760
+we will end up with a lot of people making their organizations easier for the AIs to use, and so
+
+1144
+01:29:41,760 --> 01:29:48,080
+you get 80-90% of the way there before that. Sorry, but the diff between one year and
+
+1145
+01:29:48,080 --> 01:29:51,760
+three years there is just literally… I think there’s going to be a long tail
+
+1146
+01:29:51,760 --> 01:29:55,680
+of miscellaneous stuff which some human can do, which will take the models quite a while to do.
+
+1147
+01:29:56,320 --> 01:29:59,600
+Are you thinking of computer stuff or basic cognitive capabilities?
+
+1148
+01:29:59,600 --> 01:30:03,120
+I think this really comes down to a question of how quickly we can solve
+
+1149
+01:30:03,120 --> 01:30:08,800
+this kind of online learning, and whether we can get 80-90% of the way there with compaction and
+
+1150
+01:30:08,800 --> 01:30:12,720
+writing files to yourself and stuff. That’s my big uncertainty. I really don’t know.
+
+1151
+01:30:14,080 --> 01:30:17,680
+An example of something that it wouldn’t be good at is if I have to yell at someone
+
+1152
+01:30:17,680 --> 01:30:21,040
+to get something at work, or really push someone to get something done.
+
+1153
+01:30:21,040 --> 01:30:23,520
+The model just isn’t going to do that. It’s going to be too nice.
+
+1154
+01:30:24,640 --> 01:30:28,880
+I’d say there’s a wide variation in quality of human remote workers.
+
+1155
+01:30:29,680 --> 01:30:33,760
+If you try to hire someone off of Upwork to do a software engineering project,
+
+1156
+01:30:33,760 --> 01:30:37,200
+there’s going to be a huge variation. It’s often quite hard to get them to
+
+1157
+01:30:37,200 --> 01:30:42,400
+do a good job or pay attention to all the feedback you’re giving.
+
+1158
+01:30:44,000 --> 01:30:51,360
+I would guess that in some cases, the pre-AI version of this was worse than
+
+1159
+01:30:51,360 --> 01:30:57,840
+what you can get now from existing AI. I think it might end up being a little
+
+1160
+01:30:57,840 --> 01:31:04,560
+complicated, because to some extent we already have this for some not-so-high-quality work.
+
+1161
+01:31:04,560 --> 01:31:13,760
+But then obviously we’re not matching human level in certain higher-quality forms of work.
+
+1162
+01:31:14,480 --> 01:31:19,600
+But I basically agree with Charlie and Beren that maybe we’ll have some
+
+1163
+01:31:19,600 --> 01:31:27,840
+version of this in a year or so that’s okay. We’ll have that form factor, and it’ll be able
+
+1164
+01:31:27,840 --> 01:31:33,200
+to do some things really well, some things not so well, and things will be improving from there.
+
+1165
+01:31:33,200 --> 01:31:36,240
+We shift the goalposts based on the very long tail all the time.
+
+1166
+01:31:36,800 --> 01:31:40,400
+I feel like you’ve used this example before of doing your taxes or something.
+
+1167
+01:31:40,400 --> 01:31:45,120
+This year, I literally just told Codex to go get everything I needed and send it to the accountant.
+
+1168
+01:31:45,120 --> 01:31:48,480
+There was this massive list of stuff it had to use computers to click through and download.
+
+1169
+01:31:49,120 --> 01:31:55,120
+It did it. It was perfect. A lot of this stuff it can already do.
+
+1170
+01:31:55,120 --> 01:32:02,960
+Okay: give you 10x total productivity uplift. Basically, if it takes you a year to make a
+
+1171
+01:32:02,960 --> 01:32:05,520
+breakthrough now, you make a breakthrough every month.
+
+1172
+01:32:05,520 --> 01:32:08,640
+I think I would just refuse to give you a scalar on this.
+
+1173
+01:32:10,000 --> 01:32:14,160
+We might already be past that in some types of work.
+
+1174
+01:32:14,880 --> 01:32:20,560
+Let’s say you’re trying to do certain types of math, and—
+
+1175
+01:32:20,560 --> 01:32:27,520
+Oh, sorry. But for you as AI researchers trying to advance the state of AI research.
+
+1176
+01:32:27,520 --> 01:32:33,280
+How much are AI researchers sped up or uplifted? Somewhere between 5-10 years?
+
+1177
+01:32:33,280 --> 01:32:36,000
+Oh, really? Okay, that’s far away. Really, you think it’s longer than
+
+1178
+01:32:36,000 --> 01:32:39,280
+for a general remote worker? Interesting.
+
+1179
+01:32:39,280 --> 01:32:43,760
+I’m realizing you probably have a very different definition of a fully general remote worker.
+
+1180
+01:32:43,760 --> 01:32:47,280
+I could have specified that earlier. This is true, because obviously an
+
+1181
+01:32:47,280 --> 01:32:52,640
+AI researcher can be a remote worker. I’m picturing normal white-collar work
+
+1182
+01:32:52,640 --> 01:32:55,520
+over the period of a month. I think it starts to diverge
+
+1183
+01:32:55,520 --> 01:32:58,160
+a little bit past two months. A very competent white-collar worker,
+
+1184
+01:32:58,160 --> 01:33:02,560
+but not necessarily a super creative researcher. I would say two years.
+
+1185
+01:33:02,560 --> 01:33:07,440
+Two years? 10x? Okay. How about you, Beren? I can kind of see that, actually, because
+
+1186
+01:33:09,200 --> 01:33:12,160
+right now it’s already definitely more than 10X for coding stuff.
+
+1187
+01:33:12,160 --> 01:33:16,320
+So if it can do even one or two loops of experimental feedback,
+
+1188
+01:33:16,320 --> 01:33:22,080
+that would actually be massive already. So 10x uplift of AI researchers within two years.
+
+1189
+01:33:22,080 --> 01:33:26,720
+If you plug that into a very naive model of AI progress and how much is
+
+1190
+01:33:26,720 --> 01:33:32,080
+coming from AI researchers, and there’s a 10x increase in their productivity,
+
+1191
+01:33:32,080 --> 01:33:36,640
+you have a radically accelerated pace of AI progress starting two years from now.
+
+1192
+01:33:36,640 --> 01:33:40,960
+I think this will mean that AI progress doesn’t get bottlenecked on AI researchers’
+
+1193
+01:33:40,960 --> 01:33:43,600
+ability to run small experiments. It gets bottlenecked on other things.
+
+1194
+01:33:43,600 --> 01:33:47,920
+Of course. But it just happens 10x faster, which is a huge deal.
+
+1195
+01:33:47,920 --> 01:33:53,680
+That also helps the next thing, which gives you a 100x speedup, happen sooner, et cetera.
+
+1196
+01:33:53,680 --> 01:33:57,520
+I’m happy to just take a bit longer on that one. What’s the crux?
+
+1197
+01:33:58,640 --> 01:34:03,520
+My capacity to absorb information and make the Bayesian optimal decision on the next experiment.
+
+1198
+01:34:04,800 --> 01:34:07,680
+I’m assuming that you can delegate some of this to the AI.
+
+1199
+01:34:07,680 --> 01:34:10,800
+The AI is becoming decent at deciding. It’s run this experiment, it’s got
+
+1200
+01:34:10,800 --> 01:34:14,480
+this result, it runs the next experiment. If it can run two or three experiments in a
+
+1201
+01:34:14,480 --> 01:34:19,360
+row without crashing, then that is actually a big uplift.
+
+1202
+01:34:19,360 --> 01:34:27,680
+Okay, final question. An AI which dominates top human experts across every single field
+
+1203
+01:34:27,680 --> 01:34:35,840
+of work that can be done over a computer. So not only AI research, but all cognitive work.
+
+1204
+01:34:35,840 --> 01:34:40,240
+Not just short-horizon work, but literally, if it takes three years or something, the AI will
+
+1205
+01:34:40,240 --> 01:34:43,520
+still do better than humans. This is basically just ASI?
+
+1206
+01:34:43,520 --> 01:34:46,000
+Yeah. I would say 3-4 years.
+
+1207
+01:34:46,000 --> 01:34:56,080
+The fuck? I mean that doesn’t seem wrong, but— AI is obviously getting more attention.
+
+1208
+01:34:56,080 --> 01:35:01,760
+It’s one of the harder things, but a lot of energy is being put into it.
+
+1209
+01:35:01,760 --> 01:35:07,280
+It’s also not one of the hardest things for AI, because it involves a lot of code and math,
+
+1210
+01:35:07,280 --> 01:35:12,480
+which models are really good at. For things that involve 3D and
+
+1211
+01:35:12,480 --> 01:35:17,280
+spatial stuff and physical stuff, I think that will take a little longer.
+
+1212
+01:35:20,080 --> 01:35:26,240
+If it’s mechanical engineering or something, and it’s not getting the most attention right now,
+
+1213
+01:35:26,240 --> 01:35:28,480
+that might take a little longer. But it also does include fields
+
+1214
+01:35:28,480 --> 01:35:31,760
+where there is relatively little data because of the nature of the field,
+
+1215
+01:35:31,760 --> 01:35:37,920
+and it has to learn that data on the fly. For example, it has to become superhuman
+
+1216
+01:35:37,920 --> 01:35:47,040
+at being an engineer at TSMC or something. So you would have to assume that you can give
+
+1217
+01:35:47,040 --> 01:35:53,200
+the AI the same onboarding material. Then something has to be solved about
+
+1218
+01:35:54,880 --> 01:35:58,880
+longer-horizon learning. I’d say 5 to 10.
+
+1219
+01:35:58,880 --> 01:36:06,160
+So basically, you think automating AI research is ASI-complete or something?
+
+1220
+01:36:06,160 --> 01:36:11,360
+Yeah, I think so. I think there are so many things in the world where, even if you have
+
+1221
+01:36:11,360 --> 01:36:15,920
+some sort of memory system external to the model, and even if context length grows a little bit,
+
+1222
+01:36:16,640 --> 01:36:19,520
+there are just fundamentally things where, even if you could research the information
+
+1223
+01:36:19,520 --> 01:36:22,320
+or write notes yourself, you’d need more than a million-token context window today.
+
+1224
+01:36:24,080 --> 01:36:29,040
+I kind of agree on the 5-year range, at least for the stuff that labs are focusing on.
+
+1225
+01:36:29,040 --> 01:36:33,200
+But I think there’s going to be a long tail of stuff which the AI could theoretically go out
+
+1226
+01:36:33,200 --> 01:36:37,760
+and learn about, but no one has bothered to do it and the compute hasn’t been allocated to that.
+
+1227
+01:36:37,760 --> 01:36:40,640
+So that might take longer for literally every single human expert.
+
+1228
+01:36:41,440 --> 01:36:44,640
+Sorry, but by this I also included the ability to learn a new domain as fast as a human.
+
+1229
+01:36:46,080 --> 01:36:49,120
+I think that’s not necessarily necessary, because the AI will have
+
+1230
+01:36:49,120 --> 01:36:52,720
+vastly greater experience than any human. Thanks so much for doing this, guys.
+
+1231
+01:36:52,720 --> 01:36:56,880
+I feel like this was a great format for getting different experts to disagree and debate and
+
+1232
+01:36:56,880 --> 01:36:59,120
+discuss things together. It was very productive.
+
+1233
+01:36:59,120 --> 01:36:59,840
+Thanks for having us.
+

@@ -1,0 +1,5216 @@
+1
+00:00:00,080 --> 00:00:01,439
+Oh, like I love cloud code.
+
+2
+00:00:01,439 --> 00:00:02,280
+I love codeex.
+
+3
+00:00:02,399 --> 00:00:03,200
+I love pi.
+
+4
+00:00:03,200 --> 00:00:05,520
+Like no, I love oh my pi.
+
+5
+00:00:05,520 --> 00:00:06,760
+I love prime agent.
+
+6
+00:00:07,040 --> 00:00:09,400
+To be honest, I think all of them are the same.
+
+7
+00:00:09,599 --> 00:00:13,040
+>> You know, your your models actually are capable a lot more if you try harder.
+
+8
+00:00:13,040 --> 00:00:14,320
+So this is a skill issue.
+
+9
+00:00:14,320 --> 00:00:14,559
+>> Yeah.
+
+10
+00:00:14,559 --> 00:00:14,960
+Yeah.
+
+11
+00:00:14,960 --> 00:00:20,840
+Basically, I I I mean I I I think there's one thing I want to see.
+
+12
+00:00:20,960 --> 00:00:30,199
+I I appreciate that there's a big focus on like jagged intelligence because it paints a big picture of like we can do this if we really set our minds on it.
+
+13
+00:00:30,320 --> 00:00:34,440
+But I kind of wish and and maybe someone in academia should do this.
+
+14
+00:00:34,480 --> 00:00:46,640
+Like really just sit down and think about like if I took Astra even the current frontier models are not good enough at like doing a particular job over let's say the span of a
+
+15
+00:00:46,640 --> 00:00:48,440
+month consistently and well.
+
+16
+00:00:48,559 --> 00:00:50,839
+It's uh 10,000 agents in 88 hours.
+
+17
+00:00:50,960 --> 00:00:56,280
+Um 130 billion public tokens which is estimated to be about $40 million in public pricing.
+
+18
+00:00:56,640 --> 00:00:59,680
+>> May maybe you'll have to pay like $40 million to get a result.
+
+19
+00:00:59,680 --> 00:01:02,079
+And it's like well but it's exciting.
+
+20
+00:01:02,079 --> 00:01:09,760
+I I I will say like it is it's very exciting that we even have the option to point $40 million at a problem and solve it.
+
+21
+00:01:09,760 --> 00:01:11,680
+Yes.
+
+22
+00:01:11,680 --> 00:01:15,079
+>> Before we get into today's episode, I just have a small message for listeners.
+
+23
+00:01:15,360 --> 00:01:15,840
+Thank you.
+
+24
+00:01:15,840 --> 00:01:24,479
+We would not be able to bring you the AI engineering, science, and entertainment content that you so clearly want if you didn't choose to also click in and tune into our content.
+
+25
+00:01:24,479 --> 00:01:27,560
+We've been approached by sponsors on an almost daily basis.
+
+26
+00:01:27,600 --> 00:01:34,720
+But fortunately, enough of you actually subscribe to us to keep all this sustainable without ads, and we want to keep it that way.
+
+27
+00:01:34,720 --> 00:01:37,200
+But I just have one favor to ask all of you.
+
+28
+00:01:37,200 --> 00:01:41,759
+The single most powerful, completely free thing you can do is to click that subscribe button.
+
+29
+00:01:41,759 --> 00:01:44,200
+It's the only thing I'll ever ask of you.
+
+30
+00:01:44,240 --> 00:01:50,560
+And it means absolutely everything to me and my team that works so hard to bring the Inspace to you each and every week.
+
+31
+00:01:50,560 --> 00:01:55,640
+If you do it, I promise you we'll never stop working to make the show even better.
+
+32
+00:01:55,840 --> 00:01:57,240
+Now, let's get into it.
+
+33
+00:01:59,920 --> 00:02:02,000
+>> All right, we're here in the studio with Alex Jang.
+
+34
+00:02:02,000 --> 00:02:07,480
+Uh, I guess most famously of RLMs, uh, but you you have a lot a few other affiliations.
+
+35
+00:02:08,000 --> 00:02:08,879
+Welcome to the show.
+
+36
+00:02:08,879 --> 00:02:10,000
+>> Yeah, thank you for having me.
+
+37
+00:02:10,000 --> 00:02:11,680
+Yeah, I guess GPU mode as well.
+
+38
+00:02:11,680 --> 00:02:12,720
+>> Yes, GP mode as well.
+
+39
+00:02:12,720 --> 00:02:14,560
+>> Uh, you were shephered in by Mark Sarafin.
+
+40
+00:02:14,560 --> 00:02:16,160
+Not Not everyone gets that kind of welcome.
+
+41
+00:02:16,160 --> 00:02:16,480
+>> Yep.
+
+42
+00:02:16,480 --> 00:02:16,720
+Yeah.
+
+43
+00:02:16,720 --> 00:02:16,959
+Yeah.
+
+44
+00:02:16,959 --> 00:02:19,680
+I'm very very close to all the people in GP mode.
+
+45
+00:02:19,680 --> 00:02:26,080
+So, yeah, we often end up working together in various capacities like even beyond just GP mode itself.
+
+46
+00:02:26,080 --> 00:02:26,640
+So, >> yeah.
+
+47
+00:02:26,640 --> 00:02:30,080
+Can we explain uh so people who are not that close don't know about this.
+
+48
+00:02:30,080 --> 00:02:31,320
+It's a it's a discord.
+
+49
+00:02:31,360 --> 00:02:37,040
+It used to be focused on I guess CUDA mode and then then generalized a little bit.
+
+50
+00:02:37,040 --> 00:02:38,319
+Uh it was started by Mark.
+
+51
+00:02:38,319 --> 00:02:38,640
+Yep.
+
+52
+00:02:38,640 --> 00:02:43,360
+It was basically like to me it's like the hiring pipeline of the PyTorch team and then you left PyTorch.
+
+53
+00:02:43,360 --> 00:02:43,680
+>> Yep.
+
+54
+00:02:43,680 --> 00:02:44,080
+Yep.
+
+55
+00:02:44,080 --> 00:02:44,400
+Yep.
+
+56
+00:02:44,400 --> 00:02:45,000
+Yeah.
+
+57
+00:02:46,080 --> 00:02:53,320
+>> So it used to be I think uh it started actually around when I was in college um in like 2023.
+
+58
+00:02:53,920 --> 00:02:58,839
+Uh I think it was started by Mark Andreas and Jeremy Howard.
+
+59
+00:02:59,200 --> 00:03:07,360
+The original premise was just like it was a GPU or it was a discord dedicated to learning how to write GPU kernels and they had like lectures.
+
+60
+00:03:07,360 --> 00:03:08,959
+That was basically the extent of it.
+
+61
+00:03:08,959 --> 00:03:13,040
+Um, and I got interested in it because I was writing GPU kernels.
+
+62
+00:03:13,040 --> 00:03:16,440
+It was actually out of like pure chance.
+
+63
+00:03:16,720 --> 00:03:19,840
+I was interning at Snapchat at the time and Rexus.
+
+64
+00:03:19,840 --> 00:03:20,080
+>> Yeah.
+
+65
+00:03:20,080 --> 00:03:22,839
+I was very bored with Rexus.
+
+66
+00:03:22,879 --> 00:03:27,800
+So, um, they had a project where like they were interested in writing.
+
+67
+00:03:28,080 --> 00:03:30,720
+It was this paper called Infinite Attention.
+
+68
+00:03:30,720 --> 00:03:31,920
+It was like a Google paper.
+
+69
+00:03:31,920 --> 00:03:32,159
+>> Yes.
+
+70
+00:03:32,159 --> 00:03:33,519
+We've covered it on paper club.
+
+71
+00:03:33,519 --> 00:03:33,760
+>> Yes.
+
+72
+00:03:33,760 --> 00:03:34,080
+Yeah.
+
+73
+00:03:34,080 --> 00:03:39,640
+So I was interested in in whether or not you could write specialized kernels for it at Snapchat.
+
+74
+00:03:39,840 --> 00:03:43,680
+Um it didn't nothing really came of it but I joined GPU mode at the time.
+
+75
+00:03:43,680 --> 00:03:44,879
+It was called CUDA mode.
+
+76
+00:03:44,879 --> 00:03:53,720
+Uh I think for like legal reasons or something they changed the name but I met Mark uh I met Mate I met a bunch of other people that were very involved in the community.
+
+77
+00:03:53,920 --> 00:04:00,600
+And then Mark had pitched this idea called Popcorn which was now what you see as the leaderboard today.
+
+78
+00:04:01,040 --> 00:04:11,120
+But the general idea was like I think all of us had this like intuition that GPU programming is like very similar to if you guys have done like competitive programming.
+
+79
+00:04:11,120 --> 00:04:14,640
+It's it's a not I I don't mean to say like they're transferable >> skills.
+
+80
+00:04:14,640 --> 00:04:16,000
+You code golf a little bit.
+
+81
+00:04:16,000 --> 00:04:16,160
+>> Yeah.
+
+82
+00:04:16,160 --> 00:04:16,400
+Yeah.
+
+83
+00:04:16,400 --> 00:04:16,560
+Yeah.
+
+84
+00:04:16,560 --> 00:04:21,199
+And there's like there's actually a surprisingly small space of optimizations that people do.
+
+85
+00:04:21,199 --> 00:04:25,360
+Uh and there's actually not that many kernels per se that people are interested in optimizing.
+
+86
+00:04:25,360 --> 00:04:33,480
+And so we kind of had this thought that like if you had enough data like in the same way that code force is there's millions of problems.
+
+87
+00:04:33,680 --> 00:04:44,720
+If you could do this with GPU code like you could scale and automate kind of GPU kernel development which for researchers is a huge deal cuz I think one of the bigger bottlenecks like
+
+88
+00:04:44,720 --> 00:04:54,000
+if you look like mamba for example like they release the paper with kernels because otherwise like you can't really use it in any meaningful way you know and not everyone has like a tree
+
+89
+00:04:54,000 --> 00:04:54,800
+on their team.
+
+90
+00:04:54,800 --> 00:04:56,560
+So we're very interested in this.
+
+91
+00:04:56,560 --> 00:05:05,360
+Uh kernel bench kind of spawned from that too of like can we get LLMs to automate um GPU kernel code and I think that was like a it was a very very fun time.
+
+92
+00:05:05,360 --> 00:05:12,040
+It was like between college and my PhD and yeah I I had a really pleasant time doing stuff with GPU mode.
+
+93
+00:05:12,080 --> 00:05:14,800
+Now I kind of just help with the lectures sometimes.
+
+94
+00:05:14,800 --> 00:05:23,919
+Um I'm not as involved and I think in general like we don't have as many competitions as we used to but um yeah I still keep in touch a lot with with everyone there.
+
+95
+00:05:23,919 --> 00:05:29,680
+Is there a friendly rivalry because like I think the previous community that used to do this like MLS ML Perf thing.
+
+96
+00:05:29,680 --> 00:05:31,039
+Is there a friendly riv rivalry?
+
+97
+00:05:31,039 --> 00:05:34,840
+Is this like just new generation MLF or what's going on?
+
+98
+00:05:34,880 --> 00:05:46,560
+>> The nice thing about GPU mode is that it is also a community in the sense that like a lot of the lectures are very easy enough for a beginner to follow and ask questions
+
+99
+00:05:46,560 --> 00:05:53,360
+and things like that and like the competitions are like somewhat not secondary but like you can participate in them to learn.
+
+100
+00:05:53,360 --> 00:06:02,639
+I think with a lot of like MLS, ML Perf kind of benchmarks like for the most part like only serious labs and companies participate like like seriously in them at least.
+
+101
+00:06:02,639 --> 00:06:03,919
+That's that was my understanding of it.
+
+102
+00:06:03,919 --> 00:06:15,520
+Um I I could be wrong, but I I think also beyond GPU mode now, one thing that has been really exciting is there's a lot more websites and like people that work on hosting
+
+103
+00:06:15,520 --> 00:06:16,080
+competitions.
+
+104
+00:06:16,080 --> 00:06:23,079
+Like I think there's this >> I think there's this website called like leak GPU or something and it's like leak code for GPU problems.
+
+105
+00:06:23,199 --> 00:06:34,160
+Um there's like other ones too that I like we've we've seen like there's many that have kind of spawned and like talked on GPU mode and like um it's very exciting in the sense
+
+106
+00:06:34,160 --> 00:06:44,240
+that I think GPU programming used to be super niche like when I was interested in it and the only reason I got interested in it was Trio gave a talk at Princeton because he
+
+107
+00:06:44,240 --> 00:06:52,560
+was applying for faculty I mean he is faculty there now but I listened to his talk on flash tension in like 2023 and I was like wow this is like the coolest thing ever.
+
+108
+00:06:52,560 --> 00:06:55,759
+Um and I was like this is like this is what everyone should be working on.
+
+109
+00:06:55,759 --> 00:07:03,919
+I guess like VLM and stuff had come out too and it was like oh you know we should be writing kernels but now it's like you know everyone writes kernels like everyone it's it's
+
+110
+00:07:03,919 --> 00:07:07,960
+I think it's actually almost saturated in some sense uh as a field.
+
+111
+00:07:08,160 --> 00:07:10,800
+>> Any any interesting takes for people that want to get into it?
+
+112
+00:07:10,800 --> 00:07:21,520
+So I think one of the biggest news is GPT 5.6 wrote more efficient kernels so Terra and uh Luna could be 80% cheaper.
+
+113
+00:07:21,520 --> 00:07:21,680
+Yeah.
+
+114
+00:07:21,680 --> 00:07:32,800
+And then we've seen other competitions where people are like setting records and they're like we're doing some auto research loop and these are people that don't have a background in any kernel writing.
+
+115
+00:07:32,800 --> 00:07:33,199
+Right.
+
+116
+00:07:33,199 --> 00:07:33,440
+>> Yeah.
+
+117
+00:07:33,440 --> 00:07:41,000
+So even on the GPU mode leaderboard uh if you look at like a lot of the recent problems almost all the solutions are AI generated.
+
+118
+00:07:41,360 --> 00:07:49,000
+However, you'll notice on the leaderboard so there's this guy named Gaurst who is like a very very like regular member of GPU mode.
+
+119
+00:07:49,120 --> 00:07:54,840
+We've always known for a long time that he's like a super super corrected like GPU kernel writer.
+
+120
+00:07:54,960 --> 00:08:01,039
+One thing we discovered on this leaderboard is like almost he also used AI to help him with these solutions,
+
+121
+00:08:01,039 --> 00:08:04,680
+but for the most part like he helped prompt and move it in certain directions.
+
+122
+00:08:04,960 --> 00:08:14,840
+Uh we found that like his kernel was like basically the only one in like the top 10 that was actually stable in like actual like endtoend systems.
+
+123
+00:08:14,960 --> 00:08:21,360
+And it does bring into question like it's not like I mean GPU kernels have a verification problem.
+
+124
+00:08:21,360 --> 00:08:22,720
+Like we've kind of known this.
+
+125
+00:08:22,720 --> 00:08:24,800
+It's been a problem since kernel bench was released.
+
+126
+00:08:24,800 --> 00:08:27,039
+Like there's a lot of reward hacking that goes on.
+
+127
+00:08:27,039 --> 00:08:27,599
+But you Yeah.
+
+128
+00:08:27,599 --> 00:08:30,519
+You also notice like the lines of code is a lot a lot smaller.
+
+129
+00:08:30,639 --> 00:08:32,800
+>> Is that noticeable or is it just >> Yeah.
+
+130
+00:08:32,800 --> 00:08:34,719
+No, it's it's it's definitely like very important.
+
+131
+00:08:34,719 --> 00:08:40,280
+And I think like it's it's really interesting that still there's a lot of alpha in being good at.
+
+132
+00:08:41,760 --> 00:08:42,719
+>> There definitely is.
+
+133
+00:08:42,719 --> 00:08:42,959
+Yeah.
+
+134
+00:08:42,959 --> 00:08:53,040
+I I think like and this applies to a lot of AI systems as well like I think you know even with the most recent like math proofs and stuff like it doesn't necessarily mean
+
+135
+00:08:53,040 --> 00:09:03,519
+mathematicians are obsolete I mean these companies still hire mathematicians like to do whether it be like data labeling work or or even just like steering the models to solve problems like there is still
+
+136
+00:09:03,519 --> 00:09:08,200
+a lot of alpha and being like knowledgeable in these things.
+
+137
+00:09:08,240 --> 00:09:17,960
+So >> is it just knowledge or is it also there's just more planning and is there uh an emergent style of planning that works better?
+
+138
+00:09:18,560 --> 00:09:25,680
+>> I think it's it's a mix of maybe this is what you mean like intuition for how to solve the problem.
+
+139
+00:09:25,680 --> 00:09:27,680
+>> Like for example I always diagram my code.
+
+140
+00:09:27,680 --> 00:09:28,080
+Yeah.
+
+141
+00:09:28,080 --> 00:09:28,320
+>> Right.
+
+142
+00:09:28,320 --> 00:09:32,959
+And then like if there's a part of the diagram I don't understand I work until I understand it.
+
+143
+00:09:32,959 --> 00:09:34,399
+Otherwise I it's not allowed.
+
+144
+00:09:34,399 --> 00:09:34,720
+>> Yeah.
+
+145
+00:09:34,720 --> 00:09:35,120
+Yeah.
+
+146
+00:09:35,120 --> 00:09:43,680
+So I think it's like it's a mix of those things of like the people who work like the people who know how to look at these problems and how to solve them like also
+
+147
+00:09:43,680 --> 00:09:53,040
+know how to use AI to do them because like you're acting as a very strong verifier like if you are knowledge or if you know what to do and you're also like I I
+
+148
+00:09:53,040 --> 00:10:01,800
+think the thing that we've kind of discovered with all these agent swarms and things like this is like when you throw enough compute at a problem you like can sufficiently
+
+149
+00:10:02,959 --> 00:10:05,480
+explore solutions to that problem.
+
+150
+00:10:05,519 --> 00:10:14,800
+But often times like you know maybe you can burn like a hundred billion or a trillion tokens on something but if you bring in someone who knows something about the problem um they can
+
+151
+00:10:14,800 --> 00:10:18,800
+uncover something for the model that would like erase that one trillion token spent.
+
+152
+00:10:18,800 --> 00:10:22,160
+I mean it's not it's not super clear like what exactly the trends are here.
+
+153
+00:10:22,160 --> 00:10:31,519
+But I think like there are so many problems in the wild still right now that we want to solve and like we can't afford to just always you know throw as much comput as
+
+154
+00:10:31,519 --> 00:10:32,399
+possible at it.
+
+155
+00:10:32,399 --> 00:10:38,000
+like there is still an efficiency aspect of of all of these things that is super super important.
+
+156
+00:10:38,000 --> 00:10:45,519
+>> Is there like a theoretical right answer that you can just calculate based on physics and then you just get close to the physics limit?
+
+157
+00:10:45,519 --> 00:10:45,760
+>> Yes.
+
+158
+00:10:45,760 --> 00:10:57,040
+So for GPU kernels you can compute it's actually not that easy to compute sometimes like depending on how complex the problem is like for for matrix multiplications it's very easy to compute um this
+
+159
+00:10:57,040 --> 00:11:08,800
+like speed of light kind of uh estimate of what the fastest kernel can be and like this is also assuming like you know maybe all of your all your data starts on the CPU
+
+160
+00:11:08,800 --> 00:11:16,320
+or maybe it starts in DRAM on the GPU etc like this changes these these numbers slightly >> the transfers and all these things.
+
+161
+00:11:16,320 --> 00:11:16,640
+>> Yeah.
+
+162
+00:11:16,640 --> 00:11:26,959
+But I I I will say like it's not clear though like in a lot of cases if it's even possible to hit this theoretical number if that makes sense.
+
+163
+00:11:26,959 --> 00:11:36,320
+Like this is assuming like perfect overlapping and transfer of data and and like there's maybe some bottleneck that you can't get around but often the kernels are not even close like that we write
+
+164
+00:11:36,320 --> 00:11:40,000
+are not nearly close enough to this number to be like meaningful at all.
+
+165
+00:11:40,000 --> 00:11:40,399
+>> Yeah.
+
+166
+00:11:40,399 --> 00:11:42,000
+And is it speed that matters?
+
+167
+00:11:42,000 --> 00:11:45,680
+Do you also care about uh obviously memory which which feeds into speed.
+
+168
+00:11:45,680 --> 00:11:47,400
+Do you care about power consumption?
+
+169
+00:11:47,440 --> 00:11:55,839
+So one of my uh one of our top pods of the year was Jeff Dean who was like actually I just checked the microJoules or like the nanojles pico jewels.
+
+170
+00:11:55,839 --> 00:11:57,320
+>> Yeah, pico it's optional pico.
+
+171
+00:11:58,160 --> 00:11:59,760
+>> Uh do you care about that?
+
+172
+00:11:59,760 --> 00:12:04,160
+>> So I don't I guess Vivie I'm not I'm not as >> but everything here is speed right?
+
+173
+00:12:04,160 --> 00:12:05,680
+Like nobody's counting ples.
+
+174
+00:12:05,680 --> 00:12:16,720
+Um but I there's a caveat here which is I think like there is speed in the context of a single kernel and there's speed in the context of a larger problem like maybe the
+
+175
+00:12:16,720 --> 00:12:28,639
+N10 model because like one thing to consider and this is why it's important to talk about what what speed of light is referring to because in these cases for the kernels like we always
+
+176
+00:12:28,639 --> 00:12:38,360
+start with everything in in uh like HBM for example right but you can imagine that like an end toend kernel like an end to-end model.
+
+177
+00:12:38,639 --> 00:12:48,840
+What you might want to do between two layers is like you might sacrifice the speed of the first operation to keep things in the cache for the second operation.
+
+178
+00:12:49,040 --> 00:12:54,360
+And like these are things that like you can't really get out of in isolation with like these kinds of kernels.
+
+179
+00:12:54,560 --> 00:12:59,360
+And you know people call this like the fusion pro or like the fusion problem.
+
+180
+00:12:59,360 --> 00:12:59,519
+Yeah.
+
+181
+00:12:59,519 --> 00:13:00,800
+Or like mega kernel stuff.
+
+182
+00:13:00,800 --> 00:13:06,399
+And it generally only applies like when you are like memory bound in in in most cases.
+
+183
+00:13:06,399 --> 00:13:14,880
+But this is something that like also there there is this question of like as these models get better like should we just be generating like mega kernels?
+
+184
+00:13:14,880 --> 00:13:16,240
+Is that like what we want?
+
+185
+00:13:16,240 --> 00:13:17,879
+Um >> what's your take?
+
+186
+00:13:18,079 --> 00:13:25,800
+I think that this is really difficult because you need the data to do this.
+
+187
+00:13:25,920 --> 00:13:38,920
+And I think like I have yet to see an example in the wild of like we bootstrap the ability to solve a very difficult class of problems without any examples.
+
+188
+00:13:39,200 --> 00:13:47,320
+Um, and I think like the other reason why I think maybe this isn't that interesting is that at the level of an individual kernel,
+
+189
+00:13:47,600 --> 00:13:55,600
+a like they're not that they're not as complex, but b you're somewhat confident that there's not as much structure in a single kernel.
+
+190
+00:13:55,600 --> 00:14:01,360
+But like in a mega kernel, like I would be more inclined to believe that like a compiler would be better here.
+
+191
+00:14:01,360 --> 00:14:12,439
+like some compiler over like higher level ops makes sense because in general like actually I think mega kernels are very like the pieces are very composable of like the individual kernels.
+
+192
+00:14:12,639 --> 00:14:21,519
+There's some areas where you might want to do like weird fusions and everything but in general I think these are cases that like a compiler can probably handle and there is a company that's
+
+193
+00:14:21,519 --> 00:14:25,279
+working on this from from what I understand that has given some talks on GPU mode as well.
+
+194
+00:14:25,279 --> 00:14:29,839
+>> Yeah, I want to basically cluster all the GPU mode discussions here because obviously there's other parts that we need to move on to.
+
+195
+00:14:29,839 --> 00:14:31,440
+I think there is something to plug.
+
+196
+00:14:31,440 --> 00:14:33,519
+You guys do host a lot of really good lectures.
+
+197
+00:14:33,519 --> 00:14:34,399
+They're all on YouTube.
+
+198
+00:14:34,399 --> 00:14:35,360
+People can follow along.
+
+199
+00:14:35,360 --> 00:14:37,199
+And you lead quite a bit of it.
+
+200
+00:14:37,199 --> 00:14:40,160
+You're still quite >> I used to uh sometimes I still do.
+
+201
+00:14:40,160 --> 00:14:42,119
+Uh I think they're mostly Mark.
+
+202
+00:14:42,160 --> 00:14:43,680
+Mark is the one who usually does them.
+
+203
+00:14:43,680 --> 00:14:47,839
+Mate does sometimes as well, but um yeah, I highly recommend them.
+
+204
+00:14:47,839 --> 00:14:50,240
+They are extremely good resources.
+
+205
+00:14:50,240 --> 00:14:55,080
+Like I think it's kind of crazy how much people share on there.
+
+206
+00:14:55,120 --> 00:14:59,760
+So yeah, >> because like if you're there like you're very very like you're exactly the right audience, you know?
+
+207
+00:14:59,760 --> 00:15:00,480
+Yes, exactly.
+
+208
+00:15:00,480 --> 00:15:07,120
+This isn't going to reach the >> main and there's a lot of like introductory material as well um that we've put on um that I think is useful for people.
+
+209
+00:15:07,120 --> 00:15:08,720
+>> Colonel Bench was kind of influential.
+
+210
+00:15:08,720 --> 00:15:10,999
+I just want to see like you know that was last year.
+
+211
+00:15:11,120 --> 00:15:17,519
+Uh what other ongoing work do you want to shout out that people should pay attention to because obviously you're involved in this field.
+
+212
+00:15:17,519 --> 00:15:25,640
+Yeah, I will give maybe the in the background story of like I am actually involved in a lot of benchmarks or I used to be uh maybe prior to my PhD.
+
+213
+00:15:25,839 --> 00:15:29,920
+It started because I was at Princeton uh I worked with the Sweet Bench team there.
+
+214
+00:15:29,920 --> 00:15:33,839
+John >> John Carlos here they're all great like I love them.
+
+215
+00:15:33,839 --> 00:15:34,439
+Yeah.
+
+216
+00:15:34,560 --> 00:15:38,720
+>> There's basically this I think people don't understand how many how much benchmarks come from the same group.
+
+217
+00:15:38,720 --> 00:15:39,040
+Yeah.
+
+218
+00:15:39,040 --> 00:15:39,799
+>> At Princeton
+
+219
+00:15:41,600 --> 00:15:42,439
+>> Do you know Shun?
+
+220
+00:15:42,560 --> 00:15:42,800
+>> Yes.
+
+221
+00:15:42,800 --> 00:15:42,959
+Yeah.
+
+222
+00:15:42,959 --> 00:15:43,360
+Yeah.
+
+223
+00:15:43,360 --> 00:15:44,399
+>> We had him on the pod before.
+
+224
+00:15:44,399 --> 00:15:45,600
+Now now he's like running 10.
+
+225
+00:15:45,600 --> 00:15:45,839
+>> Yeah.
+
+226
+00:15:45,839 --> 00:15:47,640
+Now he's like he's like a superstar.
+
+227
+00:15:48,000 --> 00:15:57,920
+Uh when I when I I met him so he uh he was advising my friend Michael Michael Tang who is now at anthropic but they work together a lot.
+
+228
+00:15:57,920 --> 00:16:00,560
+We were like the two undergrads in Caric's lab.
+
+229
+00:16:00,560 --> 00:16:03,279
+I and then some others joined later as well.
+
+230
+00:16:03,279 --> 00:16:04,560
+But yeah Shinu is great.
+
+231
+00:16:04,560 --> 00:16:08,880
+I I did not know he was like such a superstar until like later on like after I left.
+
+232
+00:16:08,880 --> 00:16:17,440
+But >> yeah, I mean like like okay, so there are very few PhD students like yours yours is like the next one like once a year we feature someone like who is like basically entire
+
+233
+00:16:17,440 --> 00:16:21,680
+PhD uh has been like on target.
+
+234
+00:16:21,680 --> 00:16:22,880
+>> There's not that many of them.
+
+235
+00:16:22,880 --> 00:16:27,279
+Shil was like clearly one of them and uh you know Jack Jack Morris is another one.
+
+236
+00:16:27,279 --> 00:16:35,920
+And like you know we talked before the show we talked about research taste right like somehow some grad students just have a very blessed career where like yep mostly like yep yep yep yep
+
+237
+00:16:35,920 --> 00:16:40,600
+yep this is like going to stick around relevant everyone should know this and then others just nothing.
+
+238
+00:16:40,880 --> 00:16:47,759
+>> I think this is also true of like even people within like industry labs as well.
+
+239
+00:16:47,759 --> 00:16:50,079
+I think it's just like grad students are a lot more visible.
+
+240
+00:16:50,079 --> 00:16:57,920
+So you just see like you see like you know there are some people >> who really like get lucky in like or I mean it's a mix of being lucky and also being very smart
+
+241
+00:16:57,920 --> 00:16:59,040
+and things like that.
+
+242
+00:16:59,040 --> 00:17:09,439
+I think like with with research tastes as well like I think it it gets it gets developed through opportunities at least in in my case like I got I was very fortunate to have
+
+243
+00:17:09,439 --> 00:17:17,000
+like taken the path that I took like working at Princeton and then like later like finding my ad like Omar at MIT like he's a fantastic adviser.
+
+244
+00:17:17,280 --> 00:17:31,360
+I will say though I I find that the most successful research from grad students or like in academia comes when people care about problems that maybe like most people in industry are not looking
+
+245
+00:17:31,360 --> 00:17:31,760
+at.
+
+246
+00:17:31,760 --> 00:17:39,120
+I think this is the issue that like a lot of grad students work on things that benefit like that look good to an industry lab.
+
+247
+00:17:39,120 --> 00:17:42,080
+Like for example, they'll work on some like some benchmark.
+
+248
+00:17:42,080 --> 00:17:43,039
+It's really popular now.
+
+249
+00:17:43,039 --> 00:17:48,519
+I mean, I think benchmarks in 2023 were a very different story than benchmarks now.
+
+250
+00:17:48,559 --> 00:17:56,559
+There are a lot of people that work on like harnesses and like meta harnesses and like specific harnesses for XYZ task.
+
+251
+00:17:56,559 --> 00:18:07,840
+And when you really think about it, the reason someone would work on this is like maybe there's like a clear goal shaped around the models that we have today of like this is what
+
+252
+00:18:07,840 --> 00:18:08,920
+I want to see.
+
+253
+00:18:09,039 --> 00:18:17,399
+But like I'll give I'll give the the like RLM like the recursive language model paper as an example because I think like it's a super super simple idea.
+
+254
+00:18:17,520 --> 00:18:24,840
+I think when it came out as well like there were a lot of people that were like when they see something like that they're like what is even the purpose of this or like
+
+255
+00:18:24,960 --> 00:18:28,559
+>> yeah like why like what this is just sub agents or something right?
+
+256
+00:18:28,559 --> 00:18:39,039
+Uh, and I think it's like when you get a reaction like that, it's almost like a good sign in the sense that like it's clear that people aren't thinking about what the purpose of
+
+257
+00:18:39,039 --> 00:18:39,440
+this is.
+
+258
+00:18:39,440 --> 00:18:42,480
+And I I will give another example of like Sweetbench.
+
+259
+00:18:42,480 --> 00:18:47,200
+When Sweetbench came out, I mean, OIR loves to tell this story when it came out like nobody cared.
+
+260
+00:18:47,200 --> 00:18:49,840
+Like everybody was like this is an impossible task.
+
+261
+00:18:49,840 --> 00:18:52,680
+Like why would we ever even consider this as a benchmark?
+
+262
+00:18:52,720 --> 00:18:57,320
+And it wasn't until Devon came out that everyone was like wo like this is something we want to hill climb.
+
+263
+00:18:57,440 --> 00:19:09,639
+And I think this is this this rings true for you tend to see that a lot of ideas I I think like the my favorite I guess example of this is Eric Zelikman's work
+
+264
+00:19:09,760 --> 00:19:19,120
+uh with like star and and like quiet star like I think when you read the paper at least when I first read the paper I was like is this not like an obvious idea or
+
+265
+00:19:19,120 --> 00:19:27,039
+maybe not I don't know I mean I was like oh this seems really simple or like chain of thought same thing or like shouldn't use react it's like okay like yeah I mean Sure.
+
+266
+00:19:27,039 --> 00:19:31,360
+But then like when you really think about it, it's like why what is the value of the paper?
+
+267
+00:19:31,360 --> 00:19:38,559
+And I think it comes from like it tells a bit of a story as to like what you want the field to look like.
+
+268
+00:19:38,559 --> 00:19:44,200
+And that is something that it's very hard to do this in academia because if you look at all these papers,
+
+269
+00:19:44,480 --> 00:19:51,840
+QuietStar, React, RLMs, Swebench, none of these papers are it's not like a GPT6 Astro release, you know?
+
+270
+00:19:51,840 --> 00:19:54,480
+It's not like everyone's like, "Oh my gosh, like I'm going to use this now.
+
+271
+00:19:54,480 --> 00:19:55,440
+This is the best thing in the world."
+
+272
+00:19:55,440 --> 00:19:58,160
+like academia just can't afford to do this at least right now.
+
+273
+00:19:58,160 --> 00:20:06,960
+I mean that there's a whole slew of reasons why I think that should change, but I think it's like if you don't have as a PhD student,
+
+274
+00:20:06,960 --> 00:20:12,000
+I think you're in such a unique position where you can work on literally whatever you want for the most part.
+
+275
+00:20:12,000 --> 00:20:19,120
+If you're not taking advantage of that and working on things that like nobody cares about or like people see as some trivial thing like,
+
+276
+00:20:19,120 --> 00:20:21,399
+"Oh, I thought about this, but like I don't use it."
+
+277
+00:20:21,440 --> 00:20:29,600
+I just think like in the end the research is just never going to be that interesting because you kind of need to take big bets if you're going to be in academia because otherwise
+
+278
+00:20:29,600 --> 00:20:34,600
+I think like just go to an industry lab like you know they have tons of resources, tons of talent.
+
+279
+00:20:34,880 --> 00:20:43,600
+Why constrain yourself in an area where you don't have a lot of resources and like there's not even that many people around and I think it's just it literally just comes down to like
+
+280
+00:20:43,600 --> 00:20:44,360
+big bets.
+
+281
+00:20:44,480 --> 00:20:50,680
+um you just have to take big bets and like a lot of them will fail, you know, like that's just it's it's natural.
+
+282
+00:20:50,799 --> 00:21:03,039
+But I think that is as a PhD student like that's the biggest advantage you have over any single person at another lab because you don't have to deal with bureaucracy and all these other
+
+283
+00:21:03,039 --> 00:21:03,639
+things.
+
+284
+00:21:03,840 --> 00:21:04,400
+>> Fair enough.
+
+285
+00:21:04,400 --> 00:21:07,200
+Yeah, >> I ask a lot of people this question and usually they hand wave away.
+
+286
+00:21:07,200 --> 00:21:16,960
+So I think I appreciate that you're actually think giving a thoughtful response on like no like uh this is your unfair advantage because everything else is biased against you basically.
+
+287
+00:21:16,960 --> 00:21:17,200
+>> Yeah.
+
+288
+00:21:17,200 --> 00:21:17,440
+Yeah.
+
+289
+00:21:17,440 --> 00:21:18,040
+Exactly.
+
+290
+00:21:18,080 --> 00:21:24,880
+And so like it's honestly I will bring up Jeb as an example because it's it's not an it's not an academic project.
+
+291
+00:21:24,880 --> 00:21:33,200
+I want to bring this up because >> this also happened with RLMs and uh it happens with many other works like things get overhyped right to to an extent like something gets overhyped and then
+
+292
+00:21:33,200 --> 00:21:34,799
+people are like why is this overhyped?
+
+293
+00:21:34,799 --> 00:21:37,039
+like this is trivial, this is stupid.
+
+294
+00:21:37,039 --> 00:21:46,240
+And I saw the same thing with Jev because I think the release was like I mean there's this whole thing about like academics or they're not academic group but like people have to do
+
+295
+00:21:46,240 --> 00:21:57,560
+branding and they have to like kind of market their research and so like I understand but I think there was a lot of discourse about Jev just being like something we've known for years
+
+296
+00:21:57,679 --> 00:22:02,840
+and I think it's kind of missing the point of like why is such a system so interesting.
+
+297
+00:22:03,120 --> 00:22:10,400
+It's why is it not just some stupid MLP classifier that like we've we've been doing, you know, back in our intro ML classes or something.
+
+298
+00:22:10,400 --> 00:22:19,480
+I think what's really interesting about Jev is that it kind of opens up this question of are language models correct?
+
+299
+00:22:19,520 --> 00:22:26,360
+Like in the form that they're in, can we consider a different design space other than text to text?
+
+300
+00:22:26,640 --> 00:22:37,919
+What what they're doing is they're basically saying like I will take advantage of this language model backbone like I know it captures a lot of information about language but I'm going to change the
+
+301
+00:22:37,919 --> 00:22:48,240
+output space of the model to give you a trade-off which is I will do very very fast inference over like if you have some prior about this problem like let's say I only need
+
+302
+00:22:48,240 --> 00:22:56,960
+to make a binary classification am I going to ask my language model to do this and pay like a 400x cost like no it's it's silly,
+
+303
+00:22:56,960 --> 00:22:57,520
+right?
+
+304
+00:22:57,520 --> 00:23:05,639
+Um, and I think for the longest time because the labs are the only places that control, you're never going to use something other than like GPT,
+
+305
+00:23:05,679 --> 00:23:08,200
+GP6 or Fable because they're the best models.
+
+306
+00:23:08,400 --> 00:23:17,280
+But because of that, like people have gotten kind of accustomed to this idea that a language model is just a auto reggressive decoder.
+
+307
+00:23:17,280 --> 00:23:18,559
+Like we have accepted this.
+
+308
+00:23:18,559 --> 00:23:20,799
+And I think when RLMs came out, it was the same thing.
+
+309
+00:23:20,799 --> 00:23:28,240
+Like one of the comments I like a very frequent criticism I got was like this is not a language model or like when I look at this like I thought it was a new
+
+310
+00:23:28,240 --> 00:23:40,400
+architecture but it's actually not and my response to that is like well a language model is just modeling language it doesn't have to be this transformer decoder you know uh and Jeb is really
+
+311
+00:23:40,400 --> 00:23:52,920
+really interesting in that like we now have a new thing to tune which is like what is the output space and how does this affect inference latency And I think we can actually start
+
+312
+00:23:52,960 --> 00:23:58,840
+this various parts of the language model itself.
+
+313
+00:23:59,600 --> 00:24:05,120
+It's a similar idea of a lot of the attention around it was like this is a silly idea like why who cares about this?
+
+314
+00:24:05,120 --> 00:24:15,919
+But it's like it is a simple idea but it's actually it opens up a whole new set of questions that I think like especially if you're a PhD student these are the things that
+
+315
+00:24:15,919 --> 00:24:25,279
+you want to answer because I I think it's like we don't know for Jev for example we don't know how far we can take this uh for loop transformers we also don't know how far
+
+316
+00:24:25,279 --> 00:24:35,279
+we can take this what if you loop only a subset of the model um what if you route to like only uh like you have some router to different parts of the model like
+
+317
+00:24:35,279 --> 00:24:40,559
+can you mimic what you do in a harness inside of the model?
+
+318
+00:24:40,559 --> 00:24:44,720
+What can you bridge between a harness choice and a model architecture choice?
+
+319
+00:24:44,720 --> 00:24:47,840
+These are all questions I think that open up with works like this.
+
+320
+00:24:47,840 --> 00:24:48,960
+And that's like really exciting.
+
+321
+00:24:48,960 --> 00:24:52,600
+Jeb in particular, when I saw it, I was like, this is actually really useful for RLMs.
+
+322
+00:24:52,640 --> 00:24:59,800
+Like I think it's it's it makes sense because the the biggest bottleneck in RLMs or swarms or or systems like these is they're slow.
+
+323
+00:24:59,919 --> 00:25:09,600
+when you do multiple language model calls all the time, you're not distributing your compute correctly because like maybe there's something trivial that you just want a simple model to do,
+
+324
+00:25:09,600 --> 00:25:14,720
+but you can't do it because your language model is just this this bulky thing, you know?
+
+325
+00:25:14,720 --> 00:25:15,600
+So, I'm very excited.
+
+326
+00:25:15,600 --> 00:25:24,840
+I think I think we will start to see new types of models emerge beyond just the bog standard frontier model.
+
+327
+00:25:25,200 --> 00:25:30,440
+And that is like there's so many things that you can do with these like new trade-offs.
+
+328
+00:25:30,559 --> 00:25:33,639
+Um >> I also shout out Thinky with their interaction model.
+
+329
+00:25:33,679 --> 00:25:33,919
+>> Yeah.
+
+330
+00:25:33,919 --> 00:25:34,080
+Yeah.
+
+331
+00:25:34,080 --> 00:25:35,039
+Another great example.
+
+332
+00:25:35,039 --> 00:25:35,279
+>> Yeah.
+
+333
+00:25:35,279 --> 00:25:42,640
+So like basically try to break the paradigm from sequence to sequence decoder only and just literally do anything else.
+
+334
+00:25:42,640 --> 00:25:53,039
+Yeah, I mean I think there's there's a level of if you're trying to compete, you're not going to compete with a frontier lab doing an auto reggressive decoder on like the amount of compute
+
+335
+00:25:53,039 --> 00:25:54,759
+scaling resources they have.
+
+336
+00:25:55,039 --> 00:26:02,600
+Even thinky will not, you know, okay, there may be one of the handful that can, but >> you're not really going to do much in that.
+
+337
+00:26:02,720 --> 00:26:12,159
+I don't know too much about Thinky or I don't want to say anything either, but it's like if their strategy is just to replicate open AI or anthropic like that's a horrible strategy because
+
+338
+00:26:12,159 --> 00:26:20,000
+well because like I mean they just don't have like you you kind of just have to think of it in terms of like what advantage do you have and if if you're going to
+
+339
+00:26:20,000 --> 00:26:28,320
+use the same setup I I'm sure they're not but it's like if you're going to do the same setup like you're basically competing on the things you can control which is data and compute
+
+340
+00:26:28,320 --> 00:26:31,120
+and obviously they cannot compete with the Frontier Labs on that.
+
+341
+00:26:31,120 --> 00:26:39,279
+So yeah, it makes sense that like if you are a Neolab like actually I don't know if you would consider them to be a Neolab but I guess like >> I guess they're kind of
+
+342
+00:26:39,279 --> 00:26:39,760
+a weird one.
+
+343
+00:26:39,760 --> 00:26:40,559
+Yeah, >> they're in that list.
+
+344
+00:26:40,559 --> 00:26:42,720
+They ship inkling like they count.
+
+345
+00:26:42,720 --> 00:26:50,600
+>> Anything other than open anthropic maybe like Meta and and and GDM like you just you got to do something else,
+
+346
+00:26:50,640 --> 00:26:55,720
+you know, like it's just it's the sad reality, but I think I I actually think it's a good thing.
+
+347
+00:26:55,760 --> 00:27:09,760
+I'm very happy that like scale works and these companies will just keep doing it because it opens up like potentially new players like if they uncover something really really interesting because I sort of
+
+348
+00:27:09,760 --> 00:27:17,760
+have my doubts that this is like seriously going on at Frontier Labs cuz it's like like why would you do that you know like why would you take the risk of allocating a large
+
+349
+00:27:17,760 --> 00:27:20,960
+amount of compute to new bets when the old bet already works.
+
+350
+00:27:20,960 --> 00:27:23,760
+And I think that's what spins off a lot of Neolabs, right?
+
+351
+00:27:23,760 --> 00:27:32,720
+You have a side bet and you don't get compute and you're like, "Okay, I'll go I'll go and you know your example of the potential upside is something like Jev,
+
+352
+00:27:32,720 --> 00:27:38,320
+which is X00 times cheaper, you know, comes out and >> maybe it is language model.
+
+353
+00:27:38,320 --> 00:27:39,600
+In this case, it's just different."
+
+354
+00:27:39,600 --> 00:27:39,840
+>> Yeah.
+
+355
+00:27:39,840 --> 00:27:40,080
+Yeah.
+
+356
+00:27:40,080 --> 00:27:40,400
+Yeah.
+
+357
+00:27:40,400 --> 00:27:40,640
+Yeah.
+
+358
+00:27:40,640 --> 00:27:43,800
+Um, >> so no speculation on on what Jev actually is.
+
+359
+00:27:44,320 --> 00:27:47,840
+>> I guess I have some guesses for what it might be.
+
+360
+00:27:47,840 --> 00:27:52,159
+I I have seen some people say like ah it's like a diffusion thing.
+
+361
+00:27:52,159 --> 00:27:54,759
+Um I guess that >> which is the parallel decode.
+
+362
+00:27:54,880 --> 00:27:55,960
+>> Yeah, parallel decode.
+
+363
+00:27:56,159 --> 00:28:02,680
+Honestly, I think regardless of what it actually is cuz I think you can I've seen some like open source replications of it.
+
+364
+00:28:03,039 --> 00:28:11,679
+What is really exciting to me about what they did is I'm not entirely sure what their optimization objective was and how they trained it.
+
+365
+00:28:11,679 --> 00:28:19,800
+And I think like this is a thing for RLMs that we've also been thinking about which is like okay like RLMs are a very simple idea.
+
+366
+00:28:19,919 --> 00:28:22,759
+If I come out with this paper like anyone can use it now.
+
+367
+00:28:22,799 --> 00:28:23,879
+But what distinguishes
+
+368
+00:28:24,960 --> 00:28:34,360
+the actual value of an RLM is whether or not you can train it properly and whether or not maybe you can mold some architecture around this system to make it really really good.
+
+369
+00:28:34,480 --> 00:28:43,399
+And that's something that like I mean I'm actively working on I guess but I think for them like they figured out a way to train the system which is completely non-trivial.
+
+370
+00:28:43,440 --> 00:28:45,919
+Like I I actually don't really know how they did it.
+
+371
+00:28:45,919 --> 00:28:55,520
+And I've seen some comparisons online of you know some people are claiming they used Quen or they post train on top of Quen but every open source Quen that you use is going to
+
+372
+00:28:55,520 --> 00:28:59,520
+be worse cuz whatever they did to train it clearly works very well.
+
+373
+00:28:59,520 --> 00:29:01,120
+And so that's that's very exciting.
+
+374
+00:29:01,120 --> 00:29:08,600
+There's one element of calibration which uh is a is a rare topic that I don't think people even knew about or understood.
+
+375
+00:29:08,799 --> 00:29:16,559
+We covered it with um our conversation with Clementine Forio of Hugging Face and she used to run the evals um at Hugging Face,
+
+376
+00:29:16,559 --> 00:29:23,639
+which is basically the idea that uh you know models are attuned to give you the most likely next token,
+
+377
+00:29:23,760 --> 00:29:31,679
+but uh they're going to lie to you when you ask them how confident are you because they're just going to give you the most likely next answer instead of like actually like no let's
+
+378
+00:29:31,679 --> 00:29:36,399
+calibrate like I am actually 50% sure, I'm 20% sure and like let's try to calibrate that.
+
+379
+00:29:36,399 --> 00:29:46,399
+I would say like if anything I think that actually that's pretty easy to generate synthetic data around uh because you can sort of see the truth and then synthetically generate a bunch of answers
+
+380
+00:29:46,399 --> 00:29:55,200
+have Jeff classify it and then compare with ground truth >> that that would be my reverse engineering I've actually I think calibration is probably the under like people are just using it as a very
+
+381
+00:29:55,200 --> 00:30:06,159
+fast classifier >> but they're actually not even using the probability or calibration estimates estimates I I think it's also still just misunderstood to to reiterate when you ask a model,
+
+382
+00:30:06,159 --> 00:30:09,320
+how confident are you it will spew out what 43%.
+
+383
+00:30:10,080 --> 00:30:13,600
+Uh the the big delta is this is a grounded classification, right?
+
+384
+00:30:13,600 --> 00:30:13,919
+>> Yeah.
+
+385
+00:30:13,919 --> 00:30:14,080
+Yeah.
+
+386
+00:30:14,080 --> 00:30:18,519
+I'm I'm very excited to see what people do with this model.
+
+387
+00:30:18,559 --> 00:30:20,320
+I mean, is it going to solve everything?
+
+388
+00:30:20,320 --> 00:30:21,440
+Like, no, of course not.
+
+389
+00:30:21,440 --> 00:30:27,360
+But I think it solves a class of problems that we traditionally struggled with, which is low latency things.
+
+390
+00:30:27,360 --> 00:30:29,520
+So, I I love the examples with games.
+
+391
+00:30:29,520 --> 00:30:32,040
+That's actually like I mean I >> Yeah, the Doom example.
+
+392
+00:30:32,080 --> 00:30:32,399
+Good.
+
+393
+00:30:32,399 --> 00:30:36,080
+>> I have a benchmark on language models playing video games.
+
+394
+00:30:36,080 --> 00:30:43,600
+I've always been fascinated by whether you can have an intelligent system play new games and things of of of this nature.
+
+395
+00:30:43,600 --> 00:30:55,679
+And so I think it's really really cool that they have sort of a unique way to do this to capture language and understanding in like a fast a very very fast model.
+
+396
+00:30:55,679 --> 00:30:58,600
+>> Well, while you're on the topic, anything you want to point out?
+
+397
+00:30:59,200 --> 00:30:59,520
+>> Oh, yeah.
+
+398
+00:30:59,520 --> 00:31:02,840
+I mean, you know, you did do a benchmark on many anyway.
+
+399
+00:31:03,360 --> 00:31:05,720
+>> Um, I guess these numbers are very outdated.
+
+400
+00:31:05,760 --> 00:31:07,919
+A lot of the models are are are very different.
+
+401
+00:31:07,919 --> 00:31:13,760
+And I've seen actually people run there there are some folks out there that are running newer models on these games,
+
+402
+00:31:13,760 --> 00:31:14,840
+which is really cool.
+
+403
+00:31:14,960 --> 00:31:24,960
+I guess the general premise of this benchmark was we just want to see if vision language models are are good enough at just like plugging into games with the latency constraint included.
+
+404
+00:31:24,960 --> 00:31:28,960
+Cuz this this actually I came out with this right after Claude Plays Pokémon came out.
+
+405
+00:31:28,960 --> 00:31:32,680
+Um, so this was like 2 years ago, which I guess is like ancient now.
+
+406
+00:31:32,799 --> 00:31:42,399
+But I think what's really really cool about this suite of tasks, it's very diverse in terms of what games they are.
+
+407
+00:31:42,399 --> 00:31:47,639
+And also, I think most of the games are games that people know or like have seen before.
+
+408
+00:31:47,760 --> 00:31:48,720
+I saw Yeah.
+
+409
+00:31:48,720 --> 00:31:49,960
+Jev playing Doom.
+
+410
+00:31:50,159 --> 00:32:01,440
+I will say I don't think I think they were just playing like really simple levels and stuff, but honestly like most models still can't really do or I don't actually think any models can
+
+411
+00:32:01,440 --> 00:32:02,960
+solve these games very meaningfully.
+
+412
+00:32:02,960 --> 00:32:04,640
+Like there are some games that they can.
+
+413
+00:32:04,640 --> 00:32:09,039
+I think I've seen Astra be able to solve the Kirby game.
+
+414
+00:32:09,039 --> 00:32:13,639
+And we also for this benchmark, we intentionally designed a really minimal harness.
+
+415
+00:32:13,919 --> 00:32:20,399
+And I I will get to this point about harnesses because I think there's a whole conversation to be had about like what is the value of a harness?
+
+416
+00:32:20,399 --> 00:32:25,840
+Like what is even the purpose of a harness for a model, but in general like I think it's uh yeah,
+
+417
+00:32:25,840 --> 00:32:31,720
+I I hope to see very quickly or very soon like all of these games beaten by newer models.
+
+418
+00:32:31,840 --> 00:32:39,279
+Yeah, it's interesting like the old old Cloudplace Pokemon, they like read state from RAM and saw what tiles are walkable and what not.
+
+419
+00:32:39,279 --> 00:32:41,760
+We did a podcast with them a long long time ago.
+
+420
+00:32:41,760 --> 00:32:42,240
+>> Gotcha.
+
+421
+00:32:42,240 --> 00:32:42,720
+Gotcha.
+
+422
+00:32:42,720 --> 00:32:42,799
+Yeah.
+
+423
+00:32:42,799 --> 00:32:49,919
+Yeah, I mean it's similar like Jeff doesn't have vision so you have to kind of feed in uh these like uh game state and all these things.
+
+424
+00:32:49,919 --> 00:32:52,880
+I mean let's go right into the harness stuff because you you brought it up.
+
+425
+00:32:52,880 --> 00:32:58,600
+Language model harnesses a compositional generalizes >> struggle to read that explain.
+
+426
+00:32:58,799 --> 00:32:59,279
+>> Yes.
+
+427
+00:32:59,279 --> 00:32:59,679
+Okay.
+
+428
+00:32:59,679 --> 00:33:00,159
+Okay.
+
+429
+00:33:00,159 --> 00:33:14,960
+So I have been a little unsatisfied maybe with with how people think about harnesses because people compare like oh like I love cloud code I love codeex I love pi like no I love
+
+430
+00:33:14,960 --> 00:33:23,519
+oh my pi I love prime agent to be honest I think all of them are the same most of the design decisions or like the design choices around these harnesses are the same maybe
+
+431
+00:33:23,519 --> 00:33:30,680
+prime agent is a little bit different cuz it's like inherently an RLM but in general like I think we can be a lot more creative with harnesses.
+
+432
+00:33:30,799 --> 00:33:43,919
+And what I mean by that is if we think about this from the perspective of what exactly is the harness doing for the model well basically when you're trying to solve a problem and
+
+433
+00:33:43,919 --> 00:33:47,560
+you want to use a language model to solve it like a very difficult task.
+
+434
+00:33:47,840 --> 00:33:53,919
+One thing that we have discovered is that next token prediction is a really really awkward form to do a lot of these tasks.
+
+435
+00:33:53,919 --> 00:33:56,200
+So for example, take Swebench.
+
+436
+00:33:56,559 --> 00:34:03,919
+When you're navigating a codebase, like are you going to be able to figure out how to do all of this with a single language model call?
+
+437
+00:34:03,919 --> 00:34:08,279
+Like you just say solve code or like solve my query over this codebase?
+
+438
+00:34:08,320 --> 00:34:08,800
+No.
+
+439
+00:34:08,800 --> 00:34:12,960
+So we rely on a harness to help you do these kinds of things.
+
+440
+00:34:12,960 --> 00:34:26,120
+And I think what what is interesting is like a harness is a very very opinionated program over how you want a language model to be form fit over a problem.
+
+441
+00:34:26,639 --> 00:34:38,000
+And I bring this up because when we think about the what a harness is doing, we should really think about like what choices in the harness let the language model solve this task and
+
+442
+00:34:38,000 --> 00:34:42,040
+can I actually just have a language model that just does this?
+
+443
+00:34:42,240 --> 00:34:52,480
+Because a harness if if you think about it now that loop transformers are a thing I think what's really interesting about it is you can model a looped transformer in some ways like with
+
+444
+00:34:52,480 --> 00:34:53,839
+a harness as well, right?
+
+445
+00:34:53,839 --> 00:34:55,040
+you're just looping over the model.
+
+446
+00:34:55,040 --> 00:35:05,240
+Now, you can say like, "Oh, I'm not decoding, so it's like a little bit different, but in general, we for whatever reason have stuck with the same model architecture choice forever."
+
+447
+00:35:05,280 --> 00:35:11,680
+And there's many arguments for why, but clearly like we are now training models around harness rollouts.
+
+448
+00:35:11,680 --> 00:35:24,320
+And so there is this very awkward way of doing training over harnesses which is that we train a language model to act within a harness but like now it's like a really long maybe
+
+449
+00:35:24,320 --> 00:35:29,160
+like multiple agent roll out that we're doing and there's like really awkward hacky ways of doing this.
+
+450
+00:35:29,200 --> 00:35:43,440
+So what this blog talks about is like well one way you can think about what is going on here is if the harness is basically helping the model solve a particular task.
+
+451
+00:35:43,440 --> 00:35:51,040
+Can different harness design choices actually do something a little bit more meaningful beyond just here are some tool calls that will help you.
+
+452
+00:35:51,040 --> 00:35:53,000
+Here is a way to GP through your codebase.
+
+453
+00:35:53,359 --> 00:35:59,760
+And so this actually the idea for this blog came with the RLM idea as well.
+
+454
+00:35:59,760 --> 00:36:01,680
+We just didn't package it that way.
+
+455
+00:36:01,680 --> 00:36:03,040
+And I think this is actually true.
+
+456
+00:36:03,040 --> 00:36:08,800
+There are many other ideas around RLMs that like we will be coming out with, but we're all there from the beginning.
+
+457
+00:36:08,800 --> 00:36:19,040
+I mean these are all design decisions around um I think with what what is what I like about the RLM is that there were many many many iterations and versions of different abstractions that I
+
+458
+00:36:19,040 --> 00:36:22,760
+was interested in doing and ultimately the RLM made the most sense.
+
+459
+00:36:22,880 --> 00:36:26,439
+But there's a lot of reasons that aren't public as to why that's the case.
+
+460
+00:36:26,480 --> 00:36:28,000
+Um I mean you you will see.
+
+461
+00:36:28,000 --> 00:36:37,880
+So in this example, one of the things that we see with an RLM is that if you sufficiently offload context and write ask the model to write code over that context,
+
+462
+00:36:38,400 --> 00:36:47,719
+you get this really really weird but useful property which is that when the model recognizes during training how to solve a task,
+
+463
+00:36:48,000 --> 00:36:52,280
+it turns out that the solution to many tasks is very similar.
+
+464
+00:36:52,320 --> 00:36:57,800
+across like tasks where you you don't even like it's not even that clear to you that the solutions are similar.
+
+465
+00:36:57,839 --> 00:37:04,960
+So in this example, we have like a retrieval task and we have like a an aggregation task and they're very very different query.
+
+466
+00:37:04,960 --> 00:37:06,840
+Like the domain is just completely different.
+
+467
+00:37:06,880 --> 00:37:13,119
+And when you train a regular language model over these two tasks, the trajectories look very different.
+
+468
+00:37:13,119 --> 00:37:18,960
+And so what you're relying when you like let's say you use pi or cloud code or something, which is not in this blog,
+
+469
+00:37:18,960 --> 00:37:20,360
+but we do have these results.
+
+470
+00:37:20,720 --> 00:37:27,480
+You'll find that like these harnesses distinguish too much between these problems even though the solutions are the same.
+
+471
+00:37:27,599 --> 00:37:33,440
+And so one thing that we find when training RLMs is that like when it sees these problems as the same.
+
+472
+00:37:33,440 --> 00:37:41,520
+And the reason it sees these problems as the same is the sub agent sees different problems, but the sub agent is solving an easier subtask.
+
+473
+00:37:41,520 --> 00:37:43,760
+And so you're confident it's smart enough to do it.
+
+474
+00:37:43,760 --> 00:37:47,280
+But for the base overall strategy, they end up looking the same.
+
+475
+00:37:47,280 --> 00:37:52,640
+And so when you train on the left task for example, it can immediately solve the right task.
+
+476
+00:37:52,640 --> 00:38:01,800
+And so if you go down to like the plots that we have, one thing you'll kind of observe is that the as you just naively train your RLM on these tasks,
+
+477
+00:38:02,079 --> 00:38:08,079
+they naturally learn to generalize, for example, to longer tasks because the strategy is basically the same.
+
+478
+00:38:08,079 --> 00:38:10,120
+You're just modifying like a length variable.
+
+479
+00:38:10,160 --> 00:38:14,360
+And this actually also holds for tasks that are different.
+
+480
+00:38:14,560 --> 00:38:16,920
+And it's not even they're not different across length.
+
+481
+00:38:16,960 --> 00:38:25,359
+They're completely different tasks, math tasks versus writing tasks, but the solution the like meta highle solution is the same.
+
+482
+00:38:25,359 --> 00:38:30,560
+And so when you train the RLM on one of them, it generalizes this behavior to the second one.
+
+483
+00:38:30,560 --> 00:38:31,839
+And there's no magic here.
+
+484
+00:38:31,839 --> 00:38:38,400
+I I guess maybe that's the thing that I want to kind of stress like how how would you kind of verbalize what they're learning?
+
+485
+00:38:38,400 --> 00:38:41,920
+So I think in here you say you train on short tasks.
+
+486
+00:38:41,920 --> 00:38:44,520
+They generalize to stuff 8 to 30 times longer.
+
+487
+00:38:44,720 --> 00:38:49,119
+They are learning how to solve these type of problems or what's the what's the core thing they're actually learning?
+
+488
+00:38:49,119 --> 00:38:57,719
+>> Yeah, they're learning how to solve these types of problems at a certain length and it turns out that when you take this strategy that they learned,
+
+489
+00:38:57,920 --> 00:39:01,839
+it is directly transferable to the longer length.
+
+490
+00:39:01,839 --> 00:39:03,719
+Like they're effectively the same program.
+
+491
+00:39:03,760 --> 00:39:14,439
+And this is something that is really exciting because what this kind of implies is that when you have a corpus of data or environments that you train your model on,
+
+492
+00:39:14,560 --> 00:39:25,599
+the hope is that like a you can train on less environments and generalize to more than what existing models can can do through na or harnesses through existing kind of like naive training.
+
+493
+00:39:25,599 --> 00:39:28,960
+But b also you still want to use all the data that you have.
+
+494
+00:39:28,960 --> 00:39:39,400
+So when you train on these tasks like hopefully it generalizes to a wider class of of problems and why this is also even more exciting at least in the context of RLMs or any recursively
+
+495
+00:39:39,440 --> 00:39:42,760
+calling system is this argument holds inductively.
+
+496
+00:39:43,200 --> 00:39:50,840
+So like I'll give you an example cuz I said I claimed that competitive programming and GPU optimization use very similar skill sets.
+
+497
+00:39:51,200 --> 00:40:01,280
+the model can the harness potentially I mean you might have to nudge it a certain way but it can learn that like okay how I'm going to go about solving this GPU programming task
+
+498
+00:40:01,280 --> 00:40:10,400
+is very similar to what I learned for competitive programming so I'm going to list out a set of solutions I I'll like spawn sub agents to list out promising solutions and then I'll like
+
+499
+00:40:10,400 --> 00:40:21,760
+write this loop to go through and check these solutions maybe evolve them and like evolve them against a verifier and between these two tasks this looks the same,
+
+500
+00:40:21,760 --> 00:40:31,040
+but what the sub aents are doing are maybe like unique and something something like different, but even what the sub agents are solving might actually also be of the same form,
+
+501
+00:40:31,040 --> 00:40:31,200
+right?
+
+502
+00:40:31,200 --> 00:40:33,000
+Cuz it's like a it's a recursive argument.
+
+503
+00:40:33,040 --> 00:40:46,360
+And so what I'm trying to get at with this whole blog post is just that like we should rethink what the role of the harness is because harnesses can actually greatly increase the generalization
+
+504
+00:40:46,480 --> 00:40:50,240
+capability of your model and the amount of data that it's given.
+
+505
+00:40:50,240 --> 00:40:52,000
+And this is not exclusive to RLMs.
+
+506
+00:40:52,000 --> 00:40:57,719
+I think there is a wide class of harnesses that are yet to be discovered that actually can yield similar properties.
+
+507
+00:40:58,240 --> 00:41:05,959
+And to extend this argument a little bit further, I think what you can also extrapolate from this is like if I look at an RLM,
+
+508
+00:41:06,480 --> 00:41:09,160
+what are the components of an RLM that are actually necessary?
+
+509
+00:41:09,520 --> 00:41:13,200
+And can I actually just directly train a model to do this?
+
+510
+00:41:13,200 --> 00:41:18,079
+Can I train a model to act as an RLM implicitly in its forward pass?
+
+511
+00:41:18,079 --> 00:41:28,400
+It's a really weird thing to think about because like you know you might say like ah code is non-ifferiable blah blah blah blah but there are many approximations of of this behavior that we
+
+512
+00:41:28,400 --> 00:41:38,640
+will start to uncover and I think like we will see beyond just like I'm going to design a new coding harness that uses a special form of compaction or something.
+
+513
+00:41:38,640 --> 00:41:40,160
+I think we can be a lot more creative here.
+
+514
+00:41:40,160 --> 00:41:46,319
+Like there's there's so much we can do with these language models that I think we are just not doing.
+
+515
+00:41:46,319 --> 00:41:58,760
+And I'm like very excited about this because I think like I think we can get serious gains from very very opinionated and good harness design that lends itself better to scale.
+
+516
+00:41:58,880 --> 00:42:04,480
+And what I mean by this is like you know the RLM for example is a very primitive inductive bias.
+
+517
+00:42:04,480 --> 00:42:10,600
+Like there's nothing super special about the design other than the fact that it's very different than what we currently do.
+
+518
+00:42:10,800 --> 00:42:16,720
+But this may potentially scale much better with like the data and the environments that we have available to us.
+
+519
+00:42:16,720 --> 00:42:26,640
+>> I guess the you know opposite thing that people would probably ask is current harnesses are very generalized towards coding which people see works for a lot of domains.
+
+520
+00:42:26,640 --> 00:42:30,840
+Cloud code is being used for design presentations everything.
+
+521
+00:42:31,040 --> 00:42:33,320
+um Muse, Spark, Grockbot.
+
+522
+00:42:33,440 --> 00:42:40,720
+These are very simple, non-opinionated harnesses that are good at code and that is also scaling out.
+
+523
+00:42:40,720 --> 00:42:45,320
+Um what's the example of how we improve those I guess?
+
+524
+00:42:45,599 --> 00:42:46,199
+>> Yeah.
+
+525
+00:42:46,240 --> 00:42:50,480
+Um let me let me bring up another paper uh which came out very recently.
+
+526
+00:42:50,480 --> 00:42:52,240
+It's like the harness tax paper.
+
+527
+00:42:52,240 --> 00:42:54,280
+I think it's by Arena.
+
+528
+00:42:54,720 --> 00:43:05,359
+I really like this paper because it puts forward a prior that I had, which is basically that like most >> it confirms a prior.
+
+529
+00:43:05,359 --> 00:43:05,680
+>> Yeah.
+
+530
+00:43:05,680 --> 00:43:11,719
+Like most harness choices don't matter because all of these harnesses are the same.
+
+531
+00:43:11,760 --> 00:43:19,240
+>> But I I will say like Grockpot, example, for is actually quite different, I think, from my understanding than than how some of these other harnesses have been designed.
+
+532
+00:43:19,280 --> 00:43:20,400
+And I like that a lot.
+
+533
+00:43:20,400 --> 00:43:29,599
+Um, and I think it's clear from here at least that like I'm pretty sure Anthropic or OpenAI are exclusively training on their harnesses.
+
+534
+00:43:29,599 --> 00:43:31,400
+They're probably not training on their competitors.
+
+535
+00:43:31,440 --> 00:43:34,880
+I mean, I'd assume not because I I don't know why they would do that.
+
+536
+00:43:34,880 --> 00:43:37,839
+>> But I mean, you know, this is a thing you see in open models, right?
+
+537
+00:43:37,839 --> 00:43:40,000
+Like Quinn is really good at using open code.
+
+538
+00:43:40,000 --> 00:43:41,560
+They need to train in harnesses.
+
+539
+00:43:41,839 --> 00:43:44,600
+Old Gemas were notoriously bad at this.
+
+540
+00:43:44,720 --> 00:43:46,640
+Models are good, but you need to train in a harness.
+
+541
+00:43:46,640 --> 00:43:59,359
+I I think though as models get smarter or like as they get better this distinction becomes uh not that important in the sense that like if you take Astra and you put it inside
+
+542
+00:43:59,359 --> 00:44:04,120
+of open code like it's not going to go crazy because I think it's like just sufficiently good.
+
+543
+00:44:04,160 --> 00:44:10,400
+And so I say this because the only benefits between these different harnesses is just cost for the most part.
+
+544
+00:44:10,400 --> 00:44:18,439
+And and I think like what I'm getting at here is if you plug these models into RLMs though, they're not that good still.
+
+545
+00:44:18,560 --> 00:44:19,359
+They're okay.
+
+546
+00:44:19,359 --> 00:44:26,319
+And I think it's mainly because the types like the class of harness that we are training around is this class of harness.
+
+547
+00:44:26,319 --> 00:44:36,640
+This like pi loop this like I I like to call it trajectory as a prompt which just means like you keep the whole trajectory of the roll out as the context that that that
+
+548
+00:44:36,640 --> 00:44:38,400
+your main model is is using.
+
+549
+00:44:38,400 --> 00:44:41,240
+Even if you use sub agents, it's still like kind of this form.
+
+550
+00:44:41,440 --> 00:44:54,560
+And I think we're going to if we want to explore new harnesses, there needs to be teams that are dedicated to actually running meaningful experiments over like scaling out new harnesses,
+
+551
+00:44:54,560 --> 00:44:57,839
+like maybe post-train scaling out on different harness designs.
+
+552
+00:44:57,839 --> 00:45:04,960
+Like I I think we can actually get very meaningful knowledge or gains from doing this kind of thing.
+
+553
+00:45:04,960 --> 00:45:07,839
+Uh whether it's an RLM or whether it's something different.
+
+554
+00:45:07,839 --> 00:45:16,640
+And that's exciting because I think for example if you train a lot on Fable for a long time was the best model for RLMs because they had dynamic workflows and it was pretty obvious
+
+555
+00:45:16,640 --> 00:45:26,400
+that like this was a capability that was somewhat trained in even if the model was still like a little dumb like in the RLM harness it still worked a lot better than than other
+
+556
+00:45:26,400 --> 00:45:27,320
+models did.
+
+557
+00:45:27,359 --> 00:45:30,280
+Astra is now also like good enough at doing these things.
+
+558
+00:45:30,400 --> 00:45:37,359
+>> But is this is this where we see that Fable is the best for RLMs or is there is there some other >> Oh no these are all internal results I guess.
+
+559
+00:45:37,359 --> 00:45:50,600
+Yeah, I don't I don't have them public right now, but in general like I think you can >> you can very easily tell that we have not optimized for RLM like workflows yet.
+
+560
+00:45:51,040 --> 00:45:56,079
+And I think if we get models that do this correctly, they will be a lot more efficient as well.
+
+561
+00:45:56,079 --> 00:45:59,599
+I mean, you can kind of just think through like why this is the case, right?
+
+562
+00:45:59,599 --> 00:46:08,800
+I think this is the point where you have to give the 10-second what are RL because there's a lot of listeners here that >> we're assuming a lot of knowledge also I think but you
+
+563
+00:46:08,800 --> 00:46:15,560
+have set some context so you can like with everything we just said can we have a clean crisp definition of >> RLM?
+
+564
+00:46:15,599 --> 00:46:15,760
+Yes.
+
+565
+00:46:15,760 --> 00:46:16,240
+Okay.
+
+566
+00:46:16,240 --> 00:46:20,640
+I want to go back to the blog the the compositional generalizers blog this one.
+
+567
+00:46:20,640 --> 00:46:21,240
+Okay.
+
+568
+00:46:21,280 --> 00:46:25,560
+This is like the best I wish I had this in the original paper.
+
+569
+00:46:26,079 --> 00:46:35,320
+An RLM is basically just a harness design where the only tool in the harness is code.
+
+570
+00:46:35,680 --> 00:46:47,359
+Uh which is this programmatic sub aent calling thing where it has the option to call itself as a tool and it has other tools but all of these things are functions in code and
+
+571
+00:46:47,359 --> 00:46:53,680
+the context that it's dealing with is always stored in some memory inside of this code environment.
+
+572
+00:46:53,680 --> 00:47:03,040
+So this could be a file system like this could be like I'll give you an example prime agent the trajectory of prime agent like the context even the when you compact and do all
+
+573
+00:47:03,040 --> 00:47:14,079
+these things is stored on disk so the model can always reference its original context even if it's compacted and all of its tools are run inside of let's say like a python ripple or
+
+574
+00:47:14,079 --> 00:47:26,720
+a bashrepple and so this it's like this very primitive abstraction and I would say like where most harnesses differ is a context offloading is not done that like that.
+
+575
+00:47:26,720 --> 00:47:32,720
+I mean if you look at prime agent by the way prime agent does context offloading but not all the way.
+
+576
+00:47:32,720 --> 00:47:44,640
+So like it still maintains the standard cloud codeex loop of like trajectory as a prompt where you compact but it has the additional kind of like the context is offloaded and it only has
+
+577
+00:47:44,640 --> 00:47:49,080
+the unique point of of prime agent is that the only tool is is IPython.
+
+578
+00:47:49,599 --> 00:47:56,199
+So this is like the very kind of generic abstraction around like RLMs >> concretely.
+
+579
+00:47:56,400 --> 00:47:59,119
+What's the core thing RLMs are trying to solve?
+
+580
+00:47:59,119 --> 00:48:03,599
+At one point I think when it first came out it was context and >> I'll pass the question.
+
+581
+00:48:03,599 --> 00:48:03,920
+>> Yeah.
+
+582
+00:48:03,920 --> 00:48:09,160
+So the original problem was harnesses have a really bad time dealing with long context.
+
+583
+00:48:09,280 --> 00:48:14,000
+They typically were used to only really do them for like specific things like code.
+
+584
+00:48:14,000 --> 00:48:16,840
+Like you know they could deal with your codebase because it was trained on it.
+
+585
+00:48:16,880 --> 00:48:35,320
+But now it's more around what this blog is talking about which is compositionality and the fact that like I think harnesses we want to have language model systems that have much more control over
+
+586
+00:48:35,839 --> 00:48:38,280
+the actions they make at every step.
+
+587
+00:48:38,640 --> 00:48:43,760
+And what I mean by this is tool calls are very limited because you have to invoke them every turn.
+
+588
+00:48:43,760 --> 00:48:56,079
+like you have to invoke tool A then tool B then tool C and there's no central context that you can kind of draw back from and RLMs are specifically like designed around composition and
+
+589
+00:48:56,079 --> 00:48:59,959
+having like a central context that you can always draw from.
+
+590
+00:49:00,000 --> 00:49:04,280
+Um and this context is like designed around the existing language models.
+
+591
+00:49:04,400 --> 00:49:15,440
+Another like very similar example actually in design is like agent swarms for example the the hugging face incident like these agent swarms have like a message board that they that they learn to communicate
+
+592
+00:49:15,440 --> 00:49:27,520
+over and this message board in some sense is the shared context that they like act over and RLMs basically say that like the best way to communicate through this is in code like you
+
+593
+00:49:27,520 --> 00:49:36,079
+write the code to do this and it's it's because these models are so good at writing code um like we want to take advantage of of that And then for for this compositional thing
+
+594
+00:49:36,079 --> 00:49:41,400
+up to and including generating your own harness you know specific for the task.
+
+595
+00:49:41,440 --> 00:49:41,839
+>> Exactly.
+
+596
+00:49:41,839 --> 00:49:42,439
+Exactly.
+
+597
+00:49:42,640 --> 00:49:48,960
+>> I think we will start to see that if you go up to uh this figure.
+
+598
+00:49:48,960 --> 00:49:49,560
+Okay.
+
+599
+00:49:49,839 --> 00:50:01,359
+So we we talk about this idea of locally in distribution tasks for a harness and it is like an idea on top of like indistribution tasks when we think about language models.
+
+600
+00:50:01,359 --> 00:50:08,520
+An in distribution task is just a task where like the prompt is something that the model has either seen before or like has seen some version of it.
+
+601
+00:50:08,640 --> 00:50:17,920
+Most harnesses work like the one on the right which is they keep appending the trajectory as a prompt and so eventually unless you're anthropic or open AI and you train on like kind of
+
+602
+00:50:17,920 --> 00:50:30,400
+these like user trajectories most of these things end up being out of distribution for the most part but locally in distribution is basically the compositional argument of if an RLM breaks down its computation
+
+603
+00:50:30,400 --> 00:50:40,400
+into like a kind of a meta harness of sorts or like a program that involves sub agents that like look at a local problem every individual ual language model call over the course of
+
+604
+00:50:40,400 --> 00:50:51,280
+this task is in distribution even if the entire task itself is out of distribution and this is a very desirable property I think for for obvious reasons like if every task is in distribution
+
+605
+00:50:51,280 --> 00:50:57,000
+for each individual language model call you will probably get to the right answer um so
+
+606
+00:50:58,319 --> 00:51:11,119
+I mean the the logical limit of RLM is rlms where like you not just you don't just write the harness you also train a custom model you collect data everything like it's like a
+
+607
+00:51:11,119 --> 00:51:13,520
+fully automated AI researcher inside of your harness.
+
+608
+00:51:13,520 --> 00:51:17,359
+>> Yeah, we will see where the training of RLMs goes.
+
+609
+00:51:17,359 --> 00:51:25,400
+I will say as an academic I am not working on this at MIT or at least in the scaled sense because I I can't afford to.
+
+610
+00:51:25,440 --> 00:51:27,760
+Uh but there are companies out there that are working on this.
+
+611
+00:51:27,760 --> 00:51:31,760
+I think Prime and Select is very clearly working on this and it's very cool.
+
+612
+00:51:31,760 --> 00:51:40,120
+Like I'm I'm very excited to see maybe we'll observe I don't know but maybe we'll observe better like post-training scaling walls with when you train around a smart harness.
+
+613
+00:51:40,240 --> 00:51:46,840
+Maybe we'll even see smarter harnesses that come out and like they they work better around these kinds of principles.
+
+614
+00:51:46,880 --> 00:51:48,319
+>> What is a smarter harness?
+
+615
+00:51:48,319 --> 00:51:49,440
+Like that doesn't mean anything.
+
+616
+00:51:49,440 --> 00:51:50,720
+You just said they're all the same.
+
+617
+00:51:50,720 --> 00:51:55,880
+>> No, what more of what I mean is like claude code, codeex, pi, etc.
+
+618
+00:51:55,920 --> 00:52:03,359
+are all the same in that like when you break down the the logic of the harness, it's like virtually the same thing.
+
+619
+00:52:03,359 --> 00:52:03,599
+>> Yeah.
+
+620
+00:52:03,599 --> 00:52:05,200
+Two calls in a loop, whatever.
+
+621
+00:52:05,200 --> 00:52:11,159
+>> But with RLMs and and with other harness abstractions, it looks very different.
+
+622
+00:52:11,200 --> 00:52:13,880
+And this is where I think you really distinguish.
+
+623
+00:52:14,000 --> 00:52:24,079
+I mean it's it's in the same way that like I think with language model architecture choices a lot of architecture choices end up kind of looking the same when you like scale it out
+
+624
+00:52:24,079 --> 00:52:33,520
+or like it the differences end up being like somewhat minor in terms of I mean for a lab it's not minor but you know maybe one model converges better than the other one like
+
+625
+00:52:33,520 --> 00:52:46,760
+slightly but in general like if you were so for example pre-training scaling walls only hold because the architecture choices we have are somewhat stable right But if you were to completely change the architecture,
+
+626
+00:52:46,960 --> 00:52:52,720
+pre-training scaling walls probably don't hold or like these kinds of this like power law is going to look very different.
+
+627
+00:52:52,720 --> 00:52:54,079
+And it's like the same thing with harnesses.
+
+628
+00:52:54,079 --> 00:52:58,559
+Like I think all the harnesses we have right now for the most part roughly look the same.
+
+629
+00:52:58,559 --> 00:53:00,880
+But there are some exceptions to this.
+
+630
+00:53:00,880 --> 00:53:02,720
+I think that are that are coming out.
+
+631
+00:53:02,720 --> 00:53:11,599
+I was going to say actually one of the things that I've been more interested by you know talking about PhD students who take big risks is that people have been people also pursuing the
+
+632
+00:53:11,599 --> 00:53:21,920
+other side which is pre-training scaling laws don't hold if you change data uh right now it's just raw and structured text uh corpus of internet what if you had a better data representation to
+
+633
+00:53:21,920 --> 00:53:30,240
+train on then then yes your scaling law would change as well >> so there's architecture there's data and you know whatever else uh you can think about well so I just want to get back
+
+634
+00:53:30,240 --> 00:53:32,880
+to to this it's all makes sense.
+
+635
+00:53:32,880 --> 00:53:41,680
+It's very interesting how you sort of recurse up and down the stack from like very conceptual to like no like well this is this is where we are today but like yeah obviously uh
+
+636
+00:53:41,680 --> 00:53:47,760
+you can can scale up and down I guess um I'm curious how did you start working with Prime?
+
+637
+00:53:47,760 --> 00:53:50,960
+Is Prime taking on more work with this?
+
+638
+00:53:50,960 --> 00:53:53,159
+Is this their answer to Hermes agents?
+
+639
+00:53:53,200 --> 00:53:55,200
+Uh you mentioned Grockot is a little bit different.
+
+640
+00:53:55,200 --> 00:53:58,319
+I just wanted to like name check all these guys and get your thoughts on each.
+
+641
+00:53:58,319 --> 00:53:58,559
+>> Yeah.
+
+642
+00:53:58,559 --> 00:53:59,040
+Yeah.
+
+643
+00:53:59,040 --> 00:54:10,600
+Uh, I got involved with Prime uh, after they they released a blog post, by the way, not affiliated with me at all about like how they believed RLMs were kind of the the future.
+
+644
+00:54:10,880 --> 00:54:21,040
+And I I had a friend that was working there, GP Mode Mate, like we got in touch and I think I agreed with a lot of the researchers there and like what they believed
+
+645
+00:54:21,040 --> 00:54:22,319
+about harness design.
+
+646
+00:54:22,319 --> 00:54:24,160
+Like I I I was I was very impressed.
+
+647
+00:54:24,160 --> 00:54:35,560
+I think that like they understood the purpose of the RLM paper which is not necessarily just to say that like you know we're solving long context tasks but actually like we want more opinionated
+
+648
+00:54:35,599 --> 00:54:36,400
+harness designs.
+
+649
+00:54:36,400 --> 00:54:36,800
+>> Yeah.
+
+650
+00:54:36,800 --> 00:54:39,440
+There's always like the result of the paper that you choose to highlight.
+
+651
+00:54:39,440 --> 00:54:39,760
+Yes.
+
+652
+00:54:39,760 --> 00:54:40,960
+>> Versus the actual point.
+
+653
+00:54:40,960 --> 00:54:41,200
+>> Yes.
+
+654
+00:54:41,200 --> 00:54:51,480
+As I I I would love to talk about like the incentives of academia and like the things around like why it's kind of flawed and all the issues and we'll get back to that.
+
+655
+00:54:51,520 --> 00:54:51,760
+Yeah.
+
+656
+00:54:51,760 --> 00:54:55,119
+So, so anyways, um you know, I I I I love the guys at Prime.
+
+657
+00:54:55,119 --> 00:55:07,760
+So, we kind of had been after after we decided to work together, we decided to look into training an RLM and also build this kind of RLM harness and kind of see where we
+
+658
+00:55:07,760 --> 00:55:08,559
+can take it.
+
+659
+00:55:08,559 --> 00:55:10,559
+That is how like Prime Agent came about.
+
+660
+00:55:10,559 --> 00:55:13,520
+And I think the reception for Prime Agent has been pretty good.
+
+661
+00:55:13,520 --> 00:55:18,960
+Like the one thing I was worried about with Prime Agent is that none of them at least at the time when we were building it,
+
+662
+00:55:18,960 --> 00:55:21,839
+none of the models were that good at doing Arlem stuff.
+
+663
+00:55:21,839 --> 00:55:23,880
+So this was like prefable pre-astra.
+
+664
+00:55:24,319 --> 00:55:30,480
+>> I guess I think to take a step back, can you explain what prime agent is, how it's different than >> a traditional,
+
+665
+00:55:30,480 --> 00:55:32,720
+you know, cloud code, what people would expect harness.
+
+666
+00:55:32,720 --> 00:55:33,119
+>> Yes.
+
+667
+00:55:33,119 --> 00:55:36,640
+So prime agent, I think I I mentioned this a little bit earlier.
+
+668
+00:55:36,640 --> 00:55:49,440
+Yeah, there's >> is basically uh it it is a a harness on top of pi like pi mono which is pi mono for context is like the like a minimalist yeah like harness.
+
+669
+00:55:49,440 --> 00:55:54,120
+I I use pi as the reference for everything because I think all other harnesses are basically just pi.
+
+670
+00:55:54,240 --> 00:56:01,440
+Um but it is pi except we explicitly restricty to be the only tool that's available to it.
+
+671
+00:56:01,440 --> 00:56:08,960
+every other tool gets loaded in as like a Python module um or like a like a bash kind of script that it can it can run.
+
+672
+00:56:08,960 --> 00:56:18,520
+So it uses the core RLM abstraction on top of pi and then it also has this continual harness thing which is uh Seth he's another PhD student.
+
+673
+00:56:18,640 --> 00:56:23,599
+This is a thing that he used to get language model harnesses to play games.
+
+674
+00:56:23,599 --> 00:56:29,080
+Like so he worked a lot with Joel uh who is the like the Gemini plays Pokémon guy.
+
+675
+00:56:29,280 --> 00:56:32,079
+And continual harness is also by the way very simple.
+
+676
+00:56:32,079 --> 00:56:33,040
+I I quite like it.
+
+677
+00:56:33,040 --> 00:56:42,280
+It it basically is this design uh principle around like what parts of the harness can you let the harness itself modify?
+
+678
+00:56:42,400 --> 00:56:47,839
+There are certain pieces that like you'll let it modify its own skills, the sub aents available to it.
+
+679
+00:56:47,839 --> 00:56:59,839
+uh what the system prompt to the model is and continual harness is available basically as a tool inside of the IPython kernel and so that's what prime agent is like how what is designed
+
+680
+00:56:59,839 --> 00:57:09,040
+around everything else in prime agent is like standard >> standard right yeah I think what is what I I I really liked about it and we got kind of lucky is that like a lot
+
+681
+00:57:09,040 --> 00:57:18,160
+of the new frontier models actually work really well inside and actually even a lot of the open source models work really well at least some of the newer ones And there is another thing in
+
+682
+00:57:18,160 --> 00:57:31,880
+prime agent I should highlight which is that like we have a very particular agentto agent communication system or like uh like framework which is because RLMs tend to spawn many sub agents.
+
+683
+00:57:32,079 --> 00:57:36,960
+We want a way for sub agents to communicate with maybe the root or with each other.
+
+684
+00:57:36,960 --> 00:57:41,880
+And so there are some design decisions around like what each sub aent is allowed to talk to.
+
+685
+00:57:42,000 --> 00:57:44,079
+How it does it again everything is in code.
+
+686
+00:57:44,079 --> 00:57:48,319
+So it writes the code to do this kind of communication which I think is really really cool.
+
+687
+00:57:48,319 --> 00:57:53,280
+And then there's I guess persistent sub aents is another thing that was kind of added which is the sub aents.
+
+688
+00:57:53,280 --> 00:58:04,160
+They can last beyond like the standard runtime of of the actual like original agent and you can go into that sub aent you can prompt it more um like you have more visibility and
+
+689
+00:58:04,160 --> 00:58:06,559
+flexibility into what is kind of going on.
+
+690
+00:58:06,559 --> 00:58:08,480
+>> This is my number one pain with codeex right now.
+
+691
+00:58:08,480 --> 00:58:14,640
+They their sub agents are just very ephemeral and they they actively discourage you from using it for longunning things.
+
+692
+00:58:14,640 --> 00:58:14,880
+>> Yeah.
+
+693
+00:58:14,880 --> 00:58:15,200
+Yeah.
+
+694
+00:58:15,200 --> 00:58:15,520
+Yeah.
+
+695
+00:58:15,520 --> 00:58:17,520
+Which which I think it makes sense.
+
+696
+00:58:17,520 --> 00:58:17,680
+Yeah.
+
+697
+00:58:17,680 --> 00:58:21,280
+I >> So I mean the trick is just externalize to a file system, right?
+
+698
+00:58:21,280 --> 00:58:22,319
+Like that's the trick.
+
+699
+00:58:22,319 --> 00:58:23,839
+That is the the big trick.
+
+700
+00:58:23,839 --> 00:58:24,079
+>> Yeah.
+
+701
+00:58:24,079 --> 00:58:30,799
+And well and also like force everything to run through code uh you know trust the model that can write code and it's going to write its own harnesses itself.
+
+702
+00:58:30,799 --> 00:58:35,280
+So is is Prime going to take on like training post training custom models for this?
+
+703
+00:58:35,280 --> 00:58:37,040
+Is this a one-off collaboration between you guys?
+
+704
+00:58:37,040 --> 00:58:37,440
+That's it.
+
+705
+00:58:37,440 --> 00:58:47,119
+like what's >> yeah they are training a model uh internal I think they were they were pretty public about this actually um back in March >> I mean clearly it is their business yeah so >> uh
+
+706
+00:58:47,119 --> 00:58:54,079
+yeah I mean they're they're showing that they can train it on their their kind of hosted training stack but no so for model training I'm I'm not involved with them on that the main
+
+707
+00:58:54,079 --> 00:59:03,520
+reason is just I have other things in the PhD I want to work on I think like there are many other big bets to take um outside of just RLMs uh some some I
+
+708
+00:59:03,520 --> 00:59:12,079
+I don't know how much I can share yet uh but in general Like I think I actually think one of the luxuries of being a PhD student genuinely is that there's so many big
+
+709
+00:59:12,079 --> 00:59:13,159
+bets to take.
+
+710
+00:59:13,359 --> 00:59:15,480
+Most of them will probably yield nothing.
+
+711
+00:59:15,760 --> 00:59:25,119
+But it's a really really exciting time to be in research especially because I think most progress in the field has been a little bit boring.
+
+712
+00:59:25,119 --> 00:59:31,000
+Like I'm not saying the the outcome is boring but the the process of of doing these things tends to be quite boring.
+
+713
+00:59:31,040 --> 00:59:35,680
+Um and so there is kind of this question of like you know what what do we want to do next?
+
+714
+00:59:35,680 --> 00:59:37,599
+Um but we can talk about that later.
+
+715
+00:59:37,599 --> 00:59:38,079
+>> Yeah.
+
+716
+00:59:38,079 --> 00:59:38,319
+Okay.
+
+717
+00:59:38,319 --> 00:59:45,599
+I want to close out a little bit more of your research and then we can we can uh spread it and out uh since you release RLM a lot of excitement about it.
+
+718
+00:59:45,599 --> 00:59:50,480
+Any secondary third party work that you want to shout out as like that you guys should take a look at this.
+
+719
+00:59:50,480 --> 00:59:51,640
+>> Oh yeah yeah yeah.
+
+720
+00:59:51,680 --> 01:00:02,240
+So, uh, Harvey, the legal AI company, released a blog post, not affiliated at all, but they postrained an RLM on their like legal work,
+
+721
+01:00:02,240 --> 01:00:09,200
+which often involves a lot of like sifting through documents and kind of looking through like a variety of uh,
+
+722
+01:00:09,200 --> 01:00:14,280
+specific information that maybe is not so easy to retrieve with like a pure retrieval system.
+
+723
+01:00:14,319 --> 01:00:16,079
+And they show like really really good results.
+
+724
+01:00:16,079 --> 01:00:16,880
+It's very exciting.
+
+725
+01:00:16,880 --> 01:00:21,440
+I mean I I I was I was shocked that that that they worked on this.
+
+726
+01:00:21,440 --> 01:00:22,960
+They did not tell me.
+
+727
+01:00:22,960 --> 01:00:25,280
+So when this came out I was like oh that's awesome.
+
+728
+01:00:25,280 --> 01:00:27,920
+So there's this one I think is super super cool and and what they're doing there.
+
+729
+01:00:27,920 --> 01:00:30,240
+I think this is a collaboration with base 10 by the way as well.
+
+730
+01:00:30,240 --> 01:00:38,280
+>> This is B >> Headlong which is law the Lud Institutees kind of uh it is their like persistently running harness.
+
+731
+01:00:38,400 --> 01:00:39,520
+Um it's very cool.
+
+732
+01:00:39,520 --> 01:00:40,319
+>> Oh they renamed it.
+
+733
+01:00:40,319 --> 01:00:41,839
+They used to call it something else.
+
+734
+01:00:41,839 --> 01:00:43,839
+>> It was like auto terminus ter Yeah.
+
+735
+01:00:43,839 --> 01:00:46,240
+I I know they they they've they've gone through Yeah.
+
+736
+01:00:46,240 --> 01:00:49,520
+Um, so this is Andy Kwinsk's big project.
+
+737
+01:00:49,520 --> 01:00:50,799
+Um, it's super super cool.
+
+738
+01:00:50,799 --> 01:00:51,719
+I love Andy.
+
+739
+01:00:51,760 --> 01:00:59,880
+I don't want to downplay what they're doing because >> they're using the RLM abstraction, but they're doing something much cooler than the RLM.
+
+740
+01:01:00,079 --> 01:01:05,719
+Uh, which is like they they have a system that kind of what they call like thinks persistently.
+
+741
+01:01:05,920 --> 01:01:13,159
+So even when you don't query it, it has a way to um think through problems that it has in its context.
+
+742
+01:01:13,200 --> 01:01:14,720
+>> Oh, is this just like always on type?
+
+743
+01:01:14,720 --> 01:01:17,280
+It's like an always on thing, but it's like not that expensive.
+
+744
+01:01:17,280 --> 01:01:23,320
+Like they they they control the the token cost um to make sure it's not like burning through all your all your credits.
+
+745
+01:01:23,440 --> 01:01:24,679
+This is super cool.
+
+746
+01:01:24,799 --> 01:01:33,800
+I'm trying to think there there are many actually if you go to the RLM uh GitHub page, there's a bunch of things I've linked uh below.
+
+747
+01:01:34,480 --> 01:01:38,280
+There's a ton of really really cool kind of things that people have been doing.
+
+748
+01:01:38,400 --> 01:01:41,680
+Axe is another really cool one that I think it's just by this one guy.
+
+749
+01:01:41,680 --> 01:01:44,640
+It's like a harness or on DSP and RLMs.
+
+750
+01:01:44,640 --> 01:01:46,280
+DS PI also has an RLM.
+
+751
+01:01:46,640 --> 01:01:57,280
+Oh, the last thing I'll shout out is on ARC AGI 3 I believe there were a lot of harnesses on their like Kaggle competition like the official one,
+
+752
+01:01:57,280 --> 01:02:01,480
+not not the like public prime select one that or like what people have evaluated on.
+
+753
+01:02:01,520 --> 01:02:11,920
+they all like claim to use or they reference like like Tufa for example some form or some inspired form of the RLM abstraction in their harness which is really really cool.
+
+754
+01:02:11,920 --> 01:02:22,319
+I think it's um this is where I mean this is exactly the setting where you would see a lot of benefits from composition and and and using code and combining like neurosymbolic systems with
+
+755
+01:02:22,319 --> 01:02:26,799
+with AI and so >> yeah very very cool >> we love a good neuro symbolic reference.
+
+756
+01:02:26,799 --> 01:02:27,359
+>> Yeah.
+
+757
+01:02:27,359 --> 01:02:33,560
+Uh you also uh mentioning RKGI3, OpenAI comes out and says we're 99.9% on this.
+
+758
+01:02:33,599 --> 01:02:35,599
+Uh they also say we we solve Nevia Stokes.
+
+759
+01:02:35,599 --> 01:02:36,960
+We just throw a model at it.
+
+760
+01:02:36,960 --> 01:02:40,480
+>> Uh there's some debate around whether or not it's just model.
+
+761
+01:02:40,480 --> 01:02:41,119
+Mhm.
+
+762
+01:02:41,119 --> 01:02:42,160
+>> Are they using an RLM?
+
+763
+01:02:42,160 --> 01:02:42,880
+Do you know?
+
+764
+01:02:42,880 --> 01:02:51,520
+I >> I mean I I I would guess probably not unless you say like be I'll be careful here because you know people debate what is an RLM,
+
+765
+01:02:51,520 --> 01:02:52,520
+what is not an RLM.
+
+766
+01:02:52,880 --> 01:02:59,880
+It's somewhat clear that what they used is some kind of swarm of agents with a shared some shared context like some shared file system.
+
+767
+01:03:00,000 --> 01:03:05,359
+And like this is very much in the spirit of RLM stuff, but I think there's a there's a lot of like,
+
+768
+01:03:05,359 --> 01:03:11,320
+you know, more clever things that they did that's not maybe related to to the RLM itself.
+
+769
+01:03:11,760 --> 01:03:19,719
+I agree a little bit with the idea that like a harness is not that necessary for what they did.
+
+770
+01:03:20,000 --> 01:03:35,280
+The way that I would put this is that I think a model like a GPC6 Astra type thing is technically smart enough conditioned on the right information to come up with a proof for
+
+771
+01:03:35,280 --> 01:03:37,000
+these very very difficult problems.
+
+772
+01:03:37,280 --> 01:03:42,319
+Now, how you get to that information is a giant question mark.
+
+773
+01:03:42,319 --> 01:03:52,079
+And in in their case, it probably came down to like a very long search over like many of these sub a or many of these like agents in the swarm and and maybe also
+
+774
+01:03:52,079 --> 01:03:53,000
+like researchers.
+
+775
+01:03:53,359 --> 01:04:00,000
+I'm I'm actually not sure about this part, but putting in like their kind of intuition as to like what you should explore and things like this.
+
+776
+01:04:00,000 --> 01:04:07,320
+And ultimately like this produced some information that some agent was able to take to finish the proof.
+
+777
+01:04:07,440 --> 01:04:11,560
+And so in that sense like I think was the harness that important?
+
+778
+01:04:11,920 --> 01:04:12,319
+No.
+
+779
+01:04:12,319 --> 01:04:19,200
+And I I think what this is pointing at is like these specific details of a harness do not really matter.
+
+780
+01:04:19,200 --> 01:04:30,160
+And I think that's also what that uh what the harness tax paper is is pointing at which is that like beyond the user's feeling of the harness realistically all that matters is just like
+
+781
+01:04:30,160 --> 01:04:34,000
+how are you composing these agents in a meaningful way to get to the final answer.
+
+782
+01:04:34,000 --> 01:04:37,599
+And maybe that's what like swarms and all these things are are are really about.
+
+783
+01:04:37,599 --> 01:04:43,520
+And so for my POV at least, if we if we start to think about like for user use cases,
+
+784
+01:04:43,520 --> 01:04:46,559
+what do we want out of harnesses and and and things like this?
+
+785
+01:04:46,559 --> 01:04:55,200
+Like we want to take the good parts out of these like the cloud codes, the codeexes, like the stream that people like to see,
+
+786
+01:04:55,200 --> 01:05:02,240
+but like under the hood, whatever is running can be some really weird complicated swarm of agents that like ultimately come up with an answer.
+
+787
+01:05:02,240 --> 01:05:11,839
+The user doesn't want to see that though obviously right like it's it's not legible information and so I you know this was another kind of thing in the spirit of RLM's like recursive language
+
+788
+01:05:11,839 --> 01:05:20,960
+model it sounds like it's a language model and but it's not a language model architecture but the reason for this is like I think we will start to see in the future probably one
+
+789
+01:05:20,960 --> 01:05:30,559
+day and I I I wrote a blog about this what we think of as a language model like the thing that we query might actually be like a swarm or like a scaffold or
+
+790
+01:05:30,559 --> 01:05:36,079
+like some weird harness design that scales very well, but the user just doesn't see it.
+
+791
+01:05:36,079 --> 01:05:40,040
+Ultimately, all the user sees is some front end version of this harness.
+
+792
+01:05:40,160 --> 01:05:45,599
+And yeah, I I I I I think it's a relatively safe bet at least to make that this is what we will see.
+
+793
+01:05:45,599 --> 01:05:50,280
+>> Um, and this maybe goes back to the limitations of the base transformer.
+
+794
+01:05:50,400 --> 01:05:56,000
+Like, you know, obviously if you just took a base transformer and you said like solve Navier or Stokes or something,
+
+795
+01:05:56,000 --> 01:05:56,640
+it's not going to do it.
+
+796
+01:05:56,640 --> 01:05:58,720
+Like, yeah, we we all know this is not what's going to happen.
+
+797
+01:05:58,720 --> 01:06:08,480
+But yeah, I think this is maybe the more interesting part uh and may maybe the claims around like you know did the hardness matter is is more around this of like just arbitrarily pointing
+
+798
+01:06:08,480 --> 01:06:17,280
+models like or agents at a growing kind of context of information maybe is just enough to solve very difficult problems um that I can buy.
+
+799
+01:06:17,280 --> 01:06:22,919
+Uh while there's a lot in there I do want to say uh the the amount that open spent is semi-public.
+
+800
+01:06:23,119 --> 01:06:25,399
+It's 10,000 agents in 88 hours.
+
+801
+01:06:25,680 --> 01:06:30,760
+uh 130 billion tok out tokens which is estimated to be about $40 million in public pricing.
+
+802
+01:06:31,119 --> 01:06:33,760
+>> Surprisingly actually like less than I thought.
+
+803
+01:06:33,760 --> 01:06:34,840
+>> Yeah, not that much.
+
+804
+01:06:35,119 --> 01:06:40,480
+>> 130 billion output for the final but as you said there was a lot of context being passed around.
+
+805
+01:06:40,480 --> 01:06:44,799
+It's >> more than double that in just the total agent messages being sent.
+
+806
+01:06:44,799 --> 01:06:44,960
+>> Yeah.
+
+807
+01:06:44,960 --> 01:06:45,200
+Yeah.
+
+808
+01:06:45,200 --> 01:06:45,440
+>> Yeah.
+
+809
+01:06:45,440 --> 01:06:45,760
+Yeah.
+
+810
+01:06:45,760 --> 01:06:50,480
+>> I think uh one thing I was honored to bring up also was cursor as far as like swarm stuff is concerned.
+
+811
+01:06:50,480 --> 01:06:54,040
+Uh this is slightly older uh meaning February which is ancient.
+
+812
+01:06:54,160 --> 01:06:58,960
+Uh but if you scroll down all the way to the the final sort of multi- aent architecture that they arrived at,
+
+813
+01:06:58,960 --> 01:07:01,920
+it was basically an org chart of a normal software team.
+
+814
+01:07:01,920 --> 01:07:13,039
+One thing I'm thinking about because I I basically there's like this um uh gather all function that you have to do with with sub agents or you know it's very similar to GPU programming
+
+815
+01:07:13,039 --> 01:07:13,520
+actually.
+
+816
+01:07:13,520 --> 01:07:13,760
+>> Yeah.
+
+817
+01:07:13,760 --> 01:07:14,000
+Yeah.
+
+818
+01:07:14,000 --> 01:07:14,319
+Yeah.
+
+819
+01:07:14,319 --> 01:07:17,399
+>> Uh and and so uh that's a bottleneck.
+
+820
+01:07:17,839 --> 01:07:18,720
+>> This is a bottleneck.
+
+821
+01:07:18,720 --> 01:07:29,520
+there's one main guy uh it's coordinating all the sub guys then they have to like re you know gather again and then and then reocoordinate >> that's slow that's that's crappy uh what a true
+
+822
+01:07:29,520 --> 01:07:39,440
+swarm should be is everyone is just their own person >> yeah yeah >> well I agree with this and I I think that there is a question to be had though let me give an analogy
+
+823
+01:07:39,440 --> 01:07:49,039
+which is like when would you use compaction and when would you use an RLM and there are many settings where an RLM can solve maybe a more difficult task than compaction can,
+
+824
+01:07:49,039 --> 01:07:55,320
+but you would prefer to use compaction in most cases because it's cheaper and it's quicker.
+
+825
+01:07:55,599 --> 01:08:07,039
+And I think in in the in the context of agent swarms, there is a similar thing going on of like I'm fairly certain that like 95% of the swarm is entirely useless or like
+
+826
+01:08:07,039 --> 01:08:12,480
+what it's exploring is entirely you're just burning tokens versus in this setup maybe not so much.
+
+827
+01:08:12,480 --> 01:08:13,039
+I'm not sure.
+
+828
+01:08:13,039 --> 01:08:14,559
+I mean, maybe it's also the case here.
+
+829
+01:08:14,559 --> 01:08:15,200
+>> Everyone has a job.
+
+830
+01:08:15,200 --> 01:08:16,239
+There's a Jira board.
+
+831
+01:08:16,239 --> 01:08:19,839
+I think at some level that's how problems are framed, right?
+
+832
+01:08:19,839 --> 01:08:24,719
+So like if you have a search problem and you're spanning out a bunch of sub agents to do search,
+
+833
+01:08:24,719 --> 01:08:26,719
+>> there's going to be a lot of useless information, right?
+
+834
+01:08:26,719 --> 01:08:31,040
+There's one retrieval answer >> that you're getting and you're spanning off.
+
+835
+01:08:31,040 --> 01:08:33,440
+But that is consciously understood, right?
+
+836
+01:08:33,440 --> 01:08:33,759
+>> Yes.
+
+837
+01:08:33,759 --> 01:08:43,759
+But there is kind of this question of like what is appropriate to solve for which problems like what what design you know in theory open AAI can use can can can package up this
+
+838
+01:08:43,759 --> 01:08:51,040
+API and they'll call it swarms and then they'll give it to you and they'll be like point this at any problem and we'll give you a solution but maybe >> it's called pro.
+
+839
+01:08:51,040 --> 01:08:51,279
+>> Yeah.
+
+840
+01:08:51,279 --> 01:08:56,719
+May maybe you'll have to pay like $40 million to get a result and it's like well but it's exciting.
+
+841
+01:08:56,719 --> 01:09:04,600
+I I I will say like it is it's very exciting that we even have the option to point $40 million at a problem and solve it.
+
+842
+01:09:04,719 --> 01:09:12,000
+>> But there is there is still kind of uh a lot of research to be done in this area around like you know what is necessary like what what do we want to do?
+
+843
+01:09:12,000 --> 01:09:21,640
+What design do we want I mean we probably don't want everything to be a swarm but like where do we draw the line like can the agent design that or decide that for itself
+
+844
+01:09:21,759 --> 01:09:22,759
+etc etc.
+
+845
+01:09:22,960 --> 01:09:23,279
+Yeah.
+
+846
+01:09:23,279 --> 01:09:27,839
+>> Uh, and then, uh, just a quick check in case you have opinions on this.
+
+847
+01:09:27,839 --> 01:09:31,480
+Have you looked much into open-endedness as a general category of problems?
+
+848
+01:09:32,400 --> 01:09:36,000
+>> Meaning no prompts, just go >> a little bit.
+
+849
+01:09:36,000 --> 01:09:44,000
+Um, so I I was at Sakana for a summer uh, right after or I guess right before my PhD and and that's something that they work on a lot there.
+
+850
+01:09:44,000 --> 01:09:49,679
+And I think there's a lot of people even at like recursive super intel.
+
+851
+01:09:49,679 --> 01:09:50,560
+There's many of them now.
+
+852
+01:09:50,560 --> 01:09:51,480
+>> You said Richon.
+
+853
+01:09:51,679 --> 01:09:52,159
+>> Oh yes.
+
+854
+01:09:52,159 --> 01:09:52,480
+Yeah.
+
+855
+01:09:52,480 --> 01:09:57,760
+So, so like Richard's company and then and then and then also actually wait that might be it might be the same company.
+
+856
+01:09:57,760 --> 01:09:58,480
+I I don't remember.
+
+857
+01:09:58,480 --> 01:10:00,080
+Is is Tim Rockell also?
+
+858
+01:10:00,080 --> 01:10:00,680
+Okay.
+
+859
+01:10:00,880 --> 01:10:01,600
+>> He's the main co-founder.
+
+860
+01:10:01,600 --> 01:10:03,679
+He's the head of open-endedness for Google.
+
+861
+01:10:03,679 --> 01:10:04,960
+Yeah.
+
+862
+01:10:04,960 --> 01:10:15,280
+So, >> I think with open-endedness problems like I view them as somewhat similar to even like unsolved math problems.
+
+863
+01:10:15,280 --> 01:10:23,040
+Maybe that's a weird way of of framing it, but like I think a lot of the techniques in terms of like how people like approach them are kind of the same.
+
+864
+01:10:23,040 --> 01:10:33,440
+Like evolutionary search is like very similar to just launching swarms of agents and hoping that like they come up with like an interesting I mean this is what what like Alpha Evolve and some
+
+865
+01:10:33,440 --> 01:10:36,440
+of these other works did uh like a year or two ago.
+
+866
+01:10:36,880 --> 01:10:43,679
+But I think what maybe is is not uh and and I'm not sure if this is what you were alluding to,
+
+867
+01:10:43,679 --> 01:10:57,240
+but I think what's not super clear in open-endedness style search problems is do we frame all of them as basically like an unsolved very difficult problem or like where the objective is clear.
+
+868
+01:10:57,520 --> 01:11:05,720
+If that's not the case, I still don't know yet entirely what the value of it is.
+
+869
+01:11:05,760 --> 01:11:13,920
+Maybe maybe you have other opinions like I I I don't have too many opinions on this but at least from my time at Sakcon like I I got the sense that like we ultimately
+
+870
+01:11:13,920 --> 01:11:18,239
+still kind of want to approach things the way that like say OpenAI approached Navier or Stokes.
+
+871
+01:11:18,239 --> 01:11:26,000
+We want we there's still a lot of nudging in certain directions that we want to have to like get to the point where we have something interesting.
+
+872
+01:11:26,000 --> 01:11:31,120
+>> My version of it is like u maybe it's a split between basic science and applied science.
+
+873
+01:11:31,120 --> 01:11:33,440
+Basic science you're researching for researching sake.
+
+874
+01:11:33,440 --> 01:11:35,319
+you just want to understand things better.
+
+875
+01:11:35,440 --> 01:11:38,839
+Uh I have no idea if like there will be any application at all whatsoever.
+
+876
+01:11:38,880 --> 01:11:42,080
+But that I mean that u and then applied you have a goal.
+
+877
+01:11:42,080 --> 01:11:45,120
+You're trying to minimize loss in some way, you know?
+
+878
+01:11:45,120 --> 01:11:55,040
+Uh and so uh what I really uh think you know in terms of like the the big bets that people have uh what if there was no prompt like >> I see you know you
+
+879
+01:11:55,040 --> 01:11:59,120
+just pick >> like you just like you just in this like swarm of things and you're like hey what's up guys?
+
+880
+01:11:59,120 --> 01:12:03,520
+I like what you guys working on and like you just decide I see this is an interesting problem.
+
+881
+01:12:03,520 --> 01:12:08,880
+The biggest issue that like and may maybe there's a clear path to this, but when I was there at least,
+
+882
+01:12:08,880 --> 01:12:14,400
+the biggest issue that people had with open-endedness was like how do you ultimately choose at the end?
+
+883
+01:12:14,400 --> 01:12:16,719
+How do you pick out the interesting stuff?
+
+884
+01:12:16,719 --> 01:12:24,800
+Because when there is no like maybe the agent comes up with a goal but in a lot of cases like what they and they have something called fugu I think which is like a
+
+885
+01:12:24,800 --> 01:12:34,640
+it's like a model router type thing that was like inspired at least by this idea of like let's pick a problem where maybe we can pick out the best solutions to something.
+
+886
+01:12:34,640 --> 01:12:37,240
+In this case it's like pick the best model for this problem.
+
+887
+01:12:37,280 --> 01:12:40,320
+Um >> you're the first person to connect motoral routing to open-endedness.
+
+888
+01:12:40,320 --> 01:12:40,719
+No, no.
+
+889
+01:12:40,719 --> 01:12:41,319
+Yeah.
+
+890
+01:12:41,360 --> 01:12:50,680
+But so I I I bring this up because I think like with open-endedness, like just generally the issue is like when we have this giant corpus of like slop,
+
+891
+01:12:50,719 --> 01:13:07,720
+like how do we sift through and find like the hidden gems and like the solution to open-endedness really just letting models run forever and like finding like just doing data gen super super super
+
+892
+01:13:07,920 --> 01:13:10,200
+high throughput data generation.
+
+893
+01:13:10,560 --> 01:13:15,720
+like a meaningful maybe that's
+
+894
+01:13:17,760 --> 01:13:18,080
+cool.
+
+895
+01:13:18,080 --> 01:13:24,640
+>> To me it's like very interesting as a counter to basically all of machine learning where you have a goal uh to have no goal.
+
+896
+01:13:24,640 --> 01:13:25,240
+>> Yeah.
+
+897
+01:13:26,239 --> 01:13:29,920
+>> But or or like an illdefined goal that you're like well what what about this goal?
+
+898
+01:13:29,920 --> 01:13:31,280
+And you're like well okay maybe.
+
+899
+01:13:31,280 --> 01:13:38,719
+And then you like sort of research more and you find that that is an interesting goal cuz I think like finding your objective function like like you said like Jeb found an objective function
+
+900
+01:13:38,719 --> 01:13:40,400
+that was interesting that no one was exploring.
+
+901
+01:13:40,400 --> 01:13:48,440
+Y >> I think that is like you know similar to your message about grad students as well like you know you stay in school because you are you want to pursue open-endedness.
+
+902
+01:13:48,560 --> 01:13:56,400
+If you want to you know uh profit max and like you know join the escape the permanent underclass then you join lab right?
+
+903
+01:13:56,400 --> 01:13:58,960
+Yeah.
+
+904
+01:13:58,960 --> 01:13:59,520
+It's funny.
+
+905
+01:13:59,520 --> 01:14:02,719
+I I feel like I I don't I don't hear this discourse a lot.
+
+906
+01:14:02,719 --> 01:14:06,880
+I mean, I'm I'm in the East Coast, so it's like a very different type of But then when I whenever I come here,
+
+907
+01:14:06,880 --> 01:14:08,880
+it's like that's always like the topic of discussion.
+
+908
+01:14:08,880 --> 01:14:10,680
+>> You cannot pay rent without doing this.
+
+909
+01:14:12,400 --> 01:14:13,960
+>> You're getting priced out, guys.
+
+910
+01:14:14,159 --> 01:14:14,400
+>> Okay.
+
+911
+01:14:14,400 --> 01:14:16,080
+So, so yeah, there's there's all that.
+
+912
+01:14:16,080 --> 01:14:21,760
+Um I don't know if you want to if it's relevant enough to talk about the mismanaged geniuses, which you were you were pulling up.
+
+913
+01:14:21,760 --> 01:14:25,440
+>> No, no, it's just one of your blogs, but I will poke on uh >> Yeah.
+
+914
+01:14:25,440 --> 01:14:25,600
+Yeah.
+
+915
+01:14:25,600 --> 01:14:29,520
+So they they did in their um blog post I I talked to them about this as well.
+
+916
+01:14:29,520 --> 01:14:38,920
+So one of the cool results of Ultra is they basically just let it loose on automated data science research uh with little to no human intervention.
+
+917
+01:14:39,440 --> 01:14:41,520
+It's just kind of making >> Yeah.
+
+918
+01:14:41,520 --> 01:14:47,560
+So this is auto research which is a little bit more open-ended and there's degrees of open-endedness and I agree with that.
+
+919
+01:14:47,679 --> 01:14:48,000
+>> Yeah.
+
+920
+01:14:48,000 --> 01:14:51,840
+Separate than auto research with objective this is just do stuff.
+
+921
+01:14:51,840 --> 01:14:52,800
+But you know it's cool.
+
+922
+01:14:52,800 --> 01:14:55,160
+They're they're working on it for those that are interested.
+
+923
+01:14:55,199 --> 01:14:58,000
+While you're bringing it up, actually uh what is your take on Sakana?
+
+924
+01:14:58,000 --> 01:15:01,040
+Like what are they doing apart from being, you know, the Japan one?
+
+925
+01:15:01,040 --> 01:15:01,360
+>> Yeah.
+
+926
+01:15:01,360 --> 01:15:01,600
+Yeah.
+
+927
+01:15:01,600 --> 01:15:02,080
+Yeah.
+
+928
+01:15:02,080 --> 01:15:05,600
+Um I mean I actually love the people there.
+
+929
+01:15:05,600 --> 01:15:08,920
+Like I I think they have a really really smart team.
+
+930
+01:15:08,960 --> 01:15:09,920
+Uh and it makes sense.
+
+931
+01:15:09,920 --> 01:15:19,720
+I mean it branched off from from like an earlier team at GDM which was also kind of I guess doing this kind of like open-ended evolutionary research style stuff.
+
+932
+01:15:19,840 --> 01:15:29,319
+What I liked about my experience there at least was that they did have that like mishap back I forget at this point when but I think >> about scientists.
+
+933
+01:15:29,360 --> 01:15:32,400
+>> Uh no the GPU kernel that went up.
+
+934
+01:15:32,400 --> 01:15:32,640
+>> Yeah.
+
+935
+01:15:32,640 --> 01:15:34,159
+People cannot forgive them for that.
+
+936
+01:15:34,159 --> 01:15:34,320
+Yes.
+
+937
+01:15:34,320 --> 01:15:34,480
+>> Yeah.
+
+938
+01:15:34,480 --> 01:15:34,640
+Yeah.
+
+939
+01:15:34,640 --> 01:15:40,719
+And I guess like the AI scientists like I mean there's there's some criticisms of it that I I mean I don't I don't work on that so I I have no no kind of
+
+940
+01:15:40,719 --> 01:15:48,159
+take on it but I think in general like what I like about them at least is they're a little bit more of a researchy type lab.
+
+941
+01:15:48,159 --> 01:15:55,520
+So like they don't operate in the same space as like open AI or anthropic like for sure like definitely no they do not I mean it's pretty obvious probably that at least when I
+
+942
+01:15:55,520 --> 01:16:06,000
+was there they do not have a big competitor model or something that like you know that that everyone is is is using but I think they kind of operate in some ways as like
+
+943
+01:16:06,000 --> 01:16:16,159
+a PhD lab which is cool like and I I I think like David Ha is like he's he's really really smart like I think he has a good sense of like also I think
+
+944
+01:16:16,159 --> 01:16:23,480
+the market in Japan is also a little bit different for AI and like who they're targeting is is slightly different than maybe what we're used to here.
+
+945
+01:16:23,520 --> 01:16:29,360
+But yeah, I like that they take kind of a lot of their research is kind of weird I think when when people view it,
+
+946
+01:16:29,360 --> 01:16:30,320
+you know, and I I like that.
+
+947
+01:16:30,320 --> 01:16:32,159
+Like I think it's >> you should have more weirdness.
+
+948
+01:16:32,159 --> 01:16:32,480
+Yes.
+
+949
+01:16:32,480 --> 01:16:32,880
+>> Exactly.
+
+950
+01:16:32,880 --> 01:16:33,280
+Exactly.
+
+951
+01:16:33,280 --> 01:16:40,719
+>> Uh and you say different market just is it like enterprise >> like the way it works there is is a bit different like how how deals happen and stuff like that.
+
+952
+01:16:40,719 --> 01:16:47,720
+They do have a I mean I guess this page is originally in Japanese but they do have a model specialized for the Japanese.
+
+953
+01:16:47,920 --> 01:16:48,400
+>> You didn't know that?
+
+954
+01:16:48,400 --> 01:16:50,279
+>> I didn't know that you did.
+
+955
+01:16:50,400 --> 01:16:53,240
+I also have personal friends and know the team.
+
+956
+01:16:53,520 --> 01:17:01,920
+So there is a >> even from the sense of a way that you speak culturally uh you know responses are tuned towards that.
+
+957
+01:17:01,920 --> 01:17:04,560
+This is not like >> it's frontier on benchmarks.
+
+958
+01:17:04,560 --> 01:17:08,800
+It is a cultural appropriate model for them and they have like chat and all that.
+
+959
+01:17:08,800 --> 01:17:17,600
+But uh to to mirror your point, you know, there's also like a how should education look like and someone wants to work on it and they're very PhD lab of do your thing,
+
+960
+01:17:17,600 --> 01:17:18,000
+why not?
+
+961
+01:17:18,000 --> 01:17:19,360
+We have money, go research.
+
+962
+01:17:19,360 --> 01:17:20,640
+>> Oh, they say it's a Kimmy fine, too.
+
+963
+01:17:20,640 --> 01:17:20,960
+That's nice.
+
+964
+01:17:20,960 --> 01:17:21,760
+>> Oh, there you go.
+
+965
+01:17:21,760 --> 01:17:22,600
+Good for them.
+
+966
+01:17:23,040 --> 01:17:31,760
+>> Um yeah, I mean, and you know, speaking of Kimmy, right, like another uh you know, just a a grad student that split out and like I just have this like Kimmy Delta attention that
+
+967
+01:17:31,760 --> 01:17:35,720
+wants that I want to work on >> uh and like somehow managed to make one shot.
+
+968
+01:17:36,719 --> 01:17:38,080
+>> Don't understand it still.
+
+969
+01:17:38,080 --> 01:17:38,480
+>> Yeah.
+
+970
+01:17:38,480 --> 01:17:38,719
+Yeah.
+
+971
+01:17:38,719 --> 01:17:41,319
+Well, he's he's super cracked.
+
+972
+01:17:41,440 --> 01:17:42,880
+Um, at least my my understanding.
+
+973
+01:17:42,880 --> 01:17:48,080
+I I think in general like a lot of a lot of the Chinese labs have have done really really cool work.
+
+974
+01:17:48,080 --> 01:17:48,320
+>> Yeah.
+
+975
+01:17:48,320 --> 01:17:51,400
+Like >> any thoughts on Kimmy agent swarms?
+
+976
+01:17:51,760 --> 01:17:52,360
+>> Yes.
+
+977
+01:17:52,400 --> 01:18:02,480
+Um, one thing I will say is whatever OpenAI is doing with their agent swarm is like clearly the right thing to do.
+
+978
+01:18:02,480 --> 01:18:08,560
+You have to kind of think about it this way, like nothing, especially without like a very very smart harness design,
+
+979
+01:18:08,560 --> 01:18:15,720
+which I I don't I don't think anyone really has so far, nothing comes so easily for free.
+
+980
+01:18:15,840 --> 01:18:22,640
+For example, like the agent swarm design is not something you can just take for granted.
+
+981
+01:18:22,640 --> 01:18:27,600
+Like it's not like GPT6 Astra is just super smart and then it just got agent swarms running well.
+
+982
+01:18:27,600 --> 01:18:33,199
+They clearly trained I mean the the hugging face incident was them training a system to be like a swarm.
+
+983
+01:18:33,199 --> 01:18:42,560
+Uh and I think like clearly they've done something really well to the point where you can throw $40 million and solve an unsolved problem.
+
+984
+01:18:42,560 --> 01:18:54,560
+And I I think with the Kimmy agent swarm thing like at least from when I read it just came off as like this is interesting but I don't actually know whether or not this can
+
+985
+01:18:54,560 --> 01:18:55,880
+solve anything novel.
+
+986
+01:18:56,000 --> 01:18:56,159
+>> Yeah.
+
+987
+01:18:56,159 --> 01:18:57,679
+They just they were like it makes spreadsheets.
+
+988
+01:18:57,679 --> 01:19:04,320
+>> They kind of were just like yeah like you know here is a here's a swarm that like kind of does stuff and it's cool.
+
+989
+01:19:04,320 --> 01:19:08,120
+Um but and I I will say same thing with dynamic workflows.
+
+990
+01:19:08,239 --> 01:19:11,440
+I actually kind of think the dynamic workflows release was sort of a flop.
+
+991
+01:19:11,440 --> 01:19:18,800
+I I don't know how how you guys feel about it but I think it's like uh my understanding is like it's not used that often or like >> it's just very expensive.
+
+992
+01:19:18,800 --> 01:19:19,520
+>> It's too expensive.
+
+993
+01:19:19,520 --> 01:19:20,400
+>> It's ultra code.
+
+994
+01:19:20,400 --> 01:19:22,960
+It's basically like like you know take over my bank.
+
+995
+01:19:22,960 --> 01:19:23,679
+doesn't act.
+
+996
+01:19:23,679 --> 01:19:34,239
+I've tried it and like it doesn't act in the way that like again I'm not I'm not the biggest open AI like you know stand or something but I think whatever they did was
+
+997
+01:19:34,239 --> 01:19:41,840
+very impressive like they somehow managed to get a way for this this swarm to actuallywards towards a goal and yeah it's very difficult.
+
+998
+01:19:41,840 --> 01:19:42,239
+>> I see.
+
+999
+01:19:42,239 --> 01:19:51,760
+So so like efficiency of of the multi- aent swarm is >> the objective function here right like like how much of this is sloth like this is a lot of slop.
+
+1000
+01:19:51,760 --> 01:19:52,560
+Yeah, I think so.
+
+1001
+01:19:52,560 --> 01:19:57,000
+I think we we take for granted what it means for a swarm to converge to an answer.
+
+1002
+01:19:57,199 --> 01:19:59,520
+It's just like not not something we can take for granted.
+
+1003
+01:19:59,520 --> 01:19:59,679
+>> Yeah.
+
+1004
+01:19:59,679 --> 01:20:00,000
+Yeah.
+
+1005
+01:20:00,000 --> 01:20:07,920
+We've we've done one pod with Nome Brown and like his death that thing his whole thing was like okay like we've worked on a lot of like competitive agents.
+
+1006
+01:20:07,920 --> 01:20:11,760
+Uh we're working on collaborative agents and like that's now called a swarm.
+
+1007
+01:20:11,760 --> 01:20:12,159
+>> Yeah.
+
+1008
+01:20:12,159 --> 01:20:13,520
+I would do a quick poke.
+
+1009
+01:20:13,520 --> 01:20:15,000
+Do you have any thoughts on Gemini?
+
+1010
+01:20:15,040 --> 01:20:16,560
+They were also IMO gold.
+
+1011
+01:20:16,560 --> 01:20:24,159
+like, you know, there there was a time where they were getting agents to reason for a long time and >> um yeah,
+
+1012
+01:20:24,159 --> 01:20:25,920
+I mean, >> is it too old to think about?
+
+1013
+01:20:25,920 --> 01:20:26,480
+>> No, no, no.
+
+1014
+01:20:26,480 --> 01:20:34,719
+I I I think it's a little bit blown out of proportion like Gemini for again, so I should preface by saying I haven't worked at any of these places,
+
+1015
+01:20:34,719 --> 01:20:36,480
+so so take this with it with a grain of salt, right?
+
+1016
+01:20:36,480 --> 01:20:41,840
+>> I mean, you have strong opinions on agent harnesses and you know, this was >> But um let me just say this first.
+
+1017
+01:20:41,840 --> 01:20:43,240
+This work was really impressive.
+
+1018
+01:20:43,440 --> 01:20:50,000
+I think what what they showed here was like they took a a time when the models weren't that good.
+
+1019
+01:20:50,000 --> 01:20:50,560
+Yes.
+
+1020
+01:20:50,560 --> 01:20:54,880
+And they managed to be very very smart about like what the harness does.
+
+1021
+01:20:54,880 --> 01:20:57,040
+I remember for this at least like yeah like alpha geometry.
+
+1022
+01:20:57,040 --> 01:20:58,400
+I guess that was a year before this.
+
+1023
+01:20:58,400 --> 01:20:59,520
+But it was very cool.
+
+1024
+01:20:59,520 --> 01:21:04,000
+They took um they took it to the max and they like designed uh I don't know.
+
+1025
+01:21:04,000 --> 01:21:07,560
+It's I I I'm not too big on competitive math.
+
+1026
+01:21:07,760 --> 01:21:17,840
+I think like GDM it's sort of a shame like everyone I've talked to about GDM kind of has the same opinion which is that it's way too like bureaucratic whatever is go they have
+
+1027
+01:21:17,840 --> 01:21:29,560
+the talent and the resources to do almost anything but like I don't know until they figure that part out like nothing against anti-gravity for example but like I don't know anybody that uses anti-gravity so
+
+1028
+01:21:29,600 --> 01:21:37,199
+I've tried it once and it's I don't see a reason to switch to it um and I I think for whatever reason like they've been struggling with this so Yeah.
+
+1029
+01:21:37,199 --> 01:21:44,480
+Well, uh, you know, a lot of people dogged on meta for a long time until they started coming out and like I think Google's going through that phase right now.
+
+1030
+01:21:44,480 --> 01:21:44,880
+Yeah.
+
+1031
+01:21:44,880 --> 01:21:51,920
+>> Um, and you know, it's it's you got to stay alive and >> I want to focus back on just like your uh your thoughts just general.
+
+1032
+01:21:51,920 --> 01:21:59,799
+Uh, we can talk about speculative PCC uh mismanaged geniuses or just like throw away all this and just talk about whatever else.
+
+1033
+01:22:00,000 --> 01:22:03,319
+>> Okay, let's let's talk about mismanaged genius for a little bit.
+
+1034
+01:22:03,360 --> 01:22:08,200
+The only comment I'll say on speculative PTC is that it's a really simple idea.
+
+1035
+01:22:08,320 --> 01:22:12,560
+It's almost like obvious that this should be done and like there's not much more to talk about it.
+
+1036
+01:22:12,560 --> 01:22:22,120
+Like I think it's just like you should just use it for for like coding like anything with programmatic agent calling like RLMs or code act like yeah it's like it's like a no-brainer.
+
+1037
+01:22:22,159 --> 01:22:25,319
+>> What's the you know for for people that haven't read it, what's the oneliner?
+
+1038
+01:22:25,440 --> 01:22:38,639
+Uh the simple thing is when the model is uh writing its code or like even as like after it finishes writing the code a lot of tools tend to be like sequential or like
+
+1039
+01:22:38,639 --> 01:22:39,600
+you have to wait on them.
+
+1040
+01:22:39,600 --> 01:22:48,560
+So you should just launch them in advance like if if you're able to compile this code you can probably figure out like even though it's like kind of variables and stuff like you can
+
+1041
+01:22:48,560 --> 01:22:50,279
+figure out like >> statically analyze
+
+1042
+01:22:51,360 --> 01:22:52,239
+speculation.
+
+1043
+01:22:52,239 --> 01:22:52,320
+>> Yeah.
+
+1044
+01:22:52,320 --> 01:23:03,120
+There's there is this uh someone pointed to me some actually like academics have especially PL like programming languages people have some like very kind of cool ways of doing this and so like you
+
+1045
+01:23:03,120 --> 01:23:12,239
+know at some point maybe I'll I'll I'll like work on this >> mostly you have to change language because if you are in JavaScript python you can't do this >> yes yeah yeah >> so like uh hasll
+
+1046
+01:23:12,239 --> 01:23:25,360
+yes um um what's what's the uh what's the normal one that's that's not lisp >> uh lisp uh or camel >> oh camel any functional language you can actually pipeline this um so effect ts if
+
+1047
+01:23:25,360 --> 01:23:35,600
+you want to do typescript >> okay we can switch over to uh diagram >> which which is like your you guys' whole thesis right like that uh I mean to me this is like kind of
+
+1048
+01:23:35,600 --> 01:23:44,400
+like a restatement but maybe I'm missing something of like well work on better harnesses or like you know your your models actually are capable a lot more if you try harder so this is
+
+1049
+01:23:44,400 --> 01:23:45,199
+a skill issue.
+
+1050
+01:23:45,199 --> 01:23:45,440
+>> Yeah.
+
+1051
+01:23:45,440 --> 01:23:45,600
+Yeah.
+
+1052
+01:23:45,600 --> 01:23:46,000
+Yeah.
+
+1053
+01:23:46,000 --> 01:23:51,880
+Basically, I I I mean, I I I think there's one thing I want to see.
+
+1054
+01:23:51,920 --> 01:24:01,160
+I I appreciate that there's a big focus on like jagged intelligence because it paints a big picture of like we can do this if we really set our minds on it,
+
+1055
+01:24:01,199 --> 01:24:05,480
+but I kind of wish and and maybe someone in academia should do this.
+
+1056
+01:24:05,520 --> 01:24:17,679
+like really just sit down and think about like if I took Astra even the current frontier models are not good enough at like doing a particular job over let's say the span of a
+
+1057
+01:24:17,679 --> 01:24:26,400
+month consistently and well and I think this is like a stupid problem like I I I genuinely think we can solve this you don't need to be a Frontier Lab and like do all this
+
+1058
+01:24:26,400 --> 01:24:38,120
+like you know fancy stuff for your IPO like I think like these models are so smart that even if it's like a silly way I think that it genuinely is a skill issue of
+
+1059
+01:24:38,239 --> 01:24:47,679
+you can get a model to be as good as let's say like just some 18-year-old high school kid doing some job.
+
+1060
+01:24:47,679 --> 01:24:49,679
+I think it's like ridiculous that we can't do that.
+
+1061
+01:24:49,679 --> 01:24:56,159
+And it's part of the reason is like the the the format of a language model is is not really amendable to that.
+
+1062
+01:24:56,159 --> 01:24:58,960
+But I think you can shape a harness around it and do it.
+
+1063
+01:24:58,960 --> 01:25:08,159
+And I think like this in itself is like ignoring the RLM stuff, ignoring all the like you know what abstractions should we use like I just think someone can design a harness that can
+
+1064
+01:25:08,159 --> 01:25:12,159
+do this like I I I mean that's maybe you say do this do what?
+
+1065
+01:25:12,159 --> 01:25:17,000
+>> Do long running but simple tasks uh and and do them reliably.
+
+1066
+01:25:17,520 --> 01:25:18,159
+>> That's an example.
+
+1067
+01:25:18,159 --> 01:25:27,360
+So, is this different than like, you know, pick your favorite company, Harvey, for example, using LLMs to do legal work or what's the >> I mean,
+
+1068
+01:25:27,360 --> 01:25:33,760
+I I I guess it's kind of like that except if the bottleneck was not like certain legal knowledge or something like I I don't know.
+
+1069
+01:25:33,760 --> 01:25:43,520
+Let's say >> I mean, I guess like the examples, you know, people can take models and build pipelines or whatever and have an agent repeatedly do whatever tasks they want,
+
+1070
+01:25:43,520 --> 01:25:43,760
+right?
+
+1071
+01:25:43,760 --> 01:25:43,920
+>> Yeah.
+
+1072
+01:25:43,920 --> 01:25:44,239
+Yeah.
+
+1073
+01:25:44,239 --> 01:25:55,440
+So, so for example, like if I wanted a general system that I could kind of talk I can talk to it like I would talk to an intern and basically just ask it to
+
+1074
+01:25:55,440 --> 01:25:58,159
+do to explore some small thing.
+
+1075
+01:25:58,159 --> 01:26:10,800
+So maybe an example of this is like very silly auto research is is maybe an example of this of like not necessarily finding super super novel solutions but at least optimizing all of the easy
+
+1076
+01:26:10,800 --> 01:26:13,239
+parts of any problem.
+
+1077
+01:26:13,280 --> 01:26:17,520
+they often end up being overindexed for like ML training and and and things like that.
+
+1078
+01:26:17,520 --> 01:26:18,719
+But yeah, I don't know.
+
+1079
+01:26:18,719 --> 01:26:35,920
+May maybe maybe that's that's that's not like super super clear, but there is a lot of people's general workflows where you probably could just vibe code up some specific harness to help you do
+
+1080
+01:26:35,920 --> 01:26:37,360
+like automate this thing.
+
+1081
+01:26:37,360 --> 01:26:41,920
+Some examples are like automating finding like research papers and stuff like that.
+
+1082
+01:26:41,920 --> 01:26:50,880
+But usually people will design like a specialized agent to help them do this kind of thing or like like they'll vibe code a harness like and just run it or like their Slackbot or
+
+1083
+01:26:50,880 --> 01:26:51,480
+something.
+
+1084
+01:26:51,600 --> 01:27:00,639
+But I almost think there's just like a standard form like just a harness that you just plug in like you don't it doesn't need to be designed for finding papers or like you just
+
+1085
+01:27:00,639 --> 01:27:04,279
+kind of tell it find this for me and you like plug it into that setting.
+
+1086
+01:27:04,320 --> 01:27:14,320
+What I'm getting at is that I think there's a lot of easy things that can be automated and >> is this like a hypothesis or a point around like capability overhang like even if we
+
+1087
+01:27:14,320 --> 01:27:26,159
+paused there's still a lot of impact to be had with current state of models >> in some sense yes like I guess what I'm presenting is the easiest form of this but what this is
+
+1088
+01:27:26,159 --> 01:27:36,680
+kind of saying is that like we have jagged intelligence on a lot of things like for example models are like disproportionately good at coding and math.
+
+1089
+01:27:36,800 --> 01:27:40,880
+This is saying like we can translate those abilities to many other things.
+
+1090
+01:27:40,880 --> 01:27:51,440
+So like for example, if you took usually if you take someone who was an IMO gold or something and you kind of apply them to a lot of different problem solving domains,
+
+1091
+01:27:51,440 --> 01:27:52,560
+they can figure it out.
+
+1092
+01:27:52,560 --> 01:27:54,839
+I don't actually know if this applies to models.
+
+1093
+01:27:55,040 --> 01:28:06,719
+For example, like in GPU code optimization, one very interesting question is whe if you were to take out all of the GPU programming data like from a model,
+
+1094
+01:28:06,719 --> 01:28:11,679
+but you it was re it was like as good as Astra is now just without like with that taken out,
+
+1095
+01:28:11,679 --> 01:28:14,360
+would it be able to still optimize GPU kernels?
+
+1096
+01:28:14,480 --> 01:28:24,960
+uh like would it be able to learn in context roughly what it needs to learn and then like have some pipeline or like or come up with some solution to solving like optimization tasks
+
+1097
+01:28:24,960 --> 01:28:32,480
+and I think like there's like a mismatch between like if you took a human that was as smart or like knew as much as Astra there is a mismatch between what that human can
+
+1098
+01:28:32,480 --> 01:28:42,480
+do and what Astra can do maybe around a harness um and I think we can actually approximate the human a lot more >> to me it sounds very approximate to the continual learning problem uh
+
+1099
+01:28:42,480 --> 01:28:44,839
+I think you're making >> that's the best example Yes.
+
+1100
+01:28:45,120 --> 01:28:45,440
+Yes.
+
+1101
+01:28:45,440 --> 01:28:46,480
+>> Why didn't you just say that?
+
+1102
+01:28:46,480 --> 01:28:46,719
+>> Yeah.
+
+1103
+01:28:46,719 --> 01:28:46,880
+Yeah.
+
+1104
+01:28:46,880 --> 01:28:52,719
+I guess I >> I was like thinking like could I just blurt out some words like I'm I'm careful with that.
+
+1105
+01:28:52,719 --> 01:29:02,719
+But yes, I I >> you have a very like maybe I >> maybe like a bit of a I don't know like so I I think you're a very uh I don't know.
+
+1106
+01:29:02,719 --> 01:29:03,920
+I know your undergrad actually.
+
+1107
+01:29:03,920 --> 01:29:05,400
+Are you like a math personally?
+
+1108
+01:29:05,840 --> 01:29:06,400
+Yeah.
+
+1109
+01:29:06,400 --> 01:29:08,000
+I think study math.
+
+1110
+01:29:08,000 --> 01:29:09,280
+>> Yeah, that's what I wanted to do at least.
+
+1111
+01:29:09,280 --> 01:29:19,920
+like a category theory type of uh abstraction where you think in categories and then you have to like then translate down to the specific and but then you like actually really care more about
+
+1112
+01:29:19,920 --> 01:29:20,680
+the category.
+
+1113
+01:29:21,040 --> 01:29:28,320
+>> Uh and like that that's the communication error because like everyone's listening for the specific but actually trying to also you know convey the general.
+
+1114
+01:29:28,320 --> 01:29:28,800
+Yeah.
+
+1115
+01:29:28,800 --> 01:29:30,520
+>> Um which is hard.
+
+1116
+01:29:31,120 --> 01:29:32,360
+>> I don't really know.
+
+1117
+01:29:32,400 --> 01:29:38,960
+uh you you can you maybe use like a shorthand of like okay I'm at level two and then I'm going to go up to level three and come back to level two >> that we
+
+1118
+01:29:38,960 --> 01:29:49,280
+should have say some like epistemic like shorthand for like this kind of thing because yeah it it's hard like you're compressing a lot into word after like sequential word decoding >> um should we convert
+
+1119
+01:29:49,280 --> 01:30:00,120
+to neuroles you know is there like a >> a better form of output than English or uh python or javascript
+
+1120
+01:30:03,040 --> 01:30:11,199
+>> I don't know this is very kind of like a post but like people have speculated about like what is the native language that people want out uh that models want to output >> uh some
+
+1121
+01:30:11,199 --> 01:30:24,239
+people say binary that's a that's Mark and Jason's thing >> I don't know yeah ptx >> let's say a mix of English and Python >> and I only say this because the capability of a model is
+
+1122
+01:30:24,239 --> 01:30:33,080
+somewhat a reflection of what we train them on so we still want like like yeah I don't really buy the the binary argument.
+
+1123
+01:30:33,520 --> 01:30:38,639
+I guess I like I understand but it's like uh like >> yeah you you want to you want to model the world in some way.
+
+1124
+01:30:38,639 --> 01:30:45,920
+I think uh you know uh one thing I I'll bring up is always which I always do in this kind of conversation is superior warf uh which is you if you choose English you
+
+1125
+01:30:45,920 --> 01:30:55,440
+will have locked into however long English has been around which is let's say 500 years uh which is not that long >> like actually uh you know like what you the language you speak constrains
+
+1126
+01:30:55,440 --> 01:31:05,120
+how you think and if you learn a different language uh for example uh someone uh in Chinese we don't have tenses um I don't know if you I I actually didn't know that >> and
+
+1127
+01:31:05,120 --> 01:31:09,400
+I speak Chinese >> oh I I I did know that but my my Chinese is Not great.
+
+1128
+01:31:09,600 --> 01:31:09,920
+>> Yeah.
+
+1129
+01:31:09,920 --> 01:31:10,159
+Yeah.
+
+1130
+01:31:10,159 --> 01:31:21,280
+Or like uh in let's say in Japanese or I know h I forget what language it is like in in Korean everyone you speak to you have to like acknowledge social status but there's
+
+1131
+01:31:21,280 --> 01:31:25,520
+a different dimension than gender >> right like it just like it just influences everything you do.
+
+1132
+01:31:25,520 --> 01:31:32,480
+Um when I take ling 101 um apparently there's a there's a there's a language in Africa where like there's a vegetable gender.
+
+1133
+01:31:32,480 --> 01:31:37,360
+Uh yeah right like just like you have or like smo is no word for snow or whatever like anyway.
+
+1134
+01:31:37,360 --> 01:31:45,400
+So like the the language that you adopt affects your thinking and if you choose to output your train of thought in English you are biasing towards whatever English solves.
+
+1135
+01:31:45,600 --> 01:31:48,480
+>> I don't know what the the sort of prior of English is.
+
+1136
+01:31:48,480 --> 01:31:49,400
+>> That's interesting.
+
+1137
+01:31:49,520 --> 01:31:51,440
+I I did not think of it that way.
+
+1138
+01:31:51,440 --> 01:31:52,960
+>> I mean at some level it's interesting right?
+
+1139
+01:31:52,960 --> 01:32:00,040
+So you're right on language at a lot of model chain of thought also fluctuates language.
+
+1140
+01:32:00,239 --> 01:32:04,680
+Uh the obvious example is Chinese models speaking in English might still reason in Chinese.
+
+1141
+01:32:05,120 --> 01:32:14,639
+uh but at the same level most models are very capable multilingually and that adaptation we can see you know you can add in languages you don't get that much for maning a whole language
+
+1142
+01:32:14,639 --> 01:32:25,360
+but they'll reason interchange >> yeah so we're all all regressive I mean but also like let's say German like you know uh subject object uh agreements uh you have to put the the verb at
+
+1143
+01:32:25,360 --> 01:32:35,120
+the end which is very super annoying like very famously uh yeah right you don't know what you're doing until the end where you're like oh that mess of nouns and then the verb >> Well,
+
+1144
+01:32:35,120 --> 01:32:43,880
+the the the most classic one that most people be have heard of is arrival where um they have the heptopods where they they think uh the time is like flat to them.
+
+1145
+01:32:44,000 --> 01:32:48,040
+So they think in they they they they output entire sentences at one shot.
+
+1146
+01:32:48,159 --> 01:32:52,239
+Um so it's it's closest to like the difference between auto regression and diffusion.
+
+1147
+01:32:52,239 --> 01:32:53,520
+We talk in auto regression.
+
+1148
+01:32:53,520 --> 01:32:55,920
+What if you could talk in diffusion?
+
+1149
+01:32:55,920 --> 01:32:57,600
+>> Uh where things just resolve over time.
+
+1150
+01:32:57,600 --> 01:32:58,080
+>> I see.
+
+1151
+01:32:58,080 --> 01:32:58,639
+I see.
+
+1152
+01:32:58,639 --> 01:33:00,680
+>> But the whole idea shows up at once.
+
+1153
+01:33:00,719 --> 01:33:01,319
+>> Ah
+
+1154
+01:33:03,040 --> 01:33:03,840
+I see.
+
+1155
+01:33:03,840 --> 01:33:07,199
+So that is a drastically different uh language, but it is a language.
+
+1156
+01:33:07,199 --> 01:33:07,520
+>> I see.
+
+1157
+01:33:07,520 --> 01:33:08,400
+Oh, that's really interesting.
+
+1158
+01:33:08,400 --> 01:33:09,280
+That's really really interesting.
+
+1159
+01:33:09,280 --> 01:33:15,840
+>> Uh- which like machines could speak that we, you know, probably would never speak, but like yeah, machines don't care.
+
+1160
+01:33:15,840 --> 01:33:26,200
+>> Maybe this is a huge tangent, but are there are there not like things inherently that are reasoning chains that are inherently auto reggressive?
+
+1161
+01:33:26,800 --> 01:33:28,000
+Sometimes like Yeah.
+
+1162
+01:33:28,000 --> 01:33:28,639
+or like Yeah.
+
+1163
+01:33:28,639 --> 01:33:28,800
+Yeah.
+
+1164
+01:33:28,800 --> 01:33:29,040
+Yeah.
+
+1165
+01:33:29,040 --> 01:33:29,360
+>> Yeah.
+
+1166
+01:33:29,360 --> 01:33:31,120
+Something happens first then something >> like Yeah.
+
+1167
+01:33:31,120 --> 01:33:36,759
+Anything in code for example like has to be causal in in in some or usually at least has to be causal.
+
+1168
+01:33:37,040 --> 01:33:47,840
+Um >> well no uh so so then you have to then you're not exploring enough uh function programming language theory uh where uh everything is like pure functional and like completely relational and and u
+
+1169
+01:33:47,840 --> 01:33:54,040
+you sort of abstract away the solver that translates the relationships that is are always true into code.
+
+1170
+01:33:54,080 --> 01:33:58,200
+So I I yeah I I feel like this is maybe a little bit too out of my depth.
+
+1171
+01:33:58,400 --> 01:34:08,000
+>> Uh but I love languages uh whether it's coding or human and I do think a lot about how that affects reasoning and and the boundaries of what we can do.
+
+1172
+01:34:08,000 --> 01:34:10,880
+>> I don't need to go too much beyond that.
+
+1173
+01:34:10,880 --> 01:34:12,239
+I don't know if you have any other thoughts.
+
+1174
+01:34:12,239 --> 01:34:17,040
+Uh my closing question was going to be uh you have all these research uh directions that you want to do.
+
+1175
+01:34:17,040 --> 01:34:22,560
+you're you you know you had a GPU mode phase, you had a uh RLM's phase.
+
+1176
+01:34:22,560 --> 01:34:26,800
+Presumably, you have other stuff planned which is why you're not um doubling down on that.
+
+1177
+01:34:26,800 --> 01:34:35,840
+By the way, I noticed that it is interesting how you guys do start with the GPU side and then you migrate towards the zero gradient side,
+
+1178
+01:34:35,840 --> 01:34:38,080
+which is what uh Shenu called it.
+
+1179
+01:34:38,080 --> 01:34:40,759
+Doesn't that feel less legit than messing with GPUs?
+
+1180
+01:34:41,199 --> 01:34:51,040
+Yeah, I guess in in the sense that like so you did bring up that like I I like to think about things in like a math oriented and it's like very uncomfortable sometimes to
+
+1181
+01:34:51,040 --> 01:34:58,440
+be working on like harnesses and agents because it's so >> because you think all harnesses are the same like two new ideas in harnesses.
+
+1182
+01:34:58,639 --> 01:34:58,880
+>> Yeah.
+
+1183
+01:34:58,880 --> 01:35:08,680
+It's it's >> it's also just like like empirically it's hard to like verify a lot of findings at least with with the compute that we have available to us.
+
+1184
+01:35:08,719 --> 01:35:19,199
+But the reason why I think I've moved on to a lot of these problems is I think actually this is where most of like the innovation is yet to happen to me like the GPU
+
+1185
+01:35:19,199 --> 01:35:30,639
+level is a means to exploring other ideas like you you you you want to for example like get good at writing kernels or like even automate writing kernels for the sake of a broader
+
+1186
+01:35:30,639 --> 01:35:39,840
+goal of like I want to explore ideas where I'm not bottlenecked by systems challenges in that sense like you know I guess a lot of what's written there is all harness stuff,
+
+1187
+01:35:39,840 --> 01:35:42,719
+but I am also interested in things at the model level as well.
+
+1188
+01:35:42,719 --> 01:35:45,040
+Um, but I'll just leave it at that.
+
+1189
+01:35:45,040 --> 01:35:46,239
+>> Okay, that's a good hint.
+
+1190
+01:35:46,239 --> 01:35:51,120
+Um, anything any if people want to reach out to you, uh, what are you looking for help on?
+
+1191
+01:35:51,120 --> 01:35:52,719
+What do you want collaborators on?
+
+1192
+01:35:52,719 --> 01:35:54,600
+Um, any sort of calls to action?
+
+1193
+01:35:54,800 --> 01:35:55,360
+Yeah.
+
+1194
+01:35:55,360 --> 01:36:06,719
+So, um I guess there's nothing I have in particular where I feel like I need to work with someone on unless it's like unless it's with a company before like compute or like with
+
+1195
+01:36:06,719 --> 01:36:08,480
+to talk with other people about it.
+
+1196
+01:36:08,480 --> 01:36:14,880
+But I will say I'm not I'm never opposed to working on ideas with other people.
+
+1197
+01:36:14,880 --> 01:36:19,000
+I get reached out to a lot by often undergrads or or even like other students.
+
+1198
+01:36:19,120 --> 01:36:19,720
+Podcasters.
+
+1199
+01:36:20,719 --> 01:36:22,320
+Podcasters.
+
+1200
+01:36:22,320 --> 01:36:27,760
+Um, and usually I feel like I get an email that's something along the lines of like, I really like RLM,
+
+1201
+01:36:27,760 --> 01:36:28,960
+like I want to work together.
+
+1202
+01:36:28,960 --> 01:36:32,000
+Uh, and I I feel like I >> Yeah, that's a bad reach out, right?
+
+1203
+01:36:32,000 --> 01:36:33,840
+The worst is like, can I pick your brain?
+
+1204
+01:36:33,840 --> 01:36:35,840
+I'm like on what like read my paper, dude.
+
+1205
+01:36:35,840 --> 01:36:43,040
+Like >> like they'll be like, I read your paper in quotes like recursive language models or like prime agent like a self-improving RLM harness or something.
+
+1206
+01:36:43,040 --> 01:36:48,239
+Uh, and it's kind of like I I I like I really like people that are opinionated even if we disagree.
+
+1207
+01:36:48,239 --> 01:36:57,119
+I think if you have strong opinions and are are able to like think through why you think those opinions are are right or wrong cuz usually it's it's hard to to to to actually
+
+1208
+01:36:57,119 --> 01:37:04,040
+tell but like you have strong convictions about certain problems like I'm I'm always happy to like chat and even like potentially work on something together.
+
+1209
+01:37:04,159 --> 01:37:07,920
+I have like no limit to who or like what I would like to work on.
+
+1210
+01:37:07,920 --> 01:37:10,120
+So um >> no limit.
+
+1211
+01:37:10,480 --> 01:37:10,719
+>> Yeah.
+
+1212
+01:37:10,719 --> 01:37:10,960
+Yeah.
+
+1213
+01:37:10,960 --> 01:37:11,119
+Yeah.
+
+1214
+01:37:11,119 --> 01:37:22,759
+I I you know in in the era of agents I think there's a lot more work you can do you know like like bandwidth wise so I yeah I I think in general like
+
+1215
+01:37:22,800 --> 01:37:31,199
+I am not hard to impress but I think it just takes a little bit of effort to kind of yeah know know what you want >> it's very clear I mean and like when you
+
+1216
+01:37:31,199 --> 01:37:41,199
+see a new thing come out well executed good simple idea uh then then get that immediately gets your attention right like it's actually like not that hard to get the the same attention all
+
+1217
+01:37:41,199 --> 01:37:43,920
+the Frontier Lab guys because they are looking for you.
+
+1218
+01:37:43,920 --> 01:37:45,520
+Uh you just have to put yourself out there, right?
+
+1219
+01:37:45,520 --> 01:37:45,920
+>> Exactly.
+
+1220
+01:37:45,920 --> 01:37:46,320
+Yeah.
+
+1221
+01:37:46,320 --> 01:37:47,199
+>> But yeah, it's true.
+
+1222
+01:37:47,199 --> 01:37:55,040
+I I will say I think I think human attention is very scarce right now and I do struggle with like the number of projects I have going on >> and uh I don't know how
+
+1223
+01:37:55,040 --> 01:37:55,520
+to manage it.
+
+1224
+01:37:55,520 --> 01:37:57,119
+I don't think agents are helping at all.
+
+1225
+01:37:57,119 --> 01:38:00,159
+Like I would just prompt it and I'll prompt a thing and then never look at it.
+
+1226
+01:38:00,159 --> 01:38:00,400
+>> Right.
+
+1227
+01:38:00,400 --> 01:38:01,679
+Like which is very common.
+
+1228
+01:38:01,679 --> 01:38:01,920
+Yeah.
+
+1229
+01:38:01,920 --> 01:38:02,080
+>> Yeah.
+
+1230
+01:38:02,080 --> 01:38:02,960
+And that sucks.
+
+1231
+01:38:02,960 --> 01:38:08,000
+>> I guess maybe the one of the smaller differences in like I mean actually maybe you were doing research.
+
+1232
+01:38:08,000 --> 01:38:08,639
+I'm not sure.
+
+1233
+01:38:08,639 --> 01:38:13,840
+But for for me at least, like I I'll have maybe like 10 or 15 different ideas that I want to do,
+
+1234
+01:38:13,840 --> 01:38:16,800
+but the thing is like most of them are bad.
+
+1235
+01:38:16,800 --> 01:38:16,960
+Yeah.
+
+1236
+01:38:16,960 --> 01:38:19,679
+>> And and and this also maybe is true even for someone that reaches out to me.
+
+1237
+01:38:19,679 --> 01:38:22,480
+Like maybe the idea is actually bad, but it it looks interesting to me.
+
+1238
+01:38:22,480 --> 01:38:28,719
+And so like we can spend like some time looking into it and if like we feel like there's actually something there,
+
+1239
+01:38:28,719 --> 01:38:32,719
+like then we should we should take the next few weeks and just really pursue it.
+
+1240
+01:38:32,719 --> 01:38:40,800
+And like this is my my style with this is why I love the PhD by the way because there are times when I'm just thinking about problems like maybe on a run or just
+
+1241
+01:38:40,800 --> 01:38:48,000
+like playing tennis or something like I'm not I'm not working I guess but it's like those are the most fun times and then when I like really am convicted about something I'll just like
+
+1242
+01:38:48,000 --> 01:38:56,080
+drop everything and just do it like just spend like all my time thinking and working on that problem and then I you know once you get to the point where like you can just
+
+1243
+01:38:56,080 --> 01:38:59,679
+run experiments then it's it's it's kind of easy coasting again.
+
+1244
+01:38:59,679 --> 01:39:09,360
+So >> yeah sorry this is like the the fourth last question which is like uh I I think a lot of people are also thinking about science as the next frontier like uh like physical
+
+1245
+01:39:09,360 --> 01:39:23,880
+sciences, bio, math even um >> how do you separate like I guess let's say your choice of projects that is applicable for industry and then maybe choice project that's just like science.
+
+1246
+01:39:24,000 --> 01:39:28,360
+>> I actually worked on like AI for bio stuff before I started my PhD.
+
+1247
+01:39:28,560 --> 01:39:30,400
+The field has changed a lot since then.
+
+1248
+01:39:30,400 --> 01:39:36,880
+I I I should say >> because it's it's like it used to be a theoretical like of course what what do you mean like you know I have one path and then I chose that
+
+1249
+01:39:36,880 --> 01:39:45,840
+but now a lot of people are crossing over and like so we have started a science pod to just cover those things because a lot of engineers are like well actually there's >> tractable problems
+
+1250
+01:39:45,840 --> 01:39:46,440
+there.
+
+1251
+01:39:46,639 --> 01:39:46,960
+>> Yeah.
+
+1252
+01:39:46,960 --> 01:39:56,639
+You know, I will preface by saying my my understanding of a lot of these topics is probably pretty limited, but I think like if I find out either because someone reaches out or like I
+
+1253
+01:39:56,639 --> 01:40:04,920
+look at a problem and I'm like, hey, like some design principles that we use or that we're thinking about right now actually make a lot of sense for this problem.
+
+1254
+01:40:04,960 --> 01:40:06,560
+I get excited about those as well.
+
+1255
+01:40:06,560 --> 01:40:07,920
+But I think I think it's harder.
+
+1256
+01:40:07,920 --> 01:40:08,800
+I I I don't know.
+
+1257
+01:40:08,800 --> 01:40:19,760
+I think with I think science especially like empirical or like applied science has very very long like what is it called like feedback loops or whatever.
+
+1258
+01:40:19,760 --> 01:40:22,239
+Um >> yeah you convert this to a robotics question.
+
+1259
+01:40:22,239 --> 01:40:22,560
+>> Yeah.
+
+1260
+01:40:22,560 --> 01:40:22,719
+Yeah.
+
+1261
+01:40:22,719 --> 01:40:33,600
+I mean to me like also this aspect of like what is worth spending and betting my time on now because like maybe I spend a lot of time on this problem and then like
+
+1262
+01:40:33,600 --> 01:40:40,239
+in 6 months like a different solution kind like maybe a new model comes out and it's like ah it's way better for this and so I do have to be careful I like you
+
+1263
+01:40:40,239 --> 01:40:43,920
+know you have to be conscious about like where you think things might be going.
+
+1264
+01:40:43,920 --> 01:40:46,200
+Um so >> publish publish cycle.
+
+1265
+01:40:46,560 --> 01:40:46,800
+>> Yeah.
+
+1266
+01:40:46,800 --> 01:40:47,040
+Yeah.
+
+1267
+01:40:47,040 --> 01:40:47,360
+Yeah.
+
+1268
+01:40:47,360 --> 01:40:50,239
+So >> I can just Oh 3 it's saturated.
+
+1269
+01:40:50,239 --> 01:40:51,199
+We we did it.
+
+1270
+01:40:51,199 --> 01:40:51,280
+>> Yeah.
+
+1271
+01:40:51,280 --> 01:40:54,159
+I mean, ArcJ 3 got saturated in less than a year.
+
+1272
+01:40:54,159 --> 01:41:01,679
+So, it's kind of, you know, like it's I don't know like if if if you were a lab picking that problem like you're probably kind of sad now cuz >> Exactly.
+
+1273
+01:41:01,679 --> 01:41:04,680
+That's why knowledge work, gaming, all these things are saturated.
+
+1274
+01:41:04,719 --> 01:41:06,600
+Now, actually the frontier is science.
+
+1275
+01:41:06,960 --> 01:41:08,200
+>> Knowledge work is saturated.
+
+1276
+01:41:09,040 --> 01:41:09,640
+>> Yeah.
+
+1277
+01:41:09,679 --> 01:41:12,440
+GDP is like 80 something 90 something.
+
+1278
+01:41:12,719 --> 01:41:22,480
+Um, I mean like you know there's there's 90 to 100% that's obviously going to take the next 10 years but like uh well the next lowhanging fruit is going to be like you know
+
+1279
+01:41:22,480 --> 01:41:23,199
+the other stuff.
+
+1280
+01:41:23,199 --> 01:41:24,800
+>> Yeah, maybe I'll think about that more.
+
+1281
+01:41:24,800 --> 01:41:28,600
+I actually I I haven't given too much >> I'm just trying to guess your next direction.
+
+1282
+01:41:28,880 --> 01:41:36,880
+I I will say because I think I think especially at MIT like it's it's there's a lot of really talented scientists there like in in the natural sciences and I think it's it's a
+
+1283
+01:41:36,880 --> 01:41:48,080
+little bit like sacrilegious almost to be like I'm going to figure out like your problem like >> no that's no I know yeah so I interviewed who did the IMO thing he's never I've never
+
+1284
+01:41:48,080 --> 01:41:59,440
+been to IMO I don't even know what it is model dude >> yeah yeah which is like very disrespectful but like whatever >> at some point like you have to respect ect like okay you know
+
+1285
+01:41:59,440 --> 01:42:09,840
+the the progress is being made like number is getting output right true >> yeah I mean that is very bitter lesson I it's very interesting like cuz the mathematicians are responding this way to nar
+
+1286
+01:42:09,840 --> 01:42:15,160
+right now >> like Terry turns to is like no like let's not let's not use AI I'm like
+
+1287
+01:42:16,239 --> 01:42:24,360
+>> well yeah I mean I I think that that whole thing is kind of weird because I feel like I feel like they would have had a stronger case if a lot of them didn't
+
+1288
+01:42:24,400 --> 01:42:33,119
+work with openai before like all this happens >> no that's ad hominemum uh and they they're really trying to stay away from that then so what right so what like I don't know like like
+
+1289
+01:42:33,119 --> 01:42:40,719
+so what they got you know they they they've collaborated I'll collaborate with people that I don't agree with or whatever or like I did a thing and then now I now I regret that
+
+1290
+01:42:40,719 --> 01:42:49,840
+I changed my mind or whatever right so I'll defend their right to say that but like uh yeah a lot of people are reasonably disagreeing with uh with them >> um okay cool uh thanks
+
+1291
+01:42:49,840 --> 01:42:59,600
+for you're joining us congrats on uh your success so far I can't believe you're still not done with your PhD year two you know >> can't believe we did this podcast without going through the
+
+1292
+01:42:59,600 --> 01:43:00,680
+RL paper.
+
+1293
+01:43:01,679 --> 01:43:03,679
+>> He he had a definition.
+
+1294
+01:43:03,679 --> 01:43:06,320
+>> I think the paper is more about like empirical results.
+
+1295
+01:43:06,320 --> 01:43:07,920
+Like the actual idea is quite simple.
+
+1296
+01:43:07,920 --> 01:43:08,159
+>> Yeah.
+
+1297
+01:43:08,159 --> 01:43:09,760
+And you've talked about it many times.
+
+1298
+01:43:09,760 --> 01:43:09,920
+>> Yeah.
+
+1299
+01:43:09,920 --> 01:43:10,159
+Yeah.
+
+1300
+01:43:10,159 --> 01:43:10,239
+Yeah.
+
+1301
+01:43:10,239 --> 01:43:13,520
+At this point, I think there's there's more interesting things to to to look over now.
+
+1302
+01:43:13,520 --> 01:43:14,639
+So >> cool.
+
+1303
+01:43:14,639 --> 01:43:16,480
+Well, we're excited to see what you do next.
+
+1304
+01:43:16,480 --> 01:43:17,560
+>> Thank you so much.
+

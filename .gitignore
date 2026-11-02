@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+dist/
+site-preview/
+downloads/
+*.mp4
+*.mkv
+*.m4v
+*.mov
+*.webm
+*.avi
+state.json
+*.log
+.env
+.env.*

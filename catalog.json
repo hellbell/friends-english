@@ -1,0 +1,835 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-02T08:22:08.418188+00:00",
+  "channels": [
+    {
+      "id": "UCHaHD477h-FeBbVh9Sh7syA",
+      "name": "BBC Learning English",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다."
+    },
+    {
+      "id": "UCKyTokYo0nK2OA-az-sDijA",
+      "name": "VOA Learning English",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다."
+    },
+    {
+      "id": "UCsooa4yRKGN_zEE8iknghZA",
+      "name": "TED-Ed",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요."
+    },
+    {
+      "id": "UCYO_jab_esuFRV4b17AJtAw",
+      "name": "3Blue1Brown",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다."
+    }
+  ],
+  "videos": [
+    {
+      "yt": "wkjSBC-_bDA",
+      "title": "How do you learn to speak a language? 6 Minute English",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "duration": 382,
+      "level": "intermediate",
+      "topics": [
+        "learning"
+      ],
+      "reason": "언어 학습이라는 익숙한 주제로 듣기와 어휘를 함께 연습할 수 있습니다. 6분 안팎으로 한 번에 공부하기 좋습니다.",
+      "source": "curated",
+      "subs": [],
+      "youtubeEnglishCaptions": true,
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "heycg7D5VZw",
+      "title": "Lesson 1: Welcome!",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "duration": 300,
+      "level": "beginner",
+      "topics": [
+        "conversation"
+      ],
+      "reason": "인사와 자기소개를 짧은 상황극으로 익히는 입문 영상입니다. 두 사람의 대화를 번갈아 따라 말해 보세요.",
+      "source": "curated",
+      "subs": [],
+      "youtubeEnglishCaptions": false,
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "MMmOLN5zBLY",
+      "title": "The benefits of a bilingual brain - Mia Nacamulli",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "duration": 304,
+      "level": "intermediate",
+      "topics": [
+        "science",
+        "learning"
+      ],
+      "reason": "이중 언어와 뇌에 관한 애니메이션입니다. 한 문장씩 듣고 원인과 결과를 연결하는 표현을 찾아보세요.",
+      "source": "curated",
+      "subs": [],
+      "youtubeEnglishCaptions": true,
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "aircAruvnKk",
+      "title": "But what is a neural network? | Deep learning chapter 1",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "duration": 1120,
+      "level": "advanced",
+      "topics": [
+        "ai",
+        "science"
+      ],
+      "reason": "신경망을 그림으로 설명해 전문 내용을 영어로 따라가기 좋습니다. 예시를 설명하는 문장을 골라 연습해 보세요.",
+      "source": "curated",
+      "subs": [],
+      "youtubeEnglishCaptions": true,
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "NVgpf-SFs0g",
+      "title": "Will robots out-think humans? 6 Minute English",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "duration": 377,
+      "level": "intermediate",
+      "topics": [
+        "ai"
+      ],
+      "reason": "AI와 로봇에 관한 짧은 대화입니다. 긴 연구 인터뷰 전에 관련 어휘를 가볍게 익히기 좋습니다.",
+      "source": "curated",
+      "subs": [],
+      "youtubeEnglishCaptions": true,
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "kog7mwsDqnk",
+      "title": "Recursive Language Models — Alex Zhang, MIT PhD",
+      "channel": "",
+      "duration": 6204,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "재귀 언어 모델 연구를 깊이 다루는 인터뷰입니다. GPT 한국어 번역과 영어 대본을 보며 1~2분씩 나누어 학습하세요.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/kog7mwsDqnk.en.srt",
+        "study-captions/kog7mwsDqnk.ko.srt"
+      ],
+      "translation": "GPT",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "L4SWQebqhek",
+      "title": "David Silver and Lasse Espeholt of Ineffable Intelligence: A Superlearner for the Age of Experience",
+      "channel": "",
+      "duration": 4082,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "David Silver와 Lasse Espeholt의 연구 관점을 영어로 들을 수 있습니다. 주장과 근거를 연결하는 표현을 연습하기 좋습니다.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/L4SWQebqhek.en.srt",
+        "study-captions/L4SWQebqhek.ko.srt"
+      ],
+      "translation": "GPT",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "PrSf7IOYu-I",
+      "title": "AI researchers debate how close we are to recursive self-improvement",
+      "channel": "",
+      "duration": 5821,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "여러 연구자의 토론을 들으며 동의·반박·불확실성을 표현하는 영어를 연습할 수 있습니다.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/PrSf7IOYu-I.en.srt",
+        "study-captions/PrSf7IOYu-I.ko.srt"
+      ],
+      "translation": "GPT",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "0idrTKCDhuE",
+      "title": "Inside the Robot Data Factory: Mecka's Josh Gao on Sensorizing Humans to Train Robots",
+      "channel": "",
+      "duration": 2712,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "로봇 학습용 데이터를 설명하는 인터뷰입니다. 익숙한 연구 주제의 전문 표현을 문장 단위로 반복해 보세요.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/0idrTKCDhuE.en.srt",
+        "study-captions/0idrTKCDhuE.ko.srt"
+      ],
+      "translation": "GPT",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "Yxnvq6dxXXw",
+      "title": "How to make polite conversation 💬 in this English class with Georgie",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-29T14:05:52+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "npka43vhwNo",
+      "title": "Is aircon the answer to a heating world? ⏲️ 6 Minute English",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-29T09:35:08+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "8P1StZMmGJ8",
+      "title": "Lula surprises many with fourth election win | BBC Learning English from the News",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-28T13:10:44+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "4uviHrd2Zh4",
+      "title": "BOX SET: 6 Minute English - 'Weird & wonderful' English mega-class! 30 minutes of new vocab!",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-27T10:00:41+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "bpEh_sEsYok",
+      "title": "Talk about job interviews in English 🤝 #englishpodcast  #bbclearningenglish  #job #interview",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-27T10:00:34+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "VFA53-P4yPo",
+      "title": "Tips for feeling confident in job interviews 🤝 | Improve your listening with Real Easy English",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-26T10:00:27+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "3tyG0hkQJ-w",
+      "title": "🤓 Can you say these advanced English phrases before I do?",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-23T10:29:01+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "WXKilGiOQy8",
+      "title": "9 English Expressions to describe people's personalities: Live English Class",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-22T13:02:20+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "pjFlVc-EDzc",
+      "title": "What should you eat for a better night’s sleep? ⏲️ 6 Minute English",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-22T08:55:46+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "JYjXBX5kVCg",
+      "title": "Why are so many young people around the world protesting? | BBC Learning English from the News",
+      "channel": "BBC Learning English",
+      "channelId": "UCHaHD477h-FeBbVh9Sh7syA",
+      "level": "intermediate",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "영어 학습자를 위한 설명과 짧은 대화로 표현·듣기를 연습하기 좋습니다.",
+      "published": "2026-10-21T13:11:30+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "q4PkX8_xUYk",
+      "title": "Everyday Grammar Video: Ramen, A Popular Food in Japan",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-04-29T22:09:16+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "YfvD3KpHY2A",
+      "title": "How to Pronounce: Fun Practice - Exaggeration Activities",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-04-27T22:05:36+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "41jE1ijuf_4",
+      "title": "Everyday Grammar Video: A Popular Person in Turkey",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-04-22T22:10:17+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "eieV6WIz-YM",
+      "title": "How to Pronounce: Self-monitoring and improvement",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-04-20T22:05:50+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "uuYpEPqCYYs",
+      "title": "How to Pronounce: Studying pauses and connections",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-04-13T22:06:06+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "3xdy_2SUo4Q",
+      "title": "How to Pronounce: Difficult terms - Artificial General Intelligence",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-04-06T22:08:46+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "VFhlD8kt6sQ",
+      "title": "How to Pronounce: Stress and listening - Artificial intelligence",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-03-30T22:10:17+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "0q6nFVaJ2MY",
+      "title": "Everyday Grammar Video: Feedback on Writing Submissions",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-03-25T22:05:11+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "MJUKtPaGlSQ",
+      "title": "How to Pronounce: Science and Technology: 'Asteroid'",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-03-23T22:03:51+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "vyPofYmxIJA",
+      "title": "Everyday Grammar Video: 'Population' in Sentences",
+      "channel": "VOA Learning English",
+      "channelId": "UCKyTokYo0nK2OA-az-sDijA",
+      "level": "beginner",
+      "topics": [
+        "conversation",
+        "learning"
+      ],
+      "reason": "학습자용 미국 영어를 들으며 발음과 기본 표현을 익히기 좋습니다.",
+      "published": "2025-03-18T22:01:16+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "8RPK5KwYhgA",
+      "title": "What if you didn’t brush your teeth for a year? - Justin Merritt",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-29T15:00:29+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "nXvKDYRvTno",
+      "title": "Scary stories to watch in the dark (if you dare…)",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-27T15:00:17+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "a_4eFB8pPwI",
+      "title": "5 sneaky ways stores get you to spend more",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-22T15:01:05+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "NPJ9KZqrl50",
+      "title": "Why does this animal never age? - Raymond Adkins",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-20T15:01:00+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "av3zdxYvCp8",
+      "title": "3 things to never do with a credit card",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-15T15:00:51+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "1uTRlM6MbMo",
+      "title": "How to present your ideas effectively",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-13T15:00:24+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "h6CmKF-mN2U",
+      "title": "Which is better: Buying or renting a home? - Ella Feldman",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-08T15:01:11+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "JjhrN0FcHpM",
+      "title": "Why is Queen Victoria so controversial? - Carolyn Harris",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-06T15:01:57+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "G3hXvByzLHs",
+      "title": "6 ways to be more persuasive",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-10-01T15:00:32+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "z3Y-gsBKChc",
+      "title": "Why are AI data centers using so much electricity? - Sajan Saini",
+      "channel": "TED-Ed",
+      "channelId": "UCsooa4yRKGN_zEE8iknghZA",
+      "level": "intermediate",
+      "topics": [
+        "science"
+      ],
+      "reason": "시각 자료와 함께 설명하는 영어를 들으며 핵심 내용을 요약해 보세요.",
+      "published": "2026-09-29T15:00:44+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "V_uq3v6xK-4",
+      "title": "The Sphere Intersection Puzzle",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-10-25T14:30:46+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "LKrwhjOI8Nc",
+      "title": "There's never been a better time to go into math",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-10-16T16:15:20+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "ausLKMojXaY",
+      "title": "The Phone Number puzzle",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-09-25T13:35:02+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "bRQEWPA832A",
+      "title": "The last IMO problem AI could not solve",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-09-18T17:14:08+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "Nbwv5wHQoj0",
+      "title": "The last IMO problem AI could not solve",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-09-18T17:12:53+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "rYyJm1tD3d0",
+      "title": "The jumping pegs puzzle",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-08-18T14:54:17+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "6XPlmCDNLNc",
+      "title": "The 64 sugar cubes puzzle",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-07-24T15:05:39+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "GlYgs6v2YfU",
+      "title": "But what is cross-entropy? | Compression is Intelligence Part 2",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-07-16T11:56:04+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "wGffBCfrAsE",
+      "title": "100 random chords, how many intersections?",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-06-16T18:04:05+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    },
+    {
+      "yt": "-7etvZSBxlk",
+      "title": "Measuring the entropy of English",
+      "channel": "3Blue1Brown",
+      "channelId": "UCYO_jab_esuFRV4b17AJtAw",
+      "level": "advanced",
+      "topics": [
+        "science",
+        "ai"
+      ],
+      "reason": "수학·AI를 설명하는 문장을 들으며 논리적인 설명과 전문 어휘를 연습할 수 있습니다.",
+      "published": "2026-06-12T13:22:02+00:00",
+      "source": "feed",
+      "duration": null,
+      "subs": []
+    }
+  ],
+  "feedStatus": {
+    "updated": 4,
+    "total": 4
+  }
+}

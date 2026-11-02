@@ -2,12 +2,14 @@
 
 내 영상(+영어 자막)이나 유튜브 영상으로 문장 단위 듣기, 따라 말하기, 받아쓰기를 하는 웹앱입니다.
 맥미니에서 서버를 켜 두면 아이폰·아이패드·노트북 어디서나 같은 진도와 보관함으로 공부할 수 있습니다.
-GitHub Pages 버전은 맥 서버 없이 YouTube와 기기에서 선택한 영상으로 공부할 수 있습니다.
-Python 3 표준 라이브러리만 사용합니다.
+GitHub Pages 버전은 맥 서버 없이 YouTube와 기기에서 선택한 영상으로 공부할 수 있으며, 비밀번호로 잠겨 있습니다.
+Python 3 표준 라이브러리만 사용합니다 (잠긴 Pages 빌드의 암호화에만 Deno를 씁니다).
 
 ## 온라인에서 사용
 
 **https://hellbell.github.io/friends-english/**
+
+처음 여는 기기에서는 비밀번호를 입력합니다. **이 기기에서 로그인 유지**를 켜 두면 그 브라우저는 다음부터 묻지 않습니다. 아이폰 홈 화면에 추가한 앱은 Safari와 저장소가 따로라서 한 번 더 로그인합니다. 기기 하나만 로그아웃하려면 주소 끝에 `#lock`을 붙여 엽니다(`…/friends-english/#lock`). 비밀번호를 바꿔 배포하면 모든 기기가 다시 로그인해야 합니다.
 
 - 선택한 **Latent Space 11편**을 라이브러리와 추천 목록에 연결했습니다. 추천 영상의 **목록 → Latent Space 선택 11편**에서 모아 볼 수 있습니다. 영어 자막을 기본으로 요청하며, 한국어는 플레이어의 **설정 → 자막 → 자동 번역 → 한국어**에서 선택하세요. 메뉴가 보이지 않으면 화면의 YouTube 원본 링크를 이용하세요.
 - 이 11편은 YouTube 원본 자막·자동 번역으로 보는 항목입니다. 문장별 한영 SRT나 GPT 번역은 아직 포함하지 않았습니다. 원문 SRT/VTT를 제공하면 문장별 번역과 학습 대본으로 연결할 수 있습니다. 2026-11-03에 11편 모두 영어 자막, 한국어 자동 번역 트랙과 퍼가기 지원을 공개 메타데이터에서 확인했습니다.
@@ -27,14 +29,23 @@ GitHub Pages가 집 맥의 파일이나 Dropbox 폴더를 자동으로 읽지는
 ### 배포와 추천 목록 갱신
 
 ```sh
-python3 build_pages.py              # dist/에 공개할 파일만 복사
-python3 build_pages.py --refresh    # YouTube 공개 RSS를 읽어 새 영상 추가
+python3 build_pages.py --set-password   # 비밀번호를 정하거나 바꿈: 잠금 키 저장 (GitHub 비밀값 PAGES_KEY도 설정)
+python3 build_pages.py                  # dist/에 잠긴 사이트를 만듦 (Deno 필요: brew install deno)
+python3 build_pages.py --refresh        # YouTube 공개 RSS를 읽어 새 영상 추가
+python3 build_pages.py --public         # 잠금 없이 빌드: 이 맥에서 화면 확인용, 배포하지 말 것
 python3 -m http.server 8766 --directory dist --bind 127.0.0.1
 ```
 
-`dist/`에는 `index.html`, 아이콘, 추천 목록, 준비된 SRT 8개만 들어갑니다. 개인 영상, `downloads/`, 서버 상태와 보관함은 복사하지 않습니다. 웹사이트와 포함된 자막은 공개됩니다.
+`dist/`에는 잠금 화면(`index.html`)과 아이콘, 그리고 **암호화된** 앱·추천 목록·준비된 한영 SRT만 들어갑니다. 앱·추천 목록·자막은 AES-256-GCM으로 암호화되어 비밀번호 없이는 읽을 수 없고, 그대로 보이는 것은 잠금 화면과 아이콘뿐입니다. 개인 영상, `downloads/`, 서버 상태와 보관함은 복사하지 않습니다.
 
-GitHub 저장소의 Settings → Pages → Source를 **GitHub Actions**로 설정합니다. `.github/workflows/pages.yml`이 `main` 갱신·수동 실행·매일 22:17 UTC(한국 07:17)에 사이트를 배포합니다. 예약 실행은 지연될 수 있으며, 공개 저장소가 장기간 비활성 상태이면 GitHub가 예약 실행을 중지할 수 있습니다. 피드 하나가 실패하면 해당 채널의 저장된 목록을 유지합니다. **목록 다시 읽기**는 마지막 배포된 목록을 가져옵니다.
+- 비밀번호에서 PBKDF2-SHA256(60만 회)으로 잠금 키를 만듭니다. 키는 이 맥의 `~/Library/Application Support/FriendsEnglish/pages.key`와 GitHub 저장소 비밀값 `PAGES_KEY`(매일 배포용)에만 있고, 비밀번호 자체는 어디에도 저장하지 않습니다. `PAGES_KEY`가 없으면 빌드가 멈추고 배포하지 않습니다.
+- 암호화된 파일은 누구나 받아 갈 수 있으므로 추측하기 어려운 비밀번호를 쓰세요. `--set-password`에서 Enter만 누르면 하나 만들어 줍니다.
+- 로그인 유지 키와 진도는 브라우저 저장소에 있고, `hellbell.github.io` 아래 다른 Pages 사이트와 같은 저장소를 씁니다. 그 사이트들에 남의 스크립트를 넣지 마세요.
+
+저장소(hellbell/friends-english)는 공개입니다. GitHub 무료 플랜은 비공개 저장소에서 Pages를 켤 수 없기 때문입니다. 그래서 잠금은 **사이트 접속**을 막고, 원본 코드·추천 목록·자막은 GitHub 저장소에서 그대로 보입니다(진도·단어장은 저장소에 없습니다). 이것까지 숨기려면 저장소를 비공개로 바꾸고 GitHub Pro를 쓰거나, 암호화된 `dist/`만 별도 공개 저장소로 배포해야 합니다.
+
+- Settings → Pages → Source는 **GitHub Actions**입니다. `.github/workflows/pages.yml`이 `main` 갱신·수동 실행·매일 22:17 UTC(한국 07:17)에 잠긴 사이트를 배포하며, 저장소 비밀값 `PAGES_KEY`(잠금 키)가 있어야 합니다.
+- 예약 실행은 지연될 수 있고, 공개 저장소가 오래 비활성이면 GitHub가 예약 실행을 멈출 수 있습니다. 피드 하나가 실패하면 해당 채널의 저장된 목록을 유지합니다. **목록 다시 읽기**는 마지막 배포된 목록을 가져옵니다.
 
 `catalog.json`에서 직접 고른 영상과 추천 이유를 수정할 수 있습니다. `source: feed` 항목만 자동 갱신 대상이며, `curated`와 `prepared` 항목은 유지합니다. 피드에 없는 영상 길이·자막 유무·퍼가기 가능 여부는 추측하지 않습니다. YouTube에서 영상을 내리거나 퍼가기를 막으면 원본 링크로 확인하세요.
 
@@ -122,4 +133,4 @@ deno run --allow-read tests/pages_test.mjs
 python3 -B -m unittest discover -s tests -p 'test_*.py'
 ```
 
-추천 필터·목록 병합, YouTube 주소 검증, 학습 백업 병합·잘못된 파일 거부, A–B 반복, 피드 실패 시 복구, 공개 파일 구성과 자막 짝을 검사합니다. YouTube 재생은 인터넷 연결·브라우저 정책·원본 영상의 퍼가기 설정에 영향을 받습니다.
+추천 필터·목록 병합, YouTube 주소 검증, 학습 백업 병합·잘못된 파일 거부, A–B 반복, 피드 실패 시 복구, 공개 파일 구성과 자막 짝을 검사합니다. 잠긴 빌드는 잠금 화면의 코드로 다시 풀어 원본과 같은지, 틀린 비밀번호와 바꿔치기한 파일을 거부하는지도 확인합니다(Deno 필요). YouTube 재생은 인터넷 연결·브라우저 정책·원본 영상의 퍼가기 설정에 영향을 받습니다.

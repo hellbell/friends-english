@@ -2,6 +2,8 @@ import copy
 import importlib.util
 import json
 import re
+import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -68,6 +70,50 @@ class PublicBuildTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 build_pages.build(out)
             self.assertEqual(keep.read_text(), 'keep')
+
+
+class LockedBuildTests(unittest.TestCase):
+    password = 'correct horse battery'
+
+    def test_key_format(self):
+        key = build_pages.make_key(self.password, iterations=1000)
+        lock = build_pages.parse_key(key + '\n')
+        self.assertEqual((lock['iterations'], len(lock['salt']), len(lock['key'])), (1000, 16, 32))
+        self.assertNotEqual(build_pages.make_key(self.password, iterations=1000), key)  # fresh salt
+        tag, iterations, salt, secret = key.split('.')
+        for bad in ('', 'fe1.1000.abc', f'fe2.{iterations}.{salt}.{secret}', f'fe1.999.{salt}.{secret}',
+                    f'fe1.x.{salt}.{secret}', f'fe1.{iterations}.{salt}.{secret[:-8]}', key + '.extra'):
+            with self.assertRaises(ValueError, msg=bad):
+                build_pages.parse_key(bad)
+
+    def test_missing_key_stops_the_build(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.dict('os.environ', {build_pages.KEY_ENV: ''}), \
+                patch.object(build_pages, 'KEY_FILE', Path(tmp) / 'missing.key'):
+            with self.assertRaises(SystemExit):
+                build_pages.load_key()
+
+    @unittest.skipUnless(shutil.which('deno'), 'Deno seals and opens locked builds')
+    def test_locked_build_opens_only_with_password(self):
+        lock = build_pages.parse_key(build_pages.make_key(self.password, iterations=1000))
+        with tempfile.TemporaryDirectory() as tmp:
+            plain, locked, opened = (Path(tmp) / name for name in ('plain', 'locked', 'opened'))
+            build_pages.build(plain)
+            build_pages.build(locked, lock=lock)
+            files = lambda d: {p.relative_to(d).as_posix() for p in d.rglob('*') if p.is_file()}
+            self.assertEqual(files(locked), files(plain))
+            sealed = sorted(files(plain) - {'icon.png', '.nojekyll', '.friends-english-build'})
+            self.assertNotIn('STATIC_MODE', (locked / 'index.html').read_text())
+            for name in sealed:
+                if name != 'index.html':
+                    data, original = (locked / name).read_bytes(), (plain / name).read_bytes()
+                    self.assertEqual(len(data), len(original) + 28, name)  # IV + tag only
+                    self.assertNotIn(original[:64], data, name)
+            result = subprocess.run(['deno', 'run', '--quiet', '--no-prompt', '--no-config', f'--allow-read={locked}',
+                                     f'--allow-write={opened}', str(ROOT / 'tests' / 'lock_check.mjs'),
+                                     str(locked), str(opened), self.password], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            for name in sealed:
+                self.assertEqual((opened / name).read_bytes(), (plain / name).read_bytes(), name)
 
 
 if __name__ == '__main__':

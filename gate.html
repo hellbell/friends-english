@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="영어공부">
+<meta name="theme-color" content="#1a1a1e">
+<title>Friends 영어공부</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #111113; --panel: #1a1a1e; --panel2: #24242a; --line: #2f2f37;
+  --text: #ececf1; --dim: #8f8f9c; --accent: #ffc54d; --bad: #ff6b6b;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: grid; place-items: center; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+}
+form {
+  display: grid; gap: 12px; box-sizing: border-box; width: min(340px, calc(100vw - 32px)); padding: 24px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+}
+h1 { font-size: 17px; margin: 0; }
+p { margin: 0; color: var(--dim); font-size: 13px; }
+input, button { font: inherit; color: inherit; }
+#pw {
+  padding: 10px 12px; font-size: 16px;  /* 16px보다 작으면 iOS가 화면을 확대한다 */
+  background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+}
+#pw:focus { outline: none; border-color: var(--accent); }
+label { display: flex; align-items: center; gap: 8px; color: var(--dim); font-size: 13px; }
+button {
+  padding: 10px; border: 1px solid var(--accent); border-radius: 8px;
+  background: #3a3220; color: var(--accent); cursor: pointer;
+}
+button:disabled { opacity: .6; cursor: default; }
+#msg { min-height: 1.5em; }
+#msg.bad { color: var(--bad); }
+</style>
+</head>
+<body>
+<form id="login" hidden>
+  <h1>Friends 영어공부</h1>
+  <p>개인 공부용 앱입니다. 비밀번호를 입력하세요.</p>
+  <input type="text" name="username" value="friends-english" autocomplete="username" hidden>
+  <input type="password" id="pw" name="password" autocomplete="current-password" placeholder="비밀번호" required>
+  <label><input type="checkbox" id="remember" checked> 이 기기에서 로그인 유지</label>
+  <button id="go">열기</button>
+  <p id="msg" role="status"></p>
+</form>
+<noscript>JavaScript를 켜야 열 수 있습니다.</noscript>
+<script>
+// 잠긴 Pages 사이트의 입구. 비밀번호 → PBKDF2 → AES-256-GCM 키로 앱(index.html)을 풀어 이 문서를 바꾸고,
+// 추천 목록(catalog.json)과 자막(study-captions/)은 앱이 fetch할 때 같은 키로 푼다.
+// document.open 뒤에도 전역은 남으므로 앱 스크립트와 이름이 겹치지 않게 전부 함수 안에 둔다.
+(() => {
+// ---- crypto: tests/lock_check.mjs가 이 구간을 그대로 실행한다
+const LOCK = /*LOCK*/null;
+const bytes = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const base64 = b => btoa(String.fromCharCode(...b));
+async function deriveKey(password) {
+  const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(password.normalize('NFC')), 'PBKDF2', false, ['deriveBits']);
+  return new Uint8Array(await crypto.subtle.deriveBits(
+    { name: 'PBKDF2', hash: 'SHA-256', salt: bytes(LOCK.salt), iterations: LOCK.iter }, material, 256));
+}
+async function unseal(raw, sealed, name) {
+  const key = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']);
+  return crypto.subtle.decrypt({ name: 'AES-GCM', iv: sealed.slice(0, 12), additionalData: new TextEncoder().encode(name) },
+    key, sealed.slice(12));
+}
+// 풀린 앱 문서에 문자열로 심는다: 추천 목록·자막 응답을 풀어서 돌려주고, 다른 요청은 그대로 보낸다.
+function sealedFetch(keyText) {
+  const plainFetch = window.fetch.bind(window);
+  const base = new URL('./', location.href);
+  const key = crypto.subtle.importKey('raw', Uint8Array.from(atob(keyText), c => c.charCodeAt(0)), 'AES-GCM', false, ['decrypt']);
+  window.fetch = async (input, init) => {
+    const url = new URL(input instanceof Request ? input.url : String(input), location.href);
+    const name = url.origin === base.origin && url.pathname.startsWith(base.pathname)
+      ? decodeURIComponent(url.pathname.slice(base.pathname.length)) : '';
+    if (!/^(catalog\.json|study-captions\/[\w-]+\.(en|ko)\.srt)$/.test(name)) return plainFetch(input, init);
+    const response = await plainFetch(input, init);
+    if (!response.ok) return response;
+    const sealed = new Uint8Array(await response.arrayBuffer());
+    const plain = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: sealed.slice(0, 12), additionalData: new TextEncoder().encode(name) }, await key, sealed.slice(12));
+    return new Response(plain, { headers: { 'Content-Type': name.endsWith('.json') ? 'application/json; charset=utf-8' : 'text/plain; charset=utf-8' } });
+  };
+}
+// ---- screen
+const STORE = 'fe-lock';  // 'fe.'로 시작하지 않아 학습 백업에 들어가지 않는다
+const $ = id => document.getElementById(id);
+// 이 문서를 아직 읽는 중에 document.open을 부르면 무시되고 앱이 이 화면 뒤에 덧붙는다. 다 읽은 뒤에 바꾼다.
+const loaded = new Promise(done => document.readyState === 'complete' ? done()
+  : addEventListener('load', () => setTimeout(done), { once: true }));
+function ask(text, bad) {
+  $('msg').textContent = text;
+  $('msg').className = bad ? 'bad' : '';
+  $('go').disabled = false;
+  $('login').hidden = false;
+  $('pw').focus();
+}
+async function unlock(raw, keep) {
+  const html = new TextDecoder().decode(await unseal(raw, bytes(LOCK.app), 'index.html'));
+  try { keep ? localStorage.setItem(STORE, base64(raw)) : localStorage.removeItem(STORE); } catch {}
+  const shim = '<script>(' + sealedFetch + ')(' + JSON.stringify(base64(raw)) + ');<\/script>';
+  await loaded;
+  document.open();
+  document.write(html.replace(/<head(\s[^>]*)?>/i, tag => tag + shim));
+  document.close();
+}
+$('login').addEventListener('submit', async e => {
+  e.preventDefault();
+  $('go').disabled = true;
+  $('msg').className = '';
+  $('msg').textContent = '여는 중…';
+  try {
+    await unlock(await deriveKey($('pw').value), $('remember').checked);
+  } catch (err) {
+    ask(err.name === 'OperationError' ? '비밀번호가 맞지 않습니다.' : `열지 못했습니다: ${err.message}`, true);
+    $('pw').select();
+  }
+});
+let saved = null;
+try { saved = localStorage.getItem(STORE); } catch {}
+if (!window.crypto?.subtle) {
+  ask('이 브라우저에서는 열 수 없습니다. https 주소로 여세요.', true);
+} else if (location.hash === '#lock') {
+  try { localStorage.removeItem(STORE); } catch {}
+  history.replaceState(null, '', location.pathname + location.search);
+  ask('이 기기의 로그인 유지를 해제했습니다.');
+} else if (saved) {
+  Promise.resolve(saved).then(text => unlock(bytes(text), true)).catch(() => {
+    try { localStorage.removeItem(STORE); } catch {}
+    ask('비밀번호가 바뀌었습니다. 새 비밀번호를 입력하세요.');
+  });
+} else {
+  ask('');
+}
+})();
+</script>
+</body>
+</html>

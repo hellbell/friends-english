@@ -13,3 +13,4 @@ state.json
 *.log
 .env
 .env.*
+pages.key

@@ -27,8 +27,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
       - uses: actions/configure-pages@v5
-      - name: Build public app and refresh video recommendations
+      - name: Build password-locked app and refresh video recommendations
+        env:
+          FE_PAGES_KEY: ${{ secrets.PAGES_KEY }}  # without it the build stops and nothing is deployed
         run: python3 build_pages.py --refresh
       - uses: actions/upload-pages-artifact@v4
         with:

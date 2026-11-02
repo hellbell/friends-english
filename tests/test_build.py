@@ -49,7 +49,8 @@ class PublicBuildTests(unittest.TestCase):
         self.assertIn(prior, result['videos'])
         self.assertEqual(result['updatedAt'], old['updatedAt'])
         self.assertEqual(result['feedStatus']['updated'], 0)
-        self.assertEqual(sum(v.get('source') != 'feed' for v in result['videos']), 9)
+        self.assertEqual({v['yt'] for v in result['videos'] if v.get('source') != 'feed'},
+                         {v['yt'] for v in old['videos'] if v.get('source') != 'feed'})
 
     def test_refresh_deduplicates_curated_video(self):
         selected = next(v for v in self.catalog['videos'] if v.get('source') == 'curated')

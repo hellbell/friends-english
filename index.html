@@ -404,6 +404,7 @@ header { flex-wrap: wrap; }
       <button>찾기</button>
     </form>
     <div class="discover-filters">
+      <label>목록 <select id="discover-collection"><option value="">전체</option><option value="latent-space-11">Latent Space 선택 11편</option></select></label>
       <label>난이도 <select id="discover-level"><option value="">전체</option value="beginner">기초</option><option value="intermediate">중급</option><option value="advanced">고급</option></select></label>
       <label>주제 <select id="discover-topic"><option value="">전체</option><option value="conversation">일상 회화</option><option value="learning">영어·학습</option><option value="science">과학·교양</option><option value="ai">AI·기술</option></select></label>
       <label>길이 <select id="discover-duration"><option value="">전체</option><option value="300">5분 이하</option><option value="600">10분 이하</option><option value="1200">20분 이하</option><option value="long">20분 초과</option></select></label>
@@ -609,7 +610,7 @@ class YouTubePlayer extends EventTarget {
     if (!this.p) {
       await new Promise(res => {
         this.p = new YT.Player(this.box.appendChild(el('div')), {
-          playerVars: { playsinline: 1, rel: 0, iv_load_policy: 3, cc_load_policy: 0, disablekb: 1, origin: location.origin },
+          playerVars: { playsinline: 1, rel: 0, iv_load_policy: 3, cc_load_policy: 1, cc_lang_pref: 'en', disablekb: 1, origin: location.origin },
           events: {
             onReady: () => { this.ready = true; res(); },
             onStateChange: e => this.onState(e.data),
@@ -863,7 +864,7 @@ function mergeLibrary(base) {
   const hidden = new Set(hiddenVideos());
   const ids = new Set(base.map(ep => ep.id));
   const out = [...base];
-  for (const item of [...C.videos.filter(v => v.subs?.length), ...personalYoutube()]) {
+  for (const item of [...C.videos.filter(v => v.pinned || v.subs?.length), ...personalYoutube()]) {
     const ep = youtubeEpisode(item);
     if (!ep || ids.has(ep.id) || hidden.has(ep.id) || base.some(e => e.id.endsWith('[' + ep.yt + '].mp4'))) continue;
     ids.add(ep.id);
@@ -894,6 +895,7 @@ async function loadCatalog(refresh = false) {
 }
 function discoveryFilters() {
   return { query: $('#discover-query').value.trim().toLowerCase(), level: $('#discover-level').value,
+    collection: $('#discover-collection').value,
     topic: $('#discover-topic').value, duration: $('#discover-duration').value,
     ready: $('#discover-ready').checked, sort: $('#discover-sort').value };
 }
@@ -903,6 +905,7 @@ function recommendVideos(videos, filters, positions = {}) {
     const topics = Array.isArray(v.topics) ? v.topics : [];
     const haystack = [v.title, v.channel, v.reason, LEVELS[v.level], ...topics.map(t => TOPICS[t]), ...topics].join(' ').toLowerCase();
     if (tokens.some(t => !haystack.includes(t))) return false;
+    if (filters.collection && v.collection !== filters.collection) return false;
     if (filters.level && v.level !== filters.level || filters.topic && !topics.includes(filters.topic)) return false;
     if (filters.ready && !(v.subs?.some(s => s.endsWith('.en.srt')) && v.subs?.some(s => s.endsWith('.ko.srt')))) return false;
     if (filters.duration && (!(v.duration > 0) || (filters.duration === 'long' ? v.duration <= 1200 : v.duration > +filters.duration))) return false;
@@ -910,7 +913,7 @@ function recommendVideos(videos, filters, positions = {}) {
   }).map((v, index) => {
     const p = positions['yt:' + v.yt];
     const done = p?.d > 0 && p.t / p.d >= .95;
-    const score = (v.subs?.length ? 8 : 0) + (v.source === 'curated' ? 4 : 0) + (v.duration > 0 && v.duration <= 600 ? 3 : 0) - (done ? 20 : 0);
+    const score = (v.subs?.length ? 8 : 0) + (v.pinned ? 8 : 0) + (v.source === 'curated' ? 4 : 0) + (v.duration > 0 && v.duration <= 600 ? 3 : 0) - (done ? 20 : 0);
     return { v, score, index };
   }).sort((a, b) => filters.sort === 'newest'
     ? (Date.parse(b.v.published) || 0) - (Date.parse(a.v.published) || 0) || a.index - b.index
@@ -935,7 +938,9 @@ function renderDiscovery() {
     const body = el('div', 'video-card-body'), badges = el('div', 'video-badges');
     badges.append(el('span', '', LEVELS[v.level] || '난이도 미확인'), el('span', '', v.duration ? fmt(v.duration) : '길이 미확인'));
     if (v.subs?.length) badges.append(el('span', 'ready', '한영 대본 준비됨 · GPT 번역'));
+    else if (v.youtubeEnglishCaptions && v.youtubeKoreanAutoTranslate) badges.append(el('span', '', 'YouTube 영어 자막 · 한국어 자동 번역'));
     else badges.append(el('span', '', '내 자막 연결 가능'));
+    if (v.collection === 'latent-space-11') badges.append(el('span', '', '선택한 11편'));
     if (v.source === 'feed') badges.append(el('span', '', '채널 새 영상'));
     body.append(badges, el('h3', '', v.title), el('div', 'video-channel', v.channel || 'YouTube'), el('p', '', v.reason));
     const actions = el('div', 'video-actions'), start = el('button', '', v.subs?.length ? '대본으로 공부하기' : '영상으로 공부하기');
@@ -954,7 +959,7 @@ function renderDiscovery() {
 function openDiscovery() {
   video.pause();
   const f = store.get('recommendFilters', {});
-  for (const key of ['level', 'topic', 'duration', 'sort']) if (typeof f[key] === 'string') $('#discover-' + key).value = f[key];
+  for (const key of ['collection', 'level', 'topic', 'duration', 'sort']) if (typeof f[key] === 'string') $('#discover-' + key).value = f[key];
   if (typeof f.query === 'string') $('#discover-query').value = f.query;
   $('#discover-ready').checked = !!f.ready;
   renderDiscovery();
@@ -973,6 +978,17 @@ function renderStudyNotice() {
   box.hidden = !S.ep || S.en.length > 0;
   if (box.hidden) return;
   box.append(document.createTextNode('대본이 없어도 A–B 구간을 반복할 수 있습니다. 영어·한국어 자막 파일을 열면 문장 학습이 연결됩니다.'));
+  if (S.ep.kind === 'youtube') {
+    const help = el('details');
+    help.append(el('summary', '', 'YouTube 영어 자막 / 한국어 자동 번역 보기'));
+    help.append(el('p', '', '영상의 CC 버튼으로 영어 자막을 켜세요. 한국어는 플레이어의 설정(⚙) → 자막 → 자동 번역 → 한국어에서 선택합니다. 자막·자동 번역이 제공되는 영상에서 사용할 수 있습니다.'));
+    help.append(el('p', '', '번역 메뉴가 보이지 않으면 YouTube 원본에서 확인하세요. YouTube 자막은 영상 안에 표시되며, 이 페이지의 문장별 대본·받아쓰기와는 연결되지 않습니다.'));
+    const original = el('a', '', 'YouTube 원본에서 자막 설정 ↗');
+    original.href = 'https://www.youtube.com/watch?v=' + S.ep.yt;
+    original.target = '_blank'; original.rel = 'noopener';
+    original.addEventListener('click', () => { original.href = 'https://www.youtube.com/watch?v=' + S.ep.yt + '&t=' + Math.max(0, Math.floor(video.currentTime || 0)) + 's'; });
+    help.append(original); box.append(help);
+  }
   const button = el('button', '', '자막 열기'); button.addEventListener('click', () => $('#file').click()); box.append(button);
   if (S.remote && S.ep.kind === 'youtube') {
     const fetchButton = el('button', '', '자막 가져오기');
@@ -1967,7 +1983,7 @@ renderClip();
 const changeDiscovery = () => { store.set('recommendFilters', discoveryFilters()); renderDiscovery(); };
 $('#discover-form').addEventListener('submit', e => { e.preventDefault(); changeDiscovery(); });
 $('#discover-query').addEventListener('input', changeDiscovery);
-for (const id of ['level', 'topic', 'duration', 'sort', 'ready']) $('#discover-' + id).addEventListener('change', changeDiscovery);
+for (const id of ['collection', 'level', 'topic', 'duration', 'sort', 'ready']) $('#discover-' + id).addEventListener('change', changeDiscovery);
 $('#backup-file').addEventListener('change', e => { if (e.target.files[0]) importBackup(e.target.files[0]); e.target.value = ''; });
 Promise.all([loadState(), loadCatalog()]).then(() => { renderNotes(); return loadLibrary(); });
 </script>

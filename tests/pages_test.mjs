@@ -44,6 +44,13 @@ const catalog = JSON.parse(await Deno.readTextFile(new URL('../catalog.json', im
 app.C.videos = catalog.videos;
 const defaults = { query: '', level: '', topic: '', duration: '', ready: false, sort: 'recommended' };
 const recommend = overrides => app.recommendVideos(catalog.videos, { ...defaults, ...overrides });
+const selected = recommend({ collection: 'latent-space-11' });
+equal(selected.length, 11, 'Selected collection contains the requested eleven episodes');
+equal(recommend({ collection: 'latent-space-11', ready: true }).length, 0, 'YouTube captions are not mislabeled as bilingual study transcripts');
+check(selected.every(v => app.mergeLibrary([]).some(ep => ep.yt === v.yt)), 'All selected episodes appear in the library');
+store.set('hiddenVideos', ['yt:' + selected[0].yt]);
+check(!app.mergeLibrary([]).some(ep => ep.yt === selected[0].yt), 'Selected episodes still respect library removals');
+store.set('hiddenVideos', []);
 equal(recommend({ ready: true }).length, 4, 'Four bilingual study videos');
 check(recommend({ query: 'AI', level: 'advanced' }).every(v => v.level === 'advanced'), 'Search composes with level');
 check(recommend({ topic: 'conversation' }).every(v => v.topics.includes('conversation')), 'Topic filter');

@@ -46,12 +46,13 @@ const defaults = { query: '', level: '', topic: '', duration: '', ready: false, 
 const recommend = overrides => app.recommendVideos(catalog.videos, { ...defaults, ...overrides });
 const selected = recommend({ collection: 'latent-space-11' });
 equal(selected.length, 11, 'Selected collection contains the requested eleven episodes');
-equal(recommend({ collection: 'latent-space-11', ready: true }).length, 0, 'YouTube captions are not mislabeled as bilingual study transcripts');
+equal(recommend({ collection: 'latent-space-11', ready: true }).length, 11, 'All eleven downloaded episodes have bilingual study transcripts');
 check(selected.every(v => app.mergeLibrary([]).some(ep => ep.yt === v.yt)), 'All selected episodes appear in the library');
 store.set('hiddenVideos', ['yt:' + selected[0].yt]);
 check(!app.mergeLibrary([]).some(ep => ep.yt === selected[0].yt), 'Selected episodes still respect library removals');
 store.set('hiddenVideos', []);
-equal(recommend({ ready: true }).length, 4, 'Four bilingual study videos');
+const bilingual = catalog.videos.filter(v => v.subs?.some(p => p.endsWith('.en.srt')) && v.subs?.some(p => p.endsWith('.ko.srt')));
+equal(recommend({ ready: true }).map(v => v.yt).sort(), bilingual.map(v => v.yt).sort(), 'Every bilingual study video is available');
 check(recommend({ query: 'AI', level: 'advanced' }).every(v => v.level === 'advanced'), 'Search composes with level');
 check(recommend({ topic: 'conversation' }).every(v => v.topics.includes('conversation')), 'Topic filter');
 check(recommend({ duration: '600' }).every(v => v.duration > 0 && v.duration <= 600), 'Unknown durations excluded from length filter');

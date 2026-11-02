@@ -1,0 +1,4080 @@
+1
+00:00:00,080 --> 00:00:02,999
+MD was supposed to be the protein folding solution.
+
+2
+00:00:03,040 --> 00:00:05,200
+There is a great counter example.
+
+3
+00:00:05,200 --> 00:00:09,320
+The counterfactual is basically a group called Desha Research.
+
+4
+00:00:09,440 --> 00:00:11,960
+They had, you know, similar funding to Deepmind.
+
+5
+00:00:12,080 --> 00:00:13,560
+Um, probably more actually.
+
+6
+00:00:13,840 --> 00:00:18,000
+They tested the hypothesis to death that MD could fold proteins.
+
+7
+00:00:18,000 --> 00:00:20,080
+They built their own silicon.
+
+8
+00:00:20,080 --> 00:00:21,279
+They built their own clusters.
+
+9
+00:00:21,279 --> 00:00:23,639
+They had them taped out all themselves.
+
+10
+00:00:23,680 --> 00:00:26,680
+They burned into the silicon the algorithms to run MD.
+
+11
+00:00:26,800 --> 00:00:29,920
+They ran MD at huge speeds, huge scales.
+
+12
+00:00:29,920 --> 00:00:37,280
+I remember David Shaw came to a conference once on MD and he flew in by helicopter and was like to this pretty famous guy,
+
+13
+00:00:37,280 --> 00:00:45,840
+kind of rich >> and um he he gave an amazing presentation about the special computers and special room and out outside of Time Square and like what they can do with it.
+
+14
+00:00:45,840 --> 00:00:47,200
+It was beautiful, amazing.
+
+15
+00:00:47,200 --> 00:00:52,079
+And I always thought that protein folding would be solved by them, but it would require a special machine.
+
+16
+00:00:52,079 --> 00:00:57,920
+And maybe the government would buy like five of these things and we could fold, you know, maybe one protein a day or two proteins a day.
+
+17
+00:00:57,920 --> 00:01:03,199
+And when AlphaFold came out and it's like you can do it in Google Collab, you know, or on a GPU or desktop,
+
+18
+00:01:03,199 --> 00:01:04,600
+it was so mind-blowing.
+
+19
+00:01:04,640 --> 00:01:06,640
+I forget like that protein folding was solved.
+
+20
+00:01:06,640 --> 00:01:12,159
+I always thought that was inevitable, but the fact that it was solved and on like your desktop you can do it was just completely floored.
+
+21
+00:01:12,159 --> 00:01:13,040
+Changed everything.
+
+22
+00:01:13,040 --> 00:01:18,440
+>> This is the first episode of the new AI for science podcast on the LAN space network.
+
+23
+00:01:18,479 --> 00:01:19,399
+I'm Brandon.
+
+24
+00:01:19,520 --> 00:01:23,840
+I work on RNA therapeutics using machine learning at atomic AI.
+
+25
+00:01:23,840 --> 00:01:24,720
+>> My name is R.J.
+
+26
+00:01:24,720 --> 00:01:25,320
+Haniki.
+
+27
+00:01:25,439 --> 00:01:30,080
+I'm the co-founder of Mirror Omix where we build spatial transcripttoics AI models.
+
+28
+00:01:30,080 --> 00:01:35,880
+>> The point of this podcast is to bring together AI engineers and scientists or bring together the two communities.
+
+29
+00:01:36,000 --> 00:01:46,640
+These are two communities which have been developed independently for quite some time but there's been some attempt to combine them and only now after you know many years are we starting to see some
+
+30
+00:01:46,640 --> 00:01:53,240
+of the big developments start to play out in the real world and start to solve you know key scientific problems.
+
+31
+00:01:53,360 --> 00:01:55,719
+There's no like oneizefits-all solution.
+
+32
+00:01:56,000 --> 00:01:57,399
+You need domain expertise.
+
+33
+00:01:57,520 --> 00:02:08,399
+You need people on both sides of the aisle who can really talk to each other and really work together and understand both the modeling and all of the real subtleties of the system you're
+
+34
+00:02:08,399 --> 00:02:09,800
+actually trying to work on.
+
+35
+00:02:09,840 --> 00:02:17,120
+We hope that we can connect these communities and that we can provide a starting point for this new era of AI and science to move forward.
+
+36
+00:02:17,120 --> 00:02:20,360
+>> So without further ado, let's get started on the first podcast.
+
+37
+00:02:22,160 --> 00:02:31,080
+We're really happy to have in the studio today Andrew White, co-founder of Future House and newly formed startup Edison Scientific.
+
+38
+00:02:31,440 --> 00:02:34,600
+Um, rather than introduce him, I'll let him introduce himself.
+
+39
+00:02:34,800 --> 00:02:40,360
+Uh, hi, I'm Andrew from San Francisco, former professor now running two startups.
+
+40
+00:02:40,879 --> 00:02:46,000
+Uh, one that's a nonprofit research lab and one that's a for-profit ventureback company.
+
+41
+00:02:46,000 --> 00:02:47,800
+And we're trying to automate science.
+
+42
+00:02:48,080 --> 00:02:50,319
+>> We're going to get into all those points.
+
+43
+00:02:50,319 --> 00:02:50,480
+>> Yeah.
+
+44
+00:02:50,480 --> 00:02:51,280
+I'm really happy to be here.
+
+45
+00:02:51,280 --> 00:02:52,319
+Thanks for having me on.
+
+46
+00:02:52,319 --> 00:02:59,519
+>> I want to know personally about jump from academia to industry and or quasi industry.
+
+47
+00:02:59,519 --> 00:03:02,040
+So like I would love to hear that story.
+
+48
+00:03:02,400 --> 00:03:02,959
+>> Yes.
+
+49
+00:03:02,959 --> 00:03:05,280
+Um I guess like that's the whole story, right?
+
+50
+00:03:05,280 --> 00:03:17,920
+Uh so I did my PhD at University of Washington and uh I worked in a group with um I think 19 people doing experiments and like two people doing simulations and I was working
+
+51
+00:03:17,920 --> 00:03:31,040
+on a topic uh called molecular dynamics um which I think is actually suddenly becoming interesting again as everyone's looking for ways to generate data from first principal simulation and molecular dynamics you know covers uh
+
+52
+00:03:31,040 --> 00:03:34,560
+basically everything that's molecules moving around in dynamic systems.
+
+53
+00:03:34,560 --> 00:03:36,360
+So like biology, things like that.
+
+54
+00:03:36,400 --> 00:03:43,240
+Of course, the complement in material science is things like density functional theory where you can model chemical reactions and these like solid systems.
+
+55
+00:03:43,920 --> 00:03:44,640
+So I was working on that.
+
+56
+00:03:44,640 --> 00:03:45,559
+We work on biomeaterials.
+
+57
+00:03:45,680 --> 00:03:50,879
+And so the goal of my my PhD was trying to find what are called non-falling materials.
+
+58
+00:03:50,879 --> 00:03:57,360
+So in biological systems whenever you put like a a foreign object into the body, it will trigger a response.
+
+59
+00:03:57,360 --> 00:03:58,959
+And that response called the foreign body response.
+
+60
+00:03:58,959 --> 00:04:03,160
+Basically it encapsulates it in like this um layer of collagen.
+
+61
+00:04:03,680 --> 00:04:12,879
+This actually is exploited for some implants like if you get a heart uh sorry pacemaker installed like it coats it with this collagen so that if you go to change the battery you can
+
+62
+00:04:12,879 --> 00:04:22,960
+almost change the battery out like without even bleeding because like the body has like completely encased it and this is great for pacemakers but for like a glucose sensor or like a you know
+
+63
+00:04:22,960 --> 00:04:25,280
+brain cognitive interface BCI is what they call it now.
+
+64
+00:04:25,280 --> 00:04:25,880
+Yeah.
+
+65
+00:04:26,080 --> 00:04:27,520
+there that's not so great.
+
+66
+00:04:27,520 --> 00:04:34,120
+And so that's why some of those things have like a limited lifetime because eventually your body treats it as like a wound and and heals and >> rejects it.
+
+67
+00:04:34,479 --> 00:04:34,800
+>> Yeah.
+
+68
+00:04:34,800 --> 00:04:38,560
+It's it's kind of like so some rejection is like immune based.
+
+69
+00:04:38,560 --> 00:04:38,960
+Okay.
+
+70
+00:04:38,960 --> 00:04:47,280
+>> And so that's where like if the body can see anything on it like if it can see like some some um uh lian that it can bind to with antibodies then you get this
+
+71
+00:04:47,280 --> 00:04:50,920
+like inflammation which is like an rejection response you see in organ transplants.
+
+72
+00:04:50,960 --> 00:04:56,840
+with materials the body just like oh there's just like a wound or there's some something here and it just covers it up.
+
+73
+00:04:57,199 --> 00:05:05,360
+>> I think you know the research in that field has gone on a long time since I left my PhD >> and there was a lot of theories about it's related to the mechanical properties of
+
+74
+00:05:05,360 --> 00:05:11,000
+the material like if it's spongy there's things like if it's tracular like it's have a bunch of little pores in it.
+
+75
+00:05:11,039 --> 00:05:15,039
+We worked on the theory that it had to do with how hydrophilic the material was.
+
+76
+00:05:15,039 --> 00:05:15,680
+Okay.
+
+77
+00:05:15,680 --> 00:05:18,960
+>> But anyway so I was only one working on computers in this group.
+
+78
+00:05:18,960 --> 00:05:28,400
+I couldn't figure out like how to connect what's on the computer with what's done in the lab because you can make like a simulation of whatever 10,000 part 10,000 particles 10,000 atoms.
+
+79
+00:05:28,400 --> 00:05:34,720
+It's like well this is not going to model a human body and an implant a lot more a lot more atoms involved.
+
+80
+00:05:34,720 --> 00:05:36,400
+>> So I had a good time.
+
+81
+00:05:36,400 --> 00:05:38,320
+We did some cool stuff some bopromatic stuff.
+
+82
+00:05:38,320 --> 00:05:39,120
+I learned a lot.
+
+83
+00:05:39,120 --> 00:05:43,560
+But then when I did my postto I was like okay we're going to try to merge experiments and and simulations.
+
+84
+00:05:43,840 --> 00:05:47,600
+So I worked on this this theory called um maximum entropy.
+
+85
+00:05:47,600 --> 00:05:51,320
+And it's about like how do you take complex simulations and match them to limited observations?
+
+86
+00:05:51,600 --> 00:05:54,040
+And it's like the inverse of machine learning.
+
+87
+00:05:54,160 --> 00:05:55,600
+Machine learning is like you have simple models.
+
+88
+00:05:55,600 --> 00:05:59,680
+You're making going to a lot of data where I had like complicated models and trying to fit to very little data.
+
+89
+00:05:59,680 --> 00:06:00,000
+Yeah.
+
+90
+00:06:00,000 --> 00:06:00,639
+>> It was fine.
+
+91
+00:06:00,639 --> 00:06:01,280
+It's great.
+
+92
+00:06:01,280 --> 00:06:02,400
+We wrote some papers.
+
+93
+00:06:02,400 --> 00:06:03,280
+It was useful.
+
+94
+00:06:03,280 --> 00:06:08,760
+And then I wrote like I started my research group at University of Rochester on applying these methods to model peptides.
+
+95
+00:06:08,960 --> 00:06:09,520
+Yeah.
+
+96
+00:06:09,520 --> 00:06:11,520
+>> And I'm always like too early for things.
+
+97
+00:06:11,520 --> 00:06:14,440
+We study peptides for I don't know four or five years.
+
+98
+00:06:14,800 --> 00:06:17,039
+And it was a cool niche field.
+
+99
+00:06:17,039 --> 00:06:18,000
+not that popular.
+
+100
+00:06:18,000 --> 00:06:19,840
+Now, peptides are like the hottest thing ever.
+
+101
+00:06:19,840 --> 00:06:23,480
+I think there's even like a peptide rave I heard about a couple weeks ago.
+
+102
+00:06:24,880 --> 00:06:28,200
+>> But, but when I was an assistant professor, nobody cared about peptides.
+
+103
+00:06:28,240 --> 00:06:31,039
+Um, so we worked a lot on different ways to combine them.
+
+104
+00:06:31,039 --> 00:06:35,400
+We looked at like uh different experimental methods that we could do these molecular dynamic simulations of peptides.
+
+105
+00:06:35,440 --> 00:06:39,880
+And then in 2019, I was like out on a sbatical at at UCLA.
+
+106
+00:06:40,240 --> 00:06:48,479
+um they have a place called the Institute of Pure and Applied Mathematics there which is like this institute where people can go and do a sbatical and learn new methods and they were happen
+
+107
+00:06:48,479 --> 00:06:56,880
+to be doing they happen to be doing um machine learning for physics I think the name of it was it was like some like symmetric thing it's like machine learning for physics and physics
+
+108
+00:06:56,880 --> 00:07:07,520
+of machine learning okay >> it's kind of a cool cool concept >> but like Yan Lun was there and like um Frank Noi was there who's a big guy in Europe in in this field I don't know
+
+109
+00:07:07,520 --> 00:07:11,360
+it's just Terrence Tao came by great group >> and everyone was kind of jamming.
+
+110
+00:07:11,360 --> 00:07:20,400
+It was like 2019 so like there had not really been the big hit um especially in in in uh in non computer science fields right >> and then I came back from that I was
+
+111
+00:07:20,400 --> 00:07:29,960
+like well I got to teach class on this writing the book about like how you can apply these methods in chemistry it was very kind of niche field because uh every machine learning class
+
+112
+00:07:30,240 --> 00:07:37,919
+that my PhD students could take at the time this is when I was professor at University of Rochester it was always would end in like okay this is an RNN and this is like
+
+113
+00:07:37,919 --> 00:07:42,400
+what you need to know or like this is how you do image classification In chemistry, it's all about graphs,
+
+114
+00:07:42,400 --> 00:07:42,560
+right?
+
+115
+00:07:42,560 --> 00:07:45,120
+It's all about how do you represent these graph structures?
+
+116
+00:07:45,120 --> 00:07:47,000
+It's all about symmetry and geometry.
+
+117
+00:07:47,039 --> 00:07:54,960
+Y >> and that was like not a thing was very popular, but you had Maxwelling on before and you know the the godfather of of geometric deep learning.
+
+118
+00:07:54,960 --> 00:07:55,520
+Yeah.
+
+119
+00:07:55,520 --> 00:08:01,079
+>> So I wrote this textbook about like this these methods and there was a bunch of interesting mathematics to it.
+
+120
+00:08:01,199 --> 00:08:10,000
+I had a good time and stuff and then um uh I think I was following you know the news in the space and codeex the original codeex came out and um I had been
+
+121
+00:08:10,000 --> 00:08:19,360
+looking at transformers for a while I just tinkered with them and we started trying them on doing some chemistry tasks and we were really impressed actually and we wrote a benchmark and this is
+
+122
+00:08:19,360 --> 00:08:28,479
+like 2019 or something we wrote a benchmark of verifiable rewards in 2019 maybe it's 2020 by then but like >> ahead of the curve >> a littlehead of the curve again yeah like here's a here's
+
+123
+00:08:28,479 --> 00:08:37,919
+a function and um Sorry, there's like a task which is like I have a body of a function for like a marov chain Monte Carlo simulation it's missing some pieces complete it and then we
+
+124
+00:08:37,919 --> 00:08:41,720
+had like a verifier that would see did is it a valid MCMC simulation
+
+125
+00:08:43,279 --> 00:08:53,559
+we wrote this paper it ended up coming out I think 2021 2022 >> um because it took a long time to bank enough questions >> but I wrote an opinion piece about how transformers could change
+
+126
+00:08:53,839 --> 00:09:02,640
+um how we think about chemistry and things like this and how we teach it and then opening eye some people there um Llama uh was there.
+
+127
+00:09:02,640 --> 00:09:10,480
+She saw this paper and they reached out like, "Hey, we're building this new model and we think it'd be great to red team it to see like what could happen with these models if
+
+128
+00:09:10,480 --> 00:09:12,439
+they're applied to chemistry or biology."
+
+129
+00:09:12,880 --> 00:09:18,080
+And so I was a redteamer for GPT4 and I was using it like nine months or something before release was like August.
+
+130
+00:09:18,080 --> 00:09:20,399
+So GP4 came out in March and I was using in August.
+
+131
+00:09:20,399 --> 00:09:20,880
+>> Yeah.
+
+132
+00:09:20,880 --> 00:09:23,360
+And then like the react and miracle paper came out.
+
+133
+00:09:23,360 --> 00:09:31,720
+Um I think Shenu he wrote that paper and I plugged it in with GP4 like in the fall you know and I was like wow there's so much stuff coming out >> with React.
+
+134
+00:09:31,760 --> 00:09:32,000
+>> Yeah.
+
+135
+00:09:32,000 --> 00:09:33,400
+And it was really exciting.
+
+136
+00:09:33,440 --> 00:09:37,519
+And then so when GP4 came out I released this paper called Chemcrow.
+
+137
+00:09:37,519 --> 00:09:41,320
+I worked with Philipe Schaller in in um Switzerland on this and IBM.
+
+138
+00:09:41,440 --> 00:09:43,760
+>> So that was like React applied to chemistry.
+
+139
+00:09:43,760 --> 00:09:43,920
+>> Yeah.
+
+140
+00:09:43,920 --> 00:09:47,120
+And what we had is we had like there was a cloud lab that IBM built in Switzerland.
+
+141
+00:09:47,120 --> 00:09:47,360
+Yeah.
+
+142
+00:09:47,360 --> 00:09:54,920
+So we had like GBD4 operating the cloud lab and then it was like I had written a literature research agent that did like agentic rag.
+
+143
+00:09:55,040 --> 00:09:57,800
+Again nobody knew what agent rag was at the time.
+
+144
+00:09:57,839 --> 00:10:05,680
+Um I think actually uh Harrison Chase had like written a blog post about some ideas there and so I I I stole some of his ideas.
+
+145
+00:10:05,680 --> 00:10:06,320
+Really smart guy.
+
+146
+00:10:06,320 --> 00:10:10,800
+Um and basically we applied that and >> we saw some really cool stuff.
+
+147
+00:10:10,800 --> 00:10:14,399
+It was really exciting and then I we wrote the paper.
+
+148
+00:10:14,399 --> 00:10:20,439
+It set off this crazy storm of like everyone was had a lot of anxiety about AI progress.
+
+149
+00:10:20,640 --> 00:10:20,959
+Yeah.
+
+150
+00:10:20,959 --> 00:10:23,080
+>> And um I ended up visiting the White House.
+
+151
+00:10:23,120 --> 00:10:31,920
+Um I guess my my paper was like the only time a pre-print or peer review paper was presented to the president on like their schedule for like a 30-minute block.
+
+152
+00:10:31,920 --> 00:10:32,320
+Wow.
+
+153
+00:10:32,320 --> 00:10:39,279
+>> And the national security adviser at the time um uh Jake uh God I was confused about >> Yeah.
+
+154
+00:10:39,279 --> 00:10:39,760
+No, sorry.
+
+155
+00:10:39,760 --> 00:10:42,240
+One of them is a talk show host and one of them is like the national security adviser.
+
+156
+00:10:42,240 --> 00:10:43,879
+I forget which which is which.
+
+157
+00:10:43,920 --> 00:10:45,279
+Um >> that guy.
+
+158
+00:10:45,279 --> 00:10:45,680
+>> That guy.
+
+159
+00:10:45,680 --> 00:10:46,280
+Yeah.
+
+160
+00:10:46,320 --> 00:10:54,160
+He like had a presentation about our our our paper and they presented to all because there was a big tech CEO summit at this time where they sent out Sam Alman and some other
+
+161
+00:10:54,160 --> 00:10:57,920
+CEOs out there and they >> this is the future of chemistry as language or a different one.
+
+162
+00:10:57,920 --> 00:10:59,559
+>> This is the Chem Crow paper.
+
+163
+00:11:00,720 --> 00:11:01,120
+Sorry.
+
+164
+00:11:01,120 --> 00:11:03,120
+I probably should name these things.
+
+165
+00:11:03,120 --> 00:11:09,120
+>> And and so >> it was crazy and they had me go out there and then I I met a lot of threeletter agencies I didn't really want to meet.
+
+166
+00:11:09,120 --> 00:11:15,640
+And um >> and like you know this like some somebody from uh one threeletter agencies like how does this change explosives?
+
+167
+00:11:15,680 --> 00:11:24,000
+You know the three liter agencies like how does it change breakout time for nuclear weapons research of >> I was like Kai is like I don't >> I'm not really sure and but it turns out
+
+168
+00:11:24,000 --> 00:11:28,640
+that like you know there's not that many people world experts on on on AI and science, >> right?
+
+169
+00:11:28,640 --> 00:11:29,760
+So what's the answer?
+
+170
+00:11:29,760 --> 00:11:31,600
+Uh yeah, agree.
+
+171
+00:11:31,600 --> 00:11:32,920
+Um good question.
+
+172
+00:11:33,360 --> 00:11:34,079
+We'll come back to that.
+
+173
+00:11:34,079 --> 00:11:34,480
+Uh >> okay.
+
+174
+00:11:34,480 --> 00:11:35,519
+Yeah, let's come back to that.
+
+175
+00:11:35,519 --> 00:11:40,880
+>> In the end, um I I you know had a lot of energy, a lot a lot of excitement about this area.
+
+176
+00:11:40,880 --> 00:11:42,880
+So took a sbatical from University of Rochester.
+
+177
+00:11:42,880 --> 00:11:54,800
+It was Sam Rodriguez and um Sam had been talking to Eric Schmidt and Tom Khalil who was um also National Security Council on the Obama administration about how to uh uh like scale up
+
+178
+00:11:54,800 --> 00:11:55,440
+these ideas.
+
+179
+00:11:55,440 --> 00:12:01,879
+And so Sam had this concept of like focused research organizations which was how do you do science like not in academia,
+
+180
+00:12:02,079 --> 00:12:11,040
+not in in a um in like one of these kind of near monopoly tech companies, these big labs >> and uh wanted to try this idea out and I was like hey we should do
+
+181
+00:12:11,040 --> 00:12:14,119
+this around agents for science or AI for science.
+
+182
+00:12:14,160 --> 00:12:14,880
+>> I love Sam.
+
+183
+00:12:14,880 --> 00:12:18,399
+He pushes me to come up you know with really >> lofty ambitions.
+
+184
+00:12:18,399 --> 00:12:23,440
+So we decided to automate science as the goal instead of like see what fun stuff we could do with agents in science.
+
+185
+00:12:23,440 --> 00:12:24,880
+But I think that was maybe the real mission.
+
+186
+00:12:24,880 --> 00:12:27,680
+But of course, automating science is the the long-term mission.
+
+187
+00:12:27,680 --> 00:12:28,000
+Yes.
+
+188
+00:12:28,000 --> 00:12:30,079
+>> And so that was what led to future house.
+
+189
+00:12:30,079 --> 00:12:31,400
+>> That was a very long- winded.
+
+190
+00:12:31,519 --> 00:12:31,680
+>> Yeah.
+
+191
+00:12:31,680 --> 00:12:32,639
+No, no, that's great.
+
+192
+00:12:32,639 --> 00:12:37,040
+So, but so you chose to leave a tenure track position.
+
+193
+00:12:37,040 --> 00:12:40,360
+>> I was on sbatical, which is a a beautiful concept.
+
+194
+00:12:40,560 --> 00:12:44,360
+Um, but then I did resign my tenure position when we co-founded Edison.
+
+195
+00:12:44,480 --> 00:12:44,800
+>> Yeah.
+
+196
+00:12:44,800 --> 00:12:45,200
+Okay.
+
+197
+00:12:45,200 --> 00:12:52,399
+>> And it was, you know, I had been on sabbatical for a very long period of time and so at a certain point I just had to resign my tenure.
+
+198
+00:12:52,399 --> 00:12:53,920
+So I resigned tenure in June.
+
+199
+00:12:53,920 --> 00:12:54,520
+Okay.
+
+200
+00:12:54,639 --> 00:12:55,839
+>> Oh, so that's only recently.
+
+201
+00:12:55,839 --> 00:12:56,000
+>> Yeah.
+
+202
+00:12:56,000 --> 00:12:56,560
+Only recently.
+
+203
+00:12:56,560 --> 00:12:56,880
+>> Yeah.
+
+204
+00:12:56,880 --> 00:13:00,000
+And you just felt like this is this is direction of my career.
+
+205
+00:13:00,000 --> 00:13:01,040
+I >> Yeah.
+
+206
+00:13:01,040 --> 00:13:01,440
+Yeah.
+
+207
+00:13:01,440 --> 00:13:07,519
+I mean, I got tenure and I had these early career awards like the NSF career award.
+
+208
+00:13:07,519 --> 00:13:08,160
+It was great.
+
+209
+00:13:08,160 --> 00:13:10,000
+And I think academia is really exciting.
+
+210
+00:13:10,000 --> 00:13:20,639
+But um I just thought that right now these this kind of area like a ever science is um just I think a difficult to do in academia and b so exciting that I think
+
+211
+00:13:20,639 --> 00:13:30,240
+you can take bigger bets >> and um I think having a tenure position and writing research grants is maybe not the biggest bet you can take on on a field.
+
+212
+00:13:30,240 --> 00:13:30,639
+>> Yeah.
+
+213
+00:13:30,639 --> 00:13:33,839
+So now we have a ventureback startup called Edison, right?
+
+214
+00:13:33,839 --> 00:13:40,000
+>> Which we spun out of Future House and you know we took a lot of the ideas and and we're trying to do this at an even bigger scale right now.
+
+215
+00:13:40,000 --> 00:13:40,480
+Yeah.
+
+216
+00:13:40,480 --> 00:13:50,800
+>> And and so Edison was always kind of the plan like going back to Sam's idea of a FRO or like was it fundamental research organization like he he always had this goal of like
+
+217
+00:13:50,800 --> 00:14:00,079
+let's do fundamental research and this like tightly scoped nonprofit which can kind of explore and then you have that as a natural arm for spinning off.
+
+218
+00:14:00,079 --> 00:14:00,399
+Yeah.
+
+219
+00:14:00,399 --> 00:14:02,360
+>> Um, you know, venture back.
+
+220
+00:14:02,720 --> 00:14:04,079
+>> Yeah, I think that's right.
+
+221
+00:14:04,079 --> 00:14:11,519
+Um, I think some things that like make that not as clean these days is how expensive AI research is and how expensive GPUs are.
+
+222
+00:14:11,519 --> 00:14:15,199
+So, I don't think we can repeat it many times from future house.
+
+223
+00:14:15,199 --> 00:14:17,120
+It might be like an end of one thing right now.
+
+224
+00:14:17,120 --> 00:14:18,880
+It just may maybe not.
+
+225
+00:14:18,880 --> 00:14:22,399
+I don't know if venture capital keeps growing then maybe maybe we can.
+
+226
+00:14:22,399 --> 00:14:24,480
+But yeah, I think we took a lot of the ideas of future.
+
+227
+00:14:24,480 --> 00:14:35,680
+Another thing like I think we expected it to be harder to automate science >> and actually it's really hard like I'm I'm feel like I'm always miscalibrated in this domain but it's always hard to
+
+228
+00:14:35,680 --> 00:14:36,679
+predict progress.
+
+229
+00:14:36,720 --> 00:14:37,199
+Yeah.
+
+230
+00:14:37,199 --> 00:14:43,400
+>> Um and I think that I overestimate the speed of things on month scale and I underestimate things on year scale.
+
+231
+00:14:43,519 --> 00:14:49,160
+So the two years from like 2023 to 2025 was an enormous amount of progress.
+
+232
+00:14:49,199 --> 00:14:49,440
+Yeah.
+
+233
+00:14:49,440 --> 00:14:54,079
+Um it always felt like things were not going as fast as I thought, but when you look back on it,
+
+234
+00:14:54,079 --> 00:14:55,040
+wow, like there's a lot of progress.
+
+235
+00:14:55,040 --> 00:14:59,440
+And so I think the idea that I think in future house and our Sam actually regrets us writing this,
+
+236
+00:14:59,440 --> 00:15:06,999
+but in the the original marketing or like the announcement is like it's our 10-year mission automated science and like now it's like okay yeah.
+
+237
+00:15:07,199 --> 00:15:17,519
+So two years later we we had Cosmos and um things are going so much faster and it also this kind of this this thing you notice it in um in in San Francisco.
+
+238
+00:15:17,519 --> 00:15:28,560
+is like it's actually kind of hard to find problems which are like so hard that like they are a challenge for language models but not so hard that they're impossible and this like gray
+
+239
+00:15:28,560 --> 00:15:34,880
+zone and actually I feel like that's where we are right now is that we can actually automate so much of the scientific method because it turns out especially in a field like biology which
+
+240
+00:15:34,880 --> 00:15:45,080
+is very empirical limited you know the top 1% guesser of know what what they think will happen in an experiment in the you know the top you know quintile or cortile they're about equal
+
+241
+00:15:45,279 --> 00:15:52,160
+and so you know even if you had an If we wait 10 years and get even smarter models, I don't think it's going to really change the fact that we're ready to automate a
+
+242
+00:15:52,160 --> 00:15:54,160
+lot of science with with existing LLMs.
+
+243
+00:15:54,160 --> 00:15:55,839
+>> You mean what do you mean by automate science?
+
+244
+00:15:55,839 --> 00:15:57,920
+That's like a pretty loaded state.
+
+245
+00:15:57,920 --> 00:16:01,120
+These lots of things like there's way many ways of thinking about that.
+
+246
+00:16:01,120 --> 00:16:10,560
+>> So we try to draw a line between um what I would call uh uh groups that are trying to model something like the cell or how proteins fold or like how antibodies can be
+
+247
+00:16:10,560 --> 00:16:12,959
+designed or like maybe the virtual cells like an example.
+
+248
+00:16:12,959 --> 00:16:20,920
+If they're trying to use machine learning or AI to model some very specific system, >> we're trying to automate the like cognitive process of scientific discovery,
+
+249
+00:16:21,120 --> 00:16:32,480
+making hypotheses, choosing experiments to do, analyzing the results of experiments and using it to update your hypothesis or your confidence in those hypotheses and then leading to like a world model which of like
+
+250
+00:16:32,480 --> 00:16:38,359
+okay this is how I understand this process to be and then that you know begets new hypotheses or new experiments.
+
+251
+00:16:38,560 --> 00:16:40,600
+So we want to automate that sort of loop.
+
+252
+00:16:40,800 --> 00:16:46,480
+We thought that we would have to build up like a whole new organization from the ground up for agents.
+
+253
+00:16:46,480 --> 00:16:51,480
+So it means like automated labs, it means like putting all the papers in one spot, like getting APIs wrapped around everything.
+
+254
+00:16:51,680 --> 00:16:58,999
+But um over time like the models have gotten better and better that we had to like you know stop and rethink okay we don't actually have to hold their hands so much anymore or
+
+255
+00:16:59,040 --> 00:17:01,920
+like they don't actually need to necessarily have an automated lab.
+
+256
+00:17:01,920 --> 00:17:07,280
+They can like write an email to a CRO or something or they can like tell you what experiment to do and you can take a video of you doing it and then show it
+
+257
+00:17:07,280 --> 00:17:10,279
+to the model and they can be like okay well this is you know what happened.
+
+258
+00:17:10,480 --> 00:17:19,720
+So it's been a really interesting experience of like sometimes you know we overengineer things and sometimes uh uh actually basically just mostly overengineer.
+
+259
+00:17:20,400 --> 00:17:26,640
+So >> so I always think about systems and scientific is a system like scientific process as a system.
+
+260
+00:17:26,640 --> 00:17:29,039
+I always think of it in terms of constraints, right?
+
+261
+00:17:29,039 --> 00:17:31,120
+And like what is a bottleneck in the system?
+
+262
+00:17:31,120 --> 00:17:42,080
+And so that so what is your hypothesis about this right like in my mind not knowing a ton but in my mind the constraint of the scientific process is the work you do in
+
+263
+00:17:42,080 --> 00:17:50,320
+the lab and that's sort of notably missing from well not entirely you said auto you mentioned automating lab and whatever so like how are you thinking about this?
+
+264
+00:17:50,320 --> 00:18:03,840
+Yeah, I think you're right is that uh basically the the best model um whatever opus 7 or GPT10 like on yeah >> it really can only propose the first experiment maybe slightly more clever but
+
+265
+00:18:03,840 --> 00:18:12,480
+at a certain point you just need information right like some little calculations you can do that like there's more atoms in the brain than you could ever simulate even if you had all the
+
+266
+00:18:12,480 --> 00:18:20,400
+energy from the sun right like I think you simulate maybe a thousand brains in real time with all the energy in the sun because there just too much information yeah >> so science really hits these
+
+267
+00:18:20,400 --> 00:18:22,480
+like bottlenecks where you just actually have to go measure things.
+
+268
+00:18:22,480 --> 00:18:32,320
+Y >> we definitely think about maybe like lab in the loop sort of situations like one of our papers which was called Robin is that we like had an one of our agents proposed an
+
+269
+00:18:32,320 --> 00:18:32,920
+experiment.
+
+270
+00:18:32,960 --> 00:18:38,640
+We did the experiment and then we had our agent analyze the experiment that proposed the next experiment and that kind of loop I think is where you want to get to.
+
+271
+00:18:38,640 --> 00:18:39,440
+Yeah.
+
+272
+00:18:39,440 --> 00:18:41,520
+>> So what is the bottleneck in that?
+
+273
+00:18:41,520 --> 00:18:44,040
+I don't think it's like the intelligence of the first experiment.
+
+274
+00:18:44,080 --> 00:18:46,720
+I think the bottleneck might be something like right now.
+
+275
+00:18:46,720 --> 00:18:53,200
+I think the bottleneck is something silly like knowing what's the lead time on all the reagents that you need and what is available in the lab,
+
+276
+00:18:53,200 --> 00:18:53,440
+right?
+
+277
+00:18:53,440 --> 00:18:54,480
+Like you know.
+
+278
+00:18:54,480 --> 00:18:54,640
+>> Yeah.
+
+279
+00:18:54,640 --> 00:18:54,799
+Yeah.
+
+280
+00:18:54,799 --> 00:18:55,120
+Yeah.
+
+281
+00:18:55,120 --> 00:19:01,919
+>> I think whether GPT 5.2 Codeex Max or Opus 4.5 is going to do better is probably doesn't matter.
+
+282
+00:19:01,919 --> 00:19:05,840
+It's just a matter of like which one's going to have all the information of what's in the lab and how much will it cost,
+
+283
+00:19:05,840 --> 00:19:07,039
+how long will it take, >> right?
+
+284
+00:19:07,039 --> 00:19:17,200
+Um and also I guess the the kind of frontier that I think about for these models is taste >> which is like a lot of science I mean of course we want to you know
+
+285
+00:19:17,200 --> 00:19:25,679
+accelerate technology we want to improve the economy we want to improve people's life expecties want everyone to be happier but a lot of what is done in science is is based around like human
+
+286
+00:19:25,679 --> 00:19:36,320
+preferences like why do people study I don't know a particular worm well like there is a theory that by studying the worm it has led to good medicines or it's led to discovering new
+
+287
+00:19:36,320 --> 00:19:38,720
+genes But also people studied in the past.
+
+288
+00:19:38,720 --> 00:19:42,240
+People's careers depend on that worm and people want to write papers about that worm.
+
+289
+00:19:42,240 --> 00:19:50,160
+And so there's a human element to some of this and I think the u models don't capture that so well about knowing what is an exciting result and what is a boring result.
+
+290
+00:19:50,160 --> 00:19:50,799
+>> I see.
+
+291
+00:19:50,799 --> 00:19:52,880
+>> So I think that's like scientific taste.
+
+292
+00:19:52,880 --> 00:19:55,360
+It's like a broad category of all these things.
+
+293
+00:19:55,360 --> 00:19:58,400
+>> How do you def like do you try to quantify taste in any way?
+
+294
+00:19:58,400 --> 00:20:04,240
+I mean I know that I I have some like fun anecdotes about this but maybe Yeah.
+
+295
+00:20:04,240 --> 00:20:05,960
+just like to hear what you thought.
+
+296
+00:20:06,160 --> 00:20:11,800
+>> Yeah, actually we sat on this idea sat on it, but we like argued about it for a long time.
+
+297
+00:20:12,000 --> 00:20:17,480
+Sam and I usually every Monday morning at 8:00 in the morning, Sam and I meet and we're both, you know,
+
+298
+00:20:17,600 --> 00:20:19,600
+caffeinated and ready and we argue about stuff like this.
+
+299
+00:20:19,600 --> 00:20:22,400
+And we had a lot of Mondays where we talked about scientific taste.
+
+300
+00:20:22,400 --> 00:20:29,919
+>> And in the end, we're like, okay, let's just let's just do the dumbest thing, which is to like have our agents make hypotheses and put them in front of humans and have them be
+
+301
+00:20:29,919 --> 00:20:31,039
+like, I like this one or I like that one.
+
+302
+00:20:31,039 --> 00:20:31,200
+Right?
+
+303
+00:20:31,200 --> 00:20:44,159
+So we just did like whatever RHF on on on hypothesis and um we learned a lot about how bad RHF is with people just like people pay really attention to to the tone to the
+
+304
+00:20:44,159 --> 00:20:55,600
+details to like how many specific facts or figures from the hypothesis right like actionability about like if the experiment is feasible but what people didn't really pay attention to is like I don't know how
+
+305
+00:20:55,600 --> 00:21:03,039
+to describe this like if this hypothesis is true how does it change the world if the hypothesis is false how does it change the world this like um how much information you gain.
+
+306
+00:21:03,039 --> 00:21:07,039
+It's not really information but like impact or something >> and that really didn't come through from those things.
+
+307
+00:21:07,039 --> 00:21:14,240
+So then we're like okay well this is maybe one strategy and so we had to go back and think about it more and um we then took a pause from that research and then
+
+308
+00:21:14,240 --> 00:21:24,320
+we made cosmos and then cosmos like has baked into it taste right like at the end of the day there will be some report and we're working on generalizing this basically at the end of
+
+309
+00:21:24,320 --> 00:21:32,680
+like I made these discoveries and a person be like great I want to download that one or I like that one right I don't like this one and that rolls up to some hypothesis
+
+310
+00:21:32,720 --> 00:21:38,440
+that came earlier in the process and so we think we can get to end to end on as opposed to human preferences.
+
+311
+00:21:38,640 --> 00:21:42,159
+>> So you mean the feedback loop is the click?
+
+312
+00:21:42,159 --> 00:21:42,960
+>> It could be the click.
+
+313
+00:21:42,960 --> 00:21:46,640
+It could be also like the you know it we do an experiment.
+
+314
+00:21:46,640 --> 00:21:48,799
+Sometimes in cosmos you could ask to end an experiment.
+
+315
+00:21:48,799 --> 00:21:57,679
+You go see was experiment a success or failure or something like but I guess like we we've brought it out of this kind of like hard to quantify is this a good hypothesis or
+
+316
+00:21:57,679 --> 00:22:02,040
+a bad hypothesis and into this like you can see some downstream consequences of the hypothesis.
+
+317
+00:22:02,400 --> 00:22:08,640
+So yeah, humans have I think a very like strongly well-c calibrated nose for science.
+
+318
+00:22:08,640 --> 00:22:21,280
+Like I mean maybe you could argue there sociological effects like um across the community, but ultimately often times people really like good scientists know right off the bat like is this going to be
+
+319
+00:22:21,280 --> 00:22:24,360
+likely to be um useful or not.
+
+320
+00:22:24,480 --> 00:22:31,560
+How long how many attempts did it take before you started to like see results that to yourself seemed useful?
+
+321
+00:22:31,760 --> 00:22:34,680
+Like you've been working on this for I guess two years now.
+
+322
+00:22:34,880 --> 00:22:45,120
+Um you know I think when the co-scientist paper came out from Google I think it was a really interesting idea to do this like tournament style or just pair wise ranking of hypotheses right
+
+323
+00:22:45,120 --> 00:22:53,440
+so I think cosign is very interesting counter example to what we built is that what we built is something with either lab in the loop or data analysis in the loop or literature research
+
+324
+00:22:53,440 --> 00:23:03,039
+in the loop where you're like iterating on an idea I think co-scientists took this like very different approach of like let's list all the ideas and then try to come up with a filtration
+
+325
+00:23:03,039 --> 00:23:05,080
+process to come up with the best hypothe hypothesis.
+
+326
+00:23:05,280 --> 00:23:15,520
+So co-scientists will produce these very long reports of like oh we like really tested this idea with lots of dialogue and and and it was very interesting stuff and I was really impressed with the
+
+327
+00:23:15,520 --> 00:23:23,039
+paper that came out and then we had this Robin paper and one of the things that came out of the robin paper is that the hypothesis that people thought was best was not the one
+
+328
+00:23:23,039 --> 00:23:25,280
+that led to success in that paper.
+
+329
+00:23:25,280 --> 00:23:25,919
+Interesting.
+
+330
+00:23:25,919 --> 00:23:30,799
+>> It was in um age related macular degeneration or ocular uh age related macular generation.
+
+331
+00:23:30,799 --> 00:23:36,960
+Basically, it's like part of the eye is you're going blind because you have this like accumulation of debris in the eye and can't clear it out.
+
+332
+00:23:36,960 --> 00:23:39,840
+>> That's the major cause of blindness in people over Yeah.
+
+333
+00:23:39,840 --> 00:23:41,000
+>> Uh 60.
+
+334
+00:23:41,440 --> 00:23:42,880
+Ali who works on the hill.
+
+335
+00:23:42,880 --> 00:23:43,120
+>> Yeah.
+
+336
+00:23:43,120 --> 00:23:43,720
+Yeah.
+
+337
+00:23:43,919 --> 00:23:46,080
+He'll cringe when he hears me say that, but >> something like that.
+
+338
+00:23:46,080 --> 00:23:46,720
+>> Something like that.
+
+339
+00:23:46,720 --> 00:23:47,520
+Sorry, Ollie.
+
+340
+00:23:47,520 --> 00:23:54,080
+Um in that one like we went to optometrists or opthalmologists get confused on that as well.
+
+341
+00:23:54,080 --> 00:23:54,640
+Sorry, Ollie.
+
+342
+00:23:54,640 --> 00:23:59,159
+Um but essentially, you know, asked them what hypothesis do you think are are good hypotheses?
+
+343
+00:23:59,200 --> 00:24:03,399
+which you think would lead to like um a good mechanism for treating dry AMD.
+
+344
+00:24:03,440 --> 00:24:03,840
+Yeah.
+
+345
+00:24:03,840 --> 00:24:09,480
+>> And um yeah, there was you know they agreed to be on the top 10 but but beyond that it was it was kind of noise.
+
+346
+00:24:09,520 --> 00:24:09,919
+Yeah.
+
+347
+00:24:09,919 --> 00:24:19,600
+>> Um and then you know the the what we found was ribbudal was a very good um medicine and it had a mechanism that I think is novel although there was lots of debate on
+
+348
+00:24:19,600 --> 00:24:28,360
+X because in I think in 2012 there was a master's thesis which proposed this mechanism on like page 38.
+
+349
+00:24:28,400 --> 00:24:29,760
+I actually think it was a typo.
+
+350
+00:24:29,760 --> 00:24:31,720
+I think they meant wet wet AMD.
+
+351
+00:24:32,320 --> 00:24:34,960
+But anyway, I won't I won't belager the point.
+
+352
+00:24:34,960 --> 00:24:38,960
+I will concede that it maybe was there was one reported uh example of it in the past.
+
+353
+00:24:38,960 --> 00:24:46,320
+That was a really eye opening experience for me because that was a the first really serious test where we really went to the lab and we you know spent like four weeks on a
+
+354
+00:24:46,320 --> 00:24:52,480
+battery of experiments to see what is which hypothesis led to a good mechanism and a good repurposed drug.
+
+355
+00:24:52,480 --> 00:24:52,799
+Right.
+
+356
+00:24:52,799 --> 00:24:57,240
+>> And it was not as correlated with human >> opinions as I expected.
+
+357
+00:24:57,360 --> 00:24:57,520
+>> Yeah.
+
+358
+00:24:57,520 --> 00:24:57,679
+Yeah.
+
+359
+00:24:57,679 --> 00:25:06,120
+And so since then I think that uh I have a lot more faith in these like um verifier in the loop kind of scenarios where you have either data analysis,
+
+360
+00:25:06,320 --> 00:25:11,800
+literature search or you're running a unit test or whatever you you you're going and running the experiment.
+
+361
+00:25:12,240 --> 00:25:19,760
+Anything like that I think is is going to give you a higher signal than the sort of vagaries of like oh this is a higher opinion or we like this one better.
+
+362
+00:25:19,760 --> 00:25:19,919
+>> Yeah.
+
+363
+00:25:19,919 --> 00:25:22,320
+Max Maxwellian called it nature's computer.
+
+364
+00:25:22,320 --> 00:25:22,920
+>> Yeah.
+
+365
+00:25:23,279 --> 00:25:29,639
+It's like it's like like you have this computer cycle you're running and the nature is part of that computational >> cycle.
+
+366
+00:25:29,679 --> 00:25:30,159
+I'm curious.
+
+367
+00:25:30,159 --> 00:25:42,000
+So you said that there is a paper which maybe like could propose maybe propose where this um molecule came from but like do you have some way of interpreting or like understanding where that
+
+368
+00:25:42,000 --> 00:25:44,920
+hypothesis originated in the absence of that?
+
+369
+00:25:45,200 --> 00:25:47,520
+>> Like is there a little thought train?
+
+370
+00:25:47,520 --> 00:25:47,760
+>> Yeah.
+
+371
+00:25:47,760 --> 00:25:47,919
+Yeah.
+
+372
+00:25:47,919 --> 00:25:48,159
+Yeah.
+
+373
+00:25:48,159 --> 00:25:53,960
+Actually, this something we pay really close attention to at Future House and at Edison was um Providence of like information.
+
+374
+00:25:54,159 --> 00:25:57,720
+So, our first sort of like agent was was paper QA.
+
+375
+00:25:58,080 --> 00:25:58,799
+Sorry about the name.
+
+376
+00:25:58,799 --> 00:26:00,960
+Paper QA sounds like an email 7 that was an agent.
+
+377
+00:26:00,960 --> 00:26:01,919
+>> It really does.
+
+378
+00:26:01,919 --> 00:26:02,480
+>> Yeah.
+
+379
+00:26:02,480 --> 00:26:09,360
+Um paper QA was uh has like every sentence that it outputs has a citation to a page, right?
+
+380
+00:26:09,360 --> 00:26:12,799
+So, it's like a lot of providence and then we basically built along the philosophy for everything.
+
+381
+00:26:12,799 --> 00:26:23,679
+So Robin would which is the name of this I don't know workflow or something you can call it that led to this result on riputal being a good um therapeutic for dry MD >> it
+
+382
+00:26:23,679 --> 00:26:33,120
+has like data analysis that goes shows you like which line Python code led to the result here and then that is like okay then goes to this other model which says well based on
+
+383
+00:26:33,120 --> 00:26:41,760
+this literature finding and this result from the data analysis I believe this is the right thing but you know where does the original idea come from like going after these rock inhibitors which is
+
+384
+00:26:41,760 --> 00:26:53,120
+the the mechanism for the the target was basically enumeration and so this is like if you can't be smarter you can be I don't know you can try more times of course >> and I
+
+385
+00:26:53,120 --> 00:26:59,679
+think that was like the theory of of the Robin paper was that we can put out a whole bunch of hypotheses and then we can filter them just like I think somebody how co-signist
+
+386
+00:26:59,679 --> 00:27:09,760
+did is you go for a filtration process but the difference is that in co-scientist their filtration process was other LLM sort of ranking it with rubrics or like personas and our filtration process was
+
+387
+00:27:09,760 --> 00:27:13,760
+like literature search and data analysis this um like here's some data.
+
+388
+00:27:13,760 --> 00:27:15,200
+Is it consistent with the data?
+
+389
+00:27:15,200 --> 00:27:19,120
+Go see if anyone's discovered in the paper in the literature or if they've disproven it.
+
+390
+00:27:19,120 --> 00:27:25,879
+>> And I think that's the easy way to succeed in in AI over humans is is you can try more ideas faster.
+
+391
+00:27:26,000 --> 00:27:29,679
+>> Something I've I've heard people say and maybe I've experienced this in my own life.
+
+392
+00:27:29,679 --> 00:27:39,159
+Um like sometimes hypotheses are kind of cheap especially in you know biology >> it's many ways actually easy to come up with what you think could be happening.
+
+393
+00:27:39,279 --> 00:27:50,640
+And um it seems like to me verifying is often times a big bottleneck in maybe the biggest bottleneck like if you have lots of hypotheses you know and it costs you know 1/100th of
+
+394
+00:27:50,640 --> 00:27:54,240
+your runway to test each one of them or something you don't have any shots on goal.
+
+395
+00:27:54,240 --> 00:27:54,559
+Yeah.
+
+396
+00:27:54,559 --> 00:27:55,159
+>> Yeah.
+
+397
+00:27:55,200 --> 00:28:07,679
+So how do you make sure that like you you are actually enriching for good hypothesis >> literature and data analysis right you know like do >> there was a time when we used um something called
+
+398
+00:28:07,679 --> 00:28:18,000
+tiling trees and tiling tree is like a literal brute force method invented by Ed Bon Sam's PhD advisor and basically the idea is okay I want to like accomplish X okay I could try
+
+399
+00:28:18,000 --> 00:28:25,919
+these methods and then like once you pick I'm going to try this method then you split into like two different paths I'm going to use this method or not use this method.
+
+400
+00:28:25,919 --> 00:28:26,960
+I'm using this method.
+
+401
+00:28:26,960 --> 00:28:28,880
+I need to have like I don't know some kind of substrate.
+
+402
+00:28:28,880 --> 00:28:31,520
+I'm going to try this substrate or this substrate or this substrate, right?
+
+403
+00:28:31,520 --> 00:28:37,120
+And you can basically try to really like tile space of all the we tried some early experiments there and you're right,
+
+404
+00:28:37,120 --> 00:28:43,720
+you run into this thing where some of the hypotheses come out just don't make any sense and like you are going to waste a ton of effort if you actually test them all.
+
+405
+00:28:43,760 --> 00:28:50,320
+Nowadays, I actually would argue that if you go to an LLM and you ask it to evaluate, you know,
+
+406
+00:28:50,320 --> 00:28:56,080
+hypotheses, including some garbage ones, it will probably do as good of a job as an expert in the field and and filtering them out.
+
+407
+00:28:56,080 --> 00:28:57,120
+That's not always the case.
+
+408
+00:28:57,120 --> 00:28:58,559
+>> Yeah, I've actually seen that myself.
+
+409
+00:28:58,559 --> 00:28:58,799
+>> Yeah.
+
+410
+00:28:58,799 --> 00:29:02,720
+But there's a lot of gotchas, and I think people can miss those, but I think they're actually pretty good.
+
+411
+00:29:02,720 --> 00:29:07,720
+And so, I'm not as worried about >> hypotheses that can fail fast by an expert looking at them.
+
+412
+00:29:07,840 --> 00:29:11,480
+>> I think now the filtration process really happens in in in literature.
+
+413
+00:29:11,679 --> 00:29:21,120
+And I think the filtration process happens in looking at like um you know like uh biioank data or like you know what do we know from GW was or something know other sources of
+
+414
+00:29:21,120 --> 00:29:23,760
+of existing data as much as you can draw upon.
+
+415
+00:29:23,760 --> 00:29:24,360
+>> Yeah.
+
+416
+00:29:24,559 --> 00:29:36,159
+So yeah and with regards to existing data um another like maybe contrarian uh take is that like oftentimes the the hardest part is just understanding the like the context of data and like where
+
+417
+00:29:36,159 --> 00:29:37,919
+it comes from and how do you interpret it.
+
+418
+00:29:37,919 --> 00:29:49,840
+I can also think from my own life multiple cases where you know the the data in some sense was like there and you had two people who were both experts and very smart people
+
+419
+00:29:49,840 --> 00:30:00,399
+who looked at it and drew very different interpretations and and in fact like when we were interviewing Heather Kulick she she had some fun stories about using LLM and um she would find that
+
+420
+00:30:00,399 --> 00:30:08,600
+there would be raw data in a paper which wouldn't agree with the conclusions of the actual paper and it's straight from the paper it's not even like cross paper talk or something.
+
+421
+00:30:08,720 --> 00:30:12,840
+>> Man, I'm going to be a really boring interviewer and be like, "Yes, you're right."
+
+422
+00:30:13,120 --> 00:30:16,120
+You know, like this is this is a hard question.
+
+423
+00:30:16,399 --> 00:30:23,840
+>> Um I think, you know, to give you something concrete, um >> we have a a bioinformatics benchmark we call it big bench.
+
+424
+00:30:23,840 --> 00:30:26,320
+And big bench is like we put it out, we've updated a few times.
+
+425
+00:30:26,320 --> 00:30:31,360
+It's in it's in some Frontier um LLMs when they release their system card, they'll mention Big Bench.
+
+426
+00:30:31,360 --> 00:30:32,640
+It's like one of the things they test on.
+
+427
+00:30:32,640 --> 00:30:33,200
+>> Yeah.
+
+428
+00:30:33,200 --> 00:30:46,960
+And um you know we're getting to 60% 70% correctness on Bixbench >> and um we found that actually we're at the point where humans disagree at this level.
+
+429
+00:30:46,960 --> 00:30:49,639
+Like humans only agree 70% of the analysis.
+
+430
+00:30:50,080 --> 00:30:54,640
+And so it's true that like when it comes to analyzing data like humans do not agree 100% of the time.
+
+431
+00:30:54,640 --> 00:30:57,520
+There is a certain amount of like choice that goes into it.
+
+432
+00:30:57,520 --> 00:31:01,760
+And you know we we try to um so Edison is is a for-profit company.
+
+433
+00:31:01,760 --> 00:31:10,799
+maybe like trying to sell uh some of this stuff to to companies and we'll go to some companies like oh we never impute data imputing data is bad like or you know whatever and
+
+434
+00:31:10,799 --> 00:31:17,120
+like okay well we'll have to change our agent so we don't impute data with them but then some other companies like oh yeah we impute data it makes everything easier right or uh and
+
+435
+00:31:17,120 --> 00:31:25,679
+and you know you want to know what the real modern dark arts are that like AI resistant area of the world is like medicinal chemistry that is like the spot where like you know
+
+436
+00:31:25,679 --> 00:31:32,720
+there's so much superstition >> oh yeah yeah everyone yeah everyone is like pseudo religious >> yeah exactly But you have to be to survive.
+
+437
+00:31:32,720 --> 00:31:34,000
+I feel otherwise you get burnt out.
+
+438
+00:31:34,000 --> 00:31:35,919
+>> But the religions never agree too.
+
+439
+00:31:35,919 --> 00:31:39,919
+Two medicinal chemists will have completely different viewpoints about like a functional group.
+
+440
+00:31:39,919 --> 00:31:40,159
+>> Yes.
+
+441
+00:31:40,159 --> 00:31:40,480
+Exactly.
+
+442
+00:31:40,480 --> 00:31:45,279
+And I remember this is talking to somebody who worked at CRO and they're like, "Oh, whenever like company X orders anything,
+
+443
+00:31:45,279 --> 00:31:51,399
+we never put boron on any of the compounds because they hate boron because there was one program that was killed because there was a boron,
+
+444
+00:31:51,679 --> 00:31:54,320
+you know, somewhere in the core and it led to some toxic side effect.
+
+445
+00:31:54,320 --> 00:31:55,519
+So no boron for this company.
+
+446
+00:31:55,519 --> 00:32:02,000
+this company, they like love things to be florinated or something because they love think it's great for um the admit properties,
+
+447
+00:32:02,000 --> 00:32:02,159
+right?
+
+448
+00:32:02,159 --> 00:32:11,440
+And so there's like all this this this stuff where you reach the point where I don't know human bias level or human disagreement level and I think we're getting to that point in data
+
+449
+00:32:11,440 --> 00:32:11,919
+analysis.
+
+450
+00:32:11,919 --> 00:32:16,320
+And so of course you will see then that if I take the broad data from a paper and I analyze it myself,
+
+451
+00:32:16,320 --> 00:32:17,639
+I will get a different conclusion.
+
+452
+00:32:17,760 --> 00:32:23,760
+One of the cool tricks you can do is this back to this brute force thing is that I can go to our agent and I can run it 100 times and I can take
+
+453
+00:32:23,760 --> 00:32:34,920
+the consensus like analysis or I can say even if you make these three different choices in your data analysis you get the same conclusion right or this conclusion is somehow sensitive to those choices
+
+454
+00:32:34,960 --> 00:32:44,799
+and then you can there's even like words like epistemic versus alitor uncertainty right it's like this is alitor which means like I think it's noise from the data or this is epistemic uncertainty which
+
+455
+00:32:44,799 --> 00:32:51,039
+means like I think there's some choices that are being made there's some differences that lead to the the disagreement.
+
+456
+00:32:51,039 --> 00:33:01,440
+Anyway, there's like there's like a Donald Rumsfeld formulation of this as well, like the known unknowns and yeah, the alitor epistmic uh uh debate there.
+
+457
+00:33:01,440 --> 00:33:02,040
+>> Interesting.
+
+458
+00:33:02,080 --> 00:33:05,600
+This kind of digging into your cosmos a little bit.
+
+459
+00:33:05,600 --> 00:33:14,759
+So I I glanced at the paper and one of the things that jumps out is that there were certain class of problems for which uh it was only 50ome%
+
+460
+00:33:16,080 --> 00:33:25,600
+accurate and oh yeah and can you talk a little bit about that and how that like okay so if I'm just raw getting 50% accurate answers and and then I'm going into the wet
+
+461
+00:33:25,600 --> 00:33:33,200
+lab and being like okay try this and then it's like ah like the the stupid thing did told me to do a dump like how do you >> I would say first of all that
+
+462
+00:33:33,200 --> 00:33:38,080
+50% it's actually pretty good because it's rare that experiments in the lab are actually coin tosses, right?
+
+463
+00:33:38,080 --> 00:33:41,480
+They're usually a lot more outcomes than >> you know than than binary.
+
+464
+00:33:41,519 --> 00:33:41,679
+>> Yeah.
+
+465
+00:33:41,679 --> 00:33:41,840
+Yeah.
+
+466
+00:33:41,840 --> 00:33:42,080
+Sure.
+
+467
+00:33:42,080 --> 00:33:42,320
+Okay.
+
+468
+00:33:42,320 --> 00:33:42,640
+Yeah.
+
+469
+00:33:42,640 --> 00:33:48,559
+>> But but that particular number was uh human agreement in the interpretation of the results.
+
+470
+00:33:48,559 --> 00:33:48,799
+Okay.
+
+471
+00:33:48,799 --> 00:33:51,919
+>> And so we asked people to evaluate different aspects of Cosmos.
+
+472
+00:33:51,919 --> 00:33:54,080
+We had them evaluate like the data analysis decisions.
+
+473
+00:33:54,080 --> 00:33:59,480
+We had people ask to evaluate the literature like is these is do you agree with its finding in the literature?
+
+474
+00:33:59,519 --> 00:34:06,040
+that number that was 50% that came from Cosmos's interpretation of uh some of the analysis.
+
+475
+00:34:06,159 --> 00:34:06,559
+Yeah.
+
+476
+00:34:06,559 --> 00:34:14,399
+>> So like it might go in literature and find this result and then it would say wow this is super exciting this is amazing or it might do data analysis like this is a novel
+
+477
+00:34:14,399 --> 00:34:15,760
+discovery really excited about it.
+
+478
+00:34:15,760 --> 00:34:16,079
+Yeah.
+
+479
+00:34:16,079 --> 00:34:20,639
+>> And then people would disagree that's actually not interesting or like I don't agree with the interpretation of it.
+
+480
+00:34:20,639 --> 00:34:22,519
+>> So it's like picking bad problems maybe.
+
+481
+00:34:22,560 --> 00:34:22,960
+Yeah.
+
+482
+00:34:22,960 --> 00:34:24,720
+>> In the the the negative class.
+
+483
+00:34:24,720 --> 00:34:24,960
+Yeah.
+
+484
+00:34:24,960 --> 00:34:30,279
+And so I think it's like that that 52 or 55 whatever it is that's um interpretation.
+
+485
+00:34:30,639 --> 00:34:31,280
+And so I agree.
+
+486
+00:34:31,280 --> 00:34:34,399
+I think that's where like I was saying I think the frontier right now is scientific taste.
+
+487
+00:34:34,399 --> 00:34:34,999
+Yeah.
+
+488
+00:34:35,119 --> 00:34:43,040
+>> And so that's what we're working on right now is how do you get that interpretation to to match you step back and just introduce Cosmos from a high level.
+
+489
+00:34:43,040 --> 00:34:43,200
+Yeah.
+
+490
+00:34:43,200 --> 00:34:43,520
+Yeah.
+
+491
+00:34:43,520 --> 00:34:54,079
+Um >> I would actually be in even curious to hear starting from like Chem Crow and uh you know you have uh paper QA Avery Ether Zero.
+
+492
+00:34:54,079 --> 00:34:54,159
+Yeah.
+
+493
+00:34:54,159 --> 00:35:00,720
+Yeah, >> I'd like to hear a little bit of the the lineage and how those different decisions were made.
+
+494
+00:35:00,720 --> 00:35:03,599
+What were the key learnings and how did you get to where you are now?
+
+495
+00:35:03,599 --> 00:35:03,920
+>> Yeah.
+
+496
+00:35:03,920 --> 00:35:11,200
+So, I could retcon and tell a really great story about how we arrived at Cosmos, but I will say that like to a large extent we just try a lot of stuff and sometimes
+
+497
+00:35:11,200 --> 00:35:12,720
+it works and sometimes it doesn't.
+
+498
+00:35:12,720 --> 00:35:13,280
+Okay.
+
+499
+00:35:13,280 --> 00:35:17,280
+>> You know, I I'll say that >> we're very I'm I'm a I'm a builder.
+
+500
+00:35:17,280 --> 00:35:19,520
+Like I like to like build things piece by piece.
+
+501
+00:35:19,520 --> 00:35:23,520
+I'm uh probably some fancy word for it, but I'm like a Lego guy or something.
+
+502
+00:35:23,520 --> 00:35:29,640
+My vision was that we would make an agent that does this part of the scientific process, an agent that does this part of the scientific process,
+
+503
+00:35:29,680 --> 00:35:30,000
+whatever.
+
+504
+00:35:30,000 --> 00:35:35,680
+And so we had like, you know, um, Chem Crow, which is going to help us with setting up our medicinal chemistry work.
+
+505
+00:35:35,680 --> 00:35:37,599
+We had protein crow, which we haven't released.
+
+506
+00:35:37,599 --> 00:35:42,920
+I don't know if we will ever release, but protein crow is like designing proteins we might need for for some part of our workflows.
+
+507
+00:35:43,200 --> 00:35:46,240
+Um, or we had a data >> or that's a >> it's an agent.
+
+508
+00:35:46,240 --> 00:35:47,440
+So LM plus tools.
+
+509
+00:35:47,440 --> 00:35:47,680
+>> Okay.
+
+510
+00:35:47,680 --> 00:35:55,520
+or we had ether zero was like okay we noticed that the frontier models can't work with molecules very well so let's make a a model with intuition for medicinal chemistry and that was what
+
+511
+00:35:55,520 --> 00:36:02,560
+led to ether zero but then Sam actually really pushed on us to like let's just even do the whole thing you know let's just try to build an AI scientist let's just try the
+
+512
+00:36:02,560 --> 00:36:11,280
+whole thing and that was what led to Robin and um Robin was like let's just take these agents we already have and we'll just put them in like a a workflow basically was like
+
+513
+00:36:11,280 --> 00:36:20,800
+you could express it in a concise Python file of like you know try a whole bunch of ideas then go see if they all filter through literature or if they've been disproven and then
+
+514
+00:36:20,800 --> 00:36:24,320
+go like uh come up with experiments that you could do in a wet lab.
+
+515
+00:36:24,320 --> 00:36:24,640
+Yeah.
+
+516
+00:36:24,640 --> 00:36:28,640
+>> And this is our inventory list and then go analyze all the data then go back and repeat the process.
+
+517
+00:36:28,640 --> 00:36:28,720
+Right.
+
+518
+00:36:28,720 --> 00:36:38,640
+So that's like what Robin was and um then we like we came ac across Cosmos we're trying to like understand what is the process that Robin is is automating and it came from this
+
+519
+00:36:38,640 --> 00:36:46,320
+idea of like a world model which is that when we first started Edison we were thinking like what do we what do we want to change about this like what is new here >> and
+
+520
+00:36:46,320 --> 00:36:54,800
+so we spent some time thinking about well the scientific process like what is actually going on like my brain which is that I have some understanding of of the world or the phenomena I've
+
+521
+00:36:54,800 --> 00:37:03,359
+studying and that's my world model and then a lot of the actions I take are about trying update that world model and it's something that changes over time and so this is like this
+
+522
+00:37:03,359 --> 00:37:10,960
+ability to change over time but it's also something that is practical like I can use it to make predictions about I know from this experiment this will happen that's why it's like a model
+
+523
+00:37:10,960 --> 00:37:21,200
+and not just like you know uh uh memory or like a bunch of like papers or something like that it's like it's supposed to operate in cosmos we tried this idea out and actually
+
+524
+00:37:21,200 --> 00:37:31,320
+um uh uh Ludo uh who was the the uh first author on the paper we tried a whole bunch of ideas around world models And uh we kind of thought they weren't really appropriate
+
+525
+00:37:31,599 --> 00:37:33,760
+like well we tried a lot of different ways to do this.
+
+526
+00:37:33,760 --> 00:37:37,040
+We tried you know method A, method B, method C and and they were okay.
+
+527
+00:37:37,040 --> 00:37:38,320
+And so we all decided to take a break.
+
+528
+00:37:38,320 --> 00:37:43,200
+Ludo like his project didn't work on trying to do this world model stuff.
+
+529
+00:37:43,200 --> 00:37:44,160
+He's like I'm going to keep trying it.
+
+530
+00:37:44,160 --> 00:37:45,040
+Lud is very stubborn person.
+
+531
+00:37:45,040 --> 00:37:51,599
+So he tried it for like I don't know a week or two weeks and he was kind of like quietly like hey can you guys come take a look at this >> and and we're
+
+532
+00:37:51,599 --> 00:37:55,520
+like wow this is actually really cool and then we like started building on it and jamming really.
+
+533
+00:37:55,520 --> 00:37:59,760
+And I think what Lud figured out is that you have to get this like experiment the loop thing.
+
+534
+00:37:59,760 --> 00:38:03,440
+You have to be let it and the data analysis agent is what got us in the loop.
+
+535
+00:38:03,440 --> 00:38:10,240
+So if you put that in the loop of like it can really update this world model because the we were trying to build it around literature before >> and when you build it around literature
+
+536
+00:38:10,240 --> 00:38:15,119
+there's just like not really experiments you can do and then see the results for that was like our surrogate was was literature.
+
+537
+00:38:15,119 --> 00:38:16,000
+It just wasn't working.
+
+538
+00:38:16,000 --> 00:38:20,960
+Data analysis actually really lets you explore ideas >> and so that was what led to cosmos.
+
+539
+00:38:20,960 --> 00:38:23,760
+And so in cosmos we basically we had all the pieces sitting around.
+
+540
+00:38:23,760 --> 00:38:24,720
+We working on world models.
+
+541
+00:38:24,720 --> 00:38:27,240
+We working on a data analysis agent, working on a literature agent.
+
+542
+00:38:27,359 --> 00:38:30,720
+Um, and then we're working on, you know, we built a platform for scientific agents.
+
+543
+00:38:30,720 --> 00:38:32,400
+So, we had things that can write a law tech report.
+
+544
+00:38:32,400 --> 00:38:34,199
+We had things that can make nice plots.
+
+545
+00:38:34,720 --> 00:38:40,480
+>> Then we put that all together and like a world model was like sort of the the glue that allowed it to to fit together.
+
+546
+00:38:40,480 --> 00:38:40,720
+Yeah.
+
+547
+00:38:40,720 --> 00:38:45,680
+>> An analogy is like um >> in coding agents like GitHub is sort of the glue.
+
+548
+00:38:45,680 --> 00:38:55,280
+like there's some shared repo and everyone works on the repo and like software engineers have spent whatever lots of brain cycles thinking about what's the way to coordinate you know and organize working on
+
+549
+00:38:55,280 --> 00:38:56,640
+code together for a long time.
+
+550
+00:38:56,640 --> 00:38:59,280
+>> So the world model is actually like a memory system kind of.
+
+551
+00:38:59,280 --> 00:39:00,720
+>> Yeah, you can think of it as a memory system.
+
+552
+00:39:00,720 --> 00:39:02,720
+Um we we think about it as as a model.
+
+553
+00:39:02,720 --> 00:39:07,719
+So like it actually you can put in input and it will output predictions and we think about calibration.
+
+554
+00:39:08,400 --> 00:39:17,680
+>> But like really it is a set of like a big >> bundle of information that we accumulate over time that's distilled in some way and and that is like uh what allows us to do
+
+555
+00:39:17,680 --> 00:39:18,160
+this.
+
+556
+00:39:18,160 --> 00:39:26,000
+And I think you can think about like um a GitHub repo is like it's a distillation right like really there's a long graph of commits that lead up to it and like the current
+
+557
+00:39:26,000 --> 00:39:29,280
+file system in that GitHub repo or should keep saying GitHub.
+
+558
+00:39:29,280 --> 00:39:31,839
+I'm such a corporate >> shill here.
+
+559
+00:39:31,839 --> 00:39:40,480
+get your git repo is like a distillation of all of the work that people have put in into the PRs into the into the uh the commits and so I think there's a nice
+
+560
+00:39:40,480 --> 00:39:43,440
+analogy uh between a git repo and what a world model is.
+
+561
+00:39:43,440 --> 00:39:44,160
+I see.
+
+562
+00:39:44,160 --> 00:39:48,800
+And >> I think that's just sort of what allows us to automate scientific discovery is so well.
+
+563
+00:39:48,800 --> 00:39:53,359
+>> Can you talk about like kind of how you implement a world model or is that sort of like secret sauce?
+
+564
+00:39:53,359 --> 00:39:55,800
+>> That's our like secret sauce right now, you know?
+
+565
+00:39:56,079 --> 00:39:56,480
+That's fine.
+
+566
+00:39:56,480 --> 00:39:56,800
+>> Yeah.
+
+567
+00:39:56,800 --> 00:39:57,599
+No, it's fine.
+
+568
+00:39:57,599 --> 00:39:58,720
+People have asked around.
+
+569
+00:39:58,720 --> 00:40:04,360
+>> So, one thing that's notably missing is the like simulation, right?
+
+570
+00:40:04,800 --> 00:40:12,320
+Dynamics or or or like uh bolts or >> Yeah, I want to I'll help you guys pump up your views here.
+
+571
+00:40:12,320 --> 00:40:14,840
+So I I think molecular dynamics is overrated.
+
+572
+00:40:15,520 --> 00:40:20,960
+In fact, >> coming from someone who >> goes in the that goes in the in the thumbnail, you know.
+
+573
+00:40:20,960 --> 00:40:21,560
+Yeah.
+
+574
+00:40:21,920 --> 00:40:22,560
+>> But just >> Yeah.
+
+575
+00:40:22,560 --> 00:40:25,040
+And and and DFT is overrated.
+
+576
+00:40:25,040 --> 00:40:27,520
+In fact, DFT may be even more overrated than like the NEMICS.
+
+577
+00:40:27,520 --> 00:40:31,240
+I think these method >> for materials or for biology or for both >> for materials.
+
+578
+00:40:31,440 --> 00:40:32,079
+Okay.
+
+579
+00:40:32,079 --> 00:40:34,199
+>> And I can explain more about that.
+
+580
+00:40:34,320 --> 00:40:43,000
+Basically MD and DFT have consumed an enormous number of PhDs and scientific careers at the alter of you know the beauty of the simulation.
+
+581
+00:40:43,359 --> 00:40:52,240
+>> Also random interjection once I I did an estimate I think pre like chatbt something like 20% of the world's computing power just went to simulating water.
+
+582
+00:40:52,240 --> 00:40:53,880
+>> Oh my god water.
+
+583
+00:40:54,000 --> 00:40:54,640
+Yeah.
+
+584
+00:40:54,640 --> 00:40:57,320
+>> I had to deal with so many water simulations.
+
+585
+00:40:57,359 --> 00:41:02,000
+I did I did DFT simulations of water and they are so annoying.
+
+586
+00:41:02,000 --> 00:41:11,760
+I used these big computers uh from uh the department of defense and we I spent like I don't know five months and by the way this is prel training days five months of compute
+
+587
+00:41:11,760 --> 00:41:23,440
+is actually a really long time >> I simulated water with quantum you know effects with a grotest mechanism for how a proton hops through water and it's on YouTube it's my number one YouTube video
+
+588
+00:41:23,440 --> 00:41:32,240
+and it represents like >> until now and it represents like I don't know a million CPU hours of compute it was you know one of the biggest computes that I probably the biggest one I've
+
+589
+00:41:32,240 --> 00:41:33,280
+done in my life so far.
+
+590
+00:41:33,280 --> 00:41:36,720
+Maybe Ether Zero is bigger, but but it took a lot more work anyway.
+
+591
+00:41:36,720 --> 00:41:38,439
+And and what's the point?
+
+592
+00:41:39,680 --> 00:41:40,240
+What did you learn?
+
+593
+00:41:40,240 --> 00:41:44,679
+>> All I learned was like what set of hyperparameters reproduce some physical effects of water.
+
+594
+00:41:44,800 --> 00:41:46,960
+But none of it was denovo, right?
+
+595
+00:41:46,960 --> 00:41:53,719
+And this is the this is the issue with with molecular dynamics and DFT is that um they don't model the world correctly.
+
+596
+00:41:54,160 --> 00:42:01,520
+And so we have to invent little stories we tell ourselves about we're like making good inductive biases and then it models the world more correctly.
+
+597
+00:42:01,520 --> 00:42:06,040
+Like in DFT you simulate water at 330 Kelvin when you want room temperature water.
+
+598
+00:42:06,079 --> 00:42:07,959
+>> Is room temperature 330 Kelvin?
+
+599
+00:42:08,160 --> 00:42:08,960
+>> No it's not.
+
+600
+00:42:08,960 --> 00:42:09,920
+That's a little too hot.
+
+601
+00:42:09,920 --> 00:42:10,480
+Right?
+
+602
+00:42:10,480 --> 00:42:21,520
+And so this is a the issue is that like people just make up these these these things or like I don't know GGA or like BIP or B3 lip all these different like methods people.
+
+603
+00:42:21,520 --> 00:42:31,200
+are clearly empirical and then they bolt it on to DFT and they say look >> it's a first principles method right but actually you made a whole bunch of choices and you know you you
+
+604
+00:42:31,200 --> 00:42:40,960
+whatever overfitit to the validation data to get this to work and and that's I think MD and DFT are like that because >> if you go look at the catalysts you know what catalysts change
+
+605
+00:42:40,960 --> 00:42:51,280
+the world none of them are single crystal materials that are really well suited for DFT they're always like they have grain boundaries they have dopins they're complicated right and and you never capture with
+
+606
+00:42:51,280 --> 00:42:51,880
+DFT.
+
+607
+00:42:52,079 --> 00:43:00,480
+So I think this is one of the fundamental I don't know dichotoies of the world is that simulations simulate really boring things really well.
+
+608
+00:43:00,480 --> 00:43:02,480
+They don't simulate interesting things very well.
+
+609
+00:43:02,480 --> 00:43:06,919
+And so that's why I don't do DFT and MD anymore.
+
+610
+00:43:07,119 --> 00:43:19,280
+What about somewhere like the machine learning stuff like alpha fold and and >> alpha was trained on x-ray crystalallography data and I think you know this is the this is the story of MD is
+
+611
+00:43:19,280 --> 00:43:31,119
+that MD was supposed to be the protein folding solution there is a great counter example there's a I don't know there's a word the counterfactual is basically a group called DESR dehaw research they
+
+612
+00:43:31,119 --> 00:43:39,839
+had you know similar funding to deep mind um probably more actually they tested the hypothesis to death that MD could fold proteins.
+
+613
+00:43:39,839 --> 00:43:41,839
+They built their own silicon.
+
+614
+00:43:41,839 --> 00:43:43,040
+They built their own clusters.
+
+615
+00:43:43,040 --> 00:43:45,440
+They had them taped out all themselves.
+
+616
+00:43:45,440 --> 00:43:48,520
+They burned into the silicon the algorithms to run MD.
+
+617
+00:43:48,560 --> 00:43:51,839
+They ran MD at huge speeds, huge scales.
+
+618
+00:43:51,839 --> 00:43:52,240
+>> Yeah.
+
+619
+00:43:52,240 --> 00:44:02,840
+I remember David Shaw came to a conference once on MD and he flew in by helicopter and was like to this this pretty famous guy kind of rich >> and um he he gave a
+
+620
+00:44:03,280 --> 00:44:08,880
+>> an amazing presentation about the special computers and special room and out outside of time square and like what they can do with it.
+
+621
+00:44:08,880 --> 00:44:10,319
+Beautiful, amazing.
+
+622
+00:44:10,319 --> 00:44:15,359
+And I always thought that protein folding would be solved by them, but it would require a special machine.
+
+623
+00:44:15,359 --> 00:44:21,040
+Maybe the government would buy like five of these things and we could fold, you know, maybe one protein a day or two proteins a day.
+
+624
+00:44:21,040 --> 00:44:26,319
+>> And when AlphaFold came out and it's like you can do it in Google Collab, you know, or on a GP or desktop,
+
+625
+00:44:26,319 --> 00:44:27,719
+it was so mind-blowing.
+
+626
+00:44:27,760 --> 00:44:29,760
+I forget like that protein folding was solved.
+
+627
+00:44:29,760 --> 00:44:35,280
+I always thought that was inevitable, but the fact that it was solved and on like your desktop you can do it was just completely floored.
+
+628
+00:44:35,280 --> 00:44:35,839
+Changed everything.
+
+629
+00:44:35,839 --> 00:44:38,439
+This is like the the bitter lesson on steroids.
+
+630
+00:44:38,720 --> 00:44:38,960
+>> Yeah.
+
+631
+00:44:38,960 --> 00:44:42,560
+I don't even know what it is, but it's like imagine Chad GBT came out, but instead it was like,
+
+632
+00:44:42,560 --> 00:44:45,520
+oh, you can just run it on your phone or locally on your own desktop.
+
+633
+00:44:45,520 --> 00:44:48,800
+Like that's the level of like shock that came out.
+
+634
+00:44:48,800 --> 00:44:53,839
+>> And it gets down to this thing that humans are really bad at estimating problems that aren't humanmade problems.
+
+635
+00:44:53,839 --> 00:44:58,480
+Protein folding we all thought was like would require a huge amount of compute, very challenging problem, the most hardest problem in the world,
+
+636
+00:44:58,480 --> 00:44:58,640
+right?
+
+637
+00:44:58,640 --> 00:45:02,800
+And it turns out that you can actually do it on I don't I think the numbers are now like 10,000 GPU hours.
+
+638
+00:45:02,800 --> 00:45:04,640
+You can train a a good protein folding model.
+
+639
+00:45:04,640 --> 00:45:07,280
+It's actually turned out to be barely an inconvenience.
+
+640
+00:45:07,280 --> 00:45:08,720
+>> Therefore, why not?
+
+641
+00:45:08,720 --> 00:45:08,960
+>> Oh.
+
+642
+00:45:08,960 --> 00:45:09,200
+Oh.
+
+643
+00:45:09,200 --> 00:45:12,480
+Therefore, protein folding was highly efficient based on experimental data.
+
+644
+00:45:12,480 --> 00:45:14,280
+It they took X-ray crystalography.
+
+645
+00:45:14,400 --> 00:45:16,720
+That's what Deepmind did is they took X-ray crystalraphy data.
+
+646
+00:45:16,720 --> 00:45:20,439
+Desire tried the first principles method >> and it's like a nice head-to-head comparison.
+
+647
+00:45:20,640 --> 00:45:22,439
+Two very well resourced groups.
+
+648
+00:45:22,480 --> 00:45:32,880
+They both tried different ideas >> and the machine learning on experimental data >> beat out first principal simulation by >> you know >> a very large margin.
+
+649
+00:45:32,880 --> 00:45:36,640
+And so why isn't like bolts or whatever inside of Cosmos?
+
+650
+00:45:36,640 --> 00:45:38,919
+Like why isn't there a tool that's that can run?
+
+651
+00:45:38,960 --> 00:45:41,320
+>> Oh, we have bolts inside of we have bolts gen.
+
+652
+00:45:41,920 --> 00:45:42,079
+Yeah.
+
+653
+00:45:42,079 --> 00:45:43,599
+Yeah, we have that inside of Cosmos.
+
+654
+00:45:43,599 --> 00:45:43,760
+>> Okay.
+
+655
+00:45:43,760 --> 00:45:48,960
+It is >> I mean I think in the version that we have uh for people to just sign up and use.
+
+656
+00:45:48,960 --> 00:45:55,599
+It's not in there >> but like uh you know you can imagine that you can just modal or lambda or tamarind or 310.
+
+657
+00:45:55,599 --> 00:46:01,520
+There's all these companies that basically wrap a lot of these these like um uh deep learning protein design tools or chemistry design tools.
+
+658
+00:46:01,520 --> 00:46:02,640
+wrap them in an API.
+
+659
+00:46:02,640 --> 00:46:05,520
+You just give that to to >> give it to cloud code if you want.
+
+660
+00:46:05,520 --> 00:46:09,839
+You can give it to Cosmos and you can be like, hey, >> you know, if you want to design a protein for X,
+
+661
+00:46:09,839 --> 00:46:10,840
+use these tools.
+
+662
+00:46:11,119 --> 00:46:19,959
+>> Your mechanism, it sounds like or one of the primary mechanisms that has been successful is like it like enumerate a whole bunch of possibilities and filter,
+
+663
+00:46:20,000 --> 00:46:20,160
+right?
+
+664
+00:46:20,160 --> 00:46:26,560
+And so how do you think about serendipity and out of out of distribution thinking and getting there and how far have you gotten and what's left?
+
+665
+00:46:26,560 --> 00:46:27,200
+>> That's a great question.
+
+666
+00:46:27,200 --> 00:46:39,680
+I think I guess the the short answer is that there's very so so this is the domain of seaborn so chemical biological radiological nuclear um uh weapons or I don't know safety >> this domain has
+
+667
+00:46:39,680 --> 00:46:50,319
+been explored a lot in history by a lot of organizations >> and um I would say that >> there was a big question mark for us a few years ago was like how much of this stuff
+
+668
+00:46:50,319 --> 00:47:03,520
+is uh intellectually bottlenecked >> like how often are people like oh wow I want to cause harm Um, but I need to know like some facts and could LLM's make that easier or go faster
+
+669
+00:47:03,520 --> 00:47:04,600
+or anything like that.
+
+670
+00:47:04,960 --> 00:47:15,640
+I think you know the first set of answers in 2023 I think was basically no is that like you know you can go find the synthesis route for many dangerous compounds on Wikipedia.
+
+671
+00:47:16,240 --> 00:47:22,240
+>> People know what are the targets in the human body that like are are targeted by most biological weapons.
+
+672
+00:47:22,240 --> 00:47:24,040
+It's it's not really that much of a mystery.
+
+673
+00:47:24,079 --> 00:47:29,240
+So I don't think there was a lot of like um there's a lot of new ground when LLM first came about.
+
+674
+00:47:29,359 --> 00:47:41,599
+Then there's a lot of concern about like laboratory protocols is that could agents or LLM uh reveal some tacet knowledge that like maybe people couldn't find in Wikipedia or like maybe for making something
+
+675
+00:47:41,599 --> 00:47:50,880
+there's some technique that is required when you scale it up in size or something or maybe there's like some way to get around like tracking lists by ordering different compounds or >> so and that
+
+676
+00:47:50,880 --> 00:47:53,160
+I think was really well tested.
+
+677
+00:47:53,359 --> 00:48:01,200
+um by a few different labs, not not me, but there's some groups that spun up that started making like tests for this and it and labs pay attention to I think it's really been
+
+678
+00:48:01,200 --> 00:48:09,800
+put into process where LLMs will like kind of shut down or be filtered in those scenarios, but I think that is actually an area where there is is some risk.
+
+679
+00:48:09,839 --> 00:48:14,560
+Um and so I think this something that people pay attention to for open source models and there's still I think some some discussion there,
+
+680
+00:48:14,560 --> 00:48:22,400
+but I think to a large extent it's it's not really been greatly accelerating in practice or at least I haven't seen much evidence of it.
+
+681
+00:48:22,400 --> 00:48:28,880
+Um, and again, I think it comes down to the fact that it's not really available, but like you if you look hard enough,
+
+682
+00:48:28,880 --> 00:48:33,200
+you can find most of the information you would need to to get up to no good.
+
+683
+00:48:33,200 --> 00:48:33,599
+Yeah.
+
+684
+00:48:33,599 --> 00:48:35,400
+>> In the public domain already.
+
+685
+00:48:35,520 --> 00:48:42,600
+But then I think now is the the next frontier is like uh can it somehow help you with real-time protocols,
+
+686
+00:48:42,640 --> 00:48:47,640
+troubleshooting like more in the loop and um and and more especially in the computational side of things.
+
+687
+00:48:47,680 --> 00:48:58,160
+there are some scenarios that are now coming into focus that could be more dangerous or more intellectually bottlenecked and so I think people are trying to pay attention to that to some extent there
+
+688
+00:48:58,160 --> 00:49:04,880
+was like a first wave that we thought this could unlock a lot of stuff and I don't think it came to pass I think there's now an emerging sort of second wave of like
+
+689
+00:49:04,880 --> 00:49:14,800
+there are some actually new scenarios that were just too farfetched to consider two years ago that I think are now realistic um some smart people are paying attention to it but I don't think
+
+690
+00:49:14,800 --> 00:49:18,199
+it's solved yet >> I don't It's very vague.
+
+691
+00:49:18,480 --> 00:49:24,600
+No, >> I mean, so I guess like one kind of differentiator, there's a lot of talk about AI safety in like the modern LLM,
+
+692
+00:49:24,800 --> 00:49:32,240
+you know, ASI space and, you know, there it's jokes about or pay-per-click maxing robots or something.
+
+693
+00:49:32,240 --> 00:49:38,199
+But like the the core threat here is more like a malicious actor using this as a tool to accelerate something dangerous.
+
+694
+00:49:38,480 --> 00:49:52,240
+And like kind of the first order hypothesis is that you basically already have to be an expert to effectively create a bioweapon or a chemical weapon >> and a non-expert an expert would already know
+
+695
+00:49:52,240 --> 00:49:53,040
+how to do this.
+
+696
+00:49:53,040 --> 00:49:53,200
+>> Yeah.
+
+697
+00:49:53,200 --> 00:50:02,120
+I I think you know so so each of the categories in the CBRN they're all a little different but I think to a large extent it's a a lot of like pushing material around.
+
+698
+00:50:02,240 --> 00:50:13,520
+You know the classical example in nuclear is like it's a lot of lot of centrification lot of ultra centrification a lot of high pressure or high RPMs >> and so it it's just >> you can
+
+699
+00:50:13,520 --> 00:50:24,079
+maybe get smarter about how to set up you know the the economy of scale to do that with an LLM but to a large I think you can call your your friend in country
+
+700
+00:50:24,079 --> 00:50:30,960
+X and they can tell you what are the steps it's it's not I don't think it's that much of a secret it's just a lot of like moving material around and I don't think it's
+
+701
+00:50:30,960 --> 00:50:32,439
+acceler meaningfully accelerated.
+
+702
+00:50:32,480 --> 00:50:41,680
+Now, that said, there are all kinds of like, you know, dumb dual use things of like maybe you want to call a company that makes centrifuges and you want to make sure that they
+
+703
+00:50:41,680 --> 00:50:46,600
+sell you them and they go through some KYC steps and maybe an LM can get you through the KYC faster.
+
+704
+00:50:46,800 --> 00:50:54,480
+And that's like a dumb thing that like, okay, like yes, like uh you know, email makes it so that you can order centrifuges off the internet more easily.
+
+705
+00:50:54,480 --> 00:50:56,480
+Is email like a dual use technology?
+
+706
+00:50:56,480 --> 00:50:58,000
+Like, yeah, to some extent it is.
+
+707
+00:50:58,000 --> 00:51:05,680
+And so I think there's a lot of like weird second order things that we don't pay attention to in AI safety of like does it make KYC easier?
+
+708
+00:51:05,680 --> 00:51:11,119
+Does it make it easier for people to know like where to order this from or like what is the expected price or like what should you order first,
+
+709
+00:51:11,119 --> 00:51:11,359
+right?
+
+710
+00:51:11,359 --> 00:51:18,679
+All those like sort of simple logistical things I think are accelerated by AI just as like a a consequence of AI being an accelerating technology.
+
+711
+00:51:19,440 --> 00:51:27,119
+Um, but certainly I mean guys, there's some scary stuff and I try not to think about it too much and uh yeah,
+
+712
+00:51:27,119 --> 00:51:27,599
+>> I don't know.
+
+713
+00:51:27,599 --> 00:51:37,040
+I guess I don't want to get too political, but I do think that right now um the the United States government is maybe taking a a slower,
+
+714
+00:51:37,040 --> 00:51:45,240
+less intensive look at safety and um but there's definitely people I think in other spaces than the US government thinking about it hard.
+
+715
+00:51:45,839 --> 00:51:48,679
+>> And do you think is this thing people need to spend more time on?
+
+716
+00:51:48,960 --> 00:51:58,000
+I do get waves of angst about AI and I'm sure many people living in San Francisco do get like a little bit of a little bit of waves of it and uh sometimes I
+
+717
+00:51:58,000 --> 00:52:06,199
+think that there isn't enough work being done on it >> and then sometimes I think wow like I need to mellow out and like you know we have lots of time to think about it.
+
+718
+00:52:06,400 --> 00:52:07,760
+What is my opinion on it then?
+
+719
+00:52:07,760 --> 00:52:08,319
+I don't know.
+
+720
+00:52:08,319 --> 00:52:13,159
+I I I think my opinion is um not formed fully.
+
+721
+00:52:13,280 --> 00:52:13,880
+>> Yeah.
+
+722
+00:52:13,920 --> 00:52:18,360
+You and Sam have done a lot of thinking about funding science.
+
+723
+00:52:18,480 --> 00:52:19,880
+and future of science.
+
+724
+00:52:20,079 --> 00:52:24,919
+You have you've been vocal about the reproducibility crisis and other things.
+
+725
+00:52:25,040 --> 00:52:30,240
+First question, why this focus research organization or for Yeah.
+
+726
+00:52:30,240 --> 00:52:32,160
+From Yeah.
+
+727
+00:52:32,160 --> 00:52:37,719
+What does that get you that you don't get from academia or, you know, big lab or whatever?
+
+728
+00:52:38,079 --> 00:52:40,640
+>> Um, a nice network of of people.
+
+729
+00:52:40,640 --> 00:52:46,199
+I think Edison is like a real uh, of course, I think Edison's going to do great, but I think it's a mystery of what's going to happen.
+
+730
+00:52:46,400 --> 00:52:49,560
+Um, so I don't think we've had as much friction there as you might expect.
+
+731
+00:52:49,920 --> 00:52:54,880
+But yeah, this is all stuff that we that that that Sam and I think about all the time is like how do you balance stuff like this?
+
+732
+00:52:54,880 --> 00:52:56,120
+How do you balance the economics?
+
+733
+00:52:56,559 --> 00:53:03,959
+Um, you know, there are some there are some ventureback companies that are having cash salaries over a million dollars.
+
+734
+00:53:04,079 --> 00:53:06,800
+And it's like insane to me.
+
+735
+00:53:06,800 --> 00:53:07,520
+Yeah.
+
+736
+00:53:07,520 --> 00:53:13,520
+>> That you would use all of your cash from your equity financing, you know, in these insane salaries.
+
+737
+00:53:13,520 --> 00:53:18,559
+But that can in terms of like total spend on GPUs, it can still be a total a small fraction of your burn.
+
+738
+00:53:18,559 --> 00:53:21,040
+So sometimes it kind of makes sense.
+
+739
+00:53:21,040 --> 00:53:21,640
+>> Yeah.
+
+740
+00:53:21,839 --> 00:53:22,439
+Yeah.
+
+741
+00:53:22,720 --> 00:53:24,160
+That's that's one way to think about it.
+
+742
+00:53:24,160 --> 00:53:33,719
+>> So So like you this this is a good uh leadin to you are automating science in some capacity.
+
+743
+00:53:33,920 --> 00:53:35,480
+So where does that leave scientists?
+
+744
+00:53:35,760 --> 00:53:47,359
+So I think um this is uh Jevans paradox we can try here is uh um so uh let me start with a contrast here is that uh you know if we automate um you
+
+745
+00:53:47,359 --> 00:53:55,920
+know taxi cap drivers there's a fi there's not going to be an increase in people needing to go places maybe there'll be somewhat an increase but like there is a finite amount of like
+
+746
+00:53:55,920 --> 00:53:59,359
+time people will be spending in cars >> and so there's an upper limit.
+
+747
+00:53:59,359 --> 00:54:04,520
+So when you automate that that's like a scarcity thing is basically you're displacing jobs when you automate driving.
+
+748
+00:54:04,559 --> 00:54:05,119
+>> Yeah.
+
+749
+00:54:05,119 --> 00:54:10,240
+In science, I don't think there is a finite appetite or a finite capacity for science.
+
+750
+00:54:10,240 --> 00:54:12,880
+I don't think science is like a a scarcity thing.
+
+751
+00:54:12,880 --> 00:54:15,920
+Like there's, you know, 100 more discoveries left to be made and then we'll be done.
+
+752
+00:54:15,920 --> 00:54:17,719
+And so like we're displacing jobs.
+
+753
+00:54:17,839 --> 00:54:22,040
+I think instead actually if we can, you know, make science go much much faster.
+
+754
+00:54:22,559 --> 00:54:25,400
+There will be no there will be no decrease in demand.
+
+755
+00:54:25,440 --> 00:54:30,280
+There will be actually I think an increase in demand that will match whatever automation amount we have.
+
+756
+00:54:30,400 --> 00:54:40,640
+And so my vision for what a scientist would be in the future is that they will be I don't know like uh agent wranglers or cosmos wranglers of like okay they're exploring 100 ideas
+
+757
+00:54:40,640 --> 00:54:51,440
+simultaneously or they're like working with systems like ours to to make 10x the discoveries 100x discoveries because I think there's an unlimited amount of scientific discoveries to be made and so there's no like
+
+758
+00:54:51,440 --> 00:54:54,760
+scarcity set where basically we will displace them all.
+
+759
+00:54:55,359 --> 00:55:02,079
+No, that's kind of like, you know, this is what I would tell when I go talk to a first year PhD student,
+
+760
+00:55:02,079 --> 00:55:04,160
+like everything's going to be just fine, >> you know.
+
+761
+00:55:04,160 --> 00:55:11,760
+Then when it gets into the nuts and bolts, I I do agree that this is going to be like a really hard thing where like if I am CEO of a company that makes
+
+762
+00:55:11,760 --> 00:55:17,920
+science, like a pharma company or material science company or something like that or R&D arm at IBM, I think,
+
+763
+00:55:17,920 --> 00:55:24,319
+well, I could spend, you know, a million more dollars on on compute for the AI scientist or could hire 10 more people.
+
+764
+00:55:24,319 --> 00:55:34,280
+I might just choose to go with the AI scientist because you know to a large extent like hiring people is hard right >> and and hiring an AI scientist is probably a little bit easier.
+
+765
+00:55:34,400 --> 00:55:34,880
+Yeah.
+
+766
+00:55:34,880 --> 00:55:47,760
+>> And so I think that there could be some there could be some friction but another thing is like science is in some ways closer to art in the sense that like there is a
+
+767
+00:55:47,760 --> 00:55:49,440
+large number of people just appreciate good science.
+
+768
+00:55:49,440 --> 00:55:52,480
+Like if you get published in nature it's not because it's really going to be world changing.
+
+769
+00:55:52,480 --> 00:55:56,000
+Of course, that's part of it, but it's also because like people are like, "Wow, this is really interesting science."
+
+770
+00:55:56,000 --> 00:55:56,319
+Yeah.
+
+771
+00:55:56,319 --> 00:55:59,040
+>> So, I think the the enjoyers of science are also scientists.
+
+772
+00:55:59,040 --> 00:56:04,960
+And so, I think that it's kind of hard to imagine a scenario when there's not scientists as the consumers of science.
+
+773
+00:56:04,960 --> 00:56:10,040
+And so, I think if they're going to be consumers of science, they're also going to be some of the producers are involved in the and the process by itself,
+
+774
+00:56:10,079 --> 00:56:10,880
+right?
+
+775
+00:56:10,880 --> 00:56:12,960
+>> If that makes any sense, >> yeah, you've touched on this.
+
+776
+00:56:12,960 --> 00:56:15,680
+My the question in my mind is just what does a scientist do?
+
+777
+00:56:15,680 --> 00:56:21,040
+Then >> there's a great short story um by um Ted Chang, I think in like 2003 or something.
+
+778
+00:56:21,040 --> 00:56:21,359
+Okay.
+
+779
+00:56:21,359 --> 00:56:31,119
+And it's about like well at first scientists were displaced and they became like the uh interpreters of like what the AI scientists are doing like the scientists read the AI scientists like papers and
+
+780
+00:56:31,119 --> 00:56:38,880
+then you know translate them for whatever popular science or something >> and then after that like they couldn't read the papers anymore and so they were left behind and so they had nothing to do
+
+781
+00:56:38,880 --> 00:56:50,480
+and they just sat around and >> but the problem is that >> science is like you know you you have to translate science to make any impact like science cannot exist by itself.
+
+782
+00:56:50,480 --> 00:56:58,439
+I do agree there's like engineering can exist by itself like if you give some kind of system a goal of like making me a material that I can make a space elevator out of.
+
+783
+00:56:58,640 --> 00:57:07,119
+You could be not participating in the beginning the process or the middle of the process and you just come by the end and be like okay follow this recipe like science of like what's
+
+784
+00:57:07,119 --> 00:57:18,160
+the origin of life or like is there water on other planets or you know um why is some catalyst better than another catalyst that has to be hitting human eyes and human brains at
+
+785
+00:57:18,160 --> 00:57:18,559
+some point.
+
+786
+00:57:18,559 --> 00:57:20,679
+So I think a human has to be involved in the process.
+
+787
+00:57:20,880 --> 00:57:23,200
+>> Don't want to be contrarian but >> yeah be contrary.
+
+788
+00:57:23,200 --> 00:57:24,640
+>> Why does a human have to be involved?
+
+789
+00:57:24,640 --> 00:57:25,520
+>> Why does a human has to be involved?
+
+790
+00:57:25,520 --> 00:57:29,839
+Well, a human has to be involved at least some point to be like yes this is good science or this is bad science.
+
+791
+00:57:29,839 --> 00:57:30,160
+>> Okay.
+
+792
+00:57:30,160 --> 00:57:32,319
+So it's it goes back to taste.
+
+793
+00:57:32,319 --> 00:57:32,559
+>> Yeah.
+
+794
+00:57:32,559 --> 00:57:33,119
+But I don't know.
+
+795
+00:57:33,119 --> 00:57:33,680
+Maybe you're right.
+
+796
+00:57:33,680 --> 00:57:34,880
+Maybe there is no point for humans.
+
+797
+00:57:34,880 --> 00:57:36,720
+Maybe it'll be like you know what is it?
+
+798
+00:57:36,720 --> 00:57:37,320
+Sora.
+
+799
+00:57:37,440 --> 00:57:39,280
+Uh you know like the AI slop app.
+
+800
+00:57:39,280 --> 00:57:43,040
+But I think in Sora there's still humans at the end clicking the videos or something.
+
+801
+00:57:43,040 --> 00:57:43,520
+>> Yeah.
+
+802
+00:57:43,520 --> 00:57:53,959
+So, >> so, so the the sorith analogy kind of brings up an interesting point like is it possible that like due to the biases of AI science if we really go full in science that
+
+803
+00:57:54,160 --> 00:58:04,319
+>> you know there still is a market for kind of boutique human science like you know there's still people who want to you know paint things the old fashioned way but more to the point
+
+804
+00:58:04,319 --> 00:58:17,920
+does it become even more important for to have a human who is uh actively doing their own exploration because there will be like large blind spots and biases due to the models that just
+
+805
+00:58:17,920 --> 00:58:27,599
+you'll never be able to overcome because this is sort of baked in now um due to your training data and without a human that you'll always get stuck in there will be a blind
+
+806
+00:58:27,599 --> 00:58:33,760
+spot that will never >> Bio which is a company in in Oakland um or in Emeryville and they do really cool stuff with automation.
+
+807
+00:58:33,760 --> 00:58:40,120
+I think they're going to be testing this theory of like okay maybe if that's the bottleneck we can see evidence of it because they're going to start doing really well.
+
+808
+00:58:40,319 --> 00:58:41,920
+>> Um it could be true.
+
+809
+00:58:41,920 --> 00:58:42,240
+>> Mhm.
+
+810
+00:58:42,240 --> 00:58:51,440
+I I still though want to say all of those I in my mind are still sort of scoped in terms of like R&D for pharma or bio but they're not like none of them
+
+811
+00:58:51,440 --> 00:59:02,400
+are attempting to answer big fundamental questions and maybe there's like different levels when I think about that you seem to be >> um it seems like the future h the the focus of future house
+
+812
+00:59:02,400 --> 00:59:12,559
+in Edison is much more towards like you know sort of R&D and sort of endrun science but um you know I I have some background in,
+
+813
+00:59:12,559 --> 00:59:13,880
+you know, fundamental physics.
+
+814
+00:59:14,079 --> 00:59:22,400
+Um, you know, it's like is there any thought about like how do you like take on, you know, dark matter candidates and like >> I just,
+
+815
+00:59:22,400 --> 00:59:26,559
+you know, think the data to really give us a complete story is just not there yet.
+
+816
+00:59:26,559 --> 00:59:31,839
+>> You know what like uh I'm sure everybody at every company like is the biggest critic of their own product,
+
+817
+00:59:31,839 --> 00:59:32,400
+you know?
+
+818
+00:59:32,400 --> 00:59:32,960
+>> Yeah.
+
+819
+00:59:32,960 --> 00:59:43,760
+So we think Cosmos is we think it's great but there's an a very large amount of area for improvement and >> so with Cosmos can so there's like a open like sort of access to
+
+820
+00:59:43,760 --> 00:59:45,359
+everybody version.
+
+821
+00:59:45,359 --> 00:59:46,000
+Yeah.
+
+822
+00:59:46,000 --> 00:59:51,399
+>> Do you provide access to other labs that um is less open?
+
+823
+00:59:51,839 --> 00:59:57,920
+>> Um we have a version of Cosmos that has like um bigger resources like it can run for longer.
+
+824
+00:59:57,920 --> 00:59:59,000
+It uses GPUs.
+
+825
+00:59:59,440 --> 01:00:02,400
+Um so like basically when it does data analysis it'll have a GPU.
+
+826
+01:00:02,400 --> 01:00:11,440
+So we use that for things like um like machine learning experiments you know if you want to know like this question about whether it's better to pre-train first on noisy data or not.
+
+827
+01:00:11,440 --> 01:00:11,760
+Yeah.
+
+828
+01:00:11,760 --> 01:00:18,960
+>> Um we have like pre-release models that that are coming out and we try those.
+
+829
+01:00:18,960 --> 01:00:28,240
+But um >> yeah so I guess like yes we do and we do have like research partnerships with with companies where we like build something specific for them and that is something we think about.
+
+830
+01:00:28,240 --> 01:00:28,720
+>> Yeah.
+
+831
+01:00:28,720 --> 01:00:34,439
+But broadly I would say Cosmos that's on the website is pretty close to to what is the best we have internally.
+
+832
+01:00:34,559 --> 01:00:35,359
+Yeah.
+
+833
+01:00:35,359 --> 01:00:36,760
+>> Uh I have a question.
+
+834
+01:00:37,119 --> 01:00:44,799
+Um so you you previously have stated that you think that language is the natural um language.
+
+835
+01:00:44,799 --> 01:00:46,000
+Was it >> language of chemistry?
+
+836
+01:00:46,000 --> 01:00:47,520
+>> The future of chemistry is language.
+
+837
+01:00:47,520 --> 01:00:47,760
+Yeah.
+
+838
+01:00:47,760 --> 01:00:48,360
+Yeah.
+
+839
+01:00:48,400 --> 01:00:49,200
+>> Um okay.
+
+840
+01:00:49,200 --> 01:00:52,520
+So I wonder do you still believe that?
+
+841
+01:00:53,119 --> 01:00:54,040
+>> Good question.
+
+842
+01:00:54,079 --> 01:00:57,440
+I think I I would say yes.
+
+843
+01:00:57,440 --> 01:01:07,520
+I still believe that um that so so in that article the opinion article my my point was that uh you know at the time when I wrote that article which I think maybe three
+
+844
+01:01:07,520 --> 01:01:21,119
+years ago now or something maybe 2023 um it was that we have models for predicting solubility of compounds we have like data about very large populations and we have like papers and we have
+
+845
+01:01:21,119 --> 01:01:30,240
+code and and the only way to bridge all that information is natural language and and the argument was that like humans is like you know whenever we can't bridge information like if I can't
+
+846
+01:01:30,240 --> 01:01:37,839
+talk about my code or I can't talk about some idea to you I will invent words until I can get the point across right and that humans are always innovating on language to make
+
+847
+01:01:37,839 --> 01:01:48,559
+it represent all known observations and people innovate on language to represent whatever code pattern they have right like this is like the the only shared activity we've been doing for this long is like
+
+848
+01:01:48,559 --> 01:01:58,880
+coming up with words to represent everything we know >> and so I think to that for that reason natural language is the only possible way to connect all the different pieces of data we need
+
+849
+01:01:58,880 --> 01:02:02,040
+in biology, medicine or any domain for that matter.
+
+850
+01:02:02,240 --> 01:02:09,520
+Um, I think there's some caveats to this of like, you know, you can make an argument like if Yan Lun were here and he would make an argument about like,
+
+851
+01:02:09,520 --> 01:02:12,559
+you know, world models or like vision or embodiedness, right?
+
+852
+01:02:12,559 --> 01:02:17,760
+Like that there's arguments against natural language that like, you know, that maybe there's something more that it does.
+
+853
+01:02:17,760 --> 01:02:26,480
+It's not the complete story or maybe natural language imposes limitations that you cannot exceed because you're stuck in this abstract space that was invented by humans and you can't escape it until you can
+
+854
+01:02:26,480 --> 01:02:27,599
+like touch something.
+
+855
+01:02:27,599 --> 01:02:27,920
+>> Yeah.
+
+856
+01:02:27,920 --> 01:02:29,359
+I mean, it is an abstraction, right?
+
+857
+01:02:29,359 --> 01:02:33,880
+in like like scientists basically work exclusively in abstractions to some degree.
+
+858
+01:02:34,000 --> 01:02:42,520
+Um I I just I find I found that interesting because it seems like most scientists you're right like when they explain things they explain things through language but
+
+859
+01:02:43,680 --> 01:02:57,040
+many conversations maybe most at some point result in people drawing diagrams or something like you know chemistry like biochemistry largely or medicinal chemistry is often times a it's it's a language of graphs right
+
+860
+01:02:57,040 --> 01:03:08,880
+or you know I mean bonds are abstractions yes but like they're pretty good abstractions for most ca for many cases >> or like you know geometry you know think about you know protein as like
+
+861
+01:03:08,880 --> 01:03:19,280
+the geometry of a protein >> you know it's like I think that that's how people a lot of scientists like to think about things >> and um so I find it interesting that like yeah that
+
+862
+01:03:19,280 --> 01:03:30,079
+that you are focusing primarily in language like have you thought about essentially a multimodal version of this like where you know when it comes along a smile string it doesn't just say oh this
+
+863
+01:03:30,079 --> 01:03:35,560
+is a smile string but like this is a graph this is a representation of some higher like abstract object.
+
+864
+01:03:35,599 --> 01:03:36,400
+>> You're absolutely right.
+
+865
+01:03:36,400 --> 01:03:44,319
+And and the problem with these this like I don't know Jacob's ladder or something whatever you want to call it is like yes you can say that a you can call a molecule by its
+
+866
+01:03:44,319 --> 01:03:53,119
+name >> you can show the graph >> then if you go to molecule like ferosine well it doesn't really have bonds like part of it and so then you're like well we need to draw it
+
+867
+01:03:53,119 --> 01:04:03,520
+visually >> and then you go to molecule like I don't know >> gly betane >> this dihedral angle right and so like it's not actually this thing I drew it's actually an ensemble between this thing and
+
+868
+01:04:03,520 --> 01:04:08,760
+this thing right then you go to benzene you're like Well, not only is it like a ensemble of these different confirmers,
+
+869
+01:04:08,799 --> 01:04:10,000
+it actually has electron density.
+
+870
+01:04:10,000 --> 01:04:11,839
+You can't really ignore the electron density in benzing.
+
+871
+01:04:11,839 --> 01:04:12,880
+You like need to treat it correctly.
+
+872
+01:04:12,880 --> 01:04:16,319
+And it was like, well, you can't actually represent the electron density that way.
+
+873
+01:04:16,319 --> 01:04:19,039
+You actually have to look at the correlation of the electrons individually, right?
+
+874
+01:04:19,039 --> 01:04:21,920
+Because you can't really model benzing with like DFT, right?
+
+875
+01:04:21,920 --> 01:04:22,640
+Or functional.
+
+876
+01:04:22,640 --> 01:04:24,919
+You have to actually look at the the electron correlation.
+
+877
+01:04:25,280 --> 01:04:30,880
+Electron correlation like well, you know, you can model correlation, but you know, actually these things when they're in a solution,
+
+878
+01:04:30,880 --> 01:04:34,720
+they have like, you know, relativistic effects because it's like there's a whole bunch of stuff around.
+
+879
+01:04:34,720 --> 01:04:40,160
+So you really got to have the the relativity in there and you're like well you got the relativity and you have the electron correlation you could have the bonds you and you have the
+
+880
+01:04:40,160 --> 01:04:49,200
+commerce but you really need to think about the cosmic radiation background because like you know it does actually impact everything and there is some some energy there right >> and before you know it you've
+
+881
+01:04:49,200 --> 01:04:59,440
+ran out of you know you've ran out of compute or whatever resource you're using to model this >> and so I think um you have to draw the line somewhere >> natural language like I said
+
+882
+01:04:59,440 --> 01:05:10,160
+is that humans have worked for a long time to make it be the you know what's the word like the least abstract or the you know it's somewhere on the border of like it's
+
+883
+01:05:10,160 --> 01:05:19,240
+still abstract enough that you don't need to know all these details but it's still granular enough or concretized enough that you actually can make use of it.
+
+884
+01:05:19,280 --> 01:05:25,719
+Um there may be some other representation like multimodal might turn out the video or maybe I don't know there's some other like fusion that you can make.
+
+885
+01:05:25,760 --> 01:05:29,520
+I like natural language because we all work really hard to make it right at that boundary.
+
+886
+01:05:29,520 --> 01:05:32,799
+And I do agree sometime sometimes ideas slip and they can't be in language.
+
+887
+01:05:32,799 --> 01:05:36,640
+You have to get out the whiteboard or ideas slip and you have to wave your hands around, you know,
+
+888
+01:05:36,640 --> 01:05:42,199
+or >> maybe then then you need that that uh degree of freedom to communicate.
+
+889
+01:05:42,640 --> 01:05:50,559
+>> Just digging in on this a little bit more like uh famously quantum mechanics is like undescribable, right?
+
+890
+01:05:50,559 --> 01:05:55,119
+Like there's there's an argument that you cannot understand quantum mechanics with words.
+
+891
+01:05:55,119 --> 01:06:07,839
+it or in in with our preconceived understanding of the physical world because it doesn't behave like the macroscopic world and so that the only way to understand is through mathematics right um and I
+
+892
+01:06:07,839 --> 01:06:18,160
+largely see language as the joint key of science as well but I wonder if that's not true for many domains and quantum mechanics is just the one that hits you in the face >> I
+
+893
+01:06:18,160 --> 01:06:27,240
+mean I don't know actually I think the there's like seven principles of quantum mechanics or five or something like this that you can actually express pretty concisely in language.
+
+894
+01:06:27,599 --> 01:06:30,880
+>> I agree that like you need to actually look at the consequences of them.
+
+895
+01:06:30,880 --> 01:06:31,880
+You need some mathematics.
+
+896
+01:06:32,079 --> 01:06:34,240
+Um I don't know.
+
+897
+01:06:34,240 --> 01:06:35,280
+I actually I don't know.
+
+898
+01:06:35,280 --> 01:06:36,079
+This is like a challenge.
+
+899
+01:06:36,079 --> 01:06:39,200
+I think you could actually describe a lot of quantum mechanics and language.
+
+900
+01:06:39,200 --> 01:06:39,599
+>> Sure.
+
+901
+01:06:39,599 --> 01:06:40,079
+Sure.
+
+902
+01:06:40,079 --> 01:06:49,920
+>> But but I I see your point and um yeah I I guess uh uh I'm a realist like I when I talk to my kids you know maybe I I will like okay let
+
+903
+01:06:49,920 --> 01:06:50,720
+me draw for you.
+
+904
+01:06:50,720 --> 01:06:54,040
+I don't I don't make sure in our house everything is described with natural language.
+
+905
+01:06:54,319 --> 01:06:55,839
+Uh, so I I agree with you there.
+
+906
+01:06:55,839 --> 01:07:03,200
+Um, I think maybe we can be a little a little flexible with with natural language and include equations and smiles strings in it.
+
+907
+01:07:03,200 --> 01:07:04,840
+And I think we can get a little bit farther.
+
+908
+01:07:04,880 --> 01:07:06,439
+Um, so maybe that's okay.
+
+909
+01:07:06,720 --> 01:07:12,480
+Uh, but some people I think like optionality, >> you know, like, oh, it could be this or it could be that.
+
+910
+01:07:12,480 --> 01:07:17,200
+I'm somebody I like to take take strong opinions and see >> how much farther they can get me.
+
+911
+01:07:17,200 --> 01:07:23,520
+And I think in my career, it's actually been better for me to take strong opinions, which in my deepest of hearts,
+
+912
+01:07:23,520 --> 01:07:30,799
+I know that are maybe not correct or not fully correct, but once you take these strong opinions, it just you can sort of move many steps down the road.
+
+913
+01:07:30,799 --> 01:07:35,680
+Once you take these strong opinions and like for example at future house, we took the opinion that scientific agents are the future.
+
+914
+01:07:35,680 --> 01:07:40,240
+And that allows you to skip a lot of steps because a lot of other people were like, we need to build a foundation model for X.
+
+915
+01:07:40,240 --> 01:07:40,799
+Yeah.
+
+916
+01:07:40,799 --> 01:07:42,319
+>> And we just skipped all that, right?
+
+917
+01:07:42,319 --> 01:07:50,960
+And I think if you also were unopinionated and you had optionality like I can think of a famous example of a different company that like liked the optionality and they wasted a lot of
+
+918
+01:07:50,960 --> 01:07:55,639
+time on foundation models or something then then I think you you get stuck.
+
+919
+01:07:55,760 --> 01:08:01,880
+So that's one of my strong opinions is that natural language is a is a way to join all these different domains.
+
+920
+01:08:02,079 --> 01:08:03,760
+>> It may not be a correct opinion.
+
+921
+01:08:03,760 --> 01:08:08,240
+It may not it may be more subtle or more complicated but it's allowed me to get very far.
+
+922
+01:08:08,240 --> 01:08:11,760
+Um I'll drop it someday and maybe find a new one.
+
+923
+01:08:11,760 --> 01:08:12,319
+Yeah.
+
+924
+01:08:12,319 --> 01:08:13,119
+Not yet though.
+
+925
+01:08:13,119 --> 01:08:15,599
+>> That's my ma opinion on the matter.
+
+926
+01:08:15,599 --> 01:08:20,520
+>> The Ether Zero story on your blog I find hilarious and kind of awesome.
+
+927
+01:08:20,640 --> 01:08:21,120
+Yeah.
+
+928
+01:08:21,120 --> 01:08:29,520
+>> You know, when I was a kid, I love the like genie/ monkey paw like concept of be careful what you wish for because you just might get it.
+
+929
+01:08:29,520 --> 01:08:30,159
+Yes.
+
+930
+01:08:30,159 --> 01:08:33,040
+>> Maybe just like quick story.
+
+931
+01:08:33,040 --> 01:08:35,359
+Can can you >> just talk about that?
+
+932
+01:08:35,359 --> 01:08:43,920
+That was that was just a really fun >> Ether Zero was a a hell of a project because conceptually it was a very short project of like hey people have made a lot of progress
+
+933
+01:08:43,920 --> 01:08:48,400
+in verifiable rewards in math and in computer and and code.
+
+934
+01:08:48,400 --> 01:08:49,799
+Let's see if we can do it in chemistry.
+
+935
+01:08:50,080 --> 01:08:52,960
+So chemistry is like not a verifiable field, right?
+
+936
+01:08:52,960 --> 01:08:57,600
+Like of course you can go test something in the lab, but then we like had to think about all these like ways that we make chemistry verifiable.
+
+937
+01:08:57,600 --> 01:09:04,040
+And one of the ones we settled was like make a molecule that has like three nitrogen's, two oxygen, 10 hydrogens's or something.
+
+938
+01:09:04,640 --> 01:09:09,000
+And we thought that was like a pretty verifiable pretty verifiable question.
+
+939
+01:09:09,520 --> 01:09:15,640
+But every time we would train a model, it would find some new insanely weird trick to generate these molecules.
+
+940
+01:09:15,839 --> 01:09:23,839
+And and I I I'll just tell you one of the examples was that um uh it would make these molecules and we would do some checks to make sure like it had the right bonds,
+
+941
+01:09:23,839 --> 01:09:26,480
+the right number of electrons, the right number of atoms and stuff like that.
+
+942
+01:09:26,480 --> 01:09:29,440
+Um but it would just solve the problem in any way possible, right?
+
+943
+01:09:29,440 --> 01:09:33,600
+So like it would just put all the nitrogen's over here, put all the oxygen over here, just like things that don't look good.
+
+944
+01:09:33,600 --> 01:09:34,000
+Yeah.
+
+945
+01:09:34,000 --> 01:09:39,399
+>> And so we started coming up with these rules of like, oh, let's check to make sure it followed these good practices or these good practices.
+
+946
+01:09:39,520 --> 01:09:43,600
+And we found ourselves into this like, you know, it's like the opposite of the bitter lesson, like I don't know,
+
+947
+01:09:43,600 --> 01:09:46,640
+the boutique lesson where you like try to make everything custom.
+
+948
+01:09:46,640 --> 01:09:50,319
+>> But one of the things it kept doing is it kept putting these nitrogens in a row and it put like one nitrogen,
+
+949
+01:09:50,319 --> 01:09:52,239
+two nitrogen, three nitrogen all in a chain.
+
+950
+01:09:52,239 --> 01:09:55,640
+And this is like, you know, if you have three nitrogens, it's like explosive.
+
+951
+01:09:55,679 --> 01:09:57,360
+You know, two nitrogen's like bad.
+
+952
+01:09:57,360 --> 01:09:59,440
+And like four nitrogen's you can't make.
+
+953
+01:09:59,440 --> 01:10:04,480
+And I kept telling everyone like it would make these like six nitrogen comets and they're just they're just literally impossible and they're not possible.
+
+954
+01:10:04,480 --> 01:10:12,159
+And many of the people on the team were like computer scientists like on this team and one of them like one day sent me that like this is on the cover of nature today
+
+955
+01:10:12,159 --> 01:10:13,040
+on nature's website.
+
+956
+01:10:13,040 --> 01:10:22,560
+Somebody made a six nitrogen compound and this is like somebody's like career to deliver this compound because this is the most unstable like insane compound you can make.
+
+957
+01:10:22,560 --> 01:10:28,560
+It's some ridiculous setup and like the spectroscopy to get that proven was like very difficult and this this I don't know how they did it.
+
+958
+01:10:28,560 --> 01:10:38,080
+It was amazing accomplishment like look Andrew like it's not actually impossible and it was so funny to me that like our model was sitting here spitting out these six nitrogen compounds in like you
+
+959
+01:10:38,080 --> 01:10:44,719
+know 2024 or 2025 and like the paper just happened to come out that year that like mankind had finally made a six nitrogen compound.
+
+960
+01:10:44,719 --> 01:10:49,319
+>> So do do you think that those were actually synthesizable even under these extreme circumstances?
+
+961
+01:10:49,360 --> 01:10:49,600
+>> No.
+
+962
+01:10:49,600 --> 01:10:49,760
+No.
+
+963
+01:10:49,760 --> 01:10:52,279
+Our model was just it was just reward hacking.
+
+964
+01:10:52,400 --> 01:10:53,040
+Okay.
+
+965
+01:10:53,040 --> 01:10:56,560
+>> And it was just the the model was so creative in ways to reward hack.
+
+966
+01:10:56,560 --> 01:11:03,840
+Like one of the another one we did was um >> we wanted it to make sure that the when it would propose a reaction like make this compound,
+
+967
+01:11:03,840 --> 01:11:05,120
+tell me how to make this compound.
+
+968
+01:11:05,120 --> 01:11:09,120
+We would try to make it sure that all the reagents were purchasable like you could purchase them.
+
+969
+01:11:09,120 --> 01:11:10,159
+They were not like made up.
+
+970
+01:11:10,159 --> 01:11:10,480
+Yeah.
+
+971
+01:11:10,480 --> 01:11:18,560
+>> Um and and the reason we came with that is that originally would just like take the end compound and then like remove one atom and be like here's buy this >> and then put the
+
+972
+01:11:18,560 --> 01:11:19,120
+atom on.
+
+973
+01:11:19,120 --> 01:11:20,120
+It's like okay.
+
+974
+01:11:20,640 --> 01:11:22,320
+It's like well it's I wish it was like that.
+
+975
+01:11:22,320 --> 01:11:23,920
+Um, so they have to be purchasable.
+
+976
+01:11:23,920 --> 01:11:29,760
+And then well, we're like, we thought it might be hard if they're all purchasable because sometimes you actually order things custom or or something.
+
+977
+01:11:29,760 --> 01:11:31,440
+So, just make sure one purchasable.
+
+978
+01:11:31,440 --> 01:11:37,199
+So, the first thing it starts doing is putting nitrogen in there because nitrogen is purchasable and it like has no participation in the reaction,
+
+979
+01:11:37,199 --> 01:11:37,799
+right?
+
+980
+01:11:38,000 --> 01:11:38,640
+Like, oh my god.
+
+981
+01:11:38,640 --> 01:11:38,800
+Okay.
+
+982
+01:11:38,800 --> 01:11:40,560
+So, I'm like, okay, it has to be purchasable.
+
+983
+01:11:40,560 --> 01:11:41,600
+It has to participate in the reaction.
+
+984
+01:11:41,600 --> 01:11:43,520
+Then it starts putting like acid base chemistry.
+
+985
+01:11:43,520 --> 01:11:44,800
+It would just put an acid here.
+
+986
+01:11:44,800 --> 01:11:46,560
+Acids are purchasable and it'll move one atom.
+
+987
+01:11:46,560 --> 01:11:47,280
+And they're like, okay, fine.
+
+988
+01:11:47,280 --> 01:11:47,920
+Can't be that.
+
+989
+01:11:47,920 --> 01:11:49,040
+Everything has to be purchasable.
+
+990
+01:11:49,040 --> 01:11:58,239
+Then we find ourselves and I'm like sitting there one day building this like ridiculous catalog of purchasable compounds and a bloom filter so it can go fast enough in our training loop and I'm
+
+991
+01:11:58,239 --> 01:12:00,239
+like why am I doing this?
+
+992
+01:12:00,239 --> 01:12:00,880
+How did I get here?
+
+993
+01:12:00,880 --> 01:12:02,040
+>> How did I get here?
+
+994
+01:12:02,640 --> 01:12:13,160
+And and I don't know it was really funny because um pre-training or training transformers you know on on just data like just supervised training where you just have the inputs and the outputs directly
+
+995
+01:12:13,360 --> 01:12:19,319
+>> very nice relaxing you know like things are always robust you know things are go pretty smoothly.
+
+996
+01:12:19,360 --> 01:12:28,960
+When you do these verifiable rewards where you have to like write a a bulletproof verifier it is really difficult >> and we had so many models trained only to find out they were hacking some
+
+997
+01:12:28,960 --> 01:12:31,400
+other like random thing in our setup.
+
+998
+01:12:31,440 --> 01:12:39,600
+It's really hard and I and I I don't envy the Frontier Labs that have to do this at a very massive scale because we had a lot of adventures in Ether Zero and and
+
+999
+01:12:39,600 --> 01:12:41,199
+you guys should read the the blog post.
+
+1000
+01:12:41,199 --> 01:12:42,440
+>> Definitely read the blog post.
+
+1001
+01:12:42,640 --> 01:12:43,440
+It was a great read.
+
+1002
+01:12:43,440 --> 01:12:44,040
+>> GRPO.
+
+1003
+01:12:44,320 --> 01:12:46,920
+We did make some modifications um to GRPO.
+
+1004
+01:12:47,040 --> 01:12:47,520
+Yeah.
+
+1005
+01:12:47,520 --> 01:13:00,000
+>> Um I actually I used to know all the names of these modifications, but uh I think it's like uh Dapo is one modification and like the clipping we did was special and we explored
+
+1006
+01:13:00,000 --> 01:13:00,880
+a lot of that stuff.
+
+1007
+01:13:00,880 --> 01:13:01,360
+Yeah.
+
+1008
+01:13:01,360 --> 01:13:10,880
+>> Um, and it was uh also one of these things where like you think the hypers are wrong, the algorithm is wrong and then you find out it's just because like you had somehow sorted
+
+1009
+01:13:10,880 --> 01:13:18,880
+the reagents when you made your training data, but in your test data, you didn't sort them alphabetically and the model was just like barfing because its whole strategy was to exploit something in the
+
+1010
+01:13:18,880 --> 01:13:20,520
+way you sorted things.
+
+1011
+01:13:20,800 --> 01:13:26,120
+So yeah, we explored a lot of different methods and it was um I learned a lot about chemistry, a lot about nomenclature.
+
+1012
+01:13:26,480 --> 01:13:31,799
+Um, and actually there's a I learned a lot about medicinal chemistry as well, more than I ever wanted to.
+
+1013
+01:13:32,320 --> 01:13:33,440
+Awesome.
+
+1014
+01:13:33,440 --> 01:13:41,120
+>> If you want to do some like engineering, just check out Edison Scientific and they have, you know, I think a lot they're hiring with lots of like interesting things.
+
+1015
+01:13:41,120 --> 01:13:44,719
+Everything from scientists to, you know, infrastructure engineer.
+
+1016
+01:13:44,719 --> 01:13:45,040
+Yeah.
+
+1017
+01:13:45,040 --> 01:13:45,199
+>> Yeah.
+
+1018
+01:13:45,199 --> 01:13:46,239
+Thanks, Andrew again.
+
+1019
+01:13:46,239 --> 01:13:46,480
+>> Yeah.
+
+1020
+01:13:46,480 --> 01:13:48,839
+Thank you very much for for joining us.
+

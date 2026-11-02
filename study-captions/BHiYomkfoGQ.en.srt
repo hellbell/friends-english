@@ -1,0 +1,4412 @@
+1
+00:00:00,320 --> 00:00:00,640
+Yeah.
+
+2
+00:00:00,640 --> 00:00:09,280
+So if we want to learn a new task uh you know we basically do a little bit of robot data collection then the model these >> what is a little bit like >> Yeah.
+
+3
+00:00:09,280 --> 00:00:10,160
+Like couple hours.
+
+4
+00:00:10,160 --> 00:00:10,639
+>> Couple hours.
+
+5
+00:00:10,639 --> 00:00:10,880
+>> Yeah.
+
+6
+00:00:10,880 --> 00:00:13,960
+Where in some of the task like just tens of minutes, right?
+
+7
+00:00:14,080 --> 00:00:14,639
+>> Yeah.
+
+8
+00:00:14,639 --> 00:00:16,640
+And then >> the chopping one was 45 minutes.
+
+9
+00:00:16,640 --> 00:00:16,880
+Yeah.
+
+10
+00:00:16,880 --> 00:00:19,199
+>> The open the fridge was on and that's an interview.
+
+11
+00:00:19,199 --> 00:00:22,000
+That's like an onboarding task for one of your engineers.
+
+12
+00:00:22,000 --> 00:00:30,400
+Our robots today fold thousands of napkins for many many different locations, many different gent locations in the United States.
+
+13
+00:00:30,400 --> 00:00:34,239
+So that's actually our biggest scaled customer, right?
+
+14
+00:00:34,239 --> 00:00:36,600
+So I want to make a distinction here.
+
+15
+00:00:36,880 --> 00:00:45,920
+Uh today there's a lot of robotics companies talking about deployments, talking about pilots, but what's really hard is not putting your robot in one location or doing a pilot.
+
+16
+00:00:45,920 --> 00:00:55,960
+What's really hard is that the customers believe or validate that your robot creates enough value that they want to deploy your robots across many of their sites.
+
+17
+00:00:56,000 --> 00:01:05,640
+So that's what's happened for us with Dintyong which to the best of my knowledge hasn't really happened for other companies doing similar like general purpose robots.
+
+18
+00:01:05,760 --> 00:01:09,800
+So at Dentyon our robots fold thousands of napkins per day.
+
+19
+00:01:11,040 --> 00:01:14,440
+>> Before we get into today's episode I just have a small message for listeners.
+
+20
+00:01:14,720 --> 00:01:15,200
+Thank you.
+
+21
+00:01:15,200 --> 00:01:23,840
+We would not be able to bring you the AI engineering, science, and entertainment content that you so clearly want if you didn't choose to also click in and tune into our content.
+
+22
+00:01:23,840 --> 00:01:26,920
+We've been approached by sponsors on an almost daily basis.
+
+23
+00:01:27,040 --> 00:01:34,079
+But fortunately, enough of you actually subscribe to us to keep all this sustainable without ads and we want to keep it that way.
+
+24
+00:01:34,079 --> 00:01:36,560
+But I just have one favor to ask all of you.
+
+25
+00:01:36,560 --> 00:01:41,119
+The single most powerful, completely free thing you can do is to click that subscribe button.
+
+26
+00:01:41,119 --> 00:01:43,560
+It's the only thing I'll ever ask of you.
+
+27
+00:01:43,600 --> 00:01:49,920
+And it means absolutely everything to me and my team that works so hard to bring the Inspace to you each and every week.
+
+28
+00:01:49,920 --> 00:01:54,999
+If you do it, I promise you we'll never stop working to make the show even better.
+
+29
+00:01:55,200 --> 00:01:56,600
+Now, let's get into it.
+
+30
+00:02:00,240 --> 00:02:05,280
+All right, we're here on site with Jason Ma, uh, co-founder, chief scientist of Dino Robotics.
+
+31
+00:02:05,280 --> 00:02:07,119
+Thanks for having us in your >> Of course.
+
+32
+00:02:07,119 --> 00:02:08,080
+Thank you for coming.
+
+33
+00:02:08,080 --> 00:02:09,280
+Yeah, >> it's been a blast.
+
+34
+00:02:09,280 --> 00:02:14,199
+So, we got to see, you'll see a lot of B-roll, but we got to see uh drinks being pulled,
+
+35
+00:02:14,560 --> 00:02:17,960
+a lot of evils, robots with knives for the first time.
+
+36
+00:02:18,000 --> 00:02:21,720
+Uh, so under the hood of all this, you have a world action model.
+
+37
+00:02:21,920 --> 00:02:22,959
+What is that?
+
+38
+00:02:22,959 --> 00:02:27,200
+>> Yeah, so last month we released our world action model called Dina 2.
+
+39
+00:02:27,200 --> 00:02:31,080
+So, it's the first world action model trained on more than 1 million hours of data.
+
+40
+00:02:31,200 --> 00:02:37,599
+So going back to your question first, world action model is a model that's able to predict the future video,
+
+41
+00:02:37,599 --> 00:02:39,200
+the future state of the world.
+
+42
+00:02:39,200 --> 00:02:40,959
+So hence the name world model.
+
+43
+00:02:40,959 --> 00:02:49,680
+But in addition, you could also use that future generation to also produce actions robots can execute in the physical world to control the robot.
+
+44
+00:02:49,680 --> 00:02:50,640
+So why do we do that?
+
+45
+00:02:50,640 --> 00:02:56,560
+It's a very powerful architecture because if you think about how humans act in the physical world in our brain,
+
+46
+00:02:56,560 --> 00:03:00,919
+we are implicitly thinking about how the world will evolve based on our actions.
+
+47
+00:03:01,040 --> 00:03:05,559
+So now we have a model architecture that's able to do that to guide robot actions.
+
+48
+00:03:05,599 --> 00:03:16,440
+So what we find is that by doing so the model is much more dextrous, much more robust and much more capable of generalizing to environments to scenarios is never seen before.
+
+49
+00:03:16,560 --> 00:03:17,040
+Yeah.
+
+50
+00:03:17,040 --> 00:03:17,440
+Yeah.
+
+51
+00:03:17,440 --> 00:03:19,440
+>> Uh I want to prompt this question a bit.
+
+52
+00:03:19,440 --> 00:03:25,640
+I think a lot of people hear world model and they think you're outputting video or world or 3D state.
+
+53
+00:03:25,680 --> 00:03:27,479
+Um you're also doing action.
+
+54
+00:03:27,680 --> 00:03:32,440
+I think most people don't understand what models are under the hood of robotics.
+
+55
+00:03:32,480 --> 00:03:34,520
+So what is input output?
+
+56
+00:03:34,720 --> 00:03:36,040
+What's the training data?
+
+57
+00:03:36,400 --> 00:03:37,479
+What is the architecture?
+
+58
+00:03:38,720 --> 00:03:40,000
+Give us all the details.
+
+59
+00:03:40,000 --> 00:03:40,239
+>> Yeah.
+
+60
+00:03:40,239 --> 00:03:40,720
+Yeah.
+
+61
+00:03:40,720 --> 00:03:44,879
+So uh for inputs the most important input is video, right?
+
+62
+00:03:44,879 --> 00:03:49,200
+You know, you can think about videos that the robot is capturing with its cameras, right?
+
+63
+00:03:49,200 --> 00:03:52,360
+So video or images of the, you know, past many seconds.
+
+64
+00:03:52,480 --> 00:03:53,479
+That's the input.
+
+65
+00:03:53,599 --> 00:03:59,720
+But for robots, what's really interesting is that robot also has a lot of actuator, a lot of joint encoders on itself.
+
+66
+00:03:59,760 --> 00:04:02,959
+So the robot also knows, you know, the angles of its joints.
+
+67
+00:04:02,959 --> 00:04:05,920
+So those can also be inputs to these world model.
+
+68
+00:04:05,920 --> 00:04:10,799
+That's something that's very different from just a pure video model that's only looking at videos, right?
+
+69
+00:04:10,799 --> 00:04:11,840
+So that's the input.
+
+70
+00:04:11,840 --> 00:04:17,280
+And additionally for robots you want to be able to talk to it to instruct it to do different tasks right.
+
+71
+00:04:17,280 --> 00:04:19,720
+So you can also feed it like language instruction.
+
+72
+00:04:19,919 --> 00:04:25,799
+So those are what I consider the basic set of inputs that go into any robotics models including world action models.
+
+73
+00:04:26,000 --> 00:04:34,680
+And once we have that the output at the uh basic level it needs to output actions the robots can execute on the hardware.
+
+74
+00:04:34,800 --> 00:04:41,799
+But in the case of world action model, what's really interesting is that in addition to the actions, you can also output future video,
+
+75
+00:04:41,919 --> 00:04:42,320
+right?
+
+76
+00:04:42,320 --> 00:04:50,519
+So basically you can almost output the future video or some representation of it first and then use that to guide robot actions.
+
+77
+00:04:50,560 --> 00:05:00,160
+So the way I think about is like this is kind of analogous to you know chain of thought you know basically the robots the models are reasoning in the visual the physics space and
+
+78
+00:05:00,160 --> 00:05:01,400
+then outputting actions.
+
+79
+00:05:01,520 --> 00:05:08,440
+So that's the key difference between world action models outputs versus other kind of models, robot models outputs.
+
+80
+00:05:08,479 --> 00:05:12,519
+>> Um you put out a good blog post around your model.
+
+81
+00:05:12,639 --> 00:05:17,320
+I think a lot of people understand language models or transformers next token predictors.
+
+82
+00:05:17,440 --> 00:05:19,039
+In this case you shared quite a bit.
+
+83
+00:05:19,039 --> 00:05:21,039
+There's like diffusion flow matching.
+
+84
+00:05:21,039 --> 00:05:23,880
+You're predicting next world state plus action.
+
+85
+00:05:24,160 --> 00:05:26,680
+Um one thing you say is a million hours.
+
+86
+00:05:26,720 --> 00:05:28,840
+How do you determine the architecture?
+
+87
+00:05:29,039 --> 00:05:30,240
+Like what are the choices there?
+
+88
+00:05:30,240 --> 00:05:31,320
+What is the architecture?
+
+89
+00:05:31,440 --> 00:05:38,800
+I feel like in language models there's a lot of take something off the shelf, take trillions of tokens, do prediction SFT,
+
+90
+00:05:38,800 --> 00:05:40,320
+RL and you have a model.
+
+91
+00:05:40,320 --> 00:05:40,880
+What about this?
+
+92
+00:05:40,880 --> 00:05:44,400
+How do you go from nothing to your model?
+
+93
+00:05:44,400 --> 00:05:47,120
+Is there >> vanilla architecture off the shelf?
+
+94
+00:05:47,120 --> 00:05:50,000
+Do you determine all this and what's what is the current state?
+
+95
+00:05:50,000 --> 00:05:58,000
+>> Yeah, I think yeah, so the mental framework to think about how do we build models for robotics is that there are essentially a couple things to look at.
+
+96
+00:05:58,000 --> 00:06:04,440
+one's data and the second is like how do we make a model learn as much as possible from that data.
+
+97
+00:06:04,560 --> 00:06:07,120
+So let's first talk about the model actually right.
+
+98
+00:06:07,120 --> 00:06:11,239
+So the blog post we released is our D2 word action model.
+
+99
+00:06:11,280 --> 00:06:14,440
+So under the hood it's a diffusion transformer.
+
+100
+00:06:14,560 --> 00:06:21,039
+So transformer is essentially like the language model you know uh uh sequence sequence match decoder only.
+
+101
+00:06:21,039 --> 00:06:21,280
+Yeah.
+
+102
+00:06:21,280 --> 00:06:34,000
+But what's really interesting is that in visual domains right if you think about generating images generating videos and in this case robots looking at images to generate actions people have found the diffusion kind
+
+103
+00:06:34,000 --> 00:06:35,759
+of architecture to work really well.
+
+104
+00:06:35,759 --> 00:06:37,120
+So what is a diffusion model?
+
+105
+00:06:37,120 --> 00:06:46,359
+A diffusion model is a model that takes some random noise and through iterative computation can go from noise to something that's really highdimensional.
+
+106
+00:06:46,800 --> 00:06:51,280
+something really highly like defined and have very fine grain feature.
+
+107
+00:06:51,280 --> 00:06:56,200
+If you think about generating images, right, you want sharp edges, sharp corners, color contrast.
+
+108
+00:06:56,319 --> 00:07:03,599
+And for robotics, even though you're not generating image, you're generating actions that needs to be very precise, very like smooth,
+
+109
+00:07:03,599 --> 00:07:03,840
+right?
+
+110
+00:07:03,840 --> 00:07:09,440
+So it has kind of the same kind of uh consideration of the sidora as generating image.
+
+111
+00:07:09,440 --> 00:07:21,680
+So that's why from first principle you know the whole field not just us have been using this kind of diffusion transformer architecture to train robotics foundation models you need the transformer aspect because transformer
+
+112
+00:07:21,680 --> 00:07:31,680
+is the thing that can just ingest the most amount of data can learn then diffusion helps you to refine the outcome to get to the smooth precise fine grain motion you need to actually
+
+113
+00:07:31,680 --> 00:07:33,120
+execute on the robot.
+
+114
+00:07:33,120 --> 00:07:38,040
+So that's the architecture that goes behind a lot of our recent breakthroughs.
+
+115
+00:07:38,160 --> 00:07:40,800
+>> And we and we've covered flow matching before on the podcast.
+
+116
+00:07:40,800 --> 00:07:43,199
+It is mostly an efficiency speed up.
+
+117
+00:07:43,199 --> 00:07:48,440
+Like let's say you normally would take 40 to 100 diffusion steps, you can reduce it to four.
+
+118
+00:07:48,479 --> 00:07:49,360
+>> Yeah, that's right.
+
+119
+00:07:49,360 --> 00:08:01,039
+So with a uh diffusion model, one thing that's really hard in practice is that you need to tune the scheduleuler like like by how much you're tuning or converting the initial noise input into
+
+120
+00:08:01,039 --> 00:08:02,040
+the final output.
+
+121
+00:08:02,080 --> 00:08:07,440
+So flow matching is kind of like a special case of diffusion that makes the transformation much simpler.
+
+122
+00:08:07,440 --> 00:08:10,720
+In practice, you don't have to tune as much and it works just as well.
+
+123
+00:08:10,720 --> 00:08:20,000
+That is why I think about two to three years ago most generative modeling for image and video has shifted from a diffusion model to a full matching model.
+
+124
+00:08:20,000 --> 00:08:26,319
+But the concept is the same and full matching is just a special simpler to tune variant of diffusion.
+
+125
+00:08:26,319 --> 00:08:30,800
+>> Yeah, it actually makes me think that so flow matching obviously has trade-offs in quality.
+
+126
+00:08:30,800 --> 00:08:31,199
+>> Yeah.
+
+127
+00:08:31,199 --> 00:08:38,000
+But actually, it's very suited for action diffusion and and and robotics because you get to re-evaluate in real time.
+
+128
+00:08:38,000 --> 00:08:40,959
+>> Whereas in in images, you're it's basically one shot.
+
+129
+00:08:40,959 --> 00:08:41,680
+>> That's right.
+
+130
+00:08:41,680 --> 00:08:42,479
+>> Which is pretty fun.
+
+131
+00:08:42,479 --> 00:08:47,240
+We got to mess with the laundry folding robot like you know throw a random towel in.
+
+132
+00:08:47,279 --> 00:08:49,360
+Um the models adapt, right?
+
+133
+00:08:49,360 --> 00:08:49,600
+Yeah.
+
+134
+00:08:49,600 --> 00:08:55,160
+>> I think one key thing about your models is that they're >> they're made to be generalist.
+
+135
+00:08:55,279 --> 00:08:57,839
+So one foundation model and you adapt them a lot.
+
+136
+00:08:57,839 --> 00:08:58,880
+Uh how does that work?
+
+137
+00:08:58,880 --> 00:09:07,960
+Basically in 45 minutes of mapped data you can generalize towards we saw an example of um pulling drinks out of a fridge.
+
+138
+00:09:08,160 --> 00:09:14,600
+>> What's the what's the mindset there of one general model and then how do you adapt to different tasks?
+
+139
+00:09:14,800 --> 00:09:15,120
+>> Yeah.
+
+140
+00:09:15,120 --> 00:09:27,200
+So the way we think about it is that uh for robotics we need to build a very general strong base model right and then because if you think about how a human interacts and
+
+141
+00:09:27,200 --> 00:09:37,120
+behaves in the physical world right we have very strong base knowledge we can just readily do a lot of tasks but if you want to become an expert at any any given task there's
+
+142
+00:09:37,120 --> 00:09:45,360
+some amount of training that needs to happen and I think to train a general purpose robots like the one we're building here the same principle has to apply.
+
+143
+00:09:45,360 --> 00:09:51,839
+So our approach is to first train a general model that's training on as much data as we can find.
+
+144
+00:09:51,839 --> 00:10:02,680
+So that is when our dino report our model is trained over a million hours of human data as a starting point and then given that strong foundation what we found is we can quickly
+
+145
+00:10:02,800 --> 00:10:12,880
+make the robot or make the model do many many different tasks with a very minimal amount of fine-tuning to just tell the model here's the task I wanted to do and here's very few
+
+146
+00:10:12,880 --> 00:10:23,360
+amount of demonstrations and the model can readily do bunch of the tasks that you have seen office yeah >> um we actually have quite a to people who deal in data,
+
+147
+00:10:23,360 --> 00:10:24,320
+who sell data.
+
+148
+00:10:24,320 --> 00:10:24,720
+Yeah.
+
+149
+00:10:24,720 --> 00:10:26,800
+Um >> what is good data?
+
+150
+00:10:26,800 --> 00:10:27,519
+What is bad data?
+
+151
+00:10:27,519 --> 00:10:28,600
+What do you want to buy?
+
+152
+00:10:28,880 --> 00:10:29,839
+>> Uh yeah.
+
+153
+00:10:29,839 --> 00:10:32,160
+>> Uh I think that these are all open questions.
+
+154
+00:10:32,160 --> 00:10:38,439
+Obviously, I think the the top um important thing is egocentric data of humans doing tasks.
+
+155
+00:10:38,640 --> 00:10:42,399
+Uh what else would you modify on that basic statement?
+
+156
+00:10:42,399 --> 00:10:42,720
+>> Yeah.
+
+157
+00:10:42,720 --> 00:10:43,120
+Yeah.
+
+158
+00:10:43,120 --> 00:10:49,879
+So I think data is the most important thing in robotics today because unlike language model, there is no internet,
+
+159
+00:10:50,000 --> 00:10:50,240
+right?
+
+160
+00:10:50,240 --> 00:10:54,760
+So every company that's building model, building hardware has to think about data.
+
+161
+00:10:54,880 --> 00:10:59,120
+So there's uh roughly couple different ways of operating here.
+
+162
+00:10:59,120 --> 00:11:03,279
+One is that you can collect a lot of data yourself which is what we are doing as well.
+
+163
+00:11:03,279 --> 00:11:04,999
+>> You have employees here doing that.
+
+164
+00:11:05,120 --> 00:11:07,920
+>> I mean that robots everywhere in the office, right?
+
+165
+00:11:07,920 --> 00:11:18,640
+Uh but uh if you think about how much data you need for robotic foundation model, I think the amount of data any individual company can collect by themselves is just nowhere near sufficient,
+
+166
+00:11:18,640 --> 00:11:18,959
+right?
+
+167
+00:11:18,959 --> 00:11:25,960
+It's kind of like, you know, you're trying to build an internet by just having Reddit or just having Facebook.
+
+168
+00:11:26,399 --> 00:11:29,760
+There are great websites, a lot of users, but it's not enough, right?
+
+169
+00:11:29,760 --> 00:11:35,040
+So, when we think about data, there has to be some sort of data acquisition happening, right?
+
+170
+00:11:35,040 --> 00:11:37,680
+You buy data, you look at data that's already out there.
+
+171
+00:11:37,680 --> 00:11:39,519
+And then there's many different tiers, right?
+
+172
+00:11:39,519 --> 00:11:41,400
+Um, you mentioned data quality.
+
+173
+00:11:41,760 --> 00:11:56,000
+I think data quality in robotics is a non-stationary problem in the sense that what is high quality data for your model changes over time like when your model doesn't know anything like when it's
+
+174
+00:11:56,000 --> 00:12:05,960
+zero any data is useful right you can use a lot of video data uh you know in the case of egocentric data I think it's actually a very good way of pre-training robots because
+
+175
+00:12:06,320 --> 00:12:19,239
+human data is so diverse like it covers every single physical activity you can possibly imagine and that gives robot the model such a strong prior on how things how the world can evolve around
+
+176
+00:12:19,360 --> 00:12:21,239
+a embodied actor human.
+
+177
+00:12:21,360 --> 00:12:23,720
+But the issue with human data is that
+
+178
+00:12:25,360 --> 00:12:31,839
+before your robot looks exactly like a human there's going to be some gap between human actions and the robot actions.
+
+179
+00:12:31,839 --> 00:12:32,320
+Right?
+
+180
+00:12:32,320 --> 00:12:38,959
+So just by training on human data uh today it's not very likely you can just execute robot actions directly.
+
+181
+00:12:38,959 --> 00:12:44,160
+So you still need some amount of adaptation using robots's own data, right?
+
+182
+00:12:44,160 --> 00:12:49,800
+But the robot's own data collected on a robot is going to be much more expensive and much harder to collect.
+
+183
+00:12:49,839 --> 00:13:00,560
+So the kind of recipe we're thinking about is like how do we take the largest source of data we have today like egocentric data to give the model a strong player over everything physical
+
+184
+00:13:00,560 --> 00:13:11,360
+manipulation can cover and then combine that with a small amount of robotics data to make the robot you know master the whatever task we're interested in.
+
+185
+00:13:11,360 --> 00:13:23,519
+So data quality and getting data in robotics is really I think it's a fascinating multiaceted problem but the reality is that there's not a single winning strategy like oh here's one kind of data
+
+186
+00:13:23,519 --> 00:13:35,600
+I'm only going to collect on that which will give you a strong foundation model you really need to think about uh this human data covers this part of robot cognition I need robot data
+
+187
+00:13:35,600 --> 00:13:44,639
+covers low-level reflex dexterity the robot also needs and put them into one model and And I think that's what gives a really adaptable really strong model at the end.
+
+188
+00:13:44,639 --> 00:13:45,120
+>> Yeah.
+
+189
+00:13:45,120 --> 00:13:49,680
+I I'll I'll prompt you uh just for again for the people listening who want to work with you.
+
+190
+00:13:49,680 --> 00:13:50,000
+Yeah.
+
+191
+00:13:50,000 --> 00:13:53,600
+>> Um what uh what data vendors do you want?
+
+192
+00:13:53,600 --> 00:13:55,879
+Uh this is your call for data.
+
+193
+00:13:55,920 --> 00:13:56,880
+What >> Yeah.
+
+194
+00:13:56,880 --> 00:13:57,120
+Yeah.
+
+195
+00:13:57,120 --> 00:13:58,800
+No, that's a great question and uh yeah.
+
+196
+00:13:58,800 --> 00:14:04,520
+So in our Dino 2 blog at the end we actually have an email address called data partnerships at dina.co.
+
+197
+00:14:04,800 --> 00:14:04,959
+Okay.
+
+198
+00:14:04,959 --> 00:14:09,519
+Okay, so if you're a data vendor that has a lot of high quality, let it be egocentric data, uh,
+
+199
+00:14:09,519 --> 00:14:14,800
+robot data, video data, or anything you think could help robots, you know, send it to the email.
+
+200
+00:14:14,800 --> 00:14:17,120
+Our team will take a look and we'll get back to you.
+
+201
+00:14:17,120 --> 00:14:17,440
+>> Yeah.
+
+202
+00:14:17,440 --> 00:14:23,600
+But like at your stage, are you you're you're probably not buying any more egocentric data off the shelf, right?
+
+203
+00:14:23,600 --> 00:14:26,399
+You probably want to be like, here's what I need.
+
+204
+00:14:26,399 --> 00:14:28,480
+You >> is there a niche that's lacking?
+
+205
+00:14:28,480 --> 00:14:31,120
+>> You need a scale AI, you need a core for like doing this.
+
+206
+00:14:31,120 --> 00:14:41,600
+I see >> the the custom that don't work in robotics are probably thinking like okay >> some niche factory like you know you showed putting tubes in there's only so much data you'll find about that
+
+207
+00:14:41,600 --> 00:14:51,040
+but like >> would a lot of that help you >> yeah no I mean if you really want to nail a task having data from that task will certainly help you a lot right so for
+
+208
+00:14:51,040 --> 00:15:00,160
+us it's like we still think you know just a million hours of data is is not enough it's just the beginning like we show the first model on a million hour scale but we
+
+209
+00:15:00,160 --> 00:15:01,519
+need more than that right.
+
+210
+00:15:01,519 --> 00:15:12,959
+So we're still looking at a lot of just raw diverse data uh that we can get but we're also thinking about how do we get more custom data either collected inhouse or by our
+
+211
+00:15:12,959 --> 00:15:23,680
+partner for like really you know specific niche tasks because I think you still need that to get to you know excellence that you know any model needs to actually be useful in the physical
+
+212
+00:15:23,680 --> 00:15:31,440
+world right it's kind of like humans you know uh you know if uh you know Sean or me you know we go work at Rosewood Hotel tomorrow,
+
+213
+00:15:31,440 --> 00:15:33,680
+we're not going to be able to make the bed the way they want, right?
+
+214
+00:15:33,680 --> 00:15:34,800
+We need a lot of training.
+
+215
+00:15:34,800 --> 00:15:39,279
+So that kind of data like special data, it's kind of like what Mark C is doing today for language model,
+
+216
+00:15:39,279 --> 00:15:42,720
+I think will be very very valuable for robotics as well.
+
+217
+00:15:42,720 --> 00:15:43,040
+>> Yeah.
+
+218
+00:15:43,040 --> 00:15:52,840
+So hotels, you know, strap a GoPro on your employees heads and >> and there's probably more themselves in their in their wig.
+
+219
+00:15:52,959 --> 00:16:01,279
+Uh so so one thing that we discussed is like the the closing the sim to real uh and uh what's very interesting is like now you can basically fabricate environments on the fly.
+
+220
+00:16:01,279 --> 00:16:02,160
+Yes.
+
+221
+00:16:02,160 --> 00:16:06,240
+>> Uh have you tried that with the the frontier models um what's your experience?
+
+222
+00:16:06,240 --> 00:16:07,040
+Are they good enough?
+
+223
+00:16:07,040 --> 00:16:13,920
+>> Are you using any world model robotic like world model companies to generate these and train on them?
+
+224
+00:16:13,920 --> 00:16:14,399
+>> Yeah.
+
+225
+00:16:14,399 --> 00:16:25,680
+So uh I think generating synthetic environments, synthetic data, simulation data for robotics is going to be one of the next frontiers right because today people have looked at egocentric data,
+
+226
+00:16:25,680 --> 00:16:32,600
+robot data, you know those are scaling but I think synthetic data will be a new dimension of scaling.
+
+227
+00:16:32,639 --> 00:16:43,759
+So going back to your question like yeah we have been exploring like using frontier models to generate a synthetic uh environments for us on our data on our environments that we care about and
+
+228
+00:16:43,759 --> 00:16:56,480
+surprisingly I think now it's at a point where this technology is actually very much worth like going really really deep into so for some context so uh in my PhD I primarily focused on
+
+229
+00:16:56,480 --> 00:17:07,679
+simulation based training for robotics back then simulation wasn't ready but we had this paper called Eureka uh which was the first paper taking like a large language model at the time is GBD4 which
+
+230
+00:17:07,679 --> 00:17:09,720
+just had to like selfgenerate
+
+231
+00:17:10,720 --> 00:17:21,600
+environments generate reward functions or reinforcement learning and just like do things in simulation and at the end I think uh we had this really nice demo of the robot spinning pencils right that was
+
+232
+00:17:21,600 --> 00:17:32,760
+really cool at the time but that kind of thing was still very limited at the time because back then the model didn't really have good vision capability didn't have a innate 3D understanding,
+
+233
+00:17:32,960 --> 00:17:33,200
+right?
+
+234
+00:17:33,200 --> 00:17:41,000
+So, it was basically just generating code and like using very limited feedback from text to try to come up with new simulation environments.
+
+235
+00:17:41,280 --> 00:17:45,159
+But today, like the vision capability of these frontier models are crazy.
+
+236
+00:17:45,280 --> 00:17:50,240
+They can do like real to sim cadding, there's 3D reconstruction, all of that.
+
+237
+00:17:50,240 --> 00:17:55,480
+I think now it's at a tipping point where this technology could really accelerate robotics.
+
+238
+00:17:55,760 --> 00:18:01,200
+And for us, right, we think about that as like a way to accelerate our internal progress, right?
+
+239
+00:18:01,200 --> 00:18:03,480
+because we're building models, we're building hardware.
+
+240
+00:18:03,520 --> 00:18:11,800
+So if a frontier model can give us more data that way, like generate really tailored data for ourselves, that's extremely useful for us.
+
+241
+00:18:12,000 --> 00:18:20,960
+And another thing we've been thinking about is instead of using these models to generate like 3D environments, we have also used our own world model,
+
+242
+00:18:20,960 --> 00:18:21,200
+right?
+
+243
+00:18:21,200 --> 00:18:27,240
+The world action model I was telling you about because the model not only generates action, can also generate videos,
+
+244
+00:18:27,840 --> 00:18:30,279
+the model can also generate its own training data.
+
+245
+00:18:30,320 --> 00:18:35,000
+So that becomes a you know self-fulfilling like flywheel that I think will also be powerful.
+
+246
+00:18:35,440 --> 00:18:42,559
+So overall I'm just really excited about this direction because I think even though we have scaled to a million hours of data we are deploying bunch of robots.
+
+247
+00:18:42,559 --> 00:18:46,240
+The robots are actually you know already starting to do very cool things.
+
+248
+00:18:46,240 --> 00:18:51,360
+We're just at the beginning just the tip of iceberg for like what is there to come.
+
+249
+00:18:51,360 --> 00:18:51,840
+Yeah.
+
+250
+00:18:51,840 --> 00:18:56,000
+>> For those on the research side we recently had runway on the podcast.
+
+251
+00:18:56,000 --> 00:18:58,760
+One of their things is robotic role models.
+
+252
+00:18:59,440 --> 00:19:01,120
+um shifting a little towards there.
+
+253
+00:19:01,120 --> 00:19:03,280
+So, you know, next people to look at it.
+
+254
+00:19:03,280 --> 00:19:09,520
+Um one of the questions I have about you making your own models is what is the constraints you operate in?
+
+255
+00:19:09,520 --> 00:19:17,440
+So, if you draw a parallel to language models, you see like GPOSS 20B is very fit for your average MacBook.
+
+256
+00:19:17,440 --> 00:19:17,679
+Yeah.
+
+257
+00:19:17,679 --> 00:19:20,519
+Then there's a larger one that's fit for a single GPU.
+
+258
+00:19:20,799 --> 00:19:32,799
+Um do you work in the constraints of robot of model on on device in cloud a hybrid and then how does that affect your scaling law of data?
+
+259
+00:19:32,799 --> 00:19:33,200
+Yeah.
+
+260
+00:19:33,200 --> 00:19:38,960
+>> Um you know a million hours is great but like do we just scale up parameters data?
+
+261
+00:19:38,960 --> 00:19:39,200
+>> Yeah.
+
+262
+00:19:39,200 --> 00:19:40,400
+No that's a great question.
+
+263
+00:19:40,400 --> 00:19:52,440
+So I think what's really different about robots versus language model and other applications is that for uh coding agents language model it's okay if it's it has latency right >> well like you know today
+
+264
+00:19:52,480 --> 00:20:02,640
+whenever I ask chat GPD it takes like couple seconds before it spits out anything but for robots like the inference latency has to be like very short like the robot needs to act like
+
+265
+00:20:02,640 --> 00:20:12,080
+it can't just hold a knife and not do anything for three second that's going to freak people out right >> yeah we saw someone put their real hand And >> our model's pretty smart.
+
+266
+00:20:12,080 --> 00:20:12,799
+So that's okay.
+
+267
+00:20:12,799 --> 00:20:21,919
+But uh in general like if you think about very dynamic task like for example you want your robot to like you know hold a I don't know a tennis racket and you know juggle
+
+268
+00:20:21,919 --> 00:20:22,640
+the ball right?
+
+269
+00:20:22,640 --> 00:20:24,320
+This is very dynamic, very reactive.
+
+270
+00:20:24,320 --> 00:20:28,519
+You can't just like the phys physics gravity doesn't wait for you, right?
+
+271
+00:20:28,640 --> 00:20:32,440
+So for that reason, robotics model needs to be able to inference very fast.
+
+272
+00:20:32,559 --> 00:20:37,679
+And the fastest way to do that is by serving on prem like on device, right?
+
+273
+00:20:37,679 --> 00:20:42,480
+Because if you call a model network, >> there's no guarantee drive a car.
+
+274
+00:20:42,480 --> 00:20:43,600
+>> There's no guarantee, right?
+
+275
+00:20:43,600 --> 00:20:51,080
+Like so for that reason, the model that gets deployed eventually has to be of reasonable size that can be served locally.
+
+276
+00:20:51,440 --> 00:21:01,600
+But that doesn't mean that the initial model you train also has to be small right like in language model >> can distill >> you have a large >> people do distillation right like the best way to
+
+277
+00:21:01,600 --> 00:21:13,440
+make a small model very smart >> is by doing distillation right you train the biggest model then you distill right so I think in robotics we're getting there but I think that's what people are
+
+278
+00:21:13,440 --> 00:21:22,400
+going to converge on yeah >> how about like uh inference you have your own inference stack or a lot of this is architecture you've pulled diffusion and whatnot.
+
+279
+00:21:22,400 --> 00:21:25,120
+I'm guessing you can pull off of something.
+
+280
+00:21:25,120 --> 00:21:26,279
+Anything you want to share?
+
+281
+00:21:26,559 --> 00:21:33,679
+>> Yeah, so we build our own inference stack for whatever model we deploy because I like I was saying like latency is so important.
+
+282
+00:21:33,679 --> 00:21:37,280
+So only the whole stack is extremely important for robotics, right?
+
+283
+00:21:37,280 --> 00:21:43,919
+You want to optimize like the inference speed for the kind of model you're running and there's a lot of work in there.
+
+284
+00:21:43,919 --> 00:21:45,240
+So that's what we do.
+
+285
+00:21:45,360 --> 00:21:56,559
+Yeah, you're really full stack like everything from like uh you know the actuators all the way to in the industrial design ID which I didn't really know as a acronym uh obviously to the
+
+286
+00:21:56,559 --> 00:21:57,679
+models and data as well.
+
+287
+00:21:57,679 --> 00:22:07,360
+>> Uh I'm curious like are these your own actuators or they how much of this is your own like of course the design you know it's not a humanoid but >> actuators like how how far
+
+288
+00:22:07,360 --> 00:22:08,720
+down the robotic stack?
+
+289
+00:22:08,720 --> 00:22:08,960
+>> Yeah.
+
+290
+00:22:08,960 --> 00:22:22,240
+So the way we think about uh what we need to own versus what we can buy is like if the uh input output and uh of a component is very very clear and like
+
+291
+00:22:22,240 --> 00:22:32,720
+there's already extremely good mature solution then there's no point to building a house like for example on this robot uh you see the lightars right so those black circle those are lighters to help
+
+292
+00:22:32,720 --> 00:22:42,400
+the robot detect obstacle um navigate surroundings so that's a very mature technology ology that people have been using for now decades is on self-driving car.
+
+293
+00:22:42,400 --> 00:22:44,640
+So we don't need to build lighter from scratch, right?
+
+294
+00:22:44,640 --> 00:22:46,159
+Same goes with some cameras.
+
+295
+00:22:46,159 --> 00:22:57,240
+But for anything that we think is extremely crucial for the whole systems performance at the end, our vision is to be able to own that and build that ourselves.
+
+296
+00:22:57,360 --> 00:22:59,639
+So one thing is uh you mentioned actuator.
+
+297
+00:22:59,919 --> 00:23:03,720
+So that's something we're working on and we're going to own ourselves.
+
+298
+00:23:03,919 --> 00:23:12,080
+The reason is that like the quality and how you design the actuator really matters for how well you can model the robot,
+
+299
+00:23:12,080 --> 00:23:12,400
+right?
+
+300
+00:23:12,400 --> 00:23:14,200
+Actuator is what drives the robot.
+
+301
+00:23:14,240 --> 00:23:24,000
+To be be able to model your robot very well in simulation or to do any kind of modeling, you need to select actuator is very good that you know can actually be easily modelable.
+
+302
+00:23:24,000 --> 00:23:25,880
+So that's what we care about eventually.
+
+303
+00:23:25,919 --> 00:23:27,120
+So we're going to own that.
+
+304
+00:23:27,120 --> 00:23:29,159
+Same thing with you know the robots proportion.
+
+305
+00:23:29,600 --> 00:23:33,720
+you know this robot's proportion is like we measured against real people.
+
+306
+00:23:33,840 --> 00:23:34,640
+Why do we do that?
+
+307
+00:23:34,640 --> 00:23:36,840
+Because we're pre-training on human data.
+
+308
+00:23:36,880 --> 00:23:37,280
+>> Oh yeah.
+
+309
+00:23:37,280 --> 00:23:38,480
+>> Best transfer, right?
+
+310
+00:23:38,480 --> 00:23:48,120
+So there's a lot of these kind of decision that goes into hardware that's very much tied to like because eventually you know it's hardware that carries intelligence.
+
+311
+00:23:48,559 --> 00:23:51,200
+Intelligence is the extremely important thing.
+
+312
+00:23:51,200 --> 00:23:54,200
+We want to make sure the hardware serves for that.
+
+313
+00:23:54,240 --> 00:23:54,480
+>> Yeah.
+
+314
+00:23:54,480 --> 00:23:54,799
+Yeah.
+
+315
+00:23:54,799 --> 00:24:03,039
+Uh, I'll just highlight I I don't know if this is relevant to you, but uh, one of the most interesting robotics discussions I've had is someone who was very stressed out about actuators and
+
+316
+00:24:03,039 --> 00:24:06,640
+specifically magnets because apparently we don't make magnets in the US.
+
+317
+00:24:06,640 --> 00:24:07,520
+>> No, we don't.
+
+318
+00:24:07,520 --> 00:24:09,679
+>> And there's only two countries that make magnets.
+
+319
+00:24:09,679 --> 00:24:11,320
+>> Uh, rare earth material.
+
+320
+00:24:11,360 --> 00:24:11,600
+>> Yeah.
+
+321
+00:24:11,600 --> 00:24:11,919
+Right.
+
+322
+00:24:11,919 --> 00:24:14,559
+I don't know what the what's the chem what's the material?
+
+323
+00:24:14,559 --> 00:24:16,480
+I don't know what the thing is, but yeah.
+
+324
+00:24:16,480 --> 00:24:20,880
+>> Uh, so yeah, if anyone's interested in that, that's apparently a bottleneck that we have.
+
+325
+00:24:20,880 --> 00:24:21,480
+>> No.
+
+326
+00:24:22,080 --> 00:24:22,559
+Yes.
+
+327
+00:24:22,559 --> 00:24:23,800
+>> So, what do we do?
+
+328
+00:24:24,240 --> 00:24:27,279
+Yeah, I mean I mean it's a good question, right?
+
+329
+00:24:27,279 --> 00:24:39,200
+I think there's a lot of uh exciting discussions on bringing manufacturing back to the US, but you know for robots especially that's actually much harder than uh than what it seems.
+
+330
+00:24:39,200 --> 00:24:48,600
+And I would say even now there isn't a company in the US that's truly building everything from scratch in the US,
+
+331
+00:24:48,640 --> 00:24:49,120
+right?
+
+332
+00:24:49,120 --> 00:24:58,480
+like even when they say they assemble robot, they build whatever actually in the US, they're still sourcing the raw materials from other places in the world.
+
+333
+00:24:58,480 --> 00:25:03,600
+And I think that's something to really be aware of as a robot builder, right?
+
+334
+00:25:03,600 --> 00:25:13,279
+Like I think uh like as a full stack robotics company, we realize just how long the supply chain is and how long the whole problem is is actually extremely hard.
+
+335
+00:25:13,279 --> 00:25:19,639
+And I think these days a lot of the discussion centers around a robot foundation model, model data.
+
+336
+00:25:19,919 --> 00:25:24,759
+But I think hardware and just how hard it is to build good hardware is very undermphasized.
+
+337
+00:25:25,200 --> 00:25:28,040
+But I think >> that's going to be extremely important.
+
+338
+00:25:28,159 --> 00:25:29,840
+>> This is a platform, right?
+
+339
+00:25:29,840 --> 00:25:30,759
+>> Actually platform.
+
+340
+00:25:30,799 --> 00:25:31,039
+>> Yeah.
+
+341
+00:25:31,039 --> 00:25:34,200
+There there's some companies that choose to be let's call it platformless.
+
+342
+00:25:34,480 --> 00:25:36,960
+They only do the model and you'll say we deploy on any platform.
+
+343
+00:25:36,960 --> 00:25:39,360
+We deploy on Optimus >> offtheshelf robotics.
+
+344
+00:25:39,360 --> 00:25:41,840
+>> Uh and so it's a choice, right?
+
+345
+00:25:41,840 --> 00:25:44,240
+like obviously you you you own everything so you can do that.
+
+346
+00:25:44,240 --> 00:25:50,279
+Uh do you see yourself building more in the US or do you see building your own global supply chain?
+
+347
+00:25:50,480 --> 00:25:53,279
+>> What what's the direction that is likely?
+
+348
+00:25:53,279 --> 00:25:53,679
+>> Yeah.
+
+349
+00:25:53,679 --> 00:26:06,880
+So we are currently exploring many different options right because with global supply chain then there is some you know geopolitical things shipping >> shipping also shipping delays and all that stuff >> literal ships for robots.
+
+350
+00:26:06,880 --> 00:26:07,120
+>> Yeah.
+
+351
+00:26:07,120 --> 00:26:18,000
+and uh in the US you know it's just that going from zero to one will take some time right so we're trying to think about a solution that can both allow us to build
+
+352
+00:26:18,000 --> 00:26:28,000
+more in the US while leveraging global supply chain right but I do think uh going back to your previous question on like some companies choose to just build model we build everything I think
+
+353
+00:26:28,000 --> 00:26:39,840
+I think it's very important to get this right I feel that for robotics the hard thing is uh like building the whole system the necessary things to build a whole system like previously I
+
+354
+00:26:39,840 --> 00:26:50,480
+was at deep mind I was at Nvidia primarily just building models and I saw the upper bound of the system when you don't control the hardware when you don't get to optimize that right
+
+355
+00:26:50,480 --> 00:27:00,480
+because if you think about the value creation for robots eventually robots are here to deliver service to solve some physical tasks so if you want to solve physical task you want to be able
+
+356
+00:27:00,480 --> 00:27:06,759
+to optimize everything and that's important >> I mean we have the robot you got to tell us about the Fine.
+
+357
+00:27:06,880 --> 00:27:09,840
+Um your own custom platform.
+
+358
+00:27:09,840 --> 00:27:11,080
+>> What do you call this?
+
+359
+00:27:11,600 --> 00:27:12,559
+>> What do we call it?
+
+360
+00:27:12,559 --> 00:27:12,720
+>> Yeah.
+
+361
+00:27:12,720 --> 00:27:13,800
+So it's not humanoid.
+
+362
+00:27:13,840 --> 00:27:17,279
+Um it's very smooth, but what's the what's the rotating arm?
+
+363
+00:27:17,279 --> 00:27:17,600
+>> Yeah.
+
+364
+00:27:17,600 --> 00:27:20,360
+So we think of this is generally like a semihumanoid.
+
+365
+00:27:20,880 --> 00:27:24,120
+So basically the upper body is you know like a humanoid.
+
+366
+00:27:24,400 --> 00:27:26,880
+It's got you know of course shoulder got arms.
+
+367
+00:27:26,880 --> 00:27:29,760
+It also got like four degrees of freedom on the waist.
+
+368
+00:27:29,760 --> 00:27:32,880
+So you can basically do all the upper body motion that a human can do.
+
+369
+00:27:32,880 --> 00:27:36,559
+But it's a semihumanoid because the lower body is wheels, right?
+
+370
+00:27:36,559 --> 00:27:37,919
+So why do we choose wheels?
+
+371
+00:27:37,919 --> 00:27:40,360
+Because I think there's a difference.
+
+372
+00:27:40,720 --> 00:27:46,159
+There's a you know optimal like practicality versus performance trade-off.
+
+373
+00:27:46,159 --> 00:27:50,400
+I think with legs the energy the energy consumption will be a lot higher.
+
+374
+00:27:50,400 --> 00:27:51,800
+You'll be a lot more unstable.
+
+375
+00:27:52,240 --> 00:27:56,360
+You know safety will be extremely extremely hard to guarantee.
+
+376
+00:27:56,559 --> 00:28:03,919
+So right now for legged robots, there's actually no guarantee that the robot will stay upright, balanced the entire time.
+
+377
+00:28:03,919 --> 00:28:09,399
+I'm sure you guys have seen a lot of those robot dancing videos like like the robot dancing.
+
+378
+00:28:09,440 --> 00:28:11,039
+Yeah, they are they fall over very easily.
+
+379
+00:28:11,039 --> 00:28:17,520
+>> No, but you also see the demos that you can tell are not production where you can box the robot and you can push it over and it's very good,
+
+380
+00:28:17,520 --> 00:28:19,919
+but that robot is just good at balance, right?
+
+381
+00:28:19,919 --> 00:28:28,600
+Like >> there's a >> I think I think the more interesting thing that you guys have innovated so like we have one of the prototypes uh which is the Mewtwo.
+
+382
+00:28:28,960 --> 00:28:29,679
+Yeah.
+
+383
+00:28:29,679 --> 00:28:30,440
+>> Back here.
+
+384
+00:28:30,720 --> 00:28:40,720
+>> This is this is just like an up down uh axis and you've chosen to then move towards something like this which um has the the ability to lean and we're going to show the
+
+385
+00:28:40,720 --> 00:28:42,640
+laundry demo where you have to lean into machines.
+
+386
+00:28:42,640 --> 00:28:42,880
+Right.
+
+387
+00:28:42,880 --> 00:28:45,679
+That's another degree of freedom that I don't even have the words for it.
+
+388
+00:28:45,679 --> 00:28:46,240
+It's not pitch.
+
+389
+00:28:46,240 --> 00:28:47,080
+It's not yaw.
+
+390
+00:28:47,600 --> 00:28:47,919
+>> Yeah.
+
+391
+00:28:47,919 --> 00:28:48,519
+Yeah.
+
+392
+00:28:48,960 --> 00:28:51,200
+So yeah, how did we think about that, right?
+
+393
+00:28:51,200 --> 00:29:03,600
+like uh so actually it's very useful exercise like you know I think sometimes a couple years ago when I was exercising I accidentally like you know like pull a muscle >> right I'm sure you
+
+394
+00:29:03,600 --> 00:29:12,000
+guys have that experience too right then the next few days like you just couldn't move or like you pull where you slept in the wrong position so your neck is very stiff we have
+
+395
+00:29:12,000 --> 00:29:21,120
+all experienced that and then whenever you experience that you kind of realize wow so many muscles so many degrees of freedom that we use in our daily life that we take for granted But
+
+396
+00:29:21,120 --> 00:29:26,640
+when it's disabled like it's very awkward for you to do some task that you feel are very natural.
+
+397
+00:29:26,640 --> 00:29:27,120
+Right?
+
+398
+00:29:27,120 --> 00:29:35,200
+So that's also how we think about like when we design robots when you have like a this kind of design which is this purely elevator could only go up and down.
+
+399
+00:29:35,200 --> 00:29:46,159
+We realize a lot of the like human torso movement like we use our like you know waist back a lot for like day-to-day physical activity right even like if I want to get this
+
+400
+00:29:46,159 --> 00:29:48,320
+bottle like I'm not just moving my arms.
+
+401
+00:29:48,320 --> 00:29:53,120
+It's actually very strange for me if I I have to intentionally think about fixing my upper body.
+
+402
+00:29:53,120 --> 00:29:54,960
+I would always like do this, right?
+
+403
+00:29:54,960 --> 00:30:04,040
+>> So there's just a lot of like subconscious way that humans move their body that I think will be equally useful if robot has a degree of freedom.
+
+404
+00:30:04,080 --> 00:30:08,399
+And if you further think about okay, we want to learn from human data.
+
+405
+00:30:08,399 --> 00:30:10,320
+The humans are moving their torso all the time.
+
+406
+00:30:10,320 --> 00:30:14,240
+You want to be able to like ingest that into the model to control the robot.
+
+407
+00:30:14,240 --> 00:30:22,519
+But if you have a form factor that doesn't allow for that, then the transfer becomes less and the robot becomes less stressous and it's just more awkward.
+
+408
+00:30:22,640 --> 00:30:25,279
+>> What's the data labeling side of this?
+
+409
+00:30:25,279 --> 00:30:39,520
+Like I, you know, you've seen people um is this the last like post-training fine-tuning side of actually the hour of using the roboty operated or remote controlled mapping motion or like does some of
+
+410
+00:30:39,520 --> 00:30:40,840
+it generalize over?
+
+411
+00:30:41,279 --> 00:30:48,080
+Uh when you say labeling you mean >> like taking the model you have that predict state Yeah.
+
+412
+00:30:48,080 --> 00:30:51,200
+>> to mapping it to your specific hardware.
+
+413
+00:30:51,200 --> 00:30:51,520
+>> Oh yeah.
+
+414
+00:30:51,520 --> 00:30:51,679
+Yeah.
+
+415
+00:30:51,679 --> 00:30:53,200
+It generates this very well.
+
+416
+00:30:53,200 --> 00:31:01,360
+So for all the demos that I have shown you on the new robot cuz the new robot we you know it got ready not so long ago.
+
+417
+00:31:01,360 --> 00:31:07,840
+So we quite literally do not have a lot of data compared to the stationary arms we showed you which had much more data.
+
+418
+00:31:07,840 --> 00:31:08,399
+Right.
+
+419
+00:31:08,399 --> 00:31:13,639
+But a new robot, the model has not seen this in pre-training in some of our pre-trained model.
+
+420
+00:31:13,679 --> 00:31:17,320
+It's able to learn the task that you saw like very quickly.
+
+421
+00:31:17,440 --> 00:31:26,480
+And I credit a lot of that to like you know like even before the hardware is ready, we already committed to pre-training on humans because we knew at some point our robots will be
+
+422
+00:31:26,480 --> 00:31:27,200
+like human.
+
+423
+00:31:27,200 --> 00:31:30,240
+You can get ahead on the training side while hardware is getting ready.
+
+424
+00:31:30,240 --> 00:31:35,360
+And I think now we're seeing that like the transfer is actually there and is actually very helpful.
+
+425
+00:31:35,360 --> 00:31:38,000
+>> Talk about the eval side of this.
+
+426
+00:31:38,000 --> 00:31:42,559
+So you can have predictions, you can have it do stuff and you know every now and then we see it miss stuff.
+
+427
+00:31:42,559 --> 00:31:46,360
+You test on very niche things as well like filling a pill bottle.
+
+428
+00:31:46,640 --> 00:31:49,600
+Um >> how long does that process take?
+
+429
+00:31:49,600 --> 00:31:57,039
+How do you think about the aspect of actually deploying on a new task evaling iterating what does that look like?
+
+430
+00:31:57,039 --> 00:31:57,360
+>> Yeah.
+
+431
+00:31:57,360 --> 00:32:06,480
+So if we want to learn a new task uh you know we basically do a little bit of robot data collection then the model these >> what is a little bit like >> yeah like couple
+
+432
+00:32:06,480 --> 00:32:07,200
+hours couple hours.
+
+433
+00:32:07,200 --> 00:32:10,680
+Yeah, we're in some of the tasks like just tens of minutes, right?
+
+434
+00:32:10,720 --> 00:32:11,279
+Yeah.
+
+435
+00:32:11,279 --> 00:32:13,360
+And then >> the chopping one was 45 minutes.
+
+436
+00:32:13,360 --> 00:32:13,600
+Yeah.
+
+437
+00:32:13,600 --> 00:32:15,919
+>> The open the fridge was on >> and that's an interview.
+
+438
+00:32:15,919 --> 00:32:18,880
+That's like an onboarding task for one of your engineers.
+
+439
+00:32:18,880 --> 00:32:19,200
+>> Yeah.
+
+440
+00:32:19,200 --> 00:32:19,519
+Yeah.
+
+441
+00:32:19,519 --> 00:32:20,119
+Yeah.
+
+442
+00:32:20,159 --> 00:32:22,880
+So, uh >> fun fun thing if you want to work here, you know.
+
+443
+00:32:22,880 --> 00:32:24,559
+>> Find the task, have the robot do it.
+
+444
+00:32:24,559 --> 00:32:24,720
+>> Yeah.
+
+445
+00:32:24,720 --> 00:32:24,960
+Yeah.
+
+446
+00:32:24,960 --> 00:32:30,320
+Pitch me a new task and I'll come to the office >> uh you know, collect some data, try a model and see what happens.
+
+447
+00:32:30,320 --> 00:32:31,320
+>> Tie your shoes.
+
+448
+00:32:31,440 --> 00:32:32,240
+>> Julie is tiring.
+
+449
+00:32:32,240 --> 00:32:33,360
+Yeah, that'll be cool.
+
+450
+00:32:33,360 --> 00:32:42,399
+But uh yeah so you know a little small amount of data collected train a model then we just deploy the model in the real world and then we look at the performance then >> to
+
+451
+00:32:42,399 --> 00:32:56,000
+to fill in collected means like you are you have a person actually operating remote control >> doing the task for a bit >> and then you train >> and it does okay you improve how do you
+
+452
+00:32:56,000 --> 00:33:03,200
+measure >> yeah yeah so when you're training the model there's uh you know certain metrics you can look at Right?
+
+453
+00:33:03,200 --> 00:33:06,360
+Just like actual model it converges nicely.
+
+454
+00:33:06,559 --> 00:33:15,200
+Now after that for robotics today we just run the model in the real world right on the you know same setup that the data is collected to see how the model does.
+
+455
+00:33:15,200 --> 00:33:18,480
+Sometimes the model just works great out of the box, right?
+
+456
+00:33:18,480 --> 00:33:20,240
+You don't really need to do much more.
+
+457
+00:33:20,240 --> 00:33:27,200
+But when the model's, you know, like maybe like 70% 80% there, then you see how the model behaves.
+
+458
+00:33:27,200 --> 00:33:28,799
+You figure out what it's not good at.
+
+459
+00:33:28,799 --> 00:33:31,840
+Then you can like collect a bit more data, then iterate, right?
+
+460
+00:33:31,840 --> 00:33:37,039
+I think of this is like the robotics version of like reinforcement learning from human feedback, right?
+
+461
+00:33:37,039 --> 00:33:47,879
+the robot rolls out, you can score it good, bad, uh somewhat good and then that data, the robot's only experience can be used to train the model.
+
+462
+00:33:48,080 --> 00:33:52,080
+And you can also just collect more data yourself to train a model, right?
+
+463
+00:33:52,080 --> 00:33:56,440
+Eventually, you know, our goal is like, you know, this robot is going to be our platform.
+
+464
+00:33:56,720 --> 00:33:59,919
+Anyone should be able to uh train tasks on it.
+
+465
+00:33:59,919 --> 00:34:03,919
+>> I want to get a bit of a prediction and like timeline to where that goes.
+
+466
+00:34:03,919 --> 00:34:08,800
+Right now, the tests are um somewhat simple, like take laundry out.
+
+467
+00:34:08,800 --> 00:34:09,520
+It's a towel.
+
+468
+00:34:09,520 --> 00:34:10,679
+You can't crush it.
+
+469
+00:34:10,720 --> 00:34:12,879
+Um >> chop some food.
+
+470
+00:34:12,879 --> 00:34:13,520
+Yeah.
+
+471
+00:34:13,520 --> 00:34:17,200
+>> There's also the side of like, okay, set up this filming studio, right?
+
+472
+00:34:17,200 --> 00:34:18,240
+Move stuff around.
+
+473
+00:34:18,240 --> 00:34:21,359
+Um bring a table, set up lights, I think.
+
+474
+00:34:21,359 --> 00:34:22,759
+>> Manage my data center.
+
+475
+00:34:23,040 --> 00:34:23,280
+>> Yeah.
+
+476
+00:34:23,280 --> 00:34:23,599
+Yeah.
+
+477
+00:34:23,599 --> 00:34:24,399
+Plug in stuff.
+
+478
+00:34:24,399 --> 00:34:29,760
+Um >> and and also uh re like recharge another robot.
+
+479
+00:34:29,760 --> 00:34:29,919
+>> Yeah.
+
+480
+00:34:29,919 --> 00:34:30,320
+Yeah.
+
+481
+00:34:30,320 --> 00:34:34,759
+But when do we see the factory or like what do we need to scale up?
+
+482
+00:34:34,960 --> 00:34:36,720
+Um is it model?
+
+483
+00:34:36,720 --> 00:34:37,359
+Is it everything?
+
+484
+00:34:37,359 --> 00:34:45,440
+It seems like your hardware is set for that, but where do we see it go to a point where I can go from instead of just cut one thing to you know,
+
+485
+00:34:45,440 --> 00:34:49,679
+okay, here's a recipe like full send or Yeah.
+
+486
+00:34:49,679 --> 00:34:49,919
+>> Yeah.
+
+487
+00:34:49,919 --> 00:34:53,560
+I would say to get to truly general purpose robots.
+
+488
+00:34:54,159 --> 00:35:04,240
+uh like like basically a robot or a model that does anything like >> not not not that like okay so to keep it somewhat grounded on a technical level like >> when do we start to
+
+489
+00:35:04,240 --> 00:35:14,320
+see us pushing that feedback right so instead of very simple chopping uh maybe a 5 to 10 minute sequence right where now the eval step it can break at many more points instead of
+
+490
+00:35:14,320 --> 00:35:24,240
+just fill one pill bottle uh 10 different pills all in a sequence right what's limiting us what are we pushing on >> yeah I think yeah I think a couple of And one is that
+
+491
+00:35:24,240 --> 00:35:33,920
+like uh the laundry demo that that you have seen yeah it's going to be like 1 hour to finish a whole loop right so the longest duration that a robot can do like a
+
+492
+00:35:33,920 --> 00:35:43,200
+full job is already in the hour range nice >> right but you know to be able to do that for any task you know I think the bottleneck is coming back to data and uh
+
+493
+00:35:43,200 --> 00:35:52,720
+hardware right so for some of the tasks you know for example setting up the space you know you might need more than like a you know the parallel jaw gripper right you might need
+
+494
+00:35:52,720 --> 00:35:56,079
+something more dextrous like a hand, like a human hand, right?
+
+495
+00:35:56,079 --> 00:36:00,720
+But then if you want to train a model on the hand, then you're bottlenecked by the hardware stability.
+
+496
+00:36:00,720 --> 00:36:07,280
+Like hand today, the best hands, dextrous hands are still not uh durable enough.
+
+497
+00:36:07,280 --> 00:36:09,040
+They overheat pretty quickly, right?
+
+498
+00:36:09,040 --> 00:36:10,560
+So that becomes a bottleneck, right?
+
+499
+00:36:10,560 --> 00:36:19,680
+Like you we you know, you quite literally have to put a you know ice bag >> to we're not just auto researching make better model.
+
+500
+00:36:19,680 --> 00:36:20,880
+We have we have hardware limit.
+
+501
+00:36:20,880 --> 00:36:21,040
+>> Yeah.
+
+502
+00:36:21,040 --> 00:36:30,720
+So hardware limitation is a big thing but then if hardware is limited then that will slow down everything right because to know that you're making progress on any task you eventually have to eval
+
+503
+00:36:30,720 --> 00:36:42,480
+on the hardware right so then without the eval being very like spontaneous very fast that also limits your research progress right because then how do we collect the right data right I think um
+
+504
+00:36:42,480 --> 00:36:52,400
+how do we collect the right data to do extremely complex like setting up this uh studio right because you can imagine like today most of The data is like vision based,
+
+505
+00:36:52,400 --> 00:36:52,560
+right?
+
+506
+00:36:52,560 --> 00:37:00,040
+It's like video streams and like, you know, some uh uh encoding of your hand motion where the robots have joints.
+
+507
+00:37:00,480 --> 00:37:03,560
+But humans have a lot more sensors.
+
+508
+00:37:03,599 --> 00:37:06,480
+You know, we hear things, we feel things, smell.
+
+509
+00:37:06,480 --> 00:37:06,720
+>> Yeah.
+
+510
+00:37:06,720 --> 00:37:08,439
+You smell things, right?
+
+511
+00:37:08,480 --> 00:37:14,199
+So, we subconsciously use all of those to help us be so good at manipulating the physical world.
+
+512
+00:37:14,400 --> 00:37:23,599
+But today like if you're not capturing that at all then even when we scale to millions of hours you might just be missing critical dimensions of the task.
+
+513
+00:37:23,599 --> 00:37:25,800
+So you'll never be able to solve the task right.
+
+514
+00:37:26,000 --> 00:37:30,840
+So I think those are like what I consider like you know what's dragging out the timeline.
+
+515
+00:37:30,880 --> 00:37:42,960
+But for tasks or for workflows that you can collect data today to high fidelity then I don't I don't necessarily think there's a fundamental bottleneck right just like what we are demonstrating uh to
+
+516
+00:37:42,960 --> 00:37:54,400
+the public this week you know we have a physical agent that can do the entire laundry workflow right as a human would right because for that task we don't really have like oh you
+
+517
+00:37:54,400 --> 00:38:00,960
+actually need more than a parallel job but you actually need some sensing modality that's just not available today, right?
+
+518
+00:38:00,960 --> 00:38:06,800
+So, I do think the biggest bottleneck to have a much more general thing is still hardware and data.
+
+519
+00:38:06,800 --> 00:38:07,200
+>> Yeah.
+
+520
+00:38:07,200 --> 00:38:10,480
+I want to take this chance to talk let you brag about your customers and partners.
+
+521
+00:38:10,480 --> 00:38:10,800
+Yeah.
+
+522
+00:38:10,800 --> 00:38:13,320
+>> Uh you have some announce uh relationships.
+
+523
+00:38:13,359 --> 00:38:18,840
+Um we can start with Best Western and then maybe some of uh some of the others that you're that you're proud of,
+
+524
+00:38:18,960 --> 00:38:20,560
+>> cool stories, anything like that.
+
+525
+00:38:20,560 --> 00:38:20,800
+>> Yeah.
+
+526
+00:38:20,800 --> 00:38:26,000
+So, we have a deployment blog post uh on our website that goes into much more detail.
+
+527
+00:38:26,000 --> 00:38:30,480
+I really recommend watching the video because I think the video is >> Do you want the best Western one?
+
+528
+00:38:30,480 --> 00:38:31,040
+>> Uh, no.
+
+529
+00:38:31,040 --> 00:38:34,640
+We have like a one video for all the customers we're working with.
+
+530
+00:38:34,640 --> 00:38:36,000
+It's a really really nice video.
+
+531
+00:38:36,000 --> 00:38:39,440
+Shows what we're doing and uh yeah, I think it's great.
+
+532
+00:38:39,440 --> 00:38:44,240
+But yeah, we have customers uh you know, Best Western that's in the hotel space.
+
+533
+00:38:44,240 --> 00:38:47,880
+We fold a lot of uh laundry like uh you know, towels for them.
+
+534
+00:38:48,000 --> 00:38:48,960
+Every hotel needs it.
+
+535
+00:38:48,960 --> 00:38:49,760
+Every gym needs it.
+
+536
+00:38:49,760 --> 00:38:51,320
+Every fitness center needs it.
+
+537
+00:38:51,680 --> 00:38:53,200
+What >> What's the deployment so far?
+
+538
+00:38:53,200 --> 00:38:55,280
+Uh how like where can I go to?
+
+539
+00:38:55,280 --> 00:38:57,040
+Which best person do I go to to see it?
+
+540
+00:38:57,040 --> 00:38:57,200
+>> Yeah.
+
+541
+00:38:57,200 --> 00:39:01,320
+So if you want to go somewhere, I actually recommend going to our other deployment DYon.
+
+542
+00:39:01,760 --> 00:39:03,040
+Have you guys been to Yes.
+
+543
+00:39:03,040 --> 00:39:03,440
+Yes.
+
+544
+00:39:03,440 --> 00:39:03,760
+>> Yeah.
+
+545
+00:39:03,760 --> 00:39:05,520
+You know the best >> very thin rapper.
+
+546
+00:39:05,520 --> 00:39:05,760
+>> Yeah.
+
+547
+00:39:05,760 --> 00:39:07,320
+Very >> We should have filmed there.
+
+548
+00:39:07,599 --> 00:39:08,079
+>> Yeah.
+
+549
+00:39:08,079 --> 00:39:10,520
+We should have just done there.
+
+550
+00:39:11,440 --> 00:39:11,680
+>> Yeah.
+
+551
+00:39:11,680 --> 00:39:17,520
+But uh in Dinton like if you go to Dinty phone or other like uh you know somewhat upscale restaurant,
+
+552
+00:39:17,520 --> 00:39:19,680
+there's napkins on your table, right?
+
+553
+00:39:19,680 --> 00:39:28,960
+So our robots, our robots today fold thousands of napkins for uh many many different locations, many different gentle locations in the United States.
+
+554
+00:39:28,960 --> 00:39:32,800
+So that's actually our biggest scaled customer, right?
+
+555
+00:39:32,800 --> 00:39:35,080
+So I want to make a distinction here.
+
+556
+00:39:35,440 --> 00:39:44,400
+Uh today there's a lot of robotics companies talking about deployments, talking about pilots, but what's really hard is not putting your robot in one location or doing a pilot.
+
+557
+00:39:44,400 --> 00:39:54,439
+What's really hard is that the customers believe or validate that your robot creates enough value that they want to deploy your robots across many of their sites.
+
+558
+00:39:54,560 --> 00:40:04,199
+So that's what's happened for us with Dinty phone which to the best of my knowledge hasn't really happened for other companies doing similar like general purpose robots.
+
+559
+00:40:04,240 --> 00:40:08,000
+So at Denton our robots fold thousands of napkins per day.
+
+560
+00:40:08,000 --> 00:40:19,920
+It's the quality standard is extremely high, you know, cuz they want like okay uh the second forward seam of the napkin is only like uh couple centimeters below the uh I don't even know
+
+561
+00:40:19,920 --> 00:40:23,119
+how you call it the the pocket so you can stick the chopsticks in.
+
+562
+00:40:23,119 --> 00:40:29,200
+So it's actually very fine grain high precision has I can show you >> at some level that's what robotics are good for.
+
+563
+00:40:29,200 --> 00:40:30,720
+Robots are good for too, right?
+
+564
+00:40:30,720 --> 00:40:33,760
+Um humans are not the most consistent.
+
+565
+00:40:33,760 --> 00:40:37,520
+Yes, >> especially on small details whereas a robot can somewhat do it perfectly.
+
+566
+00:40:37,520 --> 00:40:50,199
+It's interesting that's the example you bring for general purpose robotics versus >> uh at some level I think people would assume you can have a specialized robot that will fold napkins perfectly to the exact
+
+567
+00:40:50,400 --> 00:41:02,880
+you know millimeter as opposed to something like this but >> yeah I'm sure uh maybe you can right but the hard thing about manipulating deformable object right like napkin towels everything is deformable there just
+
+568
+00:41:02,880 --> 00:41:08,880
+infinite infinitely many possible configuration so that's really hard for a specialized robot, right?
+
+569
+00:41:08,880 --> 00:41:14,960
+And what we find is that by developing a general purpose model in a robot and adapting it to these use cases,
+
+570
+00:41:14,960 --> 00:41:18,199
+you can actually get to a production quality faster.
+
+571
+00:41:18,480 --> 00:41:26,439
+And what's really nice is that now that Dinton has scaled, has signed a much bigger contract with us, they not only want our robots to fold napkins,
+
+572
+00:41:26,640 --> 00:41:31,520
+now they want our robots, you know, like cut, you know, that's why we had the example to cut food to.
+
+573
+00:41:31,520 --> 00:41:33,240
+>> Is that actually the second use case?
+
+574
+00:41:33,440 --> 00:41:34,800
+>> That's one of the use case they're thinking.
+
+575
+00:41:34,800 --> 00:41:35,119
+>> Oh, wow.
+
+576
+00:41:35,119 --> 00:41:38,400
+I think that point needs to cut so many vegetables per day.
+
+577
+00:41:38,400 --> 00:41:39,719
+>> They need to do the dumplings.
+
+578
+00:41:39,760 --> 00:41:40,079
+Exactly.
+
+579
+00:41:40,079 --> 00:41:40,640
+>> Do the full.
+
+580
+00:41:40,640 --> 00:41:41,520
+That's the final boss.
+
+581
+00:41:41,520 --> 00:41:42,679
+That's that's the final.
+
+582
+00:41:43,119 --> 00:41:44,079
+Uh >> I think you can.
+
+583
+00:41:44,079 --> 00:41:46,319
+I think you have the dexterity and precision to do this.
+
+584
+00:41:46,319 --> 00:41:48,079
+Yeah, >> you have little poll.
+
+585
+00:41:48,079 --> 00:41:49,920
+>> But like I know don't break the dumplings.
+
+586
+00:41:49,920 --> 00:41:50,240
+>> Yeah.
+
+587
+00:41:50,240 --> 00:41:50,400
+Yeah.
+
+588
+00:41:50,400 --> 00:41:54,760
+I mean that's that's the obvious benefit is you can adapt them anymore.
+
+589
+00:41:54,960 --> 00:41:58,160
+I think the other thing you really touch on is the speed, right?
+
+590
+00:41:58,160 --> 00:42:01,880
+To make a custom napkin folding with the exact ply, whatever.
+
+591
+00:42:02,400 --> 00:42:03,880
+>> You have to make the machine.
+
+592
+00:42:04,160 --> 00:42:05,680
+You can't just Amazon this.
+
+593
+00:42:05,680 --> 00:42:06,000
+Yeah.
+
+594
+00:42:06,000 --> 00:42:07,680
+But this can do it pretty fast, right?
+
+595
+00:42:07,680 --> 00:42:07,839
+>> Yeah.
+
+596
+00:42:07,839 --> 00:42:09,520
+This can do it very fast.
+
+597
+00:42:09,520 --> 00:42:12,120
+And now it's actually it's at human parody.
+
+598
+00:42:12,160 --> 00:42:12,480
+Yeah.
+
+599
+00:42:12,480 --> 00:42:20,919
+>> You know, and this robot doesn't get tired, doesn't need to uh, you know, you can and I think I really like the fact that you mentioned consistency,
+
+600
+00:42:21,040 --> 00:42:21,640
+right?
+
+601
+00:42:21,680 --> 00:42:35,280
+Like one issue with Dent Tyon is like you know their LA location with New York location Seattle location they the full napkin study differently but from their p perspective they want consistency but you
+
+602
+00:42:35,280 --> 00:42:44,800
+know that's exactly what these models are good at because models are you know just it's a set of weights you can just like put the weights in the different robots across the can ota
+
+603
+00:42:44,800 --> 00:42:45,680
+update them as well.
+
+604
+00:42:45,680 --> 00:42:47,920
+Yeah, you can just update all of them at once, you know.
+
+605
+00:42:47,920 --> 00:42:52,040
+It just once it works, I think it's truly like incredible.
+
+606
+00:42:52,400 --> 00:42:54,240
+>> Final boss is Cheesecake Factory.
+
+607
+00:42:54,240 --> 00:42:56,760
+If you know the story there, they're there from scratch.
+
+608
+00:42:56,880 --> 00:42:59,920
+Everything is very consistent down to the measured gram.
+
+609
+00:42:59,920 --> 00:43:04,360
+Every sauce is made like anywhere you go in the world, you'll have the exact same thing.
+
+610
+00:43:04,400 --> 00:43:05,880
+If you don't know, you don't know.
+
+611
+00:43:05,920 --> 00:43:07,520
+But, you know, that's the that's the fun.
+
+612
+00:43:07,520 --> 00:43:11,040
+>> Anyway, the term that comes to mind is like sort of like bitter lesson for robotics, right?
+
+613
+00:43:11,040 --> 00:43:20,360
+uh instead of the specialized robots which is a lot of uh industrial engineering you build a generalized platform that can uh do a last malineet tuning and and do all those things.
+
+614
+00:43:20,400 --> 00:43:24,919
+>> Give the expert add-on outside of your what is what is more bitter bitter less in robotics?
+
+615
+00:43:25,440 --> 00:43:29,080
+>> Yeah, I think there's several bitter lessons for robotics.
+
+616
+00:43:29,200 --> 00:43:35,959
+One is that robotics is going to scale just like any other domains that machine learning has solved.
+
+617
+00:43:36,079 --> 00:43:36,480
+Right?
+
+618
+00:43:36,480 --> 00:43:37,920
+So what does that mean?
+
+619
+00:43:37,920 --> 00:43:41,240
+That means have as much data as possible.
+
+620
+00:43:41,359 --> 00:43:48,560
+But in robotics, the one thing that's a lot harder is like what is the right data is much harder to figure out than other domains.
+
+621
+00:43:48,560 --> 00:43:48,720
+Right?
+
+622
+00:43:48,720 --> 00:43:50,120
+In language is text.
+
+623
+00:43:50,319 --> 00:43:56,560
+Uh in video games, just video game data, but for robotics like what sensors you choose determine what kind of data you have,
+
+624
+00:43:56,560 --> 00:43:56,880
+right?
+
+625
+00:43:56,880 --> 00:44:03,800
+But if you have the right set of sensors and just scale that data, I think you'll get predictable return on model performance.
+
+626
+00:44:03,839 --> 00:44:06,400
+So in that way, robotics isn't so different.
+
+627
+00:44:06,400 --> 00:44:19,839
+So that's the bitter lesson as a corey of that is that like there's a lot of research in robotics that's coming up with like very specific priors like for example we need to make
+
+628
+00:44:19,839 --> 00:44:29,760
+the robot see objects as they are draw some boxes that will give robot better perception right but I think the bitter lesson here is that just keep the algorithm simpler and scale the right
+
+629
+00:44:29,760 --> 00:44:41,920
+kind of data then generalization better behavior will emerge so that's not so different And the second I think that's the main bitter lesson which is like at the end of the day scaling will
+
+630
+00:44:41,920 --> 00:44:50,480
+work but in robotics to scale and how to scale just much harder because there is no internet you have to come up with your hardware come up with the sensors get all of those
+
+631
+00:44:50,480 --> 00:45:02,400
+right and then scale then I think uh >> I mean there's the argument that you know the world is very made for humans it should be a human right as hard of a hardware problem
+
+632
+00:45:02,400 --> 00:45:09,880
+that is think 10 20, 100, 200 years down the line, can we make a really efficient human?
+
+633
+00:45:10,240 --> 00:45:12,960
+But you have to be practical with what we have now, right?
+
+634
+00:45:12,960 --> 00:45:13,520
+>> Yeah.
+
+635
+00:45:13,520 --> 00:45:13,839
+Yeah.
+
+636
+00:45:13,839 --> 00:45:19,440
+So the way I think about it is like yes, eventually the robot should if you want to build a general purpose robot,
+
+637
+00:45:19,440 --> 00:45:19,760
+right?
+
+638
+00:45:19,760 --> 00:45:24,439
+Like a machine that can be adapted to as many use cases as possible.
+
+639
+00:45:24,560 --> 00:45:30,560
+I think human form factor will be the best one just because that's what we have been doing uh for ages,
+
+640
+00:45:30,560 --> 00:45:31,160
+right?
+
+641
+00:45:31,200 --> 00:45:41,359
+But I think the best way to actually build a human robot is to take an iterative approach because robotics is so hard the you know the whole problem the whole stack is so long
+
+642
+00:45:41,359 --> 00:45:53,119
+it's really hard to know apuri what's the right decision to make right and because hardware decision is much more expensive much more costly just because hardware iteration is a lot slower you actually want
+
+643
+00:45:53,119 --> 00:46:01,520
+to take a incremental iterative approach not going all the way to the final form factor because the chances that the thing you build actually doesn't last.
+
+644
+00:46:01,520 --> 00:46:02,240
+It's not good enough.
+
+645
+00:46:02,240 --> 00:46:03,839
+So, you just end up scratching it anyway.
+
+646
+00:46:03,839 --> 00:46:14,480
+You know, like it's public news like you know Optimus you know already gone through many many iterations and they had to scratch their designs right and I think by iterating with a semihuman form
+
+647
+00:46:14,480 --> 00:46:25,880
+factor and actually putting them out to real customers or and getting models really deployed you get that feedback loop that you wouldn't get if you're just trying to build like you know warehouse humanoid
+
+648
+00:46:26,000 --> 00:46:28,000
+and you spend like five 10 years building it.
+
+649
+00:46:28,000 --> 00:46:33,359
+I think the iterative approach will actually get us closer to the final robot faster.
+
+650
+00:46:33,359 --> 00:46:38,079
+>> And I will say, you know, for those listening and not watching, it's probably the smoothest robot we've seen.
+
+651
+00:46:38,079 --> 00:46:44,800
+Like every humanoid you've seen is >> jerky and even humans don't walk as smooth as >> because Yeah.
+
+652
+00:46:44,800 --> 00:46:48,960
+The model is can can move every single motor at once.
+
+653
+00:46:48,960 --> 00:46:49,440
+>> Yeah.
+
+654
+00:46:49,440 --> 00:46:50,480
+More than two cohort.
+
+655
+00:46:50,480 --> 00:46:50,800
+Yeah.
+
+656
+00:46:50,800 --> 00:46:51,359
+>> Yeah.
+
+657
+00:46:51,359 --> 00:46:51,599
+Yeah.
+
+658
+00:46:51,599 --> 00:47:01,520
+And that's actually a very hard problem because if you just think about like uh the model you know it's outputting action there's an action you know dimension right the bigger the dimension is the
+
+659
+00:47:01,520 --> 00:47:10,560
+harder to fit uh the model to the data but here the action space is quite large but uh uh we did very good job to make sure the model fits well and gives you
+
+660
+00:47:10,560 --> 00:47:20,240
+a smooth >> can you bound the order of magnitude of the action space or is that >> yeah so it's in the orders of like uh you know about a 100 action dimensions >> yeah and these
+
+661
+00:47:20,240 --> 00:47:21,839
+are all you continuous, right?
+
+662
+00:47:21,839 --> 00:47:22,480
+>> Continuous, right?
+
+663
+00:47:22,480 --> 00:47:36,720
+So, the model is just basically predicting at very high frequency, you know, like tens like at least 50 dimensional vector like 10 20 times a second to get that continuous motion >> and potentially predicting
+
+664
+00:47:36,720 --> 00:47:38,000
+one to two seconds out.
+
+665
+00:47:38,000 --> 00:47:40,360
+So, that is another 100 frames or whatever.
+
+666
+00:47:40,480 --> 00:47:45,760
+>> There's a bit of a history um similar to context of previous state I guess.
+
+667
+00:47:45,760 --> 00:47:48,319
+>> So, context is a very important thing in robotics, right?
+
+668
+00:47:48,319 --> 00:47:58,640
+Because otherwise if you're just making decision based on the current observation sometimes it's really hard to tell like what to do next right for example like if you think about opening a microwave like
+
+669
+00:47:58,640 --> 00:48:08,720
+in the middle part it's unclear whether or not you're composer or trying to open it right so like context is also really important >> yeah and I I have a screenshot of the the fridge
+
+670
+00:48:08,720 --> 00:48:18,720
+demo where is there's aentic planning and two hauling and all those things so we can show that for listeners >> I think that's an interesting side after the model >> how do to wrap it around
+
+671
+00:48:18,720 --> 00:48:23,719
+into aentic harness like what is >> kernel deployment
+
+672
+00:48:24,720 --> 00:48:37,040
+clock UI you have a lot of cool UIs u but you know what what goes into wrapping model output towards >> final thing is this custom per use case is it you have your own
+
+673
+00:48:37,040 --> 00:48:48,720
+SDK >> yeah yeah so I mean eventually we will have our own SDK but uh the way the way we think about is we want a general like harness layer for robotics foundation model today
+
+674
+00:48:48,720 --> 00:49:00,079
+that is our own model right the way I think about is like for any like real task long task in the physical world there's a lot of like highle decision- making you have to
+
+675
+00:49:00,079 --> 00:49:11,680
+do right it's not just like robot you know only reasoning about the physical world in the action continuous trajectories right because that's like very like low-level the thing you're actually executing the physical world
+
+676
+00:49:11,680 --> 00:49:20,800
+but that's not the intent that you know like when we are doing decision making we think about steps of a recipe we think about oh like I finished this I need to do that
+
+677
+00:49:20,800 --> 00:49:29,359
+while I'm waiting for this part to finish I need to go somewhere else to do something else there's a lot of high level cognition decision making that's happening and I think for robots to
+
+678
+00:49:29,359 --> 00:49:38,800
+handle even you know the laundry task we are showing you it has to have that capability because you know it needs to reason that okay the washer is running so I should go do
+
+679
+00:49:38,800 --> 00:49:47,200
+something else while the washer is finishing but now the washer is done I should take I should take the towels from the washer and put it in dryer immediately Right?
+
+680
+00:49:47,200 --> 00:49:50,480
+Because if not, then that becomes a bottleneck in the whole workflow.
+
+681
+00:49:50,480 --> 00:49:50,880
+Right?
+
+682
+00:49:50,880 --> 00:49:53,839
+So, there's a lot of reasoning that needs to happen for robotics.
+
+683
+00:49:53,839 --> 00:50:00,880
+And I think in theory, you could just, you know, try to learn that with a, you know, low-level model that's outputting actions,
+
+684
+00:50:00,880 --> 00:50:02,360
+but it would be extremely inefficient.
+
+685
+00:50:02,640 --> 00:50:15,440
+So that is why having a hierarchical system like putting a harness like a agentic system around our world action model is what allow the model to compose different capabilities different skills to solve a
+
+686
+00:50:15,440 --> 00:50:17,080
+much longer horizon task.
+
+687
+00:50:17,200 --> 00:50:19,440
+It's very much like in language model, right?
+
+688
+00:50:19,440 --> 00:50:22,840
+Like two years ago, three years ago, the model was only good at autocomplete.
+
+689
+00:50:23,359 --> 00:50:27,400
+Like humans have to like tap tap tap to get the model to keep spitting out code.
+
+690
+00:50:27,440 --> 00:50:39,440
+But today, just like agentic system just carries the end to end task and that's and I think that's important because I think today in robotics people are still thinking about autonomy at the very
+
+691
+00:50:39,440 --> 00:50:43,119
+task level like a one minute 30 second task.
+
+692
+00:50:43,119 --> 00:50:56,240
+But really the value is about tasks or like workflows that go on like unsupervised for hours and that's what we're building towards and that's why I thinking about the robotics problem not just as
+
+693
+00:50:56,240 --> 00:51:07,680
+a modeling problem but rather as a system problem you need good agent good harness engineer good model good hardware everything it's like how we think general purpose robots ought to be solved >> do you
+
+694
+00:51:07,680 --> 00:51:15,880
+guys see benefits from language model coding tools getting better So new Opus 55, new Astra.
+
+695
+00:51:16,319 --> 00:51:19,640
+Um, do you have language models in your agent harness?
+
+696
+00:51:19,760 --> 00:51:24,800
+How does AGI being developed in language model space affect you guys?
+
+697
+00:51:24,800 --> 00:51:25,200
+>> No.
+
+698
+00:51:25,200 --> 00:51:25,599
+No.
+
+699
+00:51:25,599 --> 00:51:25,839
+Yeah.
+
+700
+00:51:25,839 --> 00:51:26,559
+No, absolutely.
+
+701
+00:51:26,559 --> 00:51:29,640
+Like it affects us very deeply in many ways.
+
+702
+00:51:29,839 --> 00:51:33,440
+One is that like we're extremely AI native company, right?
+
+703
+00:51:33,440 --> 00:51:40,160
+Like coding agents, all of that is a very fundamental part of our work and then we're very welcoming of that.
+
+704
+00:51:40,160 --> 00:51:44,000
+Like whenever there's a new model, we're the first one to test it, right?
+
+705
+00:51:44,000 --> 00:51:55,280
+Like we didn't like when GBD6 came out, we had like a companywide hackathon the same week and the thing that our engineers built was incredible and many of them are many of the features
+
+706
+00:51:55,280 --> 00:51:57,159
+we built is already in main in production.
+
+707
+00:51:57,440 --> 00:51:57,680
+Right.
+
+708
+00:51:57,680 --> 00:52:01,119
+So we really like using coding agents to accelerate our work.
+
+709
+00:52:01,119 --> 00:52:05,200
+>> Uh just for people interested, uh anything surprising in GPC6 that you found?
+
+710
+00:52:05,200 --> 00:52:11,440
+Yeah, I think uh it's about the ability for it to like construct virtual environments, right?
+
+711
+00:52:11,440 --> 00:52:13,040
+Turns into simulation.
+
+712
+00:52:13,040 --> 00:52:15,599
+We talked that uh 20 minutes ago.
+
+713
+00:52:15,599 --> 00:52:17,480
+I think that's really exciting.
+
+714
+00:52:17,520 --> 00:52:18,160
+>> It's interesting.
+
+715
+00:52:18,160 --> 00:52:21,880
+There were so many like CAD Zillow to 3Dish.
+
+716
+00:52:22,160 --> 00:52:24,319
+>> He lost the hackathon to a CAD.
+
+717
+00:52:24,319 --> 00:52:27,760
+Uh >> I won I did the CAD >> other way.
+
+718
+00:52:27,760 --> 00:52:28,240
+Other way.
+
+719
+00:52:28,240 --> 00:52:28,480
+No.
+
+720
+00:52:28,480 --> 00:52:31,760
+Oh, >> that was I won a GPT hackathon just for fun.
+
+721
+00:52:31,760 --> 00:52:33,560
+I was like I know nothing CAD.
+
+722
+00:52:34,160 --> 00:52:38,640
+um might as well play around with it cuz every demo is doing it.
+
+723
+00:52:38,640 --> 00:52:41,359
+I'm like it's going to be garbage and I'm like it's kind of grounded.
+
+724
+00:52:41,359 --> 00:52:44,120
+It's kind of good but it's just hackathon stuff.
+
+725
+00:52:44,640 --> 00:52:45,280
+Yeah.
+
+726
+00:52:45,280 --> 00:52:46,240
+>> Um cool.
+
+727
+00:52:46,240 --> 00:52:52,319
+I I I was going to round out uh some of the use cases and then go into a little bit of company culture and your personal background.
+
+728
+00:52:52,319 --> 00:52:52,800
+>> Yeah.
+
+729
+00:52:52,800 --> 00:52:55,400
+I have two uh two technical questions.
+
+730
+00:52:55,680 --> 00:53:08,000
+Uh, one is are there any like goals you want to set for yourself like 6 months, 1 year, 2 year timeline that you see robot should be able to do fill in the blank
+
+731
+00:53:08,000 --> 00:53:09,520
+that you're kind of working towards?
+
+732
+00:53:09,520 --> 00:53:18,240
+>> Yeah, I mean in the 6 months to one year frame, our goal is definitely like scaling up our robots and our model and truly getting them to deploy.
+
+733
+00:53:18,240 --> 00:53:22,240
+>> I mean like a task like uh right now it's cutting or opening a fridge.
+
+734
+00:53:22,240 --> 00:53:29,640
+Is there like do you set yourself to by this timeline we should to stay on track be able to do whatever?
+
+735
+00:53:30,079 --> 00:53:41,520
+>> Yeah I think uh in terms of deployments we're exploring many different industries there isn't a particular task we think we have to nail right because our goal is to build a general model a
+
+736
+00:53:41,520 --> 00:53:51,200
+general platform and we think of each different task as like validation of our platform as a way as a wedge for us to figure out how to build everything better.
+
+737
+00:53:51,200 --> 00:53:54,840
+So today we're doing a lot of that in laundry in restaurants.
+
+738
+00:53:55,280 --> 00:54:02,360
+Uh we have already deployed tens of robots but our goal next year is like overall just deploying hundreds of robots.
+
+739
+00:54:02,400 --> 00:54:08,720
+>> Uh my part two on the last technical question is how do you see the rest of the industry?
+
+740
+00:54:08,720 --> 00:54:13,240
+So fill in for people what other approaches are people taking to world models?
+
+741
+00:54:13,280 --> 00:54:14,360
+Why are they wrong?
+
+742
+00:54:14,559 --> 00:54:18,720
+Um what is different but good about their approaches as well?
+
+743
+00:54:18,720 --> 00:54:30,240
+just what is the landscape of robotic world models in this space and why how have you come to your current >> yeah no that's a great question so I think robotics is the most exciting
+
+744
+00:54:30,240 --> 00:54:42,720
+space today and there's just so many uh uh you know amazing companies that I truly respect you know they've been doing great frontier work like us and uh it's very exciting and I think
+
+745
+00:54:42,720 --> 00:54:49,920
+what we are seeing today is that there's still many different approaches to robotics like we believe that hardware needs to be built in-house.
+
+746
+00:54:49,920 --> 00:54:52,280
+We need to own the whole uh chain.
+
+747
+00:54:52,400 --> 00:54:55,880
+Uh we believe that scaling human data is extremely important.
+
+748
+00:54:55,920 --> 00:54:58,960
+But there are companies that's betting on just scaling robots data.
+
+749
+00:54:58,960 --> 00:55:02,720
+We're scaling some sort of intermediate like data collection devices, right?
+
+750
+00:55:02,720 --> 00:55:07,119
+All of them are in play and uh I think it's different approaches.
+
+751
+00:55:07,119 --> 00:55:08,800
+We'll just see what happens.
+
+752
+00:55:08,800 --> 00:55:18,840
+I think right now uh it's still a bit early to tell, but we feel pretty good about the way we're building things just because like we as a company culture-wise,
+
+753
+00:55:19,119 --> 00:55:21,440
+mission wise, we're not here to just build a model.
+
+754
+00:55:21,440 --> 00:55:23,320
+We're here to truly get robots deployed.
+
+755
+00:55:23,440 --> 00:55:26,880
+So we deploy as much as possible, work on the hard problem.
+
+756
+00:55:26,880 --> 00:55:29,959
+So we identify problems much earlier on.
+
+757
+00:55:30,000 --> 00:55:34,720
+So then I think that really helps us identify what is the true bottleneck and then solve it.
+
+758
+00:55:34,720 --> 00:55:42,160
+And I think for uh folks for people who are only working at one part of the problem, it's kind of like fog of war.
+
+759
+00:55:42,160 --> 00:55:49,599
+You don't really see the whole picture and you might be building something that's extremely cool technologically but may not be what people need or want at the end,
+
+760
+00:55:49,599 --> 00:55:49,760
+right?
+
+761
+00:55:49,760 --> 00:55:55,880
+I think there's a whole graveyard of robotics company and I think all of them had very shiny, very cool robots,
+
+762
+00:55:56,079 --> 00:56:03,200
+but uh you know just figuring out what people actually want is actually is very easy to say you know like build something people want.
+
+763
+00:56:03,200 --> 00:56:09,280
+You know everyone says that but it's actually really hard to execute uh botics company >> on the technical side.
+
+764
+00:56:09,280 --> 00:56:11,040
+You have your world action model.
+
+765
+00:56:11,040 --> 00:56:13,399
+Is that standard across industry?
+
+766
+00:56:13,520 --> 00:56:15,839
+Is there other directions people are taking?
+
+767
+00:56:15,839 --> 00:56:17,839
+>> Yeah, I would say that's also not standard.
+
+768
+00:56:17,839 --> 00:56:20,720
+So we're building world action model on top of world model.
+
+769
+00:56:20,720 --> 00:56:22,960
+So there's many companies building world model.
+
+770
+00:56:22,960 --> 00:56:28,160
+You know you mentioned runway they're also getting to adapt adapt video world models.
+
+771
+00:56:28,160 --> 00:56:32,120
+>> Uh there are also companies building uh vision language action model.
+
+772
+00:56:32,160 --> 00:56:36,520
+So that's like taking vision language models and adapting them to robotics.
+
+773
+00:56:37,200 --> 00:56:39,760
+Uh so I think there's many different ways to go about it.
+
+774
+00:56:39,760 --> 00:56:49,920
+But I think at the end of the day like what we call the models is less important than what we like believe the model needs to be able to do at a first principle
+
+775
+00:56:49,920 --> 00:56:50,319
+level.
+
+776
+00:56:50,319 --> 00:56:52,120
+So I want to explain that a bit.
+
+777
+00:56:52,160 --> 00:56:57,959
+I think for robotics the most important thing is that you need to be able to predict the future.
+
+778
+00:56:58,480 --> 00:56:58,960
+Right.
+
+779
+00:56:58,960 --> 00:56:59,280
+Right.
+
+780
+00:56:59,280 --> 00:57:08,679
+Robotics, any physical system is fundamentally about based on the information you have at the present moment and before what should you do next.
+
+781
+00:57:08,720 --> 00:57:11,640
+So it's really about predicting what comes next.
+
+782
+00:57:11,839 --> 00:57:16,040
+So predicting robot action is like predicting what the robot should do next.
+
+783
+00:57:16,079 --> 00:57:19,760
+But if you think about it, robot is just a part of the world, right?
+
+784
+00:57:19,760 --> 00:57:25,640
+Robot influences the world, but the world also influences how the robot should behave in that environment.
+
+785
+00:57:26,079 --> 00:57:36,720
+So if you think about it this way then the maximal the most first principle thing you can do just predict as much of the world that you can possibly predict right so that's why
+
+786
+00:57:36,720 --> 00:57:50,960
+we believe predicting the future is extremely important and today the instantiation is world action model and VA only predicts robot actions where some more abstract representation of the world but whenever you're predicting abstract
+
+787
+00:57:50,960 --> 00:58:06,319
+representation of the world you're encoding your own bias into what's important to predict and the bitter lesson tells you let's remove human biases let's just take the most raw representation the camera inputs and
+
+788
+00:58:06,319 --> 00:58:16,000
+just predict all of that right so that's how I think about uh modeling for robotics today >> so just to press you a little bit on this you're you're basically you're saying your approach is
+
+789
+00:58:16,000 --> 00:58:25,719
+better than the VA right because you're you're you're you're emphasizing prediction I fully buy that I like you've sold me on it >> if you were wrong what is the most likely be number two.
+
+790
+00:58:26,400 --> 00:58:29,200
+So, someone else is doing interesting question.
+
+791
+00:58:29,200 --> 00:58:29,800
+>> Yeah.
+
+792
+00:58:30,240 --> 00:58:35,159
+So, yeah, there's a caveat in what I've said before and I think that's where I could be wrong.
+
+793
+00:58:35,200 --> 00:58:35,800
+Right.
+
+794
+00:58:36,319 --> 00:58:41,200
+Well, I said that you need to predict the world as much as possible, right?
+
+795
+00:58:41,200 --> 00:58:47,839
+But what that doesn't say is that does your sensor have everything about the world that you need to predict?
+
+796
+00:58:47,839 --> 00:58:49,880
+I think I touched on this a little bit, right?
+
+797
+00:58:49,920 --> 00:58:56,760
+Like if you train a world model that's purely based on videos, I think it'll be a very powerful world model,
+
+798
+00:58:56,799 --> 00:59:05,880
+but it may not be a sufficiently rich enough world model because you're missing critical aspects of the world like sound like touch,
+
+799
+00:59:06,240 --> 00:59:06,840
+right?
+
+800
+00:59:06,960 --> 00:59:18,439
+So I think what where we could be wrong is like okay I have the best world model on vision vision based world model but tomorrow someone else comes out with a vision plus tactile
+
+801
+00:59:18,559 --> 00:59:33,119
+world model that just like 100x more data efficient just because you know vision is a very high information or like a highly redundant you know input because you know every other pixel they don't
+
+802
+00:59:33,119 --> 00:59:44,799
+change that much you can see you can understand the world without perfect vision but tactile you know other modality might be much denser in information right so maybe having that predicting that would just
+
+803
+00:59:44,799 --> 00:59:53,839
+allow you to use much less vision so you can get to the same performance with much less compute with much less data right but >> I think you'll be able to adapt very easy >> no
+
+804
+00:59:53,839 --> 01:00:05,920
+exactly there's also the level of how much data >> right so the reason why I bring this up is because I think if vision tactile world model or vision tactile audio whatever world model is
+
+805
+01:00:05,920 --> 01:00:19,640
+the final thing that solves robotics then I think robotics companies will be able to do that better than video generation companies is trying to pivot to robotics the reason is like to understand sensing
+
+806
+01:00:19,680 --> 01:00:29,280
+is actually very complicated like we've been building that since the company started so we know the bottleneck we know how to combine them but for if you're just trying to adapt the video model
+
+807
+01:00:29,280 --> 01:00:38,799
+to robotics action they're like you know if you were wrong if you know video model is not enough they're You don't really have the knowhow to get tactile to work very well,
+
+808
+01:00:38,799 --> 01:00:39,839
+but we have that.
+
+809
+01:00:39,839 --> 01:00:42,480
+>> This is a side question, but I think it's a quick one.
+
+810
+01:00:42,480 --> 01:00:44,280
+Uh, heat seems very important.
+
+811
+01:00:44,319 --> 01:00:50,160
+Is infrared just another color to you or is that a >> Yeah, it could be another could be another color,
+
+812
+01:00:50,160 --> 01:00:50,960
+another input.
+
+813
+01:00:50,960 --> 01:00:51,200
+Yeah.
+
+814
+01:00:51,200 --> 01:00:52,120
+>> To the model.
+
+815
+01:00:52,400 --> 01:00:54,679
+>> Could be used in in cooking scenario actually.
+
+816
+01:00:54,720 --> 01:01:01,359
+Like I know companies that's using infrared to like know how cooked their food is cuz that's really hard to tell from RGB camera.
+
+817
+01:01:01,359 --> 01:01:01,839
+Right.
+
+818
+01:01:01,839 --> 01:01:13,440
+My uh very naive push back on your last point is uh maybe we don't need to understand hardware cloud code or codecs can just you know v code it in uh there's a lot
+
+819
+01:01:13,440 --> 01:01:17,240
+you can do without understanding but of course >> it's just not in the distribution.
+
+820
+01:01:18,079 --> 01:01:22,120
+>> Uh so so I wanted to bring it a little bit to your personal story or your background.
+
+821
+01:01:22,240 --> 01:01:24,360
+Um we both went to pen.
+
+822
+01:01:24,480 --> 01:01:26,079
+I did not >> I just found out today.
+
+823
+01:01:26,079 --> 01:01:26,880
+>> Uh yes.
+
+824
+01:01:26,880 --> 01:01:27,119
+Yes.
+
+825
+01:01:27,119 --> 01:01:31,520
+Uh I I I don't know my my my big regret is I didn't join the self the darker challenge.
+
+826
+01:01:31,520 --> 01:01:31,839
+Okay.
+
+827
+01:01:31,839 --> 01:01:35,159
+>> Which uh and then I could have been like early whimo or something.
+
+828
+01:01:35,200 --> 01:01:40,679
+Um you were at grasp and then you you've also worked at uh Google and Nvidia.
+
+829
+01:01:41,280 --> 01:01:46,240
+>> What are the different focuses of let's say academia versus Google versus Nvidia?
+
+830
+01:01:46,240 --> 01:01:47,680
+You've seen all these places, right?
+
+831
+01:01:47,680 --> 01:01:51,280
+And then like that obviously caused you to say like screw all that.
+
+832
+01:01:51,280 --> 01:01:52,240
+I'm going to do my own thing, right?
+
+833
+01:01:52,240 --> 01:01:54,199
+You could have joined Open AI robotics.
+
+834
+01:01:54,240 --> 01:01:54,640
+>> Yeah.
+
+835
+01:01:54,640 --> 01:01:59,119
+Uh so can you just take us through chronologically but also like one thing you learned from each.
+
+836
+01:01:59,119 --> 01:01:59,440
+Yeah.
+
+837
+01:01:59,440 --> 01:02:04,679
+So chronologically, yeah, maybe it's useful to talk about how I got into AI in the beginning, right?
+
+838
+01:02:04,720 --> 01:02:08,439
+So, uh, as a kid, so I spent time in Japan and China.
+
+839
+01:02:08,480 --> 01:02:11,800
+I grew up playing Go, you know, the going alpha go.
+
+840
+01:02:11,920 --> 01:02:17,680
+So when Alph Go came out, I was a senior in high school and I was mind ball because I've been playing this game for many,
+
+841
+01:02:17,680 --> 01:02:18,160
+many years.
+
+842
+01:02:18,160 --> 01:02:19,159
+It's so complicated.
+
+843
+01:02:19,200 --> 01:02:25,119
+Like I think before Alpha Go came out, people were like, "Okay, Go is one of the game that AI will never solve.
+
+844
+01:02:25,119 --> 01:02:29,280
+the search space is like larger than the total number of atoms in the world.
+
+845
+01:02:29,280 --> 01:02:40,240
+how could you possibly search for solutions in that then like you know RL reinforcement learning just like cracked it right and I think that was how I got into AI initially like I was
+
+846
+01:02:40,240 --> 01:02:52,199
+just really interested in like models were systems agents that can self-improve right so when I got to pen as a PhD student I just really wanted to work on reinforcement learning so I'm co-advised
+
+847
+01:02:52,400 --> 01:03:00,919
+both my advisers were interested in uh at the time one of my adviser was more in robotics he did a posttock at Berkeley robotics lab.
+
+848
+01:03:00,960 --> 01:03:10,640
+So that's how I got into robots uh at pen you know we have grass lab I think one of the best places to do robotics and uh so that's how I got into doing
+
+849
+01:03:10,640 --> 01:03:23,440
+RL for robotics in my PhD and then yeah I did a bunch of research thinking about how to connect reinforcement learning uh with human data how to do reinforcement learning uh theory in a
+
+850
+01:03:23,440 --> 01:03:33,240
+very rigorous way and then I went to Nvidia that's when GBD4 came out at the time we were very interested in just solving uh pen spinning task.
+
+851
+01:03:33,440 --> 01:03:43,599
+I don't know why like uh >> it's the dexter it's the dexterity limit right I mean you can solve Rubik's cubes and then >> time I was working with uh Jim fan yuk which you guys
+
+852
+01:03:43,599 --> 01:03:54,079
+probably also know like yeah we were just like okay let's try to do dexious pen spinning the initial idea was like learning it from human videos >> right we were trying to watch humans do
+
+853
+01:03:54,079 --> 01:04:03,280
+it but then I realized okay today we don't have a dous hand that can spin pencil at all so how would I even be able to evaluate the algorithm even if learning from human
+
+854
+01:04:03,280 --> 01:04:04,079
+worked at all.
+
+855
+01:04:04,079 --> 01:04:07,240
+So I said, okay, we need to first try this in simulation.
+
+856
+01:04:07,680 --> 01:04:15,599
+Then as soon as I try to set up a simulated environment for a robot hand with a pen, I immediately saw what the issue is.
+
+857
+01:04:15,599 --> 01:04:23,599
+The issue is like like if I had to come up with this simulation environment, the reward function for reinforcement learning to solve pen spinning,
+
+858
+01:04:23,599 --> 01:04:24,520
+that's impossible.
+
+859
+01:04:24,720 --> 01:04:29,719
+Like I wouldn't be able to come up with all the terms that you need to get RL to learn the right behavior.
+
+860
+01:04:29,920 --> 01:04:34,840
+And then I I was just thinking what if a model that can write code can do that.
+
+861
+01:04:35,119 --> 01:04:37,119
+That's what became the Eureka project, right?
+
+862
+01:04:37,119 --> 01:04:49,680
+We basically like in my opinion we had the first like recursive self-improving robotic agent in simulation because we really like used that to solve a new task that no one has demonstrated before and
+
+863
+01:04:49,680 --> 01:04:57,480
+that that that allowed me to see the potential of using language model using coding models to really accelerate robotics.
+
+864
+01:04:57,920 --> 01:05:06,799
+So then I went to Google deep mind because at the time you know I mean even today they have one of the frontier models in Gemini right so I was looking at how to use
+
+865
+01:05:06,799 --> 01:05:17,039
+Gemini for robotics but eventually I realized like I had a lot of fun doing academic research but there was always a question in the back of my mind like does any of this matter
+
+866
+01:05:17,039 --> 01:05:25,200
+you know like when you're working on this kind of thing in the lab like you know you ask me how do we come up with so many interesting fun tasks you're basically doing your
+
+867
+01:05:25,200 --> 01:05:29,240
+own eval you're grading your own homework like I wanted something more real.
+
+868
+01:05:29,280 --> 01:05:39,200
+I wanted something that could actually be used by uh millions of people in the world and I felt 2024 was when we started Dina like end of 2024 that was the right time that
+
+869
+01:05:39,200 --> 01:05:43,440
+we can take some of these technology to actually putting them out in the real world.
+
+870
+01:05:43,440 --> 01:05:54,040
+So that's why uh I started Dino with Lynon New York and uh fast forward two years we built our platform our model our robots are in Tinton.
+
+871
+01:05:54,319 --> 01:05:56,400
+Go check it out and uh >> go eat.
+
+872
+01:05:56,400 --> 01:05:57,119
+Yeah, go eat.
+
+873
+01:05:57,119 --> 01:05:58,079
+It's been a journey.
+
+874
+01:05:58,079 --> 01:06:08,559
+And uh but what still gets me really excited is you know like some of a lot of the ideas that I temporarily abandoned when we started Dynam because you know to build a company
+
+875
+01:06:08,559 --> 01:06:19,359
+have to be very practical like I think simulation wasn't ready in 2024 but now with you know like the new frontier models and what we're seeing internally like this might change and uh that's
+
+876
+01:06:19,359 --> 01:06:20,880
+very exciting.
+
+877
+01:06:20,880 --> 01:06:21,119
+>> Yeah.
+
+878
+01:06:21,119 --> 01:06:24,040
+And uh so then also let's talk about company culture.
+
+879
+01:06:24,160 --> 01:06:24,640
+Yeah.
+
+880
+01:06:24,640 --> 01:06:32,120
+um what principles you're you're building with the company with obviously like the the you're you're responsible for the science and the the research agenda.
+
+881
+01:06:32,480 --> 01:06:37,639
+Uh and it it just seems like when we meet the engineers they're they're very engaged and and they have a lot of ownership.
+
+882
+01:06:37,920 --> 01:06:39,200
+They have a lot of motivations.
+
+883
+01:06:39,200 --> 01:06:43,119
+>> I'll say it's it's interesting to see how many side projects people just work on.
+
+884
+01:06:43,119 --> 01:06:49,599
+So some of the demos we've seen it's just the engineers that work on it were like yeah this seems fun might as well do it.
+
+885
+01:06:49,599 --> 01:06:49,920
+Yeah.
+
+886
+01:06:49,920 --> 01:06:55,520
+>> Um to your point on fun evals right here like 2 feet behind the camera.
+
+887
+01:06:55,520 --> 01:06:56,600
+>> Can't talk about that.
+
+888
+01:06:56,720 --> 01:07:03,280
+>> No, I mean the thing is just the the eval is just there's highlighters for highlighters being rubber banded together,
+
+889
+01:07:03,280 --> 01:07:03,440
+right?
+
+890
+01:07:03,440 --> 01:07:07,520
+It's like who comes up with ah yes we need to test putting rubber bands on high.
+
+891
+01:07:07,520 --> 01:07:09,039
+It's just stationary >> fun stuff.
+
+892
+01:07:09,039 --> 01:07:11,440
+People are very uh you know creative here.
+
+893
+01:07:11,440 --> 01:07:12,840
+It's a beautiful space.
+
+894
+01:07:12,960 --> 01:07:13,119
+>> Yeah.
+
+895
+01:07:13,119 --> 01:07:14,120
+I think culture.
+
+896
+01:07:14,319 --> 01:07:14,640
+Yeah.
+
+897
+01:07:14,640 --> 01:07:18,000
+So let's first talk about you know how we run a company right?
+
+898
+01:07:18,000 --> 01:07:24,760
+Like we think of oursel as like a like a like a eventually like a research plus product company.
+
+899
+01:07:24,799 --> 01:07:30,600
+It's kind of like open AI where you do frontier research but eventually all of them make their way into codeex to chacht.
+
+900
+01:07:30,960 --> 01:07:32,160
+That's how we think about it too.
+
+901
+01:07:32,160 --> 01:07:37,119
+We're not here to just do open-ended like whatever thing that interests us at the time.
+
+902
+01:07:37,119 --> 01:07:43,760
+We're always like product driven like we want to deploy our robots our platform to a new customer.
+
+903
+01:07:43,760 --> 01:07:46,319
+What are the technical problems we have to solve right?
+
+904
+01:07:46,319 --> 01:07:47,639
+We have to solve generalization.
+
+905
+01:07:47,760 --> 01:07:49,399
+We have to solve whole body control.
+
+906
+01:07:49,440 --> 01:07:51,560
+We have to solve how to adapt quickly.
+
+907
+01:07:51,760 --> 01:07:55,240
+We have to solve how to make the robots follow language.
+
+908
+01:07:55,520 --> 01:07:56,760
+We have to solve dexterity.
+
+909
+01:07:57,039 --> 01:08:03,359
+So once all those problems are very clear then like I mean our engineers are very capable, they're very smart.
+
+910
+01:08:03,359 --> 01:08:06,760
+So they just create instances of the task.
+
+911
+01:08:06,880 --> 01:08:09,920
+They create tasks that would stress test those capabilities, right?
+
+912
+01:08:09,920 --> 01:08:14,319
+Like the the grabbing and drink task is just how we test language following, right?
+
+913
+01:08:14,319 --> 01:08:16,000
+You can just specify what you want.
+
+914
+01:08:16,000 --> 01:08:19,520
+If the model follows intent, follows instruction, you should be able to do it.
+
+915
+01:08:19,520 --> 01:08:24,799
+So that's how we think about like at the top level we identify what are the things we have to solve.
+
+916
+01:08:24,799 --> 01:08:35,440
+Then we have a lot of bottoms up project to like actually drive execution to solve them and uh you know you hire the right people and everyone here is super passionate about robots.
+
+917
+01:08:35,440 --> 01:08:37,520
+You know they've been doing this for a long time.
+
+918
+01:08:37,520 --> 01:08:44,400
+they love it and we just create a culture where it just naturally happens and uh it's it's a really fun place to work.
+
+919
+01:08:44,400 --> 01:08:51,279
+>> What's the split between like uh technical research software versus hardware side of the company?
+
+920
+01:08:51,279 --> 01:08:53,679
+Yeah, you know, we recently grew so much.
+
+921
+01:08:53,679 --> 01:09:03,720
+So I don't have the perfect number but I would say on the hardware side we have I would say probably like 30% 40% of hardware just because hardware you need a lot more people
+
+922
+01:09:03,839 --> 01:09:14,159
+and then like you know we have like around 10 people working on models then we have like software engineers uh robotics engineer we have a lot of uh very talented people on the business
+
+923
+01:09:14,159 --> 01:09:24,600
+side you know the most fun thing about building a robotics company is like you see everything you know everything under the sun that could possibly be helpful will be helpful,
+
+924
+01:09:24,880 --> 01:09:25,120
+right?
+
+925
+01:09:25,120 --> 01:09:34,719
+And uh so you just get so much exposure working with so many different people from many different backgrounds who are all very passionate about robots and I think it just it just been really
+
+926
+01:09:34,719 --> 01:09:41,040
+eye opening for me as a founder because when I was a researcher at a lab or like a PhD student,
+
+927
+01:09:41,040 --> 01:09:44,520
+you know, I was talking to researchers every day and that was great.
+
+928
+01:09:44,640 --> 01:09:45,440
+That was really good.
+
+929
+01:09:45,440 --> 01:09:46,799
+I still get to do that every day.
+
+930
+01:09:46,799 --> 01:09:52,880
+But now I also get to learn like just from so many different people from different walks of life.
+
+931
+01:09:52,880 --> 01:09:56,880
+Like some of our uh people who collect data, they had no robotics experience.
+
+932
+01:09:56,880 --> 01:10:04,159
+They were work working retail, working in some other jobs and they came here, you know, they also became very well trained in robotics.
+
+933
+01:10:04,159 --> 01:10:07,880
+And I think that's just pretty amazing things amazing to see.
+
+934
+01:10:08,000 --> 01:10:16,320
+And I think of myself as like a I'm still learning, you know, I think of myself as just always learning in the robotic space and uh I haven't learned.
+
+935
+01:10:16,320 --> 01:10:18,719
+so much as I am now.
+
+936
+01:10:18,719 --> 01:10:21,720
+You know, even though, you know, you think about me now, I'm not a student anymore.
+
+937
+01:10:21,920 --> 01:10:28,920
+I'm I'm here like running a company, managing a lot of things, but I still feel like the day-to-day learning is like just so much.
+
+938
+01:10:29,440 --> 01:10:33,520
+>> Um, and then just to close off, uh, where is Dina going?
+
+939
+01:10:33,520 --> 01:10:37,080
+Uh, two years, five years, what's uh the vision?
+
+940
+01:10:37,440 --> 01:10:42,200
+Yeah, I think our vision is to truly the high level mission is truly bring like
+
+941
+01:10:43,280 --> 01:10:57,600
+you know robots and uh intelligence right into the physical world like actually that means like actually seeing our robots deployed like thousands of customers even more millions of robots that's what we want to
+
+942
+01:10:57,600 --> 01:10:58,279
+get to.
+
+943
+01:10:58,320 --> 01:11:01,319
+>> What's the what's the name from Dina Dynamic?
+
+944
+01:11:01,679 --> 01:11:03,520
+Is there a is there a story?
+
+945
+01:11:03,520 --> 01:11:05,799
+>> Yeah, there's a there's many stories.
+
+946
+01:11:05,840 --> 01:11:08,320
+So I I I named Dina.
+
+947
+01:11:08,320 --> 01:11:10,759
+There was a lot of uh >> take the credit
+
+948
+01:11:12,080 --> 01:11:16,640
+internal different options but uh how the name came to be was there are two things.
+
+949
+01:11:16,640 --> 01:11:26,839
+One is uh so uh touring award winner Richard Sudden who's like the pioneer reinforcement wrote a paper called Dina many many many years ago.
+
+950
+01:11:26,880 --> 01:11:38,239
+It's about basically a Asian that self-improves in a world model and I felt even when we started the company like we weren't doing world model yet but I felt that's how robotics will get
+
+951
+01:11:38,239 --> 01:11:48,000
+solved and now our you know technology technology direction is like converging to that so I felt that was a really neat inspiration also because I worked in reinforcement learning I have a lot of
+
+952
+01:11:48,000 --> 01:11:58,159
+respect for Richard the second thing is that um it's a bit more personal like I grew up in Japan and uh you know the year I was born there was just like a cartoon
+
+953
+01:11:58,159 --> 01:11:58,759
+show.
+
+954
+01:11:58,800 --> 01:12:00,880
+I don't know if you guys have seen like Ultra Man.
+
+955
+01:12:00,880 --> 01:12:01,520
+>> Yeah, of course.
+
+956
+01:12:01,520 --> 01:12:01,679
+>> Yeah.
+
+957
+01:12:01,679 --> 01:12:02,080
+Yeah.
+
+958
+01:12:02,080 --> 01:12:04,440
+The the Yeah, the Ultra Man that year was called Dina.
+
+959
+01:12:04,800 --> 01:12:05,679
+Oh, >> yeah.
+
+960
+01:12:05,679 --> 01:12:07,280
+So, yeah, it's a very subtle thing.
+
+961
+01:12:07,280 --> 01:12:13,040
+Not people know, but I guess now everyone will Yeah, >> the team is finding out too.
+
+962
+01:12:13,040 --> 01:12:13,640
+>> Yeah.
+
+963
+01:12:13,840 --> 01:12:15,840
+>> But like I I think Richard would appreciate.
+
+964
+01:12:15,840 --> 01:12:18,960
+I don't know if you ever talked to him, but >> No, I've seen him at RL conferences.
+
+965
+01:12:18,960 --> 01:12:21,440
+>> You should just be like, "Hey, this this company >> Yeah, I'll invite him.
+
+966
+01:12:21,440 --> 01:12:22,640
+Come to you."
+
+967
+01:12:22,640 --> 01:12:24,480
+>> Everyone knows Richard for bitter lesson, but you know.
+
+968
+01:12:24,480 --> 01:12:24,800
+Yeah.
+
+969
+01:12:24,800 --> 01:12:24,960
+Yeah.
+
+970
+01:12:24,960 --> 01:12:26,120
+Also bitter or less.
+
+971
+01:12:26,239 --> 01:12:26,640
+Yeah.
+
+972
+01:12:26,640 --> 01:12:27,440
+Yeah.
+
+973
+01:12:27,440 --> 01:12:27,760
+>> Okay.
+
+974
+01:12:27,760 --> 01:12:30,600
+Uh any parting thoughts or calls to action?
+
+975
+01:12:31,199 --> 01:12:32,159
+>> Calls to action.
+
+976
+01:12:32,159 --> 01:12:32,320
+Yeah.
+
+977
+01:12:32,320 --> 01:12:38,120
+I think um I do feel like as an industry robotics is still very demo oriented.
+
+978
+01:12:38,320 --> 01:12:40,880
+Like I have done a lot of demos in the past in my lab.
+
+979
+01:12:40,880 --> 01:12:43,199
+You know, even here like we had to show some demos.
+
+980
+01:12:43,199 --> 01:12:51,880
+I think we need more people that's truly uh mission focused on doing whatever it takes to get robots deployed,
+
+981
+01:12:51,920 --> 01:12:57,720
+get uh robotic foundation models truly integrated with hardware and seeing them at real customer sites.
+
+982
+01:12:57,760 --> 01:13:07,920
+I think we're are a pioneer on this regard and I want to see more in this field and for the audiences watching if this mission inspires you if you know solving the hardest problems
+
+983
+01:13:07,920 --> 01:13:17,040
+today is what makes you wake up every day and you want to contribute you know we're always hiring and uh yeah looking forward to that but I think just >> Bay Area anywhere else >> uh
+
+984
+01:13:17,040 --> 01:13:27,199
+yes just Bay Area today but you know as company grows never say never to other locations >> yeah but uh that's what I want to say and uh I wanted to see more robots in
+
+985
+01:13:27,199 --> 01:13:27,960
+the world.
+
+986
+01:13:28,080 --> 01:13:28,320
+>> Yeah.
+
+987
+01:13:28,320 --> 01:13:28,920
+Cool.
+
+988
+01:13:28,960 --> 01:13:30,080
+Congrats on everything.
+
+989
+01:13:30,080 --> 01:13:33,480
+Uh I mean this is this is incredible progress for two years.
+
+990
+01:13:33,840 --> 01:13:35,120
+>> Uh yeah, amazing.
+
+991
+01:13:35,120 --> 01:13:36,159
+>> Yeah, I really appreciate it.
+
+992
+01:13:36,159 --> 01:13:38,400
+Thank thank you for visiting us.
+
+993
+01:13:38,400 --> 01:13:45,120
+I hope you know it's it's been fun and uh >> yeah, I would say like yeah I I don't regret doing this onsite like Okay.
+
+994
+01:13:45,120 --> 01:13:46,920
+>> Yeah, we do a lot of in our studio.
+
+995
+01:13:46,960 --> 01:13:47,280
+Yeah.
+
+996
+01:13:47,280 --> 01:13:48,560
+>> Like this was worth it.
+
+997
+01:13:48,560 --> 01:13:48,719
+>> Yeah.
+
+998
+01:13:48,719 --> 01:13:48,880
+Yeah.
+
+999
+01:13:48,880 --> 01:13:51,199
+I think for robotics got to do it on site.
+
+1000
+01:13:51,199 --> 01:13:56,000
+It just >> for for people listening in, you know, watch the watch the video version.
+
+1001
+01:13:56,000 --> 01:13:57,319
+and we have fun B-roll.
+
+1002
+01:13:57,520 --> 01:14:04,719
+>> This is Dina 2.1, our brand new hardware with a physical agentic harness around the world action model Dino 2.
+
+1003
+01:14:04,719 --> 01:14:12,000
+So what Dina 2.1 can do is to automate a entire end to end workflow in a real physical industry.
+
+1004
+01:14:12,000 --> 01:14:18,200
+So here what we're demonstrating is end to end laundry task in a real laundry room in a hotel.
+
+1005
+01:14:18,400 --> 01:14:21,640
+And behind me these are the researchers for work project.
+
+1006
+01:14:21,679 --> 01:14:29,120
+They're going to show you something really cool, a quick demo, and going to explain some of the technical details h behind,
+
+1007
+01:14:29,120 --> 01:14:31,080
+you know, what made this possible.
+
+1008
+01:14:31,360 --> 01:14:33,040
+So, I'll pass it to George.
+
+1009
+01:14:33,040 --> 01:14:33,440
+>> All right.
+
+1010
+01:14:33,440 --> 01:14:39,000
+Um, I'm just going to show some quick steps in the entire laundry workflow.
+
+1011
+01:14:39,280 --> 01:14:40,480
+Just going to start the robot.
+
+1012
+01:14:40,480 --> 01:14:45,760
+This will be the task of transferring towels from the washer into the dryer.
+
+1013
+01:14:45,760 --> 01:14:46,920
+Let's take a look.
+
+1014
+01:14:58,960 --> 01:14:59,280
+Yeah.
+
+1015
+01:14:59,280 --> 01:15:11,880
+So, this is actually an extremely hard task because you saw the robot has to like really maneuver its body to stick the arms in to grab all the towels without colliding with the doors,
+
+1016
+01:15:12,080 --> 01:15:12,400
+right?
+
+1017
+01:15:12,400 --> 01:15:21,760
+But you see right here, it actually has to be very dextrous and the motion is very smooth because it's a single model that's controlling every single joint in the body.
+
+1018
+01:15:21,760 --> 01:15:31,040
+So there isn't like a, you know, classical planning versus acting separation that makes the motion less smooth, right?
+
+1019
+01:15:31,040 --> 01:15:31,679
+>> Okay, cool.
+
+1020
+01:15:31,679 --> 01:15:33,600
+We can also Do you want to simulate it?
+
+1021
+01:15:33,600 --> 01:15:38,759
+Okay, we can also simulate uh the robot realizing a drop towel.
+
+1022
+01:15:38,880 --> 01:15:40,920
+So I'm just going to drop my towel here.
+
+1023
+01:15:40,960 --> 01:15:46,120
+Uh we'll see that how it is able to see that the towel is dropped and then pick it up.
+
+1024
+01:15:46,320 --> 01:15:48,920
+So after it's done putting the towel in the dryer,
+
+1025
+01:15:50,080 --> 01:15:53,760
+we'll see and it also realizes that this towel is now dirty.
+
+1026
+01:15:53,760 --> 01:15:56,680
+So it goes and puts the towel in the dirty basket.
+
+1027
+01:15:57,280 --> 01:16:01,760
+>> I think this is a perfect case to showcase why we need to build a whole body robot like this,
+
+1028
+01:16:01,760 --> 01:16:02,000
+right?
+
+1029
+01:16:02,000 --> 01:16:09,960
+So it can access different parts all all of the corners of the workspace that it can do everything that a human worker can do.
+
+1030
+01:16:11,040 --> 01:16:13,920
+Next, it will close the dryer door and turn it on.
+
+1031
+01:16:13,920 --> 01:16:21,319
+And they can also reason based on the tactile uh in in terms of what uh drying mode to put in.
+
+1032
+01:16:21,520 --> 01:16:21,840
+>> Yeah.
+
+1033
+01:16:21,840 --> 01:16:29,960
+The most impressive part to me is actually this part of uh turning the knob, you know, like actually operating a machine like a human would.
+
+1034
+01:16:30,080 --> 01:16:33,960
+And uh yeah, maybe it's worth getting a close shot, right?
+
+1035
+01:16:34,000 --> 01:16:38,839
+and making sure it's on the right mode and pressing a button to start the dryer.
+
+1036
+01:16:39,360 --> 01:16:39,760
+Right?
+
+1037
+01:16:39,760 --> 01:16:42,600
+>> It's also important to realize that this is digital frames.
+
+1038
+01:16:42,640 --> 01:16:49,160
+So, you really need more context to realize because when you capture an image, the LED screen also blinks.
+
+1039
+01:16:49,360 --> 01:16:55,040
+So, that's why it's important to realize that the robot knows how to start and realizing when the dryer has started.
+
+1040
+01:16:55,040 --> 01:16:56,200
+So, it's pretty cool.
+
+1041
+01:16:57,280 --> 01:16:57,600
+>> Yeah.
+
+1042
+01:16:57,600 --> 01:17:00,279
+So, this is just one part of the whole laundry workflow.
+
+1043
+01:17:00,480 --> 01:17:02,560
+On Tuesday, we're going to drop the entire workflow.
+
+1044
+01:17:02,560 --> 01:17:05,840
+The whole workflow will take quite some time as you can imagine.
+
+1045
+01:17:05,840 --> 01:17:18,800
+So uh you know for this >> yeah folding stacking transferring basket everything right really like Dina 2.1 is about like a robot for the first time becoming like a whole employee at a work at
+
+1046
+01:17:18,800 --> 01:17:20,800
+a workplace doing everything.
+
+1047
+01:17:20,800 --> 01:17:28,159
+There's no need for human or for any other machine to feed it you know items or help it with certain step of the task.
+
+1048
+01:17:28,159 --> 01:17:30,960
+It's just going to take the whole thing and do it into it.
+
+1049
+01:17:30,960 --> 01:17:42,080
+And I think that's a big breakthrough because historically we think about robots as machine right but this is for the first time like I think we can really see like working alongside humans to
+
+1050
+01:17:42,080 --> 01:17:47,319
+really like improve and increase productivity physical productivity in the world.
+
+1051
+01:17:47,360 --> 01:17:47,600
+Yeah.
+
+1052
+01:17:47,600 --> 01:17:49,920
+So we are we're super excited about it.
+
+1053
+01:17:49,920 --> 01:17:50,520
+Yeah.
+
+1054
+01:17:50,800 --> 01:17:51,120
+Yeah.
+
+1055
+01:17:51,120 --> 01:17:51,880
+Go ahead.
+
+1056
+01:17:52,560 --> 01:17:57,240
+>> It will be the longest local dextrose manipulation uh de demo.
+
+1057
+01:17:57,280 --> 01:18:01,319
+So uh quite proud of the work that we have done and yeah exciting.
+
+1058
+01:18:01,520 --> 01:18:01,840
+>> Yeah.
+
+1059
+01:18:01,840 --> 01:18:05,240
+So here's another demo we put using Dynet 2.1.
+
+1060
+01:18:05,360 --> 01:18:13,920
+So here the physical agent with our hardware is going to uh grab a drink for you based on whatever drink you select on this screen.
+
+1061
+01:18:13,920 --> 01:18:18,440
+So our researchers me and chat will let the project we just give you a quick demo.
+
+1062
+01:18:18,719 --> 01:18:24,640
+So in this case uh they selected vanilla shake drink and the robot has received a command.
+
+1063
+01:18:24,640 --> 01:18:35,799
+So, it's going to go to the fridge and then now uh use the world action model Dino 2 that's controlling the whole robot to get the right drink for you and then retrieve it.
+
+1064
+01:18:35,840 --> 01:18:41,319
+And what's really interesting here is uh this is really to showcase the agent capability.
+
+1065
+01:18:41,360 --> 01:18:51,640
+So, the model is not just like doing actions is also following language commands very faithfully and can also navigate back to you uh to fulfill the order.
+
+1066
+01:18:52,080 --> 01:18:54,440
+So, all right.
+
+1067
+01:18:54,640 --> 01:18:57,000
+So, got the right drink.
+
+1068
+01:18:57,040 --> 01:18:57,960
+It's going to
+
+1069
+01:18:59,040 --> 01:19:03,160
+nicely close the or uh
+
+1070
+01:19:05,920 --> 01:19:09,400
+and I think it's switching switching.
+
+1071
+01:19:09,840 --> 01:19:10,759
+>> Oh, yes.
+
+1072
+01:19:11,120 --> 01:19:11,679
+Gates.
+
+1073
+01:19:11,679 --> 01:19:11,920
+>> Yeah.
+
+1074
+01:19:11,920 --> 01:19:18,560
+Switching mode because here is the navigation part which uh we can just have another highle reasoning model to do,
+
+1075
+01:19:18,560 --> 01:19:19,160
+right?
+
+1076
+01:19:19,199 --> 01:19:19,760
+also.
+
+1077
+01:19:19,760 --> 01:19:22,760
+Yeah.
+
+1078
+01:19:26,000 --> 01:19:28,000
+Yeah.
+
+1079
+01:19:28,000 --> 01:19:28,560
+Yeah.
+
+1080
+01:19:28,560 --> 01:19:30,880
+Anything you guys want to add on what's happening?
+
+1081
+01:19:30,880 --> 01:19:32,600
+Anything cool you want to point out?
+
+1082
+01:19:32,800 --> 01:19:33,120
+>> Yeah.
+
+1083
+01:19:33,120 --> 01:19:36,960
+So, this one has a reasoning layer and an action layer.
+
+1084
+01:19:36,960 --> 01:19:40,360
+So, it's a two model um architecture.
+
+1085
+01:19:41,120 --> 01:19:44,279
+Underneath we are sending language prompts.
+
+1086
+01:19:44,640 --> 01:19:48,279
+Basically, a few sentence instruction to the reasoning model.
+
+1087
+01:19:48,480 --> 01:19:52,640
+Um, and then the reasoning model is planning out what it needs to step by step.
+
+1088
+01:19:52,640 --> 01:20:02,520
+First go into the fridge and grab something and then come back and then hand it off to a human uh in in sequence and uh oversee the whole execution.
+
+1089
+01:20:02,560 --> 01:20:11,319
+And the lower level um action model is responsible for performing the manipulation and uh the dextrous task.
+
+1090
+01:20:12,239 --> 01:20:12,560
+>> Yeah.
+
+1091
+01:20:12,560 --> 01:20:17,000
+On the on the action model side um it also needs to be steerable.
+
+1092
+01:20:17,199 --> 01:20:20,759
+So you're telling it which of the six drinks you want to pick up.
+
+1093
+01:20:20,880 --> 01:20:28,360
+Um and then like our the video action model sort of helps with imagining like uh understanding your intent.
+
+1094
+01:20:28,560 --> 01:20:32,480
+So you can imagine like what does it look like when this robot grabs a drink.
+
+1095
+01:20:32,480 --> 01:20:36,320
+Um and that sort of helps it really follow uh what you tell it to do.
+
+1096
+01:20:36,320 --> 01:20:39,199
+Um and then there's also some like timing aspects to this.
+
+1097
+01:20:39,199 --> 01:20:44,480
+It needs to recognize when you've grabbed the drink and and then like release at exactly that point.
+
+1098
+01:20:44,480 --> 01:20:45,920
+And you don't want false positives.
+
+1099
+01:20:45,920 --> 01:20:47,679
+You don't want to drop a drink on the ground.
+
+1100
+01:20:47,679 --> 01:20:51,920
+So, there's all sorts of like little things you just have to be careful about to get a demo like this working.
+
+1101
+01:20:51,920 --> 01:20:52,080
+>> Yeah.
+
+1102
+01:20:52,080 --> 01:20:57,000
+And the model is uh quite good at this kind of dexterity and uh very robust.
+
+1103
+01:20:57,120 --> 01:21:04,839
+So, like Chad was saying, like it's able to just recognize and kind of like imagine what it's going to look like if it grabs the right drink and then execute.
+

@@ -1,0 +1,3828 @@
+1
+00:00:00,080 --> 00:00:05,160
+You know in a video model you might predict the next likely sequence or the next most entertaining frame.
+
+2
+00:00:05,440 --> 00:00:18,400
+What world models do is they actually have to understand the the full range of possibilities and outcomes um from the current state and based on the action that you take generates the next state
+
+3
+00:00:18,400 --> 00:00:24,640
+right so the ne the next frame and so it is it is a much more sort of complex problem than than traditional video models.
+
+4
+00:00:24,640 --> 00:00:34,079
+So to me it is it is a world that is accurately generated based on the actions that you take as a result of what's already been generated.
+
+5
+00:00:34,079 --> 00:00:38,480
+Hi listeners, as you may know, I recently wrapped up the AIE code conference in New York.
+
+6
+00:00:38,480 --> 00:00:46,320
+And while I'm traveling, I do like to visit top AI startups in person to bring you interviews that you don't find on any other podcast that just does a Zoom call.
+
+7
+00:00:46,320 --> 00:00:53,039
+General Intuition, or GI for short, is a spinout of a 10-year-old game clipping company called Metal, which has 12 million users,
+
+8
+00:00:53,039 --> 00:00:56,280
+but in comparison, Twitch only has 7 million monthly active streamers.
+
+9
+00:00:56,320 --> 00:01:00,640
+Metal collects this data by building the best retroactive clipping software in the world.
+
+10
+00:01:00,640 --> 00:01:02,839
+In other words, you don't need to be consciously recording.
+
+11
+00:01:02,960 --> 00:01:09,600
+You actually just have Metal on in the background while you're playing, and you hit a button to clip the last 30 seconds after something interesting happens.
+
+12
+00:01:09,600 --> 00:01:13,840
+It's very similar to how Tesla and self-driving does bug reporting.
+
+13
+00:01:13,840 --> 00:01:22,720
+If you ever ever done a self-driving bug report in Teslas, the result is that Metal has accumulated 3.8 billion clips of the best moments and actions in games,
+
+14
+00:01:22,720 --> 00:01:30,039
+resulting in one of the most unique and diverse data sets of peak human behavior actively mining for the interesting moments.
+
+15
+00:01:30,080 --> 00:01:37,640
+They were also very preiented in navigating privacy and data collection concerns by mapping actions to these visual inputs and game outcomes.
+
+16
+00:01:37,840 --> 00:01:43,680
+As you saw on our FE Lee and Justin Johnson episode with World Labs and with the recent departure of Yan Lun from Meta,
+
+17
+00:01:43,680 --> 00:01:51,880
+there's a lot of interest in world models as the next frontier after LLMs to improve on spatial intelligence and to work on embodied robotics use cases.
+
+18
+00:01:51,920 --> 00:01:55,759
+Deepmind has been working on this with Genie 1 2 and 3 and SEMA 1 and 2.
+
+19
+00:01:55,759 --> 00:02:05,360
+And this year, OpenAI seem to finally agree because they've been penning on LLM a lot and they made the news by offering $500 million for Metal's video game clip data.
+
+20
+00:02:05,360 --> 00:02:11,120
+Our guest today, Py, turned down that money and instead chose to build an independent world model lab.
+
+21
+00:02:11,120 --> 00:02:19,479
+Instead, Ka Ventures led the $134 million seed round, which is Venode Kosa's largest single seed bed since OpenAI.
+
+22
+00:02:19,840 --> 00:02:27,000
+We're able to get an exclusive preview of GI's models, which unfortunately we cannot show you directly, but I can confirm they were incredibly humanlike,
+
+23
+00:02:27,040 --> 00:02:30,080
+and we chose to include the first 11 minutes of the demo discussion.
+
+24
+00:02:30,080 --> 00:02:37,360
+Even though I couldn't show it to you, it may be hard to follow, but I tried to call out what was noteworthy for you to know as your likely reaction if you were watching
+
+25
+00:02:37,360 --> 00:02:38,360
+along with us.
+
+26
+00:02:38,480 --> 00:02:42,280
+Now, enjoy the world's first look at my first look at general intuition.
+
+27
+00:02:42,319 --> 00:02:49,519
+So, what I'm about to show you is a completely vision- based agent that's just seeing pixels and predicting actions the exact same way a human would.
+
+28
+00:02:49,519 --> 00:02:54,080
+Um, and so, yeah, what I'll show you here is what this looks like uh 4 months ago.
+
+29
+00:02:54,080 --> 00:03:00,080
+So this was uh so again this is just an agent that's seeing that's receiving frames um and it's just predicting action.
+
+30
+00:03:00,080 --> 00:03:10,800
+So you can see it has like a decent sense of um uh of being able to you know navigate uh around um it tabs scoreboard just like gamers always tap the scoreboard.
+
+31
+00:03:10,800 --> 00:03:13,040
+So these are purely these are pure imitation learning.
+
+32
+00:03:13,040 --> 00:03:13,440
+>> I see.
+
+33
+00:03:13,440 --> 00:03:15,440
+So I see slicing the knife.
+
+34
+00:03:15,440 --> 00:03:16,000
+>> Yeah, exactly.
+
+35
+00:03:16,000 --> 00:03:22,400
+So it's doing everything that like humans would in this case here's here was the first interesting part that we saw like it gets stuck and then it has they have memory as well.
+
+36
+00:03:22,400 --> 00:03:23,720
+So you see it can get unstuck.
+
+37
+00:03:23,920 --> 00:03:25,200
+Um, >> how long is the memory?
+
+38
+00:03:25,200 --> 00:03:26,280
+>> Uh, 4 seconds.
+
+39
+00:03:26,319 --> 00:03:26,640
+Yeah.
+
+40
+00:03:26,640 --> 00:03:27,720
+Uh, 4 seconds.
+
+41
+00:03:27,920 --> 00:03:28,080
+Okay.
+
+42
+00:03:28,080 --> 00:03:29,120
+So, this was 4 months ago.
+
+43
+00:03:29,120 --> 00:03:30,560
+This was maybe a few weeks after that.
+
+44
+00:03:30,560 --> 00:03:38,959
+So, you can you can see there's like it's still doing the scoreboard thing, but it's they're still there's still uh quite like And these are bots,
+
+45
+00:03:38,959 --> 00:03:39,200
+too.
+
+46
+00:03:39,200 --> 00:03:40,720
+So, you can see that >> it's very human.
+
+47
+00:03:40,720 --> 00:03:41,680
+Let's just say that.
+
+48
+00:03:41,680 --> 00:03:42,239
+>> Yeah.
+
+49
+00:03:42,239 --> 00:03:44,759
+Uh, and then um
+
+50
+00:03:46,080 --> 00:03:46,400
+Right.
+
+51
+00:03:46,400 --> 00:03:48,319
+So, this was really like the early days of researcher.
+
+52
+00:03:48,319 --> 00:03:51,000
+You can see, right, it does one thing and then goes for another.
+
+53
+00:03:51,040 --> 00:03:57,960
+Um and then we've been scaling right um uh on on data and compute and also we've just been making the models better.
+
+54
+00:03:58,000 --> 00:03:59,439
+Um and this is where we are now.
+
+55
+00:03:59,439 --> 00:04:00,919
+So what you're seeing is
+
+56
+00:04:02,159 --> 00:04:04,319
+um pure like I said pure mutation learning.
+
+57
+00:04:04,319 --> 00:04:05,519
+This is just a base model.
+
+58
+00:04:05,519 --> 00:04:07,320
+There's no RL, no fine-tuning.
+
+59
+00:04:07,439 --> 00:04:09,360
+Uh this model sees no game states.
+
+60
+00:04:09,360 --> 00:04:12,560
+It is purely capable not sequence uh etc.
+
+61
+00:04:12,560 --> 00:04:16,440
+>> It's purely predicting the actions um from the frames.
+
+62
+00:04:16,479 --> 00:04:17,280
+That's it.
+
+63
+00:04:17,280 --> 00:04:25,840
+Um, and it this is playing against real humans uh just like um uh like a human would play and it's also it's running completely in real time.
+
+64
+00:04:25,840 --> 00:04:31,479
+So there's absolutely everything here plays exactly like human.
+
+65
+00:04:33,919 --> 00:04:35,320
+>> Do you give it a goal?
+
+66
+00:04:35,520 --> 00:04:35,919
+Yep.
+
+67
+00:04:35,919 --> 00:04:38,560
+>> It just figures out it goal because obviously it's trained on a scene.
+
+68
+00:04:38,560 --> 00:04:39,160
+Yes.
+
+69
+00:04:39,280 --> 00:04:43,440
+>> Um and I I I picked right I picked a sequence where also it doesn't do well initially.
+
+70
+00:04:43,440 --> 00:04:50,040
+So you can see like this is this is just like a a sequence, a random sequence, >> but this is the I mean it looks like it's doing well.
+
+71
+00:04:51,040 --> 00:04:52,479
+>> So um >> Oh.
+
+72
+00:04:52,479 --> 00:04:52,880
+Okay.
+
+73
+00:04:52,880 --> 00:04:53,199
+Yeah.
+
+74
+00:04:53,199 --> 00:04:53,799
+Watch.
+
+75
+00:04:56,479 --> 00:04:57,799
+>> Yeah, that's pretty good.
+
+76
+00:04:58,880 --> 00:05:00,040
+Maybe too good.
+
+77
+00:05:04,080 --> 00:05:06,639
+Um this is what my favorite part.
+
+78
+00:05:06,639 --> 00:05:11,079
+So you can see it does something that like um here like Newman would never do this.
+
+79
+00:05:11,680 --> 00:05:19,000
+then gets unstuck then has four realizes which and then in the distance.
+
+80
+00:05:22,639 --> 00:05:31,239
+>> So you're saying one it makes a mistake that a human will never make but it unsticks itself >> and two what we just saw is it is doing superhuman things.
+
+81
+00:05:31,520 --> 00:05:31,840
+Yeah.
+
+82
+00:05:31,840 --> 00:05:32,440
+>> Okay.
+
+83
+00:05:32,560 --> 00:05:33,120
+Yeah.
+
+84
+00:05:33,120 --> 00:05:36,440
+Um I mean there are things that that that demons sit obviously.
+
+85
+00:05:36,560 --> 00:05:42,639
+Um but because it is trained on on the highlights of things that all the exceptional things it's inheriting those.
+
+86
+00:05:42,639 --> 00:05:43,039
+>> Yeah.
+
+87
+00:05:43,039 --> 00:05:46,359
+So it's not like move 37 where we RL their way into something.
+
+88
+00:05:46,479 --> 00:05:46,800
+>> Yeah.
+
+89
+00:05:46,800 --> 00:05:52,320
+Replicating superhuman or like >> P human the baseline of our data set is big human performance.
+
+90
+00:05:52,320 --> 00:05:52,639
+>> Yes.
+
+91
+00:05:52,639 --> 00:05:53,239
+Yeah.
+
+92
+00:05:53,280 --> 00:05:54,479
+>> Um okay.
+
+93
+00:05:54,479 --> 00:05:56,040
+So that that's the agent.
+
+94
+00:05:56,080 --> 00:06:00,840
+Uh, so now what I'm going to show you is we then are able to
+
+95
+00:06:02,479 --> 00:06:11,600
+take those action predictions and we're able to label any video on the internet using those actions.
+
+96
+00:06:11,600 --> 00:06:12,919
+So um
+
+97
+00:06:14,240 --> 00:06:19,000
+um and so this is this is just frames in actions out.
+
+98
+00:06:19,199 --> 00:06:29,079
+Yellow is the uh model prediction or sorry yellow is ground truth, purple is the model prediction and then bottom left is compound error over the entire sequence and then this is reset per prediction.
+
+99
+00:06:30,319 --> 00:06:33,199
+>> Reset meaning you every now and then you reset.
+
+100
+00:06:33,199 --> 00:06:33,440
+>> Yeah.
+
+101
+00:06:33,440 --> 00:06:35,320
+So this just means it resets the baseline.
+
+102
+00:06:35,520 --> 00:06:42,440
+Um and so this basically a single error in the entire sequence compounds here but it doesn't compound here if that makes sense.
+
+103
+00:06:42,560 --> 00:06:43,160
+>> Yeah.
+
+104
+00:06:43,199 --> 00:06:46,560
+Um so and again this is just seeing frames, right?
+
+105
+00:06:46,560 --> 00:06:49,720
+it's not it's not seeing any of the any of the actions.
+
+106
+00:06:50,240 --> 00:06:57,960
+Um, and so, you know, so what we did, right, is we we we trained it on less realistic games and we transferred it over to a more realistic game.
+
+107
+00:06:58,080 --> 00:07:06,960
+And then, and this is where it gets really exciting, we transferred it over to a real world video, which means that you can use any video on the internet as pre-training.
+
+108
+00:07:06,960 --> 00:07:07,960
+What is it predicting?
+
+109
+00:07:08,160 --> 00:07:11,480
+Um, it's predicting it as if you were controlling it using keyboard and mouse.
+
+110
+00:07:11,520 --> 00:07:16,120
+So if you were if you're basically playing the sequence as a human
+
+111
+00:07:17,360 --> 00:07:22,080
+is there some sense of error or >> uh so that's why you you transfer to more realistic games first.
+
+112
+00:07:22,080 --> 00:07:22,400
+Yeah.
+
+113
+00:07:22,400 --> 00:07:27,480
+>> And then you transfer to real world video because you can't get a sense from ground truth from from the real world video yet.
+
+114
+00:07:27,840 --> 00:07:30,000
+>> Um let's see.
+
+115
+00:07:30,000 --> 00:07:34,160
+And then um so what they don't so I'll show you here.
+
+116
+00:07:34,160 --> 00:07:41,000
+Uh this one is also um this is the same uh uh agents that I just showed you.
+
+117
+00:07:42,720 --> 00:07:44,680
+This is playing against other AIs.
+
+118
+00:07:44,880 --> 00:07:46,160
+>> This one's playing against bots.
+
+119
+00:07:46,160 --> 00:07:46,400
+Yeah.
+
+120
+00:07:46,400 --> 00:07:48,280
+Um the previous one was against players.
+
+121
+00:07:49,280 --> 00:07:52,760
+Uh but with the sniper, it doesn't really matter that much as she'll say.
+
+122
+00:07:53,280 --> 00:08:00,000
+It's like uh so one one thing that's really interesting is you notice that it behaves differently as it has like different items,
+
+123
+00:08:00,000 --> 00:08:00,600
+right?
+
+124
+00:08:01,520 --> 00:08:02,319
+>> That makes sense.
+
+125
+00:08:02,319 --> 00:08:02,639
+Yeah.
+
+126
+00:08:02,639 --> 00:08:03,239
+Intuitively.
+
+127
+00:08:03,680 --> 00:08:05,039
+Yeah.
+
+128
+00:08:05,039 --> 00:08:10,120
+>> I think there's also a question about egoentricity versus the third person.
+
+129
+00:08:11,120 --> 00:08:11,960
+doesn't matter.
+
+130
+00:08:12,000 --> 00:08:19,039
+>> Um the third person I think will be very very helpful if you're for instance trying to control multiple objects in an environment later on.
+
+131
+00:08:19,039 --> 00:08:24,639
+>> Uh right now I think having fully imperception uh first person is quite helpful.
+
+132
+00:08:24,639 --> 00:08:28,080
+>> Um this one's also this is the policy itself.
+
+133
+00:08:28,080 --> 00:08:29,280
+>> What do you mean this is the policy?
+
+134
+00:08:29,280 --> 00:08:30,000
+>> The agent.
+
+135
+00:08:30,000 --> 00:08:30,400
+>> Yeah.
+
+136
+00:08:30,400 --> 00:08:32,399
+Same constraints that I just told you about.
+
+137
+00:08:32,399 --> 00:08:35,399
+Yeah.
+
+138
+00:08:36,159 --> 00:08:46,240
+like this where right the where it hides that to me was just incredible like just from from knowing being able to to >> also high when you see it.
+
+139
+00:08:46,240 --> 00:08:46,560
+>> Exactly.
+
+140
+00:08:46,560 --> 00:08:46,800
+Yeah.
+
+141
+00:08:46,800 --> 00:08:47,400
+Yeah.
+
+142
+00:08:47,519 --> 00:08:54,399
+Um >> and it needs the spatial intuition to go well this is hiding and that's not hiding.
+
+143
+00:08:54,399 --> 00:08:54,959
+>> Exactly.
+
+144
+00:08:54,959 --> 00:08:57,279
+And and and right while it was reloading.
+
+145
+00:08:57,279 --> 00:08:57,680
+Yeah.
+
+146
+00:08:57,680 --> 00:08:58,880
+Um okay.
+
+147
+00:08:58,880 --> 00:09:05,879
+So that so those are that that's the policy and this is a completely general recipe meaning we can scale this to any environment.
+
+148
+00:09:06,080 --> 00:09:08,480
+Uh >> is this work closest?
+
+149
+00:09:08,480 --> 00:09:08,720
+Okay.
+
+150
+00:09:08,720 --> 00:09:13,160
+No let's keep going on demos until >> um I was going to go into research.
+
+151
+00:09:13,360 --> 00:09:13,680
+>> Yeah.
+
+152
+00:09:13,680 --> 00:09:14,280
+Yeah.
+
+153
+00:09:14,640 --> 00:09:15,360
+Um okay.
+
+154
+00:09:15,360 --> 00:09:18,680
+So and then this is this is these so what I'm about to show you are the world models.
+
+155
+00:09:18,880 --> 00:09:22,240
+Um there's a few really really interesting parts about our world models.
+
+156
+00:09:22,240 --> 00:09:32,600
+So the first is uh we actually made the decision to uh transfer um sorry we made the decision to um
+
+157
+00:09:34,000 --> 00:09:41,720
+pre-train world models from scratch but also we've actually been able to fine-tune open source video models to get a better sense of physical transfer.
+
+158
+00:09:41,920 --> 00:09:48,720
+Um, and so one of the things that you'll notice here is like our world models have mouse sensitivity, which is something that like gamers absolutely want,
+
+159
+00:09:48,720 --> 00:09:48,959
+right?
+
+160
+00:09:48,959 --> 00:09:52,640
+So you can have these like very rapid movements which you couldn't do in any other world model.
+
+161
+00:09:52,640 --> 00:09:54,000
+Um, and so this is a hold out set.
+
+162
+00:09:54,000 --> 00:09:56,999
+So this clip was never seen before um at training time.
+
+163
+00:09:57,440 --> 00:10:00,399
+Um, and so you can see it has it has spatial memory.
+
+164
+00:10:00,399 --> 00:10:04,040
+This is this is about a 20 secondish uh generation.
+
+165
+00:10:04,160 --> 00:10:05,559
+And here's what's fascinating.
+
+166
+00:10:05,680 --> 00:10:07,320
+This is an explosion that occurs.
+
+167
+00:10:07,440 --> 00:10:13,879
+And you can see that in the um in the physical world, right, the camera would shake and in the game that would never happen.
+
+168
+00:10:13,920 --> 00:10:22,959
+So you see you see the world model inherits the the physical world camera shake, but the the the actual um uh uh game never does that.
+
+169
+00:10:22,959 --> 00:10:26,640
+Uh which which is which is sort of that that to us was quite fascinating, right?
+
+170
+00:10:26,640 --> 00:10:33,680
+Also did the models that I just showed you that we used to transfer over from video, the two of those combined will allow us to like push way beyond games in terms in terms
+
+171
+00:10:33,680 --> 00:10:34,439
+of training.
+
+172
+00:10:34,880 --> 00:10:36,640
+Um, this is another interesting.
+
+173
+00:10:36,640 --> 00:10:37,600
+So, this is the world model.
+
+174
+00:10:37,600 --> 00:10:38,959
+This is rapid camera motion.
+
+175
+00:10:38,959 --> 00:10:45,480
+So, like again, this is stuff that we're literally just taking one second from here in the context and the actions and replaying it here,
+
+176
+00:10:45,680 --> 00:10:46,240
+right?
+
+177
+00:10:46,240 --> 00:10:55,760
+Um, and so you you'll you never essentially have um uh like what we're saying is the skill that you see in the clips that like the speed and the movement that also pays off
+
+178
+00:10:55,760 --> 00:10:57,640
+at training time when you're doing role models.
+
+179
+00:10:57,920 --> 00:11:00,840
+Um, this is my favorite example.
+
+180
+00:11:01,040 --> 00:11:06,520
+Uh so this shows that the role model is capable um of performing u with partial observability.
+
+181
+00:11:06,880 --> 00:11:16,480
+So what you're going to see is um again you're replaying the actions from here in here just using one second of video context.
+
+182
+00:11:16,480 --> 00:11:18,119
+Everything after that is completely generated.
+
+183
+00:11:18,399 --> 00:11:22,360
+Um so what you're going to see is the model is going to encounter in this case smoke.
+
+184
+00:11:22,560 --> 00:11:24,480
+Normally now models break down.
+
+185
+00:11:24,480 --> 00:11:26,800
+What you actually see is comes out of the same place.
+
+186
+00:11:26,800 --> 00:11:34,999
+Um and so it's capable of um of even with partial observability still maintaining um its position in the world.
+
+187
+00:11:35,120 --> 00:11:37,279
+Um and then here it is also interesting.
+
+188
+00:11:37,279 --> 00:11:39,040
+So this is uh this is sniping.
+
+189
+00:11:39,040 --> 00:11:48,079
+So this is give this gives you like a um >> reaction time >> uh like the fact that it can do depth and like sequences in completely different views,
+
+190
+00:11:48,079 --> 00:11:48,240
+right?
+
+191
+00:11:48,240 --> 00:11:52,720
+So this is a completely different view than if you were to be outside of that view, right?
+
+192
+00:11:52,720 --> 00:11:55,160
+And so it's it's it's able to maintain consistency.
+
+193
+00:11:56,000 --> 00:11:57,360
+um >> while zooming in.
+
+194
+00:11:57,360 --> 00:11:58,280
+>> Yeah, exactly.
+
+195
+00:11:58,480 --> 00:12:05,600
+Um uh and so um yeah, so you can see uh so even while this goes out of scope, right?
+
+196
+00:12:05,600 --> 00:12:05,920
+Watch.
+
+197
+00:12:05,920 --> 00:12:10,040
+And then it can and it comes back and you'll see it's still still there.
+
+198
+00:12:12,959 --> 00:12:13,559
+>> Yeah.
+
+199
+00:12:13,680 --> 00:12:18,920
+Um and so uh yeah, this is the work that that Anthony who has been working on.
+
+200
+00:12:19,040 --> 00:12:22,840
+>> I'm just wondering how much game footage you have to watch in order to find these things.
+
+201
+00:12:22,959 --> 00:12:30,200
+Um, we can ask Anthony, you know, it's it's I'm I'm sure he's not going to be too excited to play these games uh afterwards.
+
+202
+00:12:30,560 --> 00:12:31,760
+Um, >> you're not playing.
+
+203
+00:12:31,760 --> 00:12:32,600
+You're just watching.
+
+204
+00:12:32,800 --> 00:12:32,959
+Yeah.
+
+205
+00:12:32,959 --> 00:12:33,200
+Yeah.
+
+206
+00:12:33,200 --> 00:12:33,680
+Yeah.
+
+207
+00:12:33,680 --> 00:12:35,040
+Um, great.
+
+208
+00:12:35,040 --> 00:12:35,360
+Okay.
+
+209
+00:12:35,360 --> 00:12:36,679
+So, those were the models.
+
+210
+00:12:36,880 --> 00:12:39,040
+Um, see, these are interesting.
+
+211
+00:12:39,040 --> 00:12:42,320
+So, we also were able to distill into like really really tiny models.
+
+212
+00:12:42,320 --> 00:12:49,519
+Um, so this is for instance a um a long sequence on a very very tiny one.
+
+213
+00:12:49,519 --> 00:12:52,520
+You can see it makes like a bit more stupid mistakes.
+
+214
+00:12:52,639 --> 00:12:55,400
+Uh like it it does things that are not as optimal.
+
+215
+00:12:55,600 --> 00:12:58,000
+Um but >> I haven't seen anything yet.
+
+216
+00:12:58,000 --> 00:13:00,399
+>> Uh at the beginning it was running into a wall for free.
+
+217
+00:13:00,399 --> 00:13:00,560
+Yeah.
+
+218
+00:13:00,560 --> 00:13:01,160
+Exactly.
+
+219
+00:13:01,680 --> 00:13:04,840
+Um uh I mean I do that too.
+
+220
+00:13:04,880 --> 00:13:05,480
+>> Yeah.
+
+221
+00:13:05,680 --> 00:13:06,280
+Yeah.
+
+222
+00:13:06,720 --> 00:13:09,519
+Um >> it's looked I mean it's doing pretty well.
+
+223
+00:13:09,519 --> 00:13:09,760
+>> Yeah.
+
+224
+00:13:09,760 --> 00:13:12,880
+And and again all these models are running completely in real time there.
+
+225
+00:13:12,880 --> 00:13:13,920
+So there's no uh >> Okay.
+
+226
+00:13:13,920 --> 00:13:16,840
+So I was thinking your main model does real time anyway.
+
+227
+00:13:16,959 --> 00:13:18,160
+What's the goal of distilling?
+
+228
+00:13:18,160 --> 00:13:20,520
+Is it cost or >> uh yeah parameters?
+
+229
+00:13:21,040 --> 00:13:23,200
+Yeah.
+
+230
+00:13:23,200 --> 00:13:23,519
+Yeah.
+
+231
+00:13:23,519 --> 00:13:23,760
+>> Yeah.
+
+232
+00:13:23,760 --> 00:13:24,560
+This is the interesting one.
+
+233
+00:13:24,560 --> 00:13:25,200
+Peaks the corner.
+
+234
+00:13:25,200 --> 00:13:32,999
+That's what we mean by like the fish and the poor reasoning aspect is humans actually they they sort of simulate the optical dynamics of their eyes and how they actually spat
+
+235
+00:13:34,079 --> 00:13:34,320
+right.
+
+236
+00:13:34,320 --> 00:13:35,600
+You you've seen all this.
+
+237
+00:13:35,600 --> 00:13:36,079
+>> Yep.
+
+238
+00:13:36,079 --> 00:13:36,880
+Um exactly.
+
+239
+00:13:36,880 --> 00:13:46,000
+And so uh like even in like real this is kind of interesting like even in like the real world um with uh for instance YouTube data right you have to first solve for pose
+
+240
+00:13:46,000 --> 00:13:46,560
+estimation.
+
+241
+00:13:46,560 --> 00:13:50,000
+Then once you have pose estimation, maybe you do something like inverse dynamics, right?
+
+242
+00:13:50,000 --> 00:13:54,000
+Where you basically are able to like somehow label some of the actions that you're seeing.
+
+243
+00:13:54,000 --> 00:14:01,839
+And then you still have to account for optical dynamics of like where your eyes actually looking before the decision cuz like there's just three levels of information loss where when you're playing video games,
+
+244
+00:14:01,839 --> 00:14:04,480
+you're actually simulating the optical dynamics with your hand, right?
+
+245
+00:14:04,480 --> 00:14:13,400
+And I think that like that's I think why games are a better representation of sport reasoning initially than um uh than YouTube videos for instance.
+
+246
+00:14:16,480 --> 00:14:19,960
+Okay, we're in the GI offices with the CEO.
+
+247
+00:14:20,320 --> 00:14:20,920
+Welcome.
+
+248
+00:14:21,040 --> 00:14:21,440
+>> Thank you.
+
+249
+00:14:21,440 --> 00:14:22,720
+>> Thanks for having us in your office.
+
+250
+00:14:22,720 --> 00:14:23,839
+>> Yeah, excited to be here.
+
+251
+00:14:23,839 --> 00:14:31,839
+>> If I'm in New York and you're one of the hardest raises of the year, I have to come and visit and uh thanks for taking some time on the weekends or Yeah.
+
+252
+00:14:31,839 --> 00:14:32,160
+Yeah.
+
+253
+00:14:32,160 --> 00:14:37,160
+>> So, you've raised 133 million seed uh for general inspiration.
+
+254
+00:14:37,279 --> 00:14:38,880
+Most people didn't care about you.
+
+255
+00:14:38,880 --> 00:14:43,360
+I I guess cuz GI is new, but uh more gamers would have a middle.
+
+256
+00:14:43,360 --> 00:14:43,760
+>> Mhm.
+
+257
+00:14:43,760 --> 00:14:48,439
+And before that you ran probably statemer like the largest depth we stage.
+
+258
+00:14:48,880 --> 00:14:54,119
+Um what's your reflection on just that then journey of like now you're an AI founder?
+
+259
+00:14:54,480 --> 00:14:56,320
+>> Yeah you started off root stage.
+
+260
+00:14:56,320 --> 00:14:59,160
+>> Yeah I think um I grew up with Tourette's.
+
+261
+00:14:59,199 --> 00:15:05,960
+Uh I spend most of my time as a teenager coding and playing video games.
+
+262
+00:15:06,160 --> 00:15:08,760
+Uh so in that sense it doesn't feel that much different.
+
+263
+00:15:09,120 --> 00:15:18,560
+Um but I think for uh so yeah so I started the largest private server road runscape worked at Dr. Suborders for three years for Ebola and then on like satellite satellite based map generation
+
+264
+00:15:18,560 --> 00:15:29,480
+for disaster response um which was already like very AI related adjacent I built some models back then and then started metal which became one of the largest social networks and video games.
+
+265
+00:15:29,519 --> 00:15:35,320
+I've always been kind of like AI like adjacent, you know I I'm a selftaught engineer.
+
+266
+00:15:35,519 --> 00:15:39,120
+Uh so for me the modeling itself always felt a little foreign.
+
+267
+00:15:39,120 --> 00:15:45,120
+I actually had to uh take a ton of tons of classes over the summer and and early this year to get better at it.
+
+268
+00:15:45,120 --> 00:15:53,600
+Uh because I I it still felt like like I was really really good at at the infrastructure side and I had written like our our our transcoders for metal myself.
+
+269
+00:15:53,600 --> 00:15:59,519
+So I was very very familiar with CUDA and like the GPU side and all the video infrastructure that we were using uh for this stuff.
+
+270
+00:15:59,519 --> 00:16:02,160
+But the the modeling side itself was was still quite foreign.
+
+271
+00:16:02,160 --> 00:16:11,519
+Um, luckily obviously we have I have really really good f co-founders but they they they essentially put a bunch of coursework together for me to to go complete to get really really good at
+
+272
+00:16:11,519 --> 00:16:13,040
+understanding the fundamentals better.
+
+273
+00:16:13,040 --> 00:16:20,720
+I think for me I had seen inside of the labs that had really really good uh leadership with fundamentals at top and also the ones that didn't and I think the ones that did
+
+274
+00:16:20,720 --> 00:16:22,200
+were just like much better.
+
+275
+00:16:22,240 --> 00:16:26,000
+Um and so for me um yeah I wanted to be more like that.
+
+276
+00:16:26,000 --> 00:16:37,120
+So in that sense it was a bit it was first very foreign and then now I feel pretty comfortable with everything and but yeah like I think for um there's a lot to be
+
+277
+00:16:37,120 --> 00:16:45,680
+explored starting in video games and also reverse engine like I think the interesting thing about reverse engineering is it kind of teaches you to look at problems very differently.
+
+278
+00:16:45,680 --> 00:16:48,320
+It's like the ultimate form of deductive reasoning in a way.
+
+279
+00:16:48,320 --> 00:16:55,080
+Uh and so um uh so this is just how I think how I operate and so for me it's it's been a really really interesting journey.
+
+280
+00:16:55,360 --> 00:17:02,840
+uh you know I don't claim to have any of the credentials or or skills that some of the other guests do have had on but hopefully it will make for a good time.
+
+281
+00:17:02,880 --> 00:17:03,279
+>> Yeah.
+
+282
+00:17:03,279 --> 00:17:09,399
+Well, your co-founders uh definitely bring a lot of that different ability and you bring a lot of the I guess gaming expertise
+
+283
+00:17:10,799 --> 00:17:11,799
+with cheese.
+
+284
+00:17:12,000 --> 00:17:13,600
+We'll see what I bring to the table.
+
+285
+00:17:13,600 --> 00:17:13,839
+>> Yeah.
+
+286
+00:17:13,839 --> 00:17:16,120
+Just just a little bit of history of metal.
+
+287
+00:17:16,400 --> 00:17:18,760
+Let's establish metal for those who don't know.
+
+288
+00:17:18,799 --> 00:17:30,559
+uh ability uh clicks yeah the year um that's you have more active users concurrent users in Twitch something like that >> yeah on the creator side I think and the reason is because metal is
+
+289
+00:17:30,559 --> 00:17:38,080
+a lot more like Instagram than it is like Twitch so people um so the way you think about metal is it's it's a native video recorder like unlike something like Twitch where you actually
+
+290
+00:17:38,080 --> 00:17:47,200
+have to use other software to record and stream to Twitch um it's not a streaming software it's actually a video recording software and a lot of gamers love to put things like overlays on
+
+291
+00:17:47,200 --> 00:17:57,280
+top of their Um, and as a result of that, we have sort of the largest data set of ground truth action labeled video footage on the internet by maybe one or two orders of
+
+292
+00:17:57,280 --> 00:17:57,880
+magnitude.
+
+293
+00:17:58,400 --> 00:17:58,960
+Yeah.
+
+294
+00:17:58,960 --> 00:18:02,480
+>> What what's an example of an overlay like Naomi overlay?
+
+295
+00:18:02,480 --> 00:18:04,240
+I usually think of as CAD.
+
+296
+00:18:04,240 --> 00:18:04,480
+>> Yeah.
+
+297
+00:18:04,480 --> 00:18:04,720
+Yeah.
+
+298
+00:18:04,720 --> 00:18:10,559
+Also um controller overlays for instance, if you're playing um like let's say you're playing uh console.
+
+299
+00:18:10,559 --> 00:18:10,799
+>> Yeah.
+
+300
+00:18:10,799 --> 00:18:11,679
+Like flight simulator.
+
+301
+00:18:11,679 --> 00:18:13,840
+You get like you know the joystick and all all the things.
+
+302
+00:18:13,840 --> 00:18:22,720
+So you get the actual actions that people take inside the games as well as the frames of the games themselves which is a loop right because it's essentially you perceive then you act and
+
+303
+00:18:22,720 --> 00:18:29,919
+there's a state update and then you perceive again you act state update which is like roughly precisely what you use in order to trace to train these agents.
+
+304
+00:18:29,919 --> 00:18:40,320
+>> Yeah it's it's almost perfect training data we were showing you showing me in the demo when we show some B-roll here on uh how you don't log key it's very important for you to
+
+305
+00:18:40,320 --> 00:18:40,960
+log action.
+
+306
+00:18:40,960 --> 00:18:41,200
+Yeah.
+
+307
+00:18:41,200 --> 00:18:42,600
+When did you figure this out?
+
+308
+00:18:42,640 --> 00:18:46,880
+Oh um maybe starting a year and a half ago.
+
+309
+00:18:46,880 --> 00:18:47,039
+Yeah.
+
+310
+00:18:47,039 --> 00:18:56,320
+And and we realized that like fig figuring out this side of the research for us was we very much never wanted to be in a position where we eroded privacy or something like that.
+
+311
+00:18:56,320 --> 00:19:04,880
+So we never wanted to actually log like a W or A or S and a D which for researchers the fact that we don't do that like often it sounds strange like why wouldn't
+
+312
+00:19:04,880 --> 00:19:07,840
+you do that but I think for us the privacy >> we get the data.
+
+313
+00:19:07,840 --> 00:19:15,639
+Yeah, I I think you know a lot a lot of the the um the researchers they did they hadn't quite understood yet that you can actually just get away with just doing the actions.
+
+314
+00:19:15,679 --> 00:19:24,880
+Um and the reason is like at training time having the actual keys as noise anyways like if there is text in the screen and you would want to in theory make that um part
+
+315
+00:19:24,880 --> 00:19:27,919
+of the training then like reading text from a frame is like really easy.
+
+316
+00:19:27,919 --> 00:19:33,440
+And so for us if we actually can so we convert basically hit you hit the uh the input we convert it to the actual action.
+
+317
+00:19:33,440 --> 00:19:39,120
+So we had thousands of humans label every single action you can take in every single video game over the past year and a half.
+
+318
+00:19:39,120 --> 00:19:42,200
+Uh which is an enormous amount of action labels.
+
+319
+00:19:42,320 --> 00:19:42,799
+Um yeah.
+
+320
+00:19:42,799 --> 00:19:53,840
+So when you act you we we get the actual um action itself and then it being at training time you you can for like a the general set of that of that game convert
+
+321
+00:19:53,840 --> 00:19:58,160
+back into computer inputs if you want to but you can never do it for any individual person.
+
+322
+00:19:58,160 --> 00:20:01,200
+And so that for us from from like a design perspective was was important.
+
+323
+00:20:01,200 --> 00:20:03,039
+So we we we figured all that stuff out.
+
+324
+00:20:03,039 --> 00:20:07,200
+Then we actually started pushing um like we already had features as well with this.
+
+325
+00:20:07,200 --> 00:20:11,960
+So for instance like gamers already love to be able to navigate their clips by like things that happened.
+
+326
+00:20:12,000 --> 00:20:18,320
+So we have an events capture system and then we also have the overlays where you actually just want to overlay and render the actions on top of your clip.
+
+327
+00:20:18,320 --> 00:20:21,039
+We developed kind of in tandem with the feature set itself.
+
+328
+00:20:21,039 --> 00:20:30,000
+And then obviously when when world bottles became a thing and it's very very clear that all the all the data for this was precisely like that sequence yet we were able to sort of
+
+329
+00:20:30,000 --> 00:20:33,240
+be first to market recruit the best researchers and start a lab.
+
+330
+00:20:33,360 --> 00:20:34,880
+>> Yeah that's uh that's incredible.
+
+331
+00:20:34,880 --> 00:20:37,720
+Uh one more question on metal before I we move forward.
+
+332
+00:20:38,559 --> 00:20:39,679
+It's been 10 years.
+
+333
+00:20:39,679 --> 00:20:40,159
+>> Yeah.
+
+334
+00:20:40,159 --> 00:20:43,800
+What is the I don't even know how you roll something like this.
+
+335
+00:20:44,080 --> 00:20:48,680
+I'm just kind of curious and like the opportunity to ask you what really worked.
+
+336
+00:20:48,960 --> 00:20:49,440
+>> Yeah.
+
+337
+00:20:49,440 --> 00:20:52,720
+uh that you became so so huge because I'm you're not the only one.
+
+338
+00:20:52,720 --> 00:20:53,120
+Yeah.
+
+339
+00:20:53,120 --> 00:20:57,360
+But uh I'm sure it's performance and everything, but >> a few things had really worked.
+
+340
+00:20:57,360 --> 00:21:03,360
+I think the first was a lot of our competitors were focused on solving the social network and a recorder at the same time.
+
+341
+00:21:03,360 --> 00:21:10,799
+And that never like our bet was really that we could get so many people to record with us that we could bootstrap the network on top of that and that worked.
+
+342
+00:21:10,799 --> 00:21:15,039
+So well, everyone was sort of distracted trying to bootstrap a social network.
+
+343
+00:21:15,039 --> 00:21:21,440
+We were just focused on building a really really good capture tool and then we got tens of millions of people to use that which then we able were to bootstrap a network on top
+
+344
+00:21:21,440 --> 00:21:22,519
+of the share behaviors.
+
+345
+00:21:22,559 --> 00:21:31,280
+We already had like the profile behaviors and the share behaviors obviously but the actual content consumption piece and and the sharing piece really only came after we hit critical mass.
+
+346
+00:21:31,280 --> 00:21:35,320
+It was actually early days during co when like the network really accelerated.
+
+347
+00:21:35,679 --> 00:21:45,919
+Fortnite happened which was really important and I think also the fact that Discord existed um uh made it quite a different time than uh when other types of networks of these types had launched
+
+348
+00:21:45,919 --> 00:21:50,480
+because Discord essentially was like the connective tissue already between gamers that like never really existed before.
+
+349
+00:21:50,480 --> 00:21:58,080
+And so I think those combination of things really really made it I think we also built a product that for instance with with most video recorders you have to remember to start and stop
+
+350
+00:21:58,080 --> 00:21:58,799
+the recorder.
+
+351
+00:21:58,799 --> 00:22:05,360
+So, you have to go into the application, then hit start, then start your game, and then um you know,
+
+352
+00:22:05,360 --> 00:22:09,000
+maybe you'll play games for three hours, then you'll close the game, then you have to close your video application.
+
+353
+00:22:09,600 --> 00:22:13,320
+>> Then you well, then you have to process like a multi- gigabyte file.
+
+354
+00:22:13,679 --> 00:22:15,600
+Uh then you have to upload those somewhere.
+
+355
+00:22:15,600 --> 00:22:17,840
+And so like this was a pain for people.
+
+356
+00:22:17,840 --> 00:22:20,480
+And so what we did is we just ran this kind of recorder.
+
+357
+00:22:20,480 --> 00:22:22,880
+When you hit that button, it does a retroactive video record.
+
+358
+00:22:22,880 --> 00:22:24,880
+So all the recording initially is in memory.
+
+359
+00:22:24,880 --> 00:22:28,720
+And then when you hit that button, it exports only that sequence to disk and syncs it to your phone.
+
+360
+00:22:28,720 --> 00:22:30,480
+And so that that became super popular.
+
+361
+00:22:30,480 --> 00:22:39,440
+It also was interesting about it also means that you're not sort of behaving or acting differently because it's always there and you can just export whatever happens which is also very very helpful for
+
+362
+00:22:39,440 --> 00:22:40,759
+for trading obviously.
+
+363
+00:22:40,960 --> 00:22:43,639
+Um the thing you were the first to do that.
+
+364
+00:22:43,919 --> 00:22:44,960
+Yeah.
+
+365
+00:22:44,960 --> 00:22:49,760
+>> The thing you were explaining just before this was is similar to how Tesla does their bug reports, right?
+
+366
+00:22:49,760 --> 00:22:52,360
+You're driving from the disengage autopilot.
+
+367
+00:22:52,559 --> 00:22:54,720
+You're like, they're like, "Well, tell us what happened."
+
+368
+00:22:54,720 --> 00:22:55,200
+>> Exactly.
+
+369
+00:22:55,200 --> 00:22:55,679
+Exactly.
+
+370
+00:22:55,679 --> 00:22:57,720
+See, see, you're driving.
+
+371
+00:22:57,919 --> 00:23:03,159
+Tesla doesn't want to train on the like 10 hours of you driving through a desert where nothing interesting happens.
+
+372
+00:23:03,360 --> 00:23:05,120
+You have the clip button on the steering wheel.
+
+373
+00:23:05,120 --> 00:23:07,520
+Something interesting happens either while FSD is engaged.
+
+374
+00:23:07,520 --> 00:23:16,559
+And I'm not sure if you can use it without FSD as well, but you hit the clip button, it basically uses that precise sequence to mark which is then more helpful for training because it's
+
+375
+00:23:16,559 --> 00:23:17,919
+more unique as a training time.
+
+376
+00:23:17,919 --> 00:23:18,159
+>> Yeah.
+
+377
+00:23:18,159 --> 00:23:18,400
+Yeah.
+
+378
+00:23:18,400 --> 00:23:21,600
+I mean, so one thing, we're going to get to this on the agent side.
+
+379
+00:23:21,600 --> 00:23:25,440
+One thing I I that does pop up is well a lot of life is boring.
+
+380
+00:23:25,440 --> 00:23:27,039
+A lot of life is going for me.
+
+381
+00:23:27,039 --> 00:23:30,440
+A lot of a lot of playing games is doing the boring stuff that is not capable.
+
+382
+00:23:30,720 --> 00:23:31,320
+>> Yeah.
+
+383
+00:23:31,520 --> 00:23:33,600
+Somehow using the generalized fight.
+
+384
+00:23:33,600 --> 00:23:34,200
+>> Yeah.
+
+385
+00:23:35,039 --> 00:23:35,360
+>> Yeah.
+
+386
+00:23:35,360 --> 00:23:35,600
+Yeah.
+
+387
+00:23:35,600 --> 00:23:36,559
+It makes you think, right?
+
+388
+00:23:36,559 --> 00:23:37,639
+>> It makes you think.
+
+389
+00:23:37,679 --> 00:23:37,919
+>> Yeah.
+
+390
+00:23:37,919 --> 00:23:38,159
+Yeah.
+
+391
+00:23:38,159 --> 00:23:43,320
+It's also quite interesting like I showed you the models like what happens when you increase the size of the context window.
+
+392
+00:23:43,360 --> 00:23:48,559
+Um and how behaviors actually are largely shaped by the size of the context window.
+
+393
+00:23:48,559 --> 00:23:48,799
+Yeah.
+
+394
+00:23:48,799 --> 00:23:56,559
+that that to me was like one of the most interesting uh parts about the research um made me think about our own behaviors in a way.
+
+395
+00:23:56,559 --> 00:23:56,799
+Yeah.
+
+396
+00:23:56,799 --> 00:23:59,039
+>> Let's talk about also the like forming the gene.
+
+397
+00:23:59,039 --> 00:24:00,759
+Uh on your website you're 12
+
+398
+00:24:02,480 --> 00:24:03,639
+for the three co-ounders.
+
+399
+00:24:03,919 --> 00:24:04,559
+Yeah.
+
+400
+00:24:04,559 --> 00:24:11,520
+>> And just let's talk about how this team comes together because you may not yourself don't have that academic network.
+
+401
+00:24:11,520 --> 00:24:11,679
+Yeah.
+
+402
+00:24:11,679 --> 00:24:12,960
+You manage the people.
+
+403
+00:24:12,960 --> 00:24:13,360
+>> Yeah.
+
+404
+00:24:13,360 --> 00:24:17,679
+I started reading all the research papers by that time.
+
+405
+00:24:17,679 --> 00:24:27,480
+I was already pretty deep into like having a decent understanding of of of not world models in particular in particular LMS and and transformerbased models.
+
+406
+00:24:27,679 --> 00:24:30,640
+And so um there was Genie, there was SIMA.
+
+407
+00:24:30,640 --> 00:24:32,240
+Those two were really really interesting.
+
+408
+00:24:32,240 --> 00:24:43,360
+In Simma in particular was interesting because what they do is they basically take 10 games and then they they have a graphic in Simma uh where you can see kind of the precise actions
+
+409
+00:24:43,360 --> 00:24:45,200
+that are inside of those games that they mapped.
+
+410
+00:24:45,200 --> 00:24:51,480
+And I believe they found something like a 100 um which are actually actions that also exist in the real world.
+
+411
+00:24:51,679 --> 00:24:55,399
+And uh what they did was they then I believe it was specifically for navigation.
+
+412
+00:24:55,840 --> 00:24:57,520
+They did a 9-1 hold out set.
+
+413
+00:24:57,520 --> 00:25:04,080
+So they they they trained um an agent on the nine games and then um they had it play the 10th game,
+
+414
+00:25:04,080 --> 00:25:09,279
+the hold out game, but then they also trained a specialized agent just on the 10th game and they compared how good they did.
+
+415
+00:25:09,279 --> 00:25:18,960
+And my and if I recall correctly, it did roughly as well um playing the 10th game on navigation specifically on the hold out on the nineame agent than it did on the one game
+
+416
+00:25:18,960 --> 00:25:19,440
+agent.
+
+417
+00:25:19,440 --> 00:25:27,440
+And that to me was really interesting because that's precisely the type of data that we had right and so for us the thinking was okay what if we did exactly what LM did.
+
+418
+00:25:27,440 --> 00:25:35,200
+What if we use right this um uh right so LM were trained on predicting like text tokens on words on the internet.
+
+419
+00:25:35,200 --> 00:25:42,720
+What if we predict action tokens on essentially what is the equivalent of the common crawl data set uh but for interactivity >> vision input?
+
+420
+00:25:42,720 --> 00:25:43,840
+Yeah, action output.
+
+421
+00:25:43,840 --> 00:25:44,159
+Correct.
+
+422
+00:25:44,159 --> 00:25:44,960
+That's it.
+
+423
+00:25:44,960 --> 00:25:53,639
+Well, I I think actually I'm going to double back a little bit to like a question I had which is one of the one of the reasons why I thought you would prefer keyboard
+
+424
+00:25:53,679 --> 00:25:57,800
+and mouse over actions is the action is potentially unbounded.
+
+425
+00:25:58,320 --> 00:25:58,640
+Right?
+
+426
+00:25:58,640 --> 00:26:03,520
+You can jump, walk left, walk right, but then also look up, look left, bench.
+
+427
+00:26:03,520 --> 00:26:04,519
+It's it's unmounted.
+
+428
+00:26:05,039 --> 00:26:06,559
+So, it's huge, isn't it?
+
+429
+00:26:06,559 --> 00:26:07,760
+>> Yeah, I think problem.
+
+430
+00:26:07,760 --> 00:26:11,440
+>> Yeah, there there's benefits to the action space being small to start with.
+
+431
+00:26:11,440 --> 00:26:15,520
+So, I think we're we're going to start with anything that you can control using a game controller, but yeah,
+
+432
+00:26:15,520 --> 00:26:23,279
+long term, we want to actually predict maybe like action embeddings and have models sit inside a general action space to be able to transfer out to other inputs as well.
+
+433
+00:26:23,279 --> 00:26:23,600
+Got it.
+
+434
+00:26:23,600 --> 00:26:24,000
+Yeah.
+
+435
+00:26:24,000 --> 00:26:24,320
+>> Okay.
+
+436
+00:26:24,320 --> 00:26:26,320
+And then let's keep going on on the research side.
+
+437
+00:26:26,320 --> 00:26:27,399
+So, uh genius.
+
+438
+00:26:27,840 --> 00:26:28,440
+Yeah.
+
+439
+00:26:28,480 --> 00:26:30,040
+>> And then do the co-founders.
+
+440
+00:26:30,320 --> 00:26:30,720
+>> Yeah.
+
+441
+00:26:30,720 --> 00:26:34,680
+So there was the diamond paper, there was Genie, and then there was Simma.
+
+442
+00:26:34,799 --> 00:26:44,960
+The Diamond Paper for me was really interesting because they had actually managed to get this world model called Diamond running on a consumer GPU.
+
+443
+00:26:44,960 --> 00:26:48,400
+I believe it was 4090 at 10 FPS and you could play it.
+
+444
+00:26:48,400 --> 00:26:51,200
+And they did that on like 90 hours of data, like 95 hours.
+
+445
+00:26:51,200 --> 00:26:55,960
+I think it was 87 hours and I think 80 or something like that.
+
+446
+00:26:56,000 --> 00:26:57,919
+That was just incredible, right?
+
+447
+00:26:57,919 --> 00:27:00,480
+That they had something playable on that little data.
+
+448
+00:27:00,480 --> 00:27:05,360
+So I actually cold emailed the entire group of students and I was and and I I told them, hey,
+
+449
+00:27:05,360 --> 00:27:07,000
+I think we have this thing.
+
+450
+00:27:07,120 --> 00:27:08,320
+And then it was pretty interesting.
+
+451
+00:27:08,320 --> 00:27:13,200
+So like right when that happened, a lot of the labs uh also started started understanding what we had.
+
+452
+00:27:13,200 --> 00:27:18,640
+And so we started very aggressively multiple labs tried to bring us in in various ways and and they were part of that.
+
+453
+00:27:18,640 --> 00:27:20,960
+Like they basically were seeing that happen.
+
+454
+00:27:20,960 --> 00:27:24,080
+And I think for them that also kind of like solidified how real it was.
+
+455
+00:27:24,080 --> 00:27:30,720
+And then when we chose to do our own thing, you know, initially we thought that we were going to have to just work on role models,
+
+456
+00:27:30,720 --> 00:27:30,880
+right?
+
+457
+00:27:30,880 --> 00:27:35,679
+So, so we thought, okay, the main benefit of this data set is is is like Genie is is is world models.
+
+458
+00:27:35,679 --> 00:27:42,600
+What we didn't realize at the time is that we have so much of this data is that we can essentially do these role models in parallel and take the equivalent of like the LMET
+
+459
+00:27:42,880 --> 00:27:48,080
+mostly on imitation learning and then use the world models after that to get into like our off stage, right?
+
+460
+00:27:48,080 --> 00:27:58,240
+And so for us >> and eventually getting rid of robotis something like >> I mean ideally you got rid of the imitation yeah the imitation learning but yeah we essentially realized that that we could get
+
+461
+00:27:58,240 --> 00:28:07,520
+so far on just imitation learning the way to look at it is we essentially like let's let's take the element analogy we essentially have sort of the internet or like common crawl if you
+
+462
+00:28:07,520 --> 00:28:16,480
+will and every single lab is trying to simulate that right in order to get similar data in order to train their agents and so for us the reason why we stayed independent and we
+
+463
+00:28:16,480 --> 00:28:25,200
+just did our own thing was we think we essentially leap every single company that's forced to either be consumers of world models or or build world models and and and take this take this
+
+464
+00:28:25,200 --> 00:28:35,240
+foundation model bet for switch the board spatial temporal agents uh and be in a place where you know we have a lot of customers years before any of the labs even get there and
+
+465
+00:28:35,440 --> 00:28:44,159
+maybe the most similar um comparison is like what Enthropic did with code right anthropic just focus really really hard on nailing the code use case their models are incredible for it a lot of their
+
+466
+00:28:44,159 --> 00:28:53,520
+customers use it for it so we just want to become incredible at this spatial temporal agent use case and likely that starts in like game simulation and then using role models we can then
+
+467
+00:28:53,520 --> 00:28:56,320
+start expanding out to to other um areas.
+
+468
+00:28:56,320 --> 00:28:59,200
+So would you show me a little bit of how it does generalize up?
+
+469
+00:28:59,200 --> 00:28:59,440
+Yeah.
+
+470
+00:28:59,440 --> 00:29:00,040
+Dims.
+
+471
+00:29:00,480 --> 00:29:02,720
+Um but although games is kind of common error.
+
+472
+00:29:02,720 --> 00:29:02,960
+Yeah.
+
+473
+00:29:02,960 --> 00:29:04,120
+>> Games and simulation.
+
+474
+00:29:04,159 --> 00:29:07,320
+Um I I I would I would specify as game engines and particular.
+
+475
+00:29:07,360 --> 00:29:14,680
+So even if you're for instance uh simulating human behavior in Omniverse because they're trying to create better training data for factory floors.
+
+476
+00:29:14,720 --> 00:29:15,840
+Um you can use it.
+
+477
+00:29:15,840 --> 00:29:16,399
+>> Yeah.
+
+478
+00:29:16,399 --> 00:29:20,040
+Maybe Meta has a similar data set because of the quest.
+
+479
+00:29:20,159 --> 00:29:21,200
+>> I never really asked them.
+
+480
+00:29:21,200 --> 00:29:23,320
+I never really looked into the meta quest specifically.
+
+481
+00:29:23,520 --> 00:29:24,799
+So you need a few things.
+
+482
+00:29:24,799 --> 00:29:33,279
+You can't just like there's lots of companies that have like maybe recorders but you also need the public graph otherwise you can't train on the data right you can't train on people's like private
+
+483
+00:29:33,279 --> 00:29:44,399
+videos that they have saved somewhere right and so I think you you you need the social network graph components um because these videos need to be on the internet to rank >> no to train
+
+484
+00:29:44,399 --> 00:29:51,840
+on them yeah I I mean I think I think generally people like people don't want to train on like like because these things they live on your device usually right um and you can't
+
+485
+00:29:51,840 --> 00:29:56,080
+train on anything that lives on your device like you actually need to go and upload and do your thing,
+
+486
+00:29:56,080 --> 00:29:56,399
+right?
+
+487
+00:29:56,399 --> 00:30:01,200
+For meta specifically, I think also VR, the scale of VR is still pretty small.
+
+488
+00:30:01,200 --> 00:30:08,040
+The amount of um environments in VR that are that that have like consumption at scale is probably in like the hundreds.
+
+489
+00:30:08,159 --> 00:30:12,240
+Um whereas on PC, it's probably in the tens of thousands, right?
+
+490
+00:30:12,240 --> 00:30:13,919
+And so you get a lot less diversity.
+
+491
+00:30:13,919 --> 00:30:16,960
+Um the threedimensional input space of VR is pretty interesting.
+
+492
+00:30:16,960 --> 00:30:18,759
+We see some of this too, obviously.
+
+493
+00:30:19,039 --> 00:30:29,520
+And so yeah, I do suspect, you know, Meta Meta starts using these types of things, but it's unclear to me whether they can get to like a similar scale of data or diversity on
+
+494
+00:30:29,520 --> 00:30:30,720
+the environments as we can.
+
+495
+00:30:30,720 --> 00:30:32,080
+>> Yeah, there's a lot of challenges there.
+
+496
+00:30:32,080 --> 00:30:32,480
+>> Yeah.
+
+497
+00:30:32,480 --> 00:30:33,879
+Um, okay.
+
+498
+00:30:34,240 --> 00:30:38,960
+I want to take this in in like a few different ways, but I guess let's let's fill out the the papers.
+
+499
+00:30:38,960 --> 00:30:40,840
+Uh, maybe one more to mention is tire.
+
+500
+00:30:40,880 --> 00:30:41,120
+Yeah.
+
+501
+00:30:41,120 --> 00:30:49,399
+which uh I actually I interviewed the guy authors but that too seems like the particular uh insight that brought it overseed.
+
+502
+00:30:49,679 --> 00:30:49,919
+>> Yeah.
+
+503
+00:30:49,919 --> 00:30:55,919
+So so Anthony too who led the um research on Gaia 2 is is also one of the engineers that joined our team.
+
+504
+00:30:55,919 --> 00:31:02,000
+Uh so it's all the diamond uh the core contributors for diamond and then Anthony um and we just had three more researchers join this week.
+
+505
+00:31:02,000 --> 00:31:10,080
+It's been a good week and yes I I think a lot of the approaches in Gaia too were heavily inspired by diamond and then Vansa who was one of the um authors of diamond
+
+506
+00:31:10,080 --> 00:31:20,040
+also already was at wave by the time that I emailed them and he also realized what this was and realized that that you know you could scale world models to a much larger like
+
+507
+00:31:20,080 --> 00:31:22,480
+scale and decided just to make the leap as well.
+
+508
+00:31:22,480 --> 00:31:30,559
+So I think everybody that sees a data set makes a leap because it's but it takes a while to wrap wrap your head around it because it's like oh it's video games right like
+
+509
+00:31:30,559 --> 00:31:39,519
+intuitively it doesn't make sense and then when you actually understand and you see right how we've been able to transfer it to physical world video and things like that then it makes sense and
+
+510
+00:31:39,519 --> 00:31:40,799
+then everybody tends to jump.
+
+511
+00:31:40,799 --> 00:31:42,680
+I would call it video games and call it RL.
+
+512
+00:31:42,960 --> 00:31:45,840
+So then yeah, >> if I lived in San Francisco, maybe I would.
+
+513
+00:31:45,840 --> 00:31:46,440
+Yeah.
+
+514
+00:31:46,799 --> 00:31:52,399
+Uh uh just a quick note cuz we actually cover all these papers in in latest club.
+
+515
+00:31:52,399 --> 00:31:58,600
+>> Uh SEMA 2 did not seem to have as much in Tekken Suma one and I don't really know why they they did a lot more work.
+
+516
+00:31:58,640 --> 00:32:07,919
+G3 had a ton of impact and but I also felt like because you could play with the model or people it just seems an extension of all those things.
+
+517
+00:32:07,919 --> 00:32:12,240
+I guess like any quick takes on Simo 2 G3 which both this year is what?
+
+518
+00:32:12,240 --> 00:32:13,840
+>> Yeah, I'll I'll talk about Simma 2.
+
+519
+00:32:13,840 --> 00:32:25,440
+The steerability of Cinema 2 was to me the most impressive part because lighting up the action sequences and the the text conditioning is is quite hard to do,
+
+520
+00:32:25,440 --> 00:32:26,000
+right?
+
+521
+00:32:26,000 --> 00:32:32,119
+And so that and the fact that they were like it's also quite interesting that it means that they can sort of use Gemini as as part of the flywheel,
+
+522
+00:32:32,399 --> 00:32:32,720
+right?
+
+523
+00:32:32,720 --> 00:32:42,720
+where um where you can sort of scale scale this orchestrator as like an independent almost like a puppet master if you will and then like in theory Gemini could orchestrate many instances of of
+
+524
+00:32:42,720 --> 00:32:52,159
+SEMA right that to me is the most most interesting part is where I I tend to agree with this where like I think our models will initially be used as like like you'll have
+
+525
+00:32:52,159 --> 00:33:02,840
+like an orchestrator VLM of sorts that's kind of like managing instances and instructing them um and I think SEMA showing that you can do this was was fascinating Also,
+
+526
+00:33:03,279 --> 00:33:10,640
+the fact that you could um they didn't just have text conditioning, but they also were able to do like drawings and markings uh of where to go.
+
+527
+00:33:10,640 --> 00:33:16,040
+They really took an interesting end to- end approach to me uh that I I look forward to seeing a lot more of.
+
+528
+00:33:16,080 --> 00:33:19,279
+Um >> but you talking to them like you saw is that the one collaborative room?
+
+529
+00:33:19,279 --> 00:33:23,120
+>> Yeah, I I think the um yeah, we're very friendly with Deep Mind.
+
+530
+00:33:23,120 --> 00:33:23,919
+We like them a lot.
+
+531
+00:33:23,919 --> 00:33:28,720
+I just saw the team not too long ago and I think you know big fans of their work.
+
+532
+00:33:28,720 --> 00:33:32,480
+>> The the head line that kind of shade from Alice Heath's coverage review.
+
+533
+00:33:32,480 --> 00:33:32,960
+Yeah.
+
+534
+00:33:32,960 --> 00:33:36,200
+Is you're the biggest bet that Invido cross has made since open.
+
+535
+00:33:36,320 --> 00:33:36,880
+>> Yeah.
+
+536
+00:33:36,880 --> 00:33:38,600
+How did that conversation start?
+
+537
+00:33:38,960 --> 00:33:39,360
+Okay.
+
+538
+00:33:39,360 --> 00:33:47,760
+So what if I know it's style and may maybe I'll get slapped in the fingers for revealing this or whatever but uh >> forgive me if I were bad.
+
+539
+00:33:47,760 --> 00:33:57,360
+>> Um is he asked you to like draw a 2030 picture of your company and I think he just picked n plus 5 years but whatever I don't know >> I did the same to you.
+
+540
+00:33:57,360 --> 00:33:57,960
+Yeah.
+
+541
+00:33:58,080 --> 00:34:09,239
+Um he asks you to like walk that back from first principles all the way from today and and and he ask he expects you to do that flawlessly where he can challenge any assumption
+
+542
+00:34:09,599 --> 00:34:17,200
+any part of the vision that that and he asks you questions right he has a very technical background he also has a bunch of technical people on his team and he truly backs people
+
+543
+00:34:17,200 --> 00:34:27,119
+that have these like very large visions on that vision and the ability to defend it alone um and that's what he did for us um and I think that's why he made that so
+
+544
+00:34:27,119 --> 00:34:34,600
+I think also So through this uh through through this question he he he gets to know a lot of things about how technical you are.
+
+545
+00:34:34,639 --> 00:34:43,239
+He gets to know how well you think from first principles because if that if that vision is not connected to something real it's very easy to sus it out by asking good questions.
+
+546
+00:34:43,440 --> 00:34:52,519
+Um and then and then he just backs fully I think like he he really gets in your corner um if it's the right fit.
+
+547
+00:34:52,720 --> 00:34:54,800
+And yeah they they've been incredible partners.
+
+548
+00:34:54,800 --> 00:34:57,359
+they they they've opened so many doors for us.
+
+549
+00:34:57,359 --> 00:35:01,040
+>> I had to ask the question any like it's a it's a very notable story.
+
+550
+00:35:01,040 --> 00:35:07,760
+Uh obviously a lot of work went into it and but it's also worth it when come out of side >> for sure.
+
+551
+00:35:07,760 --> 00:35:15,280
+One of the things also wanted to I I guess I kind of asked this question out of sequence but um one of the things that excites me about talking to you is there are a
+
+552
+00:35:15,280 --> 00:35:27,359
+lot of people like you who are founders of business and businesses that along the way have a ton of data and yours happens to be highly valuable you pursued before deciding to do an
+
+553
+00:35:27,359 --> 00:35:37,760
+independent journey and also talk to other companies about potential licensing or acquisition and something is your learnings from those periods.
+
+554
+00:35:37,760 --> 00:35:42,360
+But also like one one version of this is very simply how do you value data?
+
+555
+00:35:42,800 --> 00:35:48,640
+>> Yeah, I don't think you can value it unless you actually model it yourself and see what the capabilities are.
+
+556
+00:35:48,640 --> 00:35:50,679
+That's my that's my real outcome.
+
+557
+00:35:50,720 --> 00:35:52,160
+>> You say model but train a model.
+
+558
+00:35:52,160 --> 00:35:56,360
+Yeah, >> but that's obviously like not doable for for everyone.
+
+559
+00:35:56,400 --> 00:36:08,640
+Um and also I think my general advice would be as model capabilities increase you and models are also like you know the these fuel ML they're very very good at labeling as well generally
+
+560
+00:36:08,640 --> 00:36:17,359
+right what I was afraid of when I was having some of these conversations was okay like you know as as the cap the capabilities increase you're just going to need less uh ground data and
+
+561
+00:36:17,359 --> 00:36:26,560
+like you can do more model based data generation or synthetic data generation I would recommend if you're going to do large data deals like just try to get like a large chunk of equity in
+
+562
+00:36:26,560 --> 00:36:28,120
+the company that you're doing it with.
+
+563
+00:36:28,240 --> 00:36:34,960
+Um, if you can now a lot of them won't do this, but I think that to me would or just go do the research,
+
+564
+00:36:34,960 --> 00:36:36,360
+figure out what's actually possible.
+
+565
+00:36:36,400 --> 00:36:41,920
+In our case, we were quite lucky in the sense that this is actually the foundation data, >> right?
+
+566
+00:36:41,920 --> 00:36:46,320
+And I think right like that's not true for for every data set.
+
+567
+00:36:46,320 --> 00:36:50,280
+I think you know we just happened to to hit a particular gold mine.
+
+568
+00:36:50,320 --> 00:36:55,280
+>> But you you also did you read Kab you did the action thing like one or five years ago.
+
+569
+00:36:55,280 --> 00:36:55,839
+Yeah.
+
+570
+00:36:55,839 --> 00:36:56,960
+So you word.
+
+571
+00:36:56,960 --> 00:36:57,200
+>> Yeah.
+
+572
+00:36:57,200 --> 00:36:59,839
+That's the thing like you you have to be grounded, right?
+
+573
+00:36:59,839 --> 00:37:08,720
+And I think a lot of the um and and I think that's the hard part and I think a lot of what's interesting is you can also kind of look for if like scaling
+
+574
+00:37:08,720 --> 00:37:17,719
+laws already exist on your data type which like for video there were some but for these like input action labeled uh sets there really wasn't any.
+
+575
+00:37:17,920 --> 00:37:20,000
+The other question is like does it go into LMS?
+
+576
+00:37:20,000 --> 00:37:22,000
+Does it go into uh world models?
+
+577
+00:37:22,000 --> 00:37:24,880
+does it go into like what type of model is it going to be used for?
+
+578
+00:37:24,880 --> 00:37:26,880
+And I think that's an important thing to know.
+
+579
+00:37:26,880 --> 00:37:33,839
+And so I just want to you know if if you're having these conversations with labs about data just like make sure that you actually understand like what it's going to be used for cuz
+
+580
+00:37:33,839 --> 00:37:38,240
+that's a very very good way for you to like make the decision yourself about whether you want to pursue that.
+
+581
+00:37:38,240 --> 00:37:45,920
+Now a lot of them won't tell you that and I think >> you know I think in in in that case you don't generally just don't want to do it because like I think I
+
+582
+00:37:45,920 --> 00:37:53,680
+think for our case like we really cared that like for instance there weren't going to be competing products with game developers built right because we didn't want to like bite the hand that feeds
+
+583
+00:37:53,680 --> 00:37:55,560
+us and I think we are part of the games industry.
+
+584
+00:37:55,760 --> 00:38:02,800
+So those questions I think are normal and then we eventually decided you know he just has the data we're just going to go do it ourselves and that's when the rest happened.
+
+585
+00:38:02,800 --> 00:38:06,560
+Yeah and >> he assembled the team that didn't uh take advantage of that.
+
+586
+00:38:06,560 --> 00:38:11,680
+I I feel like that's you've aligned a lot of stars in order to make GI burn.
+
+587
+00:38:11,680 --> 00:38:12,079
+Yeah.
+
+588
+00:38:12,079 --> 00:38:15,359
+>> That other data founders they at the beginning of the journey.
+
+589
+00:38:15,359 --> 00:38:15,760
+>> Yes.
+
+590
+00:38:15,760 --> 00:38:16,880
+Or I'm a data founder.
+
+591
+00:38:16,880 --> 00:38:20,600
+Founders who happen to have beta but they have a main business, right?
+
+592
+00:38:20,960 --> 00:38:23,520
+I I don't know if you there's two sides to this, right?
+
+593
+00:38:23,520 --> 00:38:27,520
+There it's really easy to be super naive about it and like I had a lot of people tell me initially,
+
+594
+00:38:27,520 --> 00:38:29,200
+oh, it's not that valuable.
+
+595
+00:38:29,200 --> 00:38:38,320
+you're just like making this up and and and so for me like doing the work and actually understanding it myself was a really really big part of of building that confidence and go start
+
+596
+00:38:38,320 --> 00:38:48,880
+the company but a lot of times it is true that like model capabilities increase so quickly that like the certain data you just don't need anymore um and so I think it is it's
+
+597
+00:38:48,880 --> 00:38:57,839
+really important to like get people to do the work such that you can make these types of distinctions and and and so so my recommendation would be go build models with your data see
+
+598
+00:38:57,839 --> 00:39:04,880
+if you can create any sort of cap abilities that that aren't clearly already there um or on path to being there and then figure out um where you go.
+
+599
+00:39:04,880 --> 00:39:05,280
+>> Yeah.
+
+600
+00:39:05,280 --> 00:39:12,320
+I didn't want to ask this earlier but you gave me the opportunity to uh when you say do the work thing do course work and all that and your co-founders gave you some homework.
+
+601
+00:39:12,320 --> 00:39:12,800
+Yeah.
+
+602
+00:39:12,800 --> 00:39:15,680
+>> Uh is this like some books I mean Corser?
+
+603
+00:39:15,680 --> 00:39:19,640
+>> No, this was um Franuis Flores Flores.
+
+604
+00:39:19,680 --> 00:39:25,040
+So he has a little book of deep learning and then he also has a full course that he's published um uh on his website.
+
+605
+00:39:25,040 --> 00:39:28,079
+I went through the entire course uh over the summer.
+
+606
+00:39:28,079 --> 00:39:33,160
+I believe it's like something like 30 or 40 lectures which also take home projects and things like that.
+
+607
+00:39:33,280 --> 00:39:36,800
+Um and I would recommend anybody uh uh does this.
+
+608
+00:39:36,800 --> 00:39:40,679
+It it goes through right history of deep learning like the the topology.
+
+609
+00:39:41,119 --> 00:39:50,040
+It takes you through um the linear algebra the calculus eventually end up with like chain rule and by this time you've you've done like all the the the more important concepts.
+
+610
+00:39:50,160 --> 00:39:55,520
+It takes you through how do you create neural networks using uh using these concepts that you've learned.
+
+611
+00:39:55,520 --> 00:39:55,760
+>> Wow.
+
+612
+00:39:55,760 --> 00:39:57,160
+This is super first principles.
+
+613
+00:39:57,280 --> 00:40:01,440
+this guy and I've I've I've had the the the uh opportunity to spend some time with him as well.
+
+614
+00:40:01,440 --> 00:40:05,040
+He is one of the most first principles people I've met in my entire life.
+
+615
+00:40:05,040 --> 00:40:07,359
+I'm convinced like I actually asked him why did you curse?
+
+616
+00:40:07,359 --> 00:40:15,599
+He said oh cuz I thought all the other curses weren't right and because because he is so first principles and he can only explain things from like everything you see and how he explains
+
+617
+00:40:15,599 --> 00:40:16,240
+this thing.
+
+618
+00:40:16,240 --> 00:40:26,960
+It's everything is from first principles including like the history of deep learning itself was part of of the course and um yes he goes uh um so all so he goes through everything and
+
+619
+00:40:26,960 --> 00:40:35,200
+then uh and by the end of it I think you like I now have like a pretty good intuitive understanding of how everything works but obviously still right like I I like to describe
+
+620
+00:40:35,200 --> 00:40:38,800
+it as um I'm like the the guy who just got his driver's license.
+
+621
+00:40:38,800 --> 00:40:43,440
+I can drive the car and like my co-founders are like the F1 drivers that like have done this for years.
+
+622
+00:40:43,440 --> 00:40:49,520
+they know where all the um uh where all the the gaps are and and so I I enjoy getting to learn from them.
+
+623
+00:40:49,520 --> 00:40:56,160
+The cool thing is also that world models is just like a very very new space and so you know I I get to bring ideas to the table that like no one thought of
+
+624
+00:40:56,160 --> 00:41:01,400
+and not because I'm great at this just because it's such a new space that like people just haven't tried it yet.
+
+625
+00:41:01,440 --> 00:41:04,120
+>> Um so >> to get a hit on definition.
+
+626
+00:41:04,160 --> 00:41:04,640
+>> Yeah.
+
+627
+00:41:04,640 --> 00:41:07,200
+What are role models to you?
+
+628
+00:41:07,200 --> 00:41:14,040
+You know in a video model you might predict the next likely sequence or the next most entertaining the next most entertaining frame.
+
+629
+00:41:14,240 --> 00:41:27,440
+Um what world models do is they actually have to understand the the full range of possibilities and outcomes um from the current state and based on the action that you take generates the next
+
+630
+00:41:27,440 --> 00:41:34,079
+state right so the ne the next frame and so it is it is a much more sort of complex problem than than traditional video models.
+
+631
+00:41:34,079 --> 00:41:41,680
+So to me it is it is a world that is accurately generated based on the actions that you take as a result of what's already been generated.
+
+632
+00:41:41,680 --> 00:41:45,160
+>> And just to fact check uh that needs to understand physics.
+
+633
+00:41:45,680 --> 00:41:52,000
+It needs to understand if I'm building a type of material you need how it interacts with some type of material.
+
+634
+00:41:52,000 --> 00:41:54,319
+>> Yeah I think the interactions is the most important part.
+
+635
+00:41:54,319 --> 00:41:56,560
+I think the reasons why role models are so fascinating.
+
+636
+00:41:56,560 --> 00:42:06,480
+One of the things that I did when I was studying over the summer was I tried to actually build a super rudimentary um PyTorch based physics engine which I would not recommend writing a
+
+637
+00:42:06,480 --> 00:42:15,599
+physics engine in PyTorch for obvious reasons but I wanted to be able to um because it's differential so you can uh you can generate the model but >> yeah exactly you can and then you
+
+638
+00:42:15,599 --> 00:42:23,839
+can um uh uh train and so I wanted to you know I got so many people ask me about you know why aren't you just using uh why aren't you just simulating or generating
+
+639
+00:42:23,839 --> 00:42:34,640
+this data um and I really wanted to understand from first principles why and I think the most important thing that I figured out was the compute complexity of simulation goes up really really rapidly
+
+640
+00:42:34,640 --> 00:42:48,880
+with three variables first the numbers of agents in an environment second uh their doth so their individual freedom >> yeah and then third the information that each action reveals um so like um for instance
+
+641
+00:42:48,880 --> 00:42:59,680
+if you if you have a te if you have a text action or a speech action the environment can change so much based on whether you say right water or fire that the outcomes
+
+642
+00:42:59,680 --> 00:43:02,800
+are going to be completely different of like how a human would behave in that type of situation.
+
+643
+00:43:02,800 --> 00:43:11,680
+And so it goes up so quickly with those three variables that at some point you just hit a point where you just want to maximally bet on either video transfer or generation of these
+
+644
+00:43:11,680 --> 00:43:15,920
+environments using world models because that type of soicity is just incredibly difficult.
+
+645
+00:43:15,920 --> 00:43:21,280
+But it's already very very present in a lot of the video pre-training uh that goes into into these world models,
+
+646
+00:43:21,280 --> 00:43:21,599
+right?
+
+647
+00:43:21,599 --> 00:43:29,240
+And so I think for for us it is more so about making a maximal bet on video transfer and interacting with things that are difficult to simulate.
+
+648
+00:43:29,520 --> 00:43:35,760
+And the steerability is also really interesting with text uh than it is on betting against simulation or something like that.
+
+649
+00:43:35,760 --> 00:43:43,719
+And so I think there's still a large market for for traditional simulation engines specifically in areas where video is really hard to get.
+
+650
+00:43:43,839 --> 00:43:47,920
+>> Is this exactly what the big lads are also saying when they're talking to that?
+
+651
+00:43:47,920 --> 00:43:52,800
+>> I honestly haven't talked about the big to the bigs like since we started working on them ourselves.
+
+652
+00:43:52,800 --> 00:43:55,119
+I think people are more reserved with what they share with us.
+
+653
+00:43:55,119 --> 00:43:56,319
+Yeah, >> of course.
+
+654
+00:43:56,319 --> 00:43:58,439
+With him said from your question.
+
+655
+00:43:58,720 --> 00:44:03,719
+How would you contrast your version of war models with Fi Yamun?
+
+656
+00:44:04,400 --> 00:44:04,800
+>> Yeah.
+
+657
+00:44:04,800 --> 00:44:07,200
+So I don't know exactly what Yangun is doing today.
+
+658
+00:44:07,200 --> 00:44:12,199
+My understanding it's based on the Fija like L Japa approach which is so I'll start with Fei.
+
+659
+00:44:12,240 --> 00:44:23,119
+I think what's really interesting about Fil's approach is that you in some way are able to reuse the the um the splats right in game engines and in things that let you stay in
+
+660
+00:44:23,119 --> 00:44:24,439
+verifiable domain.
+
+661
+00:44:24,480 --> 00:44:26,640
+Um which I think is a really interesting approach.
+
+662
+00:44:26,640 --> 00:44:32,240
+Um, however, my understanding is they're currently not interactive, which in my opinion is like the whole point of of world models,
+
+663
+00:44:32,240 --> 00:44:32,400
+right?
+
+664
+00:44:32,400 --> 00:44:33,359
+It's it's environments.
+
+665
+00:44:33,359 --> 00:44:34,319
+They're great environments.
+
+666
+00:44:34,319 --> 00:44:38,960
+And I think from a business perspective, I think they they they picked a really important part of the tool chain,
+
+667
+00:44:38,960 --> 00:44:44,480
+but to me, that's not really uh a role model, but my my guess is they'll get there, right?
+
+668
+00:44:44,480 --> 00:44:46,000
+They'll they'll start generating >> Yeah.
+
+669
+00:44:46,000 --> 00:44:47,040
+They just really use it.
+
+670
+00:44:47,040 --> 00:44:47,280
+>> Yeah.
+
+671
+00:44:47,280 --> 00:44:47,760
+Exactly.
+
+672
+00:44:47,760 --> 00:44:48,319
+Exactly.
+
+673
+00:44:48,319 --> 00:44:52,760
+And I think right, FE is one of the like founders of the entire space.
+
+674
+00:44:52,880 --> 00:45:02,600
+Um, so I think it's going to be really interesting to me on on on what maybe that interactive piece looks like for me to really judge their approach.
+
+675
+00:45:02,640 --> 00:45:09,480
+I I think we interviewed this before uh we interviewed her with Justin Johnson uh her co-founder.
+
+676
+00:45:09,760 --> 00:45:16,600
+He was he was more focused on the physics side of things and game trying to have good news.
+
+677
+00:45:16,640 --> 00:45:27,880
+I I I I do think that basically that the splats if you just add more dimensions on I guess the forces acting on them then then you get to drag 2D out of the box
+
+678
+00:45:28,240 --> 00:45:33,959
+because you basically these are virtual atoms that then has all the blow physics applied to them.
+
+679
+00:45:34,079 --> 00:45:39,280
+>> Yeah, I'm uh I'm excited to see what that looks like when they actually release it.
+
+680
+00:45:39,280 --> 00:45:41,880
+It's really hard really hard for me to comment on anything.
+
+681
+00:45:42,640 --> 00:45:50,720
+I really like the um uh the the frame based approach um because all of our video or all of our training data is in this format.
+
+682
+00:45:50,720 --> 00:45:51,200
+>> Yes.
+
+683
+00:45:51,200 --> 00:45:51,359
+Yeah.
+
+684
+00:45:51,359 --> 00:45:56,120
+So they we actually asked them about this and they were like yeah it's possible but we they're choosing the splat.
+
+685
+00:45:56,160 --> 00:45:56,560
+>> Yeah.
+
+686
+00:45:56,560 --> 00:45:56,800
+Yeah.
+
+687
+00:45:56,800 --> 00:45:58,880
+And you can also go from splat to frames right.
+
+688
+00:45:58,880 --> 00:46:03,000
+I'm sure you can write like at some it's it wouldn't be easy like you'd have to actually render out the environment.
+
+689
+00:46:03,200 --> 00:46:09,599
+So sure it's not it's not going to be a simple problem but like in theory it has to be something that you can do if you really wanted to.
+
+690
+00:46:09,599 --> 00:46:15,520
+So like because it's almost like having a more sort of ground truth threedimensional representation of the underlying world, right?
+
+691
+00:46:15,520 --> 00:46:17,760
+So I think it's an interesting approach.
+
+692
+00:46:17,760 --> 00:46:20,000
+Um it might be overkill, right?
+
+693
+00:46:20,000 --> 00:46:25,520
+Uh uh you're also dealing with like a much larger like degrees of freedom on the output space, right?
+
+694
+00:46:25,520 --> 00:46:27,400
+So so who knows how well it scales.
+
+695
+00:46:27,520 --> 00:46:32,240
+I like the fact that like I think these video models also use things like autoenccoders, right?
+
+696
+00:46:32,240 --> 00:46:38,640
+You can actually have the world models predict like much smaller um uh maybe like a >> resolution or size.
+
+697
+00:46:38,640 --> 00:46:39,119
+>> Yeah, exactly.
+
+698
+00:46:39,119 --> 00:46:43,680
+And then you can use like diffusion upscaling or methods like this to actually um uh enrich.
+
+699
+00:46:43,680 --> 00:46:53,000
+And so I think that world models just allow a much more or world models in my sense for a much more like controlled space that that that we know really well.
+
+700
+00:46:53,119 --> 00:46:55,200
+Um I'm not suggesting their approach is wrong.
+
+701
+00:46:55,200 --> 00:46:58,120
+I'm just you know like this is I think what we really like about it.
+
+702
+00:46:58,160 --> 00:47:06,640
+Honestly, Yan's podcast that he did, I don't remember which one it was, but a long time ago where he where he basically proclaimed LLMs to be a dead end,
+
+703
+00:47:06,640 --> 00:47:10,280
+um was one of the things that inspired me to do this.
+
+704
+00:47:10,560 --> 00:47:13,599
+I think this is very consensus around models people.
+
+705
+00:47:13,599 --> 00:47:18,040
+Basically, everyone heard this is like stops with their LM and just filter to role models.
+
+706
+00:47:18,480 --> 00:47:27,359
+I would say that the main perspective I asked this exact question to Nome Brown from Open Eye and he was like well learning the civil models,
+
+707
+00:47:27,359 --> 00:47:27,440
+right?
+
+708
+00:47:27,440 --> 00:47:31,240
+So there's basically that the different things in our system uh
+
+709
+00:47:32,400 --> 00:47:42,079
+>> yes so >> yeah I I I'm not one to proclaim LMS are dead ends personally I think um I think they're actually quite useful in particularly as orchestrators like the way I think about is
+
+710
+00:47:42,079 --> 00:47:52,560
+as humans right we had sort of a threedimensional world then we invented text as like a in a way in compression method right so you had we invented text in order to communicate with
+
+711
+00:47:52,560 --> 00:48:03,760
+each other in a in in a common way uh in a way that actually compresses all this information that we are perceiving in threedimensionals space into just like a single sequence and I think
+
+712
+00:48:03,760 --> 00:48:17,320
+that allowed sciences to emerge it allowed so many literature like so many parts of the world that we that we cherish so I think it's a critical part of uh of the whole picture
+
+713
+00:48:17,359 --> 00:48:25,839
+I also agree that that uh it's very very clear that they do build sort of the internal implicit world models inside LMS um and so I think they'll be very helpful as things like
+
+714
+00:48:25,839 --> 00:48:37,359
+orchestrators Um the problem is when it comes to the generalization I think text has a generalization backbone when most of the the uh um when most of the the pre-training is is is text right
+
+715
+00:48:37,359 --> 00:48:46,720
+or or or largely text sequences then I think you want that backbone to be kind of more spatial and plural in nature and then also just have text like as one of the as
+
+716
+00:48:46,720 --> 00:48:55,200
+as part of that and I think the actual argument of um of LLMs is also for instance the auto reggressive nature of the prediction itself.
+
+717
+00:48:55,200 --> 00:49:06,240
+So the um the fact that it's running the entire output right through the transformer and then in order to predict the next token which doesn't like the environment in the real world is continuous
+
+718
+00:49:06,240 --> 00:49:16,640
+right it's always it's always changing and elements kind of just forget about that right I think a lot of the the the argument isn't first right so I think the the fact the fact
+
+719
+00:49:16,640 --> 00:49:25,760
+that like text doesn't necessarily generalize well to sufficient coral um context and then the auto reagentive nature of the prediction and using text for that right so I Those are those are the two
+
+720
+00:49:25,760 --> 00:49:26,520
+main arguments.
+
+721
+00:49:26,559 --> 00:49:34,480
+Um I think I think text prediction is just one of the actions that is going to come out of of these you know these these policies and world models.
+
+722
+00:49:34,480 --> 00:49:40,760
+I think speech and text generation will just be >> one of the actions that that can that can be a part of that.
+
+723
+00:49:41,040 --> 00:49:46,439
+I think that there will just be labs coming at this problem from both sides.
+
+724
+00:49:47,119 --> 00:49:53,320
+Um and everyone ends up in roughly the same place and the same place will be whatever people think is cool.
+
+725
+00:49:53,599 --> 00:50:01,760
+uh right like whatever the consumer gets >> whatever is closest to the GI >> yeah and so I don't think there's like a clear answer I think it's really interesting to come to come at it
+
+726
+00:50:01,760 --> 00:50:14,720
+from the world modeling side but it's also because we have to right because like text is largely commoditized we can import all the text I think it's interesting and tenting yeah it makes sense
+
+727
+00:50:14,720 --> 00:50:24,559
+that you can probably recover it's sort of like you're taking a step back you're starting your branch of the ML research sheet but you might guess there just end up recovering all the other tech
+
+728
+00:50:24,559 --> 00:50:25,560
+stuff emergingly.
+
+729
+00:50:25,920 --> 00:50:26,160
+>> Yeah.
+
+730
+00:50:26,160 --> 00:50:26,400
+Yeah.
+
+731
+00:50:26,400 --> 00:50:28,240
+We can import a lot of that research, right?
+
+732
+00:50:28,240 --> 00:50:31,520
+A lot of that is um >> that's really cool on the on the research side.
+
+733
+00:50:31,520 --> 00:50:39,159
+Let's talk about the stuff that GI is producing more like the the biggest of research and products output.
+
+734
+00:50:39,280 --> 00:50:40,840
+You mentioned the word customers.
+
+735
+00:50:41,200 --> 00:50:42,640
+What are your current customers?
+
+736
+00:50:42,640 --> 00:50:42,800
+>> Yeah.
+
+737
+00:50:42,800 --> 00:50:45,599
+So, we're already working with some of the largest game developers in the world.
+
+738
+00:50:45,599 --> 00:50:45,920
+Yeah.
+
+739
+00:50:45,920 --> 00:50:48,040
+>> Uh we're also working with game engines directly.
+
+740
+00:50:48,079 --> 00:50:54,400
+And so really what we're doing at the moment is replacing essentially the player controller inside of a game engine.
+
+741
+00:50:54,400 --> 00:51:07,880
+So anything that you're currently that maybe like behavior trees or things that you're deterministically coding, we hope to replace with a single API which is just you stream us frames and we predict actions
+
+742
+00:51:07,920 --> 00:51:12,520
+and that can be inside an engine or it can be um eventually even inside the real world.
+
+743
+00:51:12,640 --> 00:51:14,280
+Hopefully those are then also steerable.
+
+744
+00:51:14,400 --> 00:51:19,280
+So the models that you saw weren't texturable yet, but I think we want to get to a point where they're fully texturable.
+
+745
+00:51:19,280 --> 00:51:24,800
+>> Well, steerable means like, well, I want you to share figure anything else out in the pre.
+
+746
+00:51:24,800 --> 00:51:27,280
+>> Yeah, I think it's it's sex conditioning on the generation.
+
+747
+00:51:27,280 --> 00:51:36,520
+So yeah, the ability to to you're right, we want to get to a point where you can generally and that's why it's called general intuition where we can sort of can mimic the intuition
+
+748
+00:51:36,559 --> 00:51:41,000
+of all these gamers into humanlike behaviors in any situation.
+
+749
+00:51:41,680 --> 00:51:44,040
+Um as I mentioned also the lab is named after
+
+750
+00:51:45,359 --> 00:51:54,559
+this quote from AlphaFold which is wouldn't it be amazing if we could mimic the intuition of these gamers who are by the way only amateur biologists um on his path to um he tried
+
+751
+00:51:54,559 --> 00:51:58,439
+to get an AI to train fold it to generate a lot of data for for AlphaFold.
+
+752
+00:51:58,640 --> 00:52:07,119
+And so for us really the the northstar right what we hope to get to one day is being able to represent scientific problems in threedimensional space and then have a space temporal agent capable
+
+753
+00:52:07,119 --> 00:52:16,480
+of perceiving that space and using hopefully also the the right the the text reasoning capabilities that LMS have today in addition to the space temporal capabilities to be able to work on the other
+
+754
+00:52:16,480 --> 00:52:17,560
+side of that problem.
+
+755
+00:52:17,599 --> 00:52:19,640
+So that for us is is sort of the northstar.
+
+756
+00:52:19,680 --> 00:52:29,520
+That's why like you know we're we're sort of trying to be hyperfocused based on core workloads the same way that entropic was hyperfocused code and use that to then get into organizations and expand
+
+757
+00:52:29,520 --> 00:52:30,160
+from there.
+
+758
+00:52:30,160 --> 00:52:30,640
+Yeah.
+
+759
+00:52:30,640 --> 00:52:36,760
+>> Just as a side note since you mentioned entropic um any idea what they did on this to to solve.
+
+760
+00:52:37,119 --> 00:52:41,040
+>> No out of any lab I probably know entropic at least to be honest.
+
+761
+00:52:41,040 --> 00:52:41,359
+Yeah.
+
+762
+00:52:41,359 --> 00:52:42,640
+I admired him though.
+
+763
+00:52:42,640 --> 00:52:43,119
+>> Yeah.
+
+764
+00:52:43,119 --> 00:52:49,080
+Well, the the the current working theory is that they had a super lucky um roll of the ducks,
+
+765
+00:52:50,160 --> 00:52:52,480
+but we'll and and then he compounds from there.
+
+766
+00:52:52,480 --> 00:52:53,440
+That sounds like a nice story.
+
+767
+00:52:53,440 --> 00:52:54,760
+I'm sure it's not that.
+
+768
+00:52:55,040 --> 00:52:55,280
+>> Yeah.
+
+769
+00:52:55,280 --> 00:52:55,760
+Okay.
+
+770
+00:52:55,760 --> 00:52:59,320
+So, um why did a game developers want this?
+
+771
+00:52:59,680 --> 00:53:09,040
+>> So, if you're a game developer, how well you're actually retaining players is like um if you have a game that's already at skill is like decently dependent on how good your bots are.
+
+772
+00:53:09,040 --> 00:53:13,680
+So, if you're logging in at an obscure time, let's say 3:00 a.m.
+
+773
+00:53:13,680 --> 00:53:18,720
+in America, and your player liquidity is low, then you need really really good bots to keep those players engaged.
+
+774
+00:53:18,720 --> 00:53:20,280
+>> Is this known is this a thing?
+
+775
+00:53:20,400 --> 00:53:21,839
+>> Yeah, for sure.
+
+776
+00:53:21,839 --> 00:53:23,200
+Like Fortnite and whatever.
+
+777
+00:53:23,200 --> 00:53:24,199
+>> A lot of human.
+
+778
+00:53:24,559 --> 00:53:24,880
+Yeah.
+
+779
+00:53:24,880 --> 00:53:28,840
+Um, and so if if you're like as a human, do I want to play against bots?
+
+780
+00:53:28,960 --> 00:53:30,000
+>> Usually, it's not just bots.
+
+781
+00:53:30,000 --> 00:53:35,599
+It's like players mix in with bots because you don't want to play just against bots, but it's better to have a full game than to have like an empty game.
+
+782
+00:53:35,599 --> 00:53:35,920
+>> Yeah.
+
+783
+00:53:35,920 --> 00:53:40,000
+Um and so I think as long as it's part of the environment, I think it's okay.
+
+784
+00:53:40,000 --> 00:53:42,800
+>> That means you also have to sort of grade that skill level.
+
+785
+00:53:42,800 --> 00:53:42,960
+>> Yeah.
+
+786
+00:53:42,960 --> 00:53:43,200
+Yeah.
+
+787
+00:53:43,200 --> 00:53:44,160
+Which we can do.
+
+788
+00:53:44,160 --> 00:53:47,560
+Um because we have we know exactly how good people are at these games.
+
+789
+00:53:47,599 --> 00:53:48,079
+>> Yeah.
+
+790
+00:53:48,079 --> 00:53:48,400
+Yeah.
+
+791
+00:53:48,400 --> 00:53:51,280
+I think for us um bots is kind of like step one.
+
+792
+00:53:51,280 --> 00:53:51,839
+Uh right.
+
+793
+00:53:51,839 --> 00:53:57,119
+So what what I was showing you is we're building a general agent that can sort of play any game um in real time.
+
+794
+00:53:57,119 --> 00:53:59,599
+But really that extends into all of simulation, right?
+
+795
+00:53:59,599 --> 00:54:03,920
+Like in GTA V for instance, people are genuinely role playing real life, >> right?
+
+796
+00:54:03,920 --> 00:54:08,840
+And so they're actually behaving in quite aligned ways with with the goals they set for themselves.
+
+797
+00:54:09,119 --> 00:54:11,839
+So you have all these examples represented in video games, right?
+
+798
+00:54:11,839 --> 00:54:19,839
+You have truck simulator, power wash simulator, >> power wash, >> power wash simulator where like actually the behaviors that you'd want uh in nature to be able to perceive.
+
+799
+00:54:19,839 --> 00:54:20,760
+They're all there.
+
+800
+00:54:21,440 --> 00:54:22,720
+>> Most Yeah.
+
+801
+00:54:22,720 --> 00:54:26,679
+It's it's really like how seriously some gamers take truck simulator.
+
+802
+00:54:26,960 --> 00:54:29,839
+Um if you haven't seen this, you should watch it.
+
+803
+00:54:29,839 --> 00:54:30,319
+Yeah.
+
+804
+00:54:30,319 --> 00:54:35,839
+They buy the whole like truck driving set and they're doing the job of a truck driver.
+
+805
+00:54:35,839 --> 00:54:36,400
+>> Yeah.
+
+806
+00:54:36,400 --> 00:54:44,079
+What I mentioned to you, we have more people at any given time on metal playing with steering wheels in like truck simulator and these types of games than Whimo has cars on the road.
+
+807
+00:54:44,079 --> 00:54:46,319
+Um it's a ridiculous stat, but it's true.
+
+808
+00:54:46,319 --> 00:54:46,559
+>> Yeah.
+
+809
+00:54:46,559 --> 00:54:46,720
+Yeah.
+
+810
+00:54:46,720 --> 00:54:53,320
+I mean, so you know, I I I used to think that quality to self driving, you kind of just the interplay a lot of GTA 5.
+
+811
+00:54:53,760 --> 00:54:54,960
+Um he Yeah.
+
+812
+00:54:54,960 --> 00:54:56,559
+I mean, so I'm bad at it.
+
+813
+00:54:56,559 --> 00:54:56,960
+>> Yeah.
+
+814
+00:54:56,960 --> 00:54:59,520
+Our bet is not that we can zero shot any of these things.
+
+815
+00:54:59,520 --> 00:55:08,800
+It's just that like the next self-driving company can maybe have collect 1% of the data because right also for instance clips already self- select into negative events and and adversity right and so like
+
+816
+00:55:08,800 --> 00:55:18,880
+a lot of our data set because already the highlights >> is is really um precisely what a lot of these companies spend like their last 20% doing >> right and I think that's the main argument
+
+817
+00:55:18,880 --> 00:55:27,599
+if you're if you're if if you're another company that's looking at what we're doing I think the thing that people are not that people won't understand is that anything that that you're currently doing
+
+818
+00:55:27,599 --> 00:55:30,919
+in pre-training as long as your robot can be controlled using a game controller.
+
+819
+00:55:31,040 --> 00:55:33,440
+We hope that we can move that to post training for you.
+
+820
+00:55:33,440 --> 00:55:36,000
+So our bet is not that we can create the next self-driving car company.
+
+821
+00:55:36,000 --> 00:55:40,880
+It's just that the next self-driving car company hopefully only needs 1% of the data or maybe 10% of the data,
+
+822
+00:55:40,880 --> 00:55:43,880
+I don't know, right to be able to deliver a really good product.
+
+823
+00:55:43,920 --> 00:55:44,160
+>> Yeah.
+
+824
+00:55:44,160 --> 00:55:44,720
+Yeah.
+
+825
+00:55:44,720 --> 00:55:47,800
+It's also the the term that comes to mind a lot is active learning.
+
+826
+00:55:47,920 --> 00:55:50,160
+I don't know if you've uh used to identify with that.
+
+827
+00:55:50,160 --> 00:56:01,440
+start it got less cool for a bit in order to see the uptrend uh bit which which obviously you have the best data set for the sort of high intensity or you say negative
+
+828
+00:56:01,440 --> 00:56:09,280
+but feeling for negative it could be negative all part of it >> yeah for sure I think negative events is just because it's the most common term that people use for like if you're if
+
+829
+00:56:09,280 --> 00:56:20,040
+you're Tesla you want the crashes you want like >> right right but it's only gaming it's yeah >> so you know the model that you saw obviously had really really incredible moments and and that was
+
+830
+00:56:21,119 --> 00:56:21,599
+Yeah.
+
+831
+00:56:21,599 --> 00:56:25,719
+That um that it had a large representation of people at their best.
+
+832
+00:56:25,760 --> 00:56:26,400
+Yeah.
+
+833
+00:56:26,400 --> 00:56:27,040
+>> And worst.
+
+834
+00:56:27,040 --> 00:56:27,359
+Yeah.
+
+835
+00:56:27,359 --> 00:56:27,599
+>> Yeah.
+
+836
+00:56:27,599 --> 00:56:28,079
+Yeah.
+
+837
+00:56:28,079 --> 00:56:28,559
+Amazing.
+
+838
+00:56:28,559 --> 00:56:28,799
+Okay.
+
+839
+00:56:28,799 --> 00:56:29,200
+Cool.
+
+840
+00:56:29,200 --> 00:56:33,359
+Uh any anything else on the customer development side that you want to sort of fetch off?
+
+841
+00:56:33,359 --> 00:56:33,599
+>> Yeah.
+
+842
+00:56:33,599 --> 00:56:41,000
+Um uh we're also already working with robotics companies, but again the and manufacturing, but the key is that the robot has to have gaming inputs.
+
+843
+00:56:41,200 --> 00:56:46,240
+So our bet is not that we can transfer over to like higher do robots than the keyboard and mouse.
+
+844
+00:56:46,240 --> 00:56:52,240
+It's really just that we can move the hard work of of of pre-training hopefully to post training.
+
+845
+00:56:52,240 --> 00:56:52,559
+>> Yeah.
+
+846
+00:56:52,559 --> 00:56:55,359
+It's like kind of like the foundation model that is a very good basis to start.
+
+847
+00:56:55,359 --> 00:56:55,520
+>> Yeah.
+
+848
+00:56:55,520 --> 00:57:01,640
+You're going to you're going to give us frames and and likely some text >> or you'll license the model to because they've been wondering.
+
+849
+00:57:02,400 --> 00:57:02,799
+>> Yeah.
+
+850
+00:57:02,799 --> 00:57:06,679
+Our our business model is initially going to be an API like the anthropic API.
+
+851
+00:57:06,960 --> 00:57:11,080
+Um but you also saw for instance some of the video labeling models that we've been able to develop.
+
+852
+00:57:11,200 --> 00:57:20,160
+So um the goal is for any company to be able to take in their uh their video data as well and we can create first obviously custom versions of the policy for you the
+
+853
+00:57:20,160 --> 00:57:20,720
+agent.
+
+854
+00:57:20,720 --> 00:57:29,520
+Um if that doesn't work then um we we've already working with a customer that that is doing we distill a model and and they uh turn that into a product for themselves.
+
+855
+00:57:29,520 --> 00:57:35,599
+>> So people can engage with you on the agent level API level people can engage with you on the sort of model level.
+
+856
+00:57:35,599 --> 00:57:37,719
+Can you also buy data?
+
+857
+00:57:37,760 --> 00:57:39,719
+>> No we don't sell data.
+
+858
+00:57:39,839 --> 00:57:40,400
+>> Okay cool.
+
+859
+00:57:40,400 --> 00:57:41,920
+So that's the that's the business.
+
+860
+00:57:41,920 --> 00:57:51,560
+Um and is there a world in which I I mean I I think this is on your landing page if you are you know Frontier Labs for for world models.
+
+861
+00:57:51,760 --> 00:57:58,240
+Is there a world in which there is a more sort of application layer thing that you that comes out like a chat GBT for whatever.
+
+862
+00:57:58,240 --> 00:57:58,640
+>> Yeah.
+
+863
+00:57:58,640 --> 00:58:05,760
+You're going to see us launch a few things on on metal itself that are going to blow your mind uh as a result of this this um this agent.
+
+864
+00:58:05,760 --> 00:58:07,959
+I'll I'll leave it to the imagination for now.
+
+865
+00:58:08,000 --> 00:58:15,159
+>> If people typically grate out, email, >> yeah, on the world modeling side, like I think one people underestimate is that metal is already one of the largest,
+
+866
+00:58:15,680 --> 00:58:18,000
+you know, video consumption platforms as well.
+
+867
+00:58:18,000 --> 00:58:20,000
+People watch millions and millions of videos a day.
+
+868
+00:58:20,000 --> 00:58:23,920
+Um, so um, World Autobased Entertainment and things like that.
+
+869
+00:58:23,920 --> 00:58:29,719
+While it's not like a focus for us right now, I think we'll be like on the consumer side, we have the ability to move very very quickly here,
+
+870
+00:58:29,920 --> 00:58:33,520
+um, and and get it integrated in a way that I don't I don't think anyone else can.
+
+871
+00:58:33,520 --> 00:58:40,640
+Yeah, you could theoretically do video gen like Sora like what is what is that one?
+
+872
+00:58:40,640 --> 00:58:42,040
+What's the meta one?
+
+873
+00:58:42,160 --> 00:58:46,079
+Meta m not not real.
+
+874
+00:58:46,079 --> 00:58:52,000
+Yeah, you could theoretically generate clips that nobody play but you know it's a device.
+
+875
+00:58:52,000 --> 00:58:58,240
+>> Yeah, I I I think for us the games being so humanentric is like a really big part of what makes us special.
+
+876
+00:58:58,240 --> 00:59:00,400
+Like I I actually actually just don't think that would work.
+
+877
+00:59:00,400 --> 00:59:07,119
+Like one thing that we are really excited about though, I'll give you one sneak peek of what we're thinking about is what if you could literally replay any of the clips that you have
+
+878
+00:59:07,119 --> 00:59:09,440
+inside a world model or your friends can play them.
+
+879
+00:59:09,440 --> 00:59:14,720
+Like I showed you a model that already took part of your clip as a context >> instant replay enter that world.
+
+880
+00:59:14,720 --> 00:59:17,520
+>> But it's also how we go from imitation learning to RL, right?
+
+881
+00:59:17,520 --> 00:59:22,439
+Cuz like it's part of our research road map anyways to make every single every single clip on metal playable.
+
+882
+00:59:22,640 --> 00:59:28,079
+Um so uh yeah, who's who is to say that that doesn't apply to just the actual clips that you take?
+
+883
+00:59:28,079 --> 00:59:28,240
+>> Yeah.
+
+884
+00:59:28,240 --> 00:59:28,720
+Yeah.
+
+885
+00:59:28,720 --> 00:59:29,040
+Interesting.
+
+886
+00:59:29,040 --> 00:59:30,760
+Can you say more about the RL potential?
+
+887
+00:59:31,040 --> 00:59:34,240
+>> We describe metal as as the episodic memory of humanity in simulation.
+
+888
+00:59:34,240 --> 00:59:40,400
+So when you take a clip, really the way to think about it is you get the highlight of what is maybe 3 hours of play time,
+
+889
+00:59:40,400 --> 00:59:40,640
+right?
+
+890
+00:59:40,640 --> 00:59:45,119
+You maybe get like 2 to 3 minutes of the things that were the most out of distribution, right?
+
+891
+00:59:45,119 --> 00:59:52,919
+It is genuinely your episodic memory um of that play time in simulation, the things that you most want to remember and share.
+
+892
+00:59:53,119 --> 00:59:57,280
+We want to be able to load uh and this is the work that Anthony who is doing.
+
+893
+00:59:57,280 --> 01:00:05,440
+The reason why we built world models is every crash that you run into in Euro Truck Simulator or American Truck Simulator or a driving game.
+
+894
+01:00:05,440 --> 01:00:10,840
+We want to be able right and again these are ground truth labels so we know precisely the actions that lead up to the negative events.
+
+895
+01:00:10,880 --> 01:00:18,880
+Um they're also title labeled when people upload it onto the platform they say okay it's a crash right and so we can select all these events and if we can put them inside a
+
+896
+01:00:18,880 --> 01:00:29,680
+world model we can go into right we can um uh we can train reward models to then uh reward based on how you perform in clips that actually contain negative events for example and
+
+897
+01:00:29,680 --> 01:00:39,000
+so for us it's it's very much about um uh right we can we can create this this this like LLM moment on imitation learning but actually making every single clip on the platform playable
+
+898
+01:00:39,359 --> 01:00:42,880
+um at billions of clips scale is how we go from imitation learning to RL.
+
+899
+01:00:42,880 --> 01:00:43,280
+>> Cool.
+
+900
+01:00:43,280 --> 01:00:44,559
+Uh we covered a lot of it.
+
+901
+01:00:44,559 --> 01:00:49,359
+Uh is there anything else that you want to do before we to grapple with the the long-term vision stuff?
+
+902
+01:00:49,359 --> 01:00:49,599
+>> Yeah.
+
+903
+01:00:49,599 --> 01:00:49,760
+Yeah.
+
+904
+01:00:49,760 --> 01:00:55,920
+I think I think for us um this is a very very ambitious long-term vet.
+
+905
+01:00:55,920 --> 01:00:59,760
+We need the best researchers in the world that that that that want to work on this stuff.
+
+906
+01:00:59,760 --> 01:01:03,359
+Um it's really exciting not being extremely data constrained.
+
+907
+01:01:03,359 --> 01:01:10,079
+Um like we really get to like we get so many learnings every week that we didn't think were possible and it makes it for for a joy working here.
+
+908
+01:01:10,079 --> 01:01:18,319
+Also the other thing is because we have such a large data modes we don't have to be as concerned as the LM companies about publishing because >> we don't want to be able to >> Exactly.
+
+909
+01:01:18,319 --> 01:01:27,520
+No one can replicate the models right and so for us um we really want to bring back like the original culture of of open research which is why we did the partnership with Qoutai
+
+910
+01:01:27,520 --> 01:01:28,280
+in France.
+
+911
+01:01:28,480 --> 01:01:30,480
+Um, can you say I I actually didn't.
+
+912
+01:01:30,480 --> 01:01:35,839
+>> Yeah, we just did a um we just announced our partnership with QA in French, which is an an open science lab in Paris,
+
+913
+01:01:35,839 --> 01:01:37,680
+one of the best research labs in the world.
+
+914
+01:01:37,680 --> 01:01:41,480
+Um, Eric Schmidt, I believe, funded in addition to some some French people.
+
+915
+01:01:41,520 --> 01:01:46,400
+They are essentially acting as the partner that's currently doing a lot of open research on the data.
+
+916
+01:01:46,400 --> 01:01:54,720
+We also want to partner with universities who um because like we do believe this is the frontier, but it's so data constrainted that really no everyone has their hands tied behind their back right
+
+917
+01:01:54,720 --> 01:01:54,960
+now.
+
+918
+01:01:54,960 --> 01:01:56,400
+And so we want to help fix that.
+
+919
+01:01:56,400 --> 01:02:04,840
+So for instance um we want to work with the universities to build like negative event prediction models for maybe like trucks in India on all the truck data where all these crashes occur.
+
+920
+01:02:04,960 --> 01:02:08,880
+We have all these things that we know we can do that we just haven't at the time to do.
+
+921
+01:02:08,880 --> 01:02:18,799
+Um, and so if if you're listening to this and and you're uh maybe an academic institution or something and you want access to some of this data and a research um in educational research
+
+922
+01:02:18,799 --> 01:02:22,720
+fashion, I think we're we're quite open to doing that cuz we want to educate people and uh Yeah.
+
+923
+01:02:22,720 --> 01:02:28,240
+And other than that, we just want to work with the best infrastructure and uh research engineers on the planet as we're going into scaling,
+
+924
+01:02:28,240 --> 01:02:31,640
+you know, runs that have thousands, tens of thousands, eventually hundreds of thousands of GPUs.
+
+925
+01:02:31,760 --> 01:02:32,160
+>> Yeah.
+
+926
+01:02:32,160 --> 01:02:32,480
+Yeah.
+
+927
+01:02:32,480 --> 01:02:32,960
+Amazing.
+
+928
+01:02:32,960 --> 01:02:36,360
+Uh I primed you this as like the closing question on flight.
+
+929
+01:02:36,480 --> 01:02:40,079
+It's a little bit that no cost 330 there was I didn't know.
+
+930
+01:02:40,079 --> 01:02:40,480
+Yeah.
+
+931
+01:02:40,480 --> 01:02:43,159
+>> So what does GI become in?
+
+932
+01:02:43,280 --> 01:02:43,520
+>> Yeah.
+
+933
+01:02:43,520 --> 01:02:47,480
+In 2030 we want to be the gold standard um of intelligence.
+
+934
+01:02:47,680 --> 01:02:57,560
+Uh and any sequence uh long enough is fundamentally coral right which I think is um so by nailing sporal reasoning you go after the root problem of intelligence itself.
+
+935
+01:02:57,599 --> 01:03:00,240
+What the world looks like is we want to have eight.
+
+936
+01:03:00,240 --> 01:03:10,079
+So I sort of group um the sequences of AI in three stages and I credit Andre Gaparthy for for teaching this bits to bits atoms to bits and bits atoms and then atoms to
+
+937
+01:03:10,079 --> 01:03:10,640
+atoms.
+
+938
+01:03:10,640 --> 01:03:19,560
+In the atoms to atoms stage I want like I want GI models to be responsible for 80% of all the atoms to atoms interactions driven by AI models.
+
+939
+01:03:19,599 --> 01:03:30,000
+uh uh and and and the reason the reason for that is because we were able to unblock intelligence so quickly and robotics like intelligence is the bottleneck that supply chains actually converged on gaming
+
+940
+01:03:30,000 --> 01:03:36,559
+inputs as their as their primary input methods and and they converge on essentially simpler systems that let us do a lot more a lot quicker.
+
+941
+01:03:36,559 --> 01:03:45,440
+So we are essentially the the 80% market approach and then you have lots of companies that have kind of like specialized maybe human robot OS stacks that are that are the other 20 and
+
+942
+01:03:45,440 --> 01:03:54,400
+then so I want to be responsible for 80% of all the atoms atoms interactions driven by uh by these models and be the goal center for intelligence and maybe 100x more in simulation because
+
+943
+01:03:54,400 --> 01:03:56,840
+I think simulation will actually be the larger market initially.
+
+944
+01:03:56,960 --> 01:04:04,600
+So I think in simulation um because you have very little constraints uh also from a safety perspective simulation is much easier.
+
+945
+01:04:04,640 --> 01:04:07,520
+So I think uh a lot of the takeoff initially assistant simulation.
+
+946
+01:04:07,520 --> 01:04:18,079
+So a lot of the simulation use cases like what I mentioned scientific use cases I'm really really excited about and so um yeah 80% of Adams Adams interactions uh coming downstream from these types of
+
+947
+01:04:18,079 --> 01:04:21,800
+phases of world foundation models and then 100x more in simulation.
+
+948
+01:04:22,160 --> 01:04:22,760
+Yeah.
+
+949
+01:04:22,880 --> 01:04:23,200
+Yeah.
+
+950
+01:04:23,200 --> 01:04:32,880
+It reminds me a lot of that uh what Mark and Villa from the Chaz Institute are doing with virtual biology because you can do a lot simulation and you can do Yeah.
+
+951
+01:04:32,880 --> 01:04:35,320
+Oh, you can do it a lot faster uh with interest.
+
+952
+01:04:35,599 --> 01:04:36,400
+Uh amazing.
+
+953
+01:04:36,400 --> 01:04:37,680
+Thank you for inviting us to your office.
+
+954
+01:04:37,680 --> 01:04:37,839
+Yeah.
+
+955
+01:04:37,839 --> 01:04:39,520
+And thank you sharing a little bit about your training.
+
+956
+01:04:39,520 --> 01:04:40,000
+Thank you.
+
+957
+01:04:40,000 --> 01:04:40,600
+Yeah.
+

@@ -1,0 +1,5548 @@
+1
+00:00:00,000 --> 00:00:01,920
+I have a pretty big claim.
+
+2
+00:00:02,280 --> 00:00:06,960
+It's a visual intelligence are actually mostly coming from language.
+
+3
+00:00:07,360 --> 00:00:14,720
+Like these video models especially from now since the distribution model technology is more mature.
+
+4
+00:00:14,720 --> 00:00:28,680
+Like every time you see there there some improvement on these models I would say mostly that's again comes from language model not not coming from the the video the video model itself like the
+
+5
+00:00:28,800 --> 00:00:30,760
+the video distribution models and so forth.
+
+6
+00:00:31,600 --> 00:00:34,920
+>> Before we get into today's episode, I just have this small message for listeners.
+
+7
+00:00:35,320 --> 00:00:35,800
+Thank you.
+
+8
+00:00:35,800 --> 00:00:44,440
+We would not be able to bring you the AI engineering science and entertainment content that you so clearly want if you didn't choose to also click in and tune into our content.
+
+9
+00:00:44,440 --> 00:00:54,600
+We've been approached by sponsors on an almost daily basis, but fortunately enough of you actually subscribe to us to keep all this sustainable without ads and we want to keep it that way.
+
+10
+00:00:54,600 --> 00:00:57,080
+But I just have one favor to ask all of you.
+
+11
+00:00:57,200 --> 00:01:01,640
+The single most powerful completely free thing you can do is to click that subscribe button.
+
+12
+00:01:01,640 --> 00:01:10,400
+It's the only thing I'll ever ask of you and it means absolutely everything to me and my team that works so hard to bring the AI in space to you each and every week.
+
+13
+00:01:10,560 --> 00:01:15,440
+If you do it, I promise you we'll never stop working to make this show even better.
+
+14
+00:01:15,840 --> 00:01:17,080
+Now let's get into it.
+
+15
+00:01:22,160 --> 00:01:25,760
+>> Okay, we're here in the studio with Ethan uh most recently of XAI.
+
+16
+00:01:25,840 --> 00:01:26,440
+Welcome.
+
+17
+00:01:26,480 --> 00:01:27,040
+>> Yeah, thank you.
+
+18
+00:01:27,040 --> 00:01:28,160
+Glad being here.
+
+19
+00:01:28,160 --> 00:01:29,320
+>> We were so here with Vibhu.
+
+20
+00:01:29,320 --> 00:01:36,600
+Uh you were first coming to us or joining the Lil in Space world because you were working on Cosmos at Nvidia and you did a great paper.
+
+21
+00:01:36,600 --> 00:01:37,400
+We loved it.
+
+22
+00:01:37,400 --> 00:01:38,360
+Uh you presented it as well.
+
+23
+00:01:38,360 --> 00:01:39,560
+So thank you for doing that.
+
+24
+00:01:39,560 --> 00:01:39,880
+>> Yep.
+
+25
+00:01:39,880 --> 00:01:40,320
+I thought so.
+
+26
+00:01:40,320 --> 00:01:43,800
+I I also presented the MOEs Yes.
+
+27
+00:01:43,800 --> 00:01:43,920
+>> Yes.
+
+28
+00:01:43,920 --> 00:01:45,760
+At times at Lil in Space.
+
+29
+00:01:45,760 --> 00:01:46,200
+>> Yeah.
+
+30
+00:01:46,200 --> 00:01:46,400
+Yeah.
+
+31
+00:01:46,400 --> 00:01:46,680
+Yeah.
+
+32
+00:01:46,680 --> 00:01:47,920
+How did you actually hear about us?
+
+33
+00:01:47,920 --> 00:01:49,080
+Did we reach out to you?
+
+34
+00:01:49,080 --> 00:01:50,000
+Is that how it worked?
+
+35
+00:01:50,000 --> 00:02:04,200
+>> No, actually I the the community like I realized oh there's this online community that people talk about AI and also learn learn from each other through papers every every week through the paper clock.
+
+36
+00:02:04,200 --> 00:02:05,400
+It's very nice.
+
+37
+00:02:05,520 --> 00:02:06,360
+>> Yeah, I learned a lot.
+
+38
+00:02:06,360 --> 00:02:08,560
+>> think 3 years non-stop.
+
+39
+00:02:08,560 --> 00:02:10,840
+We haven't stopped even on Christmas and New Year's.
+
+40
+00:02:11,160 --> 00:02:13,000
+It's many weeks I want to stop.
+
+41
+00:02:14,840 --> 00:02:15,400
+>> No, no, it's good.
+
+42
+00:02:15,400 --> 00:02:19,120
+I think you had posted that you worked on a paper, and I was like, "Oh, very cool.
+
+43
+00:02:19,120 --> 00:02:19,760
+We have a paper club.
+
+44
+00:02:19,760 --> 00:02:20,600
+Present it."
+
+45
+00:02:20,600 --> 00:02:22,400
+>> Yeah, I might have reached out to you after.
+
+46
+00:02:22,400 --> 00:02:24,600
+>> Yeah, you you because it's an amateur club, right?
+
+47
+00:02:24,600 --> 00:02:24,959
+Yeah.
+
+48
+00:02:24,959 --> 00:02:30,559
+>> Uh so, it's very un- unusual, and but we have sometimes people authors come by and and actually explain the paper.
+
+49
+00:02:30,560 --> 00:02:34,720
+Today, we just did uh the poolside paper, which is apparently very good.
+
+50
+00:02:34,720 --> 00:02:35,680
+>> Came out yesterday.
+
+51
+00:02:36,040 --> 00:02:37,000
+Uh pretty interesting, right?
+
+52
+00:02:37,000 --> 00:02:37,800
+Fully open.
+
+53
+00:02:37,800 --> 00:02:39,559
+They talk about everything system.
+
+54
+00:02:39,600 --> 00:02:40,560
+So, it's a good one.
+
+55
+00:02:40,560 --> 00:02:42,400
+We'll we'll recommend people to read it.
+
+56
+00:02:42,400 --> 00:02:47,120
+>> Bring us up to speed on your transition to xAI cuz I actually don't even know when you joined.
+
+57
+00:02:47,680 --> 00:02:50,800
+Uh just like tell us tell us the story about the sort of transition.
+
+58
+00:02:51,200 --> 00:02:56,080
+>> Before xAI, I was working on Cosmos world model at at Nvidia.
+
+59
+00:02:56,720 --> 00:03:09,600
+So, Cosmos is a it's a giant video foundation models I can that aims to summarize a world, and for it serves as a foundation of for all of the roboticists to build on top
+
+60
+00:03:09,600 --> 00:03:10,200
+of.
+
+61
+00:03:10,440 --> 00:03:18,440
+There once I built the Cosmos one, I realized as they saying, also has a scaling law similar to language model.
+
+62
+00:03:18,440 --> 00:03:22,200
+We need to scale scale up the video models further.
+
+63
+00:03:22,880 --> 00:03:28,640
+Uh that's that's why I realized I need to move to somewhere with much more computer resources.
+
+64
+00:03:28,800 --> 00:03:30,240
+That's how I >> than Nvidia?
+
+65
+00:03:31,600 --> 00:03:33,559
+>> The GPU rich kingdom themselves.
+
+66
+00:03:35,640 --> 00:03:36,320
+Yeah.
+
+67
+00:03:36,320 --> 00:03:38,760
+>> And timeline-wise, when was Cosmo?
+
+68
+00:03:38,959 --> 00:03:40,040
+It was pretty early, right?
+
+69
+00:03:40,040 --> 00:03:44,240
+It was open world model open paper or is >> it was like end of 2024.
+
+70
+00:03:44,959 --> 00:03:45,800
+>> End of 2024.
+
+71
+00:03:46,400 --> 00:03:51,280
+>> Yeah, then at at May 2025, I moved to xAI.
+
+72
+00:03:51,880 --> 00:03:58,600
+As that time, I I joined the at time when X AI was about to build video models and in multi-model models.
+
+73
+00:03:59,040 --> 00:04:02,240
+There were no no infra, no data, and no model.
+
+74
+00:04:02,800 --> 00:04:05,080
+And it just just a few engineers.
+
+75
+00:04:05,120 --> 00:04:10,960
+We we built it in 3 months and released the first model Grok Imagine 0.9.
+
+76
+00:04:12,240 --> 00:04:19,840
+And since then, I I keep working on video models and move more from pre-training and to post-training of the video models.
+
+77
+00:04:19,840 --> 00:04:31,160
+For example, like a reference to videos, kind of like the cameo feature, and video extensions, and that and uh Before I left,
+
+78
+00:04:31,160 --> 00:04:40,040
+I I worked on uh word model, leading a small team to to focus on the real-time long-horizon video generation.
+
+79
+00:04:40,680 --> 00:04:44,600
+>> Can you give like a rough road map of like, okay, you're on a brand new team.
+
+80
+00:04:44,880 --> 00:04:50,280
+Grok previously was only text, so they partnered with BFL for uh their their imagery and stuff.
+
+81
+00:04:50,360 --> 00:04:51,880
+What do you What What are the building blocks, right?
+
+82
+00:04:51,880 --> 00:04:54,720
+You have compute, data you can procure somewhere.
+
+83
+00:04:54,720 --> 00:04:59,800
+Like it's just like, you know, what what is like the sequence of things that people should think about when you're setting up a new team?
+
+84
+00:04:59,919 --> 00:05:02,720
+>> I tell you, even deeper, not just data you can procure.
+
+85
+00:05:03,040 --> 00:05:05,400
+You guys had to go through getting the data, too, right?
+
+86
+00:05:05,400 --> 00:05:12,480
+So, you shipped it pretty fast, but yeah, >> Yeah, 3 months is like from actually like very surprisingly fast.
+
+87
+00:05:12,480 --> 00:05:16,240
+Yeah, one thing I feel like thanks to my experience at Nvidia.
+
+88
+00:05:16,440 --> 00:05:23,240
+Cuz first time when we were building Cosmos together, we built it uh for about a year.
+
+89
+00:05:23,240 --> 00:05:26,360
+So, so this is like the second time I do it.
+
+90
+00:05:26,480 --> 00:05:29,680
+Roughly roughly have an idea like what to do.
+
+91
+00:05:29,919 --> 00:05:32,480
+I see the most important thing is is the talent.
+
+92
+00:05:32,760 --> 00:05:40,320
+Everyone Everyone were very strong and clever and very close with each other towards a common goal.
+
+93
+00:05:40,720 --> 00:05:43,680
+So, that speed up things a lot.
+
+94
+00:05:43,680 --> 00:05:50,960
+So, you reduce the communication bandwidth among people, and everyone can can work towards the same goal.
+
+95
+00:05:50,960 --> 00:05:54,960
+It's It's like every day there's not that much meetings on the calendar.
+
+96
+00:05:55,240 --> 00:06:01,200
+Like maybe like a like a a sync a day and after that is is just all building.
+
+97
+00:06:01,280 --> 00:06:04,200
+It was pretty fun at that time.
+
+98
+00:06:04,200 --> 00:06:20,600
+And another thing is that X I has very strong foundations of like data data infras, model infras and the the supporting there can can help the model development a lot.
+
+99
+00:06:21,200 --> 00:06:35,560
+When I look at like training models, I don't >> Uh so actually the the top important thing is like how many uh how many iterations can you do like per per day uh and the
+
+100
+00:06:35,600 --> 00:06:39,560
+the more iteration can you do, you can you can train the model much faster.
+
+101
+00:06:40,120 --> 00:06:49,680
+So if you have very strong infra and you you have a lot of compute, you can you can train these models in a very short period of time.
+
+102
+00:06:50,120 --> 00:07:02,080
+That can give you a a much larger buffer to uh for errors and it also gives you the opportunity to spot more bugs.
+
+103
+00:07:02,600 --> 00:07:03,960
+>> Yeah, what is an iteration?
+
+104
+00:07:04,000 --> 00:07:16,280
+Is it like uh a few hundred steps or what are we >> let's say just uh train training the model like from acquire new data and maybe design new algorithms and train train a new
+
+105
+00:07:16,280 --> 00:07:17,840
+model maybe a smaller scale.
+
+106
+00:07:17,840 --> 00:07:26,480
+>> Yeah, so a cycle time for like any hyper param that you're >> Yeah, cycle time and then till like eval this model is this model better than my previous iteration.
+
+107
+00:07:26,960 --> 00:07:27,440
+>> Yeah.
+
+108
+00:07:27,440 --> 00:07:31,800
+So it's like before you someone had already set this up that you can iterate very quickly.
+
+109
+00:07:31,800 --> 00:07:38,960
+>> Yeah, I think that the foundation there is is extremely good for developing and research research models.
+
+110
+00:07:40,000 --> 00:07:49,520
+And often I find is is a kind of boring but like a lot of the improvements does not come from new algorithms.
+
+111
+00:07:49,680 --> 00:07:57,080
+It comes from finding small bugs here and there in the data pipeline in the in the model training pipeline.
+
+112
+00:07:57,680 --> 00:08:02,000
+Those Those give the biggest boost to the model quality.
+
+113
+00:08:02,600 --> 00:08:03,440
+>> It's interesting, right?
+
+114
+00:08:03,440 --> 00:08:09,840
+So you say it's like small team, less communication bandwidth, but also a lot of quality is like find little bugs.
+
+115
+00:08:09,960 --> 00:08:11,520
+It seems counterintuitive, right?
+
+116
+00:08:11,520 --> 00:08:15,720
+You have a lot of people you can iron out more of those, but it's interesting to see the other side,
+
+117
+00:08:15,720 --> 00:08:16,000
+right?
+
+118
+00:08:16,000 --> 00:08:16,320
+>> Yeah.
+
+119
+00:08:16,320 --> 00:08:16,880
+Yeah.
+
+120
+00:08:16,880 --> 00:08:21,160
+>> I also wonder, have you Do you try using LLMs to look for bugs or anything like I don't know?
+
+121
+00:08:21,640 --> 00:08:24,360
+>> I remember at that time it was May 2025.
+
+122
+00:08:25,600 --> 00:08:29,640
+So it's the the coding model wasn't quite there yet.
+
+123
+00:08:29,640 --> 00:08:34,159
+I remember I remember like December 2025 it was extremely good.
+
+124
+00:08:34,159 --> 00:08:36,960
+Yeah, I've been I've been using it at that time.
+
+125
+00:08:37,360 --> 00:08:38,840
+It's It's helpful.
+
+126
+00:08:39,360 --> 00:08:41,000
+Uh sometimes it it produce
+
+127
+00:08:42,039 --> 00:08:44,120
+codes that are kind of difficult to maintain.
+
+128
+00:08:44,120 --> 00:08:57,000
+Even though like the first time it built something extremely fast, but it gave the like a spaghetti code thousands of lines that I couldn't maintain and the LLM itself couldn't figure out what's what's
+
+129
+00:08:57,000 --> 00:08:59,600
+wrong and how to improve on top of it.
+
+130
+00:08:59,720 --> 00:09:02,680
+But now I find it much much much better.
+
+131
+00:09:03,280 --> 00:09:13,280
+Yeah, I want to bring up another point here is like now coding models are much more efficient and can help help us implement stuff much faster,
+
+132
+00:09:14,040 --> 00:09:27,480
+compute might become a bottleneck again because previously like if you want to train a new model, say you want to generate new synthetic data and then or write a new algorithm,
+
+133
+00:09:27,520 --> 00:09:29,120
+it might take a few weeks.
+
+134
+00:09:29,480 --> 00:09:34,680
+And during that period of time you don't you might not have experiments to run.
+
+135
+00:09:34,880 --> 00:09:40,560
+But now you you can build that thing within a few hours, then you can immediately train a model.
+
+136
+00:09:41,400 --> 00:09:47,560
+Now you have to have enough compute to to try all of the ideas.
+
+137
+00:09:47,800 --> 00:09:52,480
+So compute might be the bottleneck of iterating speed again.
+
+138
+00:09:52,760 --> 00:09:53,200
+>> Mhm.
+
+139
+00:09:53,200 --> 00:09:53,800
+Yeah.
+
+140
+00:09:53,920 --> 00:09:59,000
+Um yeah, I I think actually honestly I think that's a kind of a stressful job because you're like, well,
+
+141
+00:09:59,160 --> 00:10:00,680
+I should be trying everything.
+
+142
+00:10:01,280 --> 00:10:05,040
+And if I'm not, then I'm not doing my job well.
+
+143
+00:10:05,040 --> 00:10:11,040
+>> I mean, there's also the stress of you're eating thousands of GPUs per hour, which is very expensive.
+
+144
+00:10:11,040 --> 00:10:13,400
+And you know, compute can go to other researchers.
+
+145
+00:10:13,400 --> 00:10:14,280
+Daddy Elon.
+
+146
+00:10:14,280 --> 00:10:15,320
+>> Yeah, Daddy Elon.
+
+147
+00:10:16,280 --> 00:10:19,280
+>> It was But you know, there's still finite amount of compute.
+
+148
+00:10:19,280 --> 00:10:21,640
+Like you want to use it you want to use it well.
+
+149
+00:10:21,760 --> 00:10:23,000
+You want more of it.
+
+150
+00:10:23,200 --> 00:10:25,160
+>> That was quite stressful indeed.
+
+151
+00:10:26,040 --> 00:10:33,200
+Yeah, I think one one thing is the risk coding models now, like a lot of these jobs can be automated,
+
+152
+00:10:33,480 --> 00:10:34,680
+which is much better.
+
+153
+00:10:35,360 --> 00:10:37,960
+The second, it's uh it's a marathon.
+
+154
+00:10:38,360 --> 00:10:44,600
+So you you got to maintain good health and uh a regular schedule.
+
+155
+00:10:44,680 --> 00:10:47,600
+>> hard to hear that when you ship from zero to nothing in three months.
+
+156
+00:10:48,839 --> 00:10:49,240
+>> Yeah.
+
+157
+00:10:49,240 --> 00:10:55,280
+I mean, and I think obviously the the culture actually has very famously you know, people people work very hard.
+
+158
+00:10:55,520 --> 00:11:01,720
+Um one thing I I I did want to dive into you know, in our in our notes that you that you sent ahead of time,
+
+159
+00:11:02,080 --> 00:11:04,840
+uh you had specific comments about the cost of video gen training.
+
+160
+00:11:05,120 --> 00:11:08,000
+Uh presumably this is on the cluster one, right?
+
+161
+00:11:08,000 --> 00:11:10,080
+Uh the the 200 megawatt cluster.
+
+162
+00:11:10,560 --> 00:11:12,040
+And whatever you want to share with us.
+
+163
+00:11:12,040 --> 00:11:12,960
+>> three things we're talking about.
+
+164
+00:11:12,960 --> 00:11:16,680
+There's also there's video gen, there's also the image gen model that you put out.
+
+165
+00:11:16,800 --> 00:11:19,960
+Do you want to like complete the Okay, so zero to one, you have a few months.
+
+166
+00:11:19,960 --> 00:11:23,760
+Just what are the stages of create >> Oh, yeah, maybe I got distracted.
+
+167
+00:11:23,760 --> 00:11:24,360
+Sorry.
+
+168
+00:11:24,760 --> 00:11:28,160
+>> Um and then you know, from there there's video gen, there's audio gen.
+
+169
+00:11:28,160 --> 00:11:31,640
+I'd love to get into those next, but what is that first few months like?
+
+170
+00:11:31,640 --> 00:11:35,960
+So small team, a lot of bugs, iterations, but like, you know, what does it look like?
+
+171
+00:11:35,960 --> 00:11:37,400
+Do you take something off the shelf?
+
+172
+00:11:37,400 --> 00:11:39,160
+Do we just get data compute?
+
+173
+00:11:39,160 --> 00:11:40,480
+What's what's the few months like?
+
+174
+00:11:40,480 --> 00:11:43,280
+How do you go to state of the art imagen model?
+
+175
+00:11:43,800 --> 00:11:44,520
+How do you just start?
+
+176
+00:11:44,520 --> 00:11:44,960
+>> Yeah.
+
+177
+00:11:44,960 --> 00:11:50,440
+I cannot comment specifically how I actually did, but it's it's a quite standard process.
+
+178
+00:11:50,480 --> 00:11:54,560
+I can draw draw some examples from Cosmos.
+
+179
+00:11:55,200 --> 00:12:03,400
+So, mainly it's like a building building a video model, you actually need to build a image model first.
+
+180
+00:12:03,400 --> 00:12:15,200
+And building building these two models, the data you need is 100% synthetic pair of language and image or language to video.
+
+181
+00:12:15,560 --> 00:12:21,880
+Because on the on the internet, actually the the videos don't naturally associate with text.
+
+182
+00:12:22,000 --> 00:12:28,960
+So, you can say, oh, like on YouTube, uh you have the title and you have the description and the comments of a video.
+
+183
+00:12:29,200 --> 00:12:33,440
+But you really they are not relevant to to the video itself.
+
+184
+00:12:33,440 --> 00:12:42,800
+Let's say maybe like the video is a natural scene of mountains or something, and the title is uh like I'm so happy today.
+
+185
+00:12:42,800 --> 00:12:47,200
+So, they have they have they have not no correlation at all.
+
+186
+00:12:47,400 --> 00:12:54,680
+So, the first step is to you have to generate synthetic pair of language with the videos.
+
+187
+00:12:55,200 --> 00:13:02,880
+So, you guys get videos from the internet and you you use a VLM to caption the videos.
+
+188
+00:13:03,560 --> 00:13:09,800
+So, that part Here's the question like, how do you how do you get the VLM to begin with?
+
+189
+00:13:10,160 --> 00:13:13,240
+So, like if there's no >> the model, right?
+
+190
+00:13:13,240 --> 00:13:19,440
+Like >> Say if there's no like VLM exists, like how do you generate the the text to the beginning, right?
+
+191
+00:13:19,440 --> 00:13:20,439
+It's it's impossible.
+
+192
+00:13:20,720 --> 00:13:21,400
+>> I see.
+
+193
+00:13:21,480 --> 00:13:28,320
+>> In the beginning, it's like you ask human to describe the the video as as detailed as possible.
+
+194
+00:13:29,040 --> 00:13:39,320
+For example, you ask them to describe everything like all objects, all characters, and all interaction and dialogues in the in the videos.
+
+195
+00:13:39,320 --> 00:13:42,000
+So, that seems a protocol of Cosmos labeling.
+
+196
+00:13:42,320 --> 00:13:57,560
+They require the uh the objective gave to the labelers was that you have to describe the video as detailed as possible such that a blind person hear the blob text can reconstruct what the
+
+197
+00:13:57,560 --> 00:14:00,080
+video is like from from their head.
+
+198
+00:14:00,080 --> 00:14:00,800
+>> Video or image?
+
+199
+00:14:00,800 --> 00:14:01,360
+You're talking about image.
+
+200
+00:14:01,360 --> 00:14:03,600
+>> Video or image, either either one of them.
+
+201
+00:14:03,600 --> 00:14:03,680
+>> Okay.
+
+202
+00:14:03,680 --> 00:14:07,520
+This was pretty common when we went from like uh clip and Dolly, right?
+
+203
+00:14:07,520 --> 00:14:10,440
+It's all training on really detailed captioning of images.
+
+204
+00:14:10,440 --> 00:14:19,040
+So, same is applied to video, but instead of using multimodal model to pass in video or images and write rich descriptions,
+
+205
+00:14:19,040 --> 00:14:27,880
+you can also >> I mean, I I think there's this traditional perspective of supervised uh or you know, very highly human curated thing.
+
+206
+00:14:27,880 --> 00:14:30,920
+I feel like there's a unlock with unsupervised.
+
+207
+00:14:30,920 --> 00:14:31,240
+Right?
+
+208
+00:14:31,240 --> 00:14:38,200
+Where like you have enough to bootstrap that you can just throw common corpus on it or, you know, whatever.
+
+209
+00:14:38,600 --> 00:14:41,560
+Uh like unsupervised vision and language pairing, right?
+
+210
+00:14:41,560 --> 00:14:46,000
+Like where you just have uh uh intersperse image and text and it just learns.
+
+211
+00:14:46,200 --> 00:14:52,480
+To me, that is the VLM breakthrough that is different from the clip, different from the the the the pre-LM era.
+
+212
+00:14:53,000 --> 00:14:53,520
+>> Yeah, yeah.
+
+213
+00:14:53,520 --> 00:14:57,280
+It's interesting to see that you kind of need both data.
+
+214
+00:14:57,400 --> 00:14:57,800
+Yes.
+
+215
+00:14:57,800 --> 00:14:59,520
+>> For example, >> You needed to bootstrap it up.
+
+216
+00:14:59,520 --> 00:15:06,760
+>> Yeah, for the generative model training, there's also usually like a small percentage of unlabeled data.
+
+217
+00:15:06,839 --> 00:15:12,040
+So, so the model is instructed to generate a video without any text instruction.
+
+218
+00:15:12,960 --> 00:15:15,360
+So, that that can also help the model generalize.
+
+219
+00:15:16,000 --> 00:15:28,880
+So, after after this stage of generative synthetic pair, so uh one uh one important common step is to train a compressor or a tokenizer of the image or videos.
+
+220
+00:15:29,680 --> 00:15:43,360
+So, because if you're trying if you can technically and theoretically train image or video models on pure pixels, but the the problem is that the it's it's a lot of tokens.
+
+221
+00:15:43,600 --> 00:15:50,000
+So, you're like one one image like it's a 1,000 by 1,000 is like 1 million tokens, 1 million pixels.
+
+222
+00:15:50,000 --> 00:15:53,040
+So, it's impossible to train Transformer on that.
+
+223
+00:15:53,600 --> 00:16:01,760
+So, it's a you need to train a tokenizer which can go from image to latent space and latent space back to image.
+
+224
+00:16:01,760 --> 00:16:03,040
+>> That's what we named the podcast.
+
+225
+00:16:03,880 --> 00:16:04,600
+Exactly.
+
+226
+00:16:04,600 --> 00:16:07,600
+But basically you're talking about vocabulary size.
+
+227
+00:16:07,920 --> 00:16:10,440
+it's >> And so like what is what is like a million is impossible?
+
+228
+00:16:10,920 --> 00:16:14,960
+>> In generative models, the vocab is continuous.
+
+229
+00:16:15,280 --> 00:16:16,480
+It's a continuous space.
+
+230
+00:16:16,480 --> 00:16:20,280
+You can think about like you map image to a vector.
+
+231
+00:16:21,000 --> 00:16:27,240
+It's a it's a fixed length vector of like 16 or 48 something like that.
+
+232
+00:16:27,680 --> 00:16:32,320
+And then you you map that vector back to to the image space.
+
+233
+00:16:32,800 --> 00:16:36,400
+And the the mapping is has The mapping is patch based.
+
+234
+00:16:36,400 --> 00:16:46,480
+So, you say you have a 16 by 16 patch and you match you map that patch of pixels into this latent space.
+
+235
+00:16:46,480 --> 00:16:48,560
+>> We've covered the the vision Transformer.
+
+236
+00:16:49,440 --> 00:16:50,320
+>> Yeah, VAEs.
+
+237
+00:16:50,480 --> 00:16:58,920
+>> You you basically compress your input, you do your generation, your reasoning, all that generation in smaller dimension and then you project back out.
+
+238
+00:16:58,920 --> 00:16:59,600
+Yeah.
+
+239
+00:16:59,600 --> 00:17:04,320
+>> VAEs is a form of compression, but I think that that for me the patching thing is from VIT, right?
+
+240
+00:17:04,480 --> 00:17:10,360
+>> Yeah, you can make >> Literally the the yeah, the the paper is titled like 16 by 16 is all you need something like that.
+
+241
+00:17:11,319 --> 00:17:17,320
+>> Um and then I think also people make a lot of comparisons with this kind of patching with convolutions.
+
+242
+00:17:17,880 --> 00:17:18,480
+>> Yes.
+
+243
+00:17:18,520 --> 00:17:19,000
+Yes.
+
+244
+00:17:19,000 --> 00:17:21,959
+>> Which is you're you're a of reconstructing the old paradigm with the new.
+
+245
+00:17:21,959 --> 00:17:28,680
+>> Yeah, actually in VAEs, there are there are both convolution networks and transformers.
+
+246
+00:17:28,680 --> 00:17:30,200
+You can you can actually do both.
+
+247
+00:17:30,200 --> 00:17:31,000
+Yeah.
+
+248
+00:17:31,000 --> 00:17:38,800
+>> After this VAE, so you what you got is you you got latent space tokens and you've got the the language tokens.
+
+249
+00:17:39,480 --> 00:17:46,440
+So now the training training of the diffusion transformer, you already trained these models use diffusion transformers.
+
+250
+00:17:47,240 --> 00:17:48,680
+It is actually quite standard.
+
+251
+00:17:49,120 --> 00:17:54,280
+It's it's very similar to how you train language transformer models.
+
+252
+00:17:54,680 --> 00:17:56,040
+There's not that much difference.
+
+253
+00:17:56,720 --> 00:18:01,200
+It's just the tokens the the visual tokens in visual tokens out.
+
+254
+00:18:01,280 --> 00:18:04,800
+The only difference is there's a denoising process.
+
+255
+00:18:04,800 --> 00:18:09,760
+So you train the model to unmask some of the noise.
+
+256
+00:18:10,080 --> 00:18:14,200
+So you you add you add random noise to the visual tokens.
+
+257
+00:18:14,840 --> 00:18:18,640
+And then you train the model to remove those noise to
+
+258
+00:18:19,720 --> 00:18:21,280
+to generate the clean tokens.
+
+259
+00:18:21,880 --> 00:18:28,320
+Any inference, the model can iteratively remove noise from 100% noise.
+
+260
+00:18:28,720 --> 00:18:29,160
+>> Yeah.
+
+261
+00:18:29,160 --> 00:18:40,960
+And then there's also uh to speed things along on the tech tech tree of diffusion, this CFG like uh and then also there's also I guess latent diffusion that you know is is someone
+
+262
+00:18:40,960 --> 00:18:41,520
+in there.
+
+263
+00:18:41,520 --> 00:18:48,640
+I think somewhere along the line obviously like stability and all these other guys pioneered a lot of this like um architecture.
+
+264
+00:18:49,000 --> 00:18:53,480
+But I don't know if you want to get into that or just or do the the video side, up to you.
+
+265
+00:18:53,600 --> 00:19:10,400
+>> After you train such model such image model, the reason it's a it's a foundation for video models is that image image models are cheaper to train and they have much denser connection between language
+
+266
+00:19:10,400 --> 00:19:11,200
+and text.
+
+267
+00:19:11,720 --> 00:19:14,520
+So sorry, language and images.
+
+268
+00:19:15,080 --> 00:19:27,360
+For example, you you train a billion you train on a billion images and there's a mapping from from the text to to the image and the cost to train the same,
+
+269
+00:19:27,360 --> 00:19:38,080
+like the a billion a billion text to a billion videos, that that's much more expensive because videos naturally have more tokens than images.
+
+270
+00:19:38,920 --> 00:19:46,600
+Because the diffusion fusion models, their understanding of language purely come from this this mapping.
+
+271
+00:19:46,880 --> 00:19:52,280
+So, if you don't have enough mapping, say if you only train on like a 10 million videos or something,
+
+272
+00:19:52,280 --> 00:19:57,200
+there you might not see enough language tokens in your training.
+
+273
+00:19:57,440 --> 00:20:01,280
+So, your model does not understand human intention enough.
+
+274
+00:20:01,720 --> 00:20:10,040
+So, that's why you you really you train you first train this image diffusion models and then you bootstrap the video model from there.
+
+275
+00:20:10,320 --> 00:20:17,680
+>> One thing I did want to ask because I actually I think you're you're the first video model person I've ever talked to,
+
+276
+00:20:17,920 --> 00:20:18,600
+I think.
+
+277
+00:20:18,720 --> 00:20:21,680
+Uh we we've we've like talked to Luma and and all those folks.
+
+278
+00:20:21,960 --> 00:20:26,880
+There there's all these tricks in video compression where basically frame by frame there's not that much difference.
+
+279
+00:20:27,040 --> 00:20:30,480
+So, actually you don't have to regenerate or resave the whole frame, right?
+
+280
+00:20:30,600 --> 00:20:33,240
+Um I think MP4 compression or something else like that.
+
+281
+00:20:33,280 --> 00:20:39,160
+Uh is it tempting to use that or as far as I can tell, everyone just treats it as no,
+
+282
+00:20:39,160 --> 00:20:40,760
+we will just generate every frame.
+
+283
+00:20:40,920 --> 00:20:43,240
+Is that roughly the state of the art?
+
+284
+00:20:43,600 --> 00:20:45,240
+>> There are a few different approaches.
+
+285
+00:20:45,880 --> 00:20:55,760
+Let's say first like you you want to just directly use MP4 compression and the use use that as the tokens for the transformers to train,
+
+286
+00:20:55,760 --> 00:20:56,360
+right?
+
+287
+00:20:56,960 --> 00:21:10,200
+So, people actually have tried that, but the the main challenge is the latent space for the MP4 tokens are not were not very comprehensible for the models.
+
+288
+00:21:10,560 --> 00:21:14,000
+It's It's extremely hard to train on that.
+
+289
+00:21:14,480 --> 00:21:22,200
+And there's a So, that's why they created VAEs, which creates more continuous latent space.
+
+290
+00:21:22,200 --> 00:21:26,720
+So, the models can understand that latent space and learn from it much easier.
+
+291
+00:21:27,120 --> 00:21:32,040
+Even within the VAEs, there are different difficulties of the latent space.
+
+292
+00:21:32,040 --> 00:21:45,880
+So, you you can imagine something that The simplest is the most naive VAE is like You You have an image and you just shuffle all of the images into a into a vector.
+
+293
+00:21:45,960 --> 00:21:49,160
+So, you don't need to train any VAEs, right?
+
+294
+00:21:49,520 --> 00:21:55,080
+But that latent space is extremely hard for models to train on purpose.
+
+295
+00:21:55,080 --> 00:22:00,520
+So, that that's why there's some debate on like how do you compress the the tokens.
+
+296
+00:22:00,800 --> 00:22:04,400
+So, so you mentioned like you can compress frame by frame.
+
+297
+00:22:04,720 --> 00:22:08,480
+So, you can compress uh the temporal dimension.
+
+298
+00:22:08,600 --> 00:22:09,080
+Yes.
+
+299
+00:22:09,080 --> 00:22:14,640
+>> The difference is if you compress temporal dimension, you you get a much higher compression rate.
+
+300
+00:22:14,880 --> 00:22:18,200
+It's because there exists temporal redundancy between frames.
+
+301
+00:22:18,560 --> 00:22:23,880
+Because this frame and the last frame likely they are mostly similar.
+
+302
+00:22:23,880 --> 00:22:25,840
+So, there's only some small difference.
+
+303
+00:22:26,560 --> 00:22:35,240
+Uh for example, like uh I think in 1 2.1 VAE, they have like a 8 by 8 by 4 compression rate.
+
+304
+00:22:35,600 --> 00:22:40,600
+So, the the four temporal tokens are compressing to into one tokens.
+
+305
+00:22:40,920 --> 00:22:45,800
+That can save a lot of save save a lot of the context lens.
+
+306
+00:22:45,840 --> 00:22:51,320
+If you do it frame by frame, you have to do maybe like 8 by 8 by 1.
+
+307
+00:22:51,320 --> 00:22:53,720
+Your context lens will be four times larger.
+
+308
+00:22:54,080 --> 00:23:08,600
+That being said, the benefit of the frame per frame compression, we may come back to this later, is uh real timeliness and interactivity cuz if you if you strands output of the model frame
+
+309
+00:23:08,600 --> 00:23:15,280
+by frame you can as a model can respond to any user request immediately.
+
+310
+00:23:15,720 --> 00:23:23,840
+So if you have like a temporal four four compression four times compression then >> It might be laggy.
+
+311
+00:23:24,040 --> 00:23:26,760
+>> There there's a lag there in nature.
+
+312
+00:23:27,240 --> 00:23:28,720
+>> So you're very peeled on this.
+
+313
+00:23:28,760 --> 00:23:31,880
+Let's just go ahead and bring it up cuz we have the visual prepared anyway.
+
+314
+00:23:31,920 --> 00:23:35,680
+There's some frontier applications of real-time video gen.
+
+315
+00:23:36,000 --> 00:23:38,720
+So Flipbook is one of the examples that went viral recently, right?
+
+316
+00:23:38,720 --> 00:23:39,600
+What is Flipbook?
+
+317
+00:23:39,920 --> 00:23:44,680
+>> Flipbook is is kind of like a web browser web browser.
+
+318
+00:23:44,680 --> 00:23:49,760
+You can see like it has web browser UI on top.
+
+319
+00:23:49,960 --> 00:23:57,120
+The difference is all of the UIs are generated by generative image model in real time.
+
+320
+00:23:57,600 --> 00:24:00,520
+And anything here are are fake.
+
+321
+00:24:00,920 --> 00:24:06,360
+But you can you can explore inside this this imaginary world.
+
+322
+00:24:06,640 --> 00:24:10,480
+Say like we here we have engineering the Great Pyramid.
+
+323
+00:24:11,120 --> 00:24:24,400
+Like the the model generates for us to understand how it works and if we want to navigate around that understand further we can click on some of the some of the description here and
+
+324
+00:24:24,400 --> 00:24:30,840
+the model will generate a new page new subpage describing the details we want to know about.
+
+325
+00:24:30,840 --> 00:24:39,440
+>> So it's basically a kind of we're playing a video but it's pausing for our next interaction and then it just plays the next thing based on our interaction.
+
+326
+00:24:39,680 --> 00:24:40,840
+>> Which is kind of cool.
+
+327
+00:24:40,920 --> 00:24:42,040
+Yes.
+
+328
+00:24:42,040 --> 00:24:43,840
+>> And you kind of decide your story.
+
+329
+00:24:43,840 --> 00:24:47,080
+So this was you know, how do you make a pyramid?
+
+330
+00:24:47,080 --> 00:24:49,400
+Leveraging techniques seem interesting, right?
+
+331
+00:24:49,440 --> 00:24:54,800
+It shows how do you take Okay, I want to know what this >> The demo the demo tweet had more animation between frames.
+
+332
+00:24:54,800 --> 00:24:56,080
+>> I I it's just skipping.
+
+333
+00:24:56,160 --> 00:24:57,600
+>> It's was skipping a lot of frames.
+
+334
+00:24:57,600 --> 00:25:01,680
+>> they also have a of video mode, but uh I guess a lot of people are using it.
+
+335
+00:25:01,680 --> 00:25:04,280
+So it's not really >> There's a live video stream.
+
+336
+00:25:04,800 --> 00:25:05,520
+>> We can try.
+
+337
+00:25:05,520 --> 00:25:07,400
+Um Yeah.
+
+338
+00:25:07,400 --> 00:25:11,120
+>> So so this is an example of the kind of future that you see at the extreme.
+
+339
+00:25:11,120 --> 00:25:12,920
+We don't we're obviously not in it today.
+
+340
+00:25:13,000 --> 00:25:15,760
+But in a world where inference is completely free, Yeah.
+
+341
+00:25:15,760 --> 00:25:19,000
+>> this is better than generating code and text.
+
+342
+00:25:19,000 --> 00:25:27,320
+>> Yeah, so this is this is a final stage of VR video will be at for world model, I think.
+
+343
+00:25:27,600 --> 00:25:32,440
+Imagine imagine internet doesn't exist, and then you'd type in google.com.
+
+344
+00:25:33,240 --> 00:25:36,800
+Like what should what should what should a model show you?
+
+345
+00:25:37,280 --> 00:25:42,480
+Um is a model can't imagine something, and this is what the model imagine.
+
+346
+00:25:42,880 --> 00:25:46,440
+And this web page is is a complete do not exist.
+
+347
+00:25:46,440 --> 00:25:55,080
+So I think as a inference cost come down, we're going to have generative UI for everything.
+
+348
+00:25:55,080 --> 00:25:59,120
+If you think about how the coding model works.
+
+349
+00:25:59,120 --> 00:26:08,360
+So they they write code for a web page, and they render the code might be converted into binary, and the binary render the pixels on the screen.
+
+350
+00:26:09,040 --> 00:26:15,920
+So we in machine learning, every time we have some breakthrough, obviously it's more intuitive.
+
+351
+00:26:16,240 --> 00:26:20,720
+So why don't we have like user instruction to the pixel directly?
+
+352
+00:26:21,080 --> 00:26:26,680
+So the generative UI will be user intention to to the pixels directly.
+
+353
+00:26:27,120 --> 00:26:35,800
+And say like even if I want email, let's say everyone everyone have the same interface, but I want I want it slightly different.
+
+354
+00:26:36,200 --> 00:26:41,480
+I want the email to show show to me like a TikTok, so I can swipe left and right for the emails.
+
+355
+00:26:41,920 --> 00:26:44,320
+And or maybe you want something else.
+
+356
+00:26:44,320 --> 00:26:46,320
+We can have completely different things.
+
+357
+00:26:46,600 --> 00:26:49,680
+Or like I have I'm looking at Instagram stories.
+
+358
+00:26:49,680 --> 00:26:55,800
+I don't like the like a I always make click with and then our channel is a UI wizard.
+
+359
+00:26:56,160 --> 00:27:01,480
+So it's going to be a revolutionary replacement of the interface.
+
+360
+00:27:02,160 --> 00:27:09,960
+So in the future, we might have much more powerful LLMs and coding models running behind the scene.
+
+361
+00:27:10,160 --> 00:27:16,600
+And in the in the front end, the diffusion model will actually be the front end to show stuff to you.
+
+362
+00:27:17,040 --> 00:27:18,520
+That's how I imagine it.
+
+363
+00:27:18,520 --> 00:27:21,240
+>> Yeah, diffusion front end deterministic back end.
+
+364
+00:27:21,240 --> 00:27:21,840
+Yes.
+
+365
+00:27:21,840 --> 00:27:22,560
+that.
+
+366
+00:27:22,560 --> 00:27:29,120
+I find that very expensive, but you know, >> I find it interesting you called LLMs writing code on the back end deterministic,
+
+367
+00:27:29,320 --> 00:27:30,040
+but okay.
+
+368
+00:27:31,360 --> 00:27:33,640
+>> Yeah, you write it once and then you execute it.
+
+369
+00:27:33,640 --> 00:27:45,400
+>> If you think about the cost, say and let's say each 100 cost $1 per hour and if you use this 8 hours a day and 30 days,
+
+370
+00:27:45,760 --> 00:27:48,480
+so um every month you're paying this 240.
+
+371
+00:27:48,560 --> 00:27:52,040
+You will actually not and no one will pay for that.
+
+372
+00:27:52,080 --> 00:27:55,240
+That's even more expensive than Cloud Cloud Max.
+
+373
+00:27:55,240 --> 00:28:06,480
+But if you think about the the compute cost come down like two times every year, I think that the future will actually arrive I think in a few years.
+
+374
+00:28:06,680 --> 00:28:11,800
+>> Compute cost comes down, compute gets faster, model gets smarter, model gets smaller.
+
+375
+00:28:11,800 --> 00:28:14,720
+>> Yeah, I don't know why you say two times cuz I think it's like a a 100 times.
+
+376
+00:28:15,040 --> 00:28:24,600
+>> In language models, it is roughly 100 to 1,000 times every 12 to 18 months for the same given level of LLMs is you know,
+
+377
+00:28:24,600 --> 00:28:26,240
+>> That that's an additive of everything, right?
+
+378
+00:28:26,240 --> 00:28:29,040
+That's model performance alongside compute.
+
+379
+00:28:29,600 --> 00:28:35,600
+So different than just compute cost come down, but you know, a very interesting future.
+
+380
+00:28:35,600 --> 00:28:36,000
+Yeah.
+
+381
+00:28:36,000 --> 00:28:40,400
+>> The web designers will have to shout out that accessibility is an issue, right?
+
+382
+00:28:40,400 --> 00:28:43,320
+Like you know, how do you deal with screen readers or whatever.
+
+383
+00:28:43,320 --> 00:28:48,400
+But yes, this is higher bandwidth storytelling than anything you can possibly generate with code.
+
+384
+00:28:48,640 --> 00:28:48,840
+Right?
+
+385
+00:28:48,840 --> 00:28:51,080
+So, I think that's the the rough idea.
+
+386
+00:28:51,080 --> 00:28:52,880
+>> I'd like to add a little bit to that.
+
+387
+00:28:52,880 --> 00:28:58,880
+So, human naturally have the maximum bandwidth when we're looking at things, look at videos.
+
+388
+00:28:59,240 --> 00:29:04,080
+And and we also have maximum output bandwidth when we're talking.
+
+389
+00:29:04,920 --> 00:29:13,640
+So, in the future, it might be something like we we talk to AI models, and the AI model responds back with a generative UI.
+
+390
+00:29:13,760 --> 00:29:22,920
+So, that that would be the maximum input and output bandwidth to interact with AI models before neuralink happens.
+
+391
+00:29:23,200 --> 00:29:24,800
+>> And I mean, it's also very custom, right?
+
+392
+00:29:24,800 --> 00:29:28,200
+Some people are very visual, some people are not as visual, right?
+
+393
+00:29:28,200 --> 00:29:31,680
+They prefer the text, but that's the thing about generative UI, right?
+
+394
+00:29:31,680 --> 00:29:32,840
+It can also be text.
+
+395
+00:29:33,160 --> 00:29:33,920
+Yes.
+
+396
+00:29:33,920 --> 00:29:37,400
+>> There's another project that we were wanted to highlight, which is the neural OS.
+
+397
+00:29:37,520 --> 00:29:43,800
+Kind of similar idea, but here you're literally operating a simulating operating system with a video model.
+
+398
+00:29:43,800 --> 00:29:44,160
+Yes.
+
+399
+00:29:44,160 --> 00:29:47,040
+>> Um and you can play Doom, you can do Firefox.
+
+400
+00:29:47,560 --> 00:29:54,400
+Uh I find this like mildly less impressive, obviously, because it's an OS that I can run.
+
+401
+00:29:54,400 --> 00:29:55,800
+>> But here, everything is imagined.
+
+402
+00:29:56,440 --> 00:30:00,680
+>> I I was, you know, used to the command W to close the Firefox tab.
+
+403
+00:30:01,240 --> 00:30:01,960
+>> It didn't crash.
+
+404
+00:30:01,960 --> 00:30:03,000
+>> It's too immersive.
+
+405
+00:30:03,000 --> 00:30:04,520
+>> It's it's too immersive for me.
+
+406
+00:30:04,520 --> 00:30:05,960
+I wanted to close the tab.
+
+407
+00:30:06,000 --> 00:30:08,440
+But yes, I can play generated diffuse.
+
+408
+00:30:08,440 --> 00:30:09,640
+>> is shockingly fast.
+
+409
+00:30:10,080 --> 00:30:10,480
+Yeah.
+
+410
+00:30:10,480 --> 00:30:18,320
+>> Because I I I remember there was a demo about like maybe one or two years ago, someone tried to do the first-person shooter with a image model.
+
+411
+00:30:18,360 --> 00:30:20,440
+There was no consistency, it was very slow.
+
+412
+00:30:20,560 --> 00:30:23,480
+But here, it looks like realistically, it's this is Doom.
+
+413
+00:30:24,280 --> 00:30:25,800
+>> I mean, I think there's two sides to that, right?
+
+414
+00:30:25,800 --> 00:30:31,600
+There's like, okay, what is running a game, the heavy part of it is actually the game engine, all the lighting,
+
+415
+00:30:31,600 --> 00:30:33,000
+all that stuff, the graphics.
+
+416
+00:30:33,520 --> 00:30:34,960
+This is just kind of video, right?
+
+417
+00:30:34,960 --> 00:30:36,800
+Like, we've solved consistency.
+
+418
+00:30:37,280 --> 00:30:40,040
+This is still, you know, it looks like a few years old image generation.
+
+419
+00:30:40,040 --> 00:30:51,200
+There's some temporal consistency, but it's it's kind of just images stitched together as frame video, but it it's a good visual representation to pick to picture the future you want to see,
+
+420
+00:30:51,200 --> 00:30:51,800
+right?
+
+421
+00:30:51,920 --> 00:30:54,200
+Like that's that's what I see in these more so.
+
+422
+00:30:54,440 --> 00:30:56,640
+>> This reminds me of how
+
+423
+00:30:57,800 --> 00:31:00,720
+how the video models gets better and better.
+
+424
+00:31:00,840 --> 00:31:10,760
+So, new OS is kind of if you just look at it, it feels like it's just a a a crappy version of the like the the Windows we could have,
+
+425
+00:31:10,760 --> 00:31:11,360
+right?
+
+426
+00:31:11,560 --> 00:31:20,680
+And and but but the difference is so the model this model is overfitted on the the existing operating systems.
+
+427
+00:31:21,120 --> 00:31:23,640
+It it can't generate nothing different than that.
+
+428
+00:31:24,240 --> 00:31:27,160
+But it's actually also similar to video models.
+
+429
+00:31:27,160 --> 00:31:32,200
+So, when we're training these video model image model, we train them on internet.
+
+430
+00:31:32,680 --> 00:31:44,680
+There's no imaginary supernatural stuff on the internet, but once we train this model, you can prompt the model to generate something supernatural that have never existed in the data set.
+
+431
+00:31:45,000 --> 00:31:59,960
+So, if you train your neural OS for neural computer on the standard screen recordings on the entire internet, the model can imagine completely new interface to to interact with the computer.
+
+432
+00:32:00,200 --> 00:32:00,800
+>> Yeah.
+
+433
+00:32:00,960 --> 00:32:03,440
+This is one of the things that is magical to me.
+
+434
+00:32:03,440 --> 00:32:06,840
+Usually generalizing out of distribution is bad.
+
+435
+00:32:07,160 --> 00:32:10,800
+But somehow we have learned some kind of internal world model.
+
+436
+00:32:10,800 --> 00:32:11,520
+Yes.
+
+437
+00:32:11,520 --> 00:32:19,360
+>> That you say, you know, this plus but it looks like rainbows and butterflies, it'll do it and it'll kind of make sense.
+
+438
+00:32:19,360 --> 00:32:21,480
+Yeah.
+
+439
+00:32:21,480 --> 00:32:23,080
+>> So, yeah, that's kind of cool.
+
+440
+00:32:23,160 --> 00:32:25,440
+Yeah, I I don't know if there's any comment more more on there.
+
+441
+00:32:25,440 --> 00:32:32,440
+I I I do I do wanted to I did wanted to touch a little bit more on the model architecture stuff which I think you were getting it's like really fascinating.
+
+442
+00:32:32,440 --> 00:32:34,720
+We we don't get a chance to talk about this enough.
+
+443
+00:32:35,040 --> 00:32:40,360
+So, one of the papers that we covered, we've covered every annual uh segment anything release.
+
+444
+00:32:40,680 --> 00:32:44,080
+Uh and I don't know if you follow me or computer vision guys, so you you know.
+
+445
+00:32:44,080 --> 00:32:46,480
+So, they they did memory attention, which is kind of interesting.
+
+446
+00:32:46,800 --> 00:32:54,040
+And I always think like anything where you can across the temporal dimension keep some consistency, um I think it's like very fascinating,
+
+447
+00:32:54,120 --> 00:33:01,800
+and I don't know if basically like does that the CV side bleeding into video gen side, I think it's under explored,
+
+448
+00:33:01,800 --> 00:33:02,080
+right?
+
+449
+00:33:02,080 --> 00:33:06,320
+Like we talk about it for labeling, but actually you can >> borrow the architecture itself.
+
+450
+00:33:06,720 --> 00:33:09,400
+And there's there's also a complete different approaches, right?
+
+451
+00:33:09,400 --> 00:33:14,600
+Like you you brought up the term world model, so we went from video model to world model.
+
+452
+00:33:14,680 --> 00:33:20,200
+There is diffusion, but there's also other approaches that people are doing, so maybe we get into those after as well,
+
+453
+00:33:20,200 --> 00:33:20,400
+you know.
+
+454
+00:33:20,400 --> 00:33:23,240
+>> Yeah, yeah, he has a whole definition of world models and stuff.
+
+455
+00:33:23,480 --> 00:33:24,800
+I I feel like we threw a lot at you.
+
+456
+00:33:24,800 --> 00:33:26,080
+What do you want to comment on?
+
+457
+00:33:26,520 --> 00:33:35,200
+>> I I think one thing that we should actually comment back on is like, okay, so we were talking about the steps to train image gen to video model.
+
+458
+00:33:35,440 --> 00:33:39,880
+One thing we don't see as much of is like, okay, you brought up the delta in training data, right?
+
+459
+00:33:39,880 --> 00:33:46,600
+So, you won't have as much a video model might not generalize, but what is the cost of training a large video model?
+
+460
+00:33:46,600 --> 00:33:51,320
+So, we know for LLMs roughly, okay, uh even like the pulse I think that came out today, right?
+
+461
+00:33:51,320 --> 00:33:58,040
+It's a Gemma level model trained on roughly 40 trillion tokens at this many H200s over this much time, right?
+
+462
+00:33:58,040 --> 00:34:00,360
+You can see what is the exact cost of that.
+
+463
+00:34:00,360 --> 00:34:03,640
+So, how many GPU hours over how much H200 cost.
+
+464
+00:34:03,640 --> 00:34:09,399
+So, how how do we do the back end math of, you know, same thing for video models, image models?
+
+465
+00:34:09,399 --> 00:34:11,160
+How do you how do you kind of break that down?
+
+466
+00:34:11,240 --> 00:34:11,760
+>> Okay, sure.
+
+467
+00:34:11,760 --> 00:34:13,920
+So, I'm back to see I'm a little calculation.
+
+468
+00:34:14,679 --> 00:34:22,440
+So, surprisingly, video models is like so the cost is very is comparable to language models.
+
+469
+00:34:22,720 --> 00:34:27,840
+And obviously, the largest scale is language model, maybe like a medium scale to language models.
+
+470
+00:34:28,440 --> 00:34:33,680
+I'd say just storing the videos alone, uh it costs a lot.
+
+471
+00:34:33,960 --> 00:34:36,999
+You can You can maybe look up on AWS or something.
+
+472
+00:34:37,399 --> 00:34:44,560
+You really like say if you have a billion videos, and let's say let's just say like each video like 5 MB.
+
+473
+00:34:45,120 --> 00:34:50,120
+Then you will need like uh 5 PB to just store those videos.
+
+474
+00:34:50,879 --> 00:35:02,920
+And also remember we talked about you use a VAE to compress the videos, and you also need to store typically you need to store those continuous feature on also in our storage.
+
+475
+00:35:03,120 --> 00:35:06,720
+That's also comparable size with the videos themselves.
+
+476
+00:35:07,320 --> 00:35:13,320
+So just storing storing these videos and the features is is tens of petabytes alone.
+
+477
+00:35:13,760 --> 00:35:16,440
+And uh >> Oh yeah, I just I just looked up the calculation.
+
+478
+00:35:16,440 --> 00:35:19,680
+5 petabytes on S3 standard is 100k per month.
+
+479
+00:35:19,680 --> 00:35:20,840
+Okay.
+
+480
+00:35:20,840 --> 00:35:21,800
+>> You said that's affordable?
+
+481
+00:35:21,880 --> 00:35:24,880
+>> And you need And then like a tens of petabytes 200k.
+
+482
+00:35:25,920 --> 00:35:30,000
+And even more expensive is you have the ingress and egress.
+
+483
+00:35:30,120 --> 00:35:31,280
+>> Oh yeah, I get it.
+
+484
+00:35:31,440 --> 00:35:32,640
+>> It's through the internet.
+
+485
+00:35:32,640 --> 00:35:36,120
+You have to just to download those videos.
+
+486
+00:35:36,680 --> 00:35:41,560
+I believe it's it's more expensive on AWS than just storing those videos.
+
+487
+00:35:42,120 --> 00:35:45,200
+And each training runs you probably need to pull them once.
+
+488
+00:35:45,640 --> 00:35:48,520
+And if you train multiple times, it's it's even more than that.
+
+489
+00:35:48,520 --> 00:35:57,040
+So so it's like just storing storing the network those costs is is just uh I guess it would be a few a few millions per months.
+
+490
+00:35:57,560 --> 00:36:00,320
+So just the storing everything, not to mention the
+
+491
+00:36:01,760 --> 00:36:02,040
+Yeah.
+
+492
+00:36:02,040 --> 00:36:07,680
+>> Okay, my my side tangent like you know, the compute rental like GPU rental is very efficient.
+
+493
+00:36:07,680 --> 00:36:10,680
+There's one side okay, you can be like XAI and build your data center.
+
+494
+00:36:10,880 --> 00:36:13,800
+Should we not just build our like storage compute as well?
+
+495
+00:36:13,800 --> 00:36:16,520
+Like cloud cost compared to just you know, storage.
+
+496
+00:36:16,520 --> 00:36:17,320
+Yeah, exactly.
+
+497
+00:36:17,600 --> 00:36:19,200
+Especially with like egress and stuff.
+
+498
+00:36:19,200 --> 00:36:20,360
+So you know.
+
+499
+00:36:20,400 --> 00:36:26,280
+>> That's a good idea, but it also comes comes to there there some of its own challenges.
+
+500
+00:36:26,280 --> 00:36:26,960
+>> Of course.
+
+501
+00:36:27,040 --> 00:36:34,480
+>> Yeah, like people who build the GPU data centers they might not expect this much storage.
+
+502
+00:36:34,480 --> 00:36:38,240
+And yeah, people build storage to be like they just build it somewhere.
+
+503
+00:36:38,280 --> 00:36:39,280
+It's just GPUs.
+
+504
+00:36:39,520 --> 00:36:40,320
+>> I just looked it up.
+
+505
+00:36:40,320 --> 00:36:43,760
+Five you know it's only charges for egress not ingress.
+
+506
+00:36:43,880 --> 00:36:46,760
+Tier five for five petabytes is 230k.
+
+507
+00:36:48,480 --> 00:36:50,480
+>> Yeah, even more expensive than that.
+
+508
+00:36:50,680 --> 00:36:51,760
+>> But storage is per month, right?
+
+509
+00:36:51,760 --> 00:36:53,280
+You check in and you cannot check out.
+
+510
+00:36:54,560 --> 00:36:55,560
+>> That's good, cool.
+
+511
+00:36:55,680 --> 00:36:56,040
+>> It's okay.
+
+512
+00:36:56,040 --> 00:36:57,640
+So so that's fine.
+
+513
+00:36:57,640 --> 00:37:00,800
+>> Yeah, dear, you know, my my data data is larger than you think.
+
+514
+00:37:00,800 --> 00:37:00,960
+Yes.
+
+515
+00:37:00,960 --> 00:37:06,760
+>> Yeah, my back-of-the-napkin math of GPU hours times GPU cost is also very much, you know, I'm missing some storage.
+
+516
+00:37:06,760 --> 00:37:11,280
+>> you're basically like also more I/O bound than normal training.
+
+517
+00:37:11,440 --> 00:37:11,960
+Yes.
+
+518
+00:37:11,960 --> 00:37:12,440
+Yes.
+
+519
+00:37:12,440 --> 00:37:16,120
+>> Cuz like data loadings and caching everything becomes super important.
+
+520
+00:37:16,360 --> 00:37:24,400
+>> Yeah, so in Cosmos we did a lot of optimizations to make it not I/O bound, though.
+
+521
+00:37:24,400 --> 00:37:25,000
+Yeah.
+
+522
+00:37:25,080 --> 00:37:37,320
+Uh speaking of the training, actually training the model of the GPU cost, if you look up like the so open source model hobbies these video models are I think like RTX has 19B parameters.
+
+523
+00:37:37,680 --> 00:37:38,880
+That's a dense model.
+
+524
+00:37:39,360 --> 00:37:49,520
+And people are also exploring uh MoEs, so it might be like a 20B active and uh like a hundred B uh total.
+
+525
+00:37:49,680 --> 00:37:54,600
+So that's that's even that's similar size as medium-size LM models.
+
+526
+00:37:55,200 --> 00:38:04,760
+And if you if you look at number tokens, uh we disclose that in Cosmos, it's also like tens of trillions of tokens on the visual tokens.
+
+527
+00:38:05,280 --> 00:38:12,400
+So putting these together, the cost of like training these video models is actually comparable with LMs.
+
+528
+00:38:12,400 --> 00:38:20,400
+Not to mention the the infra is slightly different from LMs, so it might be less efficient to train these models.
+
+529
+00:38:21,040 --> 00:38:24,800
+>> Do you get the benefits of traditional diffusion speed up?
+
+530
+00:38:24,800 --> 00:38:32,320
+So, for, you know, images, there's LCM loras for, um, you know, fine-tuning, there's there's a lot of >> Flow matching.
+
+531
+00:38:32,560 --> 00:38:33,440
+>> Yeah, there's flow matching.
+
+532
+00:38:33,440 --> 00:38:34,880
+There's a lot of stuff that's been done.
+
+533
+00:38:35,000 --> 00:38:45,080
+Uh, there's some overlap that applies to diffusion on the inference side and stuff or >> Yeah, so so the difference is the inference side is a completely different story.
+
+534
+00:38:45,280 --> 00:38:50,080
+I think for the training side, it's might be a little bit hard to reduce that cost.
+
+535
+00:38:50,640 --> 00:38:58,160
+And for for the inference side, the biggest gain is from the distillation of these models.
+
+536
+00:38:58,160 --> 00:39:04,200
+You can It's called step distillation, slightly different from knowledge distillation in LLMs.
+
+537
+00:39:04,920 --> 00:39:10,680
+So, you typically for flow matching models, you need like 100 steps or something.
+
+538
+00:39:10,680 --> 00:39:17,880
+Like diffusion model even need need even more like 1,000 steps to to generate a good image or video.
+
+539
+00:39:18,440 --> 00:39:24,640
+A step distillation is try to learn to generate a short step from the model itself.
+
+540
+00:39:25,080 --> 00:39:37,360
+It's kind of like now we you use the full model to generate in 100 steps, and then you you take a model that only generate 10 steps,
+
+541
+00:39:37,640 --> 00:39:40,800
+and let that model to learn from the perfect one.
+
+542
+00:39:40,800 --> 00:39:41,560
+Yeah.
+
+543
+00:39:41,560 --> 00:39:43,720
+>> Uh, why is this this work?
+
+544
+00:39:43,720 --> 00:39:44,920
+>> Strong to weak supervision.
+
+545
+00:39:44,920 --> 00:39:45,800
+>> It's distillation.
+
+546
+00:39:45,880 --> 00:39:47,680
+Kind of like strong to weak.
+
+547
+00:39:47,920 --> 00:39:57,880
+I guess the from the modeling perspective, the strong model, the teacher model is trying to model the image and videos of entire internet.
+
+548
+00:39:58,920 --> 00:40:01,360
+And that distribution is extremely complex.
+
+549
+00:40:02,040 --> 00:40:05,720
+As a step distill model, it's just trying to learn from the teacher.
+
+550
+00:40:05,720 --> 00:40:09,640
+The teacher is is a model, and the size is fixed.
+
+551
+00:40:09,640 --> 00:40:13,000
+Is a distribution is much simpler than the whole internet.
+
+552
+00:40:13,520 --> 00:40:17,080
+That's the intuition I have why a distillation can work.
+
+553
+00:40:17,600 --> 00:40:22,120
+So, earlier these models serving productions they only run in a few steps.
+
+554
+00:40:22,520 --> 00:40:28,120
+In In Cosmos, I believe we have we have like four step and eight steps.
+
+555
+00:40:28,480 --> 00:40:38,640
+If you do some simpler task like image to image translation, it can even run in first step like one step in in Cosmos transfer.
+
+556
+00:40:38,960 --> 00:40:43,000
+>> Yeah, I think this is the same intuition that guides a lot of the consistency model work.
+
+557
+00:40:43,000 --> 00:40:45,640
+I I sent you a a link for SCM.
+
+558
+00:40:45,640 --> 00:40:47,280
+I don't know if you covered that.
+
+559
+00:40:47,280 --> 00:40:51,000
+To me that was actually one of like the most impressive papers I've ever seen from OpenAI.
+
+560
+00:40:51,360 --> 00:40:55,600
+That like this is the unifying grand concept of consistency models.
+
+561
+00:40:55,880 --> 00:40:57,680
+I don't know if you have any comments on this.
+
+562
+00:40:57,880 --> 00:41:02,720
+>> So, so there are there are a few different approaches like uh >> Oh, yeah.
+
+563
+00:41:02,720 --> 00:41:03,200
+Here it is.
+
+564
+00:41:03,200 --> 00:41:06,760
+Yeah, two steps versus 20 100 steps, whatever.
+
+565
+00:41:07,040 --> 00:41:08,240
+It's already done.
+
+566
+00:41:08,720 --> 00:41:11,160
+>> So, there are there are a few different approaches.
+
+567
+00:41:11,160 --> 00:41:13,600
+For example, consistency model.
+
+568
+00:41:13,600 --> 00:41:18,000
+And there are also Actually, we we shouldn't forget GAN.
+
+569
+00:41:18,120 --> 00:41:28,320
+So, GAN Actually, that that was that was the OG step distillation cuz it trained just one step to begin with.
+
+570
+00:41:28,720 --> 00:41:42,920
+So, actually a lot of uh for example, there's a distribution matching distillation which use which uses GAN um as like as one of the loss for distillation.
+
+571
+00:41:42,920 --> 00:41:46,400
+It GAN just tells you, "Hey, like generate the image."
+
+572
+00:41:46,600 --> 00:41:53,920
+And then it has a discriminator to to tell, "Is this image real or not?"
+
+573
+00:41:54,280 --> 00:41:59,640
+So, the model the model just need to learn one of the distribution, not not the full distribution.
+
+574
+00:41:59,640 --> 00:42:08,560
+Because in training, the model is asked to reconstruct the ground truth image from the internet, which is extremely hard.
+
+575
+00:42:09,120 --> 00:42:13,000
+And in when you're training GAN, it's a one-step process.
+
+576
+00:42:13,440 --> 00:42:15,920
+It's just a hey, you generate image.
+
+577
+00:42:15,960 --> 00:42:23,400
+Does this image look look as real as the the image from the internet, which is a much simpler task.
+
+578
+00:42:24,200 --> 00:42:34,920
+And yeah, combining a lot of these approaches together, people typically do that like consistency model and distribution matching and and again,
+
+579
+00:42:35,200 --> 00:42:37,400
+and we can got these few step models.
+
+580
+00:42:38,000 --> 00:42:40,840
+>> Okay, then there's one step I wanted to add which is audio.
+
+581
+00:42:40,840 --> 00:42:42,160
+Yes.
+
+582
+00:42:42,160 --> 00:42:42,920
+>> And video.
+
+583
+00:42:43,040 --> 00:42:54,680
+>> Yeah, so uh Grok imagine 0.9, I believe it's uh is the first first audio-video trans model deployed at a large scale.
+
+584
+00:42:55,200 --> 00:42:57,000
+So >> And that was your first model.
+
+585
+00:42:57,240 --> 00:43:01,160
+>> Yes, that was the Grok imagine's first model.
+
+586
+00:43:01,160 --> 00:43:04,520
+It's it's audio-video uh trans generation.
+
+587
+00:43:05,480 --> 00:43:09,440
+I think the the hard part is like the the modality alignment.
+
+588
+00:43:10,200 --> 00:43:16,520
+Cuz before this trans model, like we have we have text to video alignment.
+
+589
+00:43:16,800 --> 00:43:20,320
+We we have this uh corresponding reason text and video.
+
+590
+00:43:20,400 --> 00:43:26,440
+Typically most of the VLMs, they they understand images and videos.
+
+591
+00:43:26,640 --> 00:43:31,120
+Videos very rare and they they don't understand audio mostly.
+
+592
+00:43:31,960 --> 00:43:42,040
+And if you look at the audio generation on the LM side, you can talk to them perfectly fine, but if you ask them to sing a song or something,
+
+593
+00:43:42,480 --> 00:43:44,440
+they typically is not very good.
+
+594
+00:43:44,720 --> 00:43:47,600
+Also, they don't have they don't have music either.
+
+595
+00:43:48,040 --> 00:43:52,880
+The hard part is that uh actually audio has two components.
+
+596
+00:43:53,080 --> 00:43:56,840
+It has like a a discrete component, a continuous component.
+
+597
+00:43:57,360 --> 00:44:00,280
+The discrete component is like the the language.
+
+598
+00:44:00,640 --> 00:44:05,320
+So, when we speak, it's just a some >> Is it ASR issue?
+
+599
+00:44:05,320 --> 00:44:05,720
+Yeah.
+
+600
+00:44:05,720 --> 00:44:10,280
+>> Yeah, it's it's text token with some characteristics, I will say.
+
+601
+00:44:10,720 --> 00:44:14,120
+But uh but music >> I think the speech guys would disagree.
+
+602
+00:44:14,240 --> 00:44:22,720
+It's like this one says and then you know Yeah, I I say largely and the the music but the music is completely different.
+
+603
+00:44:22,760 --> 00:44:29,840
+It's it's very continuous and you cannot model them like discrete tokens in language models.
+
+604
+00:44:30,440 --> 00:44:39,360
+Uh this is like the the hard part for the for models is uh not to mention we have to align text,
+
+605
+00:44:39,480 --> 00:44:42,040
+video, and audio together.
+
+606
+00:44:42,040 --> 00:44:42,720
+Yeah.
+
+607
+00:44:42,720 --> 00:44:44,480
+So How?
+
+608
+00:44:44,480 --> 00:44:50,760
+>> So the significant uh some significant challenges are like so so first like we we talk about as the VLMs,
+
+609
+00:44:51,120 --> 00:44:55,720
+they they cannot understand uh most of them cannot understand audio.
+
+610
+00:44:55,720 --> 00:45:03,040
+So you have to have some way to to do the synthetic data generation for for audio.
+
+611
+00:45:03,400 --> 00:45:10,680
+You have to caption the model and that involves that involves synthetic data and human data effort a lot.
+
+612
+00:45:10,920 --> 00:45:20,320
+As and not just surprisingly, most of the LLMs are very bad at recognizing um like the the beat, tone,
+
+613
+00:45:20,320 --> 00:45:23,600
+and the details of the of music.
+
+614
+00:45:24,080 --> 00:45:34,920
+They they can't they can't give some general uh general prediction of which song is this, but it's very hard to describe the details of of the music.
+
+615
+00:45:35,600 --> 00:45:46,520
+Um like we mentioned in image generation, like you have to describe image as detailed as possible so that someone blind can reconstruct that.
+
+616
+00:45:46,800 --> 00:45:56,800
+So here is like someone deaf >> someone deaf can reconstruct how the music sounds like without without actually listening to it.
+
+617
+00:45:56,960 --> 00:46:05,840
+Maybe like uh you you can think of it it needs to have have the or or they call the the subtitles.
+
+618
+00:46:05,840 --> 00:46:06,360
+>> Subtitles, yeah.
+
+619
+00:46:06,360 --> 00:46:11,080
+>> You got to have have all the details of of the music and the dialogue.
+
+620
+00:46:11,560 --> 00:46:23,720
+>> So is the challenge there typically stuff like music and audio or is it just like is there a baseline okay there's enough data where we can understand you know narration conversation but there's nuances
+
+621
+00:46:23,760 --> 00:46:31,240
+in audio that that's where you hit all the data issues or is it just from stage zero you you just do it all right?
+
+622
+00:46:31,520 --> 00:46:41,000
+>> So one important thing is like the alignment so the model the model has to know like the video and audio there
+
+623
+00:46:42,120 --> 00:46:50,400
+it has to have a time based alignment like at which time step the video and the audio token correspond to each other.
+
+624
+00:46:50,400 --> 00:46:57,160
+We actually don't have these kind of alignment for for for most of the other modalities.
+
+625
+00:46:57,480 --> 00:47:03,120
+If you think about like text text and image text and videos they are loosely aligned.
+
+626
+00:47:03,440 --> 00:47:10,200
+Say you can you can have a description of what's going on in the video but you don't have to exactly
+
+627
+00:47:11,240 --> 00:47:20,120
+you typically don't have exact description or at at time step one second like what happened >> very coarse.
+
+628
+00:47:21,000 --> 00:47:21,480
+>> Yeah.
+
+629
+00:47:21,480 --> 00:47:22,080
+Yeah.
+
+630
+00:47:22,160 --> 00:47:26,120
+>> So what was the ideal time step you have to delete it and then it's like four seconds or something?
+
+631
+00:47:26,360 --> 00:47:29,560
+>> So that comes down to how you design the model.
+
+632
+00:47:29,560 --> 00:47:29,960
+Yeah.
+
+633
+00:47:29,960 --> 00:47:35,600
+>> For the model to to be aware of as a time the time modality.
+
+634
+00:47:35,920 --> 00:47:38,160
+So the model is like a time aware.
+
+635
+00:47:38,640 --> 00:47:42,400
+And that's something pretty unique if you think about LLMs.
+
+636
+00:47:43,240 --> 00:47:56,920
+So if you ask LLM to complete a task say they you ask them and they will say oh this task task will probably take 12 hours to complete and they they they come back
+
+637
+00:47:56,920 --> 00:48:02,800
+in one hour say I've already spent two days on this >> and I've exhausted everything.
+
+638
+00:48:03,920 --> 00:48:09,440
+Yeah, so so the all sense themselves they they don't have a sense of time there.
+
+639
+00:48:09,440 --> 00:48:12,120
+>> I actually don't think that's just them not having a sense of time.
+
+640
+00:48:12,120 --> 00:48:14,200
+I think it's somewhat based, right?
+
+641
+00:48:14,200 --> 00:48:18,720
+Like you tell someone, "Okay, go work on this feature.
+
+642
+00:48:18,800 --> 00:48:20,160
+Go implement this."
+
+643
+00:48:20,240 --> 00:48:26,400
+There's a general understanding you would have of how long that would take without LLMs working at LLM speed, right?
+
+644
+00:48:26,400 --> 00:48:32,280
+So you think back like two years ago, if I tell you to like build me like a new front end for latent space,
+
+645
+00:48:32,440 --> 00:48:36,080
+have a search bar, have all this, you'll estimate that it'll take a few days, right?
+
+646
+00:48:36,080 --> 00:48:38,440
+So you tell an LLM, "Go build this."
+
+647
+00:48:38,760 --> 00:48:40,160
+It'll take me a few days.
+
+648
+00:48:40,320 --> 00:48:47,080
+But you know, I think it's somewhat grounded as opposed to them not having the best Not saying that they have a great understanding,
+
+649
+00:48:47,440 --> 00:48:50,720
+but I think that example is like You can see where it comes from, right?
+
+650
+00:48:50,720 --> 00:48:52,160
+You're trained on all over the text.
+
+651
+00:48:52,160 --> 00:48:54,160
+>> They're trained to say what a human would say.
+
+652
+00:48:54,160 --> 00:48:57,360
+>> Yes, because that's what the That's what the data kind of represents.
+
+653
+00:48:57,440 --> 00:49:00,360
+>> Not them the cars cars for sale on the internet.
+
+654
+00:49:00,520 --> 00:49:02,160
+People have a estimate.
+
+655
+00:49:02,280 --> 00:49:05,800
+>> Yeah, and not not even just indirect like training examples, right?
+
+656
+00:49:05,800 --> 00:49:09,920
+Just your world understanding of tokens, of how long stuff takes, right?
+
+657
+00:49:09,920 --> 00:49:10,880
+Go read a book.
+
+658
+00:49:11,160 --> 00:49:12,760
+It'll take you a while, right?
+
+659
+00:49:12,760 --> 00:49:15,440
+Even if you do nothing but read a book, it takes a few days.
+
+660
+00:49:15,640 --> 00:49:17,800
+So yeah, LLM I read it, took me a few hours.
+
+661
+00:49:17,840 --> 00:49:19,960
+It'll take me a few hours to go through this research.
+
+662
+00:49:20,280 --> 00:49:21,640
+But this is a tangent.
+
+663
+00:49:21,640 --> 00:49:28,880
+>> So I want to Yeah, this is a train of thought I haven't really expressed until now is which is basically like a full world model must also be recursive,
+
+664
+00:49:29,120 --> 00:49:33,080
+meaning that the participant in the world model must also be aware that they have a world model.
+
+665
+00:49:33,320 --> 00:49:37,720
+Uh Which is like this whole recursive thing down the down the line.
+
+666
+00:49:38,120 --> 00:49:43,080
+Um but yes, and and and then the world model can be wrong and then they need to update it and blah blah blah.
+
+667
+00:49:43,520 --> 00:49:51,000
+Yeah, we we've argued this on the uh newsletter as well that there needs to be sort of recursive adversarial world models.
+
+668
+00:49:51,000 --> 00:49:55,080
+>> Okay, I mean, just, you know, to ask, how do you define world model?
+
+669
+00:49:55,080 --> 00:49:55,920
+>> let's go there.
+
+670
+00:49:56,480 --> 00:50:05,800
+>> Yeah, so >> So, just for context, you know, we talked about >> uh video generation, and then there's a if you say there's a distinction between world models,
+
+671
+00:50:06,320 --> 00:50:07,880
+um what's your what's your definition?
+
+672
+00:50:07,880 --> 00:50:09,680
+How do you see the two?
+
+673
+00:50:09,720 --> 00:50:14,520
+>> Yeah, so so disclaimer, I'm not going to debate like what is world model.
+
+674
+00:50:14,520 --> 00:50:18,600
+Yeah, like there are there many definitions, so I'll just talk about my definition.
+
+675
+00:50:19,240 --> 00:50:26,680
+Since I I came from the multi-model multi-model domain, so mainly talking from video.
+
+676
+00:50:26,680 --> 00:50:32,880
+So, world model is like real-time interactive long horizon videos.
+
+677
+00:50:32,880 --> 00:50:34,400
+So, there are there are three parts.
+
+678
+00:50:34,520 --> 00:50:37,600
+Like So, let's talk about them one by one.
+
+679
+00:50:37,880 --> 00:50:45,040
+So, the So, interaction, so we just we just look at Facebook and neural computer.
+
+680
+00:50:45,440 --> 00:50:53,640
+So, the interaction part of it, so you uh world model can allow you to interact with them through keyboard,
+
+681
+00:50:53,640 --> 00:50:56,320
+mouse, and maybe also voice.
+
+682
+00:50:56,880 --> 00:51:04,360
+So, these all of all of the modality, you can you can interact with with the model, and the model should respond reasonably.
+
+683
+00:51:04,840 --> 00:51:06,520
+Second part is real-time.
+
+684
+00:51:07,280 --> 00:51:14,040
+So, once you once say you you move your mouse, like it it says um the world model generate a game,
+
+685
+00:51:14,040 --> 00:51:16,560
+like how how fast can that game respond?
+
+686
+00:51:17,280 --> 00:51:27,920
+So, if you're like professional CS:GO players, they might might say, "Oh, you have to respond in some sub-10 milliseconds or or even less."
+
+687
+00:51:28,280 --> 00:51:32,560
+So, that's not I guess most of the >> No, 60 FPS, let's go.
+
+688
+00:51:33,200 --> 00:51:34,600
+>> Uh 300 FPS.
+
+689
+00:51:34,600 --> 00:51:36,120
+>> No, 500 FPS.
+
+690
+00:51:36,480 --> 00:51:38,320
+Wait, uh okay, yeah, I didn't do the math right.
+
+691
+00:51:38,320 --> 00:51:39,040
+Yeah, okay.
+
+692
+00:51:39,400 --> 00:51:41,920
+Uh >> Yeah, 300 FPS, that's the 3 milliseconds.
+
+693
+00:51:42,520 --> 00:51:45,120
+So, you have to respond in 3 milliseconds.
+
+694
+00:51:46,120 --> 00:51:49,000
+Most of the video models cannot do that.
+
+695
+00:51:49,000 --> 00:51:49,520
+Yeah.
+
+696
+00:51:49,520 --> 00:51:59,280
+And uh but if you say if you have a video model that is say like a digital human, the the response time may be more generous,
+
+697
+00:51:59,280 --> 00:52:08,480
+maybe like typically like for real-time wise interaction is like 200 ms. So that's uh uh that's much more generous.
+
+698
+00:52:09,040 --> 00:52:17,280
+But even 200 ms is pretty uh it is pretty tricky cuz like remember we mentioned
+
+699
+00:52:18,320 --> 00:52:22,800
+you have this uh temporal compression coming from the VAE.
+
+700
+00:52:23,480 --> 00:52:30,000
+So if you if you don't compress the temporal dimension, your sequence length is going to explode.
+
+701
+00:52:30,400 --> 00:52:38,200
+So if you want to have this real-time real-timeness in your model you have to do this long context problem.
+
+702
+00:52:38,200 --> 00:52:41,280
+And the third part is is long horizon.
+
+703
+00:52:41,720 --> 00:52:50,920
+Cuz if you're not going to just play this uh video games just uh like a few seconds, most of video models only a few seconds.
+
+704
+00:52:50,920 --> 00:52:53,840
+We're going to play this minutes, hours.
+
+705
+00:52:54,480 --> 00:52:57,600
+The model have to be able to generate long-form content.
+
+706
+00:52:58,680 --> 00:53:03,440
+So putting these three together it's a real-time long horizon
+
+707
+00:53:04,560 --> 00:53:05,800
+interactive videos.
+
+708
+00:53:06,280 --> 00:53:19,760
+I think the the final state will be for example like uh a video a video version of PlayBook where you can you can interact with a a neuro computer you you move your mouse
+
+709
+00:53:19,880 --> 00:53:28,760
+and you you click on the generative interface and it will reply to you through through pixels generally in real time.
+
+710
+00:53:29,640 --> 00:53:32,680
+But getting there it's it's a very long way to get there.
+
+711
+00:53:33,040 --> 00:53:43,200
+So one of the first step uh at Google Imagine where I I led a small world model team there was was to build video extension.
+
+712
+00:53:44,160 --> 00:53:48,680
+So, uh video extension >> Ah, it's the first step of interactivity.
+
+713
+00:53:48,680 --> 00:53:49,960
+>> it's the first step.
+
+714
+00:53:49,960 --> 00:53:51,480
+Yeah, so it's the first step.
+
+715
+00:53:51,480 --> 00:53:53,040
+>> it here, a video editing, yeah.
+
+716
+00:53:53,520 --> 00:53:53,920
+>> Yeah.
+
+717
+00:53:53,920 --> 00:53:59,400
+Yeah, so the the first step is because uh this unlocks long horizon videos.
+
+718
+00:53:59,720 --> 00:54:07,360
+Typically, for most of the video generation models, you you give it a prompt or an image as the initial frame.
+
+719
+00:54:07,360 --> 00:54:09,040
+You generate videos, that's it.
+
+720
+00:54:09,040 --> 00:54:11,480
+That's just one time, done.
+
+721
+00:54:11,760 --> 00:54:18,160
+And some some creators would try to like use the last frame as the first frame for the second video.
+
+722
+00:54:18,400 --> 00:54:24,760
+It kind Sometimes it works, but if you do it a few times, it it says the quality will degrade.
+
+723
+00:54:25,400 --> 00:54:31,280
+And >> It doesn't have that context over the full video, so the temporal >> Yeah, cuz you only give it the last frame,
+
+724
+00:54:31,280 --> 00:54:31,920
+of course, right?
+
+725
+00:54:31,920 --> 00:54:32,280
+Yeah.
+
+726
+00:54:32,280 --> 00:54:33,400
+Exactly.
+
+727
+00:54:33,400 --> 00:54:35,080
+>> But it's actually a pretty fun hack.
+
+728
+00:54:35,120 --> 00:54:37,200
+Like if you've seen like >> he has something better.
+
+729
+00:54:37,200 --> 00:54:38,040
+>> Yeah, yeah, yeah.
+
+730
+00:54:38,040 --> 00:54:47,600
+>> And for example, like if you uh I remember Views Three has like uh a 1-second context of the the last video.
+
+731
+00:54:47,840 --> 00:54:57,040
+It is slightly better than using the last frame, but it has the same problem similar problems that it uh the quality will degrade.
+
+732
+00:54:57,600 --> 00:55:04,800
+Like if you extend a few times to like 1 minute, the the video quality will look much worse than the first video.
+
+733
+00:55:05,280 --> 00:55:12,280
+Second and another problem is that the model doesn't have long-range knowledge of like what's happening before.
+
+734
+00:55:12,280 --> 00:55:22,480
+So, if they generate some dialogue some two people speaking, and their voice might change uh over over some time,
+
+735
+00:55:22,480 --> 00:55:28,080
+especially if the 1-second conditioning it does not cover the previous context.
+
+736
+00:55:29,080 --> 00:55:30,920
+So, these are the core challenges.
+
+737
+00:55:31,600 --> 00:55:41,720
+So, the GARK Imagine video extension it has historical context of all of the previous Chinese day videos.
+
+738
+00:55:41,920 --> 00:55:42,640
+Mhm.
+
+739
+00:55:42,640 --> 00:55:54,280
+>> And it can uh it has it has a context of who's speaking and what what objects have appeared and everything having that to generate the next video.
+
+740
+00:55:54,720 --> 00:56:04,000
+So, if we naively do this, you you can imagine like just uh put all of the previous history video tokens into the context.
+
+741
+00:56:04,000 --> 00:56:07,120
+The context length will easily explode.
+
+742
+00:56:07,120 --> 00:56:13,720
+It's actually far for video models that I can be like a few a few million context I would imagine context length.
+
+743
+00:56:13,720 --> 00:56:14,960
+Yes.
+
+744
+00:56:14,960 --> 00:56:15,840
+>> What's the number that?
+
+745
+00:56:15,840 --> 00:56:24,840
+>> Yeah, for example, like in Cosmos, I think just a 5 seconds of video is like a 50 50K or 60K number of tokens.
+
+746
+00:56:25,640 --> 00:56:31,640
+So, like if you do if you do 50 seconds as a 500K tokens.
+
+747
+00:56:31,960 --> 00:56:36,520
+If you you do longer than that, easily explode.
+
+748
+00:56:36,520 --> 00:56:37,720
+This long horizon
+
+749
+00:56:38,920 --> 00:56:43,440
+problem was the first step they were trying to solve with model.
+
+750
+00:56:43,840 --> 00:56:47,280
+It turns out people Yeah, people love video extension.
+
+751
+00:56:47,320 --> 00:56:53,000
+Like a lot a lot of the creators love using video extension to create longer form videos.
+
+752
+00:56:53,720 --> 00:57:00,240
+This is the part I I like that you have a you have a intermediate step towards the the final goal.
+
+753
+00:57:00,240 --> 00:57:05,080
+Instead of just a straight straight shot to the the final version very much.
+
+754
+00:57:05,080 --> 00:57:07,960
+>> Yeah, but I can see you have a strong vision of where we want to end up.
+
+755
+00:57:07,960 --> 00:57:08,440
+Yeah.
+
+756
+00:57:08,440 --> 00:57:10,880
+>> Does it seem like it's an efficiency issue?
+
+757
+00:57:10,880 --> 00:57:18,440
+Like okay, we're at a few million tokens context, you know, if you draw the parallel to language models, we're at very short context,
+
+758
+00:57:18,440 --> 00:57:22,440
+2,000, 8,000, then you know, you scale it up, 1 million, 10 million.
+
+759
+00:57:22,800 --> 00:57:24,640
+Uh sure there's effective context.
+
+760
+00:57:24,880 --> 00:57:28,720
+Um you know, but at the end of the day, it's just what's it worth?
+
+761
+00:57:28,720 --> 00:57:30,760
+Like sure there's a whole training data side.
+
+762
+00:57:30,840 --> 00:57:35,360
+In video, it might be slightly easier cuz we have 100 million token video, right?
+
+763
+00:57:35,360 --> 00:57:38,040
+Just take a movie with the full context there.
+
+764
+00:57:38,040 --> 00:57:44,400
+Like, is this efficiency from an inference standpoint that like it's expensive, but we know how to solve it?
+
+765
+00:57:44,400 --> 00:57:47,160
+Or like why is this not the approach?
+
+766
+00:57:47,320 --> 00:57:53,280
+So, like my brother point was on your second point of world models, you say it needs to be interactive and live,
+
+767
+00:57:53,280 --> 00:57:53,880
+right?
+
+768
+00:57:53,920 --> 00:57:56,520
+You should be able to play a game and see the interaction live.
+
+769
+00:57:56,520 --> 00:58:03,000
+So, one thing I see with research is a lot of what you actually serve is different than what you build,
+
+770
+00:58:03,000 --> 00:58:03,160
+right?
+
+771
+00:58:03,160 --> 00:58:04,760
+So, we talked about distillation.
+
+772
+00:58:05,080 --> 00:58:09,640
+You train big model, you distill it, you do quantization, speculative decoding.
+
+773
+00:58:09,640 --> 00:58:11,520
+We do all this stuff to serve it efficiently.
+
+774
+00:58:11,800 --> 00:58:19,640
+Should we not just have a solution, like a world model that can interact well, do inference optimization, serve it,
+
+775
+00:58:19,640 --> 00:58:21,240
+distill it secondary.
+
+776
+00:58:21,520 --> 00:58:24,280
+So, make it real time after you solve it.
+
+777
+00:58:24,280 --> 00:58:27,760
+So, like another parallel is say continual learning, right?
+
+778
+00:58:28,240 --> 00:58:32,160
+What we need is someone to solve it and show it works inefficiently.
+
+779
+00:58:32,760 --> 00:58:34,880
+Give it a few years, people will make it efficient.
+
+780
+00:58:34,920 --> 00:58:36,840
+Same thing with regular attention, right?
+
+781
+00:58:37,040 --> 00:58:44,200
+It worked over a few years, people have different forms of attention, and we've scaled it to be efficient at long context,
+
+782
+00:58:44,200 --> 00:58:44,760
+you know?
+
+783
+00:58:44,760 --> 00:58:47,440
+So, kind of two things there, right?
+
+784
+00:58:47,440 --> 00:58:51,720
+One is like it seems like it works, you've scaled it.
+
+785
+00:58:51,720 --> 00:58:55,480
+Can we not just scale it a lot more efficiently over time?
+
+786
+00:58:55,560 --> 00:58:57,760
+Do we need a separate approach if this stuff works?
+
+787
+00:58:57,800 --> 00:58:59,680
+And same thing with interaction, right?
+
+788
+00:58:59,840 --> 00:59:09,760
+Um if we can get it done, like if we can solve some way that it works, you know, we can solve making it more efficient from an inference standpoint later.
+
+789
+00:59:10,000 --> 00:59:11,760
+>> Yeah, that's actually a very good point.
+
+790
+00:59:12,200 --> 00:59:17,080
+So, in videos, there's actually a lot of redundancies.
+
+791
+00:59:17,600 --> 00:59:26,200
+So, we we solve a lot of the pixel redundancies from VAE, but there's more redundancy in long long range and long horizon videos.
+
+792
+00:59:26,520 --> 00:59:35,160
+Say if if a character appear in the first clip and then it disappeared, it don't really reappear like as the end of the video,
+
+793
+00:59:35,640 --> 00:59:41,560
+you probably don't need the the context like in the middle of the generation.
+
+794
+00:59:42,040 --> 00:59:46,560
+So, you you only need that character uh where where you need.
+
+795
+00:59:46,760 --> 00:59:52,160
+So, that's why uh I have built another feature is the reference video.
+
+796
+00:59:52,640 --> 00:59:53,400
+>> Is it here?
+
+797
+00:59:53,640 --> 00:59:56,400
+Is it the same same model release or different one?
+
+798
+00:59:56,400 --> 00:59:57,480
+>> It's a different one.
+
+799
+00:59:57,480 --> 01:00:01,680
+You probably need to search on apps reference to video.
+
+800
+01:00:01,680 --> 01:00:02,560
+Okay.
+
+801
+01:00:02,560 --> 01:00:15,840
+>> So, reference video allow you to like upload up to seven images as condition and generate the video save like I want it can it can be characters or objects or even scenes.
+
+802
+01:00:16,120 --> 01:00:24,720
+So, like I I want I want condition on Sean's selfie and the holding holding a blade >> Yeah, we have a dog.
+
+803
+01:00:24,720 --> 01:00:25,880
+We put the dog in the thing.
+
+804
+01:00:25,880 --> 01:00:26,120
+Yeah.
+
+805
+01:00:26,120 --> 01:00:33,640
+>> Yeah, you can put them there and the video models will generate the the video from and copy the context over.
+
+806
+01:00:34,200 --> 01:00:38,480
+>> So, that can solve a lot of the problems there.
+
+807
+01:00:38,680 --> 01:00:40,360
+Like the the long context probably.
+
+808
+01:00:40,360 --> 01:00:45,000
+It doesn't need to have a very long context, but it's I feel like it's a intermediate solution.
+
+809
+01:00:45,000 --> 01:00:46,480
+The model Yeah.
+
+810
+01:00:46,480 --> 01:00:54,080
+>> Yeah, the model should be able to like selectively know like where where should I draw the references.
+
+811
+01:00:54,200 --> 01:01:01,080
+So, say if I want to generate a movie, I generate it auto aggressive like a 10 second at a time or something.
+
+812
+01:01:01,720 --> 01:01:08,720
+And now this character appear, I can look back to where it first appear and uh bring that back.
+
+813
+01:01:09,120 --> 01:01:09,880
+Yeah, this one.
+
+814
+01:01:09,880 --> 01:01:11,760
+I I put the references.
+
+815
+01:01:12,640 --> 01:01:16,000
+>> Yeah, that's uh Optimus Ice T
+
+816
+01:01:18,480 --> 01:01:24,320
+>> Oddly enough, I I used Grok search to find it and it pulled your LinkedIn post.
+
+817
+01:01:24,320 --> 01:01:26,920
+But you know, we found it interesting.
+
+818
+01:01:26,920 --> 01:01:28,520
+>> But okay, this is a problem.
+
+819
+01:01:28,520 --> 01:01:35,760
+I know this is not your fault, but like XGI doesn't communicate all this work that you do very well because they just have the model release and then that's it.
+
+820
+01:01:35,760 --> 01:01:38,440
+But like they actually these details are very very good.
+
+821
+01:01:38,720 --> 01:01:41,760
+As far as I understand, everything you just described is state of the art.
+
+822
+01:01:41,760 --> 01:01:43,720
+Like no one else has done it.
+
+823
+01:01:43,720 --> 01:01:46,520
+Thanks.
+
+824
+01:01:46,520 --> 01:01:50,520
+>> A lot of yeah, I I have a lot of more >> and then you just put this blog post and the cookies there.
+
+825
+01:01:50,520 --> 01:01:52,920
+And I'm like this is not enough, you know?
+
+826
+01:01:54,320 --> 01:01:58,240
+>> Uh but I I obviously this is like the high-level numbers that people want to know.
+
+827
+01:01:58,240 --> 01:02:06,320
+>> And I wonder you know, like part of that is also like uh some some labs don't share research research into what happens.
+
+828
+01:02:06,800 --> 01:02:09,520
+>> No, but this is literally bragging about how good they are.
+
+829
+01:02:09,880 --> 01:02:10,480
+Right?
+
+830
+01:02:10,840 --> 01:02:14,760
+Like why would you not say that you are capable of extending with full context?
+
+831
+01:02:15,000 --> 01:02:16,080
+You know, this is not a secret sauce.
+
+832
+01:02:16,080 --> 01:02:17,200
+This is like we did the work.
+
+833
+01:02:17,200 --> 01:02:18,560
+Like yeah, I don't know.
+
+834
+01:02:18,760 --> 01:02:23,920
+>> Yeah, I guess uh different labs have slightly different communication styles.
+
+835
+01:02:24,360 --> 01:02:24,960
+>> Yeah.
+
+836
+01:02:25,080 --> 01:02:29,280
+Anyway, if anyone from XGI is listening, we we are always happy to help you tell your story.
+
+837
+01:02:29,280 --> 01:02:29,760
+Yeah, okay.
+
+838
+01:02:29,760 --> 01:02:35,600
+So you did references and I think I I think the kind of the the point here you're making is like it is sort of like a kludge,
+
+839
+01:02:35,600 --> 01:02:35,800
+right?
+
+840
+01:02:35,800 --> 01:02:39,400
+Like this is you can do seven, but what about 100?
+
+841
+01:02:39,880 --> 01:02:40,080
+Right?
+
+842
+01:02:40,080 --> 01:02:42,440
+Then you need a completely different thing.
+
+843
+01:02:42,600 --> 01:02:49,640
+>> So I think it's like this is like a mechanism to like select the context from the history.
+
+844
+01:02:50,000 --> 01:02:53,080
+And you might not put the entire history into the context.
+
+845
+01:02:53,840 --> 01:03:02,080
+Uh for example, there's a paper called Frame Pack, which have a heuristic that the latest history, like the last 1 second,
+
+846
+01:03:02,080 --> 01:03:11,360
+I put the the entire history and the history before that, I would uh compress it and make the video smaller.
+
+847
+01:03:11,600 --> 01:03:18,440
+So it follow this pattern this beautiful pattern that the maximum sequence length is fixed.
+
+848
+01:03:18,440 --> 01:03:23,320
+So the further you are from the current frame, you have a smaller image.
+
+849
+01:03:23,840 --> 01:03:25,160
+So this is just a heuristic.
+
+850
+01:03:25,760 --> 01:03:28,160
+I think it can be more automatic.
+
+851
+01:03:28,240 --> 01:03:32,680
+The model is aware like which which history part of it can be select.
+
+852
+01:03:32,840 --> 01:03:40,120
+So this part of the research is actually being actively uh worked on by a lot of people.
+
+853
+01:03:40,440 --> 01:03:41,640
+It's also kind of interesting.
+
+854
+01:03:41,640 --> 01:03:47,600
+I feel this is actually this part of long context is a little bit ahead of the all LM part.
+
+855
+01:03:47,720 --> 01:03:57,680
+So for example, I can in all LMs, if you the context keep growing, let's say if you you call tool and the tool call history is extremely long,
+
+856
+01:03:57,680 --> 01:03:58,960
+that's still in context.
+
+857
+01:03:59,640 --> 01:04:07,160
+And I keep growing, keep growing even if you switch the topic to something else, the whole con- context will there.
+
+858
+01:04:07,320 --> 01:04:18,280
+There there are some agentic harnesses that help you to say prune the tool results and the prune like when you when you query a file,
+
+859
+01:04:18,280 --> 01:04:21,560
+only show like the top 200 lines or something.
+
+860
+01:04:21,920 --> 01:04:24,200
+Those those are very heuristic-driven.
+
+861
+01:04:25,160 --> 01:04:32,760
+>> For listeners, we did a write-up on the cloud code uh leak where there's eight different kinds of pruning uh including like you prune the tool results and all that.
+
+862
+01:04:32,760 --> 01:04:34,280
+So if you can you can read up on that kind of thing.
+
+863
+01:04:34,280 --> 01:04:34,880
+>> Yeah.
+
+864
+01:04:35,040 --> 01:04:41,880
+I think uh one breakthrough in continual learning might be like a way to automatically
+
+865
+01:04:43,000 --> 01:04:44,440
+uh manage its own context.
+
+866
+01:04:44,440 --> 01:04:47,040
+>> all heuristics and they will be replaced by machine learning.
+
+867
+01:04:47,440 --> 01:04:48,320
+Yes.
+
+868
+01:04:48,320 --> 01:04:53,240
+Interestingly, the same thing is being researched in both LMs and video models.
+
+869
+01:04:53,240 --> 01:04:58,280
+>> So the interesting thing is also like in the paper you showed, it's actually happening at the model level, right?
+
+870
+01:04:58,280 --> 01:05:04,520
+Compared to like language models where we have base attention, but you know, we'll do our own compression, we'll do our own pruning,
+
+871
+01:05:04,560 --> 01:05:06,280
+which is separate from model layer.
+
+872
+01:05:06,280 --> 01:05:06,400
+>> Yeah.
+
+873
+01:05:06,400 --> 01:05:08,960
+Eventually it all just boils in, hopefully.
+
+874
+01:05:08,960 --> 01:05:09,320
+Yeah.
+
+875
+01:05:09,320 --> 01:05:09,880
+Yeah.
+
+876
+01:05:09,880 --> 01:05:17,080
+>> I I this is a form of like attention, but like also no sort of reasoning attention.
+
+877
+01:05:17,080 --> 01:05:19,400
+I feel like that's different than normal attention.
+
+878
+01:05:19,680 --> 01:05:21,040
+Does that Does that make sense?
+
+879
+01:05:21,040 --> 01:05:31,160
+>> Yeah, yeah, it's it's different in the sense that attention not to mention self-sparse attention side, like normal attention >> Like you can Yeah.
+
+880
+01:05:31,160 --> 01:05:33,120
+>> to attend to all of the tokens.
+
+881
+01:05:33,200 --> 01:05:33,600
+Yes.
+
+882
+01:05:33,600 --> 01:05:40,680
+So, you you don't have the high-level mechanism to to drop which tokens do you you don't want to attend to.
+
+883
+01:05:40,720 --> 01:05:45,040
+As humans humans attention span is surprisingly small.
+
+884
+01:05:45,040 --> 01:05:45,400
+Yes.
+
+885
+01:05:45,400 --> 01:05:49,160
+>> You can only remember 11-digit phone number.
+
+886
+01:05:49,160 --> 01:05:50,520
+>> But I have feature detection, right?
+
+887
+01:05:50,520 --> 01:05:55,520
+I can detect Oh, that's a sequence of 1 2 3 4 in a phone number that is 11-digit.
+
+888
+01:05:55,840 --> 01:05:56,000
+>> Yeah.
+
+889
+01:05:56,000 --> 01:05:57,280
+Very good pattern matchers.
+
+890
+01:05:57,760 --> 01:06:06,680
+>> But humans contacts can like attention can work because we can dynamically pull in contacts from from different places.
+
+891
+01:06:07,360 --> 01:06:08,560
+And the same mechanism
+
+892
+01:06:09,760 --> 01:06:13,160
+I think it's going to happen for LLMs and video models.
+
+893
+01:06:13,520 --> 01:06:16,240
+>> Yeah, our LLMs is recent It's a It's on the recent work.
+
+894
+01:06:16,240 --> 01:06:17,440
+Yeah.
+
+895
+01:06:17,440 --> 01:06:20,240
+>> Which is not that crazy, but it's just recursive.
+
+896
+01:06:20,640 --> 01:06:22,920
+>> I think it's somewhat inherent in models, too, right?
+
+897
+01:06:22,920 --> 01:06:24,040
+Like >> Like it's a nice example here.
+
+898
+01:06:24,040 --> 01:06:30,120
+>> You pull up these, you can read it fine, but language models are also very good at slot parsing.
+
+899
+01:06:30,720 --> 01:06:33,480
+You know, you have a >> I throw my typos in there, it doesn't matter.
+
+900
+01:06:33,480 --> 01:06:33,920
+>> Yeah, yeah.
+
+901
+01:06:33,920 --> 01:06:39,320
+You have a You have a transcript, you have whatever, just throw it in and it's very good at parsing through noise.
+
+902
+01:06:40,120 --> 01:06:43,040
+Um You know, that may be a brute force.
+
+903
+01:06:43,400 --> 01:06:47,960
+It can look over reason over it, but like, you know, there's there's parallels to both.
+
+904
+01:06:48,040 --> 01:06:55,600
+>> I think it's just really fascinating how you relate the world model stuff to the video generation, which I don't think a lot of people hear directly from people like like you.
+
+905
+01:06:55,600 --> 01:06:57,200
+So, I think that's really helpful.
+
+906
+01:06:57,480 --> 01:07:05,840
+Any other work Do we cover like video, audio, world models, any other stuff in that Omni team, I guess?
+
+907
+01:07:06,080 --> 01:07:09,080
+>> Are there any other work at XAI you want to talk about?
+
+908
+01:07:09,080 --> 01:07:13,400
+>> Seems like everything we see publicly announced, oh cool, cookies.
+
+909
+01:07:13,600 --> 01:07:15,120
+And then there's so much more to everything.
+
+910
+01:07:15,120 --> 01:07:15,800
+>> There's a lot of that.
+
+911
+01:07:15,800 --> 01:07:19,520
+>> Any underrated stuff, you know, just at the time there?
+
+912
+01:07:19,720 --> 01:07:25,280
+>> Yeah, I feel the as a culture it is quite interesting and a bit underrated.
+
+913
+01:07:26,320 --> 01:07:34,880
+So so it's a culture is the culture is it's it's three sentences, move fast, build no goal is too ambitious,
+
+914
+01:07:35,600 --> 01:07:36,840
+and the first principle.
+
+915
+01:07:37,360 --> 01:07:41,160
+Like you you already is a is a goal set was very ambitious.
+
+916
+01:07:41,160 --> 01:07:48,280
+It wasn't very It's wasn't It wasn't possible to to achieve when when I when I was thinking first thinking about it.
+
+917
+01:07:48,280 --> 01:07:52,040
+Like for example, I could build build something in in three months.
+
+918
+01:07:52,520 --> 01:08:01,560
+And >> Was that like okay, we're starting team, we want image, we want video, do it by this deadline, or you know,
+
+919
+01:08:01,560 --> 01:08:02,800
+how do you work back?
+
+920
+01:08:02,800 --> 01:08:09,720
+Like was it just okay, we have a rough by, you know, this date we want something out, or is this like >> That's a very good point.
+
+921
+01:08:09,720 --> 01:08:12,560
+So it's from first principle thinking.
+
+922
+01:08:12,880 --> 01:08:21,560
+If you think about people might say like first principle thinking applied more to the physical world than the the models.
+
+923
+01:08:22,359 --> 01:08:33,359
+Uh I would say for example, like if you think about some limitation, for example, acquiring data, like how how fast can we acquire the videos?
+
+924
+01:08:33,720 --> 01:08:41,200
+And if if you think about like training the models, like what's the iteration speed for training a model end-to-end?
+
+925
+01:08:41,720 --> 01:08:47,320
+And how how would adding more GPUs accelerate that timeline?
+
+926
+01:08:47,960 --> 01:08:55,200
+And maybe if you need human data, like what was the turnaround time for for human data to arrive?
+
+927
+01:08:55,359 --> 01:09:03,240
+If you put all of those together, that is first principle thinking where oh, you know, like what is timeline?
+
+928
+01:09:03,759 --> 01:09:08,320
+What is a minimum number days that is possible to achieve something?
+
+929
+01:09:08,799 --> 01:09:11,200
+>> I think that's a this is a lot of Elon's type of thinking, right?
+
+930
+01:09:11,200 --> 01:09:16,640
+He's like I I think he's famous for saying that the only law you can't break is the laws of physics,
+
+931
+01:09:16,680 --> 01:09:17,640
+something like that.
+
+932
+01:09:17,759 --> 01:09:18,440
+Yeah.
+
+933
+01:09:18,440 --> 01:09:21,359
+>> Just broadly, you you worked a lot with Elon.
+
+934
+01:09:21,359 --> 01:09:31,240
+>> Yeah, I I guess one benefit is like uh working at xAI, you got a chance to interact more with Elon.
+
+935
+01:09:31,240 --> 01:09:38,040
+So, so I I was very fortunate to get a few retweets from him.
+
+936
+01:09:38,400 --> 01:09:39,960
+And that that was quite fun.
+
+937
+01:09:39,960 --> 01:09:46,640
+And uh he he also worked very closely uh with with people.
+
+938
+01:09:46,640 --> 01:09:50,680
+Uh like like people imagine online like he he's very hands-on.
+
+939
+01:09:51,319 --> 01:09:52,320
+>> There are two things.
+
+940
+01:09:52,839 --> 01:09:58,160
+Um One, so I was actually looking up uh Elon retweeting you.
+
+941
+01:09:58,200 --> 01:09:59,240
+I'll pull it up.
+
+942
+01:09:59,280 --> 01:10:02,800
+Uh he talks about you you tweeting that you have a really good voice mode.
+
+943
+01:10:03,000 --> 01:10:04,720
+I don't know >> No, no, no, him, him, him.
+
+944
+01:10:04,720 --> 01:10:05,920
+>> Oh, I also did it, but anyway.
+
+945
+01:10:05,920 --> 01:10:11,320
+>> I actually so I would DM you feedback on voice mode cuz I was like, "Wow, really good."
+
+946
+01:10:11,320 --> 01:10:13,000
+And then I'm like, "Ugh, this sucks."
+
+947
+01:10:13,000 --> 01:10:17,080
+But um I don't know, anything you want to talk about about your voice mode building it.
+
+948
+01:10:17,080 --> 01:10:19,440
+Was it a team you worked on as well?
+
+949
+01:10:19,440 --> 01:10:22,440
+>> Well, that that's actually not part of the the team I worked on.
+
+950
+01:10:22,440 --> 01:10:23,000
+>> Yeah, yeah, okay.
+
+951
+01:10:23,000 --> 01:10:24,920
+>> He probably worked on more of the >> Okay.
+
+952
+01:10:24,920 --> 01:10:25,520
+Video.
+
+953
+01:10:25,880 --> 01:10:28,600
+>> No, uh but Grok voice actually like very good.
+
+954
+01:10:28,600 --> 01:10:32,840
+I This one of those things where like uh first of all, you can speak at 2x, which is fun.
+
+955
+01:10:33,400 --> 01:10:35,760
+Uh which I listen to 2x, so I like to speak at 2x.
+
+956
+01:10:35,760 --> 01:10:39,600
+But also I think like the interruption was better than Gemini.
+
+957
+01:10:40,360 --> 01:10:45,640
+Uh I don't know how it compares to ChatGPT real time now, but like, you know, as far as like driving was concerned,
+
+958
+01:10:45,640 --> 01:10:49,560
+like having Grok in my Tesla and then driving, I think it was like it's really good experience.
+
+959
+01:10:50,160 --> 01:10:50,640
+Yeah.
+
+960
+01:10:50,640 --> 01:10:51,040
+>> Yeah.
+
+961
+01:10:51,040 --> 01:10:52,040
+He likes voice mode.
+
+962
+01:10:52,040 --> 01:10:54,560
+But also um just the
+
+963
+01:10:55,720 --> 01:10:56,800
+>> crazy reach by Elon.
+
+964
+01:10:56,800 --> 01:11:00,640
+>> 15 million views for just saying yes, true.
+
+965
+01:11:00,640 --> 01:11:01,880
+Um >> Oh my god.
+
+966
+01:11:01,880 --> 01:11:05,920
+>> But uh, you know, it's it's pretty cool how fast it came out.
+
+967
+01:11:05,920 --> 01:11:10,040
+I guess the other thing is the safety aspect of video mode.
+
+968
+01:11:10,160 --> 01:11:12,240
+Anything interesting to talk about there?
+
+969
+01:11:12,240 --> 01:11:13,960
+So >> Ah, spicy.
+
+970
+01:11:14,120 --> 01:11:15,040
+>> Spicy question.
+
+971
+01:11:15,280 --> 01:11:25,120
+>> A lot of the countries where they don't allow like a generative data generative AI videos without watermarks.
+
+972
+01:11:25,160 --> 01:11:30,520
+So in all of the those countries uh cracking imagine had watermarks.
+
+973
+01:11:31,120 --> 01:11:38,840
+And a lot of the a lot of the take downs of of the videos were also happening extremely fast.
+
+974
+01:11:39,280 --> 01:11:45,280
+>> I mean, it's it's part of running a social platform, but also it transfers nicely to the GenAI side.
+
+975
+01:11:45,520 --> 01:11:49,480
+Do you have a perspective on SynthID versus other kinds of watermarking?
+
+976
+01:11:50,040 --> 01:11:57,760
+>> Yeah, I guess it's going to be Yeah, it's going to be harder and harder to to detect
+
+977
+01:11:59,800 --> 01:12:00,680
+Yeah, these things.
+
+978
+01:12:00,680 --> 01:12:05,400
+So SynthID one thing is uh previously it was only Google.
+
+979
+01:12:05,840 --> 01:12:10,280
+And now now like a lot of different platforms are also adapting it.
+
+980
+01:12:10,440 --> 01:12:13,560
+As a limitation is like the the technology
+
+981
+01:12:14,600 --> 01:12:20,920
+is is a paper was out there and people can reverse engineer that how to get rid of it.
+
+982
+01:12:20,920 --> 01:12:21,480
+Yes.
+
+983
+01:12:21,480 --> 01:12:29,880
+>> And it's I think even as it advance it's it's still still possible to reverse engineer it.
+
+984
+01:12:29,880 --> 01:12:35,640
+>> Yeah, so if you are interested, you can go on to Reddit and people have taken out the exact like I don't know,
+
+985
+01:12:35,640 --> 01:12:37,720
+what do you call it mask or Yeah.
+
+986
+01:12:37,720 --> 01:12:45,880
+>> pattern that Google applies and then you can apply it onto any Google generated photo and you can reverse out the SynthID.
+
+987
+01:12:45,880 --> 01:12:47,160
+Yeah.
+
+988
+01:12:47,160 --> 01:12:51,920
+>> And it's it's also harder and harder to just judge by eyes.
+
+989
+01:12:51,960 --> 01:12:57,880
+I remember like a couple years ago there there were like a six fingers or or something.
+
+990
+01:12:57,880 --> 01:12:58,960
+It's very obvious.
+
+991
+01:12:59,040 --> 01:13:01,360
+>> My my current is actually the audio.
+
+992
+01:13:01,360 --> 01:13:03,080
+I feel like the audio is really lacking.
+
+993
+01:13:03,600 --> 01:13:07,360
+My way to tell if something is AI-generated outside of like, "Okay, I think I've seen enough.
+
+994
+01:13:07,360 --> 01:13:08,480
+I have a decent eye."
+
+995
+01:13:08,480 --> 01:13:11,320
+The audio match-up, especially with Sora, is not great.
+
+996
+01:13:11,320 --> 01:13:13,080
+It's all similar style.
+
+997
+01:13:13,400 --> 01:13:15,920
+>> But there's you know, those are minor imperfections.
+
+998
+01:13:16,200 --> 01:13:24,600
+I think the the point is that like actually my closest reference to this is also Ian Goodfellow cuz I think he did like the adversarial game thing where like it's like,
+
+999
+01:13:24,600 --> 01:13:25,800
+"Okay, here's a picture of a zebra."
+
+1000
+01:13:25,800 --> 01:13:28,800
+Then you like change one pixel and it becomes a panda.
+
+1001
+01:13:29,320 --> 01:13:29,480
+Right?
+
+1002
+01:13:29,480 --> 01:13:32,080
+It is that is like a classic computer vision issue.
+
+1003
+01:13:32,360 --> 01:13:42,440
+>> Yeah, if you think about how how these models were were trained, like I like I mentioned before, like again was in the training process.
+
+1004
+01:13:42,920 --> 01:13:53,480
+The objective again is you is a model generates a image and the model there's a judge to tell like if the image is real or not.
+
+1005
+01:13:53,600 --> 01:13:57,320
+The model is trained to make the image more real.
+
+1006
+01:13:57,640 --> 01:14:02,840
+So as a model become more and more advanced, it's going to be harder and harder.
+
+1007
+01:14:02,840 --> 01:14:10,160
+For me personally now, I have to judge by if the these videos have logical sense.
+
+1008
+01:14:10,160 --> 01:14:12,560
+If these videos >> have a world model.
+
+1009
+01:14:12,560 --> 01:14:13,720
+>> Yeah, yeah, yeah.
+
+1010
+01:14:14,360 --> 01:14:20,040
+>> No, I I also like it the the the audio is too nice and like too too studio quality.
+
+1011
+01:14:20,600 --> 01:14:22,120
+The lighting is too good.
+
+1012
+01:14:22,120 --> 01:14:23,320
+The skin is too clear.
+
+1013
+01:14:23,480 --> 01:14:25,840
+You know, basically the lack of imperfections.
+
+1014
+01:14:26,120 --> 01:14:26,880
+Yeah.
+
+1015
+01:14:26,880 --> 01:14:30,840
+>> Do we have a good way to do reasoning in diffusion?
+
+1016
+01:14:30,840 --> 01:14:39,520
+Like is that what separates video generators from world models or in you know, we really know how to apply it to auto-regressive language models.
+
+1017
+01:14:39,880 --> 01:14:43,960
+Is there a parallel for diffusion video gen world models?
+
+1018
+01:14:43,960 --> 01:14:46,200
+Like On that point, right?
+
+1019
+01:14:46,200 --> 01:14:48,280
+It >> He has a thing on video agents.
+
+1020
+01:14:48,280 --> 01:14:49,680
+>> Yeah, that's a good question.
+
+1021
+01:14:50,280 --> 01:14:54,040
+Yeah, actually I have a I have a pretty big claim.
+
+1022
+01:14:54,480 --> 01:15:01,280
+The uh the entire the visual intelligence are actually mostly coming from language.
+
+1023
+01:15:01,640 --> 01:15:08,200
+Like these video models especially from now since the diffusion model technology is more mature.
+
+1024
+01:15:09,000 --> 01:15:14,280
+The like every time you see there there are some improvement on these models.
+
+1025
+01:15:14,960 --> 01:15:23,080
+I would say mostly the the again comes from language model, not not coming from the the video the video model itself.
+
+1026
+01:15:23,080 --> 01:15:25,560
+Like the the video diffusion models themselves.
+
+1027
+01:15:25,920 --> 01:15:31,480
+In Cosmos, like we typically the these models they they have two parts.
+
+1028
+01:15:31,480 --> 01:15:36,400
+Like there's a there's a prompt rewriter or the prompt up sampler part.
+
+1029
+01:15:36,760 --> 01:15:44,200
+I think in uh in Cosmos we use Lama or we use mix mix true.
+
+1030
+01:15:44,440 --> 01:15:53,680
+And the Cosmos video model itself is only 7B and the model the language model is a prompt rewriter.
+
+1031
+01:15:53,720 --> 01:15:56,240
+It's it's bigger than that.
+
+1032
+01:15:56,480 --> 01:16:06,040
+So the prompt rewriter's task is to take a take user instruction and convert it to extremely detailed description of the video.
+
+1033
+01:16:06,360 --> 01:16:18,640
+So because a video is a visual is a video diffusion models, I would describe they they're kind of dumb because they they they take the input
+
+1034
+01:16:19,720 --> 01:16:21,160
+instruction literally.
+
+1035
+01:16:21,600 --> 01:16:31,120
+Because in the training process, remember that we have to describe the video as as detailed as possible when we're creating the the synthetic
+
+1036
+01:16:32,240 --> 01:16:33,240
+text pair.
+
+1037
+01:16:33,600 --> 01:16:38,280
+So these models they take those kind of instruction to generate the videos.
+
+1038
+01:16:38,320 --> 01:16:45,360
+So in when you're taking the user instructions, the user instruction really are simple.
+
+1039
+01:16:45,360 --> 01:16:47,440
+Just say a cat or something.
+
+1040
+01:16:47,440 --> 01:16:53,400
+If you put a cat in in the video model, they would take that instruction literally.
+
+1041
+01:16:53,640 --> 01:17:00,360
+They would literally show a cat a cat in maybe a white background because you didn't describe the background.
+
+1042
+01:17:00,640 --> 01:17:03,760
+The cat is not moving because you didn't describe it.
+
+1043
+01:17:04,000 --> 01:17:06,160
+It It takes the instruction quite literally.
+
+1044
+01:17:06,160 --> 01:17:07,920
+It's kind of It's kind of dumb.
+
+1045
+01:17:08,440 --> 01:17:16,960
+And the the prompt rewriter is actually a much bigger model, which is a language model that takes the the user instruction and expanded.
+
+1046
+01:17:17,520 --> 01:17:22,600
+So, the thinking process you mentioned is from there.
+
+1047
+01:17:23,000 --> 01:17:30,080
+So, if you if you look at like GPT image, like it generate a image in 3 minutes.
+
+1048
+01:17:30,440 --> 01:17:33,520
+3 minutes is is not all like a picture generation.
+
+1049
+01:17:33,640 --> 01:17:36,440
+A lot of time is spending in thinking.
+
+1050
+01:17:37,120 --> 01:17:48,160
+So, so prompt rewriter rewriter now have evolved to like not only just say thinking, it it can it can also be a a agent agentic model.
+
+1051
+01:17:48,160 --> 01:17:53,600
+For example, say you want you wanted to generate a image of today's news.
+
+1052
+01:17:53,880 --> 01:18:06,080
+So, the so, it's likely they'll go to fetch today's news online and then like process and digest them, then organize the layout and generate it.
+
+1053
+01:18:06,480 --> 01:18:14,440
+Another thing quite interesting is >> If I'm not mistaken, these are It's no longer a diffusion model, all right?
+
+1054
+01:18:14,440 --> 01:18:16,240
+It's auto regressively
+
+1055
+01:18:17,480 --> 01:18:19,840
+or is there still >> There are different approaches.
+
+1056
+01:18:20,680 --> 01:18:27,240
+For example, like uh Gemini Omni, since they said it's Omni, I believe it's a it's a single model.
+
+1057
+01:18:27,600 --> 01:18:32,960
+It may be something like a It's a language model with a diffusion head or something.
+
+1058
+01:18:32,960 --> 01:18:42,920
+Like a language model do the thinking, do the agentic two calling, and then it would uh uh use the diffusion head to generate the image in the end.
+
+1059
+01:18:43,360 --> 01:18:48,760
+There there were also approaches like Cosmos where you you have a separate language model and separate diffusion models.
+
+1060
+01:18:49,520 --> 01:18:58,560
+And there there are also like a purely language model like you you discretize the images and then you generate the image as discrete tokens.
+
+1061
+01:18:58,560 --> 01:18:59,920
+So, there are different approaches.
+
+1062
+01:19:00,440 --> 01:19:09,600
+I would say like >> One of One of the claims I've seen for why these approaches struggle is because a lot of the benefits for how we currently learn reasoning with language models is you
+
+1063
+01:19:09,640 --> 01:19:16,000
+basically iteratively generate, reason, you have your thought, and then you work on that answer, right?
+
+1064
+01:19:16,000 --> 01:19:22,000
+So, if you have like Omni model and then diffusion head, you can't feed that back in to continue reasoning,
+
+1065
+01:19:22,000 --> 01:19:22,200
+right?
+
+1066
+01:19:22,200 --> 01:19:24,800
+So, you can't go like text image text image.
+
+1067
+01:19:24,800 --> 01:19:27,800
+You can't reason on the output and then go back to diffusion.
+
+1068
+01:19:28,280 --> 01:19:34,840
+But, I guess in the new Gemini Omni you would be able to as long as you have >> Yeah, I'm not sure if they have that process.
+
+1069
+01:19:35,040 --> 01:19:38,160
+I guess it's definitely possible in the Omni paradigm.
+
+1070
+01:19:38,360 --> 01:19:38,840
+Yeah.
+
+1071
+01:19:38,840 --> 01:19:47,920
+>> So, if you think about like traditional multimodal language model, they would have a VIT encoder that can encode the image.
+
+1072
+01:19:48,240 --> 01:19:54,720
+So, if they have a diffusion head, they can generate the image and then put that back into the VIT encoder,
+
+1073
+01:19:55,040 --> 01:20:00,360
+encode that, and then do do the iterative refinement of the result.
+
+1074
+01:20:00,840 --> 01:20:01,160
+Yeah.
+
+1075
+01:20:01,160 --> 01:20:06,360
+>> I think you have to jointly train the VIT and the diffusion to make that somewhat feasible.
+
+1076
+01:20:06,640 --> 01:20:11,000
+Cuz otherwise you're kind of like uh mismatching or feeding in slop.
+
+1077
+01:20:11,600 --> 01:20:13,320
+>> I think it depends on the stage of training.
+
+1078
+01:20:13,320 --> 01:20:14,800
+You might be able to freeze it.
+
+1079
+01:20:14,800 --> 01:20:25,640
+But, anyway, also just on your earlier >> Uh I I wanted to also make explicit we do know that Nano Banana and GPT image are auto regressive uh language model with diffusion head.
+
+1080
+01:20:25,840 --> 01:20:29,200
+Uh as far as I can tell from your description of Grok image, it is not.
+
+1081
+01:20:29,200 --> 01:20:30,760
+It is It is end-to-end.
+
+1082
+01:20:30,760 --> 01:20:33,040
+>> I I cannot comment on that.
+
+1083
+01:20:33,200 --> 01:20:33,280
+>> Yeah.
+
+1084
+01:20:33,280 --> 01:20:34,480
+Well, the way that you described it.
+
+1085
+01:20:34,480 --> 01:20:37,160
+Uh Uh but I I think there's there's different approaches, right?
+
+1086
+01:20:37,160 --> 01:20:41,240
+Like you started off saying prompt rewriter is like the a big part of the intelligence.
+
+1087
+01:20:41,360 --> 01:20:45,120
+>> And even on that, I think everyone should try using an early diffusion model.
+
+1088
+01:20:45,120 --> 01:20:53,840
+If you've used stable diffusion one or whatever, if you've seen the prompts like uh you know, ultra high res 4K this style like Oh my god,
+
+1089
+01:20:53,840 --> 01:20:56,840
+the first time I tried one, you don't talk to them like language models, right?
+
+1090
+01:20:56,840 --> 01:21:02,840
+Your prompting is very uh you know, comma separated >> talking in the labels that were in the data set, right?
+
+1091
+01:21:02,840 --> 01:21:03,360
+Yeah.
+
+1092
+01:21:03,360 --> 01:21:11,080
+>> But but basically like I'm just trying to make the point that prompt rewriter and then image is different from autoregressive language model with diffusion head,
+
+1093
+01:21:11,080 --> 01:21:11,600
+right?
+
+1094
+01:21:11,600 --> 01:21:12,720
+They're different things.
+
+1095
+01:21:12,720 --> 01:21:13,440
+>> Yes, they're different.
+
+1096
+01:21:13,440 --> 01:21:14,040
+Yeah.
+
+1097
+01:21:14,240 --> 01:21:15,240
+>> Just wanted to establish.
+
+1098
+01:21:15,640 --> 01:21:20,320
+>> I feel like the the common part is like the the image part.
+
+1099
+01:21:20,600 --> 01:21:29,360
+So so it's it's quite surprising that like a lot of the improvement came from the >> language side.
+
+1100
+01:21:29,360 --> 01:21:31,400
+>> the thinking and the the two colleague.
+
+1101
+01:21:31,920 --> 01:21:40,440
+So so I still remember like in Cosmos I I generated a happy sheep and it if if there's our any rewriting,
+
+1102
+01:21:40,680 --> 01:21:47,040
+it's it looks so CGI and after I write it, it looks it looks so beautiful.
+
+1103
+01:21:47,960 --> 01:21:50,280
+I I think >> Without any joint training.
+
+1104
+01:21:50,560 --> 01:21:52,640
+>> Yeah, actually without any joint training.
+
+1105
+01:21:52,960 --> 01:21:55,640
+It's this rewriting is already much better.
+
+1106
+01:21:56,120 --> 01:22:01,840
+See very interesting thing I guess will happen is the video agents.
+
+1107
+01:22:02,360 --> 01:22:11,320
+Mostly language models will cause these generative model either it's a separate model or a diffusion head or whatever as tool.
+
+1108
+01:22:11,320 --> 01:22:20,520
+So this model can iteratively refine the results or or even like you generate longer content through a very long chain of thought.
+
+1109
+01:22:21,280 --> 01:22:25,160
+It's actually very similar to how human create art.
+
+1110
+01:22:25,520 --> 01:22:29,040
+So so we don't we don't generate the pixels directly.
+
+1111
+01:22:29,320 --> 01:22:43,440
+We we actually draw something on and I think through this process, like these models not only use diffusion diffusion as one of the tool,
+
+1112
+01:22:43,440 --> 01:22:45,680
+it can also use traditional tool.
+
+1113
+01:22:46,000 --> 01:22:50,120
+It can also use uh image editing tools from Photoshop.
+
+1114
+01:22:50,560 --> 01:23:05,920
+You can use uh video video editor, FFmpeg, whatever to take combination of these and the generative AI technology as a as a set of tool and they can they can interactively create a a
+
+1115
+01:23:05,920 --> 01:23:12,360
+better much better uh video for for production grade quality.
+
+1116
+01:23:12,360 --> 01:23:13,760
+If you look at existing
+
+1117
+01:23:15,120 --> 01:23:23,800
+uh professional creators, they don't they don't end at uh generating a video from from from these models.
+
+1118
+01:23:23,800 --> 01:23:28,280
+So, they will take this video to to their editor and edit here and there.
+
+1119
+01:23:28,280 --> 01:23:29,280
+>> So much post-production.
+
+1120
+01:23:30,040 --> 01:23:30,280
+Yeah.
+
+1121
+01:23:30,280 --> 01:23:30,560
+>> Yeah.
+
+1122
+01:23:30,560 --> 01:23:36,680
+And yeah, and sometimes actually like the the reason the video is good is not really the video model, it's actually the editing.
+
+1123
+01:23:37,080 --> 01:23:38,040
+Yeah.
+
+1124
+01:23:38,040 --> 01:23:40,960
+>> And yes, we also are engaged in the same process as well.
+
+1125
+01:23:40,960 --> 01:23:43,600
+We would love to use a video editing model.
+
+1126
+01:23:43,760 --> 01:23:49,240
+>> Yeah, actually there's uh Grok Grok Imagine Agent Beta.
+
+1127
+01:23:49,240 --> 01:23:54,040
+That that was the that was the first attempt in that direction.
+
+1128
+01:23:54,120 --> 01:23:55,040
+Yeah.
+
+1129
+01:23:55,040 --> 01:24:02,040
+>> So, I I think and the like the process would be similar >> What is this agent mode?
+
+1130
+01:24:02,320 --> 01:24:02,720
+>> Yeah.
+
+1131
+01:24:02,720 --> 01:24:05,720
+You can you can ask it to >> There's no blog post for it.
+
+1132
+01:24:05,720 --> 01:24:16,080
+>> Maybe generate a a 1-minute video like which which is not possible if you ask the same prompt to video models,
+
+1133
+01:24:16,480 --> 01:24:20,960
+but this model will call it really call different tools to do that.
+
+1134
+01:24:21,640 --> 01:24:23,960
+So, yeah, this is actually an interesting thing.
+
+1135
+01:24:23,960 --> 01:24:35,960
+So, when when we first released uh uh video editing model, like I see a lot of people ask some people try the video editing feature with like,
+
+1136
+01:24:36,080 --> 01:24:38,040
+"Add this video to be 1 minute."
+
+1137
+01:24:38,040 --> 01:24:40,840
+Uh cuz they didn't understand how video editing work.
+
+1138
+01:24:40,840 --> 01:24:47,360
+And video editing typically is just a removal, add, replace, style transfer, these kind of thing.
+
+1139
+01:24:47,760 --> 01:24:52,720
+But, that's actually a valid task under the assumption of video agents.
+
+1140
+01:24:53,520 --> 01:25:02,240
+So, these agents should be able to understand these kind of uh long horizon task to be able to actually uh create a long-form video.
+
+1141
+01:25:03,160 --> 01:25:13,120
+I think this is uh this is really fascinating cuz it is kind of take is taking the same uh same direction as First,
+
+1142
+01:25:13,120 --> 01:25:22,280
+you have these uh uh assisted uh AI assisted coding, kind of like tab completion, uh GitHub Copilot.
+
+1143
+01:25:22,280 --> 01:25:29,040
+And from there, you gradually evolve to Codex and Cloud Code, where you do things fully automated.
+
+1144
+01:25:29,960 --> 01:25:37,440
+So, in in agent in Grok Imagine agent mode, you can you can still go in there and do do stuff by yourself.
+
+1145
+01:25:38,480 --> 01:25:45,920
+Uh gradually, as as the model capability increase, it will be able to do everything fully automated.
+
+1146
+01:25:46,520 --> 01:25:47,120
+>> Yeah.
+
+1147
+01:25:47,280 --> 01:25:48,960
+Um I like that.
+
+1148
+01:25:48,960 --> 01:25:50,720
+Okay, so it looks like it's still generating.
+
+1149
+01:25:50,720 --> 01:25:56,120
+>> Also, I I did notice the Grok image gen was always very, very fast.
+
+1150
+01:25:56,400 --> 01:25:59,440
+I don't know if this is something you guys benchmark, but like this is just a tangent.
+
+1151
+01:25:59,440 --> 01:26:07,440
+Compared to uh when I used to use before the latest Open AI's image gen, and same with Gemini Nano Banana,
+
+1152
+01:26:07,840 --> 01:26:12,640
+I would oftentimes use Grok just >> the It's in the benchmark somewhere.
+
+1153
+01:26:13,040 --> 01:26:16,560
+In the Imagine API blog post that they have all or the speed things.
+
+1154
+01:26:17,160 --> 01:26:20,720
+It mostly combination of distillation plus inference.
+
+1155
+01:26:21,160 --> 01:26:25,360
+>> Yeah, there there are a bunch of things like we talk about distillation.
+
+1156
+01:26:26,120 --> 01:26:27,880
+Then we talk about thinking.
+
+1157
+01:26:28,400 --> 01:26:34,200
+If you don't have any thinking budget, the model can just think 30 minutes and then come back to you.
+
+1158
+01:26:34,560 --> 01:26:43,440
+And also like inference, the inference infra team was very talented and they were they were able to accelerate a whole lot of these models.
+
+1159
+01:26:43,840 --> 01:26:44,440
+>> Yeah.
+
+1160
+01:26:44,520 --> 01:26:49,880
+Yeah, I mean you know my comment on the on the video agents things like I'm trying to figure out like when people say video agents,
+
+1161
+01:26:50,120 --> 01:26:56,920
+when you initially told me about it your bet on video agents or your your vision for video agents, I was a little bit disappointed.
+
+1162
+01:26:57,480 --> 01:27:00,720
+I was like, you mean like models are tapped out now we have to do agents.
+
+1163
+01:27:00,920 --> 01:27:03,080
+But like I think you have to, right?
+
+1164
+01:27:03,080 --> 01:27:11,120
+The question now is how much model training is is it really going to make make a difference versus just putting a better harness?
+
+1165
+01:27:11,640 --> 01:27:14,840
+Like you said, the models don't have to be jointly trained.
+
+1166
+01:27:15,240 --> 01:27:22,920
+You can just take it off the shelf frontier reasoning model, slap it on a harness, give it Grok as a tool,
+
+1167
+01:27:23,000 --> 01:27:23,680
+that's it.
+
+1168
+01:27:23,680 --> 01:27:24,800
+That's your video agent.
+
+1169
+01:27:25,040 --> 01:27:26,400
+Doesn't seem super satisfying.
+
+1170
+01:27:26,480 --> 01:27:41,880
+Obviously you can co-train and and get some more percentage points of performance, but like if your central claim that the majority of video or generative media alpha or whatever is actually coming from language
+
+1171
+01:27:41,880 --> 01:27:47,120
+intelligence and not image diffusion or video diffusion, then that is the future.
+
+1172
+01:27:47,200 --> 01:27:48,360
+That is the core of it.
+
+1173
+01:27:48,360 --> 01:27:49,400
+I mean just wait.
+
+1174
+01:27:49,480 --> 01:27:53,360
+>> If you pop back at the example, you know, it it generated frames.
+
+1175
+01:27:53,360 --> 01:27:58,400
+Sorry to interrupt, you know, it's been saying like, "Okay, I'm going to start stitching these frames together."
+
+1176
+01:27:58,640 --> 01:28:00,400
+It's using FFmpeg, using code.
+
+1177
+01:28:00,400 --> 01:28:02,520
+>> is what you see image pro as well is doing, right?
+
+1178
+01:28:02,520 --> 01:28:07,760
+Like it's it's also just writing code in the background and then just stitching >> doing a image pass on the final output.
+
+1179
+01:28:08,240 --> 01:28:10,920
+It feels dissatisfying for the people who want to just train models.
+
+1180
+01:28:11,120 --> 01:28:12,280
+>> It's interesting, right?
+
+1181
+01:28:12,280 --> 01:28:15,480
+Like, it's it's also somewhat exciting.
+
+1182
+01:28:15,480 --> 01:28:19,840
+Like, you brought up earlier a lot of the gains don't come as much from the video.
+
+1183
+01:28:19,840 --> 01:28:23,480
+Like, I think you can see that in the language model space, too, right?
+
+1184
+01:28:23,720 --> 01:28:26,320
+And Tropic very, very good at coding.
+
+1185
+01:28:26,600 --> 01:28:28,480
+Their multimodal, not the best, right?
+
+1186
+01:28:28,480 --> 01:28:36,200
+They have basic input PDF, but like, you know, there's clearly a disconnect in the quality of their image, video processing,
+
+1187
+01:28:36,200 --> 01:28:37,080
+audio processing.
+
+1188
+01:28:37,600 --> 01:28:39,920
+Yet, intelligence very top-tier.
+
+1189
+01:28:40,160 --> 01:28:47,160
+Other labs, Gemini, OpenAI, XAI, you can add modalities, but it's not like they're unlocking crazy capabilities, right?
+
+1190
+01:28:47,160 --> 01:28:48,800
+So, it's interesting.
+
+1191
+01:28:49,040 --> 01:28:58,160
+>> Yeah, it's interesting to see that like, there's a video models capability increase actually come from language model being more intelligent.
+
+1192
+01:28:58,800 --> 01:29:05,720
+I think video agents like, it it can unlock more stuff that might you might imagine.
+
+1193
+01:29:05,720 --> 01:29:07,480
+So, there there's a few things.
+
+1194
+01:29:07,480 --> 01:29:15,000
+So, one thing is when we are prompting these models, so most of the people were actually not very good at prompting.
+
+1195
+01:29:15,800 --> 01:29:20,400
+Actually, language models have a better sense of how to prompt AI models.
+
+1196
+01:29:20,760 --> 01:29:22,840
+AI models know AI models better.
+
+1197
+01:29:23,480 --> 01:29:30,920
+So, if you jointly train these models, maybe the the model have a better sense of the how to prompt each model.
+
+1198
+01:29:30,920 --> 01:29:33,160
+Like, a different different model might be different.
+
+1199
+01:29:33,640 --> 01:29:42,720
+Another thing is it might not as simple as just a like, a generative few clips slap them together using FFmpeg.
+
+1200
+01:29:43,680 --> 01:29:50,640
+Like, you might there might be more like, image and video editing tool appear in this process.
+
+1201
+01:29:51,080 --> 01:29:58,040
+Say, if you want to exactly add a add a blah blah text at this timestamp.
+
+1202
+01:29:58,800 --> 01:30:04,160
+The videos model video models might not get the intention very precisely.
+
+1203
+01:30:04,720 --> 01:30:08,760
+But, these were possible using these deterministic tools.
+
+1204
+01:30:09,200 --> 01:30:14,040
+There's a lot of video agents can use all all sorts of tools.
+
+1205
+01:30:14,400 --> 01:30:20,000
+So, you don't have to put all of the capabilities into the transition model itself.
+
+1206
+01:30:20,520 --> 01:30:23,040
+>> Yeah, I I think that's very true.
+
+1207
+01:30:23,440 --> 01:30:26,280
+Um no, so so for what it's worth, I think you're right.
+
+1208
+01:30:26,440 --> 01:30:28,560
+I think that this will be a big category.
+
+1209
+01:30:28,800 --> 01:30:34,520
+I think probably you are predicting like the next one year in video is going to be all this.
+
+1210
+01:30:34,720 --> 01:30:38,520
+>> Do you have a time time prediction for how when this stuff ramps up?
+
+1211
+01:30:38,640 --> 01:30:39,800
+>> I mean, they already started.
+
+1212
+01:30:40,960 --> 01:30:44,000
+>> Is you know are we still No, it's so it's so good.
+
+1213
+01:30:44,000 --> 01:30:45,560
+I think the last one is just longer.
+
+1214
+01:30:46,000 --> 01:30:48,280
+Uh it didn't give me a minute, it gave me 36 seconds.
+
+1215
+01:30:48,400 --> 01:30:50,160
+But, you know, are we feeling it now?
+
+1216
+01:30:50,160 --> 01:30:51,280
+Is there going to be inflection?
+
+1217
+01:30:51,360 --> 01:30:53,480
+Is there any timeline prediction do you want to make?
+
+1218
+01:30:53,760 --> 01:30:59,480
+>> I guess by the end of this year is this is going to be a big hit.
+
+1219
+01:30:59,720 --> 01:31:02,320
+So, the the inflection point will be there.
+
+1220
+01:31:02,840 --> 01:31:09,520
+And the videos generated by video agents can get to like production grade quality.
+
+1221
+01:31:09,520 --> 01:31:11,520
+So, it it it can be presented
+
+1222
+01:31:12,640 --> 01:31:16,920
+and it can be it can be distributed in in ads.
+
+1223
+01:31:17,760 --> 01:31:34,800
+And when once that happen, I think the enterprise will have much more budget for video models because the agents are inherently more expensive than than the other video models themselves cuz they do these
+
+1224
+01:31:34,800 --> 01:31:35,880
+for the process.
+
+1225
+01:31:35,960 --> 01:31:38,880
+They they generate many many variations.
+
+1226
+01:31:40,160 --> 01:31:51,320
+Yeah, but once once these models have this past this usability threshold, I think it's it's going to be a exponential growth beyond that.
+
+1227
+01:31:51,440 --> 01:31:55,160
+>> Yeah, I would fund a company right now based on this this thing.
+
+1228
+01:31:56,560 --> 01:31:57,440
+So, I think you're right.
+
+1229
+01:31:57,440 --> 01:32:06,720
+One thing I'm I'm surprising I'm reflecting on the whole like past hour or our You I think you're into world models and video generation for video generation's sake.
+
+1230
+01:32:06,800 --> 01:32:10,160
+I think that a lot of other world models people we've interviewed a lot of them.
+
+1231
+01:32:10,160 --> 01:32:16,360
+Uh genuine intuition and Fei-Fei Li and all those guys and and Mundy, which I I think I told you about.
+
+1232
+01:32:16,640 --> 01:32:17,400
+Uh Moon Lake.
+
+1233
+01:32:17,400 --> 01:32:17,840
+>> Moon Lake.
+
+1234
+01:32:17,840 --> 01:32:18,920
+I keep saying Moon Dream.
+
+1235
+01:32:18,920 --> 01:32:19,560
+God damn it.
+
+1236
+01:32:19,560 --> 01:32:20,360
+Moon Lake.
+
+1237
+01:32:20,600 --> 01:32:23,560
+A lot of them actually say like robotics is the end game.
+
+1238
+01:32:23,560 --> 01:32:24,960
+Like embodied robotics.
+
+1239
+01:32:24,960 --> 01:32:27,120
+Like you want real-time, you want interactive.
+
+1240
+01:32:27,520 --> 01:32:29,840
+It is to interact with the physical world.
+
+1241
+01:32:29,840 --> 01:32:31,320
+You're not that concerned about it.
+
+1242
+01:32:31,480 --> 01:32:37,280
+>> I think robotics will be a uh will be a big part of it for sure.
+
+1243
+01:32:37,840 --> 01:32:42,400
+I guess the the process might happen naturally.
+
+1244
+01:32:42,400 --> 01:32:53,920
+So so my prediction on robotics is that the problem is physical AI might be solved like we don't actually need to >> be in the real world.
+
+1245
+01:32:53,920 --> 01:32:55,600
+>> need to be in the real world.
+
+1246
+01:32:55,840 --> 01:33:05,080
+So it might it might get solved by a video uh all lamp is very strong video capability.
+
+1247
+01:33:05,080 --> 01:33:11,880
+So So remember we talked about the the real-time interactive long horizon video.
+
+1248
+01:33:12,160 --> 01:33:19,800
+Once these models So so now these models are just training training on like screen recordings and computer screens.
+
+1249
+01:33:20,320 --> 01:33:32,080
+Once these models can use computers and understand the future state of computer extremely well, the robots might be might be one of the one of the tools
+
+1250
+01:33:33,160 --> 01:33:36,000
+a very powerful AI can can use.
+
+1251
+01:33:36,360 --> 01:33:44,240
+So the the powerful AI might just uh be able to control the physical embodiment naturally.
+
+1252
+01:33:44,960 --> 01:33:46,640
+>> I see that for sure.
+
+1253
+01:33:46,640 --> 01:33:46,920
+Cool.
+
+1254
+01:33:46,920 --> 01:33:49,480
+I I I know I know we are coming up on time.
+
+1255
+01:33:49,640 --> 01:33:54,240
+Uh you had you left one more spicy topic, which is why you left XAI.
+
+1256
+01:33:54,760 --> 01:34:04,240
+>> For me, um there's there's a lot of a lot of research you want to do and you cannot do at as a company.
+
+1257
+01:34:04,920 --> 01:34:12,240
+And also like the the priorities and and objective the for company typically can can change very fast.
+
+1258
+01:34:12,680 --> 01:34:15,920
+It is it's also the same for XAI.
+
+1259
+01:34:16,120 --> 01:34:25,080
+So so now it's kind of like the the time for there are some research I want to do, especially more on language model side.
+
+1260
+01:34:25,080 --> 01:34:27,280
+And I I cannot do at XAI.
+
+1261
+01:34:27,800 --> 01:34:29,080
+>> Oh, okay, yeah.
+
+1262
+01:34:29,080 --> 01:34:38,600
+So you're you're basically leaving you you had this whole transition from computer vision to what models, video generation, to now now you're like focusing on LLMs.
+
+1263
+01:34:38,720 --> 01:34:44,520
+>> But it seems like, you know, a lot of you saying focusing on LLMs, you really in the past hour described how it all ties together,
+
+1264
+01:34:44,520 --> 01:34:44,840
+right?
+
+1265
+01:34:44,840 --> 01:34:46,160
+Like >> Yeah.
+
+1266
+01:34:46,240 --> 01:34:47,160
+But I don't know.
+
+1267
+01:34:47,200 --> 01:34:48,800
+What do you mean by focusing on LLMs?
+
+1268
+01:34:48,800 --> 01:35:01,480
+Is there >> I realized the fact that the the video models even like in the beginning the game I come from improvement on diffusion technology.
+
+1269
+01:35:01,480 --> 01:35:07,360
+But this is the point where actually most of the gain come from the language models themselves.
+
+1270
+01:35:07,360 --> 01:35:12,600
+>> It's a huge black pill for anyone who's like spent their career in like generative media.
+
+1271
+01:35:12,760 --> 01:35:15,040
+>> I mean, that's an extreme view, right?
+
+1272
+01:35:15,040 --> 01:35:17,520
+That you still definitely need a bit of both, right?
+
+1273
+01:35:17,520 --> 01:35:17,840
+Yeah.
+
+1274
+01:35:17,840 --> 01:35:23,640
+>> There's just it seems like more pressing impactful work to do now on language model side.
+
+1275
+01:35:24,080 --> 01:35:25,600
+Do you have any similar predictions?
+
+1276
+01:35:25,600 --> 01:35:28,920
+Are you So you predict a video agents that you will be right.
+
+1277
+01:35:29,120 --> 01:35:32,480
+On the language side, what are you looking for in the next one year?
+
+1278
+01:35:32,480 --> 01:35:45,440
+>> I think one thing pretty pretty interesting I I think my it happening soon is the the language models will be a context-aware and manage its own context.
+
+1279
+01:35:45,440 --> 01:35:46,080
+Yeah.
+
+1280
+01:35:46,080 --> 01:35:56,200
+>> So some like from from the video model side, we we've been suffering from the long horizon issue like we want to generate video longer and longer.
+
+1281
+01:35:56,640 --> 01:36:01,360
+And we've been trying to solve the context lens issues through various ways.
+
+1282
+01:36:01,360 --> 01:36:05,240
+But one one thing is just brute forcing train longer context lens.
+
+1283
+01:36:05,240 --> 01:36:08,640
+Another is to manage the context better.
+
+1284
+01:36:09,000 --> 01:36:14,600
+I I think the same thing in language model is also going to be happening soon.
+
+1285
+01:36:14,680 --> 01:36:20,920
+So for example, like the language models, they they're not aware of how long their own context lenses.
+
+1286
+01:36:21,120 --> 01:36:27,160
+Once they hit like 80% or something, automatic context compaction is getting triggered.
+
+1287
+01:36:27,600 --> 01:36:32,560
+And and the model uh is not aware of that when it's working.
+
+1288
+01:36:32,560 --> 01:36:40,320
+And some maybe it's good for the models to to know, oh, I'm I'm approaching like 80% or something.
+
+1289
+01:36:40,840 --> 01:36:47,600
+And so something also pretty interesting, like for example, in Open Claw, like you every time you type in something,
+
+1290
+01:36:48,080 --> 01:36:54,160
+like uh attempts uh the current local time is automatically attached to your message.
+
+1291
+01:36:54,160 --> 01:36:56,640
+So the model actually know what time is it.
+
+1292
+01:36:56,640 --> 01:36:59,880
+So this is making the the model time aware.
+
+1293
+01:37:00,160 --> 01:37:06,400
+And also like in in tool calling, the a lot of the intermediate tool call results automatically pruned.
+
+1294
+01:37:06,640 --> 01:37:12,560
+So there's like context removal, context addition, and the context compaction.
+
+1295
+01:37:12,960 --> 01:37:16,960
+So all of these are from the harness systems themselves.
+
+1296
+01:37:17,280 --> 01:37:24,880
+And from our experience, the heuristic engineering also helps the models get this absorbed into the models themselves.
+
+1297
+01:37:24,880 --> 01:37:28,400
+I I guess that's something very interesting to explore.
+
+1298
+01:37:29,120 --> 01:37:30,440
+>> To infinite context.
+
+1299
+01:37:30,960 --> 01:37:32,440
+Maybe.
+
+1300
+01:37:32,440 --> 01:37:33,960
+>> No, but it's it's interesting, right?
+
+1301
+01:37:33,960 --> 01:37:37,760
+Um >> It is in the space of memory and continual learning and >> I don't know.
+
+1302
+01:37:37,760 --> 01:37:41,480
+It's also like in the space of agent harness use, right?
+
+1303
+01:37:41,520 --> 01:37:44,240
+You're saying he's saying he doesn't want to do it in the harness, right?
+
+1304
+01:37:44,240 --> 01:37:49,400
+>> but models are also being trained on unit using harnesses, right?
+
+1305
+01:37:49,400 --> 01:37:55,240
+So, some of it is you could say implicitly leaking in, right?
+
+1306
+01:37:55,680 --> 01:38:02,160
+Um you know, part of that post training of language models is okay, using it in coding harnesses, in which case,
+
+1307
+01:38:02,160 --> 01:38:05,280
+you know, when our sub agents run, when is convection going to happen?
+
+1308
+01:38:05,600 --> 01:38:12,360
+Uh it's not explicit, like, you know, you have this much token window, which I don't know if you want it to be is that will change,
+
+1309
+01:38:12,360 --> 01:38:14,840
+but it's it's somewhat leaking in there.
+
+1310
+01:38:14,880 --> 01:38:25,120
+>> I'm imagining what if the model have access to the whole there's a code of the agent harness itself, and be able to modify it whatever it want.
+
+1311
+01:38:25,320 --> 01:38:31,240
+Say, if the agent harness is short enough, you can just put it in the context lens in the system prompt,
+
+1312
+01:38:31,640 --> 01:38:39,320
+and then the model say, "When I want to spawn a future version of myself, I can modify the agent harness.
+
+1313
+01:38:39,320 --> 01:38:49,360
+For example, if I is that agent harness can be Oh, when I'm reading a long document, I can choose to read the whole thing in chunks,
+
+1314
+01:38:49,480 --> 01:38:59,200
+and then come back and smash the summary together, or I I can just uh read the first uh first 200 lines,
+
+1315
+01:38:59,640 --> 01:39:01,400
+and uh discard the rest.
+
+1316
+01:39:01,920 --> 01:39:15,400
+And all all kind of choices, if they can be made by the models themselves, it might be very interesting to to see that as a model can like a program So,
+
+1317
+01:39:15,400 --> 01:39:18,920
+model can program itself online in test time.
+
+1318
+01:39:19,360 --> 01:39:19,640
+>> Yeah.
+
+1319
+01:39:19,640 --> 01:39:26,320
+Uh so, there self-modifying harnesses is also part of uh Open Claw and Pi, but I I think there's a lot more work to do there.
+
+1320
+01:39:26,520 --> 01:39:27,240
+Very cool.
+
+1321
+01:39:27,280 --> 01:39:32,440
+I think part of me is kind of curious, like, you know, like, I I think you are part of Big Lab,
+
+1322
+01:39:32,760 --> 01:39:33,240
+right?
+
+1323
+01:39:33,240 --> 01:39:40,560
+And there's this career path of a researcher at a Big Lab, which is you are you train models, you get more compute,
+
+1324
+01:39:40,560 --> 01:39:43,280
+you train better models, and you keep going.
+
+1325
+01:39:43,280 --> 01:39:46,080
+And somewhat, I feel like you're opting out of that.
+
+1326
+01:39:46,560 --> 01:39:51,080
+And if I were you, I'd be like, "Oh, I think this is like a bit of a career risk."
+
+1327
+01:39:51,080 --> 01:39:51,720
+You know what I mean?
+
+1328
+01:39:51,720 --> 01:39:52,240
+>> Mhm.
+
+1329
+01:39:52,240 --> 01:39:52,840
+Mhm.
+
+1330
+01:39:53,080 --> 01:39:56,560
+>> I I don't have any comment apart from like, you're very strongly convicted.
+
+1331
+01:39:56,560 --> 01:40:00,160
+I think that a lot of people in your shoes would not be doing what you did.
+
+1332
+01:40:00,400 --> 01:40:08,400
+>> Yeah, speaking of my career, as I I look back, actually there is ever there were a lot of huge transitions.
+
+1333
+01:40:08,680 --> 01:40:17,080
+So, so 10 years ago, I was I was doing research with the ResNet authors, uh Shang Yu John and Jian Sun.
+
+1334
+01:40:17,560 --> 01:40:20,280
+Yeah, at that time, the the research were completely different.
+
+1335
+01:40:20,280 --> 01:40:27,440
+It was like uh mostly computer vision, like image recognition, object detection, object tracking.
+
+1336
+01:40:27,440 --> 01:40:31,680
+Uh I was I was also doing your net compression as that time.
+
+1337
+01:40:31,680 --> 01:40:35,400
+It was quite different from knowledge distillation these days.
+
+1338
+01:40:35,960 --> 01:40:44,160
+And at that time, I I was uh I wanted to be uh professor, and I applied when I applied for PhD,
+
+1339
+01:40:44,200 --> 01:40:48,400
+I already had a few first author papers at top conferences.
+
+1340
+01:40:48,680 --> 01:40:53,000
+So, I I confidently applied to the top schools.
+
+1341
+01:40:53,000 --> 01:40:57,920
+It turns out I got rejected by all of the >> top PhD programs.
+
+1342
+01:40:58,560 --> 01:41:02,200
+So, I had to uh I had to go to the industry.
+
+1343
+01:41:02,760 --> 01:41:07,320
+At that time, I was at Facebook AI Research Fair led by Yann LeCun.
+
+1344
+01:41:07,800 --> 01:41:10,600
+>> I I want to talk about ViT Jepa, but it's >> Yeah, I know.
+
+1345
+01:41:10,600 --> 01:41:13,040
+It's a yeah, we can leave it as for another time.
+
+1346
+01:41:13,960 --> 01:41:19,040
+Uh yeah, I switched to at that time, I switched to self-supervised learning.
+
+1347
+01:41:19,040 --> 01:41:23,520
+It was It was quite different from what I was doing in computer vision.
+
+1348
+01:41:23,520 --> 01:41:24,280
+Yeah.
+
+1349
+01:41:24,280 --> 01:41:29,120
+And and after that, it's Nvidia Cosmos.
+
+1350
+01:41:29,680 --> 01:41:33,720
+So, I realized scaling up was extremely important.
+
+1351
+01:41:33,920 --> 01:41:44,440
+So, at Nvidia, I I was mainly focused on scaling, so one thing is Cosmo scaling the videos in social models to to a few billion parameters.
+
+1352
+01:41:45,160 --> 01:41:48,920
+And another thing is I was working on MOEs.
+
+1353
+01:41:49,320 --> 01:41:58,640
+The the Megatron MOEs was the first uh was was the first framework open source to be able to train these MOEs at very large scales,
+
+1354
+01:41:59,160 --> 01:42:07,040
+like a hundred billions parameters to even trillions parameters efficiently at a 40% MFU.
+
+1355
+01:42:08,040 --> 01:42:10,120
+>> And going to
+
+1356
+01:42:11,160 --> 01:42:19,080
+switching to XAI was trying to work on even larger compute scale even further.
+
+1357
+01:42:19,840 --> 01:42:27,760
+And yeah, looking looking at this trajectory, I actually worked worked on a lot of different things.
+
+1358
+01:42:28,440 --> 01:42:38,200
+So, I feel actually within within ML it's actually easier to switch than than you think.
+
+1359
+01:42:38,480 --> 01:42:46,360
+Like a lot of people might have mentioned that, oh, I work on I work on computer vision.
+
+1360
+01:42:46,360 --> 01:42:51,560
+I always have to work on computer vision, and I cannot switch to language.
+
+1361
+01:42:52,400 --> 01:43:01,120
+And but but from my experience, at least at at Nvidia, I worked on both language model MOEs and also video models.
+
+1362
+01:43:01,120 --> 01:43:02,480
+It's It's actually not the case.
+
+1363
+01:43:02,480 --> 01:43:09,560
+A lot of a lot of the core principles how to train large models are are largely the same.
+
+1364
+01:43:09,560 --> 01:43:19,440
+And yeah, for for me, I feel right now the the bottleneck for for video models is actually the language part,
+
+1365
+01:43:20,040 --> 01:43:27,080
+the the agent, which which is why I want to go to work more on LLMs.
+
+1366
+01:43:27,800 --> 01:43:30,200
+One thing is it's it's a bit of a challenge.
+
+1367
+01:43:30,520 --> 01:43:34,360
+I don't think it's a huge jump so.
+
+1368
+01:43:34,640 --> 01:43:36,240
+>> Yeah, I mean kudos to you.
+
+1369
+01:43:36,240 --> 01:43:38,360
+I think you have a lot of strong vision there.
+
+1370
+01:43:38,400 --> 01:43:41,600
+Yeah, I think that was mostly everything that we wanted to cover.
+
+1371
+01:43:41,800 --> 01:43:47,960
+You've been very generous with your time and you know, it's really nice that you are able to share all these things now.
+
+1372
+01:43:47,960 --> 01:43:50,640
+We don't have to go through XAI to to clear everything.
+
+1373
+01:43:51,000 --> 01:43:53,760
+But also we I think we didn't get you in trouble.
+
+1374
+01:43:53,760 --> 01:43:59,240
+>> It's a lot of good stuff about XAI compared to what you just see in the releases, right?
+
+1375
+01:43:59,480 --> 01:44:01,600
+You don't realize how many more levels are to it.
+
+1376
+01:44:01,600 --> 01:44:02,680
+>> XAI please do more podcasts.
+
+1377
+01:44:03,960 --> 01:44:06,800
+Anyway, but thank thank you for sharing.
+
+1378
+01:44:06,800 --> 01:44:07,680
+It's been very kind.
+
+1379
+01:44:07,680 --> 01:44:09,840
+And and also like I want to hear more from you.
+
+1380
+01:44:09,840 --> 01:44:12,440
+I think you are going to embark on your your next phase.
+
+1381
+01:44:12,440 --> 01:44:16,440
+You haven't announced what you're doing next, but clearly you have,
+
+1382
+01:44:17,800 --> 01:44:24,840
+more vision and more ambition on on this path and I think you're you're basically kind of gradient descending to like whatever your final form is.
+
+1383
+01:44:25,120 --> 01:44:25,520
+>> Thank you.
+
+1384
+01:44:25,520 --> 01:44:26,080
+Yeah.
+
+1385
+01:44:26,080 --> 01:44:29,840
+Yeah, I'll share more about my next chapter soon.
+
+1386
+01:44:31,120 --> 01:44:32,520
+Thank you for having me.
+
+1387
+01:44:32,560 --> 01:44:33,360
+>> Thanks for coming.
+

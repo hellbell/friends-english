@@ -1,0 +1,6032 @@
+1
+00:00:00,160 --> 00:00:13,920
+Are you talking about introducing explicit priors that you know based upon some human intuition or maybe in this case LOM intuition >> when you talk about multiple hypothesis testing right there's predictive models and there's
+
+2
+00:00:13,920 --> 00:00:22,400
+descriptive models a predictive model is like let's say you just have a you have some inputs and you have some outputs and you just I just want to build a piece of code that
+
+3
+00:00:22,400 --> 00:00:33,720
+tries to just have the lowest error rate on some data set statistical model a descriptive model is actually what science is trying to get to which is okay it should be able to extrapolate
+
+4
+00:00:34,000 --> 00:00:45,040
+because it has sort of the physics or the actual some description of reality that's captured within it and then you can use it to extrapolate yes Newton thought of apples and gravity but gravity
+
+5
+00:00:45,040 --> 00:00:53,520
+isn't actually about apple right if you take the 17th century machine learning model like oh apples will fall but how about planets you know I don't know I have no data about planets so
+
+6
+00:00:53,520 --> 00:01:00,000
+who knows what they do right the distinction between those is a little bit blurry right because when a physicist or scientist comes,
+
+7
+00:01:00,000 --> 00:01:03,039
+they use their intuition or maybe even more than intuition.
+
+8
+00:01:03,039 --> 00:01:15,799
+Like essentially there's maybe a a solid pile of facts that they know about the world and then they make sure that whatever model they build is sort of consistent with what's known.
+
+9
+00:01:17,600 --> 00:01:19,000
+My co-host R.J.
+
+10
+00:01:19,040 --> 00:01:22,320
+uh it's a pleasure to have John Platt, you know, with us today.
+
+11
+00:01:22,320 --> 00:01:26,640
+John is a Google fellow and head of applied science at Google research.
+
+12
+00:01:26,640 --> 00:01:29,280
+He has really a fun like background.
+
+13
+00:01:29,280 --> 00:01:32,880
+He I guess you described yourself when we were talking a few minutes ago as a mega nerd.
+
+14
+00:01:32,880 --> 00:01:33,520
+>> Oh, gig nerd.
+
+15
+00:01:33,520 --> 00:01:34,000
+>> Giga nerd.
+
+16
+00:01:34,000 --> 00:01:34,479
+Giga nerd.
+
+17
+00:01:34,479 --> 00:01:36,000
+He's excited in absolutely everything.
+
+18
+00:01:36,000 --> 00:01:38,720
+And uh it really it really shows Yeah.
+
+19
+00:01:38,720 --> 00:01:47,079
+You was correct me if I'm wrong about any of this stuff, but um so you started college at 14 and started your PhD at 18 at Caltech.
+
+20
+00:01:47,360 --> 00:01:50,720
+You're you were advised or co-advised by John Hopfield, right?
+
+21
+00:01:50,720 --> 00:01:51,119
+>> Oh, yeah.
+
+22
+00:01:51,119 --> 00:01:51,360
+Yeah.
+
+23
+00:01:51,360 --> 00:01:51,600
+>> Yeah.
+
+24
+00:01:51,600 --> 00:01:51,920
+Yeah.
+
+25
+00:01:51,920 --> 00:01:54,799
+Who just won a Nobel Prize in you know two or three years ago.
+
+26
+00:01:54,799 --> 00:01:55,200
+>> Yes.
+
+27
+00:01:55,200 --> 00:01:59,439
+So John created um several responsible for several textbook algorithms.
+
+28
+00:01:59,439 --> 00:02:06,920
+Uh one known as plat scaling another one sequential minimal optimization which is the textbook algorithm for training SVMs.
+
+29
+00:02:07,119 --> 00:02:10,479
+Uh even today it's still if you use sklearn it's there.
+
+30
+00:02:10,479 --> 00:02:17,160
+John is discovered and named two asteroids has a Oscar for technical developments from 2006.
+
+31
+00:02:18,080 --> 00:02:22,959
+Uh so if you've ever watched a a Pixar movie you've seen John's algorithms and work.
+
+32
+00:02:22,959 --> 00:02:34,800
+John has an airdose bacon number of six or three three and three from either side and I'm going to skip over like 20 years of your career but then jumping to Google at you
+
+33
+00:02:34,800 --> 00:02:46,480
+know working at Google sciences you worked on fusion quantum computing climate modeling and many other topics is that more or less right >> that that's right yeah >> okay okay cool did I miss anything important
+
+34
+00:02:46,480 --> 00:02:52,879
+for today >> no I mean I've also done you know lots of applied math and signal processing and all sorts of fun things that.
+
+35
+00:02:52,879 --> 00:02:53,040
+>> Yeah.
+
+36
+00:02:53,040 --> 00:02:53,280
+Yeah.
+
+37
+00:02:53,280 --> 00:03:00,319
+I think you also uh your your Wikipedia has a fun story about patents and um uh the iPhone too.
+
+38
+00:03:00,319 --> 00:03:01,160
+>> The iPod.
+
+39
+00:03:01,519 --> 00:03:02,000
+>> iPod.
+
+40
+00:03:02,000 --> 00:03:02,239
+Yeah.
+
+41
+00:03:02,239 --> 00:03:02,839
+Yeah.
+
+42
+00:03:03,040 --> 00:03:03,280
+>> Yeah.
+
+43
+00:03:03,280 --> 00:03:03,880
+Welcome.
+
+44
+00:03:04,000 --> 00:03:04,560
+>> Thank you.
+
+45
+00:03:04,560 --> 00:03:05,599
+Thank you for having me.
+
+46
+00:03:05,599 --> 00:03:11,200
+>> Can you tell us about the ERA is the I think the way that the acronym is pronounced.
+
+47
+00:03:11,200 --> 00:03:19,840
+>> Um and and I know that there's a lot of different semi-related stuff um out there both within and outside of Google.
+
+48
+00:03:19,840 --> 00:03:25,400
+So what can you tell us a little bit about the details of ERA and and what makes it special?
+
+49
+00:03:25,599 --> 00:03:31,559
+>> Well, we've been doing u sort of AI for science in Google research for uh more than 10 years now.
+
+50
+00:03:31,760 --> 00:03:42,159
+And uh uh around 10 years ago it was very much um using I don't know what you call it now maybe classical uh classical machine learning models you know things like you know convolutional
+
+51
+00:03:42,159 --> 00:03:54,159
+nets or whatever to and they were specific models to build to um you know solve specific um science problems but about 2 years ago uh we got very excited about these more general uh
+
+52
+00:03:54,159 --> 00:04:02,239
+LMS that have popped up in the last few years and we were wondering what can be done with them and of course a lot of people have been uh playing and trying to figure
+
+53
+00:04:02,239 --> 00:04:04,839
+out what the right what the right thing to do is.
+
+54
+00:04:05,120 --> 00:04:09,800
+And uh we kind of um stumbled into this uh mapping.
+
+55
+00:04:10,000 --> 00:04:16,520
+Uh in other words, we found that many different scientific problems uh can be mapped into something we call scorable tasks.
+
+56
+00:04:16,560 --> 00:04:23,320
+So you can often phrase a scientific problem as a gosh, I really would like to have a piece of code that,
+
+57
+00:04:23,360 --> 00:04:25,880
+you know, maximizes some score.
+
+58
+00:04:26,160 --> 00:04:33,799
+And it's surprising the number of um different sort of scientific problems you can make a lot of progress on uh by mapping into that framework.
+
+59
+00:04:34,000 --> 00:04:37,919
+Well, one thing is uh a lot of scientists spend a lot of time sort of building models.
+
+60
+00:04:37,919 --> 00:04:42,280
+They might be statistical models or they might be you know physically based models.
+
+61
+00:04:42,560 --> 00:04:50,560
+Um and if it's a statistical model like in machine learning your scoring function is well I have some data set and I'd like to have the fit the model and the data set go
+
+62
+00:04:50,560 --> 00:04:51,120
+up.
+
+63
+00:04:51,120 --> 00:04:56,280
+Uh, and we can talk about overfitting in a minute, but u um >> that was one of our questions.
+
+64
+00:04:56,960 --> 00:04:59,799
+>> Uh, and then that's actually very that's actually very interesting.
+
+65
+00:04:59,919 --> 00:05:04,200
+So machine learning is kind of a subset of this sort of scorable task, right?
+
+66
+00:05:04,240 --> 00:05:11,079
+But you could do other kind of things like especially Michael Brener who's um uh uh the lead author on the ERA paper.
+
+67
+00:05:11,280 --> 00:05:18,320
+He's very very skilled because he he he likes to to sort of knock out a scientific paper in an evening uh now with a tool.
+
+68
+00:05:18,320 --> 00:05:31,280
+Uh so um there's something in applied math called asmtoic expansions and uh which is you're asking how does how does an ordinary differential or partial differential equation but say ordinary differential equation behave there's
+
+69
+00:05:31,280 --> 00:05:39,880
+some parameter has an epsilon in it and you're trying to say how does it behave as epsilon goes to zero and you could turn it turns out you can turn that into a empirical
+
+70
+00:05:40,400 --> 00:05:53,919
+task by essentially asking that it uh it proposes some solutions that are asmmpyically correct and you check to see if the uh asmtoic solution is correct for like epsilon equals 1 e minus 4
+
+71
+00:05:53,919 --> 00:06:04,160
+or something and then you you check that fit but then then you ask uh uh you ask Gemini which is the core AI underneath it to to do the mathematical reasoning try to solve
+
+72
+00:06:04,160 --> 00:06:09,039
+the problem while while also maximizing the fit to the to the data.
+
+73
+00:06:09,039 --> 00:06:17,280
+So you can actually there's a lot of sort of tricks you can do because it's not that the underlying thing that's that's altering the code or the underlying thing that's sort of making the
+
+74
+00:06:17,280 --> 00:06:19,400
+decisions is not a random process.
+
+75
+00:06:19,520 --> 00:06:25,199
+It's an AI itself that is smart and knows about things and knows a lot about the world.
+
+76
+00:06:25,199 --> 00:06:33,199
+You can get a lot of solve a lot of interesting problems because that sort of core inner loop is an AI that has huge amounts of um prior knowledge.
+
+77
+00:06:33,199 --> 00:06:35,239
+So that's sort of the the trick.
+
+78
+00:06:35,520 --> 00:06:44,560
+So, we we we've been uh running around trying to map lots of scientific problems into scorable tasks and trying to solve them and it's it's really been kind of fun and I'm happy to
+
+79
+00:06:44,560 --> 00:06:47,039
+talk about the ones that I've been involved in at least.
+
+80
+00:06:47,039 --> 00:06:53,600
+>> Yeah, I would love to hear about some of the more So, it's a stat statistical one is what everyone listening will probably know about.
+
+81
+00:06:53,600 --> 00:06:54,960
+What you just mentioned makes sense.
+
+82
+00:06:54,960 --> 00:06:57,000
+What are some of the other interesting ones?
+
+83
+00:06:57,199 --> 00:06:59,039
+>> Uh let's see that that are not statistical.
+
+84
+00:06:59,039 --> 00:07:08,720
+Let's see, cuz we have uh interesting ones like uh one that we just uh put a paper up on archive is um or actually I think it might be on GitHub.
+
+85
+00:07:08,720 --> 00:07:13,039
+It's um you often run into this in remote sensing because there's always a trade-off.
+
+86
+00:07:13,039 --> 00:07:21,599
+There's satellites flying above the Earth and there's a trade-off between how frequently they can revisit a spot on the Earth,
+
+87
+00:07:21,599 --> 00:07:28,400
+what their spatial resolution is, how big the pixels are, and their spectral resolution, so how many bands they have.
+
+88
+00:07:28,400 --> 00:07:38,400
+And ideally you'd like to have uh monitoring of the earth that's constant and you know a frame every five minutes at at hyperspectral resolution at at whatever 10 centimeters.
+
+89
+00:07:38,400 --> 00:07:39,400
+You can't get that.
+
+90
+00:07:39,520 --> 00:07:54,479
+But uh for for example to monitor uh CO2 the the atmospheric concentration of CO2 you can take data from one satellite uh that's for example it's OCO2 or O3 uh OC3 is actually attached
+
+91
+00:07:54,479 --> 00:08:04,359
+to u uh the international space station but so it gets you like a little uh strip of CO2 measurements that are highly accurate and pretty high resolution.
+
+92
+00:08:04,800 --> 00:08:14,560
+uh you can actually try to do uh there you could from because a lot of it is in the infrared uh weather satellites like goes has some infrared bands and it and it takes
+
+93
+00:08:14,560 --> 00:08:23,320
+a picture every essentially 5 minutes but the pixels are very large and it doesn't have such great spectral resolution in terms of it wasn't designed to find CO2.
+
+94
+00:08:23,440 --> 00:08:34,880
+So you just ask one to estimate the other and you shovel other data in like what's the current weather uh what what's sort of the long-term um you know albido uh and so you
+
+95
+00:08:34,880 --> 00:08:46,439
+so came up with this very nice um this very nice model that can sort can do almost like super resolution an informed super resolution of of uh uh one satellite to another.
+
+96
+00:08:46,480 --> 00:08:47,760
+So that's like one example.
+
+97
+00:08:47,760 --> 00:08:47,920
+>> Yeah.
+
+98
+00:08:47,920 --> 00:08:48,160
+Yeah.
+
+99
+00:08:48,160 --> 00:08:48,399
+Okay.
+
+100
+00:08:48,399 --> 00:08:52,800
+So any any scientific problem that you can map into this framework.
+
+101
+00:08:52,800 --> 00:09:04,640
+So the the input is to to error is sort of this mapping and the output is code is that >> well sort of I mean the input is you the way we've got it set
+
+102
+00:09:04,640 --> 00:09:15,680
+up in in the the uh product is you just start talking right and so because a lot of times it's nonobvious to how to do this mapping although you know experts like Michael Brener
+
+103
+00:09:15,680 --> 00:09:24,640
+know how to do it so we actually um wrote an agent that actually helps you it sort of talks to you to try to help you define ine what your scorable task should be.
+
+104
+00:09:24,640 --> 00:09:30,000
+So there's so already there's sort of a instance of Gemini sitting there trying to help you write a code.
+
+105
+00:09:30,000 --> 00:09:32,560
+So that's actually sort of almost like an intermediate result.
+
+106
+00:09:32,560 --> 00:09:44,200
+you start talking to it about your problem and it tries to produce essentially a a a Python notebook underneath that that has a that has a score essentially a function with a with a scorable
+
+107
+00:09:44,320 --> 00:09:55,519
+uh which essentially produces a score and then it starts to mutate that notebook uh in a clever way because again it's Gemini and it will try to sort of uh keep proposing code that
+
+108
+00:09:55,519 --> 00:09:58,680
+tries to maximize the um uh the score.
+
+109
+00:09:58,880 --> 00:10:06,720
+So what is different about this than just a generally a a general agentic system that can sort of optimize notebooks?
+
+110
+00:10:06,720 --> 00:10:18,600
+>> Uh right now it's a uh it's essentially its own in modern 2026 parliament we actually worked on this in 24 and 25 but in the modern modern parlates it's kind of a specialized harness
+
+111
+00:10:19,120 --> 00:10:24,640
+that uh runs an algorithm uh which in for era was Monte Carlo research.
+
+112
+00:10:24,640 --> 00:10:36,320
+So essentially it's keeping um hundreds or thousands of possible instances of notebooks and then it selects one and I can explain how it selects one and it decides well how what what can I
+
+113
+00:10:36,320 --> 00:10:36,640
+do?
+
+114
+00:10:36,640 --> 00:10:44,959
+Gemini asked itself what can I do to make that uh notebook be better and then it will make a new one and test it and then put it back into the candidate pool.
+
+115
+00:10:44,959 --> 00:10:56,079
+So you can imagine the candidate pool is actually tree structured because it's um uh you know every candidate possibly has some children and what you do is you pick based on something called the
+
+116
+00:10:56,079 --> 00:11:03,400
+uh it's actually um um a fairly standard algorithm in uh from reinforcement learning called upper confidencebound UCB.
+
+117
+00:11:03,920 --> 00:11:06,800
+So you essentially pick it's an optimistic algorithm.
+
+118
+00:11:06,800 --> 00:11:11,519
+So it tries to estimate say what's the what's the 95th percentile outcome of mutation.
+
+119
+00:11:11,519 --> 00:11:16,720
+and it tries to estimate that and it picks the one with the highest bound, the highest optimistic bound.
+
+120
+00:11:16,720 --> 00:11:20,200
+So in other words, it doesn't always pick the best performing notebook.
+
+121
+00:11:20,399 --> 00:11:25,440
+It tries to predict like what's the current performance plus two sigma of of its guest.
+
+122
+00:11:25,440 --> 00:11:27,760
+And so it it's always trying so it hunts around.
+
+123
+00:11:27,760 --> 00:11:40,160
+>> So So high recall basically >> high recall it's trying to make its bet so that it it most efficiently tries to make progress which isn't always greedily doing the best candidate.
+
+124
+00:11:40,160 --> 00:11:41,720
+Sometimes it's the fifth best.
+
+125
+00:11:41,920 --> 00:11:53,760
+Um we're also play we've also played around where where it kind of recombines it sort of takes ideas from two candidates and and smashes them together and um tries to make a third candidate
+
+126
+00:11:53,760 --> 00:11:54,600
+out of that.
+
+127
+00:11:54,720 --> 00:11:57,600
+>> How does it seed the initial candidate pool?
+
+128
+00:11:57,600 --> 00:12:02,079
+>> Well, that's the amazing thing is that underneath Gemini is actually good at writing code.
+
+129
+00:12:02,079 --> 00:12:07,680
+I mean you just ask it write me a thing because it you have you have a textual description of the problem.
+
+130
+00:12:07,680 --> 00:12:10,800
+It isn't just oh here's your scoring function start.
+
+131
+00:12:10,800 --> 00:12:21,519
+You say a textual description of the function and you might give it in fact we have under some things like here are five papers that people tried to solve this problem with and it's
+
+132
+00:12:21,519 --> 00:12:22,639
+kind of smart.
+
+133
+00:12:22,639 --> 00:12:27,040
+It actually goes and reads the papers and will actually take a first stab at code.
+
+134
+00:12:27,040 --> 00:12:32,280
+It might not be great or it might, you know, sometimes it has bugs and it returns essentially minus infinity,
+
+135
+00:12:32,480 --> 00:12:38,480
+but um it will then uh try to mutate the code and say, "Oh, it'll try to make it be better."
+
+136
+00:12:38,480 --> 00:12:40,079
+So, >> it it's pretty cool.
+
+137
+00:12:40,079 --> 00:12:45,120
+You don't actually have to give it I mean, you can if you want give it a uh some starter code,
+
+138
+00:12:45,120 --> 00:12:46,520
+but you don't have to.
+
+139
+00:12:46,639 --> 00:12:48,240
+>> How many agents are you spinning up?
+
+140
+00:12:48,240 --> 00:12:53,760
+I guess maybe not agents or how many different um you know, tree branches are you spinning up at each iteration?
+
+141
+00:12:53,760 --> 00:12:55,239
+>> Oh, at at every iteration.
+
+142
+00:12:55,279 --> 00:12:56,520
+Well, there's a trade-off.
+
+143
+00:12:56,720 --> 00:13:03,559
+You'd like to do a lot of parallel work, but if you do too much parallel work, you can't learn from previous things.
+
+144
+00:13:03,760 --> 00:13:07,920
+So, right now, we use about um the default is is 10 par.
+
+145
+00:13:07,920 --> 00:13:10,800
+So, so you you try to grow 10 leaves at a time.
+
+146
+00:13:10,800 --> 00:13:11,200
+Okay.
+
+147
+00:13:11,200 --> 00:13:14,480
+>> Um that seems to be about the right um trade-off.
+
+148
+00:13:14,480 --> 00:13:21,680
+>> When you say you can't learn from previous iterations, that means that the uh orchestrator or is there some sort of Yeah.
+
+149
+00:13:21,680 --> 00:13:31,200
+what like what's the that you said that there is some step which is able to like recombine or make decisions beyond just like the score I mean so yeah I guess maybe one of
+
+150
+00:13:31,200 --> 00:13:40,959
+the questions is as a human when you are doing some sort of ML project you don't just look at like oh there's this one metric that we're trying to optimize often times there's like
+
+151
+00:13:40,959 --> 00:13:52,639
+orthogonal metrics uh sometimes even insights such as like just watching you know training curves can sometimes give you intuition about what's going on or like looking into specific examples Does it do any sort
+
+152
+00:13:52,639 --> 00:13:53,920
+of introspection like this?
+
+153
+00:13:53,920 --> 00:14:04,800
+Is there uh >> Well, it has it has the history of but I meant why you can't um uh do too many things in parallel is is if you if you have 10 parallel uh
+
+154
+00:14:04,800 --> 00:14:10,999
+searches at once, then what the the number one can't actually see what numbers two through 10 are doing.
+
+155
+00:14:11,279 --> 00:14:17,199
+So if you do a thousand at once, then you're using a huge amount of computation without a lot of cross learning.
+
+156
+00:14:17,199 --> 00:14:21,040
+Whereas once you finish a little batch, you get the history.
+
+157
+00:14:21,040 --> 00:14:29,120
+It it it sort of obviously you have to prune it so it doesn't blow up the context, but but you get the history of of what it was thinking about as it was uh
+
+158
+00:14:29,120 --> 00:14:31,600
+kind of writing the code and the results of the code.
+
+159
+00:14:31,600 --> 00:14:35,640
+So So it it can learn from its previous attempts.
+
+160
+00:14:35,760 --> 00:14:36,000
+>> Okay.
+
+161
+00:14:36,000 --> 00:14:37,480
+And does it learn across?
+
+162
+00:14:38,160 --> 00:14:38,639
+>> Oh yes.
+
+163
+00:14:38,639 --> 00:14:38,959
+Yes.
+
+164
+00:14:38,959 --> 00:14:42,959
+Essentially it's essentially it's it's like one essentially shared context.
+
+165
+00:14:42,959 --> 00:14:43,279
+Yes.
+
+166
+00:14:43,279 --> 00:14:46,439
+So it is it is sort of thinking as it goes along.
+
+167
+00:14:46,720 --> 00:14:50,320
+It's not It's not like it's a thousand different completely independent branches.
+
+168
+00:14:50,320 --> 00:14:52,760
+>> You're really pushing Gemini's like long context abilities.
+
+169
+00:14:52,880 --> 00:14:53,120
+>> That's right.
+
+170
+00:14:53,120 --> 00:14:55,600
+And you have to do you have to do the right management and stuff.
+
+171
+00:14:55,600 --> 00:14:55,839
+>> Yeah.
+
+172
+00:14:55,839 --> 00:14:56,079
+Yeah.
+
+173
+00:14:56,079 --> 00:14:56,639
+Yeah.
+
+174
+00:14:56,639 --> 00:14:56,959
+Okay.
+
+175
+00:14:56,959 --> 00:14:58,439
+Oh, that's that's cool.
+
+176
+00:14:58,560 --> 00:15:13,199
+I mean, going back to R.J.'s question, um the like key point here being the first the first key goal is to I guess identify what specific score that you are trying to optimize,
+
+177
+00:15:13,199 --> 00:15:13,799
+right?
+
+178
+00:15:13,920 --> 00:15:16,840
+Sometimes that is, I agree, like kind of the hardest part of the problem.
+
+179
+00:15:16,880 --> 00:15:23,600
+And so I find it interesting that I'm not sure I'd always trust my agent to do that part.
+
+180
+00:15:23,600 --> 00:15:27,720
+That part seems like the more human task um in the loop.
+
+181
+00:15:27,760 --> 00:15:28,160
+>> It is.
+
+182
+00:15:28,160 --> 00:15:30,200
+And often you have to be careful.
+
+183
+00:15:30,320 --> 00:15:32,639
+In fact, a lot of what you do, it's kind of it's very meta.
+
+184
+00:15:32,639 --> 00:15:35,839
+I guess everything everything we do is very sort of high level.
+
+185
+00:15:35,839 --> 00:15:45,559
+You have to make sure that the there's no one common thing is you come up with a scoring function or the agent does or you do it together and then the iteration finds a
+
+186
+00:15:45,600 --> 00:15:54,800
+a way to cheat or hole like oh no I didn't mean that and so you have to go through and often sort of play and have a loop around it where you kind of
+
+187
+00:15:54,800 --> 00:16:05,040
+iterate like no no I didn't mean that or you have to tell it in its instructions okay you know don't don't do this so yeah there's often iterations and you so you you even
+
+188
+00:16:05,040 --> 00:16:14,639
+with agent help you don't necessarily get the the right scoring function from day one and in fact it's really neat because I mean in the old days i.e. 2024 or something you know a
+
+189
+00:16:14,639 --> 00:16:26,079
+lot of a lot of grad students would spend a lot of time like doing scientific software and it's just so much effort to write code at all that you kind of try maybe a
+
+190
+00:16:26,079 --> 00:16:32,600
+few things or a few things that are very related and then you sort of stop because you have to write your paper you have to do your next experiment.
+
+191
+00:16:32,800 --> 00:16:42,639
+This thing is kind of underneath kind of relentless because it keeps trying and keeps trying, keeps trying and so the people who use it are now spending all their time almost at the right
+
+192
+00:16:42,639 --> 00:16:44,800
+level almost at the scientific creativity level.
+
+193
+00:16:44,800 --> 00:16:47,720
+What does it mean to uh have a cost function?
+
+194
+00:16:47,759 --> 00:16:48,399
+You know what I mean?
+
+195
+00:16:48,399 --> 00:16:51,120
+And so that's almost like the essence of the scientific problem.
+
+196
+00:16:51,120 --> 00:16:58,760
+You're not so much now in the details of oh oh I have to import this CSV file or I have to get this database to work or whatever.
+
+197
+00:16:58,880 --> 00:17:08,880
+It's you're now sort of thinking almost like deeply philosophically about your actual scientific problem, not down in the grungy goop of of of worrying about,
+
+198
+00:17:08,880 --> 00:17:09,720
+you know, databases.
+
+199
+00:17:10,240 --> 00:17:16,000
+In fact, one one cool thing the agent can do is actually suggest data data sets to you like, oh,
+
+200
+00:17:16,000 --> 00:17:19,559
+have you thought about maybe pulling in this data set and doing a join?
+
+201
+00:17:19,839 --> 00:17:25,120
+And so it'll it'll make suggestions about like, you know, data sets you can join with, which is kind of cool.
+
+202
+00:17:25,120 --> 00:17:26,799
+Going back to what you said a second ago.
+
+203
+00:17:26,799 --> 00:17:34,920
+Um, in terms of agents love to hack things and the reward hack, >> are there do you have any fun stories or interesting stories about,
+
+204
+00:17:34,960 --> 00:17:38,200
+you know, where things were comedically run off the rails?
+
+205
+00:17:38,799 --> 00:17:39,679
+>> Boy, I'm blanking.
+
+206
+00:17:39,679 --> 00:17:42,400
+I know other other folks have run into it.
+
+207
+00:17:42,400 --> 00:17:47,320
+I don't know if it's I don't know if I have enough details to sort of say what to sort of express the comedy of,
+
+208
+00:17:47,520 --> 00:17:51,320
+but it it it does it you you you you kind of get >> surprised.
+
+209
+00:17:51,600 --> 00:17:52,000
+Yeah.
+
+210
+00:17:52,000 --> 00:17:56,559
+Um, I don't know if I have any really concrete um, sorry, I'm I'm blanking.
+
+211
+00:17:56,559 --> 00:17:57,280
+>> No, it's fine.
+
+212
+00:17:57,280 --> 00:17:57,679
+Yeah.
+
+213
+00:17:57,679 --> 00:18:06,000
+I always like to think of machine learning as like a it's it's sort of like the old genie stories before monkey Paul like >> careful what you wish for because you you're you're going to
+
+214
+00:18:06,000 --> 00:18:06,400
+get it.
+
+215
+00:18:06,400 --> 00:18:07,120
+Yeah, >> that's right.
+
+216
+00:18:07,120 --> 00:18:11,760
+And and you have that and that happens very much with this.
+
+217
+00:18:11,760 --> 00:18:13,159
+So, you have to be careful.
+
+218
+00:18:13,679 --> 00:18:18,320
+But on the other hand, um, it has some knowledge.
+
+219
+00:18:18,320 --> 00:18:24,680
+The nice thing is that sort of Gemini knows a lot about many things sort of more than any one person can do.
+
+220
+00:18:24,880 --> 00:18:32,840
+So it at least knows especially if you point papers point you know like here here are five papers that tried to do this in some way.
+
+221
+00:18:32,880 --> 00:18:38,960
+So to some extent it it does have that genie feel but to some extent it also sort of does sane things.
+
+222
+00:18:38,960 --> 00:18:44,840
+This is why remember the whole idea of sort of um evolutionary uh coding.
+
+223
+00:18:44,960 --> 00:18:46,480
+It's been around since the 70s.
+
+224
+00:18:46,480 --> 00:18:48,080
+everyone's loved to do that.
+
+225
+00:18:48,080 --> 00:18:52,680
+Uh like, oh, let's mutate uh list code or whatever to to do things.
+
+226
+00:18:52,880 --> 00:18:58,559
+But the reason why it just hasn't taken off is that random mutation in code space is pretty much worthless.
+
+227
+00:18:58,559 --> 00:19:03,399
+I mean, just like well, just like DNA, it's sort of like, you know, most most things are harmful.
+
+228
+00:19:03,760 --> 00:19:10,799
+So here it's like, oh, no, no, we can actually find it sort of knows sort of underneath and knows interesting gradients to try,
+
+229
+00:19:10,799 --> 00:19:14,720
+which is why the thing works that that the underlying loop itself is an AI.
+
+230
+00:19:14,720 --> 00:19:24,320
+So yes, it can it can maybe overfit and have funny sort of genie problems like you allude to, but it also has some amount of sanity because it sort of >> it knows about the
+
+231
+00:19:24,320 --> 00:19:26,880
+world and it it it has world knowledge in it.
+
+232
+00:19:26,880 --> 00:19:32,400
+So >> the paper though you were doing Gemini 2.5 and I think you know Gemini has advanced quite a bit.
+
+233
+00:19:32,400 --> 00:19:43,440
+Do you have metrics or have you you know this is a tool that you're continuously using and it sounds like you're improving and I'm wondering like do you internally have you seen like almost
+
+234
+00:19:43,440 --> 00:19:47,120
+like a phase transition in how effective this tooling has been?
+
+235
+00:19:47,120 --> 00:19:51,840
+Has it how dramatic has the improvement been over the last like I guess year or two?
+
+236
+00:19:51,840 --> 00:19:53,919
+>> Oh well I mean year or two.
+
+237
+00:19:53,919 --> 00:19:54,519
+Yeah.
+
+238
+00:19:54,559 --> 00:19:55,159
+Amazing.
+
+239
+00:19:55,280 --> 00:20:02,279
+In other words, every even every half version of of I mean essentially I think it would have been impossible under Gemini 2.0.
+
+240
+00:20:03,600 --> 00:20:04,320
+>> Yeah, I think so.
+
+241
+00:20:04,320 --> 00:20:05,679
+In other words, it would it wouldn't have worked.
+
+242
+00:20:05,679 --> 00:20:08,720
+>> So, you started at 2.5 and that was like just the >> Oh, no.
+
+243
+00:20:08,720 --> 00:20:11,679
+We've been trying to experiment with these things actually for a while.
+
+244
+00:20:11,679 --> 00:20:11,919
+Okay.
+
+245
+00:20:11,919 --> 00:20:15,919
+And things just weren't working and then they started to work and then now they're they're just amazing.
+
+246
+00:20:15,919 --> 00:20:21,360
+So, the progress on Gemini major versions has just been stunningly amazing.
+
+247
+00:20:21,360 --> 00:20:21,840
+>> Yeah.
+
+248
+00:20:21,840 --> 00:20:22,080
+Yeah.
+
+249
+00:20:22,080 --> 00:20:32,159
+I think this is an experience a lot of people have been having where things were just seemed unimpossible whatever are suddenly becoming magically useful like really quickly.
+
+250
+00:20:32,159 --> 00:20:41,360
+>> And so so if people are I even say this to scientists cuz there's some people like oh I tried whatever 2.0 go and I didn't like oh yeah that that was a long time
+
+251
+00:20:41,360 --> 00:20:51,280
+that was a year ago that was like a long that was eternity ago right yes and in fact all the all the we even have one of the preprints where we've sort of combined
+
+252
+00:20:51,280 --> 00:21:00,400
+>> uh uh era with anti-gravity and that you know the whole that whole harness of anti-gravity is pretty amazing too and it's that that's the one where you can sort of pull in lots of
+
+253
+00:21:00,400 --> 00:21:07,919
+papers and it can write lots of code for you and >> so yeah >> is that publicly available or is that >> uh the the anti-gravity Yeah.
+
+254
+00:21:07,919 --> 00:21:08,320
+Yeah.
+
+255
+00:21:08,320 --> 00:21:09,840
+>> Well, anti-gravity is certainly publicly.
+
+256
+00:21:09,840 --> 00:21:10,240
+>> Oh, sorry.
+
+257
+00:21:10,240 --> 00:21:10,400
+Sorry.
+
+258
+00:21:10,400 --> 00:21:10,559
+Yeah.
+
+259
+00:21:10,559 --> 00:21:12,559
+Uh the the era plus anti-gravity.
+
+260
+00:21:12,559 --> 00:21:13,280
+>> Uh not yet.
+
+261
+00:21:13,280 --> 00:21:13,440
+>> Okay.
+
+262
+00:21:13,440 --> 00:21:13,600
+Okay.
+
+263
+00:21:13,600 --> 00:21:14,080
+Not yet.
+
+264
+00:21:14,080 --> 00:21:14,400
+Okay.
+
+265
+00:21:14,400 --> 00:21:24,440
+>> I find this area really fascinating cuz like you said, it's been there's been some form of code mutation out there since the the dawn of computer science basically.
+
+266
+00:21:24,559 --> 00:21:37,679
+Um the canonical problem is sort of the overfitting or multiple hypothesis testing problem I think which is maybe a little bit better match to the problem where you're basically my hypothesis now that this
+
+267
+00:21:37,679 --> 00:21:49,639
+algorithm work now my hypothesis and so that um you run the risk that sort of it has exponentially exploded right because now suddenly I have like these it's like hyper hyperparameters that I'm optimizing
+
+268
+00:21:50,000 --> 00:21:59,800
+and so that you have this explosion of state space that you're exploring and so that it seems much easier to to sort of overfit to a problem.
+
+269
+00:21:59,840 --> 00:22:00,799
+What are your thoughts about that?
+
+270
+00:22:00,799 --> 00:22:07,480
+Because on the other hand, empirically my experience, I even tried um the you know sort of open- source version of ERA.
+
+271
+00:22:07,600 --> 00:22:12,960
+Um I kind of strapped it into Claude and it's running right now so I can't tell you how well it's working.
+
+272
+00:22:12,960 --> 00:22:13,840
+>> Okay, I'm curious.
+
+273
+00:22:13,840 --> 00:22:14,960
+>> Yeah, I'll I'll let you know.
+
+274
+00:22:14,960 --> 00:22:24,799
+Um, but I'm just curious to know this is a question that's been on my mind about just general AI for science and what so what are your experiences with this sort of on the
+
+275
+00:22:24,799 --> 00:22:27,000
+the sort of on the ground?
+
+276
+00:22:27,360 --> 00:22:39,039
+I guess there's two questions sort of embedded in your question I think right because when you talk about multiple hypothesis testing right there's predictive models and there's descriptive models right uh I you know
+
+277
+00:22:39,039 --> 00:22:46,720
+can you tell I've been doing machine learning for a long time in statistics >> that's actually a really good point though do you mind explaining that expanding that I'm not sure that's something that everyone
+
+278
+00:22:46,720 --> 00:22:56,400
+would audience would be familiar with like >> especially in in in modern days I think people are trying to sort of obscure the two >> if you started with LLM I'm not sure that distinction would
+
+279
+00:22:56,400 --> 00:22:58,000
+be meaningful That's right.
+
+280
+00:22:58,000 --> 00:23:06,559
+So, a a predictive model is like let's say you just have a you have some inputs and you have some outputs >> and you just I just want to build a piece of code that
+
+281
+00:23:06,559 --> 00:23:10,720
+tries to just have the lowest error rate on some data set.
+
+282
+00:23:10,720 --> 00:23:13,039
+That's just a statistical model, right?
+
+283
+00:23:13,039 --> 00:23:24,279
+A descriptive model is actually what science is trying to get to, which is okay, it should be able to extrapolate because it has sort of the physics or the actual some description of reality
+
+284
+00:23:24,400 --> 00:23:26,120
+that's captured within it.
+
+285
+00:23:26,240 --> 00:23:28,040
+And then you can use it to extrapolate.
+
+286
+00:23:28,640 --> 00:23:36,799
+Um because it's sort of like you know yes Newton thought apples and gravity but gravity isn't actually about apple right if he had just fit if he had taken as a machine you know
+
+287
+00:23:36,799 --> 00:23:45,440
+the 17th century machine learning model like oh apples will fall but how about planets you know I don't know I have no data about planets so who knows what they do right >> so so when
+
+288
+00:23:45,440 --> 00:23:46,519
+you say extrapol
+
+289
+00:23:49,039 --> 00:23:57,760
+I'm curious okay so when you say extrapolative so there's different ways I could think about this one of them is you said a model of physics or model of the world are you talking
+
+290
+00:23:57,760 --> 00:24:09,520
+about introducing explicit priors that you know based upon some human intuition or maybe in this case LLM intuition or are you talking about this is the the physics is actually learned by the model
+
+291
+00:24:09,520 --> 00:24:20,840
+or the >> it's more >> the underlying process of the world is under the model >> the distinction between those is a little bit blurry right because when a physicist or scientist comes they use their intuition
+
+292
+00:24:21,039 --> 00:24:31,440
+and they or about or or maybe even more than intuition like essentially there's maybe a a solid pile of facts that they know about the world and then they make sure that whatever model
+
+293
+00:24:31,440 --> 00:24:34,360
+they build is sort of consistent with what's known.
+
+294
+00:24:34,880 --> 00:24:45,879
+um currently in era it is it's sort of it is LM intuition essentially that's what I was trying to say about having a good gradient underneath that that especially if you point it at
+
+295
+00:24:46,000 --> 00:24:56,720
+existing papers it will try to build models that are kind of sane underneath because if again especially if you give it guidance like oh be sure to incorporate this and this or look at
+
+296
+00:24:56,720 --> 00:25:09,360
+these papers you get these things so it will there is a you can introduce a bias towards um certain model choices and it will have a bias because it it just its own little
+
+297
+00:25:09,360 --> 00:25:15,000
+sort of world knowledge is accumulated inside of inside of itself in in uh in sort of pre-training.
+
+298
+00:25:15,120 --> 00:25:17,039
+>> Can you give us examples of what that might look like?
+
+299
+00:25:17,039 --> 00:25:27,760
+Is it modeling something in a way where it's actually there's different for example if you're doing something with partial differential equations there's these you know formalisms people have like u neural operators for example
+
+300
+00:25:27,760 --> 00:25:40,000
+or where you can embed a you can encode a differential equation in some sense or uh I think that's called physics informed neural networks or something is like one for fluid and kind of
+
+301
+00:25:40,000 --> 00:25:49,919
+PTE type modeling systems or for let's say molecular systems there's often times this idea about equivariance I you know the model is like picking up on these like you know tricks which have been
+
+302
+00:25:49,919 --> 00:26:00,080
+developed in the literature or are they adding some weights for some physical prior or something yeah kind of what does that look like when it when it introduces like a physics >> when it introduces
+
+303
+00:26:00,080 --> 00:26:11,039
+some sort of um you know knowledge like that >> I don't know if I have enough data to sort of say oh you know 73% of the time it does this >> but um especially when
+
+304
+00:26:11,039 --> 00:26:22,440
+you point it at existing papers it will try to in fact it will do very well at adapting the the the methods that are described in the papers uh for the problem.
+
+305
+00:26:22,640 --> 00:26:24,480
+Um in fact we'll do an amazing job.
+
+306
+00:26:24,480 --> 00:26:34,480
+You can actually often just recreate or reverse engineer uh paper that that's again what Michael Burner actually likes to do this uh he'll he'll say oh that sounds like an interesting paper.
+
+307
+00:26:34,480 --> 00:26:37,039
+Oh we did this actually for the uh we had this thing.
+
+308
+00:26:37,039 --> 00:26:38,640
+It was actually kind of a hack.
+
+309
+00:26:38,640 --> 00:26:50,720
+I uh suggested this to Michael where uh there's this one MIT professor who um he came up with a uh uh some code to do um essentially if you have a rooftop uh if
+
+310
+00:26:50,720 --> 00:26:59,120
+you have a rooftop with a fixed uh area and you want to sort of maximize the amount of solar uh power you capture over a day sort of solar energy uh you can build
+
+311
+00:26:59,120 --> 00:27:08,559
+up which of course captures more sunlight and you can sort of build you can have it design a widget you know with involving mirrors or struts or solar panels uh to sort of stock
+
+312
+00:27:08,559 --> 00:27:20,120
+at whatever, you know, angles or or sizes you like and uh usually with with a with a maximum height and then try to figure let it sort of explore that design space.
+
+313
+00:27:20,240 --> 00:27:22,159
+And I believe Michael, we can ask him.
+
+314
+00:27:22,159 --> 00:27:26,720
+I believe it actually just I don't think he actually installed the simulator.
+
+315
+00:27:26,720 --> 00:27:33,120
+I think I think the code just just reproduced the code >> because it has like a coding agent inside of it.
+
+316
+00:27:33,120 --> 00:27:37,240
+So just reproduced the code from the paper and sort of figured it all out.
+
+317
+00:27:37,360 --> 00:27:43,560
+So yes, it's it's very good especially if given a pointer to what other people have done.
+
+318
+00:27:43,760 --> 00:27:54,880
+It's very good at kind of like oh I haven't seen it try equivariant modeling that that can get very hairy if you know about uh k clips gordon coefficients it's it's pretty fun.
+
+319
+00:27:54,880 --> 00:27:55,440
+Yes.
+
+320
+00:27:55,440 --> 00:28:00,040
+So I don't know if it'll do the true equariant stuff but it it actually knows a lot.
+
+321
+00:28:00,240 --> 00:28:07,120
+Um, I remember actually when uh Gemini 2.5 came out, I know this is not exactly about era, but I I remember sort of thinking,
+
+322
+00:28:07,120 --> 00:28:08,399
+"Oh, this is a new world."
+
+323
+00:28:08,399 --> 00:28:14,880
+When like the day 2.5 came out, cuz I said, "Hey, uh, Gemini 2.5, can you write me uh some boosted decision tree code?"
+
+324
+00:28:14,880 --> 00:28:15,840
+And it did.
+
+325
+00:28:15,840 --> 00:28:16,559
+>> And it worked.
+
+326
+00:28:16,559 --> 00:28:17,200
+>> It just did.
+
+327
+00:28:17,200 --> 00:28:17,679
+Yes.
+
+328
+00:28:17,679 --> 00:28:21,560
+And I said, you know, yeah, this is the this is a new world.
+
+329
+00:28:22,159 --> 00:28:27,520
+So yes, I think for to loop back to your question, I think yes, if you give it sort of guidance about,
+
+330
+00:28:27,520 --> 00:28:31,960
+oh, you know, it's important to put this kind of thing in, it will.
+
+331
+00:28:32,240 --> 00:28:39,760
+And so it it it won't necessarily, at least not that we've seen, discover completely new uh like if you didn't know about KP Gordon,
+
+332
+00:28:39,760 --> 00:28:41,120
+go fish, I don't know, you know what I mean?
+
+333
+00:28:41,120 --> 00:28:52,240
+didn't know about something, it won't completely discover a new kind of physical model from scratch, but it will certainly if you tell it about interesting constraints about the world that are known,
+
+334
+00:28:52,240 --> 00:28:53,399
+it will certainly evolve.
+
+335
+00:28:53,440 --> 00:28:54,480
+I don't know if I answer your question.
+
+336
+00:28:54,480 --> 00:28:56,799
+>> So, so there's still room for humans for the next year or two.
+
+337
+00:28:56,799 --> 00:29:01,840
+>> Oh, in fact, there's going back I think there's totally room for humans because I don't know.
+
+338
+00:29:01,840 --> 00:29:17,039
+I mean, we have co-scientist that tries to help you come up with um sort of hypothesis generation, but really I still haven't seen um sort of the creativity and the philosophy and the sort
+
+339
+00:29:17,039 --> 00:29:19,159
+of the the sort of the careful rigor.
+
+340
+00:29:19,200 --> 00:29:20,240
+You totally need the humans.
+
+341
+00:29:20,240 --> 00:29:22,519
+I I don't see humans going away.
+
+342
+00:29:22,799 --> 00:29:35,919
+they can make strange suggestions and I've used co-scientist actually for an interesting problem in geochemistry and I learned about a new kind of ion I didn't realize happened in magma but uh I but
+
+343
+00:29:35,919 --> 00:29:44,720
+and so it'll tell you interesting things and you'll learn stuff but I don't think it sort of substitutes for human creativity >> you know going back we were just talking about two years 2 point
+
+344
+00:29:44,720 --> 00:29:53,919
+you know two you had Gemini 20 to 2.5 and this was like you already saw a leap and now it's been another year or two and now we're at 3.5 and you know there's
+
+345
+00:29:53,919 --> 00:29:55,279
+you're saying this is working much better.
+
+346
+00:29:55,279 --> 00:30:02,880
+I mean whenever you look at a graph you know you can if something looks like an exponential it can either you can either be in a sigmoid or you can be at the beginning
+
+347
+00:30:02,880 --> 00:30:11,360
+of a takeoff right I guess every exponential turns into a sigmoid eventually >> every exponential turns into >> but the question is like where are we on that >> I mean I I guess I'm a big
+
+348
+00:30:11,360 --> 00:30:20,240
+believer in sort of the whole jagged um >> yeah the jagged frontier and so certainly at least what I see I mean I don't know what's going to happen in a couple years but yes there
+
+349
+00:30:20,240 --> 00:30:32,120
+there's some big spikes out in jaggedness in terms of coding ability and just gathering knowledge and and finding related things and and that's huge and wonderful which I think is great for scientists.
+
+350
+00:30:32,320 --> 00:30:40,759
+So far, it's kind of less in terms of uh rigor and um we can talk about things like the international methad,
+
+351
+00:30:40,960 --> 00:30:51,039
+but and math in general, but but but in terms of sort of philosophy and creativity, I think it's still kind of not and I I maybe it'll maybe everything will people some people are
+
+352
+00:30:51,039 --> 00:30:55,560
+saying everything's going to inflate and pass, but I'm still seeing a lot of very strong jaggedness.
+
+353
+00:30:55,600 --> 00:31:04,080
+So I I can see well maybe it'll get to be extra good at coding and extra good at at fitting models and extra good at making suggestions and things but I don't know.
+
+354
+00:31:04,080 --> 00:31:06,480
+So far no so far you need the humans.
+
+355
+00:31:06,480 --> 00:31:10,440
+>> Yeah I want to get back to the question about the multiple hypothesis testing.
+
+356
+00:31:10,640 --> 00:31:15,399
+Sorry totally love the the tangent.
+
+357
+00:31:15,440 --> 00:31:23,919
+Um multiple hypothesis testing is when you make have a descriptive model and you're saying this is the way the world works and you have a bunch of data and you take a billion darts
+
+358
+00:31:23,919 --> 00:31:25,840
+and you throw and so you have to be careful.
+
+359
+00:31:25,840 --> 00:31:40,720
+There's some something called false discovery rate right and so the question is >> is this finding descriptive models or is this finding sort of predictive models and fundamentally the scientist is there to make sure
+
+360
+00:31:40,720 --> 00:31:43,720
+that whatever is saying is descriptive.
+
+361
+00:31:44,240 --> 00:31:54,240
+We haven't been able to make a system so far uh out of these pieces that that can really sort of discover completely new physics or completely new science,
+
+362
+00:31:54,240 --> 00:31:58,840
+but this is sort of a power tool to help you discover completely new science.
+
+363
+00:31:58,960 --> 00:32:03,919
+So, so I maybe I'm trying to unask your question about I think this gets at the heart of it.
+
+364
+00:32:03,919 --> 00:32:04,240
+Yes.
+
+365
+00:32:04,240 --> 00:32:04,480
+>> Yes.
+
+366
+00:32:04,480 --> 00:32:07,279
+But then you're saying what about just pure over Okay, let's set aside.
+
+367
+00:32:07,279 --> 00:32:10,559
+It's not it's not trying to figure out a descriptive model of the world.
+
+368
+00:32:10,559 --> 00:32:12,119
+That's still up to the scientist.
+
+369
+00:32:12,240 --> 00:32:13,879
+But what about just plain old overfitting?
+
+370
+00:32:14,000 --> 00:32:14,399
+Yeah.
+
+371
+00:32:14,399 --> 00:32:14,720
+>> Yes.
+
+372
+00:32:14,720 --> 00:32:18,399
+You have to be very careful because it's a power tool.
+
+373
+00:32:18,399 --> 00:32:22,240
+It can uh I shouldn't probably say is it can slice your fingers off.
+
+374
+00:32:22,240 --> 00:32:23,039
+You know what I mean?
+
+375
+00:32:23,039 --> 00:32:25,360
+You have to be very careful and you have to be very rigorous.
+
+376
+00:32:25,360 --> 00:32:29,399
+In fact, now you have to be more careful more rigorous to not fool yourself.
+
+377
+00:32:29,519 --> 00:32:37,320
+You really really need to be just excruciatingly careful about having, you know, very hidden uh hold out sets you don't look at.
+
+378
+00:32:37,360 --> 00:32:44,480
+you you have to be just super super rigorous to make sure that you don't completely because it is a total power tool.
+
+379
+00:32:44,480 --> 00:32:52,320
+>> So the question to how do I not slice my fingers off is you need to use the same techniques but be very careful with them.
+
+380
+00:32:52,320 --> 00:32:56,399
+Yes, >> that's a very clear answer that get >> Yeah.
+
+381
+00:32:56,399 --> 00:32:56,999
+Okay.
+
+382
+00:32:57,200 --> 00:32:57,440
+Yeah.
+
+383
+00:32:57,440 --> 00:32:59,440
+I actually don't think I've heard any guests say that.
+
+384
+00:32:59,440 --> 00:32:59,679
+Yeah.
+
+385
+00:32:59,679 --> 00:33:06,440
+It's like it is I think a very important skill, maybe one of the most important skills in the new um people talk a lot about taste.
+
+386
+00:33:06,559 --> 00:33:06,880
+>> Yeah.
+
+387
+00:33:06,880 --> 00:33:11,600
+But and maybe this is variation of taste but >> the taste is like the other side right now.
+
+388
+00:33:11,600 --> 00:33:12,480
+>> It's like the rigor.
+
+389
+00:33:12,480 --> 00:33:13,679
+It's like the Yes.
+
+390
+00:33:13,679 --> 00:33:14,399
+Uh yes.
+
+391
+00:33:14,399 --> 00:33:15,919
+In fact, if anything >> Yeah.
+
+392
+00:33:15,919 --> 00:33:17,600
+taste or rigor, which one's more important?
+
+393
+00:33:17,600 --> 00:33:18,320
+>> Well, I don't know.
+
+394
+00:33:18,320 --> 00:33:30,040
+I think people at least the way I am viewing it is is I mean the aspect of that research researchers are software developers which there's a lot of overlap in a lot of fields.
+
+395
+00:33:30,480 --> 00:33:42,320
+I'm seeing that software engineers are it's almost like obviously there's a lot of um concern like oh no what am I going to do you know coding seems to be you know getting automatic
+
+396
+00:33:42,320 --> 00:33:52,159
+so I think I think there sort of both I think there's a lot of people get pulled into well I I'll be the creative source so I'll I'll try to figure out new science
+
+397
+00:33:52,159 --> 00:33:59,760
+I'll try to figure out new products I'll try to sort of really re be very very creative and I again I'm strong believer that I don't think that's going to go away there's also
+
+398
+00:33:59,760 --> 00:34:04,399
+people sort of pull towards rigor like, oh, I want to make sure this doesn't that this doesn't crash.
+
+399
+00:34:04,399 --> 00:34:05,600
+I want to make sure this scales.
+
+400
+00:34:05,600 --> 00:34:07,240
+I want to make sure this isn't wrong.
+
+401
+00:34:07,440 --> 00:34:08,320
+I think you need both.
+
+402
+00:34:08,320 --> 00:34:11,640
+And I think you need people who who are really good at both.
+
+403
+00:34:12,079 --> 00:34:14,240
+But they don't necessarily have to be the same people.
+
+404
+00:34:14,240 --> 00:34:21,359
+But yes, I think you need I think this is even broader than science just as sort of software uh engineering uh evolves.
+
+405
+00:34:21,359 --> 00:34:29,239
+Yeah, it'll be, you know, the people who will bring the creativity and the people who will bring the rigor and I think those will be sort of anchors.
+
+406
+00:34:29,359 --> 00:34:33,760
+There's some other things that I've seen are related work out there.
+
+407
+00:34:33,760 --> 00:34:43,200
+There's a a really cool leaderboard for, you know, like claw leaderboard, agent leaderboard for scientific problems from Stamford.
+
+408
+00:34:43,200 --> 00:34:44,720
+I don't know if you're familiar with it.
+
+409
+00:34:44,720 --> 00:34:53,679
+It seems like a really interesting idea to me to have, you know, sort of different agents kind of competing on the leader.
+
+410
+00:34:53,679 --> 00:34:59,520
+So, it seems like if you squint a little bit, what ERA is doing is is kind of a leaderboard,
+
+411
+00:34:59,520 --> 00:35:09,599
+but it's internal and it's recombining ideas whereas what are your thoughts about this and do you is that like a thing that you guys are working on and is there problems with that or
+
+412
+00:35:09,599 --> 00:35:10,920
+advantages to that?
+
+413
+00:35:11,119 --> 00:35:18,840
+Ironically, you know, the whole era project actually started because uh people may not realize Kaggle is actually part of Google.
+
+414
+00:35:19,040 --> 00:35:19,680
+>> Oh, yeah.
+
+415
+00:35:19,680 --> 00:35:22,400
+>> Uh and so it was called the auto kaggle problem.
+
+416
+00:35:22,400 --> 00:35:31,240
+So it was actually like that's what it was is let's try to let's try to u u um have a system that can sort of you know win at Kaggle competitions.
+
+417
+00:35:31,599 --> 00:35:34,160
+>> So that's sort of why it sort of has the shape.
+
+418
+00:35:34,160 --> 00:35:35,880
+That's sort of how the project started.
+
+419
+00:35:36,240 --> 00:35:39,359
+And um it goes back to sort of overfitting, right?
+
+420
+00:35:39,359 --> 00:35:42,480
+If you've ever actually competed in a Kaggle competition.
+
+421
+00:35:42,480 --> 00:35:46,360
+>> I have done Kaggle competitions and or I've done one.
+
+422
+00:35:46,640 --> 00:35:52,439
+It is a really interesting phenomenon because there's this overfitting is like rampant.
+
+423
+00:35:52,720 --> 00:35:52,960
+Yeah.
+
+424
+00:35:52,960 --> 00:35:53,359
+Yeah.
+
+425
+00:35:53,359 --> 00:35:58,240
+And it's really impressive how people can overfit to certain data sets in a way that is Yeah.
+
+426
+00:35:58,240 --> 00:36:04,720
+>> Or we even we had a we have a fun project I can talk about more if you like um that tries to mitigate contrails gen contrails.
+
+427
+00:36:04,720 --> 00:36:06,560
+I'm happy to talk about that if you want.
+
+428
+00:36:06,560 --> 00:36:13,440
+Uh, and we had a contrail uh, cattle competition and people actually beat us, but they found that we had a uh,
+
+429
+00:36:13,440 --> 00:36:22,400
+half pixel uh, error in our labels and they and they cuz it had to do with the center versus the lower left like where is 00?
+
+430
+00:36:22,400 --> 00:36:26,079
+Is it in the lower left of the of the pixel or is it in the center?
+
+431
+00:36:26,079 --> 00:36:27,040
+You know what I mean?
+
+432
+00:36:27,040 --> 00:36:32,520
+So, they found that and exploited that and and squeezed whatever a little bit extra stuff.
+
+433
+00:36:32,880 --> 00:36:39,880
+uh because it turns out when you uh make artificial data and you rotate it, you have to make sure that that you take into account that half pixel offset.
+
+434
+00:36:39,920 --> 00:36:48,400
+So they so yes people or people themselves will be act like these LLMs uh and and try to sort of reward hack upon these things.
+
+435
+00:36:48,400 --> 00:36:51,040
+Oh, it sort of goes back to um what is it?
+
+436
+00:36:51,040 --> 00:36:51,839
+Goodart's law.
+
+437
+00:36:51,839 --> 00:36:53,160
+You know, good hearts law.
+
+438
+00:36:53,760 --> 00:37:00,240
+Any maybe quote, let's say any metric that becomes a target is no longer good as a metric.
+
+439
+00:37:00,240 --> 00:37:00,480
+Yeah.
+
+440
+00:37:00,480 --> 00:37:09,359
+>> Uh and uh so that's the I mean it's good and it's just you have to be you have to be very very careful and you have to again you have to have like layers
+
+441
+00:37:09,359 --> 00:37:17,599
+of rigor like okay but we'll do this and we'll optimize for this but you have to realize okay that's just now goodart's law applies and you have to be careful and so that's a
+
+442
+00:37:17,599 --> 00:37:28,720
+lot of reasons why the whole AI field has been kind of constantly exhausting these these things because again goodart's law applies individually to every to every leaderboard you make.
+
+443
+00:37:28,720 --> 00:37:33,719
+So again, it's sort of you just have to step back and be very very careful.
+
+444
+00:37:34,000 --> 00:37:38,800
+I I maybe that's not I don't no that that's really useful to my thinking.
+
+445
+00:37:38,800 --> 00:37:49,800
+This is you know as we've had guests on it's been a recurrent theme of how do you manage all this the complexity that's introduced by LLMs and atte science.
+
+446
+00:37:49,839 --> 00:37:53,400
+>> I think my followup question was about overfitting in Kaggle.
+
+447
+00:37:53,520 --> 00:37:55,000
+Um, yeah, it is.
+
+448
+00:37:55,040 --> 00:38:02,079
+If you you had an auto autocaggle problem and then the question is given autocaggle, how often was it successful?
+
+449
+00:38:02,079 --> 00:38:05,599
+I mean, I assume you probably just ran this on like all of your Kaggle competitions or something.
+
+450
+00:38:05,599 --> 00:38:11,560
+>> Well, we tried it on various um like what they call playground competitions and it did very very well in the playground competitions.
+
+451
+00:38:11,920 --> 00:38:15,040
+Um uh we've entered into different competitions.
+
+452
+00:38:15,040 --> 00:38:23,959
+some of them it turns out uh there's uh in the last few years just the the number of leaderboards and competitions whatnot have just exploded far beyond Kaggle.
+
+453
+00:38:24,320 --> 00:38:35,040
+So uh we've done very well and some of them like uh one thing we're super proud of is the whole um the CDC set up this uh competition where you try to predict next
+
+454
+00:38:35,040 --> 00:38:42,280
+week's the number of uh COVID and flu cases that will happen in every state and um uh territory in the US.
+
+455
+00:38:42,480 --> 00:38:46,560
+uh and you try to predict a week in advance and ERA did super well on that.
+
+456
+00:38:46,560 --> 00:38:54,280
+>> It's funny because in some s Google invented the concept of using data to track uh disease progression with Google flu.
+
+457
+00:38:54,720 --> 00:39:00,000
+So it's kind of funny that you were sort of going full circle 20 years later or something like that.
+
+458
+00:39:00,000 --> 00:39:01,200
+>> So that did very well.
+
+459
+00:39:01,200 --> 00:39:13,280
+other ones where we've entered um uh we weren't quite as good often because people are very again you know you have to sometime sometimes how well you do in these competitions is a um
+
+460
+00:39:13,280 --> 00:39:21,440
+measure of how much sort of TLC you put into it and how much you're willing to squeeze the last 0.001 O1 and so so it was I mean ERA did well.
+
+461
+00:39:21,440 --> 00:39:30,240
+You got you pretty close, but you but we didn't we didn't close the jump in the last whatever 30 places or whatever because no one was there to shave the last,
+
+462
+00:39:30,240 --> 00:39:32,760
+you know, 01 off the thing.
+
+463
+00:39:32,800 --> 00:39:33,359
+Yeah.
+
+464
+00:39:33,359 --> 00:39:38,640
+>> Is it very iterative like you get to it, you know, it sort of I saw the charts in the paper and you know,
+
+465
+00:39:38,640 --> 00:39:50,079
+you sort of get these step changes as it discovers something and then and then flat and then so is it very much human in a loop like okay you've stalled on the problem like
+
+466
+00:39:50,079 --> 00:39:51,520
+try this kind of thing.
+
+467
+00:39:51,520 --> 00:39:51,920
+Okay.
+
+468
+00:39:51,920 --> 00:39:52,520
+>> Yes.
+
+469
+00:39:52,640 --> 00:39:56,760
+At the outer loop which is I think that's the almost like the more fun creative part.
+
+470
+00:39:56,960 --> 00:39:57,760
+Uh so yes.
+
+471
+00:39:57,760 --> 00:39:59,760
+Oh here have look at this paper.
+
+472
+00:39:59,760 --> 00:40:02,560
+Oh, you're doing something bad or you know what I mean?
+
+473
+00:40:02,560 --> 00:40:08,600
+So, it's almost like having a a hyper eager uh grad student or something who doesn't sleep.
+
+474
+00:40:08,720 --> 00:40:13,480
+Uh uh and you sort of tell it things and you and you and you sort of guide it around.
+
+475
+00:40:13,760 --> 00:40:17,880
+>> How often does someone intervene versus like what is the outer loop look like?
+
+476
+00:40:18,240 --> 00:40:28,079
+uh it might run for a few hours and and come back and give you uh some examples and then you would um you know you can as as far as you like you can
+
+477
+00:40:28,079 --> 00:40:34,880
+you can sort of keep trying and keep poking at it and >> so that's it's very much designed to be human in the loop then.
+
+478
+00:40:34,880 --> 00:40:35,280
+>> Yes.
+
+479
+00:40:35,280 --> 00:40:35,760
+Yes.
+
+480
+00:40:35,760 --> 00:40:42,640
+>> Interesting because a lot of the other tools I've tried tend to be very the one shot.
+
+481
+00:40:42,640 --> 00:40:45,040
+>> Well I guess it depends on your definition right?
+
+482
+00:40:45,040 --> 00:40:53,599
+I mean it's obviously you talk to it and you start it and it'll go for some number of hours and then come back and then but of course then you say but then that's
+
+483
+00:40:53,599 --> 00:41:00,720
+where the human creativity kicks in and then you're sort of doing the outer loop where you sort of every you know depends if you want to sleep but you know every few hours you
+
+484
+00:41:00,720 --> 00:41:09,760
+you go and you give it another try and you >> what kind of budget are you giving this thing >> like you you blew through a million dollars accidentally kind of thing.
+
+485
+00:41:09,760 --> 00:41:15,520
+I don't actually know because we're using sort of you know internal calls to uh to to Gemini.
+
+486
+00:41:15,520 --> 00:41:17,520
+So actually I I don't actually know.
+
+487
+00:41:17,520 --> 00:41:23,839
+>> So but look there's token budget but then there's also like I'm solving a problem that is computationally expensive.
+
+488
+00:41:23,839 --> 00:41:32,240
+>> Oh yes that also it um essentially underneath it cuz cuz the the scoring function itself might have you know Monte Carlo estimation or or whatever.
+
+489
+00:41:32,240 --> 00:41:32,480
+Yes.
+
+490
+00:41:32,480 --> 00:41:40,720
+So you actually end up you can actually end up uh using a lot of compute uh uh to just just even do or simulation like if you have a simulator inside has to run
+
+491
+00:41:40,720 --> 00:41:41,480
+a simulation.
+
+492
+00:41:41,760 --> 00:41:47,080
+Uh so yeah you can you can you can spend a fair amount of just CPU or GPU.
+
+493
+00:41:47,119 --> 00:41:59,440
+So my little experiment with ERA um ERA and Claude is is to build a a neural network for some classification problems and and so they obviously like if you have enough data then you
+
+494
+00:41:59,440 --> 00:42:08,319
+know larger networks work better but they're more expensive to train and you get to you start to run into a question of how do I manage my budget if I have a fixed budget
+
+495
+00:42:08,319 --> 00:42:16,280
+so that I'm spending my my uh my my dollars on the most effective solutions.
+
+496
+00:42:16,400 --> 00:42:16,880
+That's right.
+
+497
+00:42:16,880 --> 00:42:19,440
+And I think that's still something we need to figure out.
+
+498
+00:42:19,440 --> 00:42:28,000
+But it's of course it's no different than if you have a grad student and they're trying to train a very very large uh neural network or a very very large data set.
+
+499
+00:42:28,000 --> 00:42:32,160
+They themselves have to there's some thing like oh is there a scaling law?
+
+500
+00:42:32,160 --> 00:42:33,000
+Can I extrapolate?
+
+501
+00:42:33,359 --> 00:42:40,480
+So it's not I guess you it's an the same problem but maybe more urgent because it it just it runs into this problem because it's so relentless.
+
+502
+00:42:40,480 --> 00:42:43,400
+It runs into the problem much quicker than a grad student could.
+
+503
+00:42:43,520 --> 00:42:47,880
+One of the things that you optimized was um contrails.
+
+504
+00:42:48,480 --> 00:42:51,599
+Um can you talk a little bit about that?
+
+505
+00:42:51,599 --> 00:42:56,240
+>> Uh well uh let me maybe spend a minute or two talking about the contrails problem.
+
+506
+00:42:56,240 --> 00:42:57,080
+>> Yes, please.
+
+507
+00:42:57,119 --> 00:43:00,480
+>> For context, contrails, not chemtrails, which is a conspiracy theory.
+
+508
+00:43:00,480 --> 00:43:01,480
+>> Uh yes.
+
+509
+00:43:01,520 --> 00:43:05,160
+Uh although you should also dislike contrails, but maybe not for the same reason.
+
+510
+00:43:06,160 --> 00:43:14,280
+So, contrails are uh if you've ever seen uh those white clouds formed behind jets, those are called condensation trails or contrails.
+
+511
+00:43:14,800 --> 00:43:24,360
+And it turns out they add at least according to the estimates that people have uh about 1% of all anthropogenic uh uh global warming is caused by contrails.
+
+512
+00:43:24,720 --> 00:43:25,280
+Why is that?
+
+513
+00:43:25,280 --> 00:43:27,119
+I can just talk about the maybe the physics of that.
+
+514
+00:43:27,119 --> 00:43:31,200
+So, it turns out that uh there's actually two uh counterveailing effects.
+
+515
+00:43:31,200 --> 00:43:37,040
+Contrails are are uh well sometimes if you've ever seen them they they streak and then they kind of go away.
+
+516
+00:43:37,040 --> 00:43:40,000
+Those don't really do anything but sometimes they last for a long time.
+
+517
+00:43:40,000 --> 00:43:47,800
+You'll just see in the cl in the sky just like almost like a waffle of of of of just persistent contrails they're called.
+
+518
+00:43:48,079 --> 00:43:49,839
+And uh there's two effects that they have.
+
+519
+00:43:49,839 --> 00:43:51,599
+Those are thin white clouds.
+
+520
+00:43:51,599 --> 00:43:54,560
+So they reflect sunlight but that only of course happens during the day.
+
+521
+00:43:54,560 --> 00:43:59,560
+It turns out uh all all objects emit something called black body radiation.
+
+522
+00:43:59,839 --> 00:44:02,919
+And the Earth does at whatever the temperature is about 300 Kelvin.
+
+523
+00:44:02,960 --> 00:44:05,640
+It it's in the far infrared around 10 microns.
+
+524
+00:44:05,920 --> 00:44:10,800
+And at those uh wavelengths, uh contrails have very low albido.
+
+525
+00:44:10,800 --> 00:44:12,360
+They're almost essentially black.
+
+526
+00:44:12,400 --> 00:44:18,240
+And so they'll absorb a little bit of the outgoing uh infrared radiation and then remit it both directions.
+
+527
+00:44:18,240 --> 00:44:20,560
+So essentially they'll reflect some of the outgoing heat.
+
+528
+00:44:20,560 --> 00:44:22,280
+So it'll trap heat like a blanket.
+
+529
+00:44:22,560 --> 00:44:28,040
+>> Um and so because that happens 24 hours a day, uh they tend to be uh warming.
+
+530
+00:44:28,480 --> 00:44:40,480
+And it turns out it's a surprising again there's uh some uncertainty about it but you know uh contrail cirrus cirrus that sort of comes from from from contrails uh might might cover especially in
+
+531
+00:44:40,480 --> 00:44:51,680
+places like Europe which has a lot of airline traffic a few% of the actual sky is covered by sort of additional contrails which so it adds in those places like Europe it adds about
+
+532
+00:44:51,680 --> 00:44:59,440
+one watt per square meter of of forcing uh locally at least uh which means that uh Just to give you a sense,
+
+533
+00:44:59,440 --> 00:45:05,200
+all of anthropogenic uh uh warming sort of average across the whole globe is about three watts per square meter.
+
+534
+00:45:05,200 --> 00:45:11,000
+So in places of high uh airplane traffic, uh it can be a lot of warming locally.
+
+535
+00:45:11,440 --> 00:45:12,880
+Uh so what can you do?
+
+536
+00:45:12,880 --> 00:45:19,680
+Well, um it turns out contrails are caused by areas in the atmosphere that are ice super saturated.
+
+537
+00:45:19,680 --> 00:45:21,400
+They're a little bit like rock candy.
+
+538
+00:45:21,520 --> 00:45:26,079
+So like when you have uh rock candy, you get a water solution that has too much sugar in it.
+
+539
+00:45:26,079 --> 00:45:32,400
+And any little um you know little bit of sugar in it will just crystallize all the the the the sugar out.
+
+540
+00:45:32,400 --> 00:45:37,920
+Just like in this contrail there these regions they tend to be kind of pancake shaped only a few hundred meters tall.
+
+541
+00:45:37,920 --> 00:45:45,880
+And if you fly through it the jet exhaust has a little bit of uh moisture in it which uh will turn into droplets and then freeze.
+
+542
+00:45:45,920 --> 00:45:53,119
+And then for every gram, if you're in this bad region, for every gram of water, ice or soot you put out,
+
+543
+00:45:53,119 --> 00:45:56,560
+it's about 10 kg of water gets sucked out.
+
+544
+00:45:56,560 --> 00:45:59,400
+So there's this enormous 10,000 to1 curing ratio.
+
+545
+00:45:59,599 --> 00:46:00,880
+Um, so it's a big problem.
+
+546
+00:46:00,880 --> 00:46:07,920
+So what you can do is you can figure out where these regions, they're invisible, of course, uh, these regions of ice saturated are,
+
+547
+00:46:07,920 --> 00:46:14,520
+and then tell the plane to go underneath, and you only have to drop essentially uh, what they call two flight levels.
+
+548
+00:46:14,640 --> 00:46:20,280
+So it it actually it costs a little bit of fuel but not very much to kind of avoid these sort of bad regions.
+
+549
+00:46:20,400 --> 00:46:27,760
+So we built a system that sort of looks at satellite images and tries to detect where contrails are.
+
+550
+00:46:27,760 --> 00:46:38,880
+So we have essentially a continuous monitoring system and then try to build a model of of because it turns out the weather models are not quite accurate enough to to find these uh places
+
+551
+00:46:38,880 --> 00:46:40,240
+of ice super saturation.
+
+552
+00:46:40,240 --> 00:46:50,400
+So we build a custom model again like a convolutional net or a UNET or something uh to essentially to predict where they're going to happen so that uh then you we give maps to
+
+553
+00:46:50,400 --> 00:46:59,160
+a flight planning software so they can dodge it and and inexpensively reduce the the um the climate impact of of aviation by a lot.
+
+554
+00:46:59,280 --> 00:47:02,360
+What's the physics behind why you can predict that?
+
+555
+00:47:02,560 --> 00:47:02,880
+Right.
+
+556
+00:47:02,880 --> 00:47:09,200
+Is it just I see it in the satellite and then tomorrow I think it'll be there because planes go to the same place or >> Oh,
+
+557
+00:47:09,200 --> 00:47:09,359
+no.
+
+558
+00:47:09,359 --> 00:47:15,320
+It's because you're trying to detect these uh regions of ice super saturation because they're very very persistent.
+
+559
+00:47:15,440 --> 00:47:17,040
+Essentially they're >> Oh, they're persistent.
+
+560
+00:47:17,040 --> 00:47:17,440
+>> Oh, yeah.
+
+561
+00:47:17,440 --> 00:47:17,680
+Yeah.
+
+562
+00:47:17,680 --> 00:47:20,560
+I mean, no one knows exactly, but they could last for days.
+
+563
+00:47:20,560 --> 00:47:29,959
+Essentially, they're caused by they think sort of warm moist air being injected just at the boundary of the tropopause between the uh just at the bottom of the stratosphere.
+
+564
+00:47:30,000 --> 00:47:34,520
+And then when humidity gets up there, it sort of sticks there for a long time and then gradually dissipates.
+
+565
+00:47:34,640 --> 00:47:35,040
+>> Got it.
+
+566
+00:47:35,040 --> 00:47:40,319
+So, so it's there's just a sort of >> they're like bad spots in the atmosphere you don't want to fly through.
+
+567
+00:47:40,319 --> 00:47:40,560
+>> Right.
+
+568
+00:47:40,560 --> 00:47:40,800
+Okay.
+
+569
+00:47:40,800 --> 00:47:44,800
+And so once you've establish that, it's probably good for a couple days at least.
+
+570
+00:47:44,800 --> 00:47:47,440
+>> Uh well, you have to keep predicting where that is.
+
+571
+00:47:47,440 --> 00:47:47,920
+>> Yeah.
+
+572
+00:47:47,920 --> 00:47:52,240
+And the the models you're using are you mentioned like CNN's or something like that.
+
+573
+00:47:52,240 --> 00:47:52,640
+>> That's right.
+
+574
+00:47:52,640 --> 00:47:56,319
+And we haven't replaced those with era level uh models yet.
+
+575
+00:47:56,319 --> 00:48:07,920
+But there was a very interesting problem that came up which is you sort of want to know well just how much warming did this contrail make and how much did it add to global
+
+576
+00:48:07,920 --> 00:48:08,520
+warming.
+
+577
+00:48:08,640 --> 00:48:17,520
+Uh because for example you might want to find the biggest ones because there's some fuel cost and maybe it costs a bit of money for the air airplanes to avoid it.
+
+578
+00:48:17,520 --> 00:48:19,920
+So you say well gee I'd like to kind of know how much it did.
+
+579
+00:48:19,920 --> 00:48:26,640
+But that's actually what they call a counterfactual problem like okay you made a contrail and certain amount of infrared radiation happened.
+
+580
+00:48:26,640 --> 00:48:33,119
+So we can measure that uh if you're careful but would have happened if there hadn't been a contrail there.
+
+581
+00:48:33,119 --> 00:48:39,200
+That's a very difficult thing to estimate because you can't access the universe where the >> didn't happen.
+
+582
+00:48:39,200 --> 00:48:41,440
+So you have to make these things called counterfactual models.
+
+583
+00:48:41,440 --> 00:48:48,600
+And there's those are if I don't know if your listeners know counterfactual models are actually pretty tricky to to fit and make.
+
+584
+00:48:48,960 --> 00:48:56,600
+uh and we were there was remember there were two there were two um the reflecting the the sunlight and then there's the infrared.
+
+585
+00:48:56,640 --> 00:49:04,559
+It turns out the uh measuring what the effect of reflecting sunlight is actually more difficult and we were actually stuck on it for 2 years.
+
+586
+00:49:04,559 --> 00:49:10,919
+We we had a model that worked okay a counterfactual model for the outgoing longwave radiation but not for the reflected sunlight.
+
+587
+00:49:11,359 --> 00:49:22,480
+era actually helped us find a uh a model that sort of searched all the confounders and sort of figured out like oh how how can we estimate it because we again we even had
+
+588
+00:49:22,480 --> 00:49:32,480
+like test test code on on sort of artificial because you can kind of inject artificial make artificial data sets where there sort of injected um contrails and sort of figure out oh well we
+
+589
+00:49:32,480 --> 00:49:43,119
+know how much it was because we we injected it and so again our own attempts didn't even pass our own um tests but era this thing actually did and and sort of unstuck this
+
+590
+00:49:43,119 --> 00:49:43,520
+problem.
+
+591
+00:49:43,520 --> 00:49:48,520
+So, yeah, we're in the middle of writing up a paper uh we have a paper about the outgoing long range radiation,
+
+592
+00:49:48,720 --> 00:49:55,520
+but we have a paper um that uh it's not submitted yet, but we've talked about it at uh at EGU,
+
+593
+00:49:55,520 --> 00:49:59,599
+I think, um where um we actually solve this problem.
+
+594
+00:49:59,599 --> 00:50:11,760
+So and and the the models that error comes up with are they just like a big monstrosity of of of code or are they like pretty basic and is just you needed the intuition
+
+595
+00:50:11,760 --> 00:50:12,480
+to develop that?
+
+596
+00:50:12,480 --> 00:50:21,280
+>> Yes, it's actually in this particular case it was actually more of the latter that it essentially sort of helped identify what the it was a very simple model with some just a some number
+
+597
+00:50:21,280 --> 00:50:25,959
+of confounders that we just hadn't we just hadn't tried that combination before and it worked very very well.
+
+598
+00:50:26,079 --> 00:50:30,160
+So yeah, it actually sort of came up with the the and it was seen in in retrospect.
+
+599
+00:50:30,160 --> 00:50:32,160
+So that was I think a a big win.
+
+600
+00:50:32,160 --> 00:50:33,320
+>> Yeah, that's interesting.
+
+601
+00:50:33,440 --> 00:50:35,359
+I know you've done a lot of work in climate.
+
+602
+00:50:35,359 --> 00:50:38,319
+What other other um stuff have you done?
+
+603
+00:50:38,319 --> 00:50:39,440
+>> I think I talked about this right.
+
+604
+00:50:39,440 --> 00:50:41,520
+The the I talked about the CO2 thing.
+
+605
+00:50:41,520 --> 00:50:54,400
+That was pretty fun because it's this it's still quite a uh the reason why estimating CO2 in the atmosphere is an interesting problem is we actually don't know what the carbon flux is into
+
+606
+00:50:54,400 --> 00:50:56,120
+the bio in and out of the biosphere.
+
+607
+00:50:56,160 --> 00:51:06,400
+I mean we do we know that the biosphere captures right we emit a bunch of CO2 out into the atmosphere and some of it gets absorbed into the ocean with sort of mostly in
+
+608
+00:51:06,400 --> 00:51:19,359
+organic chemistry some some phytolanton and a lot of it gets absorbed on land uh but but the error bars about what happens is are moderately large and the error bars 50 years from now
+
+609
+00:51:19,359 --> 00:51:30,280
+are very large like the models in 2100 we don't know how how the biosphere will react to the everinccreasing temperatures and CO2.
+
+610
+00:51:30,480 --> 00:51:42,199
+So we don't actually know how much the CO2 will absorbed and the the the error bars are 300 ppm of CO2 just from the uncertainty of how what gets absorbed.
+
+611
+00:51:42,240 --> 00:51:47,000
+And just to point out, you know, right now there's about what 440 450 ppm.
+
+612
+00:51:47,040 --> 00:51:47,920
+So it's huge.
+
+613
+00:51:47,920 --> 00:51:57,080
+I mean it could be seriously amazingly awful or not great but you know it the the 300 ppm is like enormous uh uncertainty.
+
+614
+00:51:57,119 --> 00:52:01,440
+So it would be really nice to figure out you know can we can we reduce that.
+
+615
+00:52:01,440 --> 00:52:16,160
+So this is like the CO2 uh concentration is like one step towards that um solving that >> and I know that Google has made some really big um improvements and climate modeling and and weather
+
+616
+00:52:16,160 --> 00:52:17,280
+prediction as well, right?
+
+617
+00:52:17,280 --> 00:52:29,440
+is I was at Nurups this year, this last Nurups did and and um and I stopped by the climate track and you know I maybe only had a chance to listen to two talks
+
+618
+00:52:29,440 --> 00:52:38,559
+or something but I was it really blew my mind the sort of step change I think that's happened in the past I don't know what it is maybe 10 years or whatever in terms
+
+619
+00:52:38,559 --> 00:52:48,319
+of climate modeling and I know a lot of that happened at Google can you talk a little bit about what has happened in Google and other places that has made that allowed that really
+
+620
+00:52:48,319 --> 00:52:51,520
+big transition in in climate and weather modeling.
+
+621
+00:52:51,520 --> 00:52:56,439
+>> Uh okay, so let me People often sort of collapse climate and weather together.
+
+622
+00:52:56,640 --> 00:52:59,240
+Well, because they're fundamentally the same physics.
+
+623
+00:52:59,359 --> 00:52:59,839
+Yeah.
+
+624
+00:52:59,839 --> 00:53:06,960
+>> Although uh at least for the atmospheric physics, they're uh obviously when you start having ice and land, you know,
+
+625
+00:53:06,960 --> 00:53:08,600
+climate is long-term weather.
+
+626
+00:53:08,880 --> 00:53:15,760
+And so uh the complexity of a full earth system model, which is a climate model, is much much bigger than an atmospheric model.
+
+627
+00:53:15,760 --> 00:53:25,680
+like you have to actually measure uh what's the water flux and the CO2 flux in it out of the land or what will happen with ice and so there has been a step change
+
+628
+00:53:25,680 --> 00:53:38,720
+with weather models right sorry I want to make this so weather is up to 15 days okay approximately because you know weather itself or the atmosphere appears to be chaotic >> uh uh I'm I'm hoping
+
+629
+00:53:38,720 --> 00:53:49,040
+I don't know if I should explain chaos uh essentially it's the butterfly effect right that small perturbations like a butterfly flaps its wings and the weather will be completely different in you know 2
+
+630
+00:53:49,040 --> 00:53:50,040
+or 3 weeks.
+
+631
+00:53:50,240 --> 00:54:02,600
+So weather is trying to predict the actual um trajectory of the atmosphere over say 2 weeks and that's now that has been a huge step change and that's because that's been a lot of
+
+632
+00:54:02,800 --> 00:54:12,520
+not even the new LLM stuff that was based on you know the 2018 era um machine learning stuff and just a large amount of data and a large amount of compute.
+
+633
+00:54:12,720 --> 00:54:20,720
+So, it's been there's been a lot of sort of very clever work and a lot of it from Google making new u new weather models and it's been it's been great and in fact
+
+634
+00:54:20,720 --> 00:54:32,400
+uh we had a a really neat breakthrough cuz now we can apparently predict tracks of cyclones, tropical cyclones uh much more accurately many days uh in advance.
+
+635
+00:54:32,400 --> 00:54:37,640
+And so places like um Jamaica had got hammered by a terrible uh hurricane.
+
+636
+00:54:38,079 --> 00:54:45,320
+And uh a lot of the classic models didn't actually predict it partially because it's often that the especially the intensification.
+
+637
+00:54:45,520 --> 00:54:53,200
+It's all being driven by the um what the surface temperature is cuz hurricanes are people might not realize are heat engines essentially.
+
+638
+00:54:53,200 --> 00:54:58,040
+They they convert sort of heat in the ocean to big atmospheric um um motions.
+
+639
+00:54:58,319 --> 00:54:59,280
+So weather has been great.
+
+640
+00:54:59,280 --> 00:55:06,120
+climate is much more difficult because you don't actually care about you're not trying to predict whether it's going to rain in Seattle in 2070.
+
+641
+00:55:06,559 --> 00:55:13,320
+You're trying to get kind of like averages and what makes it difficult is that it's what they call non-stationary.
+
+642
+00:55:14,319 --> 00:55:24,880
+So that the in fact literally the the the it's like the underlying physics or the underlying like you know plants are behaving differently and and ice behaves differently and and and so it's a
+
+643
+00:55:24,880 --> 00:55:35,760
+it's very very difficult to use sort of classical ML on sort of true climate models and so that's why sort of the whole discussion you guys had about you know what we're talking about
+
+644
+00:55:35,760 --> 00:55:46,079
+about descriptive models and multiple hypothesis testing that is incredibly severe in climate because we don't we have no data from 30 years from out and we don't want to wait 30 or 50 years
+
+645
+00:55:46,079 --> 00:55:48,840
+to find out whether we were right or that we overfit.
+
+646
+00:55:49,200 --> 00:55:59,760
+So whatever things we do, you have to be kind of careful and try to peel off sub problems and and the problem of of exactly how do you inject how do you build a
+
+647
+00:55:59,760 --> 00:56:05,159
+big model that can predict into the future uh but is still constrained by what we know.
+
+648
+00:56:05,200 --> 00:56:06,720
+It's a fascinating problem.
+
+649
+00:56:06,720 --> 00:56:11,240
+Uh I think it's still unsolved but it's a it's a great problem to have because of again these uncertainties.
+
+650
+00:56:11,280 --> 00:56:16,160
+We really would like to know what will happen in in 60 years to the climate.
+
+651
+00:56:16,160 --> 00:56:17,440
+So it's still it's a thing.
+
+652
+00:56:17,440 --> 00:56:26,319
+It's a very very interesting problem to work on but so far AI has not revolutionized it because it's very very resistant again because of this data problem.
+
+653
+00:56:26,319 --> 00:56:27,959
+It's it's a low data problem.
+
+654
+00:56:28,160 --> 00:56:33,359
+Does the butterfly effect the chaotic um nature of weather?
+
+655
+00:56:33,359 --> 00:56:44,160
+Does that also impact climate or is the time scale so large that you have a closed system for which you know maybe it's oscillating between poles or whatever but it's it it's sort of
+
+656
+00:56:44,160 --> 00:56:46,400
+when you look at it that time scale it's more stationary.
+
+657
+00:56:46,400 --> 00:56:49,359
+It's unfortunately non-stationary in a different way.
+
+658
+00:56:49,359 --> 00:57:01,040
+But the original sort of whole uh chaos thing was well I maybe people came up with it but in meteorology it was back to a person named Lorent uh who had this sort of
+
+659
+00:57:01,040 --> 00:57:04,040
+very model uh very simple model OD.
+
+660
+00:57:04,559 --> 00:57:12,480
+So the difference between climate and weather is is weather is where are you on the attractor >> and climate is about the statistics itself of the attractor.
+
+661
+00:57:12,480 --> 00:57:14,559
+The problem with with climate is that we're altering it.
+
+662
+00:57:14,559 --> 00:57:25,280
+So the attractor itself is changing is moving and there could be and there could be everyone talks about tipping points that means that the attractor suddenly changes and the trouble is that's very very
+
+663
+00:57:25,280 --> 00:57:27,359
+very difficult to predict.
+
+664
+00:57:27,359 --> 00:57:39,280
+So even the attractor's shape changes quickly >> or could and the trouble is when you run a simulator >> you don't know like is it did it go unstable because my model's not great or is
+
+665
+00:57:39,280 --> 00:57:45,480
+it an actual physical instability >> and it's extremely difficult to tell the difference.
+
+666
+00:57:45,680 --> 00:57:46,240
+What do you do?
+
+667
+00:57:46,240 --> 00:57:52,799
+Especially when I mean to me it strikes me that not only do you have not have future data, you really don't have much past data.
+
+668
+00:57:52,799 --> 00:57:57,359
+You can do some measurements and ice cores and lots of stuff to try to do that.
+
+669
+00:57:57,359 --> 00:58:00,919
+But there was nobody with an instrument 100 years ago.
+
+670
+00:58:01,520 --> 00:58:06,679
+>> So if you have annual data or whatever, maybe you have if you're lucky 50 data points in any one location,
+
+671
+00:58:06,960 --> 00:58:07,440
+right?
+
+672
+00:58:07,440 --> 00:58:14,600
+So whatever we do has to be very constrained by uh what we know.
+
+673
+00:58:15,200 --> 00:58:19,200
+But it's just very diff I'm just telling you sort of the horns the dilemma people on.
+
+674
+00:58:19,200 --> 00:58:26,240
+People make these, in fact, people in applied science in general, I would say climate is the most extreme, make these things called process models where what you do,
+
+675
+00:58:26,240 --> 00:58:27,640
+and I've seen the code.
+
+676
+00:58:27,680 --> 00:58:35,680
+Uh, oh well, you know, I'm going to be reductionist and I'm going to sort of take the horrible complicated climate thing and sort of boil it down to a thousand pieces and then I'm
+
+677
+00:58:35,680 --> 00:58:46,319
+going to, you know, find the expert who wrote a paper about, you know, piece number 763 and he fit a cubic to some data like has like for example one thing that's very mysterious
+
+678
+00:58:46,319 --> 00:58:51,080
+which is related to contrails is how does ice behave in clouds?
+
+679
+00:58:51,359 --> 00:58:54,760
+It turns out you might again get everything is complicated once you dig into it.
+
+680
+00:58:54,799 --> 00:58:59,280
+But it turns out that uh like when you make a contrail, how long does it last?
+
+681
+00:58:59,280 --> 00:59:10,600
+Well, it depends on because the way uh contrails can evaporate is ice starts to to accumulate as I said and then the ice crystals get big and then they fall.
+
+682
+00:59:10,799 --> 00:59:15,080
+But of course, how quickly they fall depends on their shape which is not known.
+
+683
+00:59:15,599 --> 00:59:21,920
+And how much does the the the contrail mix from the from the moist inside the contrail out?
+
+684
+00:59:21,920 --> 00:59:24,559
+Again, people have approximations, but they don't know.
+
+685
+00:59:24,559 --> 00:59:27,200
+And so the uh the uncertainty is very much confound.
+
+686
+00:59:27,200 --> 00:59:30,079
+And it's not just oh uh John who cares about contrails.
+
+687
+00:59:30,079 --> 00:59:38,640
+It turns out that the actual physics of of microysics of ice has very strong implications about what climate models do.
+
+688
+00:59:38,640 --> 00:59:40,840
+And it's sort of we just don't know.
+
+689
+00:59:41,040 --> 00:59:44,919
+So I'm trying to say it's very gnarly and it's not a solved problem.
+
+690
+00:59:45,760 --> 00:59:57,560
+My hope is that with tools maybe not like today's era but maybe tomorrow's era because it remember it can as I was saying before it not only can fit data it can read papers
+
+691
+00:59:58,079 --> 01:00:10,079
+right and the question is it can read a lot more papers than we can so maybe maybe we can integrate all the data that or all the knowledge that people have carefully evaluated much
+
+692
+01:00:10,079 --> 01:00:16,880
+more than any one person writing a piece of code and fit data I mean that would be that would be utterly glorious.
+
+693
+01:00:16,880 --> 01:00:26,160
+Uh we don't have that today, but that that's sort of one of the hopes that I have even for a a more amazing tool uh in the future is something that really can write
+
+694
+01:00:26,160 --> 01:00:33,119
+code in a sane way, even much more sane because it'll be constrained by all the scientific knowledge that we've accumulated so far.
+
+695
+01:00:33,119 --> 01:00:34,079
+That would be amazing.
+
+696
+01:00:34,079 --> 01:00:35,280
+We don't have that today.
+
+697
+01:00:35,280 --> 01:00:37,719
+>> I mean, that strikes me as being very similar to biology.
+
+698
+01:00:38,400 --> 01:00:39,040
+>> Oh, yes.
+
+699
+01:00:39,040 --> 01:00:39,880
+Oh, boy.
+
+700
+01:00:41,839 --> 01:00:42,439
+Right.
+
+701
+01:00:42,559 --> 01:00:50,640
+If you've ever played by biology or even looked at biology, there's so many exceptions and so many hacks in the biological systems.
+
+702
+01:00:50,640 --> 01:00:51,240
+Yes.
+
+703
+01:00:51,359 --> 01:00:51,920
+Oh boy.
+
+704
+01:00:51,920 --> 01:00:52,640
+So, yeah.
+
+705
+01:00:52,640 --> 01:01:04,240
+Uh it would be amazing if we could have a thing that could really integrate all known scientific knowledge with data and try to synthesize sort of new models and and new things.
+
+706
+01:01:04,240 --> 01:01:11,880
+I think what you're saying is that AI can be an unlock here to some extent because the the models are so peacemeal.
+
+707
+01:01:12,319 --> 01:01:14,799
+They necessarily peace meal.
+
+708
+01:01:14,799 --> 01:01:28,480
+And so that being able to assemble the jigsaw puzzle, not to mix metaphors, but to assemble like a really this jigsaw puzzle um having just scale and capacity actually helps a lot.
+
+709
+01:01:28,480 --> 01:01:28,880
+>> That's right.
+
+710
+01:01:28,880 --> 01:01:40,120
+The one things that these AIs have is somehow you know humans even I'm pretty well right I think but it's just difficult for me to kind of integrate across the n squ different my
+
+711
+01:01:40,400 --> 01:01:49,040
+n is the number of papers I've read in the life it's pretty big and it's just difficult for me to even do that n squ thing but somehow there's just so much data in
+
+712
+01:01:49,040 --> 01:01:59,119
+those billions and billions of parameters and you can also give it access to read pdfs that it can somehow start to pull things together that people wouldn't do it.
+
+713
+01:01:59,119 --> 01:02:02,960
+So that's again I'm starting to see little indications of that inside of ERA.
+
+714
+01:02:02,960 --> 01:02:05,080
+I'm not claiming that's what ERA does today.
+
+715
+01:02:05,520 --> 01:02:08,240
+But yeah, that that's sort of my hope of where this is going to go.
+
+716
+01:02:08,240 --> 01:02:14,520
+>> I think I've heard a lot of people suggest something like the the route to intelligence is to combine LLMs with some form of search.
+
+717
+01:02:14,559 --> 01:02:18,000
+So it's actually amazingly like ERA doing that, right?
+
+718
+01:02:18,000 --> 01:02:25,760
+Something which you know is a maybe a a very a very strong database lookup with a a good search algorithm is one way.
+
+719
+01:02:25,760 --> 01:02:29,119
+And of course, I mean, there was the whole I mean, people still do, I guess, the whole rag thing,
+
+720
+01:02:29,119 --> 01:02:29,959
+of course.
+
+721
+01:02:30,079 --> 01:02:39,959
+Um, and if you think about it, Google itself, you know, the 10 blue links things, >> it was a or is a a form of AI even before we had lenses,
+
+722
+01:02:40,079 --> 01:02:40,319
+right?
+
+723
+01:02:40,319 --> 01:02:45,320
+Because it was like you can you could cast yourself back to whatever 2010 or 2015.
+
+724
+01:02:45,520 --> 01:02:49,680
+You could ask Google about literally anything and it will tell you stuff, right?
+
+725
+01:02:49,680 --> 01:02:51,280
+And so, >> surprisingly well, actually.
+
+726
+01:02:51,280 --> 01:02:52,400
+>> Yeah, surprisingly well.
+
+727
+01:02:52,400 --> 01:02:55,959
+because somebody on the internet has written about it probably.
+
+728
+01:02:56,319 --> 01:03:03,440
+So if you can match that >> in fact that was one of the reasons why I wanted to come to Google is just that was such an was such an amazing thing right >> I wonder
+
+729
+01:03:03,440 --> 01:03:09,000
+how much of our audience did a search pre Google and just know how bad that experience was.
+
+730
+01:03:09,200 --> 01:03:19,800
+Yeah, I remember 1998 I think I think when Google like I was using Alt Vista and like I I don't know Google had just gotten released and I used it and I just start sorry
+
+731
+01:03:19,839 --> 01:03:26,559
+a digital I just I just dropped just like a like hot potato or something and started immediately using Google.
+
+732
+01:03:26,559 --> 01:03:36,160
+No, it's so that is sort of a form of AI and so yes it might be uh yeah it could be that just having access to all of that and sort of keeping it
+
+733
+01:03:36,160 --> 01:03:48,079
+in mind at the same time >> that model of sort of scientific discovery in as much as it pans out is kind of comforting too because it is reductionist so that you can look at
+
+734
+01:03:48,079 --> 01:03:49,839
+the individual parts and understand them.
+
+735
+01:03:49,839 --> 01:04:03,320
+So it found the exact things to assemble, but they're all actually maybe fundamentally things that people have invented or or it's done iterations on and and so all those little pieces are individually understandable
+
+736
+01:04:03,359 --> 01:04:06,960
+and then you can also put them together into a coherent picture.
+
+737
+01:04:06,960 --> 01:04:15,520
+I think for a lot of problems like biology or climate science, I don't think we would trust the answer unless it was in that shape.
+
+738
+01:04:15,520 --> 01:04:15,920
+Yeah.
+
+739
+01:04:15,920 --> 01:04:19,440
+>> Because if there was some giant blackbox model that said, "Oh, this is how a cell works."
+
+740
+01:04:19,440 --> 01:04:21,839
+It's like, do I believe it?
+
+741
+01:04:21,839 --> 01:04:24,720
+I mean, I don't know if I believe it because I can't examine it.
+
+742
+01:04:24,720 --> 01:04:30,559
+So, >> but I mean to to argue against it though, like if it if it works really well, >> but you'd have to gather you'd have to I mean,
+
+743
+01:04:30,559 --> 01:04:35,959
+you have to test it obviously, but a but a statistical model, you have again it has to extrapolate.
+
+744
+01:04:36,079 --> 01:04:36,720
+Yeah.
+
+745
+01:04:36,720 --> 01:04:36,960
+>> Yeah.
+
+746
+01:04:36,960 --> 01:04:42,640
+And it has to extrapolate to the extreme or the sort of the the black swan events.
+
+747
+01:04:42,640 --> 01:04:43,440
+>> That That's right.
+
+748
+01:04:43,440 --> 01:04:44,480
+And so it's very hard.
+
+749
+01:04:44,480 --> 01:04:48,199
+This is why things like self-driving cars are very very it's a very difficult problem.
+
+750
+01:04:48,400 --> 01:04:49,880
+It's all corner cases.
+
+751
+01:04:49,920 --> 01:04:52,160
+Yeah, >> it's kind of amazing how well they've done.
+
+752
+01:04:52,160 --> 01:05:02,559
+>> That's an interesting point thinking about like when you know coming from the world of physics where a model was usually a single equation or a small number of equations which uniquely define a system
+
+753
+01:05:02,559 --> 01:05:09,880
+and everything about it and you just crank you just find a solution to the system and you you now know everything you need to know.
+
+754
+01:05:10,000 --> 01:05:21,280
+And I think something like alpha fold was kind of a shift for a lot of people where before they thought oh protein folding is you know problem where you just if we find the
+
+755
+01:05:21,280 --> 01:05:32,799
+right force field and we have the right computational engine we will solve protein folding >> and the thought of even really solving it in a datadriven way was only appeared a few years before you
+
+756
+01:05:32,799 --> 01:05:47,080
+know alphafold uh alpha fold one came out and it's interesting that I It's sort of forced the new AI modeling has I think forced people to re evaluate almost what is science because alphafold
+
+757
+01:05:47,200 --> 01:05:50,360
+is and similar models are incredibly powerful.
+
+758
+01:05:50,559 --> 01:06:02,640
+There's a lot of things that they've opened up as tools but at their core they often times don't give intuition in nearly the same way that let's say the physi that most physicists historically
+
+759
+01:06:02,640 --> 01:06:03,719
+would have wanted.
+
+760
+01:06:04,000 --> 01:06:08,400
+And so I guess it's sort of there's this old saying all models are wrong some are useful.
+
+761
+01:06:08,400 --> 01:06:10,720
+Yes, >> box said that.
+
+762
+01:06:10,720 --> 01:06:10,880
+>> Yeah.
+
+763
+01:06:10,880 --> 01:06:11,480
+Yeah.
+
+764
+01:06:11,599 --> 01:06:20,040
+When do you find the datadriven models to be sufficient and when do you want sort of like something which is interpretable that humans can actually understand?
+
+765
+01:06:20,079 --> 01:06:23,119
+>> I think it boils down to almost like the difference between weather and climate.
+
+766
+01:06:23,119 --> 01:06:25,159
+if you're in a datariich regime
+
+767
+01:06:26,400 --> 01:06:29,480
+>> um like weather or even proteins because of PTB
+
+768
+01:06:30,559 --> 01:06:41,039
+u you can feel oh yes in other words I' I've got enough data to kind of cover and so a statistical model like alpha fold do and so in fact a lot of people
+
+769
+01:06:41,039 --> 01:06:50,960
+happily use alpha I you know I think it's really revolutionized my understanding I'm not a biochemist but people seem to love it and the and the and one amazing thing they did is they
+
+770
+01:06:50,960 --> 01:06:57,039
+exhaustively they just just ran it on all PDB and and published it which is just really really cool.
+
+771
+01:06:57,039 --> 01:06:58,919
+>> It's like six billion protein producers.
+
+772
+01:06:59,119 --> 01:07:01,680
+So the vast majority are actually quite accurate.
+
+773
+01:07:01,680 --> 01:07:02,079
+Yeah.
+
+774
+01:07:02,079 --> 01:07:02,240
+>> Yeah.
+
+775
+01:07:02,240 --> 01:07:03,280
+So that's just amazing.
+
+776
+01:07:03,280 --> 01:07:06,160
+So but it feels closed if you know what I mean.
+
+777
+01:07:06,160 --> 01:07:14,679
+>> But when it's like climate and it's open and it's non-stationary or you have to make these big extrapolations, you have to be much more cautious.
+
+778
+01:07:15,440 --> 01:07:26,000
+uh or maybe biology again may and there's probably there may be parts of biology like oh there was this virtual cell challenge from the Ark Institute >> that had a funny result >> uh I I
+
+779
+01:07:26,000 --> 01:07:36,480
+I know that people were there may have been some overfitting for at least that would say more sorry >> or um I guess maybe at a high level I think the simple baselines for >> work very
+
+780
+01:07:36,480 --> 01:07:45,039
+very well things yeah yeah just like >> one of one of the classic things in whenever you do biology is just always start with a simple baseline maybe this is probably just good ML in
+
+781
+01:07:45,039 --> 01:07:55,599
+general analy yeah understand your simplest case and in biology there are many problems where they're extremely resistant to anything beyond the simple baseline even if you have a lot of data >> that that's right
+
+782
+01:07:55,599 --> 01:08:05,200
+and in fact I tell people the same thing I said always just just fit linear regression just fit >> just do it >> just do it just do linear >> or SVMs I mean SVMs are are
+
+783
+01:08:05,200 --> 01:08:16,640
+just a different uh >> different form of >> linear regression yes so when do you need the more process modely thing I think it's just when you >> when you have I mean sort of climate uh
+
+784
+01:08:16,640 --> 01:08:25,440
+is on one end and I don't know uh weather maybe on the other end maybe that may be too extreme but I think just where are you on the on the data richness thing when
+
+785
+01:08:25,440 --> 01:08:35,359
+do you when can you feel like oh no I really have a closed I really have a closed problem and um I think I can actually cover it >> yeah closed problem that you data
+
+786
+01:08:35,359 --> 01:08:46,239
+fully covers is yeah I think that that makes a lot of sense in what I've seen as well >> yeah I think one thing I'm kind of curious about is when you're working on climate
+
+787
+01:08:46,239 --> 01:08:56,799
+modeling, what are the you you talked about contrails, um you've talked about I guess CO2 um predictions, what are the the the broad things you're trying to accomplish?
+
+788
+01:08:56,799 --> 01:09:08,640
+So, one of them is I guess making up inter like making interventions and the other one might be uh making predictions for things like insurance or um like how do you help like adjust
+
+789
+01:09:08,640 --> 01:09:11,359
+for some sort of climate change or like Yeah.
+
+790
+01:09:11,359 --> 01:09:16,000
+What are the like principal goals I guess for you specifically or the community at large?
+
+791
+01:09:16,000 --> 01:09:19,640
+I think you you know just like any community there's probably many different goals.
+
+792
+01:09:20,159 --> 01:09:24,439
+For me I'm or and my team we're very very interested in interventions.
+
+793
+01:09:25,040 --> 01:09:31,120
+Um um so like which ones are uh possible at at at relative cost.
+
+794
+01:09:31,120 --> 01:09:41,359
+I mean contrails was kind of amazing because it turns out that the intervention is quite low cost and we um and also one amazing thing about contrails is they are local unlike things like
+
+795
+01:09:41,359 --> 01:09:52,520
+CO2 because so if a country decides to fix contrails over itself it actually improves its I mean it it has global effects but it mostly improves the the climate a little bit over themselves.
+
+796
+01:09:52,560 --> 01:09:53,920
+So they they like that.
+
+797
+01:09:53,920 --> 01:09:59,120
+>> I I guess though if you are in a cold climate and you want to warm it up this is now your own you could own >> Yeah.
+
+798
+01:09:59,120 --> 01:10:01,960
+It it turns out that it's a little bit asymmetric.
+
+799
+01:10:02,080 --> 01:10:05,960
+The warming is constant essentially and global.
+
+800
+01:10:06,080 --> 01:10:11,080
+The cooling only happens when you're sort of at a good the sun is at a good angle over you.
+
+801
+01:10:11,280 --> 01:10:19,640
+So it's very rare that the uncertainty there are contrails that where are uncertainty bounds in terms of the warming.
+
+802
+01:10:19,760 --> 01:10:29,120
+There many many contrails mostly at night of course where the where where it's it's like largely warming and we're we're very sure in terms of like two sigma uh there's very not very many
+
+803
+01:10:29,120 --> 01:10:39,280
+contrails where you say oh I know for sure that it's cooling and I want more of them like like so only over sort of the poles uh in polar summer do you know that
+
+804
+01:10:39,280 --> 01:10:50,320
+the contrails are cooling and therefore if you got rid of them they would warm up but there essentially no flights over Antarctica and not that many over over the >> polesm uh in the summer.
+
+805
+01:10:50,320 --> 01:10:55,040
+So >> So no one's gonna no one who lives in a cold climate is going to use this maliciously.
+
+806
+01:10:55,040 --> 01:11:03,799
+>> Well uh yes in that uh in that well they wouldn't know for sure whether it was warming or cooling and so they would do stuff and they so mostly we just sort of ignore
+
+807
+01:11:04,000 --> 01:11:06,880
+we don't recommend uh that people fly those.
+
+808
+01:11:06,880 --> 01:11:09,560
+>> You also brought up a interesting point about the economics.
+
+809
+01:11:09,760 --> 01:11:20,640
+I mean a lot of uh there I think was a lot of resistance historically about certain you know to climate certain climate change interventions which have in some sense the market has just taken
+
+810
+01:11:20,640 --> 01:11:29,960
+over like at this point unambiguously like renewables and batteries are just almost universally unamiguously just better than alternatives >> for for for
+
+811
+01:11:31,440 --> 01:11:40,719
+non-mobile I mean you mobile I mean that's a really good point yeah yeah like planes we we do not have a solution to >> correct I mean there are some battery powered planes,
+
+812
+01:11:40,719 --> 01:11:43,520
+but they're very small and have to go very limited range.
+
+813
+01:11:43,520 --> 01:11:51,679
+>> They probably will never actually be uh >> it's hard to imagine the physics would be very very unless we came up with something like nuclear batteries would be kind of amazing but I don't we
+
+814
+01:11:51,679 --> 01:11:58,960
+don't know how to do that >> or even if we did I think the the risk of like people would be too afraid of a nuclear battery going wrong or something.
+
+815
+01:11:58,960 --> 01:11:59,600
+>> Oh yeah.
+
+816
+01:11:59,600 --> 01:12:00,000
+Yeah.
+
+817
+01:12:00,000 --> 01:12:02,320
+Since we don't know what they are, we don't know what the risk.
+
+818
+01:12:02,320 --> 01:12:03,120
+I guess we don't have the risk.
+
+819
+01:12:03,120 --> 01:12:03,440
+Yeah.
+
+820
+01:12:03,440 --> 01:12:03,600
+>> Yeah.
+
+821
+01:12:03,600 --> 01:12:04,640
+So we don't know.
+
+822
+01:12:04,640 --> 01:12:10,960
+So yeah, that's that's the problem with I I talk about I have given talks about climate change and I talk about the p the pie chart of badness,
+
+823
+01:12:10,960 --> 01:12:16,480
+pie chart of sadness, >> which is there's no one silver bullet for climate change, right?
+
+824
+01:12:16,480 --> 01:12:21,280
+There's so many different things that contribute greenhouse gases just from across our economy.
+
+825
+01:12:21,280 --> 01:12:24,560
+So they sort of all have to be fixed or many many of them have to be fixed.
+
+826
+01:12:24,560 --> 01:12:26,320
+So there's no one single thing.
+
+827
+01:12:26,320 --> 01:12:27,679
+I mean I've worked on fusion.
+
+828
+01:12:27,679 --> 01:12:34,520
+Fusion is cool and it might actually knock a lot of them out if it's cheap enough, which we don't know cuz we don't know if it'll work yet.
+
+829
+01:12:34,719 --> 01:12:42,040
+>> I mean, fusion is one of those interesting things where the joke was always fusion is 30 years away, but I think it's actually now less than 30 years away,
+
+830
+01:12:42,080 --> 01:12:42,560
+maybe.
+
+831
+01:12:42,560 --> 01:12:42,800
+>> Yeah.
+
+832
+01:12:42,800 --> 01:12:52,480
+No, I think there's a there's a def definite probability that that someone will make uh commercially relevant fusion even by the end of this decade.
+
+833
+01:12:52,480 --> 01:12:55,600
+So, I think it's like three years away, not not 30 years away.
+
+834
+01:12:55,600 --> 01:12:56,320
+>> This is very real.
+
+835
+01:12:56,320 --> 01:13:03,280
+Interestingly enough, I think a lot of that um I'm going to now just stump or uh advertise some of our other episodes,
+
+836
+01:13:03,280 --> 01:13:05,280
+but a lot of it actually comes down to material science.
+
+837
+01:13:05,280 --> 01:13:09,160
+Um interesting enough in that >> Well, I'm Oh, super.
+
+838
+01:13:09,199 --> 01:13:09,360
+Sure.
+
+839
+01:13:09,360 --> 01:13:09,600
+Sure.
+
+840
+01:13:09,600 --> 01:13:10,080
+Sure.
+
+841
+01:13:10,080 --> 01:13:10,640
+Well, yes.
+
+842
+01:13:10,640 --> 01:13:12,640
+Sorry, we could talk about fusion if you >> Yeah.
+
+843
+01:13:12,640 --> 01:13:12,960
+Yeah.
+
+844
+01:13:12,960 --> 01:13:14,159
+There was actually two two things.
+
+845
+01:13:14,159 --> 01:13:14,800
+One is fusion.
+
+846
+01:13:14,800 --> 01:13:17,760
+The other is um better control systems, which I think is actually >> Yes.
+
+847
+01:13:17,760 --> 01:13:27,520
+And in fact uh uh Google DeepMine has been working on uh uh control systems for Tokamax uh uh to make sure they don't uh uh essentially go unstable and go disrupt.
+
+848
+01:13:27,520 --> 01:13:28,320
+Yeah, that's right.
+
+849
+01:13:28,320 --> 01:13:31,679
+>> Disruptions are are quite interesting to themselves.
+
+850
+01:13:31,679 --> 01:13:31,920
+Yes.
+
+851
+01:13:31,920 --> 01:13:32,159
+>> Yeah.
+
+852
+01:13:32,159 --> 01:13:41,760
+It's basically the entire the all energy in the the tokamac columnates into one little beam and then >> and it hits your vacuum chamber and you're very very sad.
+
+853
+01:13:41,760 --> 01:13:42,600
+>> Very sad.
+
+854
+01:13:43,120 --> 01:13:43,440
+>> Yeah.
+
+855
+01:13:43,440 --> 01:13:43,679
+Yeah.
+
+856
+01:13:43,679 --> 01:13:52,159
+I think people believe that eater could be could turned on after $30 billion disrupt and then basically have a 30 billion $30 billion brick or something.
+
+857
+01:13:52,159 --> 01:13:54,159
+>> Oh yeah, I guess I guess you could try to patch it.
+
+858
+01:13:54,159 --> 01:14:04,960
+I remember um >> uh working uh we we uh again uh before LM we worked uh with uh a fusion company called TAE and I was in their control room and yes it was kind
+
+859
+01:14:04,960 --> 01:14:05,360
+of sad.
+
+860
+01:14:05,360 --> 01:14:06,159
+You have to be very careful.
+
+861
+01:14:06,159 --> 01:14:18,080
+we were making systems to recommend new experiments and uh they were very very uh skeptical and jaundice which way they should because because I've even been there even under human control it's like uh
+
+862
+01:14:18,080 --> 01:14:25,960
+they were doing some experiment then you hear this big bang and it was like oh no and then it's like you know then the apparatus is down for two weeks as they patch some
+
+863
+01:14:26,239 --> 01:14:35,760
+>> you were there during a disruption >> oh no this is this is sorry they have filled reverse configuration >> oh okay which has its own I mean things you know there's some arc So,
+
+864
+01:14:35,760 --> 01:14:36,560
+so what is that?
+
+865
+01:14:36,560 --> 01:14:37,679
+Sorry, I'm not familiar.
+
+866
+01:14:37,679 --> 01:14:39,720
+>> Oh, oh, what's the field reverse configuration?
+
+867
+01:14:39,840 --> 01:14:44,000
+Well, it turns out toamax are not although they're perhaps the most studied form of plasma.
+
+868
+01:14:44,000 --> 01:14:49,480
+There's many different kinds of architectures, essentially ways to try to stabilize and and compress plasmas.
+
+869
+01:14:49,760 --> 01:14:59,720
+Uh there was a a shape essentially, it's essentially a self-contained football plasma called a field reversive configuration where essentially the magnetic field inside and outside are opposite.
+
+870
+01:14:59,760 --> 01:15:01,799
+So, they're separated by something called a separatrix.
+
+871
+01:15:02,239 --> 01:15:07,480
+And uh that is sort of in theory unstable but in practice stable.
+
+872
+01:15:07,760 --> 01:15:17,400
+Uh like for example when you run magnet hydrodnamics MHD code uh it it's unstable under that assumption but that's that's an assumption that's not the way the real world works.
+
+873
+01:15:17,679 --> 01:15:29,880
+And so yeah it was kind of disfavored for many years but um uh TA and other people I think Helion have have uh F FRC's uh because they are actually relatively robust.
+
+874
+01:15:30,159 --> 01:15:38,800
+uh you can actually knock them against walls and they'll they'll still they stay stable and yes, but you can still get discharges and things that punch holes in your vacuum chamber which is kind
+
+875
+01:15:38,800 --> 01:15:39,480
+of unfortunate.
+
+876
+01:15:39,840 --> 01:15:44,360
+>> For clarification, so you have these fusion reactors.
+
+877
+01:15:44,800 --> 01:15:49,160
+They are or trying to be reactors maybe and apparatuses.
+
+878
+01:15:49,440 --> 01:15:52,920
+Appares and you create a plasma.
+
+879
+01:15:53,360 --> 01:15:56,960
+The plasma is magnetically charged >> or confined.
+
+880
+01:15:56,960 --> 01:15:57,199
+Yes.
+
+881
+01:15:57,199 --> 01:15:57,840
+>> Or confined.
+
+882
+01:15:57,840 --> 01:15:59,760
+So it's confined by a magnetic field.
+
+883
+01:15:59,760 --> 01:16:11,319
+So you have some sort of magnetic system that is tunable by a computer and then the computer tries to kind of maintain the confinement.
+
+884
+01:16:11,440 --> 01:16:14,600
+>> Well F FRC's kind of once you make them they're sort of sustained.
+
+885
+01:16:14,800 --> 01:16:21,679
+There's different ways of of trying to make sure you Okay, so all of fusion boils down to something called the loss in criteria.
+
+886
+01:16:21,679 --> 01:16:25,199
+There's essentially uh and it's it explains why fusion is hard.
+
+887
+01:16:25,199 --> 01:16:31,360
+Essentially, you can just very easily in on the back of an envelope just show that the density, the temperature,
+
+888
+01:16:31,360 --> 01:16:34,080
+and essentially the energy loss, it's called the confinement time.
+
+889
+01:16:34,080 --> 01:16:39,600
+It's one over the amount of time it takes for the energy to decay away uh 1 over e in a plasma.
+
+890
+01:16:39,600 --> 01:16:47,120
+So the the product of those three numbers has to be bigger than some constant and then you can get fusion and if you don't then you don't.
+
+891
+01:16:47,120 --> 01:16:56,600
+And that's explains the the fact that it's a product of three numbers explains why fusion is so hard because every approach has an Achilles heel where one of those numbers is not very big
+
+892
+01:16:56,800 --> 01:17:00,040
+and then they try to desperately make that be higher.
+
+893
+01:17:00,400 --> 01:17:02,080
+>> Uh and every approach is different.
+
+894
+01:17:02,080 --> 01:17:10,560
+Every approach to fusion is kind of different and a lot of you have to be a bit skeptical when there there's all these sort of breathless news things about fusion because it'll say you
+
+895
+01:17:10,560 --> 01:17:19,840
+know now confinement time is start like oh stable for x minutes or whatever and it's talking about like one of the three numbers but you have to have all three numbers before it you
+
+896
+01:17:19,840 --> 01:17:20,719
+can get fusion.
+
+897
+01:17:20,719 --> 01:17:28,640
+I I think it the whole field is is making a lot of progress and it's very exciting but you do have to you have to be a little bit cautious about the breathless news
+
+898
+01:17:28,640 --> 01:17:30,400
+articles that only talk about one number.
+
+899
+01:17:30,400 --> 01:17:32,960
+So what is the computational part of that?
+
+900
+01:17:32,960 --> 01:17:37,240
+>> Oh, it unfortunately for better for worse it depends on the approach.
+
+901
+01:17:37,440 --> 01:17:49,920
+So for tokamax as Brendan said um it's uh that there's this it's mostly stable except that there's occasionally this instability that takes all the energy and max smacks it into one place and so
+
+902
+01:17:49,920 --> 01:17:51,920
+you have to sort of keep everything sort of under control.
+
+903
+01:17:51,920 --> 01:17:53,319
+So it's a control system.
+
+904
+01:17:53,440 --> 01:17:57,400
+Uh F FRC's themselves have very simple instabilities.
+
+905
+01:17:57,840 --> 01:18:00,040
+So, for example, they have what they call a Z instability.
+
+906
+01:18:00,159 --> 01:18:01,120
+So, it's fine.
+
+907
+01:18:01,120 --> 01:18:01,679
+It's stable.
+
+908
+01:18:01,679 --> 01:18:02,560
+It'll just wobble.
+
+909
+01:18:02,560 --> 01:18:10,800
+It'll literally wobble back and forth, but you just make what they call a PID controller that just keeps the football in the center of the reactor and and things are fine.
+
+910
+01:18:10,800 --> 01:18:12,800
+>> And it does that by adjusting the magnetic field.
+
+911
+01:18:12,800 --> 01:18:12,960
+>> Yeah.
+
+912
+01:18:12,960 --> 01:18:15,040
+It sort of it actually adjusts, I think, the electric field.
+
+913
+01:18:15,040 --> 01:18:17,720
+It sort of by sort of knocks it back and forth.
+
+914
+01:18:17,840 --> 01:18:23,400
+The issue that people have is really depends on which which sort of plasma architecture they're deciding to use.
+
+915
+01:18:23,840 --> 01:18:35,440
+Climate is, you know, sort of political because of economics basically probably mostly maybe other stuff, but the the the economics of it,
+
+916
+01:18:35,440 --> 01:18:47,679
+you know, you have to persuade people to to somehow spend more or you have to have a solution that it has like this happy coincidence where it's both economically better and and better for
+
+917
+01:18:47,679 --> 01:18:48,320
+the climate.
+
+918
+01:18:48,320 --> 01:18:49,040
+That that's hard.
+
+919
+01:18:49,040 --> 01:18:49,640
+>> Yeah.
+
+920
+01:18:50,000 --> 01:18:50,880
+In many cases, it's not.
+
+921
+01:18:50,880 --> 01:19:03,280
+I mean many cases it has hasn't been earned but >> well you think about like okay uh predicting even weather right you can prep and you could see how that could be economically beneficial so
+
+922
+01:19:03,280 --> 01:19:14,480
+what kind of work are you doing with interventions and how does that kind of um interact with economics like it sounds like the contrails one I did it in a an analysis and said
+
+923
+01:19:14,480 --> 01:19:22,440
+actually this is great because it it's very low economic impact but high value >> that's right so if you try I think there's there's sort of energy intervention.
+
+924
+01:19:22,480 --> 01:19:26,279
+So you have to be you have to sort of compete with existing forms of energy.
+
+925
+01:19:26,560 --> 01:19:36,719
+Um and that that's not trivial unless there's a co- benefit or there's some there's some sort of clever um you know just co- benefit like uh this again is highly speculative.
+
+926
+01:19:36,719 --> 01:19:37,440
+It wasn't our work.
+
+927
+01:19:37,440 --> 01:19:40,239
+There was a startup that was I don't know if you saw the news.
+
+928
+01:19:40,239 --> 01:19:51,840
+It was last year, I think, where someone figured out if you inject um mercury into a a fusion reactor that the neutron flux can actually transmute the mercury into gold and then you can
+
+929
+01:19:51,840 --> 01:19:53,280
+then you can sell the gold.
+
+930
+01:19:53,280 --> 01:19:54,719
+Uh which I thought was very clever.
+
+931
+01:19:54,719 --> 01:20:00,040
+It might not work, but >> you know, as a physicist, the one thing I want out of a fusion reactor is is helium,
+
+932
+01:20:00,320 --> 01:20:01,199
+but that's a different story.
+
+933
+01:20:01,199 --> 01:20:01,520
+Sorry.
+
+934
+01:20:01,520 --> 01:20:03,520
+>> Oh, you Oh, helium 3.
+
+935
+01:20:03,520 --> 01:20:09,120
+Well, I mean, helium 4 is kind of boring, although it's it is getting because the strategic reserve has been shut down.
+
+936
+01:20:09,120 --> 01:20:10,080
+There's less of it.
+
+937
+01:20:10,080 --> 01:20:10,680
+Yes.
+
+938
+01:20:10,719 --> 01:20:12,920
+>> Uh and of course I want helium 3.
+
+939
+01:20:13,840 --> 01:20:19,040
+Well, not even just a fuse, just to make dilution refrigerators for >> quantis or so.
+
+940
+01:20:19,040 --> 01:20:19,440
+Yeah.
+
+941
+01:20:19,440 --> 01:20:23,840
+So much so much technology we think about actually just goes out the window if we run out of helium.
+
+942
+01:20:23,840 --> 01:20:24,239
+>> That's true.
+
+943
+01:20:24,239 --> 01:20:26,759
+>> No one's thinking about Sorry, that's like a complete aside.
+
+944
+01:20:27,280 --> 01:20:27,760
+>> Uh yes.
+
+945
+01:20:27,760 --> 01:20:33,080
+The fact that that the US had a helium strategic helium was to reserve was for our very important blimp fleet.
+
+946
+01:20:33,120 --> 01:20:33,720
+>> Yeah.
+
+947
+01:20:34,159 --> 01:20:36,000
+>> But but they kept it for decades anyway.
+
+948
+01:20:36,000 --> 01:20:36,719
+So that was nice.
+
+949
+01:20:36,719 --> 01:20:37,880
+But then we stopped.
+
+950
+01:20:38,080 --> 01:20:38,800
+We got rid of it all.
+
+951
+01:20:38,800 --> 01:20:40,040
+It all went up in the air.
+
+952
+01:20:40,320 --> 01:20:40,560
+>> Yes.
+
+953
+01:20:40,560 --> 01:20:43,840
+In in balloons and stuff >> or out of natural gas wells.
+
+954
+01:20:43,840 --> 01:20:44,320
+Yeah.
+
+955
+01:20:44,320 --> 01:20:46,080
+>> Um sorry, now we're talking about helium.
+
+956
+01:20:46,080 --> 01:20:46,680
+>> Yeah.
+
+957
+01:20:46,800 --> 01:20:47,040
+No.
+
+958
+01:20:47,040 --> 01:20:48,520
+So, so interventions.
+
+959
+01:20:48,560 --> 01:20:51,440
+What are some of the most exciting interesting ones?
+
+960
+01:20:51,440 --> 01:20:52,800
+>> Well, I'm very excited by fusion.
+
+961
+01:20:52,800 --> 01:20:53,920
+I mean, I don't know if that's intervention.
+
+962
+01:20:53,920 --> 01:21:02,360
+that's sort of a a source of energy cuz if we can make if we can make it work and we can make it be sort of low enough capital cost that that will actually
+
+963
+01:21:02,880 --> 01:21:15,199
+um uh help a lot because at least the current models are renewables are great ideally you'd like to electrify everything right which has problems because like you can't electrify flights but you can try to
+
+964
+01:21:15,199 --> 01:21:24,480
+electrify a lot of stuff you know they're EVs um you'd have to figure out how to electrify things like uh uh cement or steel Those are hard,
+
+965
+01:21:24,480 --> 01:21:32,159
+especially things like um making steel want reduction power anyway to essentially uh you're adding carbon and you're reducing iron ore.
+
+966
+01:21:32,159 --> 01:21:36,159
+Um so there's a lot of sort of things that are difficult about electrifying everything.
+
+967
+01:21:36,159 --> 01:21:47,040
+But if you could electrify everything then then the amount of electricity required would grow by a factor of five and you could try to grow um renewables renewables plus battery.
+
+968
+01:21:47,040 --> 01:21:56,960
+and trying to squeeze all of it out, it starts getting ever more expensive because you just need ever more you need like a huge number of batteries to sort of cover the the last,
+
+969
+01:21:56,960 --> 01:21:59,880
+you know, few percent or even, you know, 10 or 20%.
+
+970
+01:22:00,000 --> 01:22:05,280
+So, we do need some sort of power that that uh can cover the last 20%, something that's, you know,
+
+971
+01:22:05,280 --> 01:22:05,920
+base load.
+
+972
+01:22:05,920 --> 01:22:09,120
+So, uh fusion might be a a thing for that.
+
+973
+01:22:09,120 --> 01:22:11,000
+Um so, that's super exciting.
+
+974
+01:22:11,120 --> 01:22:15,920
+Again, there there's no one sort of silver bullet that can sort of cover all the cases.
+
+975
+01:22:15,920 --> 01:22:23,520
+So I'm happy to sort of talk about any specific case, but it's sort of like >> the world the world is a very complicated place and the the global economy is a very complicated place.
+
+976
+01:22:23,520 --> 01:22:27,199
+So it's super hard to sort of talk about sort of interventions in general.
+
+977
+01:22:27,199 --> 01:22:27,600
+Yeah.
+
+978
+01:22:27,600 --> 01:22:36,239
+>> Maybe instead of interventions, one thing I'm curious about is how does this uh make affect decisions and to for example like what do we build?
+
+979
+01:22:36,239 --> 01:22:37,199
+How do we build?
+
+980
+01:22:37,199 --> 01:22:39,280
+Um I think you're from LA, right?
+
+981
+01:22:39,280 --> 01:22:41,880
+Or at least you >> Well, I spent 11 years.
+
+982
+01:22:42,480 --> 01:22:42,880
+Okay.
+
+983
+01:22:42,880 --> 01:22:44,800
+So yeah, you spent a lot of your life in LA.
+
+984
+01:22:44,800 --> 01:22:48,239
+I mean, LA just basically large parts of it just burned down.
+
+985
+01:22:48,239 --> 01:22:51,440
+Um, and maybe probably close to where you used to live.
+
+986
+01:22:51,440 --> 01:22:57,360
+Um, so the the, you know, this is something that I think a lot of people kind of saw coming.
+
+987
+01:22:57,360 --> 01:23:08,239
+Um, maybe partially due to regulatory issues, but partially due to other issues, you know, and we were completely unprepared and it seems like there is a lack of preparation about what to do next
+
+988
+01:23:08,239 --> 01:23:10,800
+or to sort of adjust for this.
+
+989
+01:23:10,800 --> 01:23:26,159
+And I mean have you worked on basically predicting like new risk assessments or you know suggestions of like what do we actually change to maybe harden you know society even that for what's coming
+
+990
+01:23:26,159 --> 01:23:29,920
+regardless of whether or not we're actually do something to make solve the underlying problem.
+
+991
+01:23:29,920 --> 01:23:30,560
+>> That's right.
+
+992
+01:23:30,560 --> 01:23:35,880
+So uh in fact there's a big effort at at Google into something called career crisis resilience.
+
+993
+01:23:36,239 --> 01:23:40,360
+And so we had a very uh fun project called fire fires.
+
+994
+01:23:40,639 --> 01:23:42,120
+I don't know if you know about this.
+
+995
+01:23:42,239 --> 01:23:53,040
+Um so it turns out that um for wildfires a lot of these wildfires you could c if you if you only caught them early enough u it's very easy to put out a a
+
+996
+01:23:53,040 --> 01:23:58,440
+wildfire the size of this room but even if it's like an acre it gets much much harder.
+
+997
+01:23:58,480 --> 01:24:04,080
+And so and of course under certain circumstances they can grow you know exponentially from from the size of this room up to an acre.
+
+998
+01:24:04,080 --> 01:24:09,080
+So that might be hard to catch but they often sort of start small and spend a while.
+
+999
+01:24:09,199 --> 01:24:21,679
+So uh we figured out that oh if you had a global constellation of low earth orbit satellites that could uh detect in the midwave IR that which goes back to the black body essentially
+
+1000
+01:24:21,679 --> 01:24:23,160
+that's the temperature of fire.
+
+1001
+01:24:23,280 --> 01:24:27,560
+Uh they stand the fire stand out uh in the midwave IR.
+
+1002
+01:24:27,600 --> 01:24:35,679
+And so, uh, we designed, uh, a sensor that if you built, it depends on exactly what their orbits, but,
+
+1003
+01:24:35,679 --> 01:24:41,679
+you know, roughly 50 to 80 of them, you could actually find, um, fires about the size of this room,
+
+1004
+01:24:41,679 --> 01:24:46,600
+uh, uh, uh, about 5 m on a mount, maybe it's a bit larger than this room, 5 m on a side.
+
+1005
+01:24:46,960 --> 01:24:53,720
+um and anywhere on the planet and again depending on how many satellites you had within within like 15 to 20 minutes.
+
+1006
+01:24:53,760 --> 01:25:00,000
+You'd have to put you know a fair number up like you know 80 to get them within 15 minutes and then you could actually intervene.
+
+1007
+01:25:00,000 --> 01:25:07,080
+You could decide not to if you wanted to you know have the fire burn fuel and you thought it was safe but if it was going to blow up to something unsafe.
+
+1008
+01:25:07,360 --> 01:25:15,840
+So you worked with a now a nonprofit called Earth Fire Alliance that we're part of and so they're starting to we've launched one satellite which is a prototype.
+
+1009
+01:25:15,840 --> 01:25:20,080
+We've worked with a company named Muon Space to actually sort of make the satellite.
+
+1010
+01:25:20,080 --> 01:25:21,040
+So that's cool.
+
+1011
+01:25:21,040 --> 01:25:27,160
+We have wildfire boundary detection and we propagate that information out through Google.
+
+1012
+01:25:27,440 --> 01:25:37,840
+So uh we can actually sort of figure out from existing satellites and existing data feeds where the boundaries of fires are and then we sort of tell people through through their Android phones or
+
+1013
+01:25:37,840 --> 01:25:39,239
+through search about fires.
+
+1014
+01:25:39,600 --> 01:25:50,360
+Um we've worked with the uh US Forest Service on making new models for how fires propagate because again that goes back to these process-based models from the 70s by a person named Rothermell.
+
+1015
+01:25:50,400 --> 01:25:57,080
+So we've actually made a little neural network proxy model based on a new essentially to sort of be able to run it very very quickly.
+
+1016
+01:25:57,280 --> 01:26:00,040
+Uh so we worked with the forest service on that.
+
+1017
+01:26:00,080 --> 01:26:00,719
+Uh so yeah.
+
+1018
+01:26:00,719 --> 01:26:13,720
+Yeah, we're very very interested in trying to minimize because it turns out people might not realize the World Health Organization estimates that there are 300,000 excess deaths a year across the world from wildfire
+
+1019
+01:26:13,760 --> 01:26:14,239
+smoke.
+
+1020
+01:26:14,239 --> 01:26:14,400
+>> Yeah.
+
+1021
+01:26:14,400 --> 01:26:19,120
+I mean I remember um was it if it's been a few years since we had a really bad fire season.
+
+1022
+01:26:19,120 --> 01:26:28,639
+Maybe what four or five years ago there was this cloud of smoke which like crossed all of northern US and Canada and caused a lot of respiratory issues I think.
+
+1023
+01:26:28,639 --> 01:26:29,120
+Yeah.
+
+1024
+01:26:29,120 --> 01:26:29,360
+>> Yeah.
+
+1025
+01:26:29,360 --> 01:26:30,800
+And it's very hard to track.
+
+1026
+01:26:30,800 --> 01:26:35,319
+I mean, you have to get these you have to get the estimate these excess deaths from statistical means.
+
+1027
+01:26:35,679 --> 01:26:42,960
+>> But yeah, it's a very serious public health problem and also just very scary and burns people's houses down and it's terrible.
+
+1028
+01:26:42,960 --> 01:26:46,000
+>> My view is that climate change is sort of like a serious disease.
+
+1029
+01:26:46,000 --> 01:26:47,199
+Do do you treat the symptoms?
+
+1030
+01:26:47,199 --> 01:26:50,159
+I.e. do you adapt or do you try to attack the underlying thing?
+
+1031
+01:26:50,159 --> 01:26:53,440
+And the answer is well if it's serious enough both, >> right?
+
+1032
+01:26:53,440 --> 01:27:02,639
+And so yes, so we take sort of adaptation especially around climate resilience very seriously at Google and we try to give peopleformational tools to sort of help.
+
+1033
+01:27:02,639 --> 01:27:07,600
+That's part of the reason why we're working on weather uh and then sort of cyclone prediction and things.
+
+1034
+01:27:07,600 --> 01:27:09,040
+So it all actually hangs together.
+
+1035
+01:27:09,040 --> 01:27:10,159
+So it's more than just you're right.
+
+1036
+01:27:10,159 --> 01:27:11,280
+It's more than just interventions.
+
+1037
+01:27:11,280 --> 01:27:13,520
+It's uh climate resilience too.
+
+1038
+01:27:13,520 --> 01:27:13,679
+>> Yeah.
+
+1039
+01:27:13,679 --> 01:27:20,440
+Having lived through four or five fire seasons in the on the West Coast, they're they can be quite quite nasty.
+
+1040
+01:27:20,560 --> 01:27:28,560
+And it used to not be I mean I have a cabin up in the Sierra Nevada mountains and yeah it used to be oh you know summertime it's nice and then now it's like
+
+1041
+01:27:28,560 --> 01:27:32,920
+well not every year but yeah there's like you know winter, spring, summer and smoke.
+
+1042
+01:27:33,280 --> 01:27:33,520
+>> Yeah.
+
+1043
+01:27:33,520 --> 01:27:35,720
+Fire season you're just >> Yeah.
+
+1044
+01:27:36,080 --> 01:27:39,840
+>> I want to stay stay to the west of the fire line and >> Yes.
+
+1045
+01:27:39,840 --> 01:27:40,800
+And Yes.
+
+1046
+01:27:40,800 --> 01:27:47,960
+So that is another thing that uh I'm interested in and that Google's also very interested in is is climate uh resilience.
+
+1047
+01:27:48,159 --> 01:27:52,480
+Are these IR sensors small enough that they could hitch a ride in like a micro satellite grid?
+
+1048
+01:27:52,480 --> 01:27:59,480
+Like would it make sense to would it be almost cheaper just to hire I mean to to pay someone who's watching a constellation?
+
+1049
+01:27:59,920 --> 01:28:02,360
+Um >> Oh, they're not that small.
+
+1050
+01:28:02,800 --> 01:28:05,920
+The thing is you need um refrigeration because >> Oh, okay.
+
+1051
+01:28:05,920 --> 01:28:06,239
+Okay.
+
+1052
+01:28:06,239 --> 01:28:07,600
+>> because it's midwave IR.
+
+1053
+01:28:07,600 --> 01:28:09,640
+So, you have to you have to keep it cool.
+
+1054
+01:28:09,920 --> 01:28:12,239
+>> So, these would have to be their own special >> satellites.
+
+1055
+01:28:12,239 --> 01:28:13,280
+They're not super large.
+
+1056
+01:28:13,280 --> 01:28:14,080
+Okay.
+
+1057
+01:28:14,080 --> 01:28:21,040
+They're not like the, you know, the the satellites in in geocynchronous orbit are these giant monsters because of all the optics and who knows what.
+
+1058
+01:28:21,040 --> 01:28:27,960
+But um yeah, >> and they have, you know, they're basically just eye sensors with a resolution of 5x5.
+
+1059
+01:28:28,480 --> 01:28:38,239
+Uh, no, no, that's the other cute thing is the resolution is about 50 by 50 m, but you can use super resolution because it's essentially multisspectral and you sort of know where fires are
+
+1060
+01:28:38,239 --> 01:28:44,719
+and you have so yeah, there's a a fair sprinkling of AI on top of them to to reach that 5x5 meter.
+
+1061
+01:28:44,719 --> 01:28:45,040
+>> Yeah.
+
+1062
+01:28:45,040 --> 01:28:45,440
+Yeah.
+
+1063
+01:28:45,440 --> 01:28:50,000
+>> When you also have you have a convolution over the what you're reading out, right?
+
+1064
+01:28:50,000 --> 01:28:52,800
+As well >> the I forget the frame rate.
+
+1065
+01:28:52,800 --> 01:28:54,759
+Um, the satellite is moving.
+
+1066
+01:28:55,280 --> 01:28:58,239
+I don't remember what the point spread function is.
+
+1067
+01:28:58,239 --> 01:28:58,719
+I'm sorry.
+
+1068
+01:28:58,719 --> 01:29:01,360
+I don't uh but you're right.
+
+1069
+01:29:01,360 --> 01:29:07,280
+They do move, but I don't remember how fast they I don't remember how fast they uh this also has something called a broom sensor.
+
+1070
+01:29:07,280 --> 01:29:14,880
+So, there's this funny thing of trying to you kind of spread out the spectrum one way and there's also it's it's a somewhat complicated thing.
+
+1071
+01:29:14,880 --> 01:29:17,000
+It isn't just a like a a Polaroid.
+
+1072
+01:29:17,040 --> 01:29:19,160
+It's it's a complicated sensor.
+
+1073
+01:29:19,280 --> 01:29:19,760
+>> Yeah.
+
+1074
+01:29:19,760 --> 01:29:21,040
+Sort of switching gears a little bit.
+
+1075
+01:29:21,040 --> 01:29:25,520
+Um, you know, you've been at the intersection of AI and science for quite some time.
+
+1076
+01:29:25,520 --> 01:29:29,280
+I think you've sort of wound your way into and out of it back and forth.
+
+1077
+01:29:29,280 --> 01:29:31,720
+>> How do you see the field has evolved?
+
+1078
+01:29:31,760 --> 01:29:34,040
+Because I feel like it's evolving very quickly now.
+
+1079
+01:29:34,159 --> 01:29:43,840
+And like what are the sort of lessons that you've you've learned that you think the community has learned and how do you think this should change if you are a young scientist or young
+
+1080
+01:29:43,840 --> 01:29:44,440
+practitioner?
+
+1081
+01:29:44,560 --> 01:29:49,160
+How should this change what how you should approach you know the future?
+
+1082
+01:29:49,600 --> 01:29:54,920
+Well, I think there has been a phase change in the last 12 to 18 months.
+
+1083
+01:29:55,199 --> 01:30:05,880
+So, I mean a lot of what we used to do as I as I said was um uh build uh these specialized models to solve individual problems.
+
+1084
+01:30:06,000 --> 01:30:08,000
+And if you think that's your job, it's kind of fun.
+
+1085
+01:30:08,000 --> 01:30:09,760
+You you find a problem, you solve it.
+
+1086
+01:30:09,760 --> 01:30:11,440
+You find another problem, you solve it.
+
+1087
+01:30:11,440 --> 01:30:14,759
+>> But now we have these much more general AI things.
+
+1088
+01:30:14,880 --> 01:30:19,679
+And I think the whole AI for science community is kind of still feeling around.
+
+1089
+01:30:19,679 --> 01:30:29,040
+There's such the fact that they're working is so new that collectively we're not sure like what's the best thing to do or maybe there's no one best maybe there's a tool chain and I
+
+1090
+01:30:29,040 --> 01:30:37,720
+think I think we're all trying to figure out like what should we do >> and so there's a question of uh what should uh young scientists do?
+
+1091
+01:30:38,080 --> 01:30:50,639
+I think it would be I you know I I I have a son who's uh who just turned 21 and he's really into both sort of AI and coding and chemistry and I look
+
+1092
+01:30:50,639 --> 01:31:00,960
+at him I think he's doing the right thing because he's both learning a lot and trying to be a domain expert about RNA but he's also sort of using vibe coding and using all
+
+1093
+01:31:00,960 --> 01:31:01,440
+the tools.
+
+1094
+01:31:01,440 --> 01:31:08,320
+I think that's I think that's the right answer is is is because everyone's figuring it out still be a deep domain.
+
+1095
+01:31:08,320 --> 01:31:16,239
+I don't I don't think domain expertise is going away because it goes back to a lot of people who said it goes back to taste and trying to figure out how people get taste
+
+1096
+01:31:16,239 --> 01:31:18,480
+without doing all the the grunt work.
+
+1097
+01:31:18,480 --> 01:31:30,239
+That's an interesting open question but develop domain expertise but also try and play I would say with all the different tools that are available because it's not like oh yes we know what's going
+
+1098
+01:31:30,239 --> 01:31:43,520
+to happen and the smart old people are knowing what's like no we're experimenting too and so uh yeah so I would say uh definitely develop domain expertise and try to use these tools and
+
+1099
+01:31:43,520 --> 01:31:53,280
+try to solve uh big hard scientific problems as best you can there's still the huge open issue about what do you actually do about physical lab work that is not going away because you
+
+1100
+01:31:53,280 --> 01:31:58,239
+know experiments are the the ground truth and >> and a bottleneck >> and a bottleneck.
+
+1101
+01:31:58,239 --> 01:32:07,360
+I mean people are talking about a lab in the loop but that's still very very very open because how do you how you no one has I think as far as I know a
+
+1102
+01:32:07,360 --> 01:32:08,960
+general lab that does everything.
+
+1103
+01:32:08,960 --> 01:32:13,199
+There's a lot of very specific you know labs that are controllable.
+
+1104
+01:32:13,199 --> 01:32:16,600
+>> Um so I think it's just we've gone through this phase change.
+
+1105
+01:32:16,880 --> 01:32:18,440
+uh it seems super exciting.
+
+1106
+01:32:18,719 --> 01:32:28,279
+Again, I would advise people to play with whatever tools are available and to develop sort of deep domain expertise and and taste to the extent you can.
+
+1107
+01:32:28,320 --> 01:32:37,920
+And I would advise people also not not to be scared and like try stuff you know uh you know I'm always happy uh we have student researchers at Google and they come and they
+
+1108
+01:32:37,920 --> 01:32:41,000
+do sort of wild and crazy things and that's always just delightful.
+
+1109
+01:32:41,120 --> 01:32:45,360
+So yeah, people should be trying sort of wild and crazy things and see what happens.
+
+1110
+01:32:45,360 --> 01:32:52,480
+Yeah, this may be a question without an answer, but when I think about how I developed expertise and how a lot of people developed expertise,
+
+1111
+01:32:52,480 --> 01:32:59,319
+it was by starting with a, you know, a a simple defined problem and then hammering it and then in that process of exploration,
+
+1112
+01:32:59,360 --> 01:33:10,680
+you learn more and you know some ways you go broader, some ways you go deeper, but you still the process of just banging your head against the problem which now would be instantly solvable
+
+1113
+01:33:11,280 --> 01:33:13,880
+teaches you the skills you need to solve harder problems.
+
+1114
+01:33:14,239 --> 01:33:16,440
+What advice would you give to your son for that?
+
+1115
+01:33:16,639 --> 01:33:17,360
+>> You know, I don't know.
+
+1116
+01:33:17,360 --> 01:33:19,440
+Maybe it's a bit like hiking, which is you Yes.
+
+1117
+01:33:19,440 --> 01:33:21,120
+I mean, you obviously can't drive everywhere.
+
+1118
+01:33:21,120 --> 01:33:22,960
+Or you could you could drive up the mountain.
+
+1119
+01:33:22,960 --> 01:33:23,440
+Yeah.
+
+1120
+01:33:23,440 --> 01:33:24,639
+>> Or you could hike up the mountain.
+
+1121
+01:33:24,639 --> 01:33:29,560
+And maybe it's okay, even fun to occasionally hike up the mountain even if you can drive up the mountain.
+
+1122
+01:33:29,840 --> 01:33:30,320
+>> Uh yeah.
+
+1123
+01:33:30,320 --> 01:33:32,719
+I mean, >> in the old days, I'm going to sound like a real old man.
+
+1124
+01:33:32,719 --> 01:33:39,840
+In the old days, >> in the old days of six months ago, >> well, no, no, I was even thinking of in the old days of the 80s and 90s like >> you know a lot of
+
+1125
+01:33:39,840 --> 01:33:47,760
+people take it like oh there's open source packages there's there's learn there's there's all sorts of things we didn't have that I had to write my own numerical library I had to write my
+
+1126
+01:33:47,760 --> 01:33:59,840
+own machine learning I've written boosting probably rewritten it four times four different languages and and so now I know boosting you know it's like and so maybe uh not taking the totally easy I
+
+1127
+01:33:59,840 --> 01:34:04,080
+mean obviously I mean there's this trade-off like oh but I want to be as efficient and and productive as possible.
+
+1128
+01:34:04,080 --> 01:34:04,680
+Yes.
+
+1129
+01:34:04,719 --> 01:34:06,320
+But you also have to develop the muscles.
+
+1130
+01:34:06,320 --> 01:34:08,080
+So it's a little bit maybe like being an athlete.
+
+1131
+01:34:08,080 --> 01:34:12,880
+Like there are places there are times when you're actually doing exploit when you're trying to run as fast as you can.
+
+1132
+01:34:12,880 --> 01:34:17,520
+And then there's also training time and so maybe people just have to train.
+
+1133
+01:34:17,520 --> 01:34:24,560
+>> And it's entirely plausible that if you spend time actually hammering away and doing the hard work, even if it goes slower there,
+
+1134
+01:34:24,560 --> 01:34:29,760
+that pays dividends into your larger um you know productivity long term.
+
+1135
+01:34:29,760 --> 01:34:38,080
+Like even if locally that one moment you are not being maximally productive by not exploiting an LLM that feeds into something.
+
+1136
+01:34:38,080 --> 01:34:38,719
+>> I hope so.
+
+1137
+01:34:38,719 --> 01:34:50,759
+I hope the thing I don't know is I hope people in their careers it's hard because right the the the whole world seems to want to optimize everything and your fault.
+
+1138
+01:34:51,040 --> 01:34:52,080
+No, I don't.
+
+1139
+01:34:52,080 --> 01:34:53,040
+It's No, I don't.
+
+1140
+01:34:53,040 --> 01:34:57,920
+It's my fault, but it's just sort of the the the the you know, uh and sometimes you have to set aside time.
+
+1141
+01:34:57,920 --> 01:35:05,679
+Like at Google, especially in my group, we have this concept of 20% time, which I still I very very strongly in my own group try to protect.
+
+1142
+01:35:05,679 --> 01:35:10,480
+It's like you can do whatever you if you want to learn stuff, if you want to try stuff, you don't even have to tell me.
+
+1143
+01:35:10,480 --> 01:35:11,440
+You don't even have to tell me.
+
+1144
+01:35:11,440 --> 01:35:12,759
+In fact, I probably shouldn't tell.
+
+1145
+01:35:12,960 --> 01:35:15,360
+Uh you know, just do stuff for for Exactly.
+
+1146
+01:35:15,360 --> 01:35:18,560
+for learning and also because that's where the sort of creative juices are.
+
+1147
+01:35:18,560 --> 01:35:26,880
+I don't want to so occupy people's time where they have nothing like where they they can't feel like they can play or learn or try new crazy things.
+
+1148
+01:35:26,880 --> 01:35:37,120
+So I know 20% time is unusual and there just seems to be this strong impetus in the world to just like like I said optimize and squeeze everything out but you do lose something
+
+1149
+01:35:37,120 --> 01:35:39,560
+when you hyperop you sort of overfit.
+
+1150
+01:35:39,840 --> 01:35:40,600
+>> You overit
+
+1151
+01:35:41,760 --> 01:35:44,320
+overfit to productivity as you're so >> that's right.
+
+1152
+01:35:44,320 --> 01:35:50,320
+So I I know that might be my advice might be swimming upstream against uh perhaps cultural norms.
+
+1153
+01:35:50,320 --> 01:35:56,440
+>> The thing that always comes up for me here is that I there's a the problem is not stationary.
+
+1154
+01:35:56,800 --> 01:36:02,719
+There's a new skill set that will be the the right skill set for the future, right?
+
+1155
+01:36:02,719 --> 01:36:06,520
+And that the question in my mind is always just tangling.
+
+1156
+01:36:07,040 --> 01:36:07,360
+Okay.
+
+1157
+01:36:07,360 --> 01:36:11,440
+Is this a skill that is an enduring skill that Yes.
+
+1158
+01:36:11,440 --> 01:36:22,320
+that or or or like maybe it it wasn't enduring yesterday, but today it will be enduring because the like I've seen that um you know like for just as an obvious one you become
+
+1159
+01:36:22,320 --> 01:36:28,440
+sort of like a manager when you're when you're using LL skills transfer.
+
+1160
+01:36:28,480 --> 01:36:30,960
+Well, >> some of them don't, but a lot of them do.
+
+1161
+01:36:30,960 --> 01:36:43,840
+And so that as a manager, you lose track of of the details of what's going on and you trust your people or agents or whatever to have that managed so that they can report
+
+1162
+01:36:43,840 --> 01:36:55,679
+up to you and answer uh you know sort of the highle questions and and get the judgment about the little things correctly and and so that is that what we've come to is that
+
+1163
+01:36:55,679 --> 01:36:58,040
+we're just like middle managers now.
+
+1164
+01:36:58,239 --> 01:37:00,320
+No, I I mean I don't know.
+
+1165
+01:37:00,320 --> 01:37:07,239
+Again, I I I have uh a little management work, but you can't I don't you don't want to be an empty suit.
+
+1166
+01:37:07,440 --> 01:37:12,080
+>> In other words, because the things might get it wrong, especially LM that are sort of really weird.
+
+1167
+01:37:12,080 --> 01:37:15,000
+They don't make the same kind of mistakes that humans make.
+
+1168
+01:37:15,280 --> 01:37:18,400
+>> And so you you can't, you know, fully trust them.
+
+1169
+01:37:18,400 --> 01:37:21,719
+You have to be rigorous and like, you know, poke at it and make sure.
+
+1170
+01:37:21,840 --> 01:37:24,639
+Although, you should be poking at software that you write yourself, too.
+
+1171
+01:37:24,639 --> 01:37:26,000
+I mean, you shouldn't trust yourself.
+
+1172
+01:37:26,000 --> 01:37:27,679
+That's that's one thing I've learned.
+
+1173
+01:37:27,679 --> 01:37:28,560
+What did Fman say?
+
+1174
+01:37:28,560 --> 01:37:33,560
+You know, you absolutely can't f fool yourself and you're >> you're the easiest person to fool.
+
+1175
+01:37:34,080 --> 01:37:47,719
+>> So, um, so that might be I don't know if I I can quantify what's enduring, but somehow fundamentalness I mean really learning a domain that is about the world for example.
+
+1176
+01:37:47,760 --> 01:37:53,600
+So this is why I like well biology or physical sciences I think those will those are enduring sort of fundamental things.
+
+1177
+01:37:53,600 --> 01:38:05,600
+math is very enduring, but even things like rigor and checking and that sort of thing, which goes back to maybe management that that you want to really make sure that the LMS are producing
+
+1178
+01:38:05,600 --> 01:38:10,960
+the right things or they haven't cheated in some way, but again, you should be doing that to yourself, too.
+
+1179
+01:38:10,960 --> 01:38:11,600
+Yeah.
+
+1180
+01:38:11,600 --> 01:38:17,440
+>> So, I think there's some enduring and also just the enduring value of sort of creativity and thinking out of the box.
+
+1181
+01:38:17,440 --> 01:38:19,600
+And so, I think those are enduring.
+
+1182
+01:38:19,600 --> 01:38:19,920
+I don't know.
+
+1183
+01:38:19,920 --> 01:38:23,440
+There's some there's something very fundamental about all of those.
+
+1184
+01:38:23,440 --> 01:38:24,759
+>> So, you mentioned Fineman.
+
+1185
+01:38:25,040 --> 01:38:28,120
+Um, if you don't mind me uh changing gears.
+
+1186
+01:38:28,719 --> 01:38:30,120
+>> I took a class from Fineman.
+
+1187
+01:38:31,360 --> 01:38:31,600
+Yeah.
+
+1188
+01:38:31,600 --> 01:38:32,480
+Not just any class.
+
+1189
+01:38:32,480 --> 01:38:32,639
+>> Yes.
+
+1190
+01:38:32,639 --> 01:38:35,840
+The the the his sort of uh physics of computation class.
+
+1191
+01:38:35,840 --> 01:38:40,360
+He did it with in fact Hopfield and and and uh uh Carver me.
+
+1192
+01:38:40,480 --> 01:38:41,760
+Uh that was fun.
+
+1193
+01:38:41,760 --> 01:38:43,920
+At the time I don't think any maybe Fman knew.
+
+1194
+01:38:43,920 --> 01:38:47,280
+I felt like none of us knew what even the problem was.
+
+1195
+01:38:47,280 --> 01:38:55,920
+I mean I guess Fman was trying to say oh let's do quantum simulation which I guess is uh it turned out to be the right answer but yes at the time it was well
+
+1196
+01:38:55,920 --> 01:39:04,480
+I guess uh it was cool first of all it was DARPA funded it so you were supposed to go once a week to get a prime rib dinner uh but I just went every
+
+1197
+01:39:04,480 --> 01:39:07,360
+week uh anyway for the students.
+
+1198
+01:39:07,360 --> 01:39:07,679
+>> Yeah.
+
+1199
+01:39:07,679 --> 01:39:19,040
+So ju just for a little bit more context, this class was basically the class right after Feman and I forget who else proposed the concept of a quantum computer without really knowing what it
+
+1200
+01:39:19,040 --> 01:39:26,480
+was, but knowing that there was some sort of >> well there was plenty of there was plenty of room at the bottom essay which I think was in the very early this I took it
+
+1201
+01:39:26,480 --> 01:39:27,239
+in '82.
+
+1202
+01:39:27,440 --> 01:39:28,040
+Okay.
+
+1203
+01:39:28,159 --> 01:39:29,880
+>> Oh, that was when he taught it.
+
+1204
+01:39:30,080 --> 01:39:32,920
+>> And he did say there was plenty of room at the bottom.
+
+1205
+01:39:33,040 --> 01:39:43,799
+But the way the class was structured, it was um uh it was like a guest lecture on Tuesday and then Fman would stand up on Thursday and explain why that was all wrong.
+
+1206
+01:39:45,679 --> 01:39:47,360
+Uh which was pretty fun.
+
+1207
+01:39:47,360 --> 01:39:51,920
+And then we encountered something which other people have also encountered something which called the Fman effect.
+
+1208
+01:39:51,920 --> 01:39:53,679
+Maybe he was so charismatic or something.
+
+1209
+01:39:53,679 --> 01:39:56,759
+He would explain things and he would say, "Yes, yes, I understand.
+
+1210
+01:39:56,800 --> 01:39:56,960
+Yeah.
+
+1211
+01:39:56,960 --> 01:39:59,480
+And then you walk out to think, "No, no, I I
+
+1212
+01:40:00,639 --> 01:40:01,400
+did not."
+
+1213
+01:40:01,600 --> 01:40:02,200
+>> Yeah.
+
+1214
+01:40:02,320 --> 01:40:03,440
+So, it was kind of fun.
+
+1215
+01:40:03,440 --> 01:40:07,040
+But a lot of the guest people, I mean, maybe the sort of showed the chaos.
+
+1216
+01:40:07,040 --> 01:40:12,719
+I mean, a lot of people, I think it was um Danny Hillis came, uh there was all these interesting guests.
+
+1217
+01:40:12,719 --> 01:40:18,320
+So, I would say in the union of all of them, I think showed the sort of mass confusion of what was going on because there was a lot of like,
+
+1218
+01:40:18,320 --> 01:40:22,960
+oh, should we make computers reversible because we have to make sure, you know, can they even be reversible?
+
+1219
+01:40:22,960 --> 01:40:30,000
+Can can the sort of the bottom limit of of the heat per operation be zero or is there some sort of thermodynamic limit that was like a big deal.
+
+1220
+01:40:30,000 --> 01:40:32,560
+I don't think that's I don't think that's a big deal now.
+
+1221
+01:40:32,560 --> 01:40:32,800
+>> Yeah.
+
+1222
+01:40:32,800 --> 01:40:33,280
+But >> wait.
+
+1223
+01:40:33,280 --> 01:40:35,199
+So so you're talking about the land hour limit, right?
+
+1224
+01:40:35,199 --> 01:40:36,320
+or not what's on them.
+
+1225
+01:40:36,320 --> 01:40:45,440
+>> Uh well there at the time it was all this this question about like can you have rever like billyard ball computers and can they be reversible and things so and also sort of like
+
+1226
+01:40:45,440 --> 01:40:54,560
+what kind of computing that's why Danny Hillis came like you know I think that was in the era of the connection machine and what the original thinking machines not mad but the original one
+
+1227
+01:40:54,560 --> 01:41:04,520
+in the 80s >> uh so he came >> what was the state of like general computation in 1982 like I mean I mean at this point >> to rounding error we had zero
+
+1228
+01:41:05,600 --> 01:41:15,000
+I mean we had I remember when I sorry I got there uh I was Carver me's um uh CIS admin and we had a vax 11 750 that maybe did a myip 1 million
+
+1229
+01:41:15,199 --> 01:41:22,520
+1 million operations and the whole uh research group shared an 80 megabyte disc drive that was the size of a dishwasher.
+
+1230
+01:41:22,880 --> 01:41:24,440
+It was it was very exciting.
+
+1231
+01:41:24,560 --> 01:41:27,000
+Uh so what about complexity theory?
+
+1232
+01:41:27,199 --> 01:41:27,760
+What what was it?
+
+1233
+01:41:27,760 --> 01:41:33,119
+Because I know that there's a lot of interest in quantum complexity and how it relates to gravity right now.
+
+1234
+01:41:33,119 --> 01:41:37,920
+And I wondered I don't have a mind in my mind about when complexity >> we we could try to look it up.
+
+1235
+01:41:37,920 --> 01:41:43,000
+I don't think there's of course the whole there's a whole hierarchy of you're right quantum complexity classes.
+
+1236
+01:41:43,840 --> 01:41:47,640
+>> I think that was developed after that because this was in 1982.
+
+1237
+01:41:47,679 --> 01:41:50,200
+In fact I I'm not even sure there was a gate.
+
+1238
+01:41:50,239 --> 01:41:51,600
+We never talked about the gate model.
+
+1239
+01:41:51,600 --> 01:41:53,760
+There was no gate model of quantum >> I mean quantum gate.
+
+1240
+01:41:53,760 --> 01:41:54,080
+Yeah.
+
+1241
+01:41:54,080 --> 01:41:54,320
+Yeah.
+
+1242
+01:41:54,320 --> 01:41:54,639
+Yeah.
+
+1243
+01:41:54,639 --> 01:41:54,800
+>> Yeah.
+
+1244
+01:41:54,800 --> 01:41:54,960
+Yeah.
+
+1245
+01:41:54,960 --> 01:41:55,360
+I forget.
+
+1246
+01:41:55,360 --> 01:41:55,840
+I'm sorry.
+
+1247
+01:41:55,840 --> 01:41:57,119
+I >> think a lot of those Yeah.
+
+1248
+01:41:57,119 --> 01:42:00,400
+I don't think those came out until like the the what 90s or something.
+
+1249
+01:42:00,400 --> 01:42:00,719
+Yeah.
+
+1250
+01:42:00,719 --> 01:42:11,280
+I mean I I remember reading Neielson and Chong the classic quantum forum information >> yeah quantum information textbook which uh which brings up a lot of those points now I think about it I that
+
+1251
+01:42:11,280 --> 01:42:22,440
+textbook was written in what the late 90s or early 2000s that's right >> and I think that was the first textbook which like put down kind of the general knowledge of the the the field
+
+1252
+01:42:22,480 --> 01:42:29,520
+but I could be wrong I guess I I think now that when I was young I don't think I took it just for granted that this is this is the book that everyone >> Yeah
+
+1253
+01:42:29,520 --> 01:42:39,280
+but this is a Well, you remember in the in the early ' 80s, um I mean there was a whole bunch of excitement around neural networks and it's really interesting cuz again we really did
+
+1254
+01:42:39,280 --> 01:42:40,400
+not know what we were doing.
+
+1255
+01:42:40,400 --> 01:42:41,600
+No one knew what they were doing.
+
+1256
+01:42:41,600 --> 01:42:44,560
+>> There was like an interesting like neural networks then SVNs then neural networks.
+
+1257
+01:42:44,560 --> 01:42:55,520
+Oh no no no this is before that because in the 80s everyone said everyone said this is has the capability of revolutionizing computing >> but what does well I mean there was a tremendous um uh excitement
+
+1258
+01:42:55,520 --> 01:43:08,560
+around hfield networks uh in fact nurips came out of uh because uh there was a workshop at snowbird that was nominally private but everyone tried to crash and so they they spun up nurse
+
+1259
+01:43:08,560 --> 01:43:16,560
+and so that was >> snowbird is a is a skiing trip with a with a computation conference attached >> that's right that's I learned to ski because I didn't know how to ski and then I
+
+1260
+01:43:16,560 --> 01:43:17,280
+kept going.
+
+1261
+01:43:17,280 --> 01:43:25,000
+Anyway, >> that workshop came out of the Santa Barbara workshop in 1985 which came out of some local things at Keltech which is called hopfests.
+
+1262
+01:43:25,760 --> 01:43:36,920
+>> So, so yeah people thought oh wow something involved in fact ironically there was like yeah something about associative memory and if you actually dig down into what transformers are they are associative memory.
+
+1263
+01:43:36,960 --> 01:43:41,040
+So in fact there was even a paper called you know uh hopfield networks are all you need.
+
+1264
+01:43:41,040 --> 01:43:52,400
+Uh so >> yeah I forgot that title was a reference to that paper >> uh to the era to the era so it's actually it's like it's like the whole thing has sort of come full
+
+1265
+01:43:52,400 --> 01:44:02,719
+circle and in fact I think we did uh we have uh um collectively as a as a field uh revolutionized computer science but it was the the sort of the hopes and dreams completely
+
+1266
+01:44:02,719 --> 01:44:18,560
+outstripped uh the capabilities because again we effectively had zero compute >> yeah I think there's the the history of machine learning is different paradigms as like compute versus memory uh scaling versus data become available
+
+1267
+01:44:18,560 --> 01:44:20,440
+in different levels.
+
+1268
+01:44:20,480 --> 01:44:21,119
+>> That's right.
+
+1269
+01:44:21,119 --> 01:44:31,119
+And the fact that I think people don't realize that the reason why neural networks one is they're the one compute limited thing although again with we with now that we have transformers things are
+
+1270
+01:44:31,119 --> 01:44:41,119
+getting memory limited again but but and the fact that they ride on top of blaz and so the fact that blaz was being optimized by things like GPUs I mean I don't actually know
+
+1271
+01:44:41,119 --> 01:44:51,920
+if in fact I'm pretty sure the brains don't work by matrix multiply but but it was just that that did that the algorithms co-eolved with the with the hardware >> and And that's that's why
+
+1272
+01:44:51,920 --> 01:44:52,759
+we're here.
+
+1273
+01:44:52,800 --> 01:44:53,199
+Who knows?
+
+1274
+01:44:53,199 --> 01:45:00,400
+I mean, if we'd gone down some other path where people really cared about some other compute making who knows what what architecture we have ended up with.
+
+1275
+01:45:00,400 --> 01:45:00,719
+I don't know.
+
+1276
+01:45:00,719 --> 01:45:08,759
+I mean, didn't a lot of this start with like I think people were hacking PlayStations to trade to train neural networks or something or to do I guess maybe it was even before that
+
+1277
+01:45:08,800 --> 01:45:22,080
+for like super >> There's a there's a funny story by um a friend of mine from grad school uh Brian Kotenzaro at video where he Brian sorry if I get this wrong but um he
+
+1278
+01:45:22,080 --> 01:45:36,000
+came to Nvidia and um and was having a lot of trouble getting traction and and and he basically they were they were doubled and tripled down on on gaming and he basically one day
+
+1279
+01:45:36,000 --> 01:45:49,440
+had a meeting with Jensen and convinced him let's you know like this is we have all these people using CUDA for blaz basically and and for deep learning in particular and convinced Jensen and
+
+1280
+01:45:49,440 --> 01:45:54,719
+they he said it was like a 15-minute conversation and they pivoted the whole company the next day or whatever.
+
+1281
+01:45:54,719 --> 01:46:02,639
+Okay, this I've never worked in I mean I have friends uh uh uh Dave Kirk uh who's the first chief scientist and and Bill Deli were both friends of mine from grad school.
+
+1282
+01:46:02,639 --> 01:46:05,520
+So yes, but I don't know the details of of way.
+
+1283
+01:46:05,520 --> 01:46:17,679
+Now remember that people um uh like in in um Hinton's group even in the around 2010 they were using GPUs to do the deep learning but but even in as even in I would
+
+1284
+01:46:17,679 --> 01:46:21,600
+say 2007208 they weren't that much faster than CPUs.
+
+1285
+01:46:21,600 --> 01:46:30,480
+Again they they they only started really exceeding in fact I think this not a coincidence uh in the era of you know the original imageet and some of the speech some of the speech
+
+1286
+01:46:30,480 --> 01:46:31,480
+recognition stuff.
+
+1287
+01:46:31,520 --> 01:46:36,600
+So that's I think that's not a coincidence that they really researched when when when GPUs passed CPUs.
+
+1288
+01:46:37,040 --> 01:46:38,960
+So there's that that's not a coincidence either.
+
+1289
+01:46:38,960 --> 01:46:39,560
+>> Yeah.
+
+1290
+01:46:39,600 --> 01:46:44,520
+I really want to know how does one get the opportunity to name an asteroid.
+
+1291
+01:46:44,719 --> 01:46:56,480
+>> Oh well again is Caltech there was there's were some wonderful people uh Jean and Carolyn Shoemaker and they were teaching a class in um in planetary science.
+
+1292
+01:46:56,480 --> 01:47:04,639
+I like planetary science and so yes as part of that class uh they took us they they took us through the sort of asteroid discovery thing.
+
+1293
+01:47:04,639 --> 01:47:10,719
+Now this is in the 80s so now there's all sorts of amazing amazing um systems.
+
+1294
+01:47:10,719 --> 01:47:15,799
+Well there was for a while there something called linear uh which automated the thing but this was before anything was automated.
+
+1295
+01:47:16,159 --> 01:47:22,719
+So yeah, it was just part of a class and what you would do is you go the steps even though we did it out of order in the class but the steps we used
+
+1296
+01:47:22,719 --> 01:47:31,600
+to do this is 40 years ago is you would go to Palomar there would be a fast telescope which literally now a museum piece that's in their visitor center but at the time it
+
+1297
+01:47:31,600 --> 01:47:38,719
+was a real thing you would put a piece of film in it you would take a picture and then you'd wait for a few more minutes and take a same picture of the same
+
+1298
+01:47:38,719 --> 01:47:47,920
+point of sky you'd put in a stereoscope like back at Caltech you would see if anything you would look around you would see if anything floated Because it's this it would move by a
+
+1299
+01:47:47,920 --> 01:47:48,400
+tiny bit.
+
+1300
+01:47:48,400 --> 01:47:52,080
+So it would pop up and you can see it was because it's different in different eyes.
+
+1301
+01:47:52,080 --> 01:47:56,560
+Then you would be able to see it as a something that was projected in a different place.
+
+1302
+01:47:56,560 --> 01:47:56,880
+>> That's right.
+
+1303
+01:47:56,880 --> 01:47:58,880
+So you would pop out at you literally.
+
+1304
+01:47:58,880 --> 01:48:06,159
+And then you would go to a measuring microscope and you would take measurements of known star references and where this floater is.
+
+1305
+01:48:06,159 --> 01:48:12,480
+And so if you got accurate enough measurement, then you would send it off to a person, I don't think it's him anymore,
+
+1306
+01:48:12,480 --> 01:48:16,040
+his name Brian Marsen at the Minor Planet Center in in Arizona.
+
+1307
+01:48:16,400 --> 01:48:22,680
+And then he had a big um uh software system to do um to sort of piece together these are called apparitions.
+
+1308
+01:48:22,719 --> 01:48:30,000
+And if you found and if you happen to have done an observation, which was the final apparition, which allowed his software to connect it into one big orbit,
+
+1309
+01:48:30,000 --> 01:48:33,160
+then you would get discovery rights and you could name the the asteroid.
+
+1310
+01:48:33,360 --> 01:48:34,800
+But now it's like amazing.
+
+1311
+01:48:34,800 --> 01:48:43,960
+There's uh there's this uh observatory now uh in Chile called the Vera Rubin Observatory and there's this amazing telescope called the Simony Survey Telescope.
+
+1312
+01:48:44,320 --> 01:48:46,000
+Essentially automates this process.
+
+1313
+01:48:46,000 --> 01:48:49,520
+Essentially can just take many frames of the sky.
+
+1314
+01:48:49,520 --> 01:48:51,280
+It's an utterly stunning instrument.
+
+1315
+01:48:51,280 --> 01:48:54,480
+And so they discovered 11,000 asteroids in 6 weeks.
+
+1316
+01:48:54,480 --> 01:48:55,280
+>> Oh wow.
+
+1317
+01:48:55,280 --> 01:48:55,880
+>> Yeah.
+
+1318
+01:48:55,920 --> 01:48:57,760
+So it's now >> How many of them are there?
+
+1319
+01:48:57,760 --> 01:49:02,400
+I mean at least >> Well, it depends I guess on the cut off but yeah.
+
+1320
+01:49:02,400 --> 01:49:04,759
+So, but there probably millions of of asteroids.
+
+1321
+01:49:04,880 --> 01:49:06,120
+>> So, there's still a lot of opportunity.
+
+1322
+01:49:06,239 --> 01:49:06,639
+>> It's true.
+
+1323
+01:49:06,639 --> 01:49:08,279
+But I don't even know if they bother name.
+
+1324
+01:49:09,520 --> 01:49:10,159
+>> So, I don't know.
+
+1325
+01:49:10,159 --> 01:49:11,360
+Maybe you don't need I don't know.
+
+1326
+01:49:11,360 --> 01:49:12,560
+But people are doing occult.
+
+1327
+01:49:12,560 --> 01:49:14,080
+Sorry, I can I'll talk about this forever.
+
+1328
+01:49:14,080 --> 01:49:16,040
+There's there's some there's stuff called occultation.
+
+1329
+01:49:16,080 --> 01:49:20,360
+Like one of my asteroids I I was uh talking I was sending email to a amateur.
+
+1330
+01:49:20,560 --> 01:49:25,679
+Uh I if an asteroid happens to pass in front of a star, it uh dips.
+
+1331
+01:49:25,679 --> 01:49:27,640
+You like when they discover exoplanets.
+
+1332
+01:49:28,159 --> 01:49:32,040
+But if you're super lucky, it'll dip and then it will dip again because there's a moon.
+
+1333
+01:49:32,080 --> 01:49:38,239
+And so one of my asteroids uh this amateur uh found a little moon uh around it.
+
+1334
+01:49:38,239 --> 01:49:41,199
+So So that was I think last year >> around the asteroid.
+
+1335
+01:49:41,199 --> 01:49:41,679
+Yeah.
+
+1336
+01:49:41,679 --> 01:49:42,080
+Interesting.
+
+1337
+01:49:42,080 --> 01:49:42,800
+>> So that's pretty cool.
+
+1338
+01:49:42,800 --> 01:49:46,159
+So there's still room for for >> your asteroid has a moon to it.
+
+1339
+01:49:46,159 --> 01:49:46,400
+>> Yes.
+
+1340
+01:49:46,400 --> 01:49:53,199
+In fact, apparently it's actually actually there's a little bit of a story there because it's not really my asteroid that I found two of them.
+
+1341
+01:49:53,199 --> 01:49:54,880
+I named one of them after my dad.
+
+1342
+01:49:54,880 --> 01:49:55,640
+I waffled.
+
+1343
+01:49:56,159 --> 01:50:01,040
+So Carolyn named it after a professor at University of Washington and I said, "Oh, but I wanted to name it."
+
+1344
+01:50:01,040 --> 01:50:04,400
+And so I whed it and she was nice and so she gave me one of hers.
+
+1345
+01:50:04,400 --> 01:50:08,000
+And so then they named that one after my mom and that's the one that has the moon.
+
+1346
+01:50:08,000 --> 01:50:08,920
+>> Oh, okay.
+
+1347
+01:50:09,440 --> 01:50:12,560
+>> So So the asteroid named after my mom has a moon.
+
+1348
+01:50:12,560 --> 01:50:13,600
+>> How big is it?
+
+1349
+01:50:13,600 --> 01:50:19,040
+>> It's like the main body they think is about four kilometers across.
+
+1350
+01:50:19,040 --> 01:50:20,480
+I'm trying to get the units right.
+
+1351
+01:50:20,480 --> 01:50:22,320
+And the moon is about 1 km.
+
+1352
+01:50:22,320 --> 01:50:25,199
+So it's actually it's not it's a pretty big binary.
+
+1353
+01:50:25,199 --> 01:50:27,119
+They're not quite twins, but yeah.
+
+1354
+01:50:27,119 --> 01:50:30,719
+>> Did other people in that class discover?
+
+1355
+01:50:30,719 --> 01:50:32,400
+I think there was one other person.
+
+1356
+01:50:32,400 --> 01:50:33,679
+It's a little bit of a crapshoot.
+
+1357
+01:50:33,679 --> 01:50:33,920
+Yeah.
+
+1358
+01:50:33,920 --> 01:50:36,000
+And the fact that I found two was quite unusual.
+
+1359
+01:50:36,000 --> 01:50:40,560
+>> Was there a reason why you was it just pure luck or just staying there all day?
+
+1360
+01:50:40,560 --> 01:50:41,480
+Do I try?
+
+1361
+01:50:41,840 --> 01:50:42,159
+I know.
+
+1362
+01:50:42,159 --> 01:50:44,440
+I I tried to be careful, but >> Yeah.
+
+1363
+01:50:44,480 --> 01:50:47,040
+How does one become get an Oscar?
+
+1364
+01:50:47,040 --> 01:50:47,440
+>> Yeah.
+
+1365
+01:50:47,440 --> 01:50:48,239
+Academy Award.
+
+1366
+01:50:48,239 --> 01:50:50,080
+>> Uh well, again, maybe I was at the right place.
+
+1367
+01:50:50,080 --> 01:51:01,520
+Uh I uh my thesis advisor is named Albar and um I was a student intern actually in 1986 at a place called Shumber which is a boil discovery place but they had an AI
+
+1368
+01:51:01,520 --> 01:51:11,280
+lab and so they were we were all doing sort of computer graphics research and uh we were all thinking you know there at the time this was revolutionary I realize it's now considered incredibly
+
+1369
+01:51:11,280 --> 01:51:19,119
+boring like you could actually use like physics simulators to to make computer graphics movies and at the time I was like wow that's really cool so I said you know you could use the
+
+1370
+01:51:19,119 --> 01:51:27,600
+theory of elast elicity to make floppy things and and so I said I sort of like here's the theory of elasticity and I wrote it elastic simulator and I made you know fabric and
+
+1371
+01:51:27,600 --> 01:51:29,520
+you know stretchy things and and stuff.
+
+1372
+01:51:29,520 --> 01:51:39,799
+So they said oh wow that's cool and so the sort of descendants of that became a lot of the physics simulators that people used in in um you know Pixar and their various movies.
+
+1373
+01:51:39,840 --> 01:51:46,040
+So yes I tell I tell interns sort of half jokingly well if you do a really good job as an intern you can get you get awarded.
+
+1374
+01:51:47,599 --> 01:51:52,800
+So, so how like how long was that between the time you did that work and then >> 20 years?
+
+1375
+01:51:52,800 --> 01:51:55,520
+>> It was 20 years, >> which is actually not atypical, right?
+
+1376
+01:51:55,520 --> 01:52:00,560
+Cuz they want to when they give you an Academy Award, they want to make sure like, oh yeah, it's sort of well used and everyone uses it and stuff.
+
+1377
+01:52:00,560 --> 01:52:04,560
+So, yeah, but but of course the obviously like in that 20 years like, well, everyone does it.
+
+1378
+01:52:04,560 --> 01:52:08,480
+It's obvious, but you know, >> this was specific work done for a specific movie or something.
+
+1379
+01:52:08,480 --> 01:52:10,400
+>> No, it was like a it was like a paper in cigarette.
+
+1380
+01:52:10,400 --> 01:52:16,080
+>> It was it was it was a paper and then Pixar just became like I think somewhat important core to like a lot of their >> Yes.
+
+1381
+01:52:16,080 --> 01:52:20,719
+And and in fact some of my friends in fact a lot of my friends did did a lot of these simulators.
+
+1382
+01:52:20,719 --> 01:52:28,800
+So yeah >> I'm curious about since you have been quantum computing adjacent and worked on quantum computing directly at Google applied sciences for a while.
+
+1383
+01:52:28,800 --> 01:52:33,960
+I think you're not currently on that but I'm curious to see what >> I'm still dabbling in you're still dab.
+
+1384
+01:52:35,119 --> 01:52:35,599
+Yeah.
+
+1385
+01:52:35,599 --> 01:52:41,119
+So where do you see the trajectory of quantum computing over the over the years going?
+
+1386
+01:52:41,119 --> 01:52:49,280
+Because this is one of those things which I guess kind of like fusion was sort of had a a sense at first like being very exciting and then seeming like it wasn't going anywhere
+
+1387
+01:52:49,280 --> 01:52:58,440
+for a long time and then maybe now we're seeing hints again of it being exciting and I I'm or maybe that's like my sort of quantum adjacent.
+
+1388
+01:52:58,960 --> 01:53:01,080
+>> I think a lot of people have gone through that.
+
+1389
+01:53:01,280 --> 01:53:08,000
+I tend to average I tend to average things out over the I guess I'm old enough now where I sort of average things out over the decades and it's just progress.
+
+1390
+01:53:08,000 --> 01:53:18,560
+>> But I mean like see going from you know starting from fman just trying to figure out even what this means as a concept all the way up to now where you know I there's
+
+1391
+01:53:18,560 --> 01:53:26,639
+this recent Willow result of quantum error correction which actually seems genuinely >> the right achievable with like the right scaling laws and stuff.
+
+1392
+01:53:26,639 --> 01:53:38,000
+I mean does this is this like a do you still think that or I mean would you say that quantum is 20 years away or I mean till like some simple but practical algorithm
+
+1393
+01:53:38,000 --> 01:53:47,199
+which actually succeeds or I mean is it do you see this accelerating or do you think this is still going to be something because I mean there's a lot of areas where we we
+
+1394
+01:53:47,199 --> 01:53:58,560
+saw oh this is very you know this advanced very quickly and it was very unexpected and I'm wondering if this is a thing that you think will be quick or will not be or
+
+1395
+01:53:58,560 --> 01:54:07,040
+is this I don't know >> I think sort of in between it's not a purely software thing because we need to build systems that are large enough and stable enough to be able to you
+
+1396
+01:54:07,040 --> 01:54:18,480
+know be a quantum computer instead of a quantum apparatus we're in the what they call the NISK era that was a >> intermediate scale quantum uh which was I think coined by John Prescll it's
+
+1397
+01:54:18,480 --> 01:54:28,400
+not a very good term sorry but I guess that's the term we have um and there are you know uh the quantum team made this uh wonderful um paper which I think I'm co-author
+
+1398
+01:54:28,400 --> 01:54:42,159
+on one of many for something called the quantum echoes algorithm which could uh be applicable now which fundamentally it's it's it's in the style of of Fineman's um proposal uh which essentially it's well
+
+1399
+01:54:42,159 --> 01:54:54,000
+the technical term is you could try to fit a Hamiltonian to observe data like an NMR what that means is yeah you have um a physical model that's parameterized and you use the you
+
+1400
+01:54:54,000 --> 01:55:02,960
+use the quantum computer to kind of adjust the parameters and try to figure out inside of a loop to what the right so you could for example decode uh NMR parameters.
+
+1401
+01:55:02,960 --> 01:55:06,000
+So that is a a practical thing that's used.
+
+1402
+01:55:06,000 --> 01:55:11,319
+Now the question is is it going to be it will be big enough to uh make breakthroughs that's still uh TBD.
+
+1403
+01:55:11,760 --> 01:55:25,440
+Um the uh quantum team at Google is has been very uh executing against amazingly well against a a roadmap that that uh Nevin uh laid out a few years ago and they're just uh
+
+1404
+01:55:25,440 --> 01:55:35,760
+continuing to march down this thing where they're scaling up and when they hit their last milestone they should be able to have a a quantum computer that does amazing things and they're continuing to
+
+1405
+01:55:35,760 --> 01:55:36,560
+march it along.
+
+1406
+01:55:36,560 --> 01:55:40,239
+So yeah, it's it's I think on the scale of a few to several years.
+
+1407
+01:55:40,239 --> 01:55:46,520
+I I don't I haven't sort of kept up on exactly what date they're saying, so you should ask hard exactly when that's going to happen.
+
+1408
+01:55:46,719 --> 01:55:49,119
+But um yeah, they're they're so they're marching along.
+
+1409
+01:55:49,119 --> 01:55:58,800
+So So the main the interesting question is will the superconducting uh computing be the winner or will one of the other sort of alternate technologies and that's still TBD.
+
+1410
+01:55:58,800 --> 01:56:04,120
+I I still think superconducting is is a very promising thing because it is it is very scalable.
+
+1411
+01:56:04,560 --> 01:56:06,960
+Um, so yeah, no, I don't think it's 30 years away.
+
+1412
+01:56:06,960 --> 01:56:07,840
+I don't think it's tomorrow.
+
+1413
+01:56:07,840 --> 01:56:12,520
+I don't think there's going to be I don't think unless well, even if there's a sudden hardware breakthrough.
+
+1414
+01:56:12,560 --> 01:56:14,000
+These are very finicky things.
+
+1415
+01:56:14,000 --> 01:56:19,760
+So it's like someone might have a brilliant idea, but it will still be a while before cuz fundamentally, at least in the NISK era or for a while,
+
+1416
+01:56:19,760 --> 01:56:24,120
+these are fundamentally analog computers and so that they tend to be very very very finicky.
+
+1417
+01:56:24,320 --> 01:56:30,680
+So I wouldn't expect um all of a sudden, you know, something some some phase change happens.
+
+1418
+01:56:30,880 --> 01:56:40,960
+No one has figured out how to scale up cubits in a way that interact in just to kind of arbitrary size or still on the order of 100 200 cubits I think or >> you
+
+1419
+01:56:40,960 --> 01:56:51,840
+mean in terms of okay so >> in terms of >> well it's a little like yeah yeah exactly so for superconducting cubits um yeah people I mean although people are working on it the ratio of
+
+1420
+01:56:51,840 --> 01:57:00,800
+the number of physical cubits to logical cubits is still relatively large for the error rates that you need and so maybe there'll be a breakthrough there I don't know or there other things that
+
+1421
+01:57:00,800 --> 01:57:10,560
+might have uh you don't need that ratio to be so high because a lot of it has to do with the the 2D connectivity of the of the of the chips that you lay
+
+1422
+01:57:10,560 --> 01:57:21,480
+out your cubits on a 2D chips and for things like um neutral atoms they in theory in theory can connect anything to anything else but of course in practice we don't really know and
+
+1423
+01:57:21,679 --> 01:57:31,119
+we don't actually know what the limitations of neutral at least I don't know the limitations of what neutral is maybe maybe the super experts know >> super connecting cubits in particular have this sort of tension
+
+1424
+01:57:31,119 --> 01:57:41,840
+where you you want to have you know nice clean resonators which you know you you get a clean resonator by decoupling from the environment and then you get good interactions by coupling resonators which
+
+1425
+01:57:41,840 --> 01:57:43,280
+involves covering to the environment.
+
+1426
+01:57:43,280 --> 01:57:53,119
+So it seems like >> true but at least but but there yes but there's like the whole environment uh and then there's like little tiny holes that that you want to go through to your neighbors.
+
+1427
+01:57:53,119 --> 01:57:56,120
+>> This is not like a fundamental uncertainty relationship or something.
+
+1428
+01:57:56,159 --> 01:58:00,080
+It's like this is a technological limitation that difficulty or something.
+
+1429
+01:58:00,080 --> 01:58:04,080
+>> Yeah, the hardware team in in and Google quantum is is very very skilled.
+
+1430
+01:58:04,080 --> 01:58:05,400
+They're very very skilled.
+
+1431
+01:58:05,679 --> 01:58:11,440
+So, um um yeah, they're they're really good at at making these designs and making these things actually work.
+
+1432
+01:58:11,440 --> 01:58:13,199
+So, I I I find them impressive.
+
+1433
+01:58:13,199 --> 01:58:13,520
+Yeah.
+
+1434
+01:58:13,520 --> 01:58:15,719
+>> It'd be exciting to see that advance.
+
+1435
+01:58:15,760 --> 01:58:16,080
+>> Yeah.
+
+1436
+01:58:16,080 --> 01:58:16,320
+Yeah.
+
+1437
+01:58:16,320 --> 01:58:16,560
+Yeah.
+
+1438
+01:58:16,560 --> 01:58:16,960
+Yeah.
+
+1439
+01:58:16,960 --> 01:58:19,440
+>> Um I guess we'll just have to hold a breath and wait.
+
+1440
+01:58:19,440 --> 01:58:19,840
+>> Just wait.
+
+1441
+01:58:19,840 --> 01:58:20,000
+Yeah.
+
+1442
+01:58:20,000 --> 01:58:23,520
+I guess I'm just very patient, so I just start working.
+
+1443
+01:58:23,520 --> 01:58:34,320
+So 20 years ahead of >> that's what Dave Bacon who runs the the the software team in Google quantum always he he teases me like John like oh no I can't work in quantum computing
+
+1444
+01:58:34,320 --> 01:58:41,199
+was like 10 years ago because it's going to be you're always 20 years ahead of time and so I have to wait for 20 years like okay well you know 10 years have gone
+
+1445
+01:58:41,199 --> 01:58:51,599
+by like you >> halfway there >> halfway there I don't I don't take that as a an absolute yeah but uh I also started working on fusion 10 years ago we'll Yeah.
+
+1446
+01:58:51,599 --> 01:58:52,199
+Or
+
+1447
+01:58:53,280 --> 01:58:58,800
+>> may maybe you're actually causal like you start working on something and that reality just you know catches up catches up.
+
+1448
+01:58:58,800 --> 01:58:59,280
+>> I guess so.
+
+1449
+01:58:59,280 --> 01:58:59,520
+Maybe.
+
+1450
+01:58:59,520 --> 01:58:59,920
+Who knows?
+
+1451
+01:58:59,920 --> 01:59:00,639
+I don't know.
+
+1452
+01:59:00,639 --> 01:59:03,560
+>> I I started working I loved convolutional nets in the early '90s.
+
+1453
+01:59:04,320 --> 01:59:07,119
+>> Yan uh Lukun claimed I checks out.
+
+1454
+01:59:07,119 --> 01:59:09,480
+>> I coined the term convolutional net.
+
+1455
+01:59:09,840 --> 01:59:11,520
+As far as I can tell that that may be true.
+
+1456
+01:59:11,520 --> 01:59:14,320
+I because everyone called it Lynette because it was a very specific thing.
+
+1457
+01:59:14,320 --> 01:59:15,119
+They all worked for Yan.
+
+1458
+01:59:15,119 --> 01:59:16,239
+I said well I don't work for Yan.
+
+1459
+01:59:16,239 --> 01:59:17,440
+I don't want to call it Lynette.
+
+1460
+01:59:17,440 --> 01:59:19,040
+So I called it a convolutional net.
+
+1461
+01:59:19,040 --> 01:59:19,599
+So I don't know.
+
+1462
+01:59:19,599 --> 01:59:20,560
+That was a more generic term.
+
+1463
+01:59:20,560 --> 01:59:21,440
+It's a good term.
+
+1464
+01:59:21,440 --> 01:59:22,320
+Yeah.
+
+1465
+01:59:22,320 --> 01:59:26,480
+>> Before you go, is there anything you want the audience to take away?
+
+1466
+01:59:26,480 --> 01:59:28,759
+Any messages you want to deliver?
+
+1467
+01:59:28,800 --> 01:59:30,239
+>> I think error is an example of it.
+
+1468
+01:59:30,239 --> 01:59:34,480
+But I I'm really amazingly excited about the potential of AI for science.
+
+1469
+01:59:34,480 --> 01:59:39,199
+I think it's I think it's going to be an amazing power tool for scientists.
+
+1470
+01:59:39,199 --> 01:59:41,599
+And I think scientists won't be replaced.
+
+1471
+01:59:41,599 --> 01:59:47,440
+I think the in fact I'm hoping that they'll spend all their time on again the creative stuff, on the rigorous stuff,
+
+1472
+01:59:47,440 --> 01:59:48,839
+on the philosophy stuff.
+
+1473
+01:59:49,040 --> 01:59:51,760
+And so I I think it's gonna I think it's going to be way cool.
+
+1474
+01:59:51,760 --> 01:59:52,880
+>> I I hope so, too.
+
+1475
+01:59:52,880 --> 01:59:53,119
+>> Yeah.
+
+1476
+01:59:53,119 --> 01:59:54,239
+No, yeah.
+
+1477
+01:59:54,239 --> 01:59:59,840
+My intuition is that a lot of a lot of I've heard a lot of people say that that I hope they're right.
+
+1478
+01:59:59,840 --> 02:00:05,560
+I hope it's not just a sort of coping with a reality that's uncomfortable.
+
+1479
+02:00:05,840 --> 02:00:08,680
+The other question we almost forgot to ask.
+
+1480
+02:00:08,800 --> 02:00:19,199
+If you could remove a bottleneck in your industry, which um whatever you however you want to define that by fiat then like magic.
+
+1481
+02:00:19,199 --> 02:00:19,440
+>> Yeah.
+
+1482
+02:00:19,440 --> 02:00:21,319
+By by magic, what would that be?
+
+1483
+02:00:21,520 --> 02:00:31,679
+>> If I could get a magic wish, I would say someone please make the the everything lab that you could like send JSON blob to and it will do any experiment at all.
+
+1484
+02:00:31,679 --> 02:00:32,239
+>> Okay.
+
+1485
+02:00:32,239 --> 02:00:34,080
+Automated, >> but it have to be anything.
+
+1486
+02:00:34,080 --> 02:00:38,880
+So essentially, so I guess we have to solve the sort of AI complete robotics problem, I guess.
+
+1487
+02:00:38,880 --> 02:00:43,719
+But if we did, then that would be stunning because right now things like ERA, it's all computational.
+
+1488
+02:00:43,760 --> 02:00:45,480
+So someone has to gather the data.
+
+1489
+02:00:45,679 --> 02:00:47,599
+>> So yeah, if we could just break that.
+
+1490
+02:00:47,599 --> 02:00:48,080
+Oh.
+
+1491
+02:00:48,080 --> 02:00:49,719
+Oh, that would be so amazing.
+
+1492
+02:00:49,920 --> 02:00:51,640
+That would be so utterly amazing.
+
+1493
+02:00:51,920 --> 02:00:52,159
+>> Yeah.
+
+1494
+02:00:52,159 --> 02:00:52,960
+Um, great.
+
+1495
+02:00:52,960 --> 02:00:57,599
+So I really appreciate you taking the time to to to see us.
+
+1496
+02:00:57,599 --> 02:01:03,280
+Um, and I think you you like kind of flew in and and adjusted your schedule a little bit to >> Yeah,
+
+1497
+02:01:03,280 --> 02:01:08,040
+I was I was sort of flying over San Francisco to get home and so I said I landed in San Francisco.
+
+1498
+02:01:08,239 --> 02:01:10,239
+>> So you you made a big effort to be here.
+
+1499
+02:01:10,239 --> 02:01:11,280
+We really appreciate that.
+
+1500
+02:01:11,280 --> 02:01:13,199
+It was really fun to talk to you.
+
+1501
+02:01:13,199 --> 02:01:13,599
+Mhm.
+
+1502
+02:01:13,599 --> 02:01:13,840
+>> Yeah.
+
+1503
+02:01:13,840 --> 02:01:14,719
+Listen, it's been a blast.
+
+1504
+02:01:14,719 --> 02:01:15,119
+Yeah.
+
+1505
+02:01:15,119 --> 02:01:15,840
+>> Okay, cool.
+
+1506
+02:01:15,840 --> 02:01:16,800
+Thank you for having me.
+
+1507
+02:01:16,800 --> 02:01:17,599
+>> Yeah, you're welcome.
+
+1508
+02:01:17,599 --> 02:01:18,199
+thing.
+

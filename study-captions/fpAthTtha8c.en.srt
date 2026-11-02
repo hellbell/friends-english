@@ -1,0 +1,3080 @@
+1
+00:00:02,720 --> 00:00:05,480
+Yeah, I was like >> That one that I know.
+
+2
+00:00:06,000 --> 00:00:10,240
+>> That feels like Corey, the situation I'm in.
+
+3
+00:00:10,240 --> 00:00:10,800
+Cheers.
+
+4
+00:00:10,800 --> 00:00:13,080
+Cheers.
+
+5
+00:00:13,400 --> 00:00:18,920
+>> Hey guys, welcome to the Latent Space cooking series where we invite founders and researchers and just let them cook.
+
+6
+00:00:18,960 --> 00:00:24,280
+Today, we have a very special guest, the chief research officer of OpenAI, Mark Chen.
+
+7
+00:00:24,280 --> 00:00:24,640
+Welcome, Mark.
+
+8
+00:00:24,640 --> 00:00:25,640
+>> Thanks for inviting me, Alan.
+
+9
+00:00:25,640 --> 00:00:26,600
+>> Yeah, thank you for coming.
+
+10
+00:00:26,600 --> 00:00:35,320
+I mean, to begin, this all started from the inspiration after hearing the story that Mark Zuckerberg would make soup to try to poke researchers and in response,
+
+11
+00:00:35,640 --> 00:00:37,080
+you brought soup to researchers.
+
+12
+00:00:37,080 --> 00:00:37,800
+Is this true?
+
+13
+00:00:37,800 --> 00:00:38,480
+Did this happen?
+
+14
+00:00:38,480 --> 00:00:39,160
+Did it work?
+
+15
+00:00:39,160 --> 00:00:41,000
+>> Oh, you know, it's absolutely a true story.
+
+16
+00:00:41,400 --> 00:00:43,280
+And I have brought soup to our own researchers.
+
+17
+00:00:43,680 --> 00:00:45,720
+I think that matters calmed down a little bit.
+
+18
+00:00:45,720 --> 00:00:51,920
+I think we came out on top, but yeah, still a very funny story in the craziness of how AI is involved.
+
+19
+00:00:51,920 --> 00:00:52,840
+>> How often do you cook?
+
+20
+00:00:52,840 --> 00:00:54,160
+Is it something you're familiar with?
+
+21
+00:00:54,160 --> 00:00:58,680
+>> Well, you know, I I do enjoy cooking, but I don't have the luxury of doing that so often.
+
+22
+00:00:58,680 --> 00:01:06,080
+So, I uh usually have a work dinner every night of the week and, you know, maybe post AGI, this is going to be my hobby.
+
+23
+00:01:06,080 --> 00:01:10,560
+I've always joked that I'm going to start a noodle stand once once it's it's all over.
+
+24
+00:01:10,560 --> 00:01:14,640
+>> Yeah, yeah, you know, post AGI, hopefully that'll, you know, still be there, but great.
+
+25
+00:01:14,640 --> 00:01:19,520
+And I guess looking at what we have in front of us, do you have an idea generally of what we're probably making?
+
+26
+00:01:19,520 --> 00:01:22,320
+>> Uh Korean tofu soup, maybe?
+
+27
+00:01:22,320 --> 00:01:23,840
+>> Yeah, yeah, that's that's generally what it is.
+
+28
+00:01:23,840 --> 00:01:27,720
+So, we inspired off of the story of you, you know, bringing soup to researchers.
+
+29
+00:01:28,000 --> 00:01:31,520
+So, we're making a tofu Korean stew and we have prawns that I'll be cooking.
+
+30
+00:01:31,520 --> 00:01:32,320
+Are you ready to go?
+
+31
+00:01:32,320 --> 00:01:32,960
+>> Yeah, let's do it.
+
+32
+00:01:32,960 --> 00:01:33,160
+Let's do it.
+
+33
+00:01:33,160 --> 00:01:33,280
+>> Great.
+
+34
+00:01:33,280 --> 00:01:38,200
+Okay, so the first thing we should probably do is we'll separate the veggies and then we can cut them.
+
+35
+00:01:38,200 --> 00:01:43,680
+And basically, what we want to do is just um cut the dirty part off with the dirt and then,
+
+36
+00:01:43,680 --> 00:01:44,760
+yeah, separate that across.
+
+37
+00:01:44,760 --> 00:01:45,640
+>> that I know.
+
+38
+00:01:46,120 --> 00:01:46,960
+>> Yeah, okay.
+
+39
+00:01:46,960 --> 00:01:47,960
+And then just have that there.
+
+40
+00:01:47,960 --> 00:01:49,080
+So, you can do that.
+
+41
+00:01:49,080 --> 00:01:52,320
+And while that's going, I guess I could ask more about your background.
+
+42
+00:01:52,320 --> 00:01:54,760
+So, in a previous life, you were once a trader.
+
+43
+00:01:54,920 --> 00:02:03,040
+And even Sam, I think, last year in April also tweeted about how if you're a high frequency trader, you should consider joining OpenAI because,
+
+44
+00:02:03,040 --> 00:02:04,400
+you know, build AGI.
+
+45
+00:02:04,520 --> 00:02:12,959
+So, do you think there's a relation between, you know, being a trader and being a researcher, or do you think it's just like a very technical and competitive area where a lot of great
+
+46
+00:02:12,959 --> 00:02:14,080
+employees can come from?
+
+47
+00:02:14,080 --> 00:02:23,200
+>> I think really the most important thing is there are a lot of researchers who just started out without a formal training in machine learning or AI research.
+
+48
+00:02:23,480 --> 00:02:27,680
+Um we've very much believed in training people up to do this.
+
+49
+00:02:27,680 --> 00:02:33,200
+I I think the real hard thing is the ability to creatively solve problems and think outside of the box.
+
+50
+00:02:33,200 --> 00:02:37,640
+It's not so much, you know, you have to do a PhD, even though that does bring a valuable skill set.
+
+51
+00:02:37,760 --> 00:02:43,480
+Um with trading in particular, I mean, I I don't know that it's that special of a profession.
+
+52
+00:02:43,520 --> 00:02:48,880
+Like, I kind of think of it as, you know, we've had great mathematicians join, we already had great, you know,
+
+53
+00:02:48,880 --> 00:02:53,600
+physicists join, but trading is something where, you know, it's like it's very unhackable.
+
+54
+00:02:54,000 --> 00:02:58,480
+You're um how you you can't kind of cheat the real world, right?
+
+55
+00:02:58,680 --> 00:03:00,960
+You know, it's it's a hard metric to optimize.
+
+56
+00:03:01,840 --> 00:03:07,000
+And there's also a lot of characteristics like it's it's a field where attention to detail really matters.
+
+57
+00:03:07,080 --> 00:03:13,920
+And um you know, it's kind of the brutal hard optimization and squeezing out the juice of a system.
+
+58
+00:03:14,280 --> 00:03:17,480
+Um and some of those those skills transfer over.
+
+59
+00:03:17,480 --> 00:03:17,840
+>> Got you.
+
+60
+00:03:17,840 --> 00:03:26,320
+Yeah, and I guess for people who want to get into research, who let's say don't have a PhD, what do you think are the main attributes or things that they can learn to develop
+
+61
+00:03:26,320 --> 00:03:27,040
+research taste?
+
+62
+00:03:27,040 --> 00:03:32,680
+Because I guess that's the main part of getting into this field that may be very foreign to them.
+
+63
+00:03:32,680 --> 00:03:35,520
+>> Yeah, I mean, I think it's a little bit overrated.
+
+64
+00:03:35,880 --> 00:03:42,720
+It is something you have to develop, but um the best mechanism I've found for developing that is really just replication.
+
+65
+00:03:42,959 --> 00:03:50,040
+So, I think you should take papers that you really look up to and just try to fully replicate it.
+
+66
+00:03:50,440 --> 00:03:53,840
+I like I I think a lot of applications stood out in my my mind.
+
+67
+00:03:53,840 --> 00:04:05,480
+Um you know, back in 2018, there is um you know, like ResNet, there were Pixel CNNs, and I I learned so much just um trying to replicate the training curves exactly,
+
+68
+00:04:05,600 --> 00:04:11,400
+get to the exact amount of, you know, like training loss or perplexity that the papers um hinted towards.
+
+69
+00:04:11,400 --> 00:04:16,519
+You just see a lot of techniques, right, that um people don't really kind of talk about, but you know,
+
+70
+00:04:16,519 --> 00:04:20,200
+once once you dive in a couple of layers deeper, um you learn those techniques.
+
+71
+00:04:20,560 --> 00:04:26,080
+And um yeah, I think really the first thing, too, that got me into the field was Yeah.
+
+72
+00:04:26,080 --> 00:04:28,400
+>> when AlphaGo played Lee Sedol.
+
+73
+00:04:28,480 --> 00:04:31,080
+And you know, I think that was a turning point for so many people.
+
+74
+00:04:31,240 --> 00:04:33,840
+And yeah, I mean, it was it was it was inspirational.
+
+75
+00:04:33,840 --> 00:04:39,800
+And it it the the first big project that I I really went after was um can I get a DQN working?
+
+76
+00:04:39,800 --> 00:04:40,280
+Mhm.
+
+77
+00:04:40,280 --> 00:04:40,520
+Yeah.
+
+78
+00:04:40,520 --> 00:04:41,120
+>> Yeah.
+
+79
+00:04:41,360 --> 00:04:41,800
+Yeah, that's true.
+
+80
+00:04:41,800 --> 00:04:50,400
+I think it was move 37 or something like one of the games that was pretty uh insane watching it happen and seeing all that development and seeing also where we have gotten to today,
+
+81
+00:04:50,440 --> 00:04:51,480
+especially with the research.
+
+82
+00:04:51,760 --> 00:04:55,760
+>> I mean, isn't it crazy that you're seeing move 37s in almost every field now?
+
+83
+00:04:55,760 --> 00:05:01,400
+It's like there's move 37s in in math, there's uh in computer science and coding.
+
+84
+00:05:01,480 --> 00:05:07,080
+Um I think even yeah, just it feels like a lot of people woke up at the start of this year and were like,
+
+85
+00:05:07,080 --> 00:05:09,560
+man, agents are working in my profession.
+
+86
+00:05:09,800 --> 00:05:16,960
+And um you know, they're they're essentially realizing that these models can just do long horizon meaningful work for them.
+
+87
+00:05:16,960 --> 00:05:17,960
+>> Yeah, no, that's true.
+
+88
+00:05:17,960 --> 00:05:21,280
+It is it is very impressive to see, like I'm even just using it in my own work.
+
+89
+00:05:21,280 --> 00:05:24,240
+But okay, the next thing we could do is just as simple as cutting the onion.
+
+90
+00:05:24,280 --> 00:05:26,280
+So, what we have to do here is just like dicing it.
+
+91
+00:05:26,280 --> 00:05:33,760
+Do you think um there's jobs that RL maybe will have like a much harder time to kind of break into?
+
+92
+00:05:33,760 --> 00:05:40,080
+So, for example, coding maybe easier since a lot of context is accessible either through the code bases or even the work you're trying to do,
+
+93
+00:05:40,080 --> 00:05:45,720
+but let's say if you're trying to do the job that a junior consultant may do, where all the context is a little scattered,
+
+94
+00:05:45,919 --> 00:05:47,000
+maybe it more difficult.
+
+95
+00:05:47,080 --> 00:05:49,680
+How do you view through like those different scenarios?
+
+96
+00:05:49,680 --> 00:05:53,520
+Is there a way that you kind of assess what can be the right approach?
+
+97
+00:05:53,520 --> 00:06:01,160
+>> Yeah, I mean, I I think it's RL's traditionally had um headwinds when it's come to fields that, you know,
+
+98
+00:06:01,160 --> 00:06:07,440
+it's more um kind of subjective than objective.
+
+99
+00:06:07,600 --> 00:06:14,880
+So, if you kind of think of you know, one one kind of you know, uh example of this is creative writing.
+
+100
+00:06:14,880 --> 00:06:15,360
+Yeah.
+
+101
+00:06:15,360 --> 00:06:20,760
+>> Where, you know, you could take two pieces of creative writing and two experts can have wildly different opinions.
+
+102
+00:06:20,760 --> 00:06:21,000
+Yeah.
+
+103
+00:06:21,000 --> 00:06:24,040
+>> So, it's these fields where things are hard to grade.
+
+104
+00:06:24,360 --> 00:06:30,919
+Um where you know, RL has the least amount of ability to kind of go and um and directly apply there.
+
+105
+00:06:30,919 --> 00:06:37,440
+I know a lot of people are developing techniques to apply RL in these um these settings, but um for now,
+
+106
+00:06:37,440 --> 00:06:42,920
+it's just where there's cold hard truth, things like math and computer science, where you can prove it correctly or wrong.
+
+107
+00:06:43,160 --> 00:06:46,120
+Um that's where you kind of see it really taking off.
+
+108
+00:06:46,120 --> 00:06:46,720
+>> Yeah.
+
+109
+00:06:46,919 --> 00:06:52,240
+No, that actually brings up a thought on in terms of evaluating those fields.
+
+110
+00:06:52,240 --> 00:06:58,760
+So, um you know, as models get much much more powerful and even saturate, for example, solving like the IMO questions.
+
+111
+00:06:58,800 --> 00:06:59,160
+>> Yeah, yeah.
+
+112
+00:06:59,160 --> 00:07:02,600
+>> Um how do you view evaluating like superhuman intelligence?
+
+113
+00:07:02,600 --> 00:07:08,000
+Like it gets to a point where it's so good at things that even the top what, 0.01% of humans can do,
+
+114
+00:07:08,000 --> 00:07:12,080
+that like, you know, how can we push past that frontier of intelligence?
+
+115
+00:07:12,240 --> 00:07:18,320
+>> No, it's kind of it's kind of crazy, and I feel like um a lot of it centers in on in on kind of interfacing with the real world.
+
+116
+00:07:18,320 --> 00:07:28,880
+And um when when we've thought about how to evolve past things like programming contests in the past, um I think a lot of the initial direction we took was you should move it to
+
+117
+00:07:28,880 --> 00:07:30,080
+real-world research, right?
+
+118
+00:07:30,080 --> 00:07:38,440
+And we've seen that the models uh they've gotten a lot better at uh just kind of discovering novel theorems and uh pushing the frontiers of of hard sciences.
+
+119
+00:07:38,800 --> 00:07:40,160
+But even today, right?
+
+120
+00:07:40,160 --> 00:07:41,480
+That's no longer a surprise.
+
+121
+00:07:41,640 --> 00:07:49,080
+I think like you we almost take it for granted now that these these models can solve very very difficult problems.
+
+122
+00:07:49,080 --> 00:07:56,760
+They can make contributions and even kind of draw relationships between um fields that, you know, that are that are novel and insightful.
+
+123
+00:07:56,920 --> 00:08:11,160
+So, I think you know, we we think of coding co-working as really a domain for that that tests whether our models can learn in high-context settings and in real-world long-horizon settings.
+
+124
+00:08:11,280 --> 00:08:11,720
+>> Got you.
+
+125
+00:08:11,720 --> 00:08:12,120
+Okay.
+
+126
+00:08:12,120 --> 00:08:13,160
+Yeah, that makes sense.
+
+127
+00:08:13,160 --> 00:08:17,120
+And since you're done with all the vegetables, we can now do the next step, which is sauteing it.
+
+128
+00:08:17,120 --> 00:08:22,200
+So, yeah, we can use the impulse stove, which we've seen before and very powerful.
+
+129
+00:08:22,200 --> 00:08:23,360
+Let me just turn it on.
+
+130
+00:08:23,440 --> 00:08:26,040
+Um and yeah, so we'll just saute it Great.
+
+131
+00:08:26,040 --> 00:08:26,600
+>> with some oil.
+
+132
+00:08:26,600 --> 00:08:30,760
+So, yeah, put the pan in the front burner and then >> These are cool stoves.
+
+133
+00:08:30,760 --> 00:08:33,040
+>> Yeah, you can use oil to pour some in.
+
+134
+00:08:33,200 --> 00:08:36,400
+And then, you can also Yeah, just a good dollop.
+
+135
+00:08:36,400 --> 00:08:37,000
+Perfect.
+
+136
+00:08:37,520 --> 00:08:39,000
+And yeah, and then we can turn on the stove.
+
+137
+00:08:39,000 --> 00:08:40,199
+So, just press it.
+
+138
+00:08:40,240 --> 00:08:43,440
+And then, yes, spin the knob.
+
+139
+00:08:46,600 --> 00:08:47,120
+Great.
+
+140
+00:08:47,120 --> 00:08:47,600
+Perfect.
+
+141
+00:08:47,600 --> 00:08:50,280
+And then while that heats up, we can just wait and then add the vegetables.
+
+142
+00:08:50,520 --> 00:08:58,520
+But yeah, I guess more so on views for research, are there I guess, you know, commonly accepted ideas that are,
+
+143
+00:08:58,600 --> 00:09:03,920
+you know, you disagree with, whether it be like pre-training is dead or language models will never get us to AGI.
+
+144
+00:09:03,920 --> 00:09:08,720
+I think there's a lot of takes out there that are very ambiguous and obviously haven't proven out yet.
+
+145
+00:09:08,720 --> 00:09:12,120
+And I guess from your perspective as like the research like leading things in OpenAI.
+
+146
+00:09:12,160 --> 00:09:12,400
+Yeah.
+
+147
+00:09:12,400 --> 00:09:13,200
+>> Like things like those?
+
+148
+00:09:13,200 --> 00:09:18,960
+>> I mean, I I firmly believe in exponent being on the exponential and in scaling laws.
+
+149
+00:09:18,960 --> 00:09:24,400
+So, I think any of these bear takes, I fairly strongly disagree with.
+
+150
+00:09:24,400 --> 00:09:33,080
+Um you know, when when it comes to pre-training is dead, I I mean, I think the the funny thing is this narrative only started spreading more widely after,
+
+151
+00:09:33,080 --> 00:09:33,880
+let's say,
+
+152
+00:09:34,960 --> 00:09:36,600
+the last one or two years or so.
+
+153
+00:09:36,600 --> 00:09:37,160
+Right?
+
+154
+00:09:37,160 --> 00:09:42,440
+In many times uh in the history of uh developing LLMs, people have been saying this, right?
+
+155
+00:09:42,440 --> 00:09:49,760
+And you know, um there there've always been some some bottlenecks that people will Well, you can't scale past this because of this bottleneck.
+
+156
+00:09:50,160 --> 00:09:57,280
+Um and we've always found some kind of technique, whether it be better engineering or some new research insight that helps you break past the boundary.
+
+157
+00:09:57,440 --> 00:09:59,680
+And so, I think it's just more and more of the same, right?
+
+158
+00:09:59,680 --> 00:10:04,360
+Like more careful research engineering, more careful data engineering, more careful scaling.
+
+159
+00:10:04,520 --> 00:10:07,400
+And it always unlocks that next ability to scale further.
+
+160
+00:10:07,400 --> 00:10:15,560
+So, I I mean, it's held for, you know, almost 10 orders of magnitude, but there's no reason it should not keep keep holding.
+
+161
+00:10:15,560 --> 00:10:16,720
+>> Yeah, that's a very fair point.
+
+162
+00:10:16,720 --> 00:10:25,720
+I guess on research bets that have helped you scale beyond, were there specific ideas that you can even remember in the early days that everyone was was saying that this is not going to
+
+163
+00:10:25,720 --> 00:10:26,120
+work?
+
+164
+00:10:26,120 --> 00:10:29,480
+>> Well, yeah, I mean, I think of reasoning as one of the biggest examples of this.
+
+165
+00:10:29,480 --> 00:10:39,040
+Yeah, and um you know, the the first breakthrough that we launched to the world here was O1, but it wasn't easy to get that off the ground cuz one the world we were back
+
+166
+00:10:39,040 --> 00:10:42,839
+living in back then, it was one where pre-training plus post-training, right?
+
+167
+00:10:42,839 --> 00:10:45,000
+That felt like such a promising paradigm.
+
+168
+00:10:45,000 --> 00:10:45,360
+Yeah.
+
+169
+00:10:45,360 --> 00:10:55,200
+>> Um and so, even at a company like OpenAI, you would have people ask naturally, why do something when you have a machine that works?
+
+170
+00:10:55,400 --> 00:11:05,640
+And fundamentally, you know, it's to the credit of you know, Yakub, Ilya, many of the people who really had conviction and vision in the space um that we started pushing on this in earnest.
+
+171
+00:11:05,640 --> 00:11:11,480
+And even then, it took a lot of steering to get the whole company behind this as a as a fundamental bet.
+
+172
+00:11:11,480 --> 00:11:12,120
+>> Got you.
+
+173
+00:11:12,120 --> 00:11:12,400
+Yeah.
+
+174
+00:11:12,400 --> 00:11:15,720
+>> And how do you kind of develop that ability to motivate researchers?
+
+175
+00:11:15,720 --> 00:11:19,200
+Cuz I assume that's a big part of you know, taking a lot of bets and some won't pan out,
+
+176
+00:11:19,200 --> 00:11:24,560
+but still building the trust in the team to know that eventually some of these will actually have no power law effects.
+
+177
+00:11:24,560 --> 00:11:28,880
+>> You know, what's what's really cool about OpenAI is um research it feels like a meritocracy.
+
+178
+00:11:29,200 --> 00:11:37,720
+So, um often times the research managers are the people who um do the actual have done the best research in the past.
+
+179
+00:11:37,800 --> 00:11:40,960
+And so I think a lot of steering can come top-down, right?
+
+180
+00:11:40,960 --> 00:11:46,040
+Like if your manager says, "Hey, you know, I'm like really convinced this is the path forward."
+
+181
+00:11:46,240 --> 00:11:50,840
+Um, generally people will take that into heavy consideration, right?
+
+182
+00:11:50,880 --> 00:11:58,200
+It's like, you know, this person who you've respected for their research taste and execution for so long is like now very excited by this idea.
+
+183
+00:11:58,440 --> 00:12:03,840
+Um, it's it's definitely something that uh that um yeah, you you you people take into account.
+
+184
+00:12:03,840 --> 00:12:06,040
+So, I think there there's good top-down steering.
+
+185
+00:12:06,080 --> 00:12:10,560
+At the same time, you know, I think one really cool thing about OpenAI is um there bottom-up elements.
+
+186
+00:12:10,560 --> 00:12:16,240
+Like we like to be convinced that um uh you know, that we're wrong, right?
+
+187
+00:12:16,240 --> 00:12:18,720
+And and someone can just come with cold, hard evidence.
+
+188
+00:12:18,920 --> 00:12:22,720
+And many things like that have turned into core parts of our research roadmap.
+
+189
+00:12:22,720 --> 00:12:29,480
+Just things that no one was really kind of trying to steer, but some researcher on the ground had a heavy conviction in.
+
+190
+00:12:29,720 --> 00:12:32,320
+Um, and and that's also a really good big delight to see.
+
+191
+00:12:32,320 --> 00:12:33,560
+>> Yeah, no, absolutely.
+
+192
+00:12:33,640 --> 00:12:41,640
+I heard in a recent interview that you gave that your internal research roadmap hasn't really changed um even through all that we've seen,
+
+193
+00:12:41,680 --> 00:12:44,320
+you know, with model development and even other companies.
+
+194
+00:12:44,440 --> 00:12:44,640
+Yeah.
+
+195
+00:12:44,640 --> 00:12:49,880
+I guess how often do you guys assess that, reassess that, even like act proactively?
+
+196
+00:12:49,880 --> 00:12:54,360
+I assume it's not a lot of reactive, you know, decision-making as like other models come out.
+
+197
+00:12:54,360 --> 00:12:58,840
+But how do you like think through that process, especially as everything around you just continues to get better?
+
+198
+00:12:58,920 --> 00:13:03,160
+>> Yeah, so I think the thing is um the high-level research roadmap should be stable, right?
+
+199
+00:13:03,160 --> 00:13:04,839
+I think people need something to ground in.
+
+200
+00:13:04,839 --> 00:13:07,439
+People need to see a path to what we're building.
+
+201
+00:13:07,760 --> 00:13:11,760
+Um, and I've been very happy that we stayed the course for for a while.
+
+202
+00:13:11,760 --> 00:13:14,560
+But the implementation details can change over time, right?
+
+203
+00:13:14,560 --> 00:13:19,320
+And I think um it's important to kind of like the the sequencing will matter, right?
+
+204
+00:13:19,320 --> 00:13:20,960
+The relative resourcing will matter.
+
+205
+00:13:20,960 --> 00:13:24,040
+And the kind of exact steps on the ground will matter.
+
+206
+00:13:24,080 --> 00:13:29,880
+So, what we do is um I think we have kind of points in time that force us to reconsider these things.
+
+207
+00:13:29,880 --> 00:13:32,400
+So, uh one example is when we do compute.
+
+208
+00:13:32,400 --> 00:13:32,680
+Yeah.
+
+209
+00:13:32,680 --> 00:13:37,400
+>> Um, one of the parts of the job is just figuring out how to allocate computer projects.
+
+210
+00:13:37,840 --> 00:13:46,200
+And um it's it's a time to kind of question like are we really putting compute to use and people's use at the highest priority bets?
+
+211
+00:13:46,200 --> 00:13:47,520
+Yeah.
+
+212
+00:13:47,520 --> 00:13:50,840
+And I guess could you clarify more what you mean by Oh yeah.
+
+213
+00:13:50,840 --> 00:13:53,240
+Yeah, I was like I'm constantly adding oil.
+
+214
+00:13:53,240 --> 00:13:57,600
+But clarify what you mean by higher level versus like the more implementation detail.
+
+215
+00:13:57,600 --> 00:14:00,320
+Like is high level as general as like AGI?
+
+216
+00:14:00,320 --> 00:14:02,800
+That's like our North Star or is it more like granular than that?
+
+217
+00:14:02,800 --> 00:14:04,960
+>> Um well yeah, I mean at the very highest level, right?
+
+218
+00:14:04,960 --> 00:14:07,920
+We have an org that focuses on pre-training, right?
+
+219
+00:14:07,920 --> 00:14:10,440
+Which is you know giving models a lot of world knowledge.
+
+220
+00:14:10,440 --> 00:14:15,880
+We focus on RL like teaching the models how to reason with that knowledge, how to chain the little insights together.
+
+221
+00:14:15,880 --> 00:14:16,240
+Yeah.
+
+222
+00:14:16,240 --> 00:14:19,080
+And then finally um alignment and post-training, right?
+
+223
+00:14:19,080 --> 00:14:32,000
+And um we're always looking at both like how to scale the mainline in each of these domains and also new bets that fundamentally unlock either like different scaling properties or more aggressive scaling properties.
+
+224
+00:14:32,000 --> 00:14:32,480
+>> Got you.
+
+225
+00:14:32,480 --> 00:14:33,040
+Mhm.
+
+226
+00:14:33,040 --> 00:14:36,600
+>> And so even in that I heard that every one to two months you go through what?
+
+227
+00:14:36,600 --> 00:14:40,640
+Like 300 projects like research projects that could be uh you know followed through on.
+
+228
+00:14:40,640 --> 00:14:48,839
+Is there a way that you kind of hone that decision making I assume as you like decide what to actually double down on and what not to since I assume there's a lot of
+
+229
+00:14:48,839 --> 00:14:52,040
+talented researchers who provide possible ideas to pursue.
+
+230
+00:14:52,280 --> 00:14:55,440
+>> so I think really in the spirit of uh focus.
+
+231
+00:14:55,440 --> 00:15:05,200
+So one one narrative you might have heard is you know we're we're really focusing our bets at OpenAI and um we're also trying to do a little bit more uh directive computer allocation as
+
+232
+00:15:05,200 --> 00:15:05,560
+well.
+
+233
+00:15:05,560 --> 00:15:09,440
+So um I don't like micromanaging my managers.
+
+234
+00:15:09,440 --> 00:15:16,839
+I think one important thing is to empower them but to just kind of give compute big swaths of compute to the big bets you want to make.
+
+235
+00:15:16,839 --> 00:15:20,200
+>> And then is that what you mean by directive like >> Yeah, yeah, yeah.
+
+236
+00:15:20,200 --> 00:15:28,840
+But but then also give them kind of flexible pools of compute which they can you know freely allocate to things that that they believe in or just kind of a fudge with the the
+
+237
+00:15:28,840 --> 00:15:31,520
+allocations that that we prescribe.
+
+238
+00:15:31,640 --> 00:15:43,920
+So, I think yeah, I I think it's just tying would say like a small number of bets, say three to five bets from each org into the main research roadmap and then really letting
+
+239
+00:15:43,920 --> 00:15:46,880
+the the managers and org leads take things from there.
+
+240
+00:15:46,880 --> 00:15:47,440
+>> Got you.
+
+241
+00:15:47,440 --> 00:15:48,520
+Okay, that makes sense.
+
+242
+00:15:48,600 --> 00:15:56,080
+And I guess for rising researchers, so let's say in an interview setting, are there specific tells or ways that you can identify,
+
+243
+00:15:56,080 --> 00:16:06,360
+okay, this person has some, you know, potential of becoming a researcher to impact an org in a specific way or is it like just looking at the previous research that they've done and then
+
+244
+00:16:06,360 --> 00:16:09,560
+that is what heavily dictates whether they can actually continue on?
+
+245
+00:16:09,560 --> 00:16:12,720
+>> Um, it's a hard problem before someone comes to OpenAI.
+
+246
+00:16:12,960 --> 00:16:14,920
+I think that's that's genuinely true.
+
+247
+00:16:14,920 --> 00:16:26,280
+Um, I I think for a lot of the best research managers, you know, they work with so many researchers over time where you kind of develop an intuition like you know,
+
+248
+00:16:26,280 --> 00:16:28,720
+the things that they say, the ideas that they bring up.
+
+249
+00:16:30,160 --> 00:16:36,960
+Are are those kind of do they hit hit the same mark or like are they the things that you would be thinking about personally too?
+
+250
+00:16:36,960 --> 00:16:43,000
+And so there's this gut check of like, you know, does their intuition match um the same intuition that you have?
+
+251
+00:16:43,160 --> 00:16:46,839
+Um but it is really hard to tell out of the gate.
+
+252
+00:16:46,839 --> 00:16:56,840
+Usually in, you know, let's say six months to a year, it's pretty clear who who's, you know, has the strongest trajectory and who's going to make a lot of impact.
+
+253
+00:16:57,120 --> 00:17:04,560
+Um, so yeah, honestly um I I I think it's a hard problem, but just having seen a lot of people,
+
+254
+00:17:04,680 --> 00:17:05,640
+you know, go through
+
+255
+00:17:06,640 --> 00:17:14,280
+research development at OpenAI, you develop an intuition for you know, who's more peppy in different areas.
+
+256
+00:17:14,280 --> 00:17:14,600
+Yeah.
+
+257
+00:17:14,600 --> 00:17:18,480
+And one thing to kind of like just mention there is not every researcher is the same.
+
+258
+00:17:18,480 --> 00:17:20,360
+I think there's a lot of different types of impact.
+
+259
+00:17:20,360 --> 00:17:20,640
+Yeah.
+
+260
+00:17:20,640 --> 00:17:26,039
+There are the people who just take an idea, it's very clear, and they'll just implement it before anyone else.
+
+261
+00:17:26,199 --> 00:17:29,400
+They're also the people who just come up with the kind of like crazy
+
+262
+00:17:30,640 --> 00:17:40,240
+almost too crazy, but yeah, but somehow not that crazy and and they they really convince you in a in a different way of seeing the world or or or another completely different type of
+
+263
+00:17:40,240 --> 00:17:40,720
+project.
+
+264
+00:17:40,720 --> 00:17:42,800
+So, there's a lot of ways to make an impact.
+
+265
+00:17:42,840 --> 00:17:43,240
+>> Yeah.
+
+266
+00:17:43,240 --> 00:17:44,240
+No, that's helpful.
+
+267
+00:17:44,320 --> 00:17:49,600
+And so, I guess elaborating on that, would you say there are similarities that you would see between, let's say,
+
+268
+00:17:49,600 --> 00:17:52,720
+like top engineers and top researchers?
+
+269
+00:17:52,800 --> 00:18:00,040
+Like I often hear top engineers, even at like small companies and startups, are ones who can take an iota of an idea all the way to production.
+
+270
+00:18:00,280 --> 00:18:06,800
+I assume in research it's like coming up the idea all the way to how it's delivered to the end user through like the product.
+
+271
+00:18:06,800 --> 00:18:11,840
+Or do you think it's more so they're focusing solely on the research and not considering like the end design,
+
+272
+00:18:12,000 --> 00:18:13,280
+how it's used by the customer?
+
+273
+00:18:13,400 --> 00:18:18,880
+>> Well, I yeah, I mean, I guess the thing about research is many times the path forward is unclear.
+
+274
+00:18:18,880 --> 00:18:27,600
+And so, what differentiates researchers is how often they're pointed in the right direction and how like like you say taste,
+
+275
+00:18:27,600 --> 00:18:27,880
+right?
+
+276
+00:18:27,880 --> 00:18:30,600
+I think in engineering there are certain patterns that work.
+
+277
+00:18:30,600 --> 00:18:36,440
+Like, you know, if you want to build a product that looks this way, the engineering principles can be pretty similar.
+
+278
+00:18:36,440 --> 00:18:37,040
+Yeah.
+
+279
+00:18:37,560 --> 00:18:48,120
+But for research, I think the thing that's slightly different is just this ability to you know, have good research taste to convince other people that what you're doing is promising.
+
+280
+00:18:48,480 --> 00:18:53,400
+Um and then, yeah, again, to just kind of integrate it into the core research room.
+
+281
+00:18:53,400 --> 00:18:53,840
+Yeah.
+
+282
+00:18:53,840 --> 00:18:54,240
+>> Got you.
+
+283
+00:18:54,240 --> 00:18:54,800
+Yeah.
+
+284
+00:18:54,800 --> 00:18:55,400
+>> Great.
+
+285
+00:18:55,440 --> 00:18:59,600
+Okay, it seems like we're done with the vegetables, so now we have to multitask.
+
+286
+00:18:59,600 --> 00:18:59,840
+Okay.
+
+287
+00:18:59,840 --> 00:19:04,520
+>> So, we're going to pour some water into our pots to get the base of the soup going.
+
+288
+00:19:04,840 --> 00:19:06,200
+So, in the top right, yeah, here.
+
+289
+00:19:06,200 --> 00:19:07,840
+And then just twisting this off.
+
+290
+00:19:07,880 --> 00:19:09,320
+So, I'm going to pour some here.
+
+291
+00:19:10,160 --> 00:19:11,600
+And you can use some as well.
+
+292
+00:19:12,080 --> 00:19:16,000
+And while we have this simmer, and we'll add the veg, we'll cook our prawns here.
+
+293
+00:19:16,000 --> 00:19:16,320
+Okay.
+
+294
+00:19:16,320 --> 00:19:21,800
+Um >> Yeah, so let me clean this up real quick.
+
+295
+00:19:22,080 --> 00:19:23,080
+Looks like it's going great so far.
+
+296
+00:19:23,080 --> 00:19:27,240
+I feel like saute got some color on the onions and and mushrooms.
+
+297
+00:19:27,240 --> 00:19:28,800
+So, yeah, let's turn this on.
+
+298
+00:19:29,160 --> 00:19:33,000
+I guess one aspect or area that seems very interesting are evals.
+
+299
+00:19:33,440 --> 00:19:40,680
+Um and more specifically, have there been instances where you've seen like through just vibe checks that it was a really good,
+
+300
+00:19:40,680 --> 00:19:43,320
+but on the actual benchmark it like performs very poorly?
+
+301
+00:19:43,320 --> 00:19:48,920
+Or do you think it's like heavily correlated that, you know, if your Sweet Bench Pro is, you know, a high number,
+
+302
+00:19:48,960 --> 00:19:53,000
+then it's like your vibe check on it doing coding tasks is also really, really high?
+
+303
+00:19:53,160 --> 00:19:53,600
+>> No, no.
+
+304
+00:19:53,600 --> 00:19:55,240
+I mean, I think there is this phenomenon.
+
+305
+00:19:55,680 --> 00:20:01,560
+Um you know, I I think internally, I'm not sure if this is a externally used word, but yeah, just like bench maxing,
+
+306
+00:20:01,560 --> 00:20:02,080
+you know?
+
+307
+00:20:02,080 --> 00:20:06,800
+Um yeah, I think I think you can kind of overfit onto certain distributions.
+
+308
+00:20:07,320 --> 00:20:12,040
+Um and it won't be reflective how you how well you generalize, right?
+
+309
+00:20:12,040 --> 00:20:17,360
+Because um I mean, easy ways to do this are, you know, you take a benchmark and you just find like very,
+
+310
+00:20:17,360 --> 00:20:21,480
+very, very similar types of instances to the benchmark and you overtrain on these instances.
+
+311
+00:20:21,880 --> 00:20:31,040
+Um So, I think um beyond that, the the other scary thing in the field is the the number of canonical gold standard benchmarks is low.
+
+312
+00:20:31,040 --> 00:20:31,400
+Yeah.
+
+313
+00:20:31,400 --> 00:20:35,880
+>> And we really are kind of in an evals crisis, right?
+
+314
+00:20:35,880 --> 00:20:44,800
+Where all the really great uh evals that we we all know like growing up like taking the SAT or those those are all fully saturated.
+
+315
+00:20:44,880 --> 00:20:49,240
+And um we really need to find good new ways to benchmark the models.
+
+316
+00:20:49,440 --> 00:20:55,720
+I think one great thing about tools like Codex is they really enabled the fast iteration of of evals.
+
+317
+00:20:55,720 --> 00:21:02,040
+Like we're able to just kind of have one person just very quickly put together a very high-quality eval.
+
+318
+00:21:02,040 --> 00:21:02,440
+Mhm.
+
+319
+00:21:02,440 --> 00:21:09,880
+>> Um another kind of interesting thing of just being able to deploy your models is you can just see them eval as people are doing things with them,
+
+320
+00:21:09,880 --> 00:21:10,160
+right?
+
+321
+00:21:10,160 --> 00:21:16,880
+Um, one of the great things is, you know, in math and coding and software, like you get a sense for like where where they fall over,
+
+322
+00:21:16,880 --> 00:21:21,320
+what the task horizon they can do from from this like general very broad-based deployment.
+
+323
+00:21:21,480 --> 00:21:21,800
+So.
+
+324
+00:21:21,800 --> 00:21:23,440
+>> Yeah, no, that's that's helpful.
+
+325
+00:21:23,520 --> 00:21:27,040
+Now, we'll just add the prawns to the oil and get some color on it.
+
+326
+00:21:27,040 --> 00:21:27,640
+Um.
+
+327
+00:21:28,000 --> 00:21:38,040
+Yeah, and so I guess double-clicking onto that um how do you balance both doing well on these benchmarks but also not,
+
+328
+00:21:38,040 --> 00:21:39,680
+you know, like benchmark maxing as you said.
+
+329
+00:21:39,680 --> 00:21:44,560
+Cuz I assume you want to be most honest and like not kind of cheat the system.
+
+330
+00:21:44,760 --> 00:21:50,160
+But if you have like lower scores, let's say, than a competitor or from other models, to the consumer maybe like,
+
+331
+00:21:50,160 --> 00:21:53,040
+"Wait, your score isn't that great, so the model just probably isn't that good."
+
+332
+00:21:53,040 --> 00:21:55,560
+Like how do you balance both of those dichotomies?
+
+333
+00:21:55,720 --> 00:22:03,120
+>> Yeah, I mean, I think the thing is, you just really have to operate over representative mixtures of evals and
+
+334
+00:22:04,200 --> 00:22:06,040
+always investing in creating new evals.
+
+335
+00:22:07,080 --> 00:22:16,040
+And yeah, really just like there's this philosophy of once an eval is out in the world, then it's it's just already not a good eval.
+
+336
+00:22:16,040 --> 00:22:22,480
+And I think one one thing is, also just kind of partnering with external organizations to create evals.
+
+337
+00:22:22,480 --> 00:22:25,720
+So, you know, in in many of the kind of hard math and science evals,
+
+338
+00:22:26,800 --> 00:22:33,560
+we've partnered with external organizations and they've been able to kind of craft gold standards there for us.
+
+339
+00:22:33,560 --> 00:22:41,200
+So, yeah, I think um there's a kind of interesting philosophy of separate the teams that are creating the evals from the teams that are optimizing >> building,
+
+340
+00:22:41,200 --> 00:22:41,640
+okay.
+
+341
+00:22:41,640 --> 00:22:42,880
+>> the models themselves.
+
+342
+00:22:42,920 --> 00:22:45,320
+Because that way you don't like coincentivize them, right?
+
+343
+00:22:45,320 --> 00:22:50,160
+Like the the way the evals team can work is they're trying to build evals that are hard for the models.
+
+344
+00:22:50,160 --> 00:22:56,400
+So, there's this inherently adversarial process where you're you're not kind of cheating yourself.
+
+345
+00:22:56,400 --> 00:22:56,960
+Yeah.
+
+346
+00:22:56,960 --> 00:23:01,520
+>> The the incentives are somewhat aligned in the right way between the two teams.
+
+347
+00:23:01,520 --> 00:23:01,920
+>> Yeah.
+
+348
+00:23:01,920 --> 00:23:02,200
+Yeah.
+
+349
+00:23:02,200 --> 00:23:10,520
+do kind of also contribute and help in the ideation process or even deciding what Evals, you know, you should work with a third party on to develop.
+
+350
+00:23:10,520 --> 00:23:10,720
+>> Yeah.
+
+351
+00:23:10,720 --> 00:23:10,880
+Yeah.
+
+352
+00:23:10,880 --> 00:23:17,000
+So, I mean, I think a lot of the work that Yacoub and I do also involves just kind of uh steering the direction that Evals go.
+
+353
+00:23:17,000 --> 00:23:17,080
+Yeah.
+
+354
+00:23:17,080 --> 00:23:18,480
+I think we'll notice certain gaps, right?
+
+355
+00:23:18,480 --> 00:23:21,040
+Or certain kind of capabilities um that we want.
+
+356
+00:23:21,120 --> 00:23:23,840
+And every capability on the foot side is an Eval, right?
+
+357
+00:23:23,840 --> 00:23:28,400
+You need some kind of Eval that measures if you elicited exactly what you want and you want it well.
+
+358
+00:23:28,400 --> 00:23:37,640
+So, yeah, I think uh yeah, it's um it's takes a lot of steering and just to get everyone on the same page with Evals is also a lot of tough work.
+
+359
+00:23:37,640 --> 00:23:38,080
+>> Yeah.
+
+360
+00:23:38,080 --> 00:23:39,120
+No, that's that's fair.
+
+361
+00:23:39,120 --> 00:23:43,400
+I guess on Yacoub, you said in a previous interview that he's a very funny guy.
+
+362
+00:23:43,840 --> 00:23:47,600
+Do you have any fun stories that maybe you haven't shared about working with him?
+
+363
+00:23:47,600 --> 00:23:50,800
+Cuz you also state that you guys align very well.
+
+364
+00:23:50,840 --> 00:23:56,480
+So, your discussions even on research are very efficient and help a lot when like driving towards the frontier.
+
+365
+00:23:56,640 --> 00:24:00,360
+I guess like on the opposite side of being very funny, are there things that you're Yeah.
+
+366
+00:24:00,360 --> 00:24:02,240
+>> You you asked about like a funny story.
+
+367
+00:24:02,480 --> 00:24:05,440
+Well, he told me this joke yesterday, which I thought was very funny.
+
+368
+00:24:05,640 --> 00:24:09,520
+I mean, in many ways we kind of jointly manage the the research efforts.
+
+369
+00:24:09,520 --> 00:24:19,200
+And you know, apparently some researcher came up to him and was like, you know, um it feels like I now just have an army of,
+
+370
+00:24:19,200 --> 00:24:22,280
+you know, really dumb I O I like formalists.
+
+371
+00:24:22,560 --> 00:24:23,160
+Yeah.
+
+372
+00:24:23,160 --> 00:24:28,360
+And Yacoub was like, that feels like already the situation I'm in.
+
+373
+00:24:28,720 --> 00:24:33,120
+>> You're like, so uh yeah, no, he's he's just like brutally sarcastic and funny.
+
+374
+00:24:33,120 --> 00:24:33,640
+Yeah.
+
+375
+00:24:33,640 --> 00:24:34,200
+>> Yeah, that's great.
+
+376
+00:24:34,200 --> 00:24:40,480
+It's great to have humor in the workplace and it's good to bounce out, especially as you're pushing the frontier on very important work.
+
+377
+00:24:40,680 --> 00:24:47,880
+Um but that also brings to mind one kind of weird scenario of how models can perform very well on,
+
+378
+00:24:47,880 --> 00:24:53,640
+let's say, the IMO or even the I O I, but may struggle with some more mundane tasks that a human can easily do.
+
+379
+00:24:53,760 --> 00:24:55,040
+So, I guess how do you feel about >> Yeah.
+
+380
+00:24:55,040 --> 00:24:55,240
+Yeah.
+
+381
+00:24:55,240 --> 00:25:02,480
+I mean, ultimately, I think what's intuitive for the models is often not um that intuitive for the humans.
+
+382
+00:25:02,480 --> 00:25:09,920
+Like, uh there's there's a lot made of this jagged frontier analogy where um there's some things that the models just inherently,
+
+383
+00:25:10,280 --> 00:25:16,280
+you know, based on maybe the data it sees or um kind of the the things that we we can teach it more easily,
+
+384
+00:25:16,280 --> 00:25:17,680
+yeah, it's just good at.
+
+385
+00:25:17,760 --> 00:25:22,840
+Um I actually think, you know, a lot of a lot of it boils down to also just context, right?
+
+386
+00:25:22,840 --> 00:25:25,800
+Um the models don't have a lot of context that it can Mhm.
+
+387
+00:25:25,800 --> 00:25:30,120
+>> Um vision, of course, is something that's more naturally biologically wired for humans.
+
+388
+00:25:30,320 --> 00:25:37,760
+Um and so, yeah, I think there are there's just certain kind of jagged capabilities that models are better at than humans and vice versa.
+
+389
+00:25:38,000 --> 00:25:45,840
+Um but I also think, you know, context, just um being able to take a single task, learn lessons from it,
+
+390
+00:25:45,840 --> 00:25:52,240
+and apply them to future tasks, um that capability is something that, you know, a lot of people are in AI working towards right now.
+
+391
+00:25:52,240 --> 00:25:54,880
+Um but it's, yeah, very natural for humans.
+
+392
+00:25:54,880 --> 00:25:55,280
+Yeah.
+
+393
+00:25:55,280 --> 00:25:55,600
+Mhm.
+
+394
+00:25:55,600 --> 00:26:04,920
+>> And on the context point, um a very low-hanging fruit example that many people will say is just to increase the context window to provide more um examples so the model can perform.
+
+395
+00:26:04,920 --> 00:26:11,200
+But do you think I assume there's more complexity on how to actually enable, since even with a large context window and a lot of context,
+
+396
+00:26:11,200 --> 00:26:15,400
+there could be bloat or even just a lot of like context rot, as people have said.
+
+397
+00:26:15,400 --> 00:26:16,000
+Yeah.
+
+398
+00:26:16,000 --> 00:26:24,560
+>> So, how do you go through that process of >> Yes, so I mean, I think there's kind of the canonical way you would solve for very long horizon learning,
+
+399
+00:26:24,560 --> 00:26:28,560
+which is, you know, you just naively increase your context window, right?
+
+400
+00:26:28,560 --> 00:26:31,200
+And um I mean, that makes sense.
+
+401
+00:26:31,200 --> 00:26:37,040
+I think there's a difference between implementing long context and implementing long context well, like you said.
+
+402
+00:26:37,120 --> 00:26:42,560
+Um and there is a lot of kind of like needle-in-a-haystack style evaluations to measure that.
+
+403
+00:26:42,720 --> 00:26:45,240
+Um but I do think beyond that, um
+
+404
+00:26:46,480 --> 00:26:51,200
+there are also a lot of, in some sense, like engineering and research shortcuts that you could take.
+
+405
+00:26:51,200 --> 00:26:56,600
+Um so, you like, uh many many coding products today have features like compaction, right?
+
+406
+00:26:56,600 --> 00:27:02,520
+Where um, you can compress kind of either insights or working state and
+
+407
+00:27:03,520 --> 00:27:11,600
+stuff like that, you know, it just shortcuts a lot of the the very brutally difficult and expensive um, primitives that you have to build with just native long context.
+
+408
+00:27:11,600 --> 00:27:12,160
+>> Got you.
+
+409
+00:27:12,160 --> 00:27:12,840
+Great.
+
+410
+00:27:12,840 --> 00:27:14,360
+>> Okay, now we're going to do the fun part.
+
+411
+00:27:14,360 --> 00:27:19,400
+So, um, let's lower the heat a little bit and then add a little bit more oil to the pan.
+
+412
+00:27:19,560 --> 00:27:24,880
+Um, and then we'll torch the the shrimp the prawns to get a little more flavor in there.
+
+413
+00:27:24,880 --> 00:27:25,360
+Yep.
+
+414
+00:27:25,360 --> 00:27:28,440
+>> So, I'll first do it on on my pan to show you what it looks like.
+
+415
+00:27:28,600 --> 00:27:29,600
+But >> One shot learning.
+
+416
+00:27:29,600 --> 00:27:30,000
+Yeah.
+
+417
+00:27:30,000 --> 00:27:30,960
+>> Yeah, indeed.
+
+418
+00:27:32,120 --> 00:27:33,760
+>> Wait, I I didn't pour any bourbon.
+
+419
+00:27:35,400 --> 00:27:35,760
+>> Okay, wait.
+
+420
+00:27:35,760 --> 00:27:38,080
+So, let's pour like a fourth.
+
+421
+00:27:39,520 --> 00:27:41,920
+Okay.
+
+422
+00:27:41,920 --> 00:27:42,640
+And then
+
+423
+00:27:43,840 --> 00:27:44,680
+pour it in.
+
+424
+00:27:44,720 --> 00:27:45,640
+Heat is off.
+
+425
+00:27:46,800 --> 00:27:48,640
+And then torch it.
+
+426
+00:27:49,160 --> 00:27:49,720
+Awesome.
+
+427
+00:27:49,720 --> 00:27:50,560
+Great.
+
+428
+00:27:50,560 --> 00:27:50,880
+>> All right.
+
+429
+00:27:50,880 --> 00:27:52,360
+>> Okay, I think I got this.
+
+430
+00:27:52,360 --> 00:27:52,680
+>> Okay, yeah.
+
+431
+00:27:52,680 --> 00:27:53,800
+So, do you want to do it your Yeah.
+
+432
+00:27:53,800 --> 00:27:54,320
+>> Yeah, yeah.
+
+433
+00:27:54,320 --> 00:28:00,480
+And >> So, pour it to like half of the fourth cup and then once you have that, I can give this to you.
+
+434
+00:28:00,480 --> 00:28:01,000
+Perfect.
+
+435
+00:28:01,000 --> 00:28:01,240
+>> Great.
+
+436
+00:28:01,240 --> 00:28:02,200
+So, it's off.
+
+437
+00:28:02,640 --> 00:28:04,920
+And then once that's off, you can turn it back on.
+
+438
+00:28:05,360 --> 00:28:05,960
+>> Perfect.
+
+439
+00:28:05,960 --> 00:28:06,560
+Okay.
+
+440
+00:28:06,600 --> 00:28:10,760
+>> And then now, do you want to hold on this and just press this button Yep.
+
+441
+00:28:10,760 --> 00:28:11,840
+>> to fire it up.
+
+442
+00:28:11,840 --> 00:28:12,440
+Yeah.
+
+443
+00:28:12,640 --> 00:28:14,640
+Cool.
+
+444
+00:28:14,640 --> 00:28:15,720
+Yeah, perfect.
+
+445
+00:28:15,720 --> 00:28:16,120
+Great.
+
+446
+00:28:16,120 --> 00:28:16,720
+Okay.
+
+447
+00:28:17,160 --> 00:28:18,240
+I'm burning it.
+
+448
+00:28:18,560 --> 00:28:20,200
+It's a little light, but yeah.
+
+449
+00:28:20,520 --> 00:28:20,720
+Great.
+
+450
+00:28:20,720 --> 00:28:22,160
+And then we can turn on the heat again.
+
+451
+00:28:22,160 --> 00:28:22,680
+Okay.
+
+452
+00:28:22,680 --> 00:28:23,960
+>> And then we'll just cook off the alcohol.
+
+453
+00:28:23,960 --> 00:28:24,280
+>> Okay.
+
+454
+00:28:24,280 --> 00:28:24,480
+Great.
+
+455
+00:28:24,480 --> 00:28:24,680
+Great.
+
+456
+00:28:24,680 --> 00:28:25,280
+Great.
+
+457
+00:28:25,560 --> 00:28:25,840
+>> Great.
+
+458
+00:28:25,840 --> 00:28:26,960
+How How are you feeling?
+
+459
+00:28:27,080 --> 00:28:27,720
+>> You know >> Great.
+
+460
+00:28:27,720 --> 00:28:28,080
+Great.
+
+461
+00:28:28,080 --> 00:28:29,680
+>> Basically there cooking everything.
+
+462
+00:28:29,680 --> 00:28:32,760
+So Okay.
+
+463
+00:28:32,760 --> 00:28:33,880
+Awesome.
+
+464
+00:28:33,880 --> 00:28:43,840
+Yeah, and I guess in terms of research ideas and what to work towards, do you think there's still a lot of low-hanging fruit or ideas that can still be improved a lot through just
+
+465
+00:28:43,840 --> 00:28:51,000
+optimizing small parts of already implemented work or do you think right now there has to be a lot of research that are completely new bets that people take?
+
+466
+00:28:51,000 --> 00:28:53,280
+>> Um yeah, that's a really great question.
+
+467
+00:28:53,280 --> 00:28:58,000
+I feel like there are new bets, but probably not that many.
+
+468
+00:28:58,000 --> 00:29:02,880
+Yeah, um in some sense like uh hopefully you feel like, you know, AGI is coming soon, right?
+
+469
+00:29:02,880 --> 00:29:08,600
+And um I think everyone sees that these models are getting really capable, and Yeah.
+
+470
+00:29:08,600 --> 00:29:17,040
+>> I think if you really imagine the implications of that, we're getting closer and closer to a world where the models can come up >> with more of the innovation funder out.
+
+471
+00:29:17,040 --> 00:29:23,120
+>> Yeah, if they can kind of do self-sustaining research, this is one of the big or goals that we've set for for our research work.
+
+472
+00:29:23,120 --> 00:29:23,400
+Mhm.
+
+473
+00:29:23,400 --> 00:29:29,280
+>> And and so I think like you know, what really matters is are there big bets before that point in time?
+
+474
+00:29:29,280 --> 00:29:29,560
+>> Got it.
+
+475
+00:29:29,560 --> 00:29:35,080
+>> And um I I think the window is small, but there are still like some pretty significant ideas we're trying out.
+
+476
+00:29:35,080 --> 00:29:35,680
+>> Yeah.
+
+477
+00:29:35,920 --> 00:29:42,800
+I mean, there've been some researchers who have stated that to get to AGI, we still need, let's say like two or three more breakthroughs,
+
+478
+00:29:42,840 --> 00:29:45,080
+if you like continual learning or some other ideas.
+
+479
+00:29:45,080 --> 00:29:55,080
+Um do you follow that same view perspective, or do you think it's kind of more so like not as drastic as coming up with like three completely different paradigms?
+
+480
+00:29:55,080 --> 00:29:58,200
+Um yeah, I mean, I I don't know.
+
+481
+00:29:58,200 --> 00:29:59,800
+I I don't know if I have that same framing.
+
+482
+00:29:59,800 --> 00:30:03,320
+Like continual learning is a a basic primitive that you have to unlock.
+
+483
+00:30:03,320 --> 00:30:03,400
+Yeah.
+
+484
+00:30:03,400 --> 00:30:04,400
+Yeah.
+
+485
+00:30:04,400 --> 00:30:06,040
+>> Uh there's so many different techniques.
+
+486
+00:30:06,040 --> 00:30:10,800
+I I don't know um that yeah, I think, you know, we're we're trying a lot of in the limitations of it.
+
+487
+00:30:10,800 --> 00:30:16,000
+I don't know what would consider as a breakthrough versus not, but I think there >> clearly many shots on goal,
+
+488
+00:30:16,000 --> 00:30:18,360
+and I I I'm pretty sure they'll work.
+
+489
+00:30:18,440 --> 00:30:18,800
+>> Great.
+
+490
+00:30:18,800 --> 00:30:19,280
+Okay.
+
+491
+00:30:19,280 --> 00:30:19,920
+Mhm.
+
+492
+00:30:19,920 --> 00:30:20,120
+>> Great.
+
+493
+00:30:20,120 --> 00:30:21,760
+Okay, so the shrimp is basically done.
+
+494
+00:30:21,760 --> 00:30:22,160
+Awesome.
+
+495
+00:30:22,160 --> 00:30:22,720
+>> Okay.
+
+496
+00:30:22,720 --> 00:30:26,080
+So, do you want to do the flambé thing again to get more color?
+
+497
+00:30:26,080 --> 00:30:26,720
+>> Let's do it.
+
+498
+00:30:26,720 --> 00:30:27,240
+Yeah.
+
+499
+00:30:27,240 --> 00:30:27,520
+Okay.
+
+500
+00:30:27,520 --> 00:30:30,440
+>> I'll I'll >> Turn on the heat a little bit, and then let me get some more oil.
+
+501
+00:30:30,480 --> 00:30:30,880
+Great.
+
+502
+00:30:30,880 --> 00:30:33,240
+>> Yeah, cuz you want to get like some dark color.
+
+503
+00:30:33,240 --> 00:30:34,400
+I think mine has.
+
+504
+00:30:34,480 --> 00:30:35,280
+And here.
+
+505
+00:30:36,240 --> 00:30:36,720
+Great.
+
+506
+00:30:36,720 --> 00:30:38,720
+And then we can hopefully get another shot.
+
+507
+00:30:39,480 --> 00:30:39,960
+Okay.
+
+508
+00:30:39,960 --> 00:30:40,200
+>> Perfect.
+
+509
+00:30:40,200 --> 00:30:40,560
+minute.
+
+510
+00:30:40,560 --> 00:30:41,480
+Yeah.
+
+511
+00:30:41,480 --> 00:30:42,680
+Do you want Do you want to go first?
+
+512
+00:30:42,960 --> 00:30:43,920
+Um Okay.
+
+513
+00:30:43,920 --> 00:30:44,880
+>> Same same amount of beer.
+
+514
+00:30:44,880 --> 00:30:45,320
+Yeah.
+
+515
+00:30:45,320 --> 00:30:46,040
+>> Same amount.
+
+516
+00:30:46,320 --> 00:30:50,200
+>> We could hopefully get cuz I think the heat wasn't as Yeah.
+
+517
+00:30:50,200 --> 00:30:50,720
+>> Okay.
+
+518
+00:30:50,720 --> 00:30:51,960
+I think we put it in.
+
+519
+00:30:52,360 --> 00:30:52,880
+>> Yeah.
+
+520
+00:30:52,880 --> 00:30:54,040
+I think There we go.
+
+521
+00:30:56,520 --> 00:30:57,480
+Let's press the button.
+
+522
+00:30:58,960 --> 00:30:59,400
+Great.
+
+523
+00:30:59,400 --> 00:30:59,960
+>> There we go.
+
+524
+00:30:59,960 --> 00:31:00,600
+>> There it is.
+
+525
+00:31:00,600 --> 00:31:01,400
+>> It's good texture.
+
+526
+00:31:01,440 --> 00:31:02,640
+Yeah.
+
+527
+00:31:02,640 --> 00:31:03,880
+Indeed.
+
+528
+00:31:03,880 --> 00:31:05,360
+And it's like add some good flavor.
+
+529
+00:31:05,360 --> 00:31:06,080
+Here, let me try it.
+
+530
+00:31:06,080 --> 00:31:06,640
+It'll be good.
+
+531
+00:31:06,640 --> 00:31:07,880
+Yep.
+
+532
+00:31:07,880 --> 00:31:09,320
+>> Yeah, let's see.
+
+533
+00:31:10,480 --> 00:31:12,680
+Great.
+
+534
+00:31:12,680 --> 00:31:14,800
+All right, let's see what it's going to look like.
+
+535
+00:31:16,320 --> 00:31:17,760
+Ooh.
+
+536
+00:31:17,760 --> 00:31:18,760
+There it is.
+
+537
+00:31:19,440 --> 00:31:20,040
+All right.
+
+538
+00:31:20,040 --> 00:31:21,080
+>> But we're in the final stretch.
+
+539
+00:31:21,080 --> 00:31:22,080
+Okay.
+
+540
+00:31:22,080 --> 00:31:23,640
+>> shrimp all cooked.
+
+541
+00:31:23,640 --> 00:31:24,320
+Yep.
+
+542
+00:31:24,320 --> 00:31:25,040
+>> Some fire.
+
+543
+00:31:25,040 --> 00:31:27,600
+So, now we can kind of Yeah.
+
+544
+00:31:27,880 --> 00:31:31,800
+Cook it off a little bit and then um we should add our veg to the water.
+
+545
+00:31:32,320 --> 00:31:35,000
+>> I'm impressed by your multitasking abilities.
+
+546
+00:31:35,000 --> 00:31:38,120
+You know, I think that's actually one thing um we need our models to get better at.
+
+547
+00:31:38,120 --> 00:31:43,280
+Like it should just be able to do some thread like this and also just have a conversation with you at the same time.
+
+548
+00:31:43,280 --> 00:31:43,320
+>> Yeah.
+
+549
+00:31:43,320 --> 00:31:43,600
+Yeah.
+
+550
+00:31:43,600 --> 00:31:44,120
+Yeah.
+
+551
+00:31:44,120 --> 00:31:45,800
+>> No, I I That also reminds me.
+
+552
+00:31:45,800 --> 00:31:54,840
+Do you think images and audio and video and even text like that should all be one under one model or do you think it'll like break through like specific specialized like audio model or
+
+553
+00:31:54,840 --> 00:31:55,640
+>> Well, yeah.
+
+554
+00:31:55,640 --> 00:32:02,120
+I mean, I think for for a research lab, I think there are a lot of advantages for it to be under one.
+
+555
+00:32:02,440 --> 00:32:05,440
+Um you just have to maintain one infrastructure stack for instance.
+
+556
+00:32:05,440 --> 00:32:10,800
+Um I think the cost of like maintaining and scaling many infrastructure stacks at once.
+
+557
+00:32:10,840 --> 00:32:15,120
+Um I think that's something that you shouldn't underestimate.
+
+558
+00:32:15,640 --> 00:32:24,520
+So, I think there are a lot of benefits to just like you know, you do some core research in in your like in your fundamental stack and that just carries over to whatever modality
+
+559
+00:32:24,520 --> 00:32:25,920
+or whatever thing that you want.
+
+560
+00:32:25,920 --> 00:32:34,000
+So, um I I think there's a strong bias for us to keep it in as as few different archi architectures as possible.
+
+561
+00:32:34,000 --> 00:32:34,400
+>> Got you.
+
+562
+00:32:34,400 --> 00:32:34,800
+Yep.
+
+563
+00:32:34,800 --> 00:32:35,600
+Great.
+
+564
+00:32:35,600 --> 00:32:36,760
+>> No, that that makes a lot of sense.
+
+565
+00:32:36,760 --> 00:32:39,680
+I think like the architecture as well is something that isn't often considered.
+
+566
+00:32:39,760 --> 00:32:40,000
+Yeah.
+
+567
+00:32:40,000 --> 00:32:40,760
+>> It's very important.
+
+568
+00:32:41,040 --> 00:32:47,320
+But one also term that I've been seeing a lot that you've also kind of mentioned is a vibe researcher.
+
+569
+00:32:47,320 --> 00:32:48,600
+You know, we have vibe coders obviously.
+
+570
+00:32:48,600 --> 00:32:49,240
+>> Yeah, yeah, yeah, yeah.
+
+571
+00:32:49,240 --> 00:32:53,600
+>> But I guess on vibe researching, what do you think is like the end state?
+
+572
+00:32:53,600 --> 00:33:01,640
+Do you think the main value out of a vibe researcher is just the research taste of coming up with the right idea or do you think it's more so the execution of going through
+
+573
+00:33:01,640 --> 00:33:03,560
+and following through on the actual research?
+
+574
+00:33:03,680 --> 00:33:08,440
+>> Um yeah, so I I I think we're actually moving towards this world very quickly, right?
+
+575
+00:33:08,520 --> 00:33:15,760
+I think both that OpenAI and our other labs, you're starting to see a lot of the work become mostly orchestration-focused,
+
+576
+00:33:16,400 --> 00:33:16,560
+right?
+
+577
+00:33:16,560 --> 00:33:24,800
+Like the researchers coming up with the ideas and the model's great enough to do the implementation execution by itself.
+
+578
+00:33:25,600 --> 00:33:32,120
+So I think you know, when you when it comes down to like you know, is is the value of coming up with ideas versus execution?
+
+579
+00:33:32,720 --> 00:33:42,560
+Um Yeah, both are still important, but I just feel like there's there's this market shift towards just kind of being able to come up with a lot of ideas and then the model can
+
+580
+00:33:42,560 --> 00:33:45,800
+actually do the the execution and orchestration for you.
+
+581
+00:33:45,800 --> 00:33:50,680
+So I think going to be the future of doing research.
+
+582
+00:33:50,680 --> 00:33:55,920
+Um We also said earlier, you know, like the models don't quite have the taste yet.
+
+583
+00:33:55,920 --> 00:34:00,720
+And um that's why you still need the researchers coming up with the ideas.
+
+584
+00:34:01,200 --> 00:34:03,760
+It's going to be hard to teach the models good taste.
+
+585
+00:34:03,760 --> 00:34:09,519
+We noticed that, but in terms of actually accelerating the research, there's clear tangible benefits already.
+
+586
+00:34:09,679 --> 00:34:10,120
+>> Yeah.
+
+587
+00:34:10,120 --> 00:34:14,560
+Do you think they'll ever be parity in terms of research taste with models?
+
+588
+00:34:14,560 --> 00:34:15,080
+>> I think so.
+
+589
+00:34:15,080 --> 00:34:18,160
+I mean, when we look at our kind of three-year roadmap, right?
+
+590
+00:34:18,520 --> 00:34:27,919
+The end goal that we want to reach is one where you know, the the models are just doing end-to-end research and um I think a part of that problem is just being able to
+
+591
+00:34:27,919 --> 00:34:29,480
+have the model come up with good taste.
+
+592
+00:34:29,480 --> 00:34:34,280
+You point at some you know, just generic benchmark or something and it finds the right solutions.
+
+593
+00:34:34,280 --> 00:34:34,760
+Yeah.
+
+594
+00:34:34,760 --> 00:34:35,880
+>> Yeah, no, that's helpful.
+
+595
+00:34:36,040 --> 00:34:45,400
+And in terms of research done by humans at OpenAI, how do you guys go about I guess the postmortem process of let's say a research bet that didn't turn out well?
+
+596
+00:34:45,480 --> 00:34:50,360
+Cuz I assume that a lot of it is taking these, you know, vast bets and some don't turn out well.
+
+597
+00:34:50,360 --> 00:35:01,120
+>> Well, I would say that is a big part of OpenAI's alpha because I think one thing that differentiates us from other labs is we take a lot of high-risk bets.
+
+598
+00:35:01,120 --> 00:35:05,200
+And I think that's what's allowed us to stay at the frontier uh so consistently over time.
+
+599
+00:35:05,480 --> 00:35:08,520
+Um but it also means that some of the bets are not going to pan out.
+
+600
+00:35:08,520 --> 00:35:16,880
+And um a hard corollary of that is when a when a bet doesn't pan out um you have to
+
+601
+00:35:18,040 --> 00:35:23,840
+you know, not delude yourself into thinking that, you know, this is something that will work and and kind of uh disconnect from it.
+
+602
+00:35:23,840 --> 00:35:26,400
+So, I think there are certain calls that you have to make, right?
+
+603
+00:35:26,400 --> 00:35:32,440
+Like uh kind of look back and be like, well, um this was a promising idea at the time, but actually it's less important than we thought,
+
+604
+00:35:32,440 --> 00:35:39,840
+you know, it's uh there's some other approach that works better or, you know, um there's some other kind of some something that we discovered.
+
+605
+00:35:39,960 --> 00:35:43,920
+But I I think many of that much of that work is also very fruitful.
+
+606
+00:35:44,080 --> 00:35:54,320
+So, what we realized is like even sometimes when people fail at um proving out a technique, uh their write-ups are very important important because um they'll kind of a lot it it'll often be
+
+607
+00:35:54,320 --> 00:35:58,440
+a natural idea and you can perhaps save a lot of people from going through the same pain.
+
+608
+00:35:58,440 --> 00:35:59,440
+Yeah.
+
+609
+00:35:59,440 --> 00:36:00,080
+Well, that's helpful.
+
+610
+00:36:00,080 --> 00:36:00,600
+>> Yeah.
+
+611
+00:36:00,600 --> 00:36:05,640
+So, I guess when it comes to this positive view on failure, how do you balance that with, you know,
+
+612
+00:36:05,640 --> 00:36:09,880
+a researcher, let's say, takes a lot of bets, consecutive bets, and none of them pan out?
+
+613
+00:36:09,880 --> 00:36:20,400
+Cuz I assume at a certain point you'd want a researcher to eventually have contributions that are actually beneficial compared to only taking bets that maybe pan out to being not good space.
+
+614
+00:36:20,400 --> 00:36:24,240
+>> Just through experience, I I've definitely seen some people fall into this.
+
+615
+00:36:24,240 --> 00:36:30,120
+Um but I've also had several cases where, you know, like it's just like bet after bet, it doesn't pan out,
+
+616
+00:36:30,120 --> 00:36:34,440
+and just when you're like at the brink of frustration, you have something that's like a mega hit.
+
+617
+00:36:34,520 --> 00:36:42,360
+And um this happened enough, so it really just depends on kind of are are the ideas themselves sound?
+
+618
+00:36:42,680 --> 00:36:46,320
+Uh they could be ambitious, but they still have to be sound.
+
+619
+00:36:46,440 --> 00:36:55,040
+And um there's a certain kind of person who will will just take a lot of those ideas, and it's okay because they're somewhat on the riskier frontier.
+
+620
+00:36:55,040 --> 00:36:55,480
+Mhm.
+
+621
+00:36:55,480 --> 00:36:58,720
+>> But, they only have to justify it once in a while for it to make sense, right?
+
+622
+00:36:58,720 --> 00:37:04,240
+It may be like a very trading like kind of lens on the world, but yeah, it's it's just on our expectation,
+
+623
+00:37:04,320 --> 00:37:04,480
+right?
+
+624
+00:37:04,480 --> 00:37:05,760
+Like they they need to add value.
+
+625
+00:37:05,760 --> 00:37:07,440
+>> Yeah, no, that's that's great.
+
+626
+00:37:07,440 --> 00:37:15,000
+Okay, so we're basically assembled, now it's the finishing touches, so you can taste your soup, and then we just add soy sauce if it's not salty enough,
+
+627
+00:37:15,120 --> 00:37:18,720
+and if it's too salty, we can add some water to lower this down.
+
+628
+00:37:19,320 --> 00:37:21,240
+But, let's see our final creation.
+
+629
+00:37:23,880 --> 00:37:24,760
+How is it?
+
+630
+00:37:25,000 --> 00:37:25,520
+>> It's pretty good.
+
+631
+00:37:25,520 --> 00:37:26,240
+Good?
+
+632
+00:37:26,240 --> 00:37:26,640
+>> I'll take it.
+
+633
+00:37:26,640 --> 00:37:27,440
+Mine is good.
+
+634
+00:37:27,440 --> 00:37:28,800
+>> Yeah, mine needs a little bit of water.
+
+635
+00:37:28,800 --> 00:37:29,520
+Could you pass me the water?
+
+636
+00:37:29,520 --> 00:37:30,320
+>> yeah, absolutely.
+
+637
+00:37:30,720 --> 00:37:31,320
+>> Great.
+
+638
+00:37:31,760 --> 00:37:32,840
+So, how was that?
+
+639
+00:37:32,840 --> 00:37:34,000
+How did that feel?
+
+640
+00:37:34,000 --> 00:37:36,400
+>> Um I think this is a student distillation.
+
+641
+00:37:36,880 --> 00:37:39,120
+Um you're clearly better than I am at this.
+
+642
+00:37:39,120 --> 00:37:40,000
+>> No, no, no.
+
+643
+00:37:40,000 --> 00:37:44,600
+I feel like you did a very good job, especially with even with the shrimp and palm hearts.
+
+644
+00:37:45,120 --> 00:37:46,240
+Yeah.
+
+645
+00:37:46,240 --> 00:37:47,200
+Smells great.
+
+646
+00:37:50,440 --> 00:37:51,840
+Wow, okay, that sounds good.
+
+647
+00:37:51,840 --> 00:37:58,920
+I guess just more generally, I'm kind of curious, are there any reason research or topics that you think are right now overrated and underrated?
+
+648
+00:37:58,920 --> 00:38:00,400
+Like what would you categorize under?
+
+649
+00:38:00,880 --> 00:38:11,120
+Um Well, I think if you still have a pre-training is dead view of the world, um I think I think uh pre-training is definitely uh yeah,
+
+650
+00:38:11,120 --> 00:38:12,240
+yeah, yeah, not not dead.
+
+651
+00:38:12,240 --> 00:38:14,320
+It's it's um it's underrated.
+
+652
+00:38:14,720 --> 00:38:30,480
+Um Yeah, and honestly, um I think products and kind of thinking about end uses and you know how you tie all the primitives you build in research to you know real agentic use cases
+
+653
+00:38:30,480 --> 00:38:30,920
+in the world.
+
+654
+00:38:30,920 --> 00:38:31,880
+That's also underrated.
+
+655
+00:38:31,880 --> 00:38:37,560
+I think um you really can't just kind of build everything in a vacuum and not connect things to utility.
+
+656
+00:38:37,720 --> 00:38:38,120
+>> Yeah.
+
+657
+00:38:38,120 --> 00:38:39,120
+No, that's great.
+
+658
+00:38:39,120 --> 00:38:39,240
+>> Yeah.
+
+659
+00:38:39,240 --> 00:38:39,640
+Awesome.
+
+660
+00:38:39,640 --> 00:38:41,360
+I think we are ready to taste.
+
+661
+00:38:41,360 --> 00:38:42,920
+So, do we want to give it a go?
+
+662
+00:38:42,920 --> 00:38:43,360
+>> Let's do it.
+
+663
+00:38:43,360 --> 00:38:46,120
+>> We can move this and I think there should be some plating.
+
+664
+00:38:46,120 --> 00:38:47,600
+Yeah, do you want to take this plate over here?
+
+665
+00:38:47,600 --> 00:38:49,120
+Okay.
+
+666
+00:38:49,120 --> 00:38:49,720
+>> Okay.
+
+667
+00:38:49,840 --> 00:38:51,040
+Shrimp looks great.
+
+668
+00:38:51,720 --> 00:38:53,400
+But everything else is here.
+
+669
+00:38:54,320 --> 00:38:54,680
+Great.
+
+670
+00:38:54,680 --> 00:38:59,000
+And then we could just use these pots.
+
+671
+00:38:59,240 --> 00:39:00,240
+So, we have our shrimp.
+
+672
+00:39:00,320 --> 00:39:00,840
+Yep.
+
+673
+00:39:00,840 --> 00:39:01,520
+>> Do you want to try it?
+
+674
+00:39:01,520 --> 00:39:02,120
+Cheers.
+
+675
+00:39:02,120 --> 00:39:02,400
+Cheers.
+
+676
+00:39:02,400 --> 00:39:02,760
+Let's see.
+
+677
+00:39:02,760 --> 00:39:03,920
+Maybe a little sweet.
+
+678
+00:39:06,560 --> 00:39:07,960
+That's a little too sweet.
+
+679
+00:39:08,360 --> 00:39:09,280
+Cuz we found a way to make it up.
+
+680
+00:39:09,280 --> 00:39:09,680
+>> for me.
+
+681
+00:39:09,680 --> 00:39:10,640
+I like sweet things.
+
+682
+00:39:10,640 --> 00:39:11,160
+>> It's good.
+
+683
+00:39:11,160 --> 00:39:11,960
+Okay, great.
+
+684
+00:39:12,320 --> 00:39:15,600
+Um Sean, do you want to come and taste our truffle soup?
+
+685
+00:39:15,760 --> 00:39:16,760
+>> That was so good by the way.
+
+686
+00:39:16,760 --> 00:39:21,880
+You guys can't smell it, but um >> We'll pretend you're a um researcher that's trying to get a promotion.
+
+687
+00:39:22,360 --> 00:39:26,600
+>> And I'm Zach and he's a you know trying to get you so do you want to grab the spoon over here?
+
+688
+00:39:26,600 --> 00:39:29,080
+>> soup is really going to sway the decision here.
+
+689
+00:39:29,280 --> 00:39:30,600
+The soup quality of soup.
+
+690
+00:39:30,760 --> 00:39:31,920
+Yeah.
+
+691
+00:39:31,920 --> 00:39:33,400
+Great.
+
+692
+00:39:33,400 --> 00:39:34,200
+>> I'll do it.
+
+693
+00:39:34,560 --> 00:39:34,800
+>> All right.
+
+694
+00:39:34,800 --> 00:39:37,120
+What was the artistic direction here?
+
+695
+00:39:37,920 --> 00:39:39,640
+>> Um artistic direction.
+
+696
+00:39:39,640 --> 00:39:40,680
+Well, it was mimicry.
+
+697
+00:39:40,920 --> 00:39:43,680
+I think there's great art in mimicry.
+
+698
+00:39:43,680 --> 00:39:44,200
+>> Yeah.
+
+699
+00:39:44,200 --> 00:39:45,520
+Just letting them cook.
+
+700
+00:39:45,520 --> 00:39:46,240
+Mhm.
+
+701
+00:39:46,240 --> 00:39:46,560
+Good.
+
+702
+00:39:46,560 --> 00:39:47,040
+>> Wow.
+
+703
+00:39:47,040 --> 00:39:47,640
+Yeah.
+
+704
+00:39:48,000 --> 00:39:50,520
+Strong.
+
+705
+00:39:51,640 --> 00:39:58,920
+>> I mean, I think um one thing I I definitely like like savory and spice that goes together, but then also like the sort of sea seafoodness.
+
+706
+00:39:59,360 --> 00:39:59,720
+Mhm.
+
+707
+00:39:59,720 --> 00:40:00,400
+Um >> Yeah.
+
+708
+00:40:00,400 --> 00:40:01,680
+Kind of really goes into it.
+
+709
+00:40:01,680 --> 00:40:02,160
+Great.
+
+710
+00:40:02,160 --> 00:40:02,760
+>> Okay.
+
+711
+00:40:03,120 --> 00:40:04,640
+Mine's mine's very dominant.
+
+712
+00:40:04,640 --> 00:40:05,400
+>> winner or what?
+
+713
+00:40:05,400 --> 00:40:05,800
+>> No, no, no.
+
+714
+00:40:05,800 --> 00:40:08,280
+You're you're supposed to try it and then >> No, you do pick a winner.
+
+715
+00:40:09,720 --> 00:40:10,200
+Okay.
+
+716
+00:40:10,200 --> 00:40:11,160
+>> This is like evals?
+
+717
+00:40:11,320 --> 00:40:11,760
+Yes.
+
+718
+00:40:11,760 --> 00:40:12,560
+Yeah.
+
+719
+00:40:12,560 --> 00:40:13,080
+>> So, it's expensive.
+
+720
+00:40:13,080 --> 00:40:14,120
+>> External evals.
+
+721
+00:40:14,560 --> 00:40:17,920
+>> Okay, I got to say I feel like there's too much water in this.
+
+722
+00:40:17,920 --> 00:40:20,920
+I think like the the >> I I think it's also a pot.
+
+723
+00:40:21,440 --> 00:40:22,360
+Cuz this is a big pot.
+
+724
+00:40:22,360 --> 00:40:22,720
+>> Yeah.
+
+725
+00:40:22,720 --> 00:40:23,640
+Wait, okay.
+
+726
+00:40:23,640 --> 00:40:25,760
+Um I I would say I I have to go for this.
+
+727
+00:40:25,760 --> 00:40:26,200
+>> Okay.
+
+728
+00:40:26,200 --> 00:40:26,360
+Okay.
+
+729
+00:40:26,360 --> 00:40:29,640
+>> Just like you're our respected guest, but I want to be objective.
+
+730
+00:40:29,640 --> 00:40:29,920
+>> Of course.
+
+731
+00:40:29,920 --> 00:40:30,280
+Of course.
+
+732
+00:40:30,280 --> 00:40:30,440
+Yes.
+
+733
+00:40:30,440 --> 00:40:30,680
+Yes.
+
+734
+00:40:30,680 --> 00:40:31,080
+Yes.
+
+735
+00:40:31,080 --> 00:40:38,040
+>> Um and like yeah, the density I think really a flavor really >> I'll do half water?
+
+736
+00:40:38,040 --> 00:40:38,640
+Half the water?
+
+737
+00:40:38,640 --> 00:40:38,920
+Probably.
+
+738
+00:40:38,920 --> 00:40:39,440
+>> Okay.
+
+739
+00:40:39,440 --> 00:40:40,160
+That sounds good.
+
+740
+00:40:40,160 --> 00:40:41,720
+>> I mean I think it's very personal, right?
+
+741
+00:40:41,720 --> 00:40:42,960
+>> Yeah, I think it's also very personal.
+
+742
+00:40:42,960 --> 00:40:45,040
+Taste, you know, you were mentioning >> You do a lot of cooking.
+
+743
+00:40:45,040 --> 00:40:45,480
+Taste.
+
+744
+00:40:45,480 --> 00:40:46,040
+>> No.
+
+745
+00:40:46,040 --> 00:40:46,200
+No.
+
+746
+00:40:46,200 --> 00:40:46,800
+No.
+
+747
+00:40:46,920 --> 00:40:47,200
+>> Okay.
+
+748
+00:40:47,200 --> 00:40:48,440
+I know a couple recipes.
+
+749
+00:40:48,720 --> 00:40:50,760
+Um I follow them to the T.
+
+750
+00:40:50,760 --> 00:40:54,160
+I can't Like if you tell me, "Oh, cook something slightly different."
+
+751
+00:40:54,200 --> 00:40:54,760
+I have no idea.
+
+752
+00:40:54,760 --> 00:40:55,720
+I'm completely lost.
+
+753
+00:40:55,720 --> 00:40:55,840
+>> Right.
+
+754
+00:40:55,840 --> 00:40:56,080
+Right.
+
+755
+00:40:56,080 --> 00:40:56,680
+>> Yeah.
+
+756
+00:40:56,720 --> 00:40:57,800
+There's busy cooking.
+
+757
+00:40:57,800 --> 00:40:58,840
+>> GPT can tell you.
+
+758
+00:40:58,840 --> 00:40:59,280
+>> Mhm.
+
+759
+00:40:59,280 --> 00:40:59,520
+Yeah.
+
+760
+00:40:59,520 --> 00:41:00,000
+Yeah.
+
+761
+00:41:00,000 --> 00:41:01,240
+Oh, I I'm not going to lie.
+
+762
+00:41:01,240 --> 00:41:04,480
+I kind of looked up in ChatGPT a couple of times.
+
+763
+00:41:04,480 --> 00:41:06,640
+>> So for you, it's like, "Oh, just as prep."
+
+764
+00:41:06,640 --> 00:41:07,280
+But >> No worries.
+
+765
+00:41:07,280 --> 00:41:07,760
+But yeah.
+
+766
+00:41:07,760 --> 00:41:08,960
+>> It was It was great having you.
+
+767
+00:41:08,960 --> 00:41:14,280
+I feel like you're always leading the field with a lot of research taste as well, and it's great seeing your work.
+
+768
+00:41:14,280 --> 00:41:15,560
+So hopefully It was fun.
+
+769
+00:41:15,560 --> 00:41:16,440
+>> Yeah, a lot of fun.
+
+770
+00:41:16,440 --> 00:41:17,360
+Thank you so much.
+

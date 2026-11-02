@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T16:41:54.944473+00:00",
+  "updatedAt": "2026-11-02T17:53:20.466433+00:00",
   "channels": [
     {
       "id": "UCHaHD477h-FeBbVh9Sh7syA",
@@ -54,8 +54,11 @@
         "ai"
       ],
       "reason": "게임 엔진과 인과 구조를 활용하는 월드 모델. 가정·인과관계·상호작용을 설명하는 영어를 연습하세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/oBWRHnggscM.en.srt",
+        "study-captions/oBWRHnggscM.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -63,7 +66,9 @@
       "published": "2026-04-02T00:00:00Z",
       "episodeUrl": "https://latent.space/p/moonlake/",
       "youtubeTitle": "Moonlake: Interactive, Multimodal World Models — with Chris Manning and Fan-yun Sun",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 753
     },
     {
       "yt": "A2P3Q3LCoLw",
@@ -76,8 +81,11 @@
         "ai"
       ],
       "reason": "게임 영상·행동 데이터와 공간 추론. 데이터의 가치를 설명하고 접근법을 비교하는 표현을 들어보세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/A2P3Q3LCoLw.en.srt",
+        "study-captions/A2P3Q3LCoLw.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -85,7 +93,9 @@
       "published": "2025-12-06T00:00:00Z",
       "episodeUrl": "https://latent.space/p/world-models-and-general-intuition/",
       "youtubeTitle": "World Models & General Intuition: Khosla's largest bet since LLMs & OpenAI",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 957
     },
     {
       "yt": "fGRd5gYhztg",
@@ -98,8 +108,11 @@
         "ai"
       ],
       "reason": "Runway의 실시간 월드 모델과 로보틱스 인터뷰. 영상 생성·기억·제어에 관한 기술 설명을 연습하세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/fGRd5gYhztg.en.srt",
+        "study-captions/fGRd5gYhztg.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -107,7 +120,9 @@
       "published": "2026-09-25T00:00:00Z",
       "episodeUrl": "https://latent.space/p/runway/",
       "youtubeTitle": "Runway’s Bet Beyond Video: World Models, Robotics, and the Neural OS — Anastasis Germanidis",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 1006
     },
     {
       "yt": "jPtQlILfkhA",
@@ -120,8 +135,11 @@
         "ai"
       ],
       "reason": "Grok Imagine·Cosmos와 비디오 에이전트. 모델 학습과 시스템의 역할을 구분하는 표현을 익히세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/jPtQlILfkhA.en.srt",
+        "study-captions/jPtQlILfkhA.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -129,7 +147,9 @@
       "published": "2026-06-01T00:00:00Z",
       "episodeUrl": "https://latent.space/p/video-agents/",
       "youtubeTitle": "Inside xAI: Building Grok Imagine in 3 Months, Videogen vs World Models, and Video Agents— Ethan He",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 1387
     },
     {
       "yt": "BHiYomkfoGQ",
@@ -142,8 +162,11 @@
         "ai"
       ],
       "reason": "사람 영상으로 배우는 World Action Model. 로봇 정책·실제 배포·장기 작업을 설명하는 인터뷰입니다.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/BHiYomkfoGQ.en.srt",
+        "study-captions/BHiYomkfoGQ.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -151,7 +174,9 @@
       "published": "2026-10-13T00:00:00Z",
       "episodeUrl": "https://latent.space/p/dyna/",
       "youtubeTitle": "Robots That Predict the Future: Dyna-2 & Physical AI — Jason Ma, Dyna Robotics",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 1103
     },
     {
       "yt": "79mIutht1f4",
@@ -165,8 +190,11 @@
         "science"
       ],
       "reason": "기상·유체·핵융합을 위한 모델. 수학·물리 개념을 영어로 풀어 설명하는 방식을 연습하세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/79mIutht1f4.en.srt",
+        "study-captions/79mIutht1f4.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -174,7 +202,9 @@
       "published": "2026-08-26T00:00:00Z",
       "episodeUrl": "https://latent.space/p/anima/",
       "youtubeTitle": "🔬 Why Transformers Hit a Wall the Moment Physics Shows Up — Anima Anandkumar, Caltech",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 1550
     },
     {
       "yt": "YHiqVRxGViM",
@@ -188,8 +218,11 @@
         "science"
       ],
       "reason": "자율 실험실과 재료 탐색. 가설·실험 결과·불확실성에 관한 영어 표현을 들어보세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/YHiqVRxGViM.en.srt",
+        "study-captions/YHiqVRxGViM.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -197,7 +230,9 @@
       "published": "2026-10-08T00:00:00Z",
       "episodeUrl": "https://latent.space/p/periodic/",
       "youtubeTitle": "AI Scientists Are Here: Autonomous Labs & Synthesis Superintelligence — Periodic Labs",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 959
     },
     {
       "yt": "2xBSGluFkG0",
@@ -211,8 +246,11 @@
         "science"
       ],
       "reason": "Google ERA와 과학 문제의 자동화. 평가 목표와 연구 사례를 설명하는 표현을 연습하세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/2xBSGluFkG0.en.srt",
+        "study-captions/2xBSGluFkG0.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -220,7 +258,9 @@
       "published": "2026-09-22T00:00:00Z",
       "episodeUrl": "https://latent.space/p/john-platt/",
       "youtubeTitle": "🔬 Google's AI Scientist Started as an Attempt to Automate Kaggle — John Platt, Google Fellow",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 1508
     },
     {
       "yt": "XqoBSB3nsgw",
@@ -234,8 +274,11 @@
         "science"
       ],
       "reason": "가설·실험·분석을 잇는 과학 에이전트. scientific taste와 피드백을 논하는 영어를 들어보세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/XqoBSB3nsgw.en.srt",
+        "study-captions/XqoBSB3nsgw.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -243,7 +286,9 @@
       "published": "2026-01-28T00:00:00Z",
       "episodeUrl": "https://latent.space/p/edison/",
       "youtubeTitle": "🔬 From Red Teaming GPT-4 to Automating Drug Discovery: The Future of AI in Science — Andrew White",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 1020
     },
     {
       "yt": "UwxxlTNPjWo",
@@ -256,8 +301,11 @@
         "ai"
       ],
       "reason": "에이전트 실행 환경·샌드박스·추론 인프라. 설계 선택과 기술적 제약을 설명하는 표현을 연습하세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/UwxxlTNPjWo.en.srt",
+        "study-captions/UwxxlTNPjWo.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -265,7 +313,9 @@
       "published": "2026-07-08T00:00:00Z",
       "episodeUrl": "https://latent.space/p/modal2026/",
       "youtubeTitle": "The Future of AI Infra: from Kubernetes to Agent Sandboxes — Akshat Bubna, Modal CTO",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 688
     },
     {
       "yt": "fpAthTtha8c",
@@ -278,8 +328,11 @@
         "ai"
       ],
       "reason": "요리하며 나누는 연구 방향·평가·scaling laws 이야기. 전문적인 논의와 일상 대화를 함께 들어보세요.",
-      "source": "curated",
-      "subs": [],
+      "source": "prepared",
+      "subs": [
+        "study-captions/fpAthTtha8c.en.srt",
+        "study-captions/fpAthTtha8c.ko.srt"
+      ],
       "collection": "latent-space-11",
       "pinned": true,
       "youtubeEnglishCaptions": true,
@@ -287,7 +340,9 @@
       "published": "2026-06-25T00:00:00Z",
       "episodeUrl": "https://www.youtube.com/watch?v=fpAthTtha8c",
       "youtubeTitle": "Cooking with OpenAI’s Research Chief: AGI, o1, Evals, and Scaling Laws — Mark Chen",
-      "checkedAt": "2026-11-03"
+      "checkedAt": "2026-11-03",
+      "translation": "GPT",
+      "sentenceCount": 770
     },
     {
       "yt": "wkjSBC-_bDA",
@@ -439,6 +494,44 @@
       "subs": [
         "study-captions/0idrTKCDhuE.en.srt",
         "study-captions/0idrTKCDhuE.ko.srt"
+      ],
+      "translation": "GPT",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "SWIKyLSUBIc",
+      "title": "Information Theory for Language Models: Jack Morris",
+      "channel": "Latent Space",
+      "channelId": "UCxBcwypKK-W3GHd_RZ9FZrQ",
+      "duration": 4693,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "Jack Morris와 정보이론·임베딩·언어 모델의 암기와 일반화를 다루는 인터뷰입니다. GPT 한국어 번역과 함께 연구 개념을 설명하는 표현을 연습하세요.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/SWIKyLSUBIc.en.srt",
+        "study-captions/SWIKyLSUBIc.ko.srt"
+      ],
+      "translation": "GPT",
+      "checkedAt": "2026-11-02"
+    },
+    {
+      "yt": "8t65bss7U74",
+      "title": "Language Agents: From Reasoning to Acting — with Shunyu Yao of OpenAI, Harrison Chase of LangGraph",
+      "channel": "Latent Space",
+      "channelId": "UCxBcwypKK-W3GHd_RZ9FZrQ",
+      "duration": 5193,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "Shunyu Yao와 Harrison Chase가 ReAct·Reflexion·언어 에이전트를 설명합니다. GPT 한국어 번역으로 추론, 도구 사용, 에이전트 설계에 관한 논의를 따라가세요.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/8t65bss7U74.en.srt",
+        "study-captions/8t65bss7U74.ko.srt"
       ],
       "translation": "GPT",
       "checkedAt": "2026-11-02"

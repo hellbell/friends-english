@@ -1,0 +1,4328 @@
+1
+00:00:03,480 --> 00:00:09,360
+Hello, this is in space just switch today with our special guest Jack Morris.
+
+2
+00:00:09,600 --> 00:00:10,600
+I guess from Columbia.
+
+3
+00:00:10,600 --> 00:00:12,080
+That's your affiliation right now.
+
+4
+00:00:12,120 --> 00:00:12,720
+Cornell.
+
+5
+00:00:14,280 --> 00:00:21,080
+It's actually confusing because I go I'm in a the New York City Outpost of of Cornell.
+
+6
+00:00:21,080 --> 00:00:22,520
+So you have the city right.
+
+7
+00:00:22,960 --> 00:00:28,680
+But it's Cornell Tech which is like a small Cornell campus in New York.
+
+8
+00:00:28,920 --> 00:00:31,760
+you're you're student of Professor Rush who teaches at Cornell.
+
+9
+00:00:31,920 --> 00:00:33,400
+So I I should have made that connection.
+
+10
+00:00:33,400 --> 00:00:33,800
+Okay.
+
+11
+00:00:33,800 --> 00:00:34,720
+Yeah, I'm sorry.
+
+12
+00:00:35,240 --> 00:00:46,040
+Well, that's that's a horrible mistake to make right off the bat, but you're one of Look, you're one of the they're not that many PhD students that make an impact with their research.
+
+13
+00:00:46,040 --> 00:00:56,560
+The last time someone like this happens was Shinju from Princeton and he joined the open AI operator team quite shortly after he graduated.
+
+14
+00:00:56,920 --> 00:01:06,520
+So like you're one of those like high-profile PhD students that's like coming out of the the program and like I figured like it was a good time to just like talk about your work
+
+15
+00:01:06,840 --> 00:01:11,600
+and also the fact that you're looking for like which lab you're you're going to join.
+
+16
+00:01:11,640 --> 00:01:18,760
+That's like a whole interesting meta discussion especially with like the insane market for AI talent these days.
+
+17
+00:01:18,880 --> 00:01:21,520
+What's it like to be a AI grad student these days?
+
+18
+00:01:21,680 --> 00:01:22,880
+Yeah, and thanks for having me.
+
+19
+00:01:22,880 --> 00:01:29,520
+I guess maybe we can go back to when things first started or like like put yourself in my shoes.
+
+20
+00:01:30,000 --> 00:01:31,400
+In 2017-2018,
+
+21
+00:01:32,480 --> 00:01:36,480
+I would really learned a lot about machine learning and at my I went to a state university.
+
+22
+00:01:36,840 --> 00:01:41,400
+It's a good school, but they didn't have like a deep learning research department or anything.
+
+23
+00:01:41,400 --> 00:01:44,640
+They had people doing it, but it was just not as big at that time.
+
+24
+00:01:44,880 --> 00:01:50,240
+But I was getting really interested in those topics especially as applied to language.
+
+25
+00:01:50,680 --> 00:01:57,040
+And then in 2019, I kind of was starting to do research and I think thinking about my career.
+
+26
+00:01:57,360 --> 00:01:59,600
+When I was at that point, I was 20 21.
+
+27
+00:02:00,040 --> 00:02:06,720
+I was thinking about like where do I want to be career-wise or like who's doing the coolest stuff right now?
+
+28
+00:02:06,720 --> 00:02:09,200
+Like looking at like what kind of stuff is coming out of that time.
+
+29
+00:02:09,200 --> 00:02:10,440
+I mean I think AlphaGo.
+
+30
+00:02:10,520 --> 00:02:12,240
+I thought AlphaGo was really good.
+
+31
+00:02:12,520 --> 00:02:15,920
+At that time I was playing a lot with like BERT and BERT-based models.
+
+32
+00:02:16,040 --> 00:02:20,000
+So like you know Google DeepMind, they're doing great work.
+
+33
+00:02:20,000 --> 00:02:26,040
+GPT-2, GPT-1 from OpenAI were like interesting, but I think most people were into BERT at that time.
+
+34
+00:02:26,440 --> 00:02:34,000
+I still have a soft spot for like that parameter class of like 100 million to 1 billion scale models.
+
+35
+00:02:34,280 --> 00:02:42,280
+But this is all to say I think at that time I felt like the people doing a lot of the most impactful work were like professors and PhD students.
+
+36
+00:02:42,280 --> 00:02:47,960
+Like just a ton of like interesting ideas being explored and cool opportunities in academia.
+
+37
+00:02:48,680 --> 00:02:51,600
+So I ended up applying to grad school.
+
+38
+00:02:52,160 --> 00:02:58,560
+Well, I first I did this Google AI residency program which was mostly during the pandemic like 2020 and then 2021.
+
+39
+00:02:59,280 --> 00:03:00,920
+And then I was also applying to grad school.
+
+40
+00:03:00,920 --> 00:03:02,240
+Started grad school in 2021.
+
+41
+00:03:03,040 --> 00:03:06,000
+That's still what was going on at that time.
+
+42
+00:03:06,000 --> 00:03:08,200
+Like around when I guess GPT-3
+
+43
+00:03:09,280 --> 00:03:14,000
+175 billion had been released but not instruct GPT.
+
+44
+00:03:14,160 --> 00:03:20,640
+So like we had pre-training and sort of the science of pre-training was emerging, but that's where the models were.
+
+45
+00:03:21,000 --> 00:03:27,360
+And I still think like I'm glad that I went to grad school and like I had a great experience,
+
+46
+00:03:27,360 --> 00:03:30,360
+but the last 5 years have changed a lot.
+
+47
+00:03:30,360 --> 00:03:32,840
+Like the whole meta has shifted, you know?
+
+48
+00:03:32,840 --> 00:03:37,040
+Like uh and the kind of power dynamics are completely different.
+
+49
+00:03:37,040 --> 00:03:39,040
+The ideas are coming from different places.
+
+50
+00:03:39,360 --> 00:03:40,440
+Most stuff was open.
+
+51
+00:03:40,440 --> 00:03:42,360
+Now most stuff is not open.
+
+52
+00:03:42,760 --> 00:03:49,040
+Um the types of questions people are asking are different and so yeah, I mean for better or for worse,
+
+53
+00:03:49,040 --> 00:03:53,600
+I did go to do the full grad school thing and and here I am.
+
+54
+00:03:53,600 --> 00:03:59,320
+It's been really interesting perspective watching the science kind of emerge with the products.
+
+55
+00:03:59,480 --> 00:04:04,600
+Like the biggest thing that happened by far was like ChatGPT coming out and which was right in the middle.
+
+56
+00:04:04,600 --> 00:04:08,240
+Like what 2022 before Christmas like November.
+
+57
+00:04:08,800 --> 00:04:14,160
+I remember that year like all like my grandma was asking me about it and that's when it hit me like oh,
+
+58
+00:04:14,160 --> 00:04:19,440
+this is actually becoming like a real area that people will know about and understand.
+
+59
+00:04:19,440 --> 00:04:29,080
+Like I was trying to explain it to my parents and that's when I think things really started to change in terms of the types of questions you wanted to ask can't always be answered
+
+60
+00:04:29,080 --> 00:04:30,320
+with academic resources.
+
+61
+00:04:30,320 --> 00:04:37,360
+So a lot of the like fundamental kind of like boundary pushing in AI science moved into companies.
+
+62
+00:04:37,800 --> 00:04:41,600
+That was the year when like you know, just around NeurIPS as well.
+
+63
+00:04:41,680 --> 00:04:51,040
+Everyone in in NLP and deep learning were were were like very confused at like I think some people were like kind of expecting this already in a sense that they had they were obviously
+
+64
+00:04:51,040 --> 00:04:53,480
+more clued into large language models.
+
+65
+00:04:53,840 --> 00:05:00,920
+But I think that the sheer amount of consumer level interest that had that that was around at the time in 2022 that completely changed the world.
+
+66
+00:05:00,920 --> 00:05:03,720
+Like now now we're just like in a different sphere.
+
+67
+00:05:04,320 --> 00:05:09,960
+Did you have to pivot your research or were you already you just went from BERT to like other stuff.
+
+68
+00:05:10,320 --> 00:05:12,280
+You've done a lot of embeddings work.
+
+69
+00:05:12,480 --> 00:05:14,960
+I mean you're always heads down working on a problem.
+
+70
+00:05:14,960 --> 00:05:22,560
+So I don't think most people in academia are the type to say, "Oh, look at this new product that came out.
+
+71
+00:05:22,560 --> 00:05:24,600
+I'm going to abandon everything I'm doing."
+
+72
+00:05:24,840 --> 00:05:26,360
+That can be the right move, you know?
+
+73
+00:05:26,360 --> 00:05:27,760
+Oh, it definitely can.
+
+74
+00:05:27,760 --> 00:05:39,440
+Honestly, if if if I were to give advice to a younger grad student I think the way to do it would be literally just like sit and wait until the next kind of paradigm
+
+75
+00:05:39,440 --> 00:05:43,800
+shift and then just immediately start working as fast as you can to like re-implement it.
+
+76
+00:05:43,880 --> 00:05:51,320
+Like I I don't think that's like maybe the best way to do science, but it's probably the best way to play the sort of academic game in the in the days of AI.
+
+77
+00:05:51,320 --> 00:05:53,520
+Like you've seen that so many times.
+
+78
+00:05:53,520 --> 00:06:01,800
+Most recently probably with the reasoning models like 01 came out of OpenAI September 2024 last year.
+
+79
+00:06:02,120 --> 00:06:07,440
+And then there's just been this explosion of like you build like abstraction ladders on top of that.
+
+80
+00:06:07,440 --> 00:06:09,200
+Like first it was re-implementation.
+
+81
+00:06:09,360 --> 00:06:10,480
+Like how do we even do this?
+
+82
+00:06:10,480 --> 00:06:12,480
+And now it's like a lot about the data.
+
+83
+00:06:12,480 --> 00:06:13,400
+What's the right data?
+
+84
+00:06:13,400 --> 00:06:14,480
+What are the right evals?
+
+85
+00:06:14,480 --> 00:06:15,800
+What are the right training schemes?
+
+86
+00:06:15,800 --> 00:06:20,960
+Like there's so many different axes you can test and publish research in.
+
+87
+00:06:20,960 --> 00:06:28,400
+And like I think the easiest way to do that probably is just work in a field like that that like has it only existed for less than 1 year.
+
+88
+00:06:28,560 --> 00:06:31,600
+And so no one has any like big advantage, I guess.
+
+89
+00:06:31,960 --> 00:06:33,520
+That is mostly correct.
+
+90
+00:06:33,520 --> 00:06:37,720
+I think anyone who jumped on reasoning and RL for LLMs is doing super well.
+
+91
+00:06:37,720 --> 00:06:49,080
+I just saw this morning that one of the recent Stanford grad students who worked on RL, they just started their company and they're worth 500 million.
+
+92
+00:06:49,080 --> 00:06:51,760
+It's It's like absolutely bonkers right now.
+
+93
+00:06:51,880 --> 00:06:56,800
+Like just like no product, just three dudes, you know, sitting in some basement somewhere.
+
+94
+00:06:57,040 --> 00:07:01,080
+I mean undoubtedly cracked, but like also not worth 500 million.
+
+95
+00:07:01,240 --> 00:07:03,520
+Yeah, but maybe it's not paying for the product, right?
+
+96
+00:07:03,520 --> 00:07:07,320
+It's like the the ideas behind it or the yeah, yeah.
+
+97
+00:07:07,440 --> 00:07:13,280
+There was this big shift from in scale of working with 100 million parameter models.
+
+98
+00:07:13,520 --> 00:07:17,760
+Really what happened is like I think the companies invested a ton more into training and infra.
+
+99
+00:07:18,280 --> 00:07:20,560
+And like we all kind of had to catch up.
+
+100
+00:07:20,560 --> 00:07:24,040
+Like you know, me, I go to Cornell, work with the professor there.
+
+101
+00:07:24,040 --> 00:07:25,240
+He has to buy GPUs.
+
+102
+00:07:25,360 --> 00:07:28,400
+Like should he buy last year's GPUs or this year's GPUs?
+
+103
+00:07:28,400 --> 00:07:29,600
+How many should he get?
+
+104
+00:07:29,800 --> 00:07:38,720
+That we were kind of like trying to figure that out and there was there was like a big lag I think where basically the the 7 and 8 billion parameter scale,
+
+105
+00:07:38,880 --> 00:07:48,080
+like there's a huge difference between the BERT-size models which are 125 million parameters to to 200 and then like the 8 billion parameters.
+
+106
+00:07:48,080 --> 00:07:52,520
+I mean obviously it's two orders of magnitude, but just like this idea of emergence.
+
+107
+00:07:52,680 --> 00:07:58,760
+Like if you're talking to a model that's 100 million parameters, no matter how well it's trained, it knows nothing.
+
+108
+00:07:58,800 --> 00:08:01,840
+Like if you ask it like "What's the capital of a state?"
+
+109
+00:08:01,840 --> 00:08:08,120
+Or like if you ask it "Who's Who was president of the United States in 1990 or whatever?"
+
+110
+00:08:08,120 --> 00:08:13,360
+It'll just always say George Washington because it just associates the words like president United States with George Washington.
+
+111
+00:08:13,920 --> 00:08:19,560
+And then when you get to the 8 billion parameter scale, suddenly it knows every single president.
+
+112
+00:08:19,560 --> 00:08:22,320
+It knows every single capital of every single country.
+
+113
+00:08:22,560 --> 00:08:25,840
+And I really do think that changes the type of research you can do.
+
+114
+00:08:25,840 --> 00:08:29,240
+And so like it took us a while I think in academia to catch up.
+
+115
+00:08:29,240 --> 00:08:34,440
+Like getting good 7 billion parameter models and then running them and getting GPUs to run them.
+
+116
+00:08:34,440 --> 00:08:36,120
+Now I think things have stabilized a lot.
+
+117
+00:08:36,120 --> 00:08:42,920
+Like we have access to compute and we can kind of like fine-tune and inference that scale of models and that's like kind of fine.
+
+118
+00:08:43,280 --> 00:08:49,280
+But there was like kind of 2 years where everyone in academia was working on like smaller models and none of it really mattered.
+
+119
+00:08:49,480 --> 00:08:51,600
+I can sort of branch that discussion in two ways.
+
+120
+00:08:51,600 --> 00:08:54,280
+And we should we should sort of go to your research at some point.
+
+121
+00:08:54,280 --> 00:08:58,680
+But I'm enjoying this because I think like we don't get to talk about this on the podcast too often.
+
+122
+00:08:58,680 --> 00:09:05,080
+One is there's there's an often is often bit of advice from the industry people to grad students which is give up.
+
+123
+00:09:05,080 --> 00:09:06,120
+Don't work on models.
+
+124
+00:09:06,160 --> 00:09:07,400
+Just do benchmarks, right?
+
+125
+00:09:07,400 --> 00:09:11,800
+Like a really good benchmarks will get our attention and then we'll hire you and then you can switch to models later.
+
+126
+00:09:11,800 --> 00:09:14,080
+You have for better or worse avoided that.
+
+127
+00:09:14,160 --> 00:09:15,000
+Which is cool.
+
+128
+00:09:15,160 --> 00:09:16,960
+And we can talk about that as well.
+
+129
+00:09:17,080 --> 00:09:27,360
+But the other thing I think is that round about 7 8B maybe 4B is when you start switching from like a single GPU setup to like a distributed setup.
+
+130
+00:09:27,920 --> 00:09:31,920
+And I'm wondering like do grad students get HPC training?
+
+131
+00:09:32,200 --> 00:09:37,760
+How much they teach you of like just how to work with like large clusters of stuff?
+
+132
+00:09:38,200 --> 00:09:40,440
+Oh, to be clear, they don't teach you anything.
+
+133
+00:09:40,720 --> 00:09:51,240
+Like anything like if you see a paper coming out from even you know, Stanford probably the best school in AI if you had to choose and it's not like they're learning how to do
+
+134
+00:09:51,240 --> 00:09:56,120
+like multi-node distributed FSDP training like with whatever DeepSpeed.
+
+135
+00:09:56,440 --> 00:09:59,240
+You have to learn that from the internet and from other people.
+
+136
+00:09:59,400 --> 00:10:02,720
+And like there's no classes that really do that.
+
+137
+00:10:02,720 --> 00:10:06,760
+I mean it's that's hard to facilitate like as one person.
+
+138
+00:10:07,280 --> 00:10:11,440
+I would say most grad students are doing stuff on single GPU.
+
+139
+00:10:11,440 --> 00:10:14,640
+Some people are doing multi GPU training.
+
+140
+00:10:14,640 --> 00:10:19,120
+There's probably basically no grad students doing multi node training.
+
+141
+00:10:19,120 --> 00:10:24,440
+I mean there's probably a few, especially if they have like company affiliations, but that's really unusual, I think.
+
+142
+00:10:24,720 --> 00:10:25,320
+Okay.
+
+143
+00:10:25,320 --> 00:10:33,800
+For grad students who are looking to get up to speed on that, I would recommend the GPU mode Discord where basically the PyTorch team is hanging out in there just waiting to help you.
+
+144
+00:10:33,880 --> 00:10:36,160
+And then the other one would be the fast.ai team.
+
+145
+00:10:36,160 --> 00:10:40,680
+If you have some kind of thing, Jeremy Howard would basically help you out.
+
+146
+00:10:40,680 --> 00:10:43,120
+And they they have some distributed training.
+
+147
+00:10:43,200 --> 00:10:46,360
+Honestly, try to reach out to the DeepSpeed team at Microsoft.
+
+148
+00:10:46,360 --> 00:10:48,840
+Like actually they're reasonably accessible.
+
+149
+00:10:48,880 --> 00:10:50,120
+Nobody talks to them.
+
+150
+00:10:50,240 --> 00:10:51,440
+Like it's so so funny.
+
+151
+00:10:51,440 --> 00:10:56,360
+I I I like met them at NeurIPS and like they had nobody at their like there's presenting DeepSpeed three.
+
+152
+00:10:56,400 --> 00:10:57,680
+I was the only one asking questions.
+
+153
+00:10:57,680 --> 00:10:58,280
+Like
+
+154
+00:10:59,400 --> 00:11:00,720
+yeah.
+
+155
+00:11:00,720 --> 00:11:02,200
+Yeah, that's good that's good advice.
+
+156
+00:11:02,200 --> 00:11:03,280
+Listen to this guy.
+
+157
+00:11:03,400 --> 00:11:06,800
+Yeah, I mean it's just basically like people are there if you want to ask.
+
+158
+00:11:06,920 --> 00:11:08,920
+This is very very valuable experience.
+
+159
+00:11:09,240 --> 00:11:16,680
+Once you're like a GPU god, like you're basically you know in a like a different tier as a researcher because you don't rely on someone else helping you out.
+
+160
+00:11:16,680 --> 00:11:20,160
+Like you can just sort of be your own research engineer, you know.
+
+161
+00:11:20,320 --> 00:11:27,040
+Yeah, I'll comment on that quickly because if someone has been listening to this and also following me online for a while,
+
+162
+00:11:27,040 --> 00:11:33,480
+I think I've made a couple comments like saying something like you shouldn't learn about CUDA or things to that nature.
+
+163
+00:11:33,920 --> 00:11:36,480
+And I'll I'll give some more color to that.
+
+164
+00:11:36,480 --> 00:11:40,600
+So it's definitely a great idea to learn CUDA if you can.
+
+165
+00:11:40,800 --> 00:11:47,160
+I think my point was that if you're trying to enter this space, like learn about the models, learn about how they're trained,
+
+166
+00:11:47,160 --> 00:11:49,560
+what the data looks like, what the compute looks like.
+
+167
+00:11:49,640 --> 00:11:54,520
+One axis of that is how to do more efficient training and inference.
+
+168
+00:11:54,640 --> 00:12:02,920
+And one part of doing more efficient training and inference is studying the hardware which is GPUs.
+
+169
+00:12:03,320 --> 00:12:08,320
+So like I think that's a very small subset of all possible knowledge that you could acquire.
+
+170
+00:12:08,800 --> 00:12:12,680
+And it's probably not the best place for a lot of people to start.
+
+171
+00:12:12,960 --> 00:12:17,120
+That said, if you do it you're you've got to be one of the most hireable people in the world.
+
+172
+00:12:17,160 --> 00:12:24,839
+Like if you like really deeply understand the architecture of the new GPUs coming out and and how to control it,
+
+173
+00:12:24,839 --> 00:12:29,400
+you're in a very small handful of people and like everyone will want to hire you.
+
+174
+00:12:29,400 --> 00:12:31,720
+Actually the sweet spot is not even CUDA right now.
+
+175
+00:12:31,720 --> 00:12:33,920
+I would say actually it is Mojo.
+
+176
+00:12:34,040 --> 00:12:37,240
+I don't know if you've been paying attention to modular Mojo.
+
+177
+00:12:37,480 --> 00:12:38,920
+Oh, I listened to your podcast, man.
+
+178
+00:12:38,920 --> 00:12:41,480
+You had that guy on the other day.
+
+179
+00:12:41,520 --> 00:12:48,600
+The whole story is Chris Lattner, industry legends, LLVM, Swift, all these things.
+
+180
+00:12:48,720 --> 00:12:52,440
+And now he's turned his attention to the Python CUDA relationship, right?
+
+181
+00:12:52,440 --> 00:12:56,320
+And he wants to basically create a viable CUDA replacement.
+
+182
+00:12:56,760 --> 00:12:58,680
+It's basically Python married with Rust.
+
+183
+00:12:59,000 --> 00:13:03,120
+For the last two and a half years it was basically kind of stealth, not ready for production.
+
+184
+00:13:03,400 --> 00:13:07,520
+When he came on our podcast he was basically announcing to the world like we're open for business.
+
+185
+00:13:07,520 --> 00:13:14,600
+Like you can use us now for for most models and like we actually are faster than like the native like sometimes the PTX implementation.
+
+186
+00:13:14,600 --> 00:13:18,200
+I don't know how that works precisely, but he's a compiler languages god.
+
+187
+00:13:18,320 --> 00:13:20,600
+I think there's a there's one of those windows now.
+
+188
+00:13:20,600 --> 00:13:23,960
+Like like you said like you know bet early on something that's that's a that's a shift.
+
+189
+00:13:24,040 --> 00:13:29,760
+It's one of those windows now where you try to implement things, you basically like you know Mojo is 100 people.
+
+190
+00:13:29,880 --> 00:13:32,720
+If you run into issues you'll get Chris's personal help on things.
+
+191
+00:13:32,920 --> 00:13:35,000
+Like I'm not promising it, but like probably.
+
+192
+00:13:35,240 --> 00:13:37,960
+You know like cuz he wants to work on improving the toolkit.
+
+193
+00:13:38,200 --> 00:13:46,760
+And all you have to do is just like it's not really about becoming a CUDA god because obviously like once you wrap up on on the the general concepts and principles you can probably
+
+194
+00:13:46,760 --> 00:13:49,800
+translate ecosystems pretty effectively.
+
+195
+00:13:50,280 --> 00:13:52,880
+A lot of people switch from like JAX to to CUDA.
+
+196
+00:13:52,920 --> 00:13:57,800
+But like the the thing is just like being able to experiment very quickly on a limited budget.
+
+197
+00:13:57,800 --> 00:14:04,360
+Like efficiency is not just because you are trying to be an efficiency guru and that's your career and that's kind of boring.
+
+198
+00:14:04,640 --> 00:14:09,760
+But it's really also just about being able to experiment very quickly and finding these like these ideas.
+
+199
+00:14:10,040 --> 00:14:16,679
+I also think vLLM and S 3 Lang seem like really good and important and here to stay.
+
+200
+00:14:17,000 --> 00:14:29,400
+Like they'll probably just get larger and more complex to accommodate future systems, but if I were like a starting out grad student I and working in that area I'd probably like want to learn
+
+201
+00:14:29,400 --> 00:14:31,559
+more about how they work.
+
+202
+00:14:31,640 --> 00:14:32,240
+Awesome.
+
+203
+00:14:32,320 --> 00:14:33,640
+Let's go to your research.
+
+204
+00:14:33,839 --> 00:14:39,640
+I I like to mention that I I first came across you because of CDE, the contextual document embedding paper.
+
+205
+00:14:39,640 --> 00:14:49,760
+You can tell me the story about that, but I just want to show you proof that you know I get one slot per day to highlight the number one AI story and you were
+
+206
+00:14:49,760 --> 00:14:51,320
+the slot of the day for October 5th.
+
+207
+00:14:51,320 --> 00:14:52,240
+No no way.
+
+208
+00:14:52,520 --> 00:14:59,680
+I mean obviously you were producing work before that, but like I thought CDE was a really cool exploration of like oh yeah,
+
+209
+00:14:59,680 --> 00:15:02,360
+you know embedding models are kind of like stuck in a rut.
+
+210
+00:15:02,360 --> 00:15:06,120
+Like here's actually how to make them very efficient by just doing it in two stages.
+
+211
+00:15:06,560 --> 00:15:11,280
+That seems like a you know relatively simple insight that was done very well.
+
+212
+00:15:11,360 --> 00:15:17,280
+But you have a general maybe information theory thing that maybe we should start with and then we can sort of create it in a similar way.
+
+213
+00:15:17,520 --> 00:15:18,280
+Yeah, sure.
+
+214
+00:15:18,280 --> 00:15:19,120
+That sounds good.
+
+215
+00:15:19,120 --> 00:15:21,120
+So we can we can circle back on that.
+
+216
+00:15:21,120 --> 00:15:24,640
+That's that's really cool that you wrote about it.
+
+217
+00:15:24,640 --> 00:15:27,320
+What was that almost coming up on two years ago?
+
+218
+00:15:27,560 --> 00:15:28,880
+Yeah, this is the post I wrote.
+
+219
+00:15:28,880 --> 00:15:31,559
+I called it a new type of information theory.
+
+220
+00:15:31,880 --> 00:15:37,800
+We don't need to go into the there's this paper about a concept called V-information.
+
+221
+00:15:38,600 --> 00:15:47,840
+Maybe I'll give like the most simple explanation which is if you say you have two text files, one text file contains a paragraph of information about New York City.
+
+222
+00:15:48,040 --> 00:15:56,280
+And then the other text file contains the same text but encrypted with like SHA whatever encryption algorithm.
+
+223
+00:15:56,280 --> 00:16:04,320
+So it looks like random letters, but if you decrypt it, it has the same text as the first text file.
+
+224
+00:16:04,560 --> 00:16:13,800
+From the perspective of like Shannon's information theory, these two files contain the same information content.
+
+225
+00:16:14,160 --> 00:16:25,960
+Like relative to everything they have the same number of bits, but it's it's very clear to the observer that the first text file which is plain English text is like much easier to read
+
+226
+00:16:26,160 --> 00:16:29,080
+and easier to process even though they have the same information.
+
+227
+00:16:29,640 --> 00:16:37,760
+And so there's this theoretical framework proposed in this paper which is a theory of usable information under computational constraints from 2020.
+
+228
+00:16:37,959 --> 00:16:40,200
+It really doesn't have that much press.
+
+229
+00:16:40,200 --> 00:16:44,560
+There not aren't as many citations as you would think, but I think it's a really really neat idea.
+
+230
+00:16:44,560 --> 00:16:51,000
+It's like we should measure information with computational power as a constraint.
+
+231
+00:16:51,120 --> 00:16:59,480
+So like they have this idea they call V-information of how much information is extractable from a given like file or or code.
+
+232
+00:16:59,800 --> 00:17:06,400
+So in that case we could say the left text file actually has more extractable information than the the right text file.
+
+233
+00:17:06,640 --> 00:17:08,040
+I think that's like really good.
+
+234
+00:17:08,040 --> 00:17:12,320
+That captures a lot of our ideas of how these deep learning systems work.
+
+235
+00:17:12,320 --> 00:17:13,520
+Like why does pre-training work?
+
+236
+00:17:13,520 --> 00:17:20,439
+Like if you have two sets of weights and you you want to train on some downstream data set, one set of weights is pre-trained,
+
+237
+00:17:20,439 --> 00:17:22,360
+one set of weights is randomly initialized.
+
+238
+00:17:22,760 --> 00:17:28,600
+Why is the pre-trained model better at all even though it's never seen your data?
+
+239
+00:17:28,760 --> 00:17:34,080
+Maybe one way of looking at that is that it has like it makes the information like more extractable somehow.
+
+240
+00:17:34,080 --> 00:17:37,520
+Like there's this concept of like computational
+
+241
+00:17:38,720 --> 00:17:41,200
+processing that you can almost like store up.
+
+242
+00:17:41,320 --> 00:17:48,360
+I like this as a just like a lens to view problems with like how much information is stored where.
+
+243
+00:17:48,360 --> 00:17:57,560
+Like if you if you get a a set of model weights or like an activation vector and you open it up like print some tensor or NumPy array,
+
+244
+00:17:57,640 --> 00:17:59,240
+it looks like random numbers, right?
+
+245
+00:17:59,240 --> 00:18:12,040
+Like there's nothing human intelligible about that, but really it's this complex combination of like the training data and the training algorithm which get compressed into model weights and then the actual computation that the
+
+246
+00:18:12,040 --> 00:18:16,279
+model is doing which involves like manipulating these numbers in ways that we don't understand.
+
+247
+00:18:16,840 --> 00:18:25,320
+So it's like this really highly compressed non-linear combination of all these information sources mixed with like computation.
+
+248
+00:18:25,920 --> 00:18:29,520
+And I just think we don't have like the right words of of discussing this.
+
+249
+00:18:29,520 --> 00:18:41,159
+I think I like the information theory analogy because back in the day, you know, we had phones and like telegraphs and and people were just sort of like building the phone system with these
+
+250
+00:18:41,159 --> 00:18:47,160
+crazy heuristics to like send information across the country or send telegraphs across the Atlantic.
+
+251
+00:18:47,600 --> 00:18:50,320
+People were just like trying stuff.
+
+252
+00:18:50,360 --> 00:18:56,120
+And then uh we kind of found stuff that worked and we we ran with it that wasn't really optimal.
+
+253
+00:18:56,679 --> 00:19:04,160
+And it wasn't until someone came along and proposed this concept of like a bit, like a one or zero that tells you something.
+
+254
+00:19:04,240 --> 00:19:06,280
+And once we have a bit we can do all these things.
+
+255
+00:19:06,280 --> 00:19:09,240
+We can like count the amount of information in signal.
+
+256
+00:19:09,600 --> 00:19:11,960
+We can do really good error correction.
+
+257
+00:19:12,360 --> 00:19:20,360
+We can measure properties of distributions of things and and we can build like a really good system for for phones and then eventually which led to computers.
+
+258
+00:19:20,919 --> 00:19:26,640
+I'm bringing this all up because I don't think we have I don't think we know what a bit is yet in terms of like deep learning models.
+
+259
+00:19:26,919 --> 00:19:30,200
+I'm going to graduate for my PhD this year, but I didn't figure it out.
+
+260
+00:19:30,200 --> 00:19:39,760
+So if you're listening to this maybe you can like I don't know spend more time on it or you're smarter than me or you have a you know a group of collaborators you can
+
+261
+00:19:39,760 --> 00:19:43,800
+all get together and figure out what the right lens to look at this stuff is.
+
+262
+00:19:43,800 --> 00:19:52,000
+But even by just asking these questions I think I was able to conduct this research agenda that I'm kind of still working on actually.
+
+263
+00:19:52,400 --> 00:19:53,840
+Yeah.
+
+264
+00:19:53,840 --> 00:19:55,560
+What do you call this field?
+
+265
+00:19:55,880 --> 00:19:58,160
+Uh I don't know.
+
+266
+00:19:58,160 --> 00:19:58,600
+I don't know.
+
+267
+00:19:58,600 --> 00:20:01,800
+I called the post a new type of information theory.
+
+268
+00:20:02,000 --> 00:20:03,760
+I don't think it exists yet, I guess.
+
+269
+00:20:03,760 --> 00:20:08,960
+So, maybe it'll it'll get a name once someone actually comes up with the right set of definitions.
+
+270
+00:20:09,280 --> 00:20:11,800
+I think the information is a is a really good start.
+
+271
+00:20:12,200 --> 00:20:13,760
+There's a couple related threads.
+
+272
+00:20:13,880 --> 00:20:23,600
+So, first of all, you don't know this, but I actually have been trying to accumulate data about Shannon like it's sort of like a Shannon information theory view of language models.
+
+273
+00:20:23,800 --> 00:20:24,880
+I have a lot of notes.
+
+274
+00:20:24,880 --> 00:20:29,760
+This is actually on my GitHub for people who are watching along, but um you know, like at the limit,
+
+275
+00:20:29,880 --> 00:20:36,400
+if language model has 175 billion parameters using 16-bit, you can it would take up 350 GB.
+
+276
+00:20:36,640 --> 00:20:37,960
+You can compare that to Wikipedia.
+
+277
+00:20:37,960 --> 00:20:39,760
+Wikipedia is about 150 GB.
+
+278
+00:20:40,040 --> 00:20:42,160
+You know, let's say GPT-3 can store two Wikipedias.
+
+279
+00:20:42,680 --> 00:20:47,920
+But like is is that a relevant measure of information storage, right?
+
+280
+00:20:47,920 --> 00:20:50,680
+It is not because you can compress Wikipedia a lot.
+
+281
+00:20:50,680 --> 00:20:52,680
+There's a lot of repeated patterns.
+
+282
+00:20:53,040 --> 00:21:06,720
+Tokenization is is like the first form of compression, but I think there's a there's a related talk from Ilya Sutskever about how deep learning is machine learning and kind of is is is compression.
+
+283
+00:21:06,840 --> 00:21:13,560
+Like it you have a data set, you compress it into a model that is smaller than it is but generalizes and like has like,
+
+284
+00:21:13,560 --> 00:21:15,720
+you know, some some amount of acceptable loss.
+
+285
+00:21:16,040 --> 00:21:21,680
+I think that one of your commenters on on the on the post made this direct comparison with Kolmogorov complexity,
+
+286
+00:21:21,680 --> 00:21:24,080
+which is what Ilya how Ilya sees it.
+
+287
+00:21:24,080 --> 00:21:29,200
+So, I think like people have this information theory idea or approach to language models.
+
+288
+00:21:29,440 --> 00:21:34,160
+It is just not precise because exactly what you say like it's we don't know what a bit really means.
+
+289
+00:21:34,160 --> 00:21:42,800
+We don't know what like the most legible Legibility is is a word that comes to mind in terms of like like it matters to us that it's human readable like even if it's SHA-1,
+
+290
+00:21:42,800 --> 00:21:49,880
+SHA-256, I don't care, but like that is less readable and therefore there's more I guess I don't know.
+
+291
+00:21:50,120 --> 00:21:53,520
+Entropy's not the word because it's it's directly convertible.
+
+292
+00:21:54,120 --> 00:21:55,640
+But it's just less useful.
+
+293
+00:21:56,480 --> 00:21:57,280
+Yeah, yeah, yeah.
+
+294
+00:21:57,280 --> 00:21:58,679
+Useful is a good word.
+
+295
+00:21:58,679 --> 00:22:02,600
+I think maybe useful information or usable information is is the right lens.
+
+296
+00:22:02,679 --> 00:22:07,040
+And Kolmogorov is a really interesting connection like Kolmogorov complexity.
+
+297
+00:22:07,040 --> 00:22:10,520
+I think that's a really good concept for for computer scientists.
+
+298
+00:22:10,880 --> 00:22:21,960
+So, I'm not sure exactly about this specific talk or like what he was trying to say, but I I think that we have a very good understanding of language model pre-training and there's a
+
+299
+00:22:21,960 --> 00:22:25,480
+deep connection between language models and and compression.
+
+300
+00:22:25,920 --> 00:22:28,080
+Actually, maybe let's let's start with the embeddings.
+
+301
+00:22:28,080 --> 00:22:29,400
+We can come back to that.
+
+302
+00:22:29,400 --> 00:22:30,000
+Okay.
+
+303
+00:22:30,120 --> 00:22:32,320
+So, is this are we good to the first paper?
+
+304
+00:22:32,400 --> 00:22:37,320
+Actually, let's go to your Wikipedia uh numbers if if you still have access to that.
+
+305
+00:22:37,400 --> 00:22:42,840
+So, this 50 GB for text of Wikipedia, that sounds like a pretty high to me.
+
+306
+00:22:42,840 --> 00:22:46,480
+Is that that's uncompressed like text files or something?
+
+307
+00:22:46,480 --> 00:22:48,680
+it from Andrew Ng, so I don't know.
+
+308
+00:22:50,000 --> 00:22:50,240
+Okay.
+
+309
+00:22:50,240 --> 00:22:50,600
+Okay.
+
+310
+00:22:50,600 --> 00:22:52,080
+No, no, I'm probably off.
+
+311
+00:22:52,080 --> 00:23:00,120
+I just sort of have the sense that like when you store text, it's generally like very very small, especially when you zip Maybe he's including all the languages,
+
+312
+00:23:00,320 --> 00:23:01,160
+all the edits.
+
+313
+00:23:01,360 --> 00:23:02,600
+Yeah, yeah, that could make sense.
+
+314
+00:23:02,600 --> 00:23:03,160
+That could make sense.
+
+315
+00:23:03,160 --> 00:23:11,440
+Because I guess what you you say from, you know, if you want to do apples-to-apples comparisons, GPT-3 can store two Wikipedias.
+
+316
+00:23:11,640 --> 00:23:12,080
+Is that right?
+
+317
+00:23:12,080 --> 00:23:14,200
+Two 2.3 Wikipedias.
+
+318
+00:23:14,200 --> 00:23:15,080
+Yeah.
+
+319
+00:23:15,080 --> 00:23:16,520
+I thought it would be a lot more.
+
+320
+00:23:16,520 --> 00:23:18,720
+And this is actually an experiment that you could do.
+
+321
+00:23:18,720 --> 00:23:25,880
+You could like just train a model on Wikipedia and keep training it until you can perfectly extract all of Wikipedia.
+
+322
+00:23:26,280 --> 00:23:30,760
+And that would be like a good way of knowing like how many Wikipedias can GPT store.
+
+323
+00:23:30,760 --> 00:23:32,120
+I like I like that idea.
+
+324
+00:23:32,280 --> 00:23:42,679
+But I think this type of like back-of-the-envelope math is is really useful for thinking about problems and like grounding yourself in the real world even if you can never quite answer the questions you
+
+325
+00:23:42,679 --> 00:23:45,080
+want to answer at least like in four years.
+
+326
+00:23:45,240 --> 00:23:50,920
+If we think about embeddings, you know, vectors that people use for search, we can do the exact same kind of math.
+
+327
+00:23:50,920 --> 00:23:58,920
+So, if you use the OpenAI embeddings, which last time I checked I think have 1,536 dimensions.
+
+328
+00:23:58,920 --> 00:24:10,400
+So, that if you say there's 16 bits per dimension and like half-precision floating point, it's something like 20 KB of information in a vector.
+
+329
+00:24:10,600 --> 00:24:20,080
+And if you want to store 20 KB of text, that's a lot of text like many many paragraphs that you can perfectly compress into 20 KB.
+
+330
+00:24:20,080 --> 00:24:22,760
+And so, I think this is kind of like the idea we had.
+
+331
+00:24:22,960 --> 00:24:28,000
+I'll give you the practical explanation, which was I'm Well, first of all, I'm a second-year grad student.
+
+332
+00:24:28,000 --> 00:24:35,640
+I'm like going to these conferences, seeing all these other things people working on and thinking, you know, like what the heck like how am I going to like have my own little area to
+
+333
+00:24:35,640 --> 00:24:37,840
+do work in that no one else is working in already.
+
+334
+00:24:37,840 --> 00:24:41,480
+And so, I spent a lot of time coming up with bad ideas.
+
+335
+00:24:41,880 --> 00:24:46,520
+And my advisor would say, "No, like that's not a good idea to work on."
+
+336
+00:24:46,679 --> 00:24:48,160
+Many times this happened.
+
+337
+00:24:48,800 --> 00:24:56,760
+And like even my first year and a half of grad school was like a lot of exploration and a lot of like coming up with bad ideas.
+
+338
+00:24:57,240 --> 00:25:07,360
+And then, honestly, I'd be interested to see how he remembers it, but I think I wrote a sequence of proposals about different projects and then I came up with this idea.
+
+339
+00:25:07,360 --> 00:25:13,360
+I was like, "Oh, we should just try to do as well as we can to reverse engineer the text that's in embeddings."
+
+340
+00:25:13,360 --> 00:25:14,800
+And I And then we were talking about it.
+
+341
+00:25:14,800 --> 00:25:16,400
+He was like, "Oh, yeah, you should just do that."
+
+342
+00:25:16,400 --> 00:25:17,800
+And then that was the end of the proposals.
+
+343
+00:25:17,800 --> 00:25:20,360
+And then that was just working on that problem for a long time.
+
+344
+00:25:20,640 --> 00:25:29,880
+Which at the time I was really motivated by that because I was like cool like my first as a grad student my first sort of like official like sign-off on like coming up with
+
+345
+00:25:29,880 --> 00:25:31,120
+a good research idea.
+
+346
+00:25:31,360 --> 00:25:38,440
+And at the same time there was this big rise of this startup business model called like a vector database.
+
+347
+00:25:38,880 --> 00:25:44,400
+And there were all these companies popping up raising money, raising money, getting like crazy funding.
+
+348
+00:25:44,600 --> 00:25:51,920
+And then actual applications being built that do something where instead of exchanging customer data they exchange vectors.
+
+349
+00:25:52,400 --> 00:25:59,040
+So, we had this like very grounded question of like what data are they actually sending when they when they send the vectors.
+
+350
+00:25:59,200 --> 00:26:09,040
+Like first of all, you have this information theoretic argument that when you send one vector, there should be a lot of text recoverable just in terms of like a lot of these things represent
+
+351
+00:26:09,040 --> 00:26:12,040
+very short documents, but they actually have many many bits.
+
+352
+00:26:12,200 --> 00:26:14,440
+So, like the problem seems trackable.
+
+353
+00:26:14,920 --> 00:26:18,880
+And the second of all, we had this justification of how the product is actually being used.
+
+354
+00:26:18,880 --> 00:26:24,080
+Like if someone hacks into a vector database, what do they actually find if that makes sense?
+
+355
+00:26:24,679 --> 00:26:26,680
+So, we were working on that for a while.
+
+356
+00:26:26,880 --> 00:26:30,240
+I think I have the the the talk that you did from that Sasha highlighted.
+
+357
+00:26:30,679 --> 00:26:31,360
+Is this one.
+
+358
+00:26:31,360 --> 00:26:32,760
+Oh, yeah, yeah, yeah.
+
+359
+00:26:32,760 --> 00:26:37,120
+Maybe that has the graphic that that would kind of Oh, go one before, I think.
+
+360
+00:26:37,120 --> 00:26:37,720
+One before?
+
+361
+00:26:37,720 --> 00:26:39,520
+This is actually Yeah, this one's good.
+
+362
+00:26:39,520 --> 00:26:40,120
+Yeah.
+
+363
+00:26:40,120 --> 00:26:41,280
+I like having visual aid.
+
+364
+00:26:41,280 --> 00:26:45,640
+I like how I like giving people breadcrumbs to follow up if they if they're interested in digging more.
+
+365
+00:26:45,720 --> 00:26:49,840
+But yeah, I remember this is a pretty hot area research at the time.
+
+366
+00:26:50,080 --> 00:26:52,120
+And there's been some really interesting follow-ups.
+
+367
+00:26:52,760 --> 00:26:57,040
+Like we we ended up building a system that can do this quite well.
+
+368
+00:26:57,040 --> 00:27:03,520
+Like taking an embedding and what I think our highlight number is like at a certain length like a long sentence length,
+
+369
+00:27:03,520 --> 00:27:07,600
+we can get 90% of the text back exactly.
+
+370
+00:27:08,160 --> 00:27:11,160
+And a lot of people were able to do stuff with that.
+
+371
+00:27:11,160 --> 00:27:18,440
+Like they can they For example, I know these people that work on problem of like debiasing embeddings.
+
+372
+00:27:18,640 --> 00:27:20,960
+And like in one data set, they do something.
+
+373
+00:27:21,160 --> 00:27:27,680
+They have a procedure for like removing all latent features that correlate with gender.
+
+374
+00:27:27,960 --> 00:27:35,640
+So, they can produce like useful embeddings that from some perspective have no like information or usable information about gender.
+
+375
+00:27:35,640 --> 00:27:37,240
+And they've been doing that for a while.
+
+376
+00:27:37,240 --> 00:27:39,320
+And then they actually just used our tool.
+
+377
+00:27:39,360 --> 00:27:47,160
+And they So, like they would put in a sentence like, "This woman is a doctor at Wild Cornell Hospital in New York."
+
+378
+00:27:47,240 --> 00:27:48,560
+Or say, "This woman is a doctor.
+
+379
+00:27:48,560 --> 00:27:50,200
+She works at Wild Cornell."
+
+380
+00:27:50,200 --> 00:27:51,680
+And then they would run their procedure.
+
+381
+00:27:51,920 --> 00:27:54,160
+And then they would run our embedding-to-text model.
+
+382
+00:27:54,240 --> 00:27:57,600
+And now it would say like, "This person is a doctor.
+
+383
+00:27:57,640 --> 00:27:59,400
+They work at Wild Cornell."
+
+384
+00:27:59,400 --> 00:28:00,320
+Which is pretty cool.
+
+385
+00:28:00,320 --> 00:28:06,800
+So, they have like sort of text-based evidence that their method is actually removing gender features.
+
+386
+00:28:07,480 --> 00:28:13,920
+But let me talk for a second about the research phase here cuz I thought it would be I mean,
+
+387
+00:28:13,920 --> 00:28:19,400
+I know if if you ever heard me talk about this, I probably told you about it, but just for a wider audience,
+
+388
+00:28:19,440 --> 00:28:29,679
+I like thinking back on this because it was probably my in some sense like my greatest victory of grad school was like working on this embedding inversion problem for a while for a quite
+
+389
+00:28:29,679 --> 00:28:34,000
+a while and and proposing a lot of approaches and like testing stuff.
+
+390
+00:28:34,520 --> 00:28:37,279
+I think sometimes you do stuff and it's clear it was a bad idea.
+
+391
+00:28:37,760 --> 00:28:41,120
+Sometimes you think you should have figured it out earlier.
+
+392
+00:28:41,400 --> 00:28:46,320
+And then sometimes you do stuff and you kind of realize it's really complicated and and probably not worth it.
+
+393
+00:28:46,440 --> 00:28:55,800
+So, I was testing different decoding algorithms for embeddings that are closer or text that's closer to the text that's in embeddings.
+
+394
+00:28:55,800 --> 00:29:01,759
+And I was testing these kind of like inference time adaptation models for samplers.
+
+395
+00:29:02,320 --> 00:29:05,519
+Think we tried a lot of architecture and like kind of training tweaks.
+
+396
+00:29:05,760 --> 00:29:07,200
+We should have tried RL.
+
+397
+00:29:07,280 --> 00:29:08,560
+I think that would work.
+
+398
+00:29:08,840 --> 00:29:11,320
+But we finally found something that ended up working.
+
+399
+00:29:11,320 --> 00:29:14,840
+And I guess I'm just saying this all because I thought it was like so rewarding.
+
+400
+00:29:14,880 --> 00:29:17,760
+Like we were just banging our heads against this the wall.
+
+401
+00:29:17,760 --> 00:29:19,679
+I'd have biweekly meetings with my advisor.
+
+402
+00:29:19,679 --> 00:29:21,040
+He'd suggest things.
+
+403
+00:29:21,159 --> 00:29:23,600
+Sometimes we would agree we were mutually stuck.
+
+404
+00:29:23,720 --> 00:29:29,440
+Sometimes I would get feedback one way or another and and try something new or try a couple things.
+
+405
+00:29:29,440 --> 00:29:40,280
+And And we had this idea that it was possible from the information theory arguments and this other thing where we would we would kind of like take our best guess at what the text
+
+406
+00:29:40,280 --> 00:29:44,400
+was and re-embed it and see that it was kind of far from the true embedding.
+
+407
+00:29:44,560 --> 00:29:50,000
+So, we had this proof that like a better method could like leverage this kind of information.
+
+408
+00:29:50,520 --> 00:29:54,560
+And then when we finally solved it, it was it was awesome.
+
+409
+00:29:54,560 --> 00:29:57,520
+Like we had this number that was like 30 for months.
+
+410
+00:29:57,520 --> 00:29:59,040
+I think at one point I got it to 35.
+
+411
+00:29:59,880 --> 00:30:01,480
+And actually I think I was like, "Oh, I'm done.
+
+412
+00:30:01,480 --> 00:30:02,600
+Like I got it to 35."
+
+413
+00:30:02,600 --> 00:30:08,680
+And and my advisor told me, "Oh, no, like that's you can't really just propose a new problem and show you push a metric from 30 to 35.
+
+414
+00:30:08,680 --> 00:30:12,160
+That's like confusing and probably not that meaningful to people."
+
+415
+00:30:12,640 --> 00:30:17,680
+And I I think I was you know, that was kind of like a local minimum for me where I was like bummed.
+
+416
+00:30:17,960 --> 00:30:23,120
+But then we ended up getting the number to like 97 or something, which neither of us knew were possible.
+
+417
+00:30:23,120 --> 00:30:25,440
+We were all just we were just kind of staring at this graph.
+
+418
+00:30:25,440 --> 00:30:29,520
+Like, "Oh my god, like who knew you could get this much information from an embedding?"
+
+419
+00:30:29,520 --> 00:30:32,000
+And that was like so great.
+
+420
+00:30:32,000 --> 00:30:34,920
+Like um just sort of this it was so rewarding.
+
+421
+00:30:35,000 --> 00:30:37,200
+It's so it was invigorating, honestly.
+
+422
+00:30:37,200 --> 00:30:43,400
+Like that research process of like we picked a good problem and then we spent so long trying stuff that didn't work,
+
+423
+00:30:43,400 --> 00:30:46,520
+which I'm probably forgetting how frustrating that was.
+
+424
+00:30:46,520 --> 00:30:47,560
+I'm sure it was terrible.
+
+425
+00:30:47,560 --> 00:30:53,360
+But then like actually solving or at least like coming up with a much better way of solving the problem.
+
+426
+00:30:53,360 --> 00:30:58,560
+I don't know if I'd say we solved it, but we definitely learned a lot from where we started was like was great.
+
+427
+00:30:58,560 --> 00:31:08,520
+And it completely solidified for me the fact that I should have gone to grad school to have this like life experience and like makes me want to do research forever.
+
+428
+00:31:08,920 --> 00:31:12,280
+You clearly clearly um sort of in love with the with the the journey.
+
+429
+00:31:12,520 --> 00:31:17,120
+Uh which I think is is important because it this allows it keeps you going through the the tough parts.
+
+430
+00:31:17,240 --> 00:31:20,600
+Is this a good time to talk about the universal geometry side then?
+
+431
+00:31:20,600 --> 00:31:21,400
+Yeah, yeah, yeah.
+
+432
+00:31:21,400 --> 00:31:22,640
+Let's let's do that next.
+
+433
+00:31:22,640 --> 00:31:23,680
+I think that's a good idea.
+
+434
+00:31:23,680 --> 00:31:26,560
+So So we have this more recent follow-up.
+
+435
+00:31:26,560 --> 00:31:34,680
+And the So the first part I was talking about ended up in this paper called text embeddings reveal almost as much as text.
+
+436
+00:31:35,040 --> 00:31:35,200
+Yep.
+
+437
+00:31:35,200 --> 00:31:37,000
+Which was published in 2023.
+
+438
+00:31:37,360 --> 00:31:42,120
+And then we recently had a paper come out on archive, which will hopefully be published at some point.
+
+439
+00:31:42,120 --> 00:31:45,200
+And it's called harnessing the universal geometry of embeddings.
+
+440
+00:31:45,520 --> 00:31:52,880
+Which was also that was probably like the only other time I felt like we've made like maybe there have been two more times.
+
+441
+00:31:52,880 --> 00:31:59,640
+But that that was probably the the second of three times where I felt like we made like a real discovery about like the unknown.
+
+442
+00:31:59,679 --> 00:32:04,800
+And it was like very rewarding just for its own intrinsic kind of elusiveness.
+
+443
+00:32:05,720 --> 00:32:08,880
+And I'll start from explaining it in terms of the prior paper.
+
+444
+00:32:08,880 --> 00:32:12,800
+So we we built a system that can you know, do embeddings to text.
+
+445
+00:32:12,800 --> 00:32:14,000
+And it and it works very well.
+
+446
+00:32:14,000 --> 00:32:15,840
+And we're all we're very pleased with ourselves.
+
+447
+00:32:16,200 --> 00:32:17,640
+And then we we went to a conference.
+
+448
+00:32:17,640 --> 00:32:18,640
+We talked to people about it.
+
+449
+00:32:18,640 --> 00:32:20,240
+We talked to like the vector databases.
+
+450
+00:32:20,560 --> 00:32:24,520
+I think some of them changed our privacy policies, which was like somewhat gratifying.
+
+451
+00:32:25,160 --> 00:32:32,040
+Um and then we kept getting this perpetual question, which is like "Well, you're just assuming we use the OpenAI model.
+
+452
+00:32:32,040 --> 00:32:34,640
+Or you're just assuming we use the most popular text embedding model.
+
+453
+00:32:34,640 --> 00:32:43,200
+If they fine-tune their own model or if they use a model that you're not training an adversary for, then you can't solve the problem."
+
+454
+00:32:43,360 --> 00:32:44,400
+Which is like true.
+
+455
+00:32:44,400 --> 00:32:53,120
+Like none of the vector detect stuff works unless you have this assumption of like knowing the encoder and also being able to make a lot of queries to it.
+
+456
+00:32:53,440 --> 00:33:00,320
+But we had this kind of underlying theory that all of the models learn very similar things.
+
+457
+00:33:00,320 --> 00:33:02,720
+Like we have some preliminary evidence for that.
+
+458
+00:33:02,720 --> 00:33:08,720
+Like certain models that are fine-tuned from the same base, you can kind of swap their representations without doing much.
+
+459
+00:33:08,800 --> 00:33:15,320
+Or if you look at the nearest neighbors, a lot of the models will give you the exact same nearest neighbors even though they have completely different training bases.
+
+460
+00:33:15,880 --> 00:33:21,600
+And then there's this paper that came out last year called the platonic representation hypothesis from some folks at MIT,
+
+461
+00:33:21,600 --> 00:33:23,840
+which is really, really compelling.
+
+462
+00:33:23,840 --> 00:33:29,720
+And I think just like great intersection of philosophy, representation learning, deep learning research.
+
+463
+00:33:29,720 --> 00:33:38,400
+Like I I love this paper and that it's it's such a beautiful idea, which is something like all models are trained on data from the world.
+
+464
+00:33:38,600 --> 00:33:40,720
+And there's only one world.
+
+465
+00:33:41,080 --> 00:33:48,400
+And so as the models get better by scaling data and scaling model sizes, they're sort of converging to learn the exact same thing.
+
+466
+00:33:48,679 --> 00:33:55,120
+And in this paper they have evidence based on correlations for doing this with vision and language models.
+
+467
+00:33:55,360 --> 00:33:56,360
+It's very neat.
+
+468
+00:33:56,560 --> 00:33:57,880
+And so we saw this.
+
+469
+00:33:58,000 --> 00:34:00,520
+So basically think about you know, you're us.
+
+470
+00:34:00,520 --> 00:34:03,200
+You see this platonic representation hypothesis paper.
+
+471
+00:34:03,240 --> 00:34:05,000
+A lot of people have this shared idea.
+
+472
+00:34:05,000 --> 00:34:16,600
+Like you know, Claude and GPT-4 probably do a lot of very similar internal computation because both of them are trained on trillions of tokens of human written text.
+
+473
+00:34:16,840 --> 00:34:24,359
+Even if they have different architectures, like maybe you know, the actual basis or like the the numbers if you look at them look different.
+
+474
+00:34:24,359 --> 00:34:27,800
+But in some way they're like kind of computing the same thing.
+
+475
+00:34:27,879 --> 00:34:33,720
+And I think it's even more true with these like embedding models, which have like really only one objective that works.
+
+476
+00:34:33,720 --> 00:34:39,720
+And they're probably all trained on like MS Marco, which is a really popular data set and pre-trained maybe on Wikipedia.
+
+477
+00:34:40,280 --> 00:34:52,240
+But we wanted to basically combine this platonic representation hypothesis idea with the vector text thing and produce a system that can like align models so that we can do embedding inversion.
+
+478
+00:34:53,560 --> 00:34:56,959
+But you know, it's it's valuable for more than just embedding inversion.
+
+479
+00:34:57,200 --> 00:34:59,840
+Like you can use this to kind of glue together models.
+
+480
+00:34:59,840 --> 00:35:02,520
+Like that's what actually got me like super excited.
+
+481
+00:35:02,560 --> 00:35:04,640
+And by the way, like I think there's a few related threads.
+
+482
+00:35:04,640 --> 00:35:13,440
+Uh I think we did an episode with Nicholas Carlini where he had an extraction attack uh on on one of the GPT models and uh they got it fixed.
+
+483
+00:35:13,600 --> 00:35:17,160
+The other thing I wanted I was just realizing for all of people just in case you're not thinking it through.
+
+484
+00:35:17,200 --> 00:35:26,040
+Being able to invert embeddings also means that you can you can back out uh like secret prompts or context that might leak customer information.
+
+485
+00:35:26,480 --> 00:35:30,359
+That's potentially harmful and like obviously a attack vector issue.
+
+486
+00:35:30,359 --> 00:35:40,400
+I think one of the things I I had a question about was whether or not position embedding does affect it and like extension of first position embeddings affect it because obviously that like contexts
+
+487
+00:35:40,400 --> 00:35:41,560
+are going to get longer and longer.
+
+488
+00:35:41,560 --> 00:35:45,360
+Your ability to invert will obviously decrease with longer context.
+
+489
+00:35:45,760 --> 00:35:46,359
+What now?
+
+490
+00:35:46,359 --> 00:35:48,200
+You know, uh maybe not that important.
+
+491
+00:35:48,200 --> 00:35:48,760
+No, no, no.
+
+492
+00:35:48,760 --> 00:35:49,960
+No, you're totally right.
+
+493
+00:35:49,960 --> 00:35:57,880
+So we're operating in this space in in our work where the sequences are relatively short.
+
+494
+00:35:58,359 --> 00:36:00,800
+And embeddings are relatively large.
+
+495
+00:36:01,000 --> 00:36:04,760
+Like I think we're kind of at a great advantage from that perspective.
+
+496
+00:36:05,160 --> 00:36:06,280
+And you're definitely right.
+
+497
+00:36:06,280 --> 00:36:12,760
+Like if you embed an entire book to a 500-dimensional vector.
+
+498
+00:36:12,760 --> 00:36:13,120
+way.
+
+499
+00:36:13,120 --> 00:36:15,800
+There's just no way you could get the entire book back.
+
+500
+00:36:15,800 --> 00:36:18,400
+Like there must be this these kind of collisions.
+
+501
+00:36:18,480 --> 00:36:25,280
+Like it you know, in information theory like if you have lossy compression, two different inputs map to the same code.
+
+502
+00:36:25,640 --> 00:36:29,840
+Which means that you can never determine which input formed the code.
+
+503
+00:36:29,960 --> 00:36:31,880
+And I think that's probably what will start to happen.
+
+504
+00:36:31,880 --> 00:36:37,280
+Like if you have two books and you swap just one word and you embed them, I don't know, someone can try this.
+
+505
+00:36:37,280 --> 00:36:39,960
+You'll probably get like a perfect collision.
+
+506
+00:36:39,960 --> 00:36:41,680
+And in that case inversion is impossible.
+
+507
+00:36:42,000 --> 00:36:46,280
+And even like when you don't take it to the limit, it probably just gets very, very hard.
+
+508
+00:36:46,280 --> 00:36:47,720
+Like things get super compressed.
+
+509
+00:36:48,080 --> 00:36:50,280
+So I don't know how well this work scales.
+
+510
+00:36:50,280 --> 00:36:51,280
+Like it's a great question.
+
+511
+00:36:51,280 --> 00:36:55,400
+Like exactly how much information you can sort of cram into one of these vectors.
+
+512
+00:36:55,400 --> 00:36:58,240
+And I I don't have a sense of where the boundary is.
+
+513
+00:36:58,240 --> 00:37:05,760
+It'd be interesting to talk to some one of the like linear algebra people from like the math department on like how literally can we take inversion?
+
+514
+00:37:06,040 --> 00:37:15,280
+Like you know, how like what what measures of a matrix do they have where we can like kind of run that and like try to get some meaningful information out of that.
+
+515
+00:37:15,280 --> 00:37:20,200
+This is like where information theory starts to collide with uh linear algebra and all the all the other stuff.
+
+516
+00:37:20,320 --> 00:37:20,760
+Totally.
+
+517
+00:37:20,760 --> 00:37:26,040
+Yeah, there there's always this um this detail where we're we're running these on computers.
+
+518
+00:37:26,160 --> 00:37:30,000
+And so we don't actually have like real decimal numbers or real numbers.
+
+519
+00:37:30,000 --> 00:37:37,760
+We have like floating point representations of numbers, which are like very it kind of like throws a wrench into the mix.
+
+520
+00:37:38,040 --> 00:37:40,320
+Do you have any consideration of like superposition?
+
+521
+00:37:40,960 --> 00:37:42,320
+I mean like sort of non-linearity.
+
+522
+00:37:42,520 --> 00:37:46,560
+Like you you could like stuff information in the lower bits.
+
+523
+00:37:46,760 --> 00:37:48,040
+But I don't know if that matters.
+
+524
+00:37:48,120 --> 00:37:48,880
+I really don't.
+
+525
+00:37:48,880 --> 00:37:50,840
+It's just like a nice thing to think about.
+
+526
+00:37:50,960 --> 00:37:51,560
+Yeah, yeah.
+
+527
+00:37:51,560 --> 00:37:52,680
+It is a great question.
+
+528
+00:37:52,680 --> 00:37:58,600
+And and I get a sense that like a lot of the less important bits are more useful for computation.
+
+529
+00:37:59,440 --> 00:38:04,040
+And maybe the higher order bits are more important for like storing data or something like that.
+
+530
+00:38:04,080 --> 00:38:04,800
+But I'm not sure.
+
+531
+00:38:04,800 --> 00:38:08,840
+These are the kinds of questions I'm actually hoping to explore over the next few years.
+
+532
+00:38:08,840 --> 00:38:11,640
+Like um I'll skip ahead for a second.
+
+533
+00:38:11,640 --> 00:38:16,720
+So we we have this result that's like maybe the the third sort of like discovery I was alluding to,
+
+534
+00:38:16,720 --> 00:38:21,360
+which is like a way to measure the exact capacity of a language model.
+
+535
+00:38:21,560 --> 00:38:22,840
+And we get this number.
+
+536
+00:38:23,080 --> 00:38:28,400
+If you train a language model on a ton of random data and you measure its rate of memorization.
+
+537
+00:38:28,400 --> 00:38:29,959
+Yeah, can you open the right curve?
+
+538
+00:38:30,040 --> 00:38:31,600
+This is sort of the discovery I'm talking about.
+
+539
+00:38:31,600 --> 00:38:40,880
+Like no matter how you scale the training size, you hit this like perfect perfect-ish plateau in total memorization, which we call the model capacity.
+
+540
+00:38:41,480 --> 00:38:46,720
+And the the question I've been stuck on in the back of my mind for a while is like how is that actually implemented?
+
+541
+00:38:46,800 --> 00:38:53,240
+So like this is a transformer that is trained for many, many data points and many, many training steps.
+
+542
+00:38:53,680 --> 00:38:59,400
+And so it like it's almost like if you have okay, the 10 to the sixth point on the x-axis.
+
+543
+00:39:00,080 --> 00:39:10,080
+The capacity We don't have to actually say the numbers, but it's basically perfectly dividing its computation between all of the data points.
+
+544
+00:39:10,080 --> 00:39:18,240
+Like every one of the 10 to the sixth data points gets like a tiny sliver of the model parameters because they're completely independent random strings.
+
+545
+00:39:18,720 --> 00:39:22,200
+So I don't really know if superposition is occurring here.
+
+546
+00:39:22,200 --> 00:39:29,440
+Like it seems possible to me that the model would learn like these completely independent columns of computation, one per data point.
+
+547
+00:39:29,600 --> 00:39:37,720
+But it's also possible it's learning some kind of like combined thing where it's maybe it learns like a load and a store.
+
+548
+00:39:37,840 --> 00:39:41,920
+And it's like sort of like loading and storing bits using these generic operations.
+
+549
+00:39:42,080 --> 00:39:44,600
+And then in the end it reconstructs the random string.
+
+550
+00:39:44,600 --> 00:39:53,160
+So even though like the data is completely independent, the kind of like compute is is very similar in terms of like predicting random strings.
+
+551
+00:39:53,480 --> 00:39:57,960
+But yeah, I guess this is all to say like about superposition and everything.
+
+552
+00:39:58,080 --> 00:40:05,320
+I have no idea how the mechanisms are actually implemented inside the models and that's like one thing I'm hoping to learn about in the next couple years.
+
+553
+00:40:05,640 --> 00:40:09,080
+It's a reasonable question whether it's meaningful to learn.
+
+554
+00:40:09,160 --> 00:40:14,000
+I think there's a lot of things that is like nice to know, but maybe not that useful.
+
+555
+00:40:14,280 --> 00:40:17,880
+Lane space lane space alignment is very very useful.
+
+556
+00:40:18,120 --> 00:40:25,280
+Dataset efficiency in theory cool, but like practically people are just going to go for the biggest dataset they can.
+
+557
+00:40:26,840 --> 00:40:32,680
+Like like the scaling laws are kind of worked out in so far as like the relationship of compute and data.
+
+558
+00:40:32,960 --> 00:40:34,640
+A lot of memorization I don't know.
+
+559
+00:40:34,640 --> 00:40:44,640
+I think maybe this is a good point to maybe also bring in the idea that Andre has been pushing for the last like a I think year and a bit of the cognitive core.
+
+560
+00:40:44,720 --> 00:40:51,640
+Like the what is the dumbest possible model that knows nothing but is you is smart enough for tool use to do everything else,
+
+561
+00:40:51,640 --> 00:40:51,840
+right?
+
+562
+00:40:51,840 --> 00:40:56,280
+So you can run it on device and fast inference is open source, whatever.
+
+563
+00:40:56,480 --> 00:41:06,920
+Uh so Gemma 3N is like a really good candidate right now because it's like a 4B model that is like claimed to be better than Lama 4 and GPT-4.1 uh according to you know,
+
+564
+00:41:06,920 --> 00:41:09,360
+certain arenas that shall not be named.
+
+565
+00:41:09,520 --> 00:41:11,240
+This is where things get complicated.
+
+566
+00:41:11,480 --> 00:41:24,440
+Like I it feels like language models kind of implement things and know things almost in the same way and it's like really difficult to disentangle like whether they're memorizing facts from whether they're like
+
+567
+00:41:24,440 --> 00:41:28,280
+learning useful ways to generalize about new stuff.
+
+568
+00:41:28,800 --> 00:41:30,840
+But I mean I agree this would be really nice.
+
+569
+00:41:31,160 --> 00:41:38,560
+I don't think we have a lot of evidence that we can build a system like this that like is really really good at reasoning but really dumb about the world.
+
+570
+00:41:38,800 --> 00:41:41,160
+Like I don't know if we have the tools.
+
+571
+00:41:41,360 --> 00:41:42,400
+Yeah, maybe maybe not.
+
+572
+00:41:42,400 --> 00:41:45,080
+I think the existence proof is humans, right?
+
+573
+00:41:45,080 --> 00:41:47,440
+People always lean on humans as like the existence proof.
+
+574
+00:41:47,480 --> 00:41:55,280
+It's not a great existence proof because I think if you talk to people about the number of neurons that we have and you make a neuron roughly equivalent to a parameter,
+
+575
+00:41:55,680 --> 00:41:58,320
+we have something like a hundred trillion in our brains.
+
+576
+00:41:58,320 --> 00:42:01,360
+So like and like we consume like 20 watts of energy.
+
+577
+00:42:01,360 --> 00:42:02,960
+Like it's nothing.
+
+578
+00:42:03,120 --> 00:42:06,360
+Like we're so much better than than uh language models.
+
+579
+00:42:06,360 --> 00:42:07,480
+It's not even funny.
+
+580
+00:42:07,640 --> 00:42:13,040
+And then the the last feature of us is that we're self-pruning, which is uh not something that language models do as well.
+
+581
+00:42:13,200 --> 00:42:14,840
+Oh like we will forget stuff.
+
+582
+00:42:15,440 --> 00:42:17,880
+No, like we are not deeply densely connected.
+
+583
+00:42:17,880 --> 00:42:21,680
+Like we like connections will drop, therefore are more efficient, you know?
+
+584
+00:42:21,680 --> 00:42:25,400
+So yeah, so unlike a language model where everything is always connected all the time.
+
+585
+00:42:25,640 --> 00:42:33,400
+Yeah, or you like you preset the skip layers or whatever and that's it, you know, like it's not it's not really actually anything we've evolved with learning.
+
+586
+00:42:33,400 --> 00:42:37,520
+It's just like something you do based on ablations and like guestimates.
+
+587
+00:42:38,360 --> 00:42:46,440
+Even if we did want that, I'm not sure if we have like the right frameworks or methods for actually building like what you're talking about yet.
+
+588
+00:42:46,520 --> 00:42:49,480
+I think the world is much closer to where you're at than where Andre is at.
+
+589
+00:42:49,480 --> 00:42:52,880
+Andre is like kind of wishing for a an optimistic world.
+
+590
+00:42:53,000 --> 00:42:57,080
+Our conversation with Noam Brown was like, yeah, reasoning is emergent.
+
+591
+00:42:57,400 --> 00:43:04,640
+If you gave the O1 harness on top of GPT-2, you would get nothing because GPT-2 didn't know enough.
+
+592
+00:43:04,680 --> 00:43:08,880
+You need a GPT-3 and GPT-4 in order to then get O1.
+
+593
+00:43:08,920 --> 00:43:11,040
+Like as as GPT-4 is the base model.
+
+594
+00:43:11,280 --> 00:43:13,520
+Which is like, yeah, that's I mean that's that's reasonable.
+
+595
+00:43:13,600 --> 00:43:17,120
+The way I put it is like in order to use tools, you need to like in order to search Google,
+
+596
+00:43:17,120 --> 00:43:23,280
+you need to to know at least search terms in order to like then search Google and then learn what you need.
+
+597
+00:43:23,280 --> 00:43:26,360
+And if you don't know what what to search, then like you might just be too dumb.
+
+598
+00:43:26,480 --> 00:43:27,080
+Uh
+
+599
+00:43:28,400 --> 00:43:30,360
+I like the kind of uh ethos.
+
+600
+00:43:30,400 --> 00:43:41,520
+Like maybe you could do some kind of pre-training or whenever the model doesn't know something, it can just Google for it and that way you try to encourage it to learn words without or
+
+601
+00:43:41,520 --> 00:43:46,360
+like to guess words correctly without actually storing the information into its weights.
+
+602
+00:43:46,560 --> 00:43:49,480
+Yeah, it seems like a nice like goal at least.
+
+603
+00:43:49,640 --> 00:43:55,760
+Yeah, you need some kind of online learning probably or memory and some combination of that.
+
+604
+00:43:55,920 --> 00:43:56,520
+Yeah.
+
+605
+00:43:57,000 --> 00:44:02,160
+It's exciting, you know, like I think like if that is the the direction of where this all lands up,
+
+606
+00:44:02,160 --> 00:44:02,959
+that's great.
+
+607
+00:44:03,120 --> 00:44:05,800
+But like people aren't not doing that.
+
+608
+00:44:05,800 --> 00:44:10,440
+Instead, we're building, you know, 500 billion dollar data centers in the middle of Texas.
+
+609
+00:44:11,240 --> 00:44:20,800
+And like, you know, all hail the the the god cluster that just all, you know, eventually wrap around the sun and consume solar energy because that's that's all we need.
+
+610
+00:44:20,960 --> 00:44:23,400
+Do we finish out the universal geometry thing?
+
+611
+00:44:23,520 --> 00:44:27,440
+Let me finish the kind of uh methodological description.
+
+612
+00:44:27,560 --> 00:44:31,959
+So So we had this goal So So So yeah, back to the embedding universality.
+
+613
+00:44:32,440 --> 00:44:34,560
+We started with going from embeddings to text.
+
+614
+00:44:34,840 --> 00:44:37,480
+We know about this platonic representation hypothesis.
+
+615
+00:44:38,359 --> 00:44:47,920
+And maybe I'll skip over the details, but basically we had total inspiration from computer vision and this model from 2017 called CycleGAN,
+
+616
+00:44:48,600 --> 00:45:00,760
+which is among other things uh it's a way to map between two different distributions without any underlying notion of like which thing should be mapped where.
+
+617
+00:45:00,880 --> 00:45:04,320
+It's just based on some kind of idea of closeness.
+
+618
+00:45:04,760 --> 00:45:09,880
+So like the cool thing about this, if you look at the top left, so I guess the the top left is Monet.
+
+619
+00:45:09,880 --> 00:45:14,800
+So impressionist paintings and this picture on the right is a photograph.
+
+620
+00:45:15,160 --> 00:45:29,960
+So like it's learning this kind of like semantic notion of what content goes where just by mapping a distribution of Monet pictures to a distribution of photographs without actually telling it which Monet picture
+
+621
+00:45:29,960 --> 00:45:31,320
+should map to which photograph.
+
+622
+00:45:31,760 --> 00:45:33,720
+It's kind of a subtle point I'm making.
+
+623
+00:45:33,960 --> 00:45:37,720
+It takes a little bit of time to wrap your head around or maybe like go to the middle one if you don't mind,
+
+624
+00:45:37,720 --> 00:45:39,440
+the zebras and the horses.
+
+625
+00:45:39,720 --> 00:45:50,520
+So like it's clearly learning like what an animal is and what legs are and sort of like more abstract stuff like what the camera position should be and and what grass is and stuff
+
+626
+00:45:50,520 --> 00:45:51,240
+like that.
+
+627
+00:45:51,320 --> 00:45:57,959
+And it's learning like what a horse that looks like a zebra is, which is actually like a complicated semantic concept.
+
+628
+00:45:58,440 --> 00:46:03,480
+Like we don't have a a dataset that has a horse and then that horse as a zebra.
+
+629
+00:46:03,640 --> 00:46:05,959
+We just have separate horses and separate zebras.
+
+630
+00:46:06,120 --> 00:46:12,160
+But somehow this this GAN system is able to like elicit this sort of mapping property.
+
+631
+00:46:12,440 --> 00:46:20,240
+It's like kind of a magical connection that it learns and I'm still like in awe that it's possible at all.
+
+632
+00:46:20,240 --> 00:46:27,240
+But we more more or less like repurpose this system and like we we built our own, but like this idea,
+
+633
+00:46:27,560 --> 00:46:38,280
+we took it and we applied it to model embeddings where instead of zebras and horses, we have like BERT embeddings and GPT embeddings or like two completely different models with different architectures.
+
+634
+00:46:38,840 --> 00:46:44,160
+So I think these are GTR, which is a T5 based retrieval model and GTE, which is based on BERT.
+
+635
+00:46:44,160 --> 00:46:52,359
+So they have different training data, different architectures, different downstream objectives, different embeddings, but yet when we do this CycleGAN in the embedding space,
+
+636
+00:46:52,359 --> 00:47:00,600
+they just perfectly sort of snap to the same place, which is amazing and has some pretty deep implications of like the platonic stuff.
+
+637
+00:47:00,600 --> 00:47:07,400
+Like maybe the models actually are learning a lot of the same functions or something and in some semantic way they're like very close.
+
+638
+00:47:08,040 --> 00:47:11,080
+And yeah, this is a diagram of how our system looks.
+
+639
+00:47:11,440 --> 00:47:13,760
+It's weird to me how profound it seems.
+
+640
+00:47:14,120 --> 00:47:16,760
+Like you you seem you seem like deeply impressed by it.
+
+641
+00:47:16,760 --> 00:47:26,680
+And then the other thing is like when we talked to the the to Emmanuel from Anthropic who did the circuit tracing and interpret mechanistic interpretability work,
+
+642
+00:47:26,800 --> 00:47:31,880
+they were like excited that like the same thing in different languages maps to the same circuits.
+
+643
+00:47:32,280 --> 00:47:35,960
+And I'm like what you would expect.
+
+644
+00:47:35,960 --> 00:47:37,280
+Yeah, yeah.
+
+645
+00:47:37,320 --> 00:47:40,520
+I I don't know like why like I I I I I don't know.
+
+646
+00:47:40,520 --> 00:47:43,200
+I think I feel like this this feels more profound to you than it does to me.
+
+647
+00:47:43,200 --> 00:47:44,360
+I'm like, yeah, obviously.
+
+648
+00:47:44,400 --> 00:47:46,080
+No, that's that's so fair.
+
+649
+00:47:46,080 --> 00:47:51,360
+Maybe it's just like self-congratulatory and we're happy that we're like the people that got it to work.
+
+650
+00:47:51,560 --> 00:47:52,480
+Yeah, exactly.
+
+651
+00:47:52,560 --> 00:47:54,880
+Yeah, it does it does seem obvious in retrospect.
+
+652
+00:47:55,160 --> 00:48:01,120
+And I think that's like constant feedback I've gotten from research from, you know, people will tell you that this seems obvious to them.
+
+653
+00:48:01,320 --> 00:48:10,959
+But you have to realize that like you came from a perspective of no one ever having done this before and they're coming from a perspective of you telling them it's true.
+
+654
+00:48:11,240 --> 00:48:16,600
+And like if someone had told you that this was true, it would be like maybe obvious to you, too,
+
+655
+00:48:16,600 --> 00:48:17,760
+if that makes sense.
+
+656
+00:48:17,920 --> 00:48:21,400
+The way I put it is that we have the intuition, but not the proof.
+
+657
+00:48:21,400 --> 00:48:26,680
+You have to you did the work and you have at least some evidence that it's true.
+
+658
+00:48:26,680 --> 00:48:28,640
+Whereas we just have intuitions, right?
+
+659
+00:48:28,640 --> 00:48:32,120
+So part of research is just confirming intuitions.
+
+660
+00:48:32,640 --> 00:48:37,280
+The applied part comes from like, okay, now that you know this for a fact, what do you do with it?
+
+661
+00:48:37,280 --> 00:48:38,280
+Yeah, right.
+
+662
+00:48:38,280 --> 00:48:40,120
+I think the details can be really interesting.
+
+663
+00:48:40,120 --> 00:48:49,440
+Like the details of the proof, like which models are most similar to one another and to what degree can you get them to align and on which distributions does this property actually emerge?
+
+664
+00:48:49,440 --> 00:48:54,520
+And like that's why reading papers can be fun sometimes is because they kind of answer all those little questions.
+
+665
+00:48:55,280 --> 00:49:03,480
+Yeah, I would say uh okay, I'll pull out something very current, which is Gemma 3N, which launched which sort of was generally available yesterday.
+
+666
+00:49:03,920 --> 00:49:11,160
+I would say that for me, and you can correct me if I'm wrong, the most immediate implication is mapping adapters to language models.
+
+667
+00:49:11,359 --> 00:49:17,080
+So the the dream is that you have a language model backbone, let's say this one is like a 2B language model backbone,
+
+668
+00:49:17,280 --> 00:49:25,480
+and then you offload your vision So you only you only load in the vision and para parameters or the the vision adapter when you need vision.
+
+669
+00:49:25,520 --> 00:49:31,840
+You only load in audio, you only load in speech text to speech whenever you need it because these are all separately trained.
+
+670
+00:49:31,920 --> 00:49:36,200
+You're just sort of aligning lane spaces and you can sort of train them separately.
+
+671
+00:49:36,200 --> 00:49:42,880
+And I think like this helps to make us more confident in one is is more efficient.
+
+672
+00:49:42,880 --> 00:49:44,000
+That's a that's a given.
+
+673
+00:49:44,120 --> 00:49:50,480
+Two, it makes us makes us confident that we can just just add capabilities without taking away or catastrophically forgetting others.
+
+674
+00:49:52,200 --> 00:49:54,520
+So, they're just sort of like stacking more parameters.
+
+675
+00:49:54,520 --> 00:49:55,240
+Just stackable.
+
+676
+00:49:55,640 --> 00:49:56,560
+So, that's very cool.
+
+677
+00:49:56,560 --> 00:49:56,920
+Yeah.
+
+678
+00:49:56,920 --> 00:49:58,080
+Swappable, stackable.
+
+679
+00:49:58,800 --> 00:50:03,160
+It's like a fatter version of Laura's that is not really Yeah.
+
+680
+00:50:03,160 --> 00:50:04,600
+that model specific.
+
+681
+00:50:05,000 --> 00:50:08,560
+I would say Apple and and Google are pursuing this with their own device stuff.
+
+682
+00:50:08,600 --> 00:50:10,000
+Is is where I is my sense.
+
+683
+00:50:10,000 --> 00:50:11,080
+Is this open source?
+
+684
+00:50:11,280 --> 00:50:12,120
+Gemma, yeah.
+
+685
+00:50:12,160 --> 00:50:15,240
+For a given definition open source, which is like we release the weights of hugging face.
+
+686
+00:50:15,240 --> 00:50:16,080
+Here you go.
+
+687
+00:50:16,200 --> 00:50:18,600
+Oh, that sounds like open source to me.
+
+688
+00:50:18,760 --> 00:50:19,320
+Eh.
+
+689
+00:50:19,320 --> 00:50:19,640
+Oh, yeah.
+
+690
+00:50:19,640 --> 00:50:22,360
+I guess it's it's open weights, but not the data.
+
+691
+00:50:23,000 --> 00:50:24,440
+Not the data, not the code.
+
+692
+00:50:24,520 --> 00:50:25,840
+Not the code, yeah.
+
+693
+00:50:25,840 --> 00:50:26,440
+Right.
+
+694
+00:50:26,520 --> 00:50:29,600
+Yeah, I would say that this is quite Soda in terms of efficient models.
+
+695
+00:50:29,920 --> 00:50:35,240
+Maybe a small LM also from hugging face would be also in that in that category.
+
+696
+00:50:35,400 --> 00:50:38,280
+It's not that many people working on very good very efficient models.
+
+697
+00:50:38,360 --> 00:50:47,240
+Yeah, this is a a very deeply related question and something that really interests me, which is like what is the limit of like a 100 million parameter model?
+
+698
+00:50:47,240 --> 00:50:57,880
+Like if you imagine, you know, 100 years from now when we have maybe our computers are gelatinous blobs and we all communicate through telepathy,
+
+699
+00:50:58,840 --> 00:51:06,160
+will we have 100 million parameter models that are at the level of today's 03 Pro or whatever?
+
+700
+00:51:06,160 --> 00:51:09,000
+And like if so, like how would that even be the case?
+
+701
+00:51:09,000 --> 00:51:11,880
+Like based on scaling laws, like do we have special data?
+
+702
+00:51:11,880 --> 00:51:16,280
+Do we come up with like a brilliant new training scheme or some type of magical architecture?
+
+703
+00:51:16,280 --> 00:51:17,920
+Like I really don't know.
+
+704
+00:51:17,920 --> 00:51:20,640
+Or maybe we're we really are on the at the plateau already.
+
+705
+00:51:20,640 --> 00:51:21,520
+I don't know.
+
+706
+00:51:21,640 --> 00:51:29,880
+It seems like when we are doing things like calling a small model like a 27B model that is a small like that's what Mistral is doing.
+
+707
+00:51:32,040 --> 00:51:35,920
+You know, we've plateaued a little bit in terms of like what we can do to compress things.
+
+708
+00:51:36,080 --> 00:51:40,840
+I have a fun theory uh that this is where we mix quantum computing with models.
+
+709
+00:51:40,840 --> 00:51:43,000
+Like we have to change what a parameter means.
+
+710
+00:51:43,480 --> 00:51:50,880
+We have to search through very high-dimensional space and and resolve them much quicker than we can with like conventional compute.
+
+711
+00:51:51,400 --> 00:51:53,640
+That would be my pie in the sky thing.
+
+712
+00:51:53,720 --> 00:51:54,840
+I said 100 years.
+
+713
+00:51:54,840 --> 00:51:56,520
+That's very reasonable to me.
+
+714
+00:51:56,560 --> 00:51:57,920
+Throw quantum at it.
+
+715
+00:52:00,320 --> 00:52:04,440
+Yeah, I'll probably have to get a second PhD to know what's going on there.
+
+716
+00:52:04,640 --> 00:52:18,560
+I think that we should establish the definition of small model as being a model that a grad student can inference at reasonable time on a single GPU.
+
+717
+00:52:18,560 --> 00:52:20,400
+Which is probably like 7B.
+
+718
+00:52:21,200 --> 00:52:21,800
+Maybe.
+
+719
+00:52:22,000 --> 00:52:26,480
+I don't think 27 is small under any reasonable Is it What is it MOE?
+
+720
+00:52:26,880 --> 00:52:27,480
+Mistral?
+
+721
+00:52:28,120 --> 00:52:29,040
+Uh I don't think so.
+
+722
+00:52:29,040 --> 00:52:31,800
+I think I'll I think their stuff is default dense.
+
+723
+00:52:32,200 --> 00:52:32,920
+Don't quote me on that.
+
+724
+00:52:32,920 --> 00:52:38,920
+Uh this is this is coming off of um just a lot of pre-trained data that is that is uh potentially collided.
+
+725
+00:52:39,280 --> 00:52:44,440
+Okay, there was one There's two more papers that we wanted to cover and then we can we can sort of wrap it.
+
+726
+00:52:44,440 --> 00:52:48,160
+You had an approximating You had a language model training data.
+
+727
+00:52:48,160 --> 00:52:50,520
+I think this is a little bit also newer.
+
+728
+00:52:50,880 --> 00:52:53,560
+How does this rank in terms of your your overall work?
+
+729
+00:52:53,560 --> 00:52:56,920
+Yeah, let's return to the kind of information theory question.
+
+730
+00:52:56,920 --> 00:53:04,880
+So, yeah, maybe we'll we'll skip over the contextual embeddings in the case of time, but we'll group those papers.
+
+731
+00:53:05,560 --> 00:53:06,240
+Great paper.
+
+732
+00:53:06,240 --> 00:53:08,800
+Hopefully people start training with that technique.
+
+733
+00:53:08,800 --> 00:53:10,240
+It's kind of a free lunch.
+
+734
+00:53:10,720 --> 00:53:13,600
+Those questions are all about information and model activations.
+
+735
+00:53:13,760 --> 00:53:17,840
+Like how much can we recover from this given vector?
+
+736
+00:53:17,960 --> 00:53:20,560
+Or like what data does this vector represent?
+
+737
+00:53:20,600 --> 00:53:23,040
+Or what com- computation is this vector represent?
+
+738
+00:53:23,520 --> 00:53:32,560
+And there's really two types of Like if you want to taxonomize, there's there's two types of whatever you call it dense information storage mechanisms.
+
+739
+00:53:33,040 --> 00:53:37,520
+One of them is activations or embeddings, which we were discussing already.
+
+740
+00:53:37,720 --> 00:53:45,160
+And then the other is weights, which are the things that are used to perform the computation, but not the computation itself.
+
+741
+00:53:45,480 --> 00:53:50,720
+And so we have now two papers in this direction of what is stored in the weights.
+
+742
+00:53:50,960 --> 00:53:57,120
+The first one is about language model capacity, which is called how much can language models memorize?
+
+743
+00:53:57,120 --> 00:53:58,960
+Or how much do language models memorize?
+
+744
+00:53:58,960 --> 00:54:01,360
+I never remember which one we settled on.
+
+745
+00:54:01,400 --> 00:54:05,800
+And then the other one is called approximating language model training data from weights.
+
+746
+00:54:05,920 --> 00:54:12,720
+The first one is like I I think has a lot of deep messages about how language models store information and how they work in general.
+
+747
+00:54:12,720 --> 00:54:17,800
+The second thing is like a proof of concept of maybe like a longer-term research project.
+
+748
+00:54:18,160 --> 00:54:21,280
+Let's start with the capacity stuff if that's good with you.
+
+749
+00:54:21,280 --> 00:54:22,359
+Do I have the paper for that?
+
+750
+00:54:22,359 --> 00:54:23,959
+I don't I don't know.
+
+751
+00:54:23,960 --> 00:54:27,640
+You know, we can return to the question you asked me, which is something like why do we care?
+
+752
+00:54:27,760 --> 00:54:29,680
+Or like what is this useful for?
+
+753
+00:54:30,080 --> 00:54:33,120
+And I don't know if I have a good answer for this.
+
+754
+00:54:33,320 --> 00:54:36,359
+I think this is this is somewhat profound.
+
+755
+00:54:36,359 --> 00:54:42,920
+Like it's kind of like in in physics, you know, when they try to measure these constants, like gravity.
+
+756
+00:54:42,920 --> 00:54:46,280
+People tried to measure the rate of acceleration of gravity for a long time.
+
+757
+00:54:46,440 --> 00:54:53,959
+Or like those Greek guys like back in in the BC era when they were trying to to approximate the radius of the earth based on shadows.
+
+758
+00:54:54,160 --> 00:55:02,120
+We're trying to take the GPT architecture, like the main one, and just measure how much information it it can store.
+
+759
+00:55:02,320 --> 00:55:08,000
+And we did this through the the lens of memorization, which I think we can skip over for the podcast.
+
+760
+00:55:08,120 --> 00:55:11,920
+And and we'll just talk about like information storage in in weights.
+
+761
+00:55:12,240 --> 00:55:15,960
+Like these curves to me are are pretty crazy.
+
+762
+00:55:15,960 --> 00:55:23,040
+Again, maybe maybe it's like the sort of discoverer's fat folly or something where I'm like, "Oh, this didn't exist before,
+
+763
+00:55:23,040 --> 00:55:24,600
+so it seems so cool."
+
+764
+00:55:24,600 --> 00:55:27,200
+But then you're saying like it seems somewhat obvious.
+
+765
+00:55:27,600 --> 00:55:28,080
+No, no, no.
+
+766
+00:55:28,080 --> 00:55:29,440
+Don't don't let me take that away from you.
+
+767
+00:55:29,440 --> 00:55:30,400
+Yeah, no.
+
+768
+00:55:31,240 --> 00:55:36,359
+Again, like I I independently was asking how come there's not enough people exploring LLMs from information theory.
+
+769
+00:55:36,359 --> 00:55:41,080
+And then like you just come along and your embeddings work become like an information theory exploration.
+
+770
+00:55:41,080 --> 00:55:47,960
+And I'm like suddenly like I'm very aligned to like exploring this, promoting this, and encouraging more people to to figure it out.
+
+771
+00:55:47,960 --> 00:55:53,200
+Because like that's ultimately how we figure out this whole compression issue and that you know, what what Andre wants,
+
+772
+00:55:53,200 --> 00:55:54,600
+which is like the cognitive core, right?
+
+773
+00:55:54,600 --> 00:55:56,480
+The most efficient model for the most capability.
+
+774
+00:55:56,480 --> 00:55:58,520
+Like that is an information theory question.
+
+775
+00:55:58,760 --> 00:56:00,080
+Totally agree with that.
+
+776
+00:56:00,240 --> 00:56:01,160
+We could start here.
+
+777
+00:56:01,160 --> 00:56:16,959
+Like so so transformers that are trained in 32-bit precision, we approximate can store about 3.6 bits of information to maybe 3.9 bits somewhere in there per parameter.
+
+778
+00:56:17,359 --> 00:56:18,480
+And like why is this?
+
+779
+00:56:18,480 --> 00:56:20,880
+I mean, for some perspective, this is this is quite bad.
+
+780
+00:56:20,880 --> 00:56:27,880
+Like if you have 32 bits available and you can only use three to four of them, like you're Just store 32,
+
+781
+00:56:27,880 --> 00:56:28,480
+bro.
+
+782
+00:56:30,440 --> 00:56:31,160
+Yeah, yeah.
+
+783
+00:56:31,160 --> 00:56:38,520
+Then you'll like, you know, you could build your own AI lab if you can make the these models uh that much more efficient.
+
+784
+00:56:38,720 --> 00:56:45,440
+I don't know how they're implementing this mechanism or where the kind of bottlenecks come from.
+
+785
+00:56:45,560 --> 00:56:49,359
+Or even now that we know this, what it's necessarily useful for.
+
+786
+00:56:49,359 --> 00:57:01,440
+I guess the tools that would be interesting to me are knowing like given a data set, if you could predetermine the exact model size and maybe architectural properties required to get a certain level
+
+787
+00:57:01,440 --> 00:57:03,680
+of performance, that would be really neat.
+
+788
+00:57:03,680 --> 00:57:05,040
+And like we don't even know how to do that.
+
+789
+00:57:05,040 --> 00:57:10,480
+We don't even know what the difference is between doing Laura training, which trains less than 1% of the parameters,
+
+790
+00:57:10,800 --> 00:57:13,240
+and full fine-tuning, which trains all the parameters.
+
+791
+00:57:13,240 --> 00:57:15,320
+We don't even really understand the difference there.
+
+792
+00:57:15,440 --> 00:57:20,680
+So, I think this is like maybe like a baby step sort of in that direction, but there's a lot of unknown ahead of us.
+
+793
+00:57:20,880 --> 00:57:21,440
+Okay.
+
+794
+00:57:21,440 --> 00:57:22,520
+Do you think this is a hard limit?
+
+795
+00:57:22,520 --> 00:57:27,800
+Do you think someone can come up with a better algorithm by better architecture and then sort of just change the slope?
+
+796
+00:57:28,000 --> 00:57:29,359
+There two axes here.
+
+797
+00:57:29,359 --> 00:57:33,000
+One is the ability of the model to store data.
+
+798
+00:57:33,120 --> 00:57:35,600
+And I think we can definitely improve that.
+
+799
+00:57:35,600 --> 00:57:42,400
+I think like maybe even if we tested this with the Lama architecture, like there's sort of like a GPT++ architecture.
+
+800
+00:57:42,480 --> 00:57:48,080
+Like I would guess that can store better data just because the kind of numerical flow is a little bit better.
+
+801
+00:57:48,080 --> 00:57:52,000
+The nonlinearities are maybe like a little bit more suitable to training.
+
+802
+00:57:52,160 --> 00:57:54,600
+Like that will probably raise the bound a little bit.
+
+803
+00:57:54,680 --> 00:57:58,200
+And then the second axis is that our measurement tools are just not that good.
+
+804
+00:57:58,200 --> 00:57:59,960
+Like this is, you know, me I'm a grad student.
+
+805
+00:57:59,960 --> 00:58:05,840
+I'm running all these hyperparameter sweeps and sort of like we we draw conclusions from them, but even that being said,
+
+806
+00:58:05,840 --> 00:58:11,520
+like there probably ways to measure this better and but all that would do is push the number up.
+
+807
+00:58:11,520 --> 00:58:23,440
+So, it's possible like there is a way to store five bits per parameter if you have like a better optimization technique or if you were a super genius and you could just perfectly set
+
+808
+00:58:23,440 --> 00:58:26,440
+the weights to store the data, then maybe you can do better.
+
+809
+00:58:26,440 --> 00:58:31,200
+And this is just sort of like what we can reach through optimization is this 3.6 bits per parameter.
+
+810
+00:58:31,600 --> 00:58:36,400
+But I would be happy if someone came along with a much better measurement tool.
+
+811
+00:58:36,640 --> 00:58:37,240
+Yeah.
+
+812
+00:58:38,080 --> 00:58:40,120
+And this is just sort of like the first measurement.
+
+813
+00:58:40,120 --> 00:58:48,760
+I mean, I would I would guess in the future like, you know, people will look back and say like this is like somewhat off in one direction or another for whatever reason.
+
+814
+00:58:48,960 --> 00:58:50,600
+Um and and that's just how science goes.
+
+815
+00:58:50,600 --> 00:58:52,200
+And I've no problem with it.
+
+816
+00:58:52,200 --> 00:58:56,680
+What we do is we call we we call this the Morris constant, 3.6, right?
+
+817
+00:58:58,160 --> 00:58:59,120
+I would never.
+
+818
+00:58:59,160 --> 00:59:04,640
+And then we we we set a like a like a challenge like a leaderboard of like beat this.
+
+819
+00:59:05,040 --> 00:59:05,440
+Right?
+
+820
+00:59:05,440 --> 00:59:06,880
+And like let let people go.
+
+821
+00:59:06,880 --> 00:59:11,800
+Yeah, that assumes that we know the true constant ahead of time and we can measure the error rate.
+
+822
+00:59:11,960 --> 00:59:12,880
+It's it's doable.
+
+823
+00:59:12,880 --> 00:59:14,040
+You you laid it out here.
+
+824
+00:59:14,040 --> 00:59:15,200
+Yeah, yeah, yeah, yeah.
+
+825
+00:59:15,200 --> 00:59:16,240
+That makes sense.
+
+826
+00:59:16,480 --> 00:59:22,880
+One minor doubt I have is like the goal actually isn't memorization, it's generalization, right?
+
+827
+00:59:22,880 --> 00:59:23,480
+Mhm.
+
+828
+00:59:23,680 --> 00:59:26,680
+The best memorizer model may not be the best generalizer model.
+
+829
+00:59:26,680 --> 00:59:34,800
+And you like this incentivizing people to to max this number might actually just be fruitless in terms of actual intelligence.
+
+830
+00:59:35,240 --> 00:59:37,480
+Like you just get the best actual compressor.
+
+831
+00:59:37,800 --> 00:59:39,200
+Like you're just going to get Gzip.
+
+832
+00:59:39,360 --> 00:59:40,600
+That's totally true.
+
+833
+00:59:40,800 --> 00:59:43,920
+And there's this pattern in research, you know, time after time.
+
+834
+00:59:43,920 --> 00:59:48,920
+It's like someone poses a question and then people answer it over and over and over again.
+
+835
+00:59:48,920 --> 00:59:52,440
+But it's it's often much more fruitful to just ask a new question.
+
+836
+00:59:52,840 --> 00:59:59,080
+Maybe it just doesn't matter how much GPT models can store and you should just like work on something else.
+
+837
+00:59:59,080 --> 01:00:00,280
+We'll figure that out.
+
+838
+01:00:00,280 --> 01:00:03,520
+Um did you want to uh dwell on this this side at all?
+
+839
+01:00:03,560 --> 01:00:05,480
+Yeah, let's just talk about it real quick.
+
+840
+01:00:05,480 --> 01:00:07,840
+Uh definitely not the algorithm itself.
+
+841
+01:00:08,240 --> 01:00:12,440
+By the way, what are your tools for doing these kinds of charts uh and these kinds of diagrams?
+
+842
+01:00:12,440 --> 01:00:14,840
+Like I I just kind kind of curious about behind the scenes on the tools.
+
+843
+01:00:14,840 --> 01:00:20,240
+I think like visualization has definitely been fun hobby of mine during grad school.
+
+844
+01:00:20,280 --> 01:00:23,440
+This one actually Oscar, my co-author, made this one.
+
+845
+01:00:23,440 --> 01:00:26,880
+Maybe I gave some like prompting, but he made it.
+
+846
+01:00:26,880 --> 01:00:33,560
+I I think most the last few papers have all been in diagrams of Google diagrams.
+
+847
+01:00:33,600 --> 01:00:36,240
+I was using Figma for a while and Illustrator.
+
+848
+01:00:36,840 --> 01:00:40,640
+I think Illustrator actually is is the best tool.
+
+849
+01:00:41,120 --> 01:00:44,840
+Oh, did you know the Transformers Transformers diagram was in Adobe Illustrator?
+
+850
+01:00:45,280 --> 01:00:47,560
+Oh, yeah, yeah, I did know that actually.
+
+851
+01:00:47,560 --> 01:00:51,960
+Yeah, because that's the only way you can get arrows that sort of like curve like that.
+
+852
+01:00:52,320 --> 01:00:54,640
+Um and then they've good shadows.
+
+853
+01:00:54,760 --> 01:00:58,840
+Diagrams is like the least robust, but it's the most accessible.
+
+854
+01:00:58,840 --> 01:01:02,160
+And honestly, if you if you're good, you can make pretty good stuff.
+
+855
+01:01:02,160 --> 01:01:05,840
+Excalidraws is nice too if it's not going in a a paper.
+
+856
+01:01:06,160 --> 01:01:07,520
+Yeah, it's just too rough for a paper.
+
+857
+01:01:07,520 --> 01:01:09,560
+But you need something professional looking, you know?
+
+858
+01:01:09,560 --> 01:01:15,040
+It helps like if you're going to publish your work, you need to make it look nice and professional and like official,
+
+859
+01:01:15,040 --> 01:01:15,560
+right?
+
+860
+01:01:15,560 --> 01:01:16,520
+So this is what it is.
+
+861
+01:01:16,520 --> 01:01:22,800
+Yeah, yeah, and I think there's something worthwhile about saying like, okay, if if I'm going to put my name behind this,
+
+862
+01:01:22,800 --> 01:01:29,880
+like I want to spend time making all the references perfect and and all the diagrams professional, all the captions are correct.
+
+863
+01:01:29,880 --> 01:01:33,600
+And I think it's like important to put that level of detail into your work.
+
+864
+01:01:33,600 --> 01:01:36,040
+That's a little chuggy, but let's finish this off.
+
+865
+01:01:36,040 --> 01:01:43,040
+So okay, we're talking about bits information theory, what what information stored embeddings, we're talking about language model capacity.
+
+866
+01:01:43,440 --> 01:01:55,440
+I think a much more question more practical question is uh maybe some maybe this is more analogous to the vector database hacking embedding threat model we discussed is like if you have access to
+
+867
+01:01:55,440 --> 01:01:58,120
+a set of model weights, what can you learn about the data?
+
+868
+01:01:58,120 --> 01:02:09,200
+So like you were just mentioning Gemma 3B came out yesterday and you can download it and it takes up a certain amount of space on disk and it was trained on some data,
+
+869
+01:02:09,200 --> 01:02:11,320
+but we have no insight into what the data was.
+
+870
+01:02:11,320 --> 01:02:12,480
+I mean, it's probably English.
+
+871
+01:02:12,480 --> 01:02:14,360
+It's probably some distribution of web text.
+
+872
+01:02:14,560 --> 01:02:15,880
+I guess there's a lot of code.
+
+873
+01:02:16,440 --> 01:02:19,040
+And we seem to have a lot of information about the model, right?
+
+874
+01:02:19,040 --> 01:02:26,680
+You have this file and there's like many ones and zeros, which means something, but it's kind of like a very highly compressed version of the training data.
+
+875
+01:02:26,760 --> 01:02:33,040
+But I I I would be extremely surprised if they do any type of like private training.
+
+876
+01:02:33,040 --> 01:02:41,360
+Like there are these mechanisms for doing like differentially private language model training or um even just anonymization in the pre-training pipeline.
+
+877
+01:02:41,360 --> 01:02:42,720
+I bet they don't do any of that.
+
+878
+01:02:42,720 --> 01:02:49,960
+They just sort of like train on the data and then they kind of know that we don't have the right tools to decrypt the model weights.
+
+879
+01:02:49,960 --> 01:02:57,400
+And so that's like my dream is we can come up with some way of of translating model weights back into text data sets.
+
+880
+01:02:57,760 --> 01:03:05,240
+And so in the the most recent kind of drop uh paper drop is that paper approximating language model training data from weights.
+
+881
+01:03:05,840 --> 01:03:08,320
+And it turns out to be a really hard problem.
+
+882
+01:03:08,320 --> 01:03:16,840
+Like trying to go from model weights to text is really hard and we do something a lot simpler, which is like well,
+
+883
+01:03:16,840 --> 01:03:18,440
+there's there's two ways we make it simpler.
+
+884
+01:03:18,440 --> 01:03:24,600
+The first thing is we assume access to two checkpoints, which I think it is probably not the case in Gemma.
+
+885
+01:03:24,920 --> 01:03:28,560
+But in the in the case of DeepSeek, if you download the 400 billion
+
+886
+01:03:29,600 --> 01:03:34,240
+parameter model weights, it's this giant file and you can actually get two of them.
+
+887
+01:03:34,240 --> 01:03:38,720
+You can get the base model weights and the fine-tuned model weights.
+
+888
+01:03:38,800 --> 01:03:48,320
+So the way we put this we you have this kind of like difference in parameter space telling you what DeepSeek fine-tuned on and it's very controversial.
+
+889
+01:03:48,480 --> 01:03:57,720
+I mean, there's sort of like geopolitical, definitely at the at the corporation level, they're really interested in the implications of like what did DeepSeek train on?
+
+890
+01:03:57,720 --> 01:04:02,840
+And they've released this kind of treasure trove of information of what they trained on, which is the actual model weights,
+
+891
+01:04:02,840 --> 01:04:07,800
+but we have no tool for like interpreting or kind of decrypting this weight difference.
+
+892
+01:04:08,200 --> 01:04:14,600
+And so we started with something really simple, which is instead of even just trying to like regenerate the training data,
+
+893
+01:04:14,840 --> 01:04:27,359
+we take just a web corpus and try to do selection of training data that kind of like looks like the true training data and gives us performance that's as close as possible to the
+
+894
+01:04:27,359 --> 01:04:28,480
+true training data.
+
+895
+01:04:28,560 --> 01:04:39,200
+So there's this complicated method, but it's something like you just sort of like look at the data point gradient and see if it points in the direction in weight space of the fine-tune and
+
+896
+01:04:39,200 --> 01:04:41,560
+then you take like the top data set.
+
+897
+01:04:41,600 --> 01:04:46,200
+There's some tricks to it, but it's basically just like gradient-based selection based on this weight difference.
+
+898
+01:04:46,880 --> 01:04:49,160
+And it seems to be okay.
+
+899
+01:04:49,160 --> 01:04:52,000
+Like it can get us pretty good training data.
+
+900
+01:04:52,000 --> 01:05:00,480
+So I guess it if you actually wanted to use this, it would be like your competitor releases a base model and a fine-tune and you're trying to recreate their data set.
+
+901
+01:05:00,480 --> 01:05:04,960
+So you can take this weight difference and take a giant web data set.
+
+902
+01:05:04,960 --> 01:05:13,760
+Like if I was doing this at a company, I'd probably try to scale it up to trillions of tokens and then select the exact data points that try to produce the model.
+
+903
+01:05:13,760 --> 01:05:16,600
+And and it turns out you can train a pretty good model with that.
+
+904
+01:05:16,600 --> 01:05:24,240
+It we don't get to quite the performance of the original model, but it does seem to be like trending in that direction.
+
+905
+01:05:24,240 --> 01:05:26,240
+This is like very creative.
+
+906
+01:05:26,520 --> 01:05:28,840
+I don't know what the the the the use of it
+
+907
+01:05:30,040 --> 01:05:32,959
+Yeah, like when would you be in this exact situation?
+
+908
+01:05:33,560 --> 01:05:35,359
+Decently often for the open model labs.
+
+909
+01:05:35,359 --> 01:05:39,080
+Like even DeepSeek are are one like has released an update.
+
+910
+01:05:39,320 --> 01:05:40,880
+Mistral does it pretty frequently.
+
+911
+01:05:40,880 --> 01:05:42,000
+Llama does it frequently.
+
+912
+01:05:42,440 --> 01:05:50,520
+It's not impossible, but like I think it's like it's like I think that I really like the creativity in using quote unquote synthetic checkpoints to do this,
+
+913
+01:05:50,760 --> 01:05:54,840
+which is I don't think I've heard this from any other place.
+
+914
+01:05:54,840 --> 01:05:57,560
+So I I don't know if you you came up the idea.
+
+915
+01:05:57,680 --> 01:06:00,280
+It's like linear interpolation in in weight space.
+
+916
+01:06:00,640 --> 01:06:01,240
+Okay.
+
+917
+01:06:01,280 --> 01:06:03,240
+Um that's a bunch of the recent work.
+
+918
+01:06:03,240 --> 01:06:06,080
+I wanted to sort of cap things off with the data sets question.
+
+919
+01:06:06,080 --> 01:06:09,640
+If if that's is is that a good You can ask me whatever you want.
+
+920
+01:06:09,640 --> 01:06:11,680
+Well, it's not it's not a good it's not an ask.
+
+921
+01:06:11,680 --> 01:06:13,760
+It's just like I think this is a very good thesis.
+
+922
+01:06:14,320 --> 01:06:15,720
+Uh I think it's a hot take.
+
+923
+01:06:15,800 --> 01:06:21,520
+I almost invited you to speak based on just this alone, but it was just it was a little bit late uh to talk Oh,
+
+924
+01:06:21,520 --> 01:06:22,680
+for the for the conference?
+
+925
+01:06:22,920 --> 01:06:23,520
+Yes.
+
+926
+01:06:23,720 --> 01:06:33,720
+When I look for conference keynotes, I look for something that has a broad overview that can I put the last few years in perspective or is an insight that you can reasonably rely on
+
+927
+01:06:33,720 --> 01:06:37,440
+to like last for a while so you can get some mileage out of it, you know?
+
+928
+01:06:37,440 --> 01:06:39,600
+And I think a lot of ideas in AI come and go.
+
+929
+01:06:39,800 --> 01:06:47,000
+But like things that are trend these things are scaling laws, things are trend lines, things are things that are like um there's you know,
+
+930
+01:06:47,000 --> 01:06:49,640
+there's no new ideas in AI that I pay attention to.
+
+931
+01:06:49,640 --> 01:06:52,320
+So maybe you want to recap like what's what's the backstory if there was one.
+
+932
+01:06:52,320 --> 01:06:53,240
+Yeah, yeah, sure.
+
+933
+01:06:53,520 --> 01:07:00,840
+So the the meta backstory is I've sort of started writing on Substack and this is a post that I wrote a few months ago.
+
+934
+01:07:00,840 --> 01:07:03,160
+The highest art form of humanity.
+
+935
+01:07:03,359 --> 01:07:06,440
+Yeah, yeah.
+
+936
+01:07:06,440 --> 01:07:13,040
+Yeah, publishing papers wasn't doing it for me anymore and and I moved to Substack and this is the name of the post.
+
+937
+01:07:13,040 --> 01:07:16,360
+There are no new ideas in AI, only new data sets.
+
+938
+01:07:16,600 --> 01:07:22,480
+One one guy pledged me, but then I found out he was like my former student from a class I was teaching.
+
+939
+01:07:22,480 --> 01:07:24,320
+So I I don't think it really counts.
+
+940
+01:07:24,640 --> 01:07:25,160
+It counts.
+
+941
+01:07:25,160 --> 01:07:25,760
+He's a friend.
+
+942
+01:07:25,760 --> 01:07:26,800
+He's your first supporter.
+
+943
+01:07:27,160 --> 01:07:28,320
+A pledge is a pledge, man.
+
+944
+01:07:28,320 --> 01:07:29,720
+I'll take whatever I can get.
+
+945
+01:07:29,920 --> 01:07:35,800
+So so the underlying thesis is that whenever maybe I'll I'll lay out this framework first.
+
+946
+01:07:35,800 --> 01:07:52,160
+So there's this uh this book called The Structure of Scientific Revolutions by Thomas Kuhn that I read near the beginning of my PhD which suggests that science kind of moves in these cycles where
+
+947
+01:07:52,720 --> 01:08:00,280
+not very often there's something he calls a paradigm shift, which is like uh you could think of it as a zero to one innovation where everything changes.
+
+948
+01:08:00,760 --> 01:08:10,520
+And then it's followed by a rapid period of small innovations, a lot of like reapplication of previous techniques, pre-paradigm shift techniques to the new era.
+
+949
+01:08:10,840 --> 01:08:14,320
+And then things sort of slow down as we wait for a new paradigm shift.
+
+950
+01:08:14,720 --> 01:08:19,759
+And I was kind of asking myself what's unique to the paradigm shifts that we've seen in in AI.
+
+951
+01:08:19,759 --> 01:08:25,600
+And And by the way, to me AI and language models are somewhat synonymous at this point.
+
+952
+01:08:25,600 --> 01:08:27,839
+Like at least for the foreseeable future.
+
+953
+01:08:27,839 --> 01:08:38,799
+I'm I'm certain that will change, but basically everything that's pushed the boundary to whatever we have now that resembles like intelligence has come from language models.
+
+954
+01:08:38,799 --> 01:08:43,560
+And so those breakthroughs came in in a few steps.
+
+955
+01:08:43,920 --> 01:08:55,160
+So I think the idea is also like a meta commentary on the research community because what everyone wants as a researcher is some kind of like cute new method that no one has thought
+
+956
+01:08:55,160 --> 01:09:00,440
+of before that just works on the existing data better than the previous methods.
+
+957
+01:09:00,440 --> 01:09:06,160
+That's like for whatever reason like the kind of most glamorous thing people think you can do as a researcher.
+
+958
+01:09:06,160 --> 01:09:10,720
+Like Mamba, it's like it's like a transformer, but it's like more efficient and works better.
+
+959
+01:09:10,799 --> 01:09:13,600
+So that's what a good idea looks like.
+
+960
+01:09:13,600 --> 01:09:15,920
+And I think everyone wants to like find something like that.
+
+961
+01:09:15,920 --> 01:09:19,400
+But if you look at what's actually born out in practice, it's never been like that.
+
+962
+01:09:19,400 --> 01:09:31,839
+I think like all of the things that I would consider paradigm shifts in the Koonian sense came from a new technique but trained on new data and I think the new data is super
+
+963
+01:09:31,839 --> 01:09:32,680
+super important.
+
+964
+01:09:32,960 --> 01:09:35,720
+So I wrote it as a series of four paradigm shifts.
+
+965
+01:09:35,880 --> 01:09:47,279
+The first is the emergence of deep neural networks with AlexNet which I think was like 2010 to 2012 era where we just started training on ImageNet which is like a scale no one had
+
+966
+01:09:47,279 --> 01:10:00,440
+ever seen before of millions of images and then the second thing was transformers and BERT and this attention is all you need paper 2017 and the first GPT 2018 which is web scale pre-training.
+
+967
+01:10:00,520 --> 01:10:01,920
+Like no one had ever done that before.
+
+968
+01:10:01,920 --> 01:10:07,040
+No one had ever tried to scrape all the text off the internet and then tokenize it and feed it into models.
+
+969
+01:10:07,040 --> 01:10:10,960
+Like it's a crazy idea and I think like we should be honest.
+
+970
+01:10:11,560 --> 01:10:18,120
+I mean transformers are incredible and like their staying power is never going to cease to amaze me.
+
+971
+01:10:18,120 --> 01:10:29,800
+They're like much more optimal than I think anyone ever knew and I don't know if we'll ever beat them but the real innovation is web scale pre-training and I think like we honestly probably
+
+972
+01:10:29,880 --> 01:10:31,520
+could have gotten this with RNNs.
+
+973
+01:10:31,520 --> 01:10:42,680
+I know like the scaling laws paper shows that RNNs have worse curves for scaling but probably people would have been like I bet you could have built ChatGPT with a very sophisticated RNN.
+
+974
+01:10:42,680 --> 01:10:44,280
+Like you didn't even need transformers.
+
+975
+01:10:44,760 --> 01:10:55,680
+What you need is web scale pre-training and the third innovation which is instruction tuning and we thought it it came with like reinforcement learning but I think the big innovation of instruction tuning is
+
+976
+01:10:55,680 --> 01:11:07,120
+actually the human preference data which is like gathering positive and negative pairs of what looks good like in terms of a chatbot interface and actually it turns out you can do supervised learning on
+
+977
+01:11:07,120 --> 01:11:07,680
+that too.
+
+978
+01:11:07,680 --> 01:11:10,520
+You can do DPO which is a form of supervised learning.
+
+979
+01:11:10,520 --> 01:11:13,360
+You don't even need the the instruct GPT techniques.
+
+980
+01:11:13,800 --> 01:11:15,160
+You just need the data.
+
+981
+01:11:15,160 --> 01:11:24,000
+So like I'm sort of playing devil's advocate here but I actually think this is true that like if we had the right data sets we almost could have scaled like 2015 era techniques and
+
+982
+01:11:24,000 --> 01:11:27,400
+gotten something that looks like at least instruct GPT.
+
+983
+01:11:27,840 --> 01:11:33,480
+Reasoning models are are a little different like they're I'm not sure if we could have that with RNNs or not.
+
+984
+01:11:33,480 --> 01:11:42,880
+Like I don't know if I'm in a position to comment on that with certainty but they do fall into this framework which is they really did emerge from a new data source.
+
+985
+01:11:42,880 --> 01:11:44,800
+In this case it's something like a little different.
+
+986
+01:11:44,800 --> 01:11:57,480
+It's like verification with symbolic systems like math, calculators, coding environments, unit tests, like things where we can provide numerical feedback to language model outputs.
+
+987
+01:11:57,480 --> 01:12:02,960
+But we we built a way to to learn that and leverage it to get more intelligent systems.
+
+988
+01:12:03,440 --> 01:12:15,640
+And so whatever the fifth thing is whether it's video or embodied AI or some kind of crazy innovation on reasoning models whatever comes next will probably be some type of new data source that
+
+989
+01:12:15,640 --> 01:12:17,840
+we're not using yet.
+
+990
+01:12:18,080 --> 01:12:19,960
+That's a really good thesis.
+
+991
+01:12:20,280 --> 01:12:25,520
+I would say that the researchers I talked to would somewhat disagree.
+
+992
+01:12:25,760 --> 01:12:31,160
+Yeah, obviously this is like a hot take type of thing and like you already acknowledged that RNNs don't don't scale to the same extent.
+
+993
+01:12:31,160 --> 01:12:41,200
+Like they operate on the slope of the curve whereas you know I guess like the amount of data or the type of data or the core insight just changes the order of magnitude of
+
+994
+01:12:41,200 --> 01:12:42,240
+the x-axis, right?
+
+995
+01:12:42,240 --> 01:12:46,200
+That that we are mostly working on but like both are important.
+
+996
+01:12:46,480 --> 01:12:56,600
+The way that I think someone put it to me was an improvement on compute or data efficiency is the equivalent of having a whole bunch more data that we you know that otherwise would
+
+997
+01:12:56,600 --> 01:12:59,200
+be a lot more expensive to collect.
+
+998
+01:12:59,560 --> 01:13:06,960
+It's likely that you know the frontier models right now are just a collection of hundreds of these small little experiments that just stack up.
+
+999
+01:13:06,960 --> 01:13:12,560
+You mentioned Muon in your in your post which seems to be the atom killer.
+
+1000
+01:13:12,720 --> 01:13:19,760
+Curiously enough like still none of the big models use Muon but like vibes are good.
+
+1001
+01:13:19,760 --> 01:13:23,800
+Yeah, yeah and the value of building better optimizers is really incredible.
+
+1002
+01:13:23,800 --> 01:13:25,600
+Like it's just a free lunch.
+
+1003
+01:13:25,600 --> 01:13:32,640
+You can just sort of like plug in a slightly better training mechanism and then you save like a ton of compute and a ton of training time.
+
+1004
+01:13:32,720 --> 01:13:34,280
+That's like hugely valuable.
+
+1005
+01:13:34,840 --> 01:13:42,920
+I think this is cool because I think like it's puts us in a mode of like if you were ever to ask what comes after reasoning it has to be something on the order
+
+1006
+01:13:42,920 --> 01:13:43,600
+of this.
+
+1007
+01:13:44,080 --> 01:13:45,520
+And most ideas are not.
+
+1008
+01:13:45,520 --> 01:13:46,600
+Most ideas are not.
+
+1009
+01:13:46,680 --> 01:13:54,560
+And so this is cool in the sense of like it just jolts you out of incremental thinking into like what really is missing for the next paradigm.
+
+1010
+01:13:55,000 --> 01:13:56,160
+And I don't have an answer.
+
+1011
+01:13:56,160 --> 01:13:56,840
+Do you have one?
+
+1012
+01:13:56,840 --> 01:13:58,000
+Do you have do you have candidates?
+
+1013
+01:13:58,640 --> 01:14:01,400
+Oh I I I really haven't even considered that too much.
+
+1014
+01:14:01,400 --> 01:14:04,920
+I guess like scaling reasoning to do the auto complete.
+
+1015
+01:14:05,800 --> 01:14:06,840
+for step five.
+
+1016
+01:14:06,880 --> 01:14:11,920
+I mean you got us all the way there and you were like you know you should you got to show us the way now.
+
+1017
+01:14:11,920 --> 01:14:18,320
+We can say it's an exercise left to the reader but I mean the reality is like predicting the future is too damn hard,
+
+1018
+01:14:18,320 --> 01:14:18,720
+you know?
+
+1019
+01:14:18,720 --> 01:14:28,920
+Like I I don't maybe it'll be obvious to me in hindsight in five years but sitting here today I I really can't derive from first principles what the next wave of innovation will come
+
+1020
+01:14:28,920 --> 01:14:29,520
+from.
+
+1021
+01:14:29,920 --> 01:14:30,440
+Yep.
+
+1022
+01:14:30,440 --> 01:14:31,600
+I think we have a few years left.
+
+1023
+01:14:31,600 --> 01:14:35,080
+Like each of these phases lasted for a few years.
+
+1024
+01:14:35,080 --> 01:14:37,280
+Reasoning just started last year kind of.
+
+1025
+01:14:37,360 --> 01:14:39,320
+We got some some juice on this one.
+
+1026
+01:14:39,320 --> 01:14:39,920
+Cool.
+
+1027
+01:14:40,080 --> 01:14:42,720
+I think that is a broad overview.
+
+1028
+01:14:42,720 --> 01:14:45,560
+Like we've went way over time but like I really enjoyed this.
+
+1029
+01:14:45,560 --> 01:14:49,200
+I guess my parting question for you is kind of a meta one.
+
+1030
+01:14:49,440 --> 01:14:50,960
+So I'm not an academic.
+
+1031
+01:14:51,080 --> 01:14:52,320
+I'm like kind of self-taught.
+
+1032
+01:14:52,320 --> 01:14:57,000
+I just read a bunch of papers and like I talk to people all day as part of the podcast.
+
+1033
+01:14:57,000 --> 01:15:03,120
+How do I rate in terms of like my my questions as though like could I pass as a grad student?
+
+1034
+01:15:03,320 --> 01:15:07,040
+Like or like what's my distribution like?
+
+1035
+01:15:07,040 --> 01:15:09,640
+Maybe I'm maybe more industry oriented than academics.
+
+1036
+01:15:10,160 --> 01:15:22,840
+I think you got to realize that like the only person that's an expert in your area as a grad student is you and even like eventually your advisor defers to you for a small
+
+1037
+01:15:22,840 --> 01:15:25,800
+set of questions that fall within your very niche expertise.
+
+1038
+01:15:26,400 --> 01:15:36,480
+So like I think you're clearly like a very good generalist and have like a huge amount of background on these topics and to the point where I would say you're passing the the grad
+
+1039
+01:15:36,480 --> 01:15:44,360
+student Turing test and I think if you went to a talk like people would just assume you have some weird research area of your own that they don't understand,
+
+1040
+01:15:44,360 --> 01:15:45,040
+you know?
+
+1041
+01:15:45,200 --> 01:15:46,960
+My research area is AI engineering.
+
+1042
+01:15:46,960 --> 01:15:49,800
+Like I'm I'm trying to like making it up as I go.
+
+1043
+01:15:50,560 --> 01:15:51,960
+Uh but no, this is super helpful.
+
+1044
+01:15:52,200 --> 01:15:55,120
+Uh okay, well I I I that's about all we we prepared.
+
+1045
+01:15:55,360 --> 01:15:56,560
+All the best in your search.
+
+1046
+01:15:56,560 --> 01:15:58,360
+All the best in your PhD.
+
+1047
+01:15:58,480 --> 01:16:02,360
+I assume like apparently the current PhD meta is you just you do a bunch of small papers.
+
+1048
+01:16:02,360 --> 01:16:05,120
+You staple them together and like find an overall theme.
+
+1049
+01:16:05,120 --> 01:16:06,560
+You do a defense and that's it.
+
+1050
+01:16:06,560 --> 01:16:08,960
+Like that's the journey which is kind of cool.
+
+1051
+01:16:08,960 --> 01:16:10,680
+Like I I would I would love to do that.
+
+1052
+01:16:10,680 --> 01:16:13,320
+I I I'm too old to do it but like it's cool.
+
+1053
+01:16:13,320 --> 01:16:13,840
+Yeah, yeah.
+
+1054
+01:16:13,840 --> 01:16:16,320
+It's it's a great thing to do at at any age.
+
+1055
+01:16:16,680 --> 01:16:19,120
+Well, it's better to do a Substack, right?
+
+1056
+01:16:19,120 --> 01:16:25,240
+And then you have like people like subscribing and pledging along the way and like getting validation and like yeah,
+
+1057
+01:16:25,240 --> 01:16:26,800
+that's that's better than a PhD.
+
+1058
+01:16:27,000 --> 01:16:29,520
+Substack.
+
+1059
+01:16:30,040 --> 01:16:33,120
+That's the title of the episode like Substack better than PhD.
+
+1060
+01:16:35,720 --> 01:16:36,400
+But no.
+
+1061
+01:16:36,400 --> 01:16:37,400
+Thanks Yeah, thanks for your time.
+
+1062
+01:16:37,400 --> 01:16:38,600
+This is really great.
+
+1063
+01:16:38,600 --> 01:16:40,000
+Where can people find you?
+
+1064
+01:16:40,120 --> 01:16:41,400
+What are you looking for really?
+
+1065
+01:16:41,680 --> 01:16:45,160
+I'm online, you know, you can follow my Substack and Twitter.
+
+1066
+01:16:45,560 --> 01:16:47,200
+I tweet pretty consistently.
+
+1067
+01:16:48,160 --> 01:16:49,920
+And you're putting papers out.
+
+1068
+01:16:49,920 --> 01:16:56,560
+I guess like the most meaningful thing to be honest is to engage with the research and send me an email if you really care.
+
+1069
+01:16:56,920 --> 01:17:00,320
+That that's amazing and like I love having those kinds of discussions.
+
+1070
+01:17:01,160 --> 01:17:04,720
+And you mean like what I'm looking for in a job or out of life?
+
+1071
+01:17:04,960 --> 01:17:06,560
+Your research direction.
+
+1072
+01:17:07,120 --> 01:17:14,520
+Like what interests you over anything else that's like if if there's someone out there looking who has a problem and is looking for someone to help them on it.
+
+1073
+01:17:14,520 --> 01:17:17,040
+Like you are the guy for underscore.
+
+1074
+01:17:17,280 --> 01:17:17,920
+Oh yeah.
+
+1075
+01:17:17,920 --> 01:17:32,120
+Hopefully if you listen this long like I think like my research is a lot more well connected than some people's PhD research in that it all falls into like a very small manifold of
+
+1076
+01:17:32,120 --> 01:17:43,160
+like all possible problems and so if you if you want to work on anything within that space or that's sort of like adjacent to the problems that we discussed in terms of like language
+
+1077
+01:17:43,160 --> 01:17:43,760
+model
+
+1078
+01:17:44,800 --> 01:17:49,080
+and maybe not even language model but model weight and activation information.
+
+1079
+01:17:49,800 --> 01:17:54,440
+I think anything that can be described as that is very interesting to me and I would love to talk.
+
+1080
+01:17:54,600 --> 01:17:55,080
+Awesome.
+
+1081
+01:17:55,080 --> 01:17:59,640
+Well, we'll put your contact info in the show notes and thanks for your time.
+
+1082
+01:17:59,719 --> 01:18:00,560
+Thank you.
+

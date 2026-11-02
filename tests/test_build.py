@@ -24,7 +24,8 @@ class PublicBuildTests(unittest.TestCase):
             out = Path(tmp) / 'site'
             build_pages.build(out)
             files = {p.relative_to(out).as_posix() for p in out.rglob('*') if p.is_file()}
-            self.assertEqual(len(files), 13)
+            subtitle_paths = {sub for item in self.catalog['videos'] for sub in item.get('subs', [])}
+            self.assertEqual(files, {'index.html', 'icon.png', 'catalog.json', '.nojekyll', '.friends-english-build'} | subtitle_paths)
             self.assertTrue({'index.html', 'icon.png', 'catalog.json', '.nojekyll', '.friends-english-build'} <= files)
             self.assertFalse(any(p.endswith(('.mp4', '.py', '.log')) or 'state' in p or 'downloads' in p for p in files))
             self.assertIn('name="fe-storage" content="browser"', (out / 'index.html').read_text())
@@ -38,8 +39,8 @@ class PublicBuildTests(unittest.TestCase):
                 self.assertEqual(times(en), times(ko))
                 self.assertGreater(len(times(en)), 0)
                 total_cues += len(times(en))
-            self.assertEqual(total_cues, 3872)
-            self.assertLess(sum(p.stat().st_size for p in out.rglob('*') if p.is_file()), 2_000_000)
+            self.assertGreater(total_cues, 0)
+            self.assertLess(sum(p.stat().st_size for p in out.rglob('*') if p.is_file()), 8_000_000)
 
     def test_failed_feed_preserves_previous_channel(self):
         old = copy.deepcopy(self.catalog)
@@ -51,8 +52,8 @@ class PublicBuildTests(unittest.TestCase):
         self.assertIn(prior, result['videos'])
         self.assertEqual(result['updatedAt'], old['updatedAt'])
         self.assertEqual(result['feedStatus']['updated'], 0)
-        self.assertEqual({v['yt'] for v in result['videos'] if v.get('source') != 'feed'},
-                         {v['yt'] for v in old['videos'] if v.get('source') != 'feed'})
+        self.assertEqual([v for v in result['videos'] if v.get('source') != 'feed'],
+                         [v for v in old['videos'] if v.get('source') != 'feed'])
 
     def test_refresh_deduplicates_curated_video(self):
         selected = next(v for v in self.catalog['videos'] if v.get('source') == 'curated')

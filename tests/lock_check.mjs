@@ -24,13 +24,15 @@ await Deno.mkdir(`${out}/study-captions`, { recursive: true });
 await Deno.writeFile(`${out}/index.html`, new Uint8Array(await lib.unseal(raw, lib.bytes(lib.LOCK.app), 'index.html')));
 await rejects(lib.deriveKey(password + '!').then(key => lib.unseal(key, lib.bytes(lib.LOCK.app), 'index.html')), 'Wrong password fails');
 
-// Plain fetch of the static host; `swap` serves one sealed file under another name.
-const requests = [], swap = new Map();
+// Plain fetch of the static host; `swap` serves one sealed file under another name,
+// `stale` stands for an old copy in the browser cache that only cache: 'reload' skips.
+const requests = [], swap = new Map(), stale = new Map();
 page.fetch = async (input, init) => {
   requests.push({ input: String(input), init });
   const url = new URL(String(input), location.href);
   if (url.origin !== 'https://example.github.io' || !url.pathname.startsWith('/friends-english/')) return new Response('elsewhere');
   const name = url.pathname.slice('/friends-english/'.length);
+  if (stale.has(name) && init?.cache !== 'reload') return new Response(stale.get(name));
   try { return new Response(await Deno.readFile(`${site}/${swap.get(name) ?? name}`)); }
   catch { return new Response('missing', { status: 404 }); }
 };
@@ -45,6 +47,10 @@ for (const name of names) {
   await Deno.writeFile(`${out}/${name}`, new Uint8Array(await response.arrayBuffer()));
 }
 check(requests.some(r => r.input === 'catalog.json' && r.init?.cache === 'reload'), 'Fetch options pass through');
+stale.set('catalog.json', '{"videos": []}');  // e.g. the unlocked catalog from before the lock
+const reread = await page.fetch('catalog.json');
+check((await reread.json()).videos.length > 0 && requests.at(-1).init?.cache === 'reload', 'A stale cached copy is fetched again past the cache');
+stale.clear();
 swap.set('study-captions/aaaaaaaaaaa.en.srt', 'catalog.json');
 await rejects(page.fetch('study-captions/aaaaaaaaaaa.en.srt'), 'A sealed file under another name fails');
 swap.set('catalog.json', names[1]);

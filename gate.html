@@ -81,6 +81,12 @@ function sealedFetch(keyText) {
   const plainFetch = window.fetch.bind(window);
   const base = new URL('./', location.href);
   const key = crypto.subtle.importKey('raw', Uint8Array.from(atob(keyText), c => c.charCodeAt(0)), 'AES-GCM', false, ['decrypt']);
+  async function open(response, name) {
+    const sealed = new Uint8Array(await response.arrayBuffer());
+    const plain = await crypto.subtle.decrypt(
+      { name: 'AES-GCM', iv: sealed.slice(0, 12), additionalData: new TextEncoder().encode(name) }, await key, sealed.slice(12));
+    return new Response(plain, { headers: { 'Content-Type': name.endsWith('.json') ? 'application/json; charset=utf-8' : 'text/plain; charset=utf-8' } });
+  }
   window.fetch = async (input, init) => {
     const url = new URL(input instanceof Request ? input.url : String(input), location.href);
     const name = url.origin === base.origin && url.pathname.startsWith(base.pathname)
@@ -88,10 +94,10 @@ function sealedFetch(keyText) {
     if (!/^(catalog\.json|study-captions\/[\w-]+\.(en|ko)\.srt)$/.test(name)) return plainFetch(input, init);
     const response = await plainFetch(input, init);
     if (!response.ok) return response;
-    const sealed = new Uint8Array(await response.arrayBuffer());
-    const plain = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: sealed.slice(0, 12), additionalData: new TextEncoder().encode(name) }, await key, sealed.slice(12));
-    return new Response(plain, { headers: { 'Content-Type': name.endsWith('.json') ? 'application/json; charset=utf-8' : 'text/plain; charset=utf-8' } });
+    // 잠그기 전(평문)이나 비밀번호를 바꾸기 전 파일이 브라우저 캐시에 남아 있으면 풀리지 않는다. 캐시를 건너뛰고 한 번 더 받는다.
+    try { return await open(response, name); } catch {}
+    const fresh = await plainFetch(input, { ...init, cache: 'reload' });
+    return fresh.ok ? open(fresh, name) : fresh;
   };
 }
 // ---- screen

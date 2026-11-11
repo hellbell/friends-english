@@ -93,13 +93,29 @@ class LockedBuildTests(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 build_pages.load_key()
 
+    def test_notes_sync_setting(self):
+        good = 'me/sync github_pat_' + 'a' * 40
+        with tempfile.TemporaryDirectory() as tmp, patch.object(build_pages, 'SYNC_FILE', Path(tmp) / 'notes-sync'):
+            with patch.dict('os.environ', {build_pages.SYNC_ENV: ''}):
+                self.assertIsNone(build_pages.load_sync())
+            with patch.dict('os.environ', {build_pages.SYNC_ENV: good + '\n'}):
+                self.assertEqual(build_pages.load_sync(), good)
+            for bad in ('me/sync', 'me sync ' + 'a' * 40, good + '"><script>'):
+                with patch.dict('os.environ', {build_pages.SYNC_ENV: bad}), self.assertRaises(SystemExit, msg=bad):
+                    build_pages.load_sync()
+            with self.assertRaises(ValueError):  # never into an unlocked build
+                build_pages.build(Path(tmp) / 'site', sync=good)
+
     @unittest.skipUnless(shutil.which('deno'), 'Deno seals and opens locked builds')
     def test_locked_build_opens_only_with_password(self):
         lock = build_pages.parse_key(build_pages.make_key(self.password, iterations=1000))
+        sync = 'me/sync github_pat_' + 'b' * 40
         with tempfile.TemporaryDirectory() as tmp:
             plain, locked, opened = (Path(tmp) / name for name in ('plain', 'locked', 'opened'))
             build_pages.build(plain)
-            build_pages.build(locked, lock=lock)
+            build_pages.build(locked, lock=lock, sync=sync)
+            self.assertIn(b'name="fe-sync" content=""', (plain / 'index.html').read_bytes())
+            self.assertNotIn(b'github_pat_', (locked / 'index.html').read_bytes())  # only inside the ciphertext
             files = lambda d: {p.relative_to(d).as_posix() for p in d.rglob('*') if p.is_file()}
             self.assertEqual(files(locked), files(plain))
             sealed = sorted(files(plain) - {'icon.png', '.nojekyll', '.friends-english-build'})
@@ -114,7 +130,10 @@ class LockedBuildTests(unittest.TestCase):
                                      str(locked), str(opened), self.password], capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             for name in sealed:
-                self.assertEqual((opened / name).read_bytes(), (plain / name).read_bytes(), name)
+                expected = (plain / name).read_bytes()
+                if name == 'index.html':
+                    expected = expected.replace(b'name="fe-sync" content=""', f'name="fe-sync" content="{sync}"'.encode())
+                self.assertEqual((opened / name).read_bytes(), expected, name)
 
 
 if __name__ == '__main__':

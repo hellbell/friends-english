@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="fe-storage" content="auto">
+<meta name="fe-sync" content=""><!-- 보관함 동기화 'owner/repo 토큰': 잠긴 Pages 빌드만 채운다 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="영어공부">
@@ -228,6 +229,10 @@ header { flex-wrap: wrap; }
 .study-notice { margin: 0; padding: 8px 16px; color: var(--dim); font-size: 12px; border-top: 1px solid var(--line); }
 .study-notice button { padding: 3px 8px; margin-left: 8px; }
 #backup-help { padding: 0 14px; color: var(--dim); font-size: 12px; }
+#sync-line { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; padding: 0 14px; color: var(--dim); font-size: 12px; }
+#sync-line[hidden] { display: none; }
+#sync-line.bad { color: var(--bad); }
+#sync-line button { padding: 2px 8px; font-size: 12px; }
 #discover { width: min(1060px, calc(100% - 32px)); max-height: calc(100dvh - 32px); padding: 0; color: var(--text); background: var(--bg); border: 1px solid #45454f; border-radius: 16px; }
 #discover::backdrop { background: rgba(0, 0, 0, .72); }
 .discover-head { display: flex; gap: 16px; align-items: flex-start; padding: 22px 24px 12px; }
@@ -402,6 +407,7 @@ header { flex-wrap: wrap; }
         <input id="backup-file" type="file" accept=".json,application/json" hidden>
       </div>
       <p id="backup-help"></p>
+      <p id="sync-line" hidden><span id="sync-status"></span><button data-act="sync-now">지금 동기화</button></p>
       <div id="note-list"></div>
     </div>
   </aside>
@@ -838,9 +844,11 @@ async function loadState() {
     if (STATIC_MODE) throw new Error('browser storage');
     const st = await api('GET', 'api/state');
     Object.assign(S, { remote: true, notes: st.notes, pos: st.pos, delays: st.delay, lastEp: st.last });
+    NS.conf = noteSyncConf(st.noteSync);
     migrateLocalNotes();
   } catch {
     Object.assign(S, { notes: store.get('notes', []), pos: store.get('pos', {}), delays: store.get('delays', {}) });
+    NS.conf = noteSyncConf($('meta[name="fe-sync"]')?.content);
   }
 }
 function migrateLocalNotes() {  // 서버 저장 전에 이 브라우저에만 저장해 둔 보관함이 있으면 한 번 올린다
@@ -1007,9 +1015,12 @@ function openDiscovery() {
 function renderStorageMode() {
   $('#storage-note').textContent = S.remote ? '맥 서버에 보관함·진도 저장' : '이 브라우저에 보관함·진도 저장';
   $('#backup-import-btn').hidden = S.remote;
-  $('#backup-help').textContent = S.remote
+  $('#backup-help').textContent = NS.conf
+    ? `보관함은 GitHub를 거쳐 다른 기기와 자동으로 동기화됩니다. 진도는 ${S.remote ? '맥 서버' : '이 브라우저'}에만 저장됩니다.`
+    : S.remote
     ? '온라인 버전으로 옮기려면 백업을 내보낸 뒤 온라인 버전의 보관함에서 가져오세요.'
     : '기기 간 자동 동기화는 없습니다. 백업을 다른 기기의 보관함에서 가져오세요. 브라우저 데이터를 지우면 저장 내용도 지워집니다.';
+  renderNoteSync();
 }
 function renderStudyNotice() {
   const box = $('#study-notice');
@@ -1085,14 +1096,23 @@ function exportBackup() {
     `friends-study-${new Date().toISOString().slice(0, 10)}.json`);
   toast('백업을 내려받았습니다');
 }
+function cleanNote(n) {  // 백업이나 동기화로 받은 보관함 항목. 형식이 틀리면 null
+  const text = (v, max) => typeof v === 'string' && v.length <= max;
+  const number = v => typeof v === 'number' && Number.isFinite(v);
+  if (!n || !text(n.id, 100) || !/^[\w-]+$/.test(n.id) || !['sentence', 'word', 'phrase'].includes(n.kind) || !text(n.text, 10000)
+    || !text(n.ep, 1500) || !n.ep || ['__proto__', 'constructor', 'prototype'].includes(n.ep) || !number(n.t) || n.t < -60 || !number(n.at)
+    || !text(n.sent, 10000) || !text(n.ko, 10000) || !text(n.epLabel, 1500)) return null;
+  return { id: n.id, kind: n.kind, text: n.text, ep: portableEpisodeId(n.ep), t: n.t, at: n.at, sent: n.sent, ko: n.ko, epLabel: n.epLabel };
+}
 function validateBackup(data) {
   if (!data || data.app !== 'friends-english' || data.version !== 1 || !Array.isArray(data.notes) || data.notes.length > 20000) throw new Error('Friends 영어공부 백업 파일이 아닙니다');
   const text = (v, max) => typeof v === 'string' && v.length <= max;
   const key = v => text(v, 1500) && v.length > 0 && !['__proto__', 'constructor', 'prototype'].includes(v);
   const number = v => typeof v === 'number' && Number.isFinite(v);
   const notes = data.notes.map(n => {
-    if (!n || !text(n.id, 100) || !/^[\w-]+$/.test(n.id) || !['sentence', 'word', 'phrase'].includes(n.kind) || !text(n.text, 10000) || !key(n.ep) || !number(n.t) || n.t < -60 || !number(n.at) || !text(n.sent, 10000) || !text(n.ko, 10000) || !text(n.epLabel, 1500)) throw new Error('백업의 보관함 항목을 확인해 주세요');
-    return { id: n.id, kind: n.kind, text: n.text, ep: portableEpisodeId(n.ep), t: n.t, at: n.at, sent: n.sent, ko: n.ko, epLabel: n.epLabel };
+    const note = cleanNote(n);
+    if (!note) throw new Error('백업의 보관함 항목을 확인해 주세요');
+    return note;
   });
   const cleanMap = (obj, check) => {
     if (!obj || typeof obj !== 'object' || Array.isArray(obj) || Object.keys(obj).length > 20000) throw new Error('백업의 진도 형식이 올바르지 않습니다');
@@ -1130,6 +1150,7 @@ async function importBackup(file) {
     Object.assign(S, merged);
     setEpisodes(mergeLibrary(S.episodes));
     renderNotes(); refreshSaved();
+    scheduleNoteSync();
     toast(`보관함 ${added}개와 새 영상·진도를 가져왔습니다. 기존 진도는 유지합니다.`, 5000);
   } catch (err) { toast(err instanceof SyntaxError ? 'JSON 백업 파일을 읽지 못했습니다' : err.message, 6000); }
 }
@@ -1746,12 +1767,15 @@ function addNote(kind, text, i = S.focus) {
   S.notes.unshift(note);
   sync('POST', 'api/notes', note);
   saveNotes();
+  scheduleNoteSync();
   toast('★ 저장: ' + (text.length > 40 ? text.slice(0, 40) + '…' : text));
 }
 function removeNote(n) {
   S.notes = S.notes.filter(x => x !== n);
+  store.set('deletedNotes', { ...store.get('deletedNotes', {}), [n.id]: Date.now() });  // 다른 기기에서도 지우도록 남긴다
   sync('DELETE', 'api/notes/' + n.id);
   saveNotes();
+  scheduleNoteSync();
 }
 function toggleSaveSentence(i) {
   const c = S.en[i];
@@ -1804,6 +1828,126 @@ function exportNotes() {
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
+// ---------- 보관함 동기화: GitHub 비공개 저장소의 notes.json 하나를 모든 기기(온라인 버전·맥 서버)가 같이 쓴다
+// 항목은 id로 합치고, 지운 항목은 deleted[id] = 지운 시각으로 남겨 다른 기기에서 되살아나지 않게 한다. 진도는 동기화하지 않는다.
+const NS = { conf: null, timer: 0, running: false, again: false, at: 0, error: '' };
+const NOTE_FILE = { app: 'friends-english-notes', version: 1 };
+function noteSyncConf(text) {  // 'owner/repo 토큰' — 잠긴 Pages 빌드의 meta나 맥 서버의 api/state에서 온다
+  const m = /^([\w.-]+\/[\w.-]+) ([A-Za-z0-9_]{20,255})$/.exec(String(text || '').trim());
+  return m ? { repo: m[1], token: m[2] } : null;
+}
+function mergeNoteSets(a, b) {  // 같은 id면 a 쪽이 남는다. 정렬해 두어 내용이 같으면 JSON도 같다
+  const deleted = new Map(Object.entries(b.deleted));
+  for (const [id, at] of Object.entries(a.deleted)) deleted.set(id, Math.max(at, deleted.get(id) || 0));
+  const notes = new Map();
+  for (const n of [...b.notes, ...a.notes]) if (!deleted.has(n.id)) notes.set(n.id, n);
+  return {
+    notes: [...notes.values()].sort((x, y) => y.at - x.at || (x.id < y.id ? -1 : 1)),
+    deleted: Object.fromEntries([...deleted].sort(([x], [y]) => (x < y ? -1 : 1))),
+  };
+}
+function localNoteSet() {  // cleanNote로 필드 순서·영상 id를 맞춰야 내용이 같을 때 JSON도 같다
+  const deleted = store.get('deletedNotes', {});
+  return { notes: S.notes.map(cleanNote).filter(Boolean),
+    deleted: deleted && typeof deleted === 'object' && !Array.isArray(deleted) ? deleted : {} };
+}
+function localEpisodeId(id) {  // portableEpisodeId의 반대: 'yt:<id>' 항목을 맥 서버에 내려받아 둔 같은 영상 파일에 붙인다
+  const yt = id.startsWith('yt:') && id.slice(3);
+  return (yt && S.episodes.find(e => e.id.endsWith('[' + yt + '].mp4'))?.id) || id;
+}
+function readNoteFile(text) {
+  const data = JSON.parse(text);
+  if (data?.app !== NOTE_FILE.app || data.version !== NOTE_FILE.version || !Array.isArray(data.notes)) throw new Error('동기화 파일 형식이 다릅니다');
+  const deleted = Object.entries(data.deleted || {}).filter(([id, at]) => /^[\w-]{1,100}$/.test(id) && Number.isFinite(at));
+  return { notes: data.notes.map(cleanNote).filter(Boolean), deleted: Object.fromEntries(deleted) };
+}
+function utf8ToBase64(text) {
+  const bytes = new TextEncoder().encode(text);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+const base64ToUtf8 = b64 => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\s+/g, '')), c => c.charCodeAt(0)));
+async function github(path, init = {}) {  // X-GitHub-Api-Version 같은 헤더는 CORS에서 막히므로 보내지 않는다
+  const r = await fetch(`https://api.github.com/repos/${NS.conf.repo}/${path}`, { cache: 'no-store', ...init,
+    headers: { Authorization: 'Bearer ' + NS.conf.token, Accept: 'application/vnd.github+json', ...init.headers } });
+  if (r.status === 401) throw new Error('동기화 토큰이 만료되었거나 잘못되었습니다');
+  if (r.status === 403) throw new Error('동기화 토큰에 이 저장소 권한이 없거나 요청이 너무 많습니다');
+  return r;
+}
+async function syncNotesOnce() {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const got = await github('contents/notes.json');
+    if (!got.ok && got.status !== 404) throw new Error(`GitHub 오류 ${got.status}`);
+    const meta = got.ok ? await got.json() : null;
+    let remote = { notes: [], deleted: {} }, current = null;
+    if (meta) {
+      let content = meta.content;
+      if (!content) {  // 1MB가 넘으면 내용 없이 오므로 blob으로 받는다
+        const blob = await github('git/blobs/' + meta.sha);
+        if (!blob.ok) throw new Error(`GitHub 오류 ${blob.status}`);
+        content = (await blob.json()).content;
+      }
+      current = base64ToUtf8(content);
+      remote = readNoteFile(current);
+    }
+    const merged = mergeNoteSets(localNoteSet(), remote);
+    const text = JSON.stringify({ ...NOTE_FILE, ...merged });
+    if (text !== current) {  // 모든 기기가 같은 순서로 쓰므로, 다르면 바뀐 것이 있거나 정리할 항목이 있다
+      const put = await github('contents/notes.json', { method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Sync notes', content: utf8ToBase64(text), ...(meta && { sha: meta.sha }) }) });
+      if (put.status === 409 || put.status === 422) continue;  // 그 사이 다른 기기가 먼저 올렸다: 다시 받아 합친다
+      if (put.status === 404) throw new Error(`저장소 ${NS.conf.repo}를 찾을 수 없습니다 (토큰의 저장소 선택 확인)`);
+      if (!put.ok) throw new Error(`GitHub 오류 ${put.status}`);
+    }
+    return applyNotes(merged);
+  }
+  throw new Error('다른 기기와 동시에 저장하고 있어 다음에 다시 합칩니다');
+}
+async function applyNotes(merged) {
+  const now = mergeNoteSets(localNoteSet(), merged);  // 동기화하는 동안 저장·삭제한 것도 살린다
+  const notes = now.notes.map(n => ({ ...n, ep: localEpisodeId(n.ep) }));
+  store.set('deletedNotes', now.deleted);
+  if (S.remote) {  // 맥 서버에도 반영: 받은 항목은 올리고, 다른 기기에서 지운 항목은 지운다
+    const have = new Set(S.notes.map(n => n.id)), keep = new Set(notes.map(n => n.id));
+    for (const n of notes) if (!have.has(n.id)) await api('POST', 'api/notes', n);
+    for (const n of S.notes) if (!keep.has(n.id)) await api('DELETE', 'api/notes/' + n.id);
+  }
+  notes.push(...S.notes.filter(n => !cleanNote(n)));  // 형식이 틀려 동기화하지 못하는 항목도 이 기기에서는 지우지 않는다
+  const changed = JSON.stringify(notes) !== JSON.stringify(S.notes);
+  S.notes = notes;
+  if (changed) saveNotes();
+}
+async function syncNotes(manual = false) {
+  if (!NS.conf) return manual && toast('보관함 동기화가 설정되지 않았습니다 (README 참고)', 3000);
+  if (NS.running) { NS.again = true; return; }
+  NS.running = true;
+  renderNoteSync();
+  try {
+    do { NS.again = false; await syncNotesOnce(); } while (NS.again);
+    NS.error = ''; NS.at = Date.now();
+    if (manual) toast('보관함을 동기화했습니다');
+  } catch (err) {
+    NS.error = err instanceof TypeError ? `연결하지 못했습니다 (${err.message})` : err instanceof SyntaxError ? '동기화 파일을 읽지 못했습니다' : err.message;
+    if (manual) toast('동기화 실패: ' + NS.error, 4000);
+  } finally {
+    NS.running = false;
+    renderNoteSync();
+  }
+}
+function scheduleNoteSync(ms = 1500) {
+  clearTimeout(NS.timer);
+  NS.timer = setTimeout(() => { NS.timer = 0; syncNotes(); }, ms);
+}
+function renderNoteSync() {
+  $('#sync-line').hidden = !NS.conf;
+  $('#sync-line').classList.toggle('bad', !!NS.error);
+  $('#sync-status').textContent = NS.running ? '보관함 동기화 중…'
+    : NS.error ? '동기화 실패: ' + NS.error
+    : NS.at ? '보관함 동기화됨 · ' + new Date(NS.at).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+    : '보관함 동기화 준비됨';
+}
+
 // 단어 팝업
 function openPop(text, rect) {
   if (!video.paused) video.pause();
@@ -1846,7 +1990,7 @@ const ACTIONS = {
   'reset-display': resetDisplay,
   discover: openDiscovery, 'discover-close': () => $('#discover').close(), 'discover-refresh': () => loadCatalog(true),
   'clip-a': () => markClip('a'), 'clip-b': () => markClip('b'), 'clip-loop': toggleClip, 'clip-reset': resetClip,
-  'backup-export': exportBackup, 'backup-import': () => $('#backup-file').click(),
+  'backup-export': exportBackup, 'backup-import': () => $('#backup-file').click(), 'sync-now': () => syncNotes(true),
   /* check: checkDictation, */ export: exportNotes, 'save-word': saveWord, 'yt-del': removeYoutube,
   open: () => $('#file').click(), help: () => { $('#help').hidden = !$('#help').hidden; },
 };
@@ -2023,8 +2167,11 @@ addEventListener('drop', e => {
 });
 // 다른 기기에서 공부하고 돌아오면 진도·보관함·유튜브 목록을 다시 받아온다
 document.addEventListener('visibilitychange', async () => {
-  if (document.visibilityState === 'hidden') return savePos();
-  if (!S.remote) return;
+  if (document.visibilityState === 'hidden') {
+    if (NS.timer) scheduleNoteSync(0);  // 기다리던 보관함 동기화는 앱을 떠나기 전에 보낸다
+    return savePos();
+  }
+  if (!S.remote) return scheduleNoteSync(0);
   try {
     const [lib, st] = await Promise.all([api('GET', 'api/library'), api('GET', 'api/state')]);
     Object.assign(S, { notes: st.notes, pos: st.pos, delays: st.delay });
@@ -2032,7 +2179,9 @@ document.addEventListener('visibilitychange', async () => {
     renderNotes();
     refreshSaved();
   } catch {}
+  scheduleNoteSync(0);
 });
+addEventListener('online', () => scheduleNoteSync(0));
 
 renderPlayerHeight();
 renderSideWidth();
@@ -2045,7 +2194,7 @@ $('#discover-form').addEventListener('submit', e => { e.preventDefault(); change
 $('#discover-query').addEventListener('input', changeDiscovery);
 for (const id of ['collection', 'level', 'topic', 'duration', 'sort', 'ready']) $('#discover-' + id).addEventListener('change', changeDiscovery);
 $('#backup-file').addEventListener('change', e => { if (e.target.files[0]) importBackup(e.target.files[0]); e.target.value = ''; });
-Promise.all([loadState(), loadCatalog()]).then(() => { renderNotes(); return loadLibrary(); });
+Promise.all([loadState(), loadCatalog()]).then(() => { renderNotes(); return loadLibrary(); }).finally(() => scheduleNoteSync(0));
 </script>
 </body>
 </html>

@@ -14,7 +14,10 @@ import secrets
 import shutil
 import subprocess
 import unicodedata
+import urllib.error
+import urllib.parse
 import urllib.request
+import webbrowser
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -24,6 +27,10 @@ NS = {'a': 'http://www.w3.org/2005/Atom', 'yt': 'http://www.youtube.com/xml/sche
 KEY_ENV = 'FE_PAGES_KEY'
 KEY_FILE = Path.home() / 'Library' / 'Application Support' / 'FriendsEnglish' / 'pages.key'
 ITERATIONS = 600_000  # PBKDF2-HMAC-SHA256; each device pays this once when logging in
+SYNC_ENV = 'FE_NOTES_SYNC'
+SYNC_FILE = KEY_FILE.parent / 'notes-sync'  # serve.py reads the same file for the Mac server
+SYNC_REPO = 'hellbell/friends-english-sync'
+SYNC_SETTING = re.compile(r'[\w.-]+/[\w.-]+ [A-Za-z0-9_]{20,255}')  # 'owner/repo token', as index.html expects
 
 
 def urlsafe(data):
@@ -80,6 +87,50 @@ def set_password():
         subprocess.run(['gh', 'secret', 'set', 'PAGES_KEY'], input=key.encode(), cwd=ROOT, check=True)
     else:
         print(f'GitHub Actions needs it: gh secret set PAGES_KEY < "{KEY_FILE}"')
+
+
+def load_sync():
+    """Notes sync setting for locked builds, or None when sync is not set up."""
+    text = (os.environ.get(SYNC_ENV) or (SYNC_FILE.read_text() if SYNC_FILE.is_file() else '')).strip()
+    if text and not SYNC_SETTING.fullmatch(text):
+        raise SystemExit('Invalid notes sync setting; run "python3 build_pages.py --set-sync" again.')
+    return text or None
+
+
+def set_sync(repo=SYNC_REPO):
+    """Guided setup: private repository, fine-grained token, file for the Mac server, secret for the online version."""
+    gh = shutil.which('gh')
+    if gh and subprocess.run([gh, 'repo', 'view', repo], capture_output=True).returncode != 0:
+        if input(f'Create the private repository {repo} for synced notes? [Y/n] ').strip().lower() not in ('', 'y', 'yes'):
+            raise SystemExit(f'Create it first: gh repo create {repo} --private --add-readme')
+        subprocess.run([gh, 'repo', 'create', repo, '--private', '--add-readme',
+                        '--description', 'Friends English saved notes (private sync data)'], check=True)
+    url = 'https://github.com/settings/personal-access-tokens/new?' + urllib.parse.urlencode(
+        {'name': 'friends-english-sync', 'description': f'Notes sync for the Friends English app ({repo})',
+         'expires_in': 'none', 'contents': 'write'})
+    print(f'1. Create a fine-grained token (opening the page). Under "Repository access" choose\n'
+          f'   "Only select repositories" and pick {repo}. Everything else is filled in.\n   {url}')
+    webbrowser.open(url)
+    token = getpass.getpass('2. Paste the token: ').strip()
+    value = f'{repo} {token}'
+    if not SYNC_SETTING.fullmatch(value):
+        raise SystemExit('That does not look like a GitHub token.')
+    request = urllib.request.Request(f'https://api.github.com/repos/{repo}', headers={
+        'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'User-Agent': 'FriendsEnglish/1.0'})
+    try:
+        urllib.request.urlopen(request, timeout=20).close()
+    except urllib.error.HTTPError as exc:
+        raise SystemExit(f'GitHub refused the token for {repo} ({exc.code}). Check the repository selection.') from None
+    SYNC_FILE.parent.mkdir(parents=True, exist_ok=True)
+    SYNC_FILE.touch(mode=0o600)
+    SYNC_FILE.chmod(0o600)
+    SYNC_FILE.write_text(value + '\n')
+    print(f'Saved {SYNC_FILE}; the Mac server syncs after you reload the app.')
+    if gh and input('3. Save it as the NOTES_SYNC secret so the online version syncs too? [Y/n] ').strip().lower() in ('', 'y', 'yes'):
+        subprocess.run([gh, 'secret', 'set', 'NOTES_SYNC'], input=value.encode(), cwd=ROOT, check=True)
+        print('Done. The next deploy turns sync on for the online version.')
+    else:
+        print(f'For the online version: gh secret set NOTES_SYNC < "{SYNC_FILE}"')
 
 
 def seal(output, names, key):
@@ -140,7 +191,7 @@ def refresh_catalog(catalog):
     return result
 
 
-def build(output, refresh=False, lock=None):
+def build(output, refresh=False, lock=None, sync=None):
     output = Path(output).resolve()
     if output == ROOT or ROOT in output.parents and output.relative_to(ROOT).parts[0] not in ('dist', 'site-preview'):
         raise ValueError('Use dist/ or an output directory outside the source folder')
@@ -156,6 +207,10 @@ def build(output, refresh=False, lock=None):
         catalog = refresh_catalog(catalog)
     html = (ROOT / 'index.html').read_text(encoding='utf-8')
     html = html.replace('name="fe-storage" content="auto"', 'name="fe-storage" content="browser"')
+    if sync:  # the token goes only into the encrypted app
+        if not lock or not SYNC_SETTING.fullmatch(sync) or html.count('name="fe-sync" content=""') != 1:
+            raise ValueError('The notes sync setting goes only into a locked build with an empty fe-sync meta tag')
+        html = html.replace('name="fe-sync" content=""', f'name="fe-sync" content="{sync}"')
     (output / 'index.html').write_text(html, encoding='utf-8')
     shutil.copyfile(ROOT / 'icon.png', output / 'icon.png')
     (output / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
@@ -181,7 +236,7 @@ def build(output, refresh=False, lock=None):
                   'app': base64.b64encode((output / 'index.html').read_bytes()).decode()}
         (output / 'index.html').write_text(gate.replace('/*LOCK*/null', json.dumps(config)), encoding='utf-8')
     files = [p for p in output.rglob('*') if p.is_file()]
-    print(f'Built {output} ({"locked" if lock else "UNLOCKED"}): {len(files)} files, '
+    print(f'Built {output} ({"locked" if lock else "UNLOCKED"}{", notes sync" if sync else ""}): {len(files)} files, '
           f'{sum(p.stat().st_size for p in files):,} bytes, {len(catalog["videos"])} recommendations, {len(copied)} subtitles')
     return catalog
 
@@ -192,8 +247,12 @@ if __name__ == '__main__':
     parser.add_argument('--refresh', action='store_true', help='Refresh the four public YouTube channel feeds')
     parser.add_argument('--public', action='store_true', help='Build without the password lock (local preview only)')
     parser.add_argument('--set-password', action='store_true', help='Choose the site password and save the key')
+    parser.add_argument('--set-sync', action='store_true', help='Set up syncing saved notes through a private GitHub repository')
     args = parser.parse_args()
     if args.set_password:
         set_password()
+    elif args.set_sync:
+        set_sync()
     else:
-        build(args.out, args.refresh, None if args.public else load_key())
+        lock = None if args.public else load_key()
+        build(args.out, args.refresh, lock, load_sync() if lock else None)

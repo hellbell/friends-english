@@ -105,6 +105,15 @@ def youtube_entry(item):
             'subs': [f'/yt/{vid}.en.srt'] + ([f'/yt/{vid}.ko.srt'] if item.get('ko') else [])}
 
 
+def note_sync(data):
+    """보관함 동기화 설정 'owner/repo 토큰' (DATA/notes-sync, build_pages.py --set-sync가 만든다). 없거나 틀리면 None."""
+    try:
+        text = (data / 'notes-sync').read_text(encoding='utf-8').strip()
+    except OSError:
+        return None
+    return text if re.fullmatch(r'[\w.-]+/[\w.-]+ [A-Za-z0-9_]{20,255}', text) else None
+
+
 class State:
     """진도·단어장·유튜브 목록 (JSON 파일 하나). 바꿀 때마다 파일을 다시 읽어서 서버가 둘 떠 있어도 덮어쓰지 않는다."""
 
@@ -180,7 +189,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json({'root': str(srv.root), 'episodes': eps})
         if path == '/api/state':
             st = srv.state.read()
-            return self.send_json({k: st[k] for k in ('notes', 'pos', 'delay', 'last')})
+            return self.send_json({**{k: st[k] for k in ('notes', 'pos', 'delay', 'last')}, 'noteSync': note_sync(srv.data)})
         if path.startswith('/media/'):
             return self.send_file(srv.root, path[len('/media/'):], set(VIDEO_TYPES) | SUB_EXTS)
         if path.startswith('/yt/'):

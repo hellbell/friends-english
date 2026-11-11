@@ -34,6 +34,7 @@ jobs:
       - name: Build password-locked app and refresh video recommendations
         env:
           FE_PAGES_KEY: ${{ secrets.PAGES_KEY }}  # without it the build stops and nothing is deployed
+          FE_NOTES_SYNC: ${{ secrets.NOTES_SYNC }}  # optional: 'owner/repo token' for syncing saved notes
         run: python3 build_pages.py --refresh
       - uses: actions/upload-pages-artifact@v4
         with:

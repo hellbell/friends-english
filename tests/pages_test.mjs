@@ -28,13 +28,14 @@ const store = { get(k, fallback) { const v = localStorage.getItem('fe.' + k); re
 const S = { episodes: [], ep: null, remote: false, notes: [], pos: {}, delays: {}, en: [], set: { loop: false, autoPause: false, dict: false } };
 const video = { currentTime: 0, paused: true, seeking: false, duration: 100, play() { this.paused = false; return Promise.resolve(); }, pause() { this.paused = true; } };
 const toasts = [];
-const app = new Function('$', 'S', 'video', 'store', 'localStorage', 'toast', 'fmt', 'applySettings', 'setEpisodes', 'renderNotes', 'refreshSaved', 'requestAnimationFrame', 'setFocus', 'gotoCue', 'PAD_END',
+let syncsScheduled = 0;
+const app = new Function('$', 'S', 'video', 'store', 'localStorage', 'toast', 'fmt', 'applySettings', 'setEpisodes', 'renderNotes', 'refreshSaved', 'requestAnimationFrame', 'setFocus', 'gotoCue', 'PAD_END', 'scheduleNoteSync',
   section('const LEVELS =', '// ---------- 라이브러리 / 에피소드') +
   section('function cueAt(t)', '// ---------- 저장 상태') +
   section('function armStop(', "onPlayer('seeked'") +
   'return { youtubeId, youtubeEpisode, C, recommendVideos, mergeLibrary, rememberYoutube, hiddenVideos, portableEpisodeId, validateBackup, importBackup, clip, markClip, toggleClip, resetClip, tick, follow, armStop };'
 )($, S, video, store, localStorage, msg => toasts.push(msg), n => String(n), () => {}, e => { S.episodes = e; }, () => {}, () => {}, () => {},
-  i => { S.focus = i; }, i => { S.focus = i; S.apDone = -1; }, 0.2);
+  i => { S.focus = i; }, i => { S.focus = i; S.apDone = -1; }, 0.2, () => { syncsScheduled++; });
 
 const yt = 'aircAruvnKk';
 for (const url of [yt, `https://youtube.com/watch?v=${yt}&t=10`, `youtu.be/${yt}?si=abc`, `https://www.youtube.com/shorts/${yt}`, `https://m.youtube.com/live/${yt}`, `https://www.youtube-nocookie.com/embed/${yt}`]) equal(app.youtubeId(url), yt, 'Supported video URL');
@@ -94,6 +95,7 @@ const makeFile = data => ({ size: 1000, text: async () => JSON.stringify(data) }
 S.pos = { ['yt:' + yt]: { t: 70, d: 100 } };
 await app.importBackup(makeFile(backup));
 equal(S.notes.length, 1, 'Import adds saved sentence');
+check(toasts.at(-1).includes('가져왔습니다') && syncsScheduled === 1, 'Import reports success and schedules note sync');
 equal(S.pos['yt:' + yt].t, 70, 'Import keeps current progress');
 await app.importBackup(makeFile(backup));
 equal(S.notes.length, 1, 'Import twice does not duplicate notes');

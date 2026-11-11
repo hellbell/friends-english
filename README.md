@@ -28,11 +28,20 @@ Python 3 표준 라이브러리만 사용합니다 (잠긴 Pages 빌드의 암�
 - 처음 한 번 이 맥에서 `python3 build_pages.py --set-sync`를 실행합니다. 비공개 저장소를 만들고, 토큰 만들기 페이지를 엽니다(Contents 쓰기·만료 없음은 채워져 있고, **Repository access → Only select repositories**에서 이 저장소만 고릅니다). 붙여넣은 토큰은 맥 서버용 `~/Library/Application Support/FriendsEnglish/notes-sync`와 온라인 버전용 비밀값 `NOTES_SYNC`에 저장됩니다. 온라인 버전은 다음 배포부터, 맥 서버는 앱을 새로 고치면 켜집니다.
 - 토큰은 잠긴 앱 안에 암호화되어 들어갑니다. 사이트 비밀번호를 아는 사람은 이 토큰으로 동기화 저장소 하나를 읽고 쓸 수 있습니다. 토큰이 샜다고 생각되면 GitHub에서 지우고 `--set-sync`를 다시 실행하세요. `notes.json` 자체는 암호화하지 않습니다(비공개 저장소).
 
-### Friends 등 내 영상 사용
+### Friends 등 내 영상: Dropbox에서 재생
 
-Dropbox에서 영상과 자막을 **사용할 기기에 다운로드**한 뒤 **내 영상·자막 열기**로 함께 선택하세요. 앱이 브라우저의 파일 URL로 재생하며 파일을 웹사이트에 업로드하지 않습니다. 다음 방문에는 파일을 다시 선택해야 합니다. 브라우저에서 지원하는 MP4(H.264/AAC)를 권장합니다.
+온라인 버전은 내 Dropbox **앱 폴더**의 영상을 4시간짜리 임시 링크로 받아 재생합니다. 기기마다 처음 한 번 **Dropbox 연결**로 로그인하면, 그 뒤로는 재발급 토큰으로 알아서 이어집니다. 연결은 보관함 탭의 **연결 끊기**나 Dropbox 설정에서 기기별로 끊을 수 있습니다. 링크를 공개하지 않으므로 영상이 남에게 열리지 않습니다.
 
-GitHub Pages가 집 맥의 파일이나 Dropbox 폴더를 자동으로 읽지는 못합니다. 내 전체 라이브러리를 원격으로 스트리밍하고 진도를 함께 쓰려면 아래 맥 서버와 Tailscale 방식을 사용하세요. 스트리밍 서비스에서만 재생 가능한 영상은 해당 서비스에서 봐야 합니다.
+- 앱 폴더는 맥 라이브러리와 같은 구조로 둡니다(`S01/1x01 - ….mp4`와 `.en.srt`, `YouTube AI/… [영상id].mp4`). 영상 id가 맥 서버와 같아서 보관함·진도가 그대로 이어지고, 내려받아 둔 YouTube 영상은 목록에서 YouTube 버전을 대신합니다.
+- 처음 설정: [Dropbox App Console](https://www.dropbox.com/developers/apps)에서 **Scoped access → App folder**로 앱을 만들고, Permissions에서 `files.metadata.read`와 `files.content.read`만 켭니다. Settings의 OAuth 2 Redirect URIs에 `https://hellbell.github.io/friends-english/`를 넣고, App key를 `index.html`의 `fe-dropbox` meta에 넣어 배포합니다. App key는 공개 값입니다(PKCE 로그인이라 App secret은 쓰지 않습니다).
+- 영상 올리기: 첫 연결 뒤 생긴 앱 폴더(`Dropbox/Apps/<앱 이름>`)에 라이브러리를 복사하고 `python3 prep.py <앱 폴더> --audio`로 소리만 파일을 만듭니다. 올라간 뒤에는 Finder에서 "온라인 전용으로 설정"하면 맥의 공간을 차지하지 않습니다.
+- 아이폰 Safari는 이 사이트를 7일 넘게 열지 않으면 로그인 정보를 지울 수 있습니다. 홈 화면에 추가한 앱은 이 규칙을 받지 않습니다.
+
+Dropbox 없이 볼 때는 영상과 자막을 기기에 내려받은 뒤 **내 영상·자막 열기**로 함께 선택하세요. 파일을 웹사이트에 올리지 않으며, 다음 방문에는 다시 선택해야 합니다. 브라우저에서 지원하는 MP4(H.264/AAC)를 권장합니다.
+
+### 소리만 (화면을 꺼도 재생)
+
+**소리만**을 켜면 같은 위치에서 영상 대신 소리만 재생합니다. 아이폰은 화면이 꺼지면 영상은 멈추지만 소리 재생은 이어서, 화면을 끄거나 다른 앱을 써도 계속 들립니다. 잠금 화면·이어폰 버튼으로 재생·정지와 이전·다음 문장을 조작합니다. Dropbox에 `.m4a`(소리만 파일)가 있으면 그것을 받아 데이터도 영상의 1/10쯤만 씁니다. YouTube로 재생하는 영상은 소리만 재생을 지원하지 않습니다.
 
 ### 배포와 추천 목록 갱신
 
@@ -108,6 +117,7 @@ python3 -m http.server 8766 --directory dist --bind 127.0.0.1
     python3 prep.py ~/Documents/원본폴더 --out ~/Movies/Friends   # mkv → mp4 (H.264면 무손실 복사), 내장 영어·한국어 텍스트 자막 → .en.srt/.ko.srt
     python3 prep.py ~/Movies/Friends --whisper ~/models/ggml-large-v3-turbo-q5_0.bin      # 영어 자막이 없는 영상에 자막 생성
     python3 prep.py ~/Movies/Friends --check-sync ~/models/ggml-large-v3-turbo-q5_0.bin   # 영어 자막 싱크 검사
+    python3 prep.py ~/Movies/Friends --audio     # mp4마다 소리만 뽑은 .m4a (앱의 '소리만' 재생용, 재인코딩 없음)
     python3 prep.py ~/Movies/Friends --dry-run   # 실행할 명령만 출력
 
 - 원본은 지우지 않습니다. `--out`을 주면 원본 폴더 구조 그대로 다른 폴더에 만들고, 없으면 원본 옆에 만듭니다. 같은 이름의 mp4가 생기면 앱 목록에서 mkv는 숨겨집니다.
@@ -140,6 +150,7 @@ python3 -m http.server 8766 --directory dist --bind 127.0.0.1
 ```sh
 deno run --allow-read tests/pages_test.mjs
 deno run --allow-read tests/sync_test.mjs
+deno run --allow-read tests/dropbox_test.mjs
 python3 -B -m unittest discover -s tests -p 'test_*.py'
 ```
 

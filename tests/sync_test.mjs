@@ -56,10 +56,10 @@ function device({ remote = false, episodes = [], token = TOKEN } = {}) {
   const $ = sel => els.get(sel) || els.set(sel, { hidden: false, textContent: '', classList: { toggle() {} } }).get(sel);
   const portable = id => { const m = /\[([\w-]{11})\]\.mp4$/.exec(id); return m ? 'yt:' + m[1] : id; };
   const app = new Function('$', 'S', 'store', 'api', 'sync', 'toast', 'fetch', 'portableEpisodeId', 'refreshSaved', 'renderNotes',
-    'epLabel', 'video', 'setTimeout', 'clearTimeout',
+    'epLabel', 'video', 'setTimeout', 'clearTimeout', 'sameEpisode',
     code + 'return { NS, syncNotes, addNote, removeNote, noteSyncConf };')(
     $, S, store, api, (m, p, b) => { if (S.remote) api(m, p, b); }, () => {}, githubFetch, portable, () => {}, () => {},
-    ep => ep.title, { currentTime: 0 }, () => 0, () => {});
+    ep => ep.title, { currentTime: 0 }, () => 0, () => {}, (x, y) => x === y || portable(x) === portable(y));
   app.NS.conf = app.noteSyncConf('me/sync ' + token);
   return {
     S, store, server, app, status: () => $('#sync-status').textContent,

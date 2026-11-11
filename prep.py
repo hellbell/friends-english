@@ -4,6 +4,7 @@
     python3 prep.py SRC [--out LIBRARY]               # mkv/avi → mp4, 내장 영어·한국어 텍스트 자막 → .en.srt/.ko.srt
     python3 prep.py LIBRARY --whisper MODEL.bin       # 영어 자막이 없는 영상은 whisper.cpp로 생성
     python3 prep.py LIBRARY --check-sync MODEL.bin    # 영어 자막 싱크를 실제 음성과 비교 (whisper.cpp)
+    python3 prep.py LIBRARY --audio                   # mp4마다 소리만 뽑은 .m4a (앱의 '소리만' 재생용)
     python3 prep.py SRC --dry-run                     # 실행할 명령만 출력
 
 --out을 주면 SRC의 폴더 구조 그대로 LIBRARY에 mp4와 자막을 만든다. 원본은 지우지 않는다.
@@ -47,6 +48,19 @@ def probe(path):
 def lang_of(stream):
     lang = (stream.get('tags') or {}).get('language', '').lower()
     return {'eng': 'en', 'kor': 'ko'}.get(lang, lang or 'und')
+
+
+def to_audio(mp4, dry):
+    """소리만 뽑은 .m4a. 앱의 '소리만' 재생은 화면을 꺼도 이어지고, 데이터는 영상의 1/10쯤만 쓴다."""
+    dst = mp4.with_suffix('.m4a')
+    a = next((s for s in probe(mp4)['streams'] if s['codec_type'] == 'audio'), None)
+    if dst.exists() or a is None:
+        return
+    part = dst.with_name(dst.stem + '.part.m4a')
+    codec = ['-c:a', 'copy'] if a['codec_name'] == 'aac' else ['-c:a', 'aac', '-b:a', '128k', '-ac', '2']
+    run(FFMPEG + ['-i', mp4, '-map', f"0:{a['index']}"] + codec + ['-movflags', '+faststart', part], dry)
+    if not dry:
+        part.replace(dst)
 
 
 def to_mp4(src, dst, streams, dry):
@@ -239,6 +253,7 @@ def main():
     ap.add_argument('--out', metavar='LIBRARY', help='변환 결과를 둘 라이브러리 폴더 (원본 폴더 구조 유지)')
     ap.add_argument('--whisper', metavar='MODEL', help='whisper.cpp ggml 모델 경로 — 영어 자막이 없는 영상에 자막 생성')
     ap.add_argument('--check-sync', metavar='MODEL', help='whisper.cpp ggml 모델로 영어 자막 싱크 검사')
+    ap.add_argument('--audio', action='store_true', help="mp4마다 소리만 뽑은 .m4a를 옆에 만든다 (앱의 '소리만' 재생용)")
     ap.add_argument('--dry-run', action='store_true', help='실행할 명령만 출력')
     args = ap.parse_args()
     sys.stdout.reconfigure(line_buffering=True)  # ffmpeg 출력과 순서가 섞이지 않게
@@ -258,6 +273,13 @@ def main():
 
     if args.check_sync:
         return check_sync(out or root, Path(args.check_sync).expanduser(), whisper)
+    if args.audio:
+        todo = [v for v, _ in episodes(out or root) if v.suffix.lower() == '.mp4' and not v.with_suffix('.m4a').exists()]
+        print(f'소리만 파일(.m4a) {len(todo)}개를 만듭니다')
+        for i, v in enumerate(todo, 1):
+            print(f'[{i}/{len(todo)}] {v.relative_to(out or root)}')
+            to_audio(v, args.dry_run)
+        return
 
     videos, _ = scan(root, set(VIDEO_TYPES) | CONVERT_EXTS)
     for i, v in enumerate(videos, 1):

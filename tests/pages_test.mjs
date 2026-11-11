@@ -26,13 +26,15 @@ const localStorage = {
 };
 const store = { get(k, fallback) { const v = localStorage.getItem('fe.' + k); return v == null ? fallback : JSON.parse(v); }, set(k, v) { localStorage.setItem('fe.' + k, JSON.stringify(v)); } };
 const S = { episodes: [], ep: null, remote: false, notes: [], pos: {}, delays: {}, en: [], set: { loop: false, autoPause: false, dict: false } };
-const video = { currentTime: 0, paused: true, seeking: false, duration: 100, play() { this.paused = false; return Promise.resolve(); } };
+const video = { currentTime: 0, paused: true, seeking: false, duration: 100, play() { this.paused = false; return Promise.resolve(); }, pause() { this.paused = true; } };
 const toasts = [];
-const app = new Function('$', 'S', 'video', 'store', 'localStorage', 'toast', 'fmt', 'applySettings', 'setEpisodes', 'renderNotes', 'refreshSaved', 'requestAnimationFrame',
+const app = new Function('$', 'S', 'video', 'store', 'localStorage', 'toast', 'fmt', 'applySettings', 'setEpisodes', 'renderNotes', 'refreshSaved', 'requestAnimationFrame', 'setFocus', 'gotoCue', 'PAD_END',
   section('const LEVELS =', '// ---------- 라이브러리 / 에피소드') +
-  section('function tick()', "onPlayer('seeked'") +
-  'return { youtubeId, youtubeEpisode, C, recommendVideos, mergeLibrary, rememberYoutube, hiddenVideos, portableEpisodeId, validateBackup, importBackup, clip, markClip, toggleClip, resetClip, tick };'
-)($, S, video, store, localStorage, msg => toasts.push(msg), n => String(n), () => {}, e => { S.episodes = e; }, () => {}, () => {}, () => {});
+  section('function cueAt(t)', '// ---------- 저장 상태') +
+  section('function armStop(', "onPlayer('seeked'") +
+  'return { youtubeId, youtubeEpisode, C, recommendVideos, mergeLibrary, rememberYoutube, hiddenVideos, portableEpisodeId, validateBackup, importBackup, clip, markClip, toggleClip, resetClip, tick, follow, armStop };'
+)($, S, video, store, localStorage, msg => toasts.push(msg), n => String(n), () => {}, e => { S.episodes = e; }, () => {}, () => {}, () => {},
+  i => { S.focus = i; }, i => { S.focus = i; S.apDone = -1; }, 0.2);
 
 const yt = 'aircAruvnKk';
 for (const url of [yt, `https://youtube.com/watch?v=${yt}&t=10`, `youtu.be/${yt}?si=abc`, `https://www.youtube.com/shorts/${yt}`, `https://m.youtube.com/live/${yt}`, `https://www.youtube-nocookie.com/embed/${yt}`]) equal(app.youtubeId(url), yt, 'Supported video URL');
@@ -127,6 +129,22 @@ equal(app.clip.on, false, 'Editing bounds stops loop');
 app.resetClip();
 equal(app.clip, { a: null, b: null, on: false }, 'Episode changes can clear clip state');
 
+// 문장마다 멈춤: follow()는 rAF와 timeupdate 양쪽에서 불린다
+S.en = [{ start: 1, end: 3 }, { start: 3, end: 5 }, { start: 6.5, end: 8.5 }];
+Object.assign(S, { focus: 0, apDone: -1, delay: 0 });
+S.set.autoPause = true;
+Object.assign(video, { paused: false, currentTime: 2.9 }); app.follow();
+check(!video.paused, 'Keeps playing inside the sentence');
+video.currentTime = 3.01; app.follow();
+check(video.paused && S.apDone === 0 && S.focus === 0, 'Pauses at the end of the sentence');
+video.paused = false; app.follow();
+check(!video.paused && S.focus === 1, 'Resuming does not stop again at the same sentence');
+video.currentTime = 5.25; app.follow();
+check(video.paused && S.apDone === 1, 'Pauses at the next sentence end after the pad');
+S.focus = 2; app.armStop(9);
+equal(S.apDone, 2, 'Resume position past the sentence end does not pause there');
+S.en = []; S.set.autoPause = false; video.paused = true;
+
 // Basic wiring: all literal ID selectors resolve, and generated markup stays unique.
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 equal(new Set(ids).size, ids.length, 'Unique DOM IDs');
@@ -135,4 +153,4 @@ check(html.includes('aria-orientation="vertical" aria-controls="side"'), 'Panel 
 check(!html.includes('id="side-height"'), 'No sidebar height control');
 check(html.includes('name="referrer" content="strict-origin-when-cross-origin"'), 'YouTube receives page origin');
 check(script.includes("if (STATIC_MODE) throw new Error('browser storage')"), 'Static build skips private state API');
-console.log(`PASS: ${checks} app checks (recommendations, storage, backup, A–B playback, DOM wiring)`);
+console.log(`PASS: ${checks} app checks (recommendations, storage, backup, A–B playback, auto-pause, DOM wiring)`);

@@ -33,7 +33,7 @@ Python 3 표준 라이브러리만 사용합니다 (잠긴 Pages 빌드의 암�
 온라인 버전은 내 Dropbox **앱 폴더**의 영상을 4시간짜리 임시 링크로 받아 재생합니다. 기기마다 처음 한 번 **Dropbox 연결**로 로그인하면, 그 뒤로는 재발급 토큰으로 알아서 이어집니다. 연결은 보관함 탭의 **연결 끊기**나 Dropbox 설정에서 기기별로 끊을 수 있습니다. 링크를 공개하지 않으므로 영상이 남에게 열리지 않습니다.
 
 - 앱 폴더는 맥 라이브러리와 같은 구조로 둡니다(`S01/1x01 - ….mp4`와 `.en.srt`, `YouTube AI/… [영상id].mp4`). 영상 id가 맥 서버와 같아서 보관함·진도가 그대로 이어지고, 내려받아 둔 YouTube 영상은 목록에서 YouTube 버전을 대신합니다.
-- 처음 설정: [Dropbox App Console](https://www.dropbox.com/developers/apps)에서 **Scoped access → App folder**로 앱을 만들고, Permissions에서 `files.metadata.read`와 `files.content.read`만 켭니다. Settings의 OAuth 2 Redirect URIs에 `https://hellbell.github.io/friends-english/`를 넣고, App key를 `index.html`의 `fe-dropbox` meta에 넣어 배포합니다. App key는 공개 값입니다(PKCE 로그인이라 App secret은 쓰지 않습니다).
+- 처음 설정: [Dropbox App Console](https://www.dropbox.com/developers/apps)에서 **Scoped access → App folder**로 앱을 만들고, Permissions에서 `files.metadata.read`와 `files.content.read`만 켭니다. Settings의 OAuth 2 Redirect URIs에 `https://hellbell.github.io/friends-english/`를 넣고, App key는 `index.html`의 `fe-dropbox` meta에 있습니다(앱 **wellvell-english-study**, 공개 값이며 PKCE 로그인이라 App secret은 쓰지 않습니다).
 - 영상 올리기: 첫 연결 뒤 생긴 앱 폴더(`Dropbox/Apps/<앱 이름>`)에 라이브러리를 복사하고 `python3 prep.py <앱 폴더> --audio`로 소리만 파일을 만듭니다. 올라간 뒤에는 Finder에서 "온라인 전용으로 설정"하면 맥의 공간을 차지하지 않습니다.
 - 아이폰 Safari는 이 사이트를 7일 넘게 열지 않으면 로그인 정보를 지울 수 있습니다. 홈 화면에 추가한 앱은 이 규칙을 받지 않습니다.
 

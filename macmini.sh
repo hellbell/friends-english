@@ -32,9 +32,10 @@ for t in yt-dlp ffmpeg; do
 done
 
 launchctl bootout "$DOMAIN/$LABEL" 2>/dev/null || true
-if lsof -nP -iTCP:8765 -sTCP:LISTEN >/dev/null 2>&1; then
+# serve.py는 IPv4(127.0.0.1, --lan이면 0.0.0.0)에만 연다. ::1:8765만 쓰는 프로그램(kubectl port-forward 등)과는 함께 뜰 수 있다
+if lsof -nP -i4TCP:8765 -sTCP:LISTEN >/dev/null 2>&1; then
   sleep 1
-  lsof -nP -iTCP:8765 -sTCP:LISTEN >/dev/null 2>&1 && { echo "8765 포트를 이미 다른 프로그램이 쓰고 있습니다:" >&2; lsof -nP -iTCP:8765 -sTCP:LISTEN >&2; exit 1; }
+  lsof -nP -i4TCP:8765 -sTCP:LISTEN >/dev/null 2>&1 && { echo "8765 포트를 이미 다른 프로그램이 쓰고 있습니다:" >&2; lsof -nP -i4TCP:8765 -sTCP:LISTEN >&2; exit 1; }
 fi
 
 mkdir -p "$APP" "$LIB" "$(dirname "$PLIST")" "$(dirname "$LOG")"
@@ -71,16 +72,19 @@ for i in 1 2 3 4 5; do
   sleep 1  # 직전 실행이 완전히 내려가기를 기다림
 done
 for i in 1 2 3 4 5 6 7 8 9 10; do
-  curl -s -o /dev/null http://localhost:8765/api/state && break
+  curl -s -o /dev/null http://127.0.0.1:8765/api/state && break
   sleep 0.5
 done
-if ! curl -s -o /dev/null http://localhost:8765/api/state; then
+if ! curl -s -o /dev/null http://127.0.0.1:8765/api/state; then
   echo "서버가 뜨지 않았습니다. 로그: $LOG" >&2
   tail -5 "$LOG" >&2
   exit 1
 fi
 
 echo "실행 중: http://localhost:8765   (라이브러리: $LIB, 로그: $LOG)"
+if lsof -nP -i6TCP:8765 -sTCP:LISTEN >/dev/null 2>&1; then  # 브라우저는 localhost를 ::1로 먼저 연다
+  echo "[주의] ::1:8765를 다른 프로그램($(lsof -nP -i6TCP:8765 -sTCP:LISTEN | awk 'NR==2 {print $1}'))이 쓰고 있어, 그동안은 http://127.0.0.1:8765 로 여세요"
+fi
 if [ -n "$LAN_ARG" ]; then
   echo "집 Wi-Fi의 다른 기기: http://$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || echo '<맥미니 IP>'):8765"
 fi

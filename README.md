@@ -81,7 +81,9 @@ python3 -m http.server 8766 --directory dist --bind 127.0.0.1
 
 - 앱은 `~/Library/Application Support/FriendsEnglish/app`에 복사해서 실행합니다. Dropbox 폴더는 백그라운드 실행 시 권한 문제가 생길 수 있기 때문입니다.
 - 진도, 보관함, 유튜브 목록은 `~/Library/Application Support/FriendsEnglish/state.json`에 저장됩니다. 로그는 `~/Library/Logs/friends-english.log`에 남습니다.
-- 라이브러리는 `~/Movies` 아래에 두세요. 데스크톱, 문서, 다운로드, 외장 디스크는 macOS가 백그라운드 접근을 막을 수 있습니다.
+- 라이브러리는 `~/Movies` 아래에 두세요. 데스크톱, 문서, 다운로드, 외장 디스크는 macOS가 백그라운드 접근을 막을 수 있고, Dropbox 폴더는 실제로 막힙니다(정책상 거부, 허락 창도 뜨지 않음).
+- 2026-11-11에 영상을 Dropbox 앱 폴더로 옮겨서 맥 서버의 라이브러리는 비어 있습니다. 맥에서도 온라인 버전으로 보세요. 맥 서버에 쌓인 진도·싱크 보정은 맥 서버의 **학습 백업 내보내기** → 온라인 버전의 **백업 가져오기**로 옮깁니다.
+- 다른 프로그램이 `::1:8765`만 쓰고 있으면(예: `kubectl port-forward`) 함께 뜰 수 있지만, 그동안 브라우저의 `localhost:8765`는 그쪽으로 가므로 `http://127.0.0.1:8765`로 여세요.
 - 맥미니는 로그인 상태를 유지하고, 시스템 설정에서 잠자기를 꺼 두어야 합니다.
 
 ### 밖에서(아이폰·회사) 쓰기: Tailscale

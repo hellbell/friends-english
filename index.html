@@ -1210,29 +1210,40 @@ function setEpisodes(list) {
     groups.get(g).append(o);
   }
   sel.append(...groups.values());
+  if (DB.key && !DB.refresh) {  // Friends는 Dropbox에 있다: 이 기기가 아직 연결 전이면 목록에서 그 이유를 보여 준다
+    const og = el('optgroup'), o = el('option', null, '위의 “Dropbox 연결”을 누르면 Friends 시즌이 여기에 나옵니다');
+    og.label = 'Friends (Dropbox 연결 필요)';
+    o.disabled = true;
+    og.append(o);
+    sel.prepend(og);
+  }
   if (S.localEp) addLocalOption(S.localEp);
   if (S.ep) sel.value = S.ep.id;
 }
 
 async function loadLibrary() {
-  let data = { episodes: [] };
+  let data = { episodes: [] }, hint = '';
   if (S.remote) {
-    try { data = await api('GET', 'api/library'); }
-    catch { toast('맥 서버의 영상 목록을 읽지 못했습니다. 추천 영상은 계속 사용할 수 있습니다.', 5000); }
+    try {
+      data = await api('GET', 'api/library');
+      if (!data.episodes.some(e => e.kind === 'file')) hint = 'Friends 영상은 Dropbox로 옮겨서 온라인 버전(hellbell.github.io/friends-english)에서 봅니다';
+    } catch { toast('맥 서버의 영상 목록을 읽지 못했습니다. 추천 영상은 계속 사용할 수 있습니다.', 5000); }
   } else if (DB.key) {  // 온라인 버전: Dropbox 앱 폴더의 영상이 목록의 기본이 되고, 같은 YouTube 영상은 파일로 대신한다
     try {
       await dropboxFinishLogin();
       if (DB.refresh) data.episodes = await loadDropbox();
+      else hint = 'Friends 영상은 Dropbox에 있습니다. 이 기기(브라우저)에서 처음 한 번 위의 “Dropbox 연결”을 눌러 주세요';
       DB.error = '';
-    } catch (err) { DB.error = err.message; toast('Dropbox: ' + err.message, 5000); }
+    } catch (err) { DB.error = err.message; hint = 'Dropbox: ' + err.message; }
     renderDropbox();
   }
   S.root = data.root;
   setEpisodes(mergeLibrary(data.episodes));
   renderStorageMode();
-  if (!S.episodes.length) return showEmpty();
   const last = S.lastEp || store.get('last');
-  await loadEpisode(S.episodes.find(e => sameEpisode(e.id, last)) || S.episodes[0]);
+  if (!S.episodes.length) showEmpty();
+  else await loadEpisode(S.episodes.find(e => sameEpisode(e.id, last)) || S.episodes[0]);
+  if (hint) toast(hint, 6000);  // 이어보기 안내 같은 다른 안내에 덮이지 않게 마지막에 띄운다
 }
 function showEmpty() {
   S.ep = null;

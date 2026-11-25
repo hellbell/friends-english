@@ -446,7 +446,7 @@ header { flex-wrap: wrap; }
     </form>
     <div class="discover-filters">
       <label>목록 <select id="discover-collection"><option value="">전체</option><option value="latent-space-11">Latent Space 선택 11편</option></select></label>
-      <label>난이도 <select id="discover-level"><option value="">전체</option value="beginner">기초</option><option value="intermediate">중급</option><option value="advanced">고급</option></select></label>
+      <label>난이도 <select id="discover-level"><option value="">전체</option><option value="beginner">기초</option><option value="intermediate">중급</option><option value="advanced">고급</option></select></label>
       <label>주제 <select id="discover-topic"><option value="">전체</option><option value="conversation">일상 회화</option><option value="learning">영어·학습</option><option value="science">과학·교양</option><option value="ai">AI·기술</option></select></label>
       <label>길이 <select id="discover-duration"><option value="">전체</option><option value="300">5분 이하</option><option value="600">10분 이하</option><option value="1200">20분 이하</option><option value="long">20분 초과</option></select></label>
       <label>정렬 <select id="discover-sort"><option value="recommended">추천순</option><option value="newest">새 영상순</option></select></label>
@@ -997,7 +997,7 @@ function renderDiscovery() {
     image.alt = ''; image.loading = 'lazy'; image.width = 480; image.height = 270;
     const body = el('div', 'video-card-body'), badges = el('div', 'video-badges');
     badges.append(el('span', '', LEVELS[v.level] || '난이도 미확인'), el('span', '', v.duration ? fmt(v.duration) : '길이 미확인'));
-    if (v.subs?.length) badges.append(el('span', 'ready', '한영 대본 준비됨 · GPT 번역'));
+    if (v.subs?.length) badges.append(el('span', 'ready', '한영 대본 준비됨' + (v.translation ? ` · ${v.translation} 번역` : '')));
     else if (v.youtubeEnglishCaptions && v.youtubeKoreanAutoTranslate) badges.append(el('span', '', 'YouTube 영어 자막 · 한국어 자동 번역'));
     else badges.append(el('span', '', '내 자막 연결 가능'));
     if (v.collection === 'latent-space-11') badges.append(el('span', '', '선택한 11편'));

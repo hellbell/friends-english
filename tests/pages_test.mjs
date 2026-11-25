@@ -56,6 +56,7 @@ check(!app.mergeLibrary([]).some(ep => ep.yt === selected[0].yt), 'Selected epis
 store.set('hiddenVideos', []);
 const bilingual = catalog.videos.filter(v => v.subs?.some(p => p.endsWith('.en.srt')) && v.subs?.some(p => p.endsWith('.ko.srt')));
 equal(recommend({ ready: true }).map(v => v.yt).sort(), bilingual.map(v => v.yt).sort(), 'Every bilingual study video is available');
+check(bilingual.every(v => ['GPT', 'Claude'].includes(v.translation)), 'Every bilingual study video names who translated it (shown on its card)');
 check(recommend({ query: 'AI', level: 'advanced' }).every(v => v.level === 'advanced'), 'Search composes with level');
 check(recommend({ topic: 'conversation' }).every(v => v.topics.includes('conversation')), 'Topic filter');
 check(recommend({ duration: '600' }).every(v => v.duration > 0 && v.duration <= 600), 'Unknown durations excluded from length filter');
@@ -153,6 +154,9 @@ equal(new Set(ids).size, ids.length, 'Unique DOM IDs');
 for (const [, id] of script.matchAll(/\$\(['"]#([a-z][\w-]*)['"]\)/g)) check(ids.includes(id), 'DOM element exists: ' + id);
 check(html.includes('aria-orientation="vertical" aria-controls="side"'), 'Panel width divider retained');
 check(!html.includes('id="side-height"'), 'No sidebar height control');
+const options = id => [...html.match(new RegExp(`<select id="${id}">([\\s\\S]*?)</select>`))[1]
+  .matchAll(/<option value="([^"]*)">([^<]*)<\/option>/g)].map(m => m[1] + '=' + m[2]);
+equal(options('discover-level'), ['=전체', 'beginner=기초', 'intermediate=중급', 'advanced=고급'], 'Level filter offers every level');
 check(html.includes('name="referrer" content="strict-origin-when-cross-origin"'), 'YouTube receives page origin');
 check(script.includes("if (STATIC_MODE) throw new Error('browser storage')"), 'Static build skips private state API');
 console.log(`PASS: ${checks} app checks (recommendations, storage, backup, A–B playback, auto-pause, DOM wiring)`);

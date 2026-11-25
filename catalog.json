@@ -537,6 +537,54 @@
       "checkedAt": "2026-11-02"
     },
     {
+      "yt": "8cGfJOU3AlQ",
+      "title": "Black Forest Labs — Andreas Blattmann·Dustin Podell",
+      "channel": "Latent Space",
+      "channelId": "UCxBcwypKK-W3GHd_RZ9FZrQ",
+      "duration": 5903,
+      "level": "advanced",
+      "topics": [
+        "ai"
+      ],
+      "reason": "FLUX를 만든 Black Forest Labs 연구자들이 이미지·영상·소리를 한 모델로 배우는 시각 지능과 디퓨전·자기회귀 방식을 이야기합니다. 모델이 무엇을 어떻게 배우는지 설명하는 영어를 연습하세요.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/8cGfJOU3AlQ.en.srt",
+        "study-captions/8cGfJOU3AlQ.ko.srt"
+      ],
+      "translation": "Claude",
+      "sentenceCount": 1425,
+      "published": "2026-11-16T00:00:00Z",
+      "youtubeTitle": "Building Visual Intelligence — Andreas Blattmann & Dustin Podell, Black Forest Labs",
+      "youtubeEnglishCaptions": true,
+      "youtubeKoreanAutoTranslate": true,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "yt": "uNjEJ22h9fI",
+      "title": "Hugh Laurie — Good Hang with Amy Poehler",
+      "channel": "Good Hang with Amy Poehler",
+      "channelId": "UC1lg-nYUcZ1pjo6EC2Nj5Sw",
+      "duration": 3351,
+      "level": "advanced",
+      "topics": [
+        "conversation"
+      ],
+      "reason": "Hugh Laurie와 Amy Poehler가 농담을 주고받는 편한 대화입니다. 영국식·미국식 일상 표현과 맞장구, 유머를 듣고 따라 말해 보세요.",
+      "source": "prepared",
+      "subs": [
+        "study-captions/uNjEJ22h9fI.en.srt",
+        "study-captions/uNjEJ22h9fI.ko.srt"
+      ],
+      "translation": "Claude",
+      "sentenceCount": 1063,
+      "published": "2026-11-24T00:00:00Z",
+      "youtubeTitle": "Hugh Laurie | Good Hang with Amy Poehler",
+      "youtubeEnglishCaptions": true,
+      "youtubeKoreanAutoTranslate": true,
+      "checkedAt": "2026-11-26"
+    },
+    {
       "yt": "Yxnvq6dxXXw",
       "title": "How to make polite conversation 💬 in this English class with Georgie",
       "channel": "BBC Learning English",
